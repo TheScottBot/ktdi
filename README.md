@@ -1,9 +1,18 @@
 # ktdi
 Keep The Degenerates Inline
 
-A tiny Discord bot with one command, `spray`, which posts a spray bottle GIF. It works as a slash command (`/spray`) and as a text command using a configurable prefix (`!spray` by default; set `COMMAND_PREFIX` in `.env`).
+A tiny Discord bot for keeping your friends in line. Commands work as slash commands (`/spray`) and as text commands using a configurable prefix (`!spray` by default; set `COMMAND_PREFIX` in `.env`).
 
-Reacting 💦 to any message also sprays the person who sent it.
+| Command | What it does |
+|---|---|
+| `spray [@user]` | Posts a spray bottle GIF. Target someone to add to their rap sheet. |
+| `rapsheet [@user]` | Shows how many times someone has been sprayed (defaults to you). |
+| `blame [reason]` | Blames a random person who's spoken recently in the channel. |
+| `help` | Lists all commands. |
+
+Reacting 💦 to any message also sprays the person who sent it and adds to their rap sheet.
+
+Spray counts are stored per server in `ktdi.db` (SQLite) next to `bot.py`; set `DB_PATH` to move it.
 
 Text commands need the **Message Content Intent** enabled on the bot's page in the Developer Portal.
 
