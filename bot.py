@@ -243,6 +243,7 @@ async def update_briber_role(guild: discord.Guild) -> None:
         log.warning("[%s] Couldn't update %r role: %s", guild.name, BRIBER_ROLE_NAME, error)
 
 
+ANONYMOUS = 0  # user_id for quotes that aren't credited to anyone.
 QUOTE_MAX_LENGTH = 1000
 QUOTE_CONTEXT_MAX_LENGTH = 200
 QUOTE_COLUMNS = "id, guild_id, user_id, text, context, added_by, channel_id, message_id, created_at"
@@ -312,6 +313,13 @@ def recent_quotes(guild_id: int, limit: int, user_id: int | None = None) -> list
         rows = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND user_id = ? ORDER BY id DESC LIMIT ?",
                           (guild_id, user_id, limit)).fetchall()
     return [Quote(*row) for row in rows]
+
+
+def anonymise_quote(guild_id: int, quote_id: int) -> None:
+    # The message link goes too, since it would show who wrote it.
+    db.execute("UPDATE quotes SET user_id = ?, channel_id = NULL, message_id = NULL WHERE guild_id = ? AND id = ?",
+               (ANONYMOUS, guild_id, quote_id))
+    db.commit()
 
 
 def delete_quote(guild_id: int, quote_id: int) -> None:
@@ -516,8 +524,12 @@ class Reply:
     private: bool = False  # Only shown to the person who asked (slash commands only).
 
 
+def said_by(quote: Quote) -> str:
+    return "*Anonymous*" if quote.user_id == ANONYMOUS else f"<@{quote.user_id}>"
+
+
 def quote_embed(quote: Quote) -> discord.Embed:
-    description = f"“{quote.text}”\n— <@{quote.user_id}>"
+    description = f"“{quote.text}”\n— {said_by(quote)}"
     if quote.context:
         description += f"\n*{quote.context}*"
     if quote.message_id and quote.channel_id:
@@ -536,23 +548,45 @@ def split_context(text: str) -> tuple[str, str | None]:
     return text.strip(), None
 
 
-def save_quote(guild: discord.Guild, channel_id: int | None, added_by: discord.abc.User, said_by: int,
+def save_quote(guild: discord.Guild, channel_id: int | None, added_by: discord.abc.User, speaker_id: int,
                text: str | None, context: str | None, source: discord.Message | None = None) -> Reply:
+    """Save a quote. speaker_id=ANONYMOUS saves it uncredited (and without a link to the original message)."""
     text = (text or "").strip()
     context = (context or "").strip() or None
     if not text:
-        return Reply("There's nothing to quote. That message has no text, so type it in: `/quote add`.", private=True)
+        if source:
+            return Reply("That message has no text, so type the quote in with `/quote add`.", private=True)
+        return Reply("There's nothing to quote. Add what was said.", private=True)
     if len(text) > QUOTE_MAX_LENGTH:
         return Reply(f"That's a bit long for a quote (max {QUOTE_MAX_LENGTH} characters).", private=True)
     if context and len(context) > QUOTE_CONTEXT_MAX_LENGTH:
         return Reply(f"The context is too long (max {QUOTE_CONTEXT_MAX_LENGTH} characters).", private=True)
+    anonymous = speaker_id == ANONYMOUS
+    if anonymous:
+        channel_id = source = None  # A link to the original message would give away who said it.
     if source:
         existing = quote_for_message(guild.id, source.id)
-        if existing and existing.text == text and existing.user_id == said_by:
+        if existing and existing.text == text and existing.user_id == speaker_id:
             return Reply(f"That's already saved as quote #{existing.id}.", private=True)
-    quote_id = add_quote(guild.id, said_by, text, context, added_by.id, channel_id, source.id if source else None)
-    log.info("[%s] %s saved quote #%d (said by user %s)", guild.name, added_by, quote_id, said_by)
-    return Reply(f"📌 Saved quote #{quote_id}.", quote_embed(get_quote(guild.id, quote_id)))
+    quote_id = add_quote(guild.id, speaker_id, text, context, added_by.id, channel_id, source.id if source else None)
+    log.info("[%s] %s saved %squote #%d", guild.name, added_by, "an anonymous " if anonymous else "", quote_id)
+    label = "anonymous quote" if anonymous else "quote"
+    return Reply(f"📌 Saved {label} #{quote_id}.", quote_embed(get_quote(guild.id, quote_id)))
+
+
+def dissociate_quote(guild: discord.Guild, member: discord.Member, number: int) -> Reply:
+    quote = get_quote(guild.id, number)
+    if quote is None:
+        return Reply(f"There's no quote #{number}.", private=True)
+    if quote.user_id == ANONYMOUS:
+        return Reply(f"Quote #{number} is already anonymous.", private=True)
+    if member.id not in (quote.added_by, quote.user_id) and not member.guild_permissions.manage_messages:
+        return Reply(f"Only the person quoted, whoever saved it, or a moderator can make quote #{number} anonymous.",
+                     private=True)
+    anonymise_quote(guild.id, number)
+    # Deliberately doesn't log who asked: that alone would reveal whose quote it was.
+    log.info("[%s] Quote #%d was made anonymous", guild.name, number)
+    return Reply(f"🕶️ Quote #{number} is now anonymous.", quote_embed(get_quote(guild.id, number)))
 
 
 def show_random_quote(guild: discord.Guild, user: discord.abc.User | None = None) -> Reply:
@@ -587,7 +621,7 @@ def quote_line(quote: Quote, length: int = 80) -> str:
     """One-line summary for lists: #12 “text…” — @user · date."""
     text = quote.text if len(quote.text) <= length else quote.text[:length].rstrip() + "…"
     when = int(datetime.fromisoformat(quote.created_at).timestamp())
-    return f"`#{quote.id}` “{text}” — <@{quote.user_id}> · <t:{when}:d>"
+    return f"`#{quote.id}` “{text}” — {said_by(quote)} · <t:{when}:d>"
 
 
 def last_quotes(guild: discord.Guild, count: int, user: discord.abc.User | None = None) -> Reply:
@@ -636,7 +670,7 @@ async def replied_message(ctx: commands.Context) -> discord.Message | None:
 @commands.guild_only()
 async def quote_prefix(ctx: commands.Context, *, args: str = ""):
     match = MENTION_AT_START_RE.match(args)
-    said_by = int(match.group(1)) if match else None
+    speaker = int(match.group(1)) if match else None
     text = (match.group(2) if match else args).strip()
     try:
         replied = await replied_message(ctx)
@@ -647,27 +681,54 @@ async def quote_prefix(ctx: commands.Context, *, args: str = ""):
     if replied:
         # "!quote" or "!quote @Dave" as a reply saves that message; any text typed replaces its wording.
         quote_text, context = split_context(text)
-        reply = save_quote(ctx.guild, ctx.channel.id, ctx.author, said_by or replied.author.id,
+        reply = save_quote(ctx.guild, ctx.channel.id, ctx.author, speaker or replied.author.id,
                            quote_text or replied.content, context, replied)
-    elif said_by is None and text.isdigit():
+    elif speaker is None and text.isdigit():
         reply = show_quote(ctx.guild, int(text))
-    elif text and said_by is None:
-        reply = Reply(f"Who said it? Use `{COMMAND_PREFIX}quote @someone what they said`, "
-                      f"or reply to their message with `{COMMAND_PREFIX}quote`.")
+    elif text and speaker is None:
+        reply = Reply(f"Who said it? Use `{COMMAND_PREFIX}quote @someone what they said`, reply to their message "
+                      f"with `{COMMAND_PREFIX}quote`, or use `{COMMAND_PREFIX}quote anon what was said`.")
     elif text:
         quote_text, context = split_context(text)
-        reply = save_quote(ctx.guild, ctx.channel.id, ctx.author, said_by, quote_text, context)
+        reply = save_quote(ctx.guild, ctx.channel.id, ctx.author, speaker, quote_text, context)
     else:
         # "!quote" or "!quote @Dave" on its own: a random quote.
-        user = discord.utils.get(ctx.message.mentions, id=said_by) if said_by else None
+        user = discord.utils.get(ctx.message.mentions, id=speaker) if speaker else None
         reply = show_random_quote(ctx.guild, user)
     await send_reply(ctx, reply)
 
 
-@quote_prefix.command(name="add", description="Save something someone said.")
-async def quote_prefix_add(ctx: commands.Context, user: discord.Member, *, text: str):
+@quote_prefix.command(name="anon", aliases=["anonymous"], description="Save a quote without crediting anyone.")
+async def quote_prefix_anon(ctx: commands.Context, *, text: str = ""):
+    try:
+        replied = await replied_message(ctx)
+    except discord.HTTPException:
+        replied = None
     quote_text, context = split_context(text)
-    await send_reply(ctx, save_quote(ctx.guild, ctx.channel.id, ctx.author, user.id, quote_text, context))
+    if not quote_text and replied is None:
+        await send_reply(ctx, Reply(f"What was said? `{COMMAND_PREFIX}quote anon what was said`, "
+                                    f"or reply to a message with `{COMMAND_PREFIX}quote anon`."))
+        return
+    await send_reply(ctx, save_quote(ctx.guild, ctx.channel.id, ctx.author, ANONYMOUS,
+                                     quote_text or replied.content, context))
+
+
+@quote_prefix.command(name="dissociate", aliases=["anonymise", "anonymize"],
+                      description="Remove the name from a quote, keeping the quote (the person quoted, whoever saved it, or a mod).")
+async def quote_prefix_dissociate(ctx: commands.Context, number: int):
+    await send_reply(ctx, dissociate_quote(ctx.guild, ctx.author, number))
+
+
+@quote_prefix.command(name="add", description="Save something someone said. Leave out the user (or use anon) for an anonymous quote.")
+async def quote_prefix_add(ctx: commands.Context, user: discord.Member | None = None, *, text: str = ""):
+    # "!quote add @Dave text", "!quote add anon text" and "!quote add text" (anonymous) all work.
+    if user is None:
+        first, _, rest = text.partition(" ")
+        if first.lower() in ("anon", "anonymous"):
+            text = rest
+    quote_text, context = split_context(text)
+    await send_reply(ctx, save_quote(ctx.guild, ctx.channel.id, ctx.author, user.id if user else ANONYMOUS,
+                                     quote_text, context))
 
 
 @quote_prefix.command(name="random", description="A random quote, optionally from one person.")
@@ -700,11 +761,27 @@ quote_slash = app_commands.Group(name="quote", description="Save and replay the 
 
 
 @quote_slash.command(name="add", description="Save something someone said (great for things said in voice).")
-@app_commands.describe(user="Who said it", text="What they said", context="Optional: what was going on at the time")
-async def quote_slash_add(interaction: discord.Interaction, user: discord.Member,
-                          text: app_commands.Range[str, 1, QUOTE_MAX_LENGTH],
+@app_commands.describe(text="What they said", user="Who said it. Leave empty to save it anonymously",
+                       context="Optional: what was going on at the time")
+async def quote_slash_add(interaction: discord.Interaction, text: app_commands.Range[str, 1, QUOTE_MAX_LENGTH],
+                          user: discord.Member | None = None,
                           context: app_commands.Range[str, 1, QUOTE_CONTEXT_MAX_LENGTH] | None = None):
-    await respond(interaction, save_quote(interaction.guild, interaction.channel_id, interaction.user, user.id, text, context))
+    speaker = user.id if user else ANONYMOUS
+    await respond(interaction, save_quote(interaction.guild, interaction.channel_id, interaction.user, speaker, text, context))
+
+
+@quote_slash.command(name="anon", description="Save a quote without crediting anyone.")
+@app_commands.describe(text="What was said", context="Optional: what was going on at the time")
+async def quote_slash_anon(interaction: discord.Interaction, text: app_commands.Range[str, 1, QUOTE_MAX_LENGTH],
+                           context: app_commands.Range[str, 1, QUOTE_CONTEXT_MAX_LENGTH] | None = None):
+    await respond(interaction, save_quote(interaction.guild, interaction.channel_id, interaction.user, ANONYMOUS,
+                                          text, context))
+
+
+@quote_slash.command(name="dissociate",
+                     description="Remove the name from a quote, keeping the quote (the person quoted, whoever saved it, or a mod).")
+async def quote_slash_dissociate(interaction: discord.Interaction, number: int):
+    await respond(interaction, dissociate_quote(interaction.guild, interaction.user, number))
 
 
 @quote_slash.command(name="random", description="A random quote, optionally from one person.")
@@ -745,17 +822,19 @@ class SaveQuoteModal(discord.ui.Modal, title="Save quote"):
         self.source = source
         self.quote_text = discord.ui.TextInput(style=discord.TextStyle.paragraph, max_length=QUOTE_MAX_LENGTH,
                                                default=source.content[:QUOTE_MAX_LENGTH] or None)
-        self.said_by = discord.ui.UserSelect(default_values=[discord.Object(id=source.author.id)], required=True)
+        self.said_by = discord.ui.UserSelect(default_values=[discord.Object(id=source.author.id)],
+                                             required=False, min_values=0)
         self.context = discord.ui.TextInput(required=False, max_length=QUOTE_CONTEXT_MAX_LENGTH,
                                             placeholder="e.g. mid-fight, right after rolling a nat 1")
         self.add_item(discord.ui.Label(text="Quote", component=self.quote_text))
         self.add_item(discord.ui.Label(text="Who said it?", component=self.said_by,
-                                       description="Change this if someone typed out what another person said."))
+                                       description="Change it if someone typed out what another person said, "
+                                                   "or clear it to save anonymously."))
         self.add_item(discord.ui.Label(text="Context (optional)", component=self.context))
 
     async def on_submit(self, interaction: discord.Interaction):
-        said_by = self.said_by.values[0].id if self.said_by.values else self.source.author.id
-        await respond(interaction, save_quote(interaction.guild, self.source.channel.id, interaction.user, said_by,
+        speaker = self.said_by.values[0].id if self.said_by.values else ANONYMOUS  # Cleared picker = anonymous.
+        await respond(interaction, save_quote(interaction.guild, self.source.channel.id, interaction.user, speaker,
                                               self.quote_text.value, self.context.value, self.source))
 
 
@@ -962,7 +1041,11 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
                 f"• **Reply** to a message with `{COMMAND_PREFIX}quote` to save it, or `{COMMAND_PREFIX}quote @someone` "
                 "to credit someone else (handy when a person types out what someone said in voice).\n"
                 f"• **Type it:** `{COMMAND_PREFIX}quote @someone what they said`. Add ` -- context` on the end for context.\n"
-                "• **Right-click a message** → Apps → **Save quote** to edit the wording and pick who said it.\n"
+                "• **Right-click a message** → Apps → **Save quote** to edit the wording and pick who said it "
+                "(clear the picker to save it anonymously).\n"
+                f"• **Anonymous:** leave `user` empty in `/quote add`, use `/quote anon`, or reply with "
+                f"`{COMMAND_PREFIX}quote anon`. "
+                "`/quote dissociate <#>` takes the name off an existing quote.\n"
                 f"• `{COMMAND_PREFIX}quote` on its own gives a random quote; `{COMMAND_PREFIX}quote 12` shows quote #12."
             ),
             inline=False,
