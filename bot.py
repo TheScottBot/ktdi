@@ -181,15 +181,18 @@ db.execute(
         channel_id  INTEGER NOT NULL,  -- where the reminders are posted
         message_id  INTEGER,           -- the setup message people react 🔔 to
         days        TEXT NOT NULL,     -- "0,3" = Mondays and Thursdays
-        time        TEXT NOT NULL,     -- "18:00", in REMINDER_TIMEZONE
+        time        TEXT NOT NULL,     -- the game's start time, e.g. "19:00", in REMINDER_TIMEZONE
         every_weeks INTEGER NOT NULL,  -- 1 weekly, 2 fortnightly
         anchor      TEXT NOT NULL,     -- a date in an "on" week, for fortnightly schedules
-        next_run    TEXT NOT NULL,     -- ISO 8601, UTC
+        next_run    TEXT NOT NULL,     -- when the next ping goes out (start time minus lead_minutes), ISO 8601 UTC
         created_by  INTEGER NOT NULL,
         UNIQUE (guild_id, alias_key)
     )
     """
 )
+# Added later: how many minutes before the start time to ping. Existing reminders get 0 (ping at the time given).
+if "lead_minutes" not in [column[1] for column in db.execute("PRAGMA table_info(campaign_reminders)")]:
+    db.execute("ALTER TABLE campaign_reminders ADD COLUMN lead_minutes INTEGER NOT NULL DEFAULT 0")
 db.execute(
     """
     CREATE TABLE IF NOT EXISTS campaign_reminder_subscribers (
@@ -447,6 +450,7 @@ class Reminder:
     anchor: str
     next_run: str
     created_by: int
+    lead_minutes: int
 
     @property
     def schedule(self) -> reminders.Schedule:
@@ -454,10 +458,21 @@ class Reminder:
 
     @property
     def next_run_at(self) -> datetime:
+        """When the next ping goes out."""
         return datetime.fromisoformat(self.next_run)
 
+    @property
+    def lead(self) -> timedelta:
+        return timedelta(minutes=self.lead_minutes)
 
-REMINDER_COLUMNS = "id, guild_id, alias_key, channel_id, message_id, days, time, every_weeks, anchor, next_run, created_by"
+    @property
+    def next_game_at(self) -> datetime:
+        """The start time the next ping is for."""
+        return self.next_run_at + self.lead
+
+
+REMINDER_COLUMNS = ("id, guild_id, alias_key, channel_id, message_id, days, time, every_weeks, anchor, next_run, "
+                    "created_by, lead_minutes")
 
 
 def get_reminder(guild_id: int, alias: str) -> Reminder | None:
@@ -478,15 +493,15 @@ def due_reminders(now: datetime) -> list[Reminder]:
 
 
 def save_reminder(guild_id: int, alias: str, channel_id: int, schedule: reminders.Schedule, anchor: date,
-                  next_run: datetime, created_by: int) -> int:
+                  next_run: datetime, created_by: int, lead_minutes: int) -> int:
     """Create the campaign's reminder, replacing any existing one (and its subscribers)."""
     delete_reminder(guild_id, alias)
     days, clock, every_weeks = schedule.to_storage()
     cursor = db.execute(
-        "INSERT INTO campaign_reminders (guild_id, alias_key, channel_id, days, time, every_weeks, anchor, next_run, created_by)"
-        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO campaign_reminders (guild_id, alias_key, channel_id, days, time, every_weeks, anchor, next_run,"
+        " created_by, lead_minutes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (guild_id, alias.casefold(), channel_id, days, clock, every_weeks, anchor.isoformat(),
-         next_run.isoformat(timespec="seconds"), created_by),
+         next_run.isoformat(timespec="seconds"), created_by, lead_minutes),
     )
     db.commit()
     return cursor.lastrowid
@@ -497,11 +512,14 @@ def set_reminder_message(reminder_id: int, message_id: int) -> None:
     db.commit()
 
 
-def update_reminder_schedule(reminder_id: int, schedule: reminders.Schedule, anchor: date, next_run: datetime) -> None:
+def update_reminder_schedule(reminder_id: int, schedule: reminders.Schedule, anchor: date, next_run: datetime,
+                             lead_minutes: int) -> None:
     """Change when a reminder goes off, keeping its setup message and subscribers."""
     days, clock, every_weeks = schedule.to_storage()
-    db.execute("UPDATE campaign_reminders SET days = ?, time = ?, every_weeks = ?, anchor = ?, next_run = ? WHERE id = ?",
-               (days, clock, every_weeks, anchor.isoformat(), next_run.isoformat(timespec="seconds"), reminder_id))
+    db.execute("UPDATE campaign_reminders SET days = ?, time = ?, every_weeks = ?, anchor = ?, next_run = ?,"
+               " lead_minutes = ? WHERE id = ?",
+               (days, clock, every_weeks, anchor.isoformat(), next_run.isoformat(timespec="seconds"), lead_minutes,
+                reminder_id))
     db.commit()
 
 
@@ -1144,10 +1162,11 @@ def campaign_embed(campaign: Campaign) -> discord.Embed:
 
 
 def reminder_summary(reminder: Reminder) -> str:
-    """e.g. 'Mondays at 18:00 · next <in 3 days> · 4 subscribed'."""
+    """e.g. 'Mondays at 19:00, pings 15 minutes before · next ping <in 3 days> · 4 subscribed'."""
     count = len(subscribers(reminder.id))
     next_at = int(reminder.next_run_at.timestamp())
-    return f"⏰ {reminder.schedule.describe()} · next <t:{next_at}:R> · {count} subscribed"
+    return (f"⏰ {reminder.schedule.describe()}, {ping_phrase(reminder.lead_minutes)} · "
+            f"next ping <t:{next_at}:R> · {count} subscribed")
 
 
 def campaign_buttons(campaign: Campaign) -> discord.ui.View:
@@ -1223,7 +1242,8 @@ async def campaign_list(ctx: commands.Context):
         lines.append(f"**{discord.utils.escape_markdown(c.alias)}** · " + " · ".join(links))
         reminder = get_reminder(c.guild_id, c.alias)
         if reminder:
-            lines.append(f"  ⏰ {reminder.schedule.describe()} · next <t:{int(reminder.next_run_at.timestamp())}:R>")
+            lines.append(f"  ⏰ {reminder.schedule.describe()}, {ping_phrase(reminder.lead_minutes)} · "
+                         f"next ping <t:{int(reminder.next_run_at.timestamp())}:R>")
     embed = discord.Embed(title="🎲 Campaigns", description="\n".join(lines), color=discord.Color.dark_red())
     embed.set_footer(text="Show one with its buttons: /campaign show <alias>")
     await send_campaign_reply(ctx, embed=embed)
@@ -1302,26 +1322,43 @@ def can_manage_reminder(member: discord.Member, reminder: Reminder, campaign: Ca
     return member.id in (reminder.created_by, campaign.added_by) or member.guild_permissions.manage_messages
 
 
-def plan_schedule(text: str, now: datetime, keep_anchor: date | None = None) -> tuple[reminders.Schedule, datetime, date]:
-    """Parse 'every other monday at 7pm [from 19 oct]' into (schedule, first reminder, anchor)."""
+def next_ping(schedule: reminders.Schedule, after: datetime, lead: timedelta, anchor: date | None) -> datetime:
+    """The first ping after `after`: the next start time that's more than `lead` away, minus the lead."""
+    return reminders.next_occurrence(schedule, after + lead, REMINDER_TIMEZONE, anchor) - lead
+
+
+def plan_schedule(text: str, now: datetime, keep_anchor: date | None = None,
+                  keep_lead: int = 0) -> tuple[reminders.Schedule, datetime, date, int]:
+    """Parse 'every other monday at 7pm [from 19 oct] [15 minutes before]'.
+
+    Returns (schedule, first ping, anchor, lead minutes). The time in the schedule is the start time.
+    """
+    text, lead_minutes = reminders.split_lead(text)
+    lead_minutes = keep_lead if lead_minutes is None else lead_minutes
+    lead = timedelta(minutes=lead_minutes)
     schedule_text, start_text = reminders.split_start(text)
     schedule = reminders.parse_schedule(schedule_text)
     if start_text:
         start = reminders.parse_date(start_text, now.astimezone(REMINDER_TIMEZONE).date())
-        first, anchor = reminders.first_on_or_after(schedule, start, now, REMINDER_TIMEZONE)
+        game, anchor = reminders.first_on_or_after(schedule, start, now + lead, REMINDER_TIMEZONE)
     else:
-        first = reminders.next_occurrence(schedule, now, REMINDER_TIMEZONE, keep_anchor)
-        anchor = keep_anchor or first.astimezone(REMINDER_TIMEZONE).date()
-    return schedule, first, anchor
+        game = reminders.next_occurrence(schedule, now + lead, REMINDER_TIMEZONE, keep_anchor)
+        anchor = keep_anchor or game.astimezone(REMINDER_TIMEZONE).date()
+    return schedule, game - lead, anchor, lead_minutes
 
 
 def when_text(moment: datetime) -> str:
     return f"<t:{int(moment.timestamp())}:F> (<t:{int(moment.timestamp())}:R>)"
 
 
-@campaign_group.command(name="remind", description="Remind the group on a schedule, e.g. mondays at 1800. React 🔔 to get pinged.")
+def ping_phrase(lead_minutes: int) -> str:
+    """'pings 15 minutes before' / 'pings at the start time'."""
+    return f"pings {reminders.describe_lead(lead_minutes)}"
+
+
+@campaign_group.command(name="remind", description="Remind the group before each session, e.g. mondays at 1900, 15 minutes before.")
 @app_commands.describe(alias="The campaign",
-                       when="e.g. mondays at 1800, monday 6pm, every other friday at 7:30pm from 23 oct")
+                       when="Start time + warning, e.g. mondays at 1900, 15 minutes before · every other friday 7:30pm from 23 oct")
 async def campaign_remind(ctx: commands.Context, alias: str, *, when: str):
     campaign = get_campaign(ctx.guild.id, alias)
     if campaign is None:
@@ -1335,17 +1372,20 @@ async def campaign_remind(ctx: commands.Context, alias: str, *, when: str):
         return
     now = datetime.now(timezone.utc)
     try:
-        schedule, first, anchor = plan_schedule(when, now)
+        schedule, first, anchor, lead_minutes = plan_schedule(when, now)
     except reminders.ScheduleError as error:
         await send_campaign_reply(ctx, str(error), private=True)
         return
-    reminder_id = save_reminder(ctx.guild.id, campaign.alias, ctx.channel.id, schedule, anchor, first, ctx.author.id)
-    log.info("[%s] %s set a reminder for %r: %s", ctx.guild.name, ctx.author, campaign.alias, schedule.describe())
+    reminder_id = save_reminder(ctx.guild.id, campaign.alias, ctx.channel.id, schedule, anchor, first, ctx.author.id,
+                                lead_minutes)
+    log.info("[%s] %s set a reminder for %r: %s, %s", ctx.guild.name, ctx.author, campaign.alias,
+             schedule.describe(), ping_phrase(lead_minutes))
 
+    tip = "" if lead_minutes else "\n-# Want a heads-up? `/campaign reschedule` it to `15 minutes before`."
     embed = discord.Embed(
         title=f"⏰ Reminder: {campaign.alias}",
-        description=(f"**{schedule.describe()}** ({REMINDER_TIMEZONE.key} time)\n"
-                     f"First one: {when_text(first)}\n\n"
+        description=(f"**{schedule.describe()}** ({REMINDER_TIMEZONE.key} time), {ping_phrase(lead_minutes)}\n"
+                     f"First ping: {when_text(first)}{tip}\n\n"
                      f"**React {REMINDER_EMOJI} to this message to get pinged.** Remove your {REMINDER_EMOJI} to stop."),
         color=discord.Color.dark_red(),
     )
@@ -1392,38 +1432,54 @@ async def reminder_to_change(ctx: commands.Context, alias: str) -> tuple[Campaig
 
 
 @campaign_group.command(name="reschedule",
-                        description="Change a reminder's schedule or next date, keeping everyone's 🔔.")
+                        description="Change a reminder's schedule, next date or warning, keeping everyone's 🔔.")
 @app_commands.describe(alias="The campaign",
-                       change="e.g. next 26 oct · every other monday 7pm · mondays 6pm from 12 oct")
+                       change="e.g. 30 minutes before · next 26 oct · every other monday 7pm · mondays 6pm from 12 oct")
 async def campaign_reschedule(ctx: commands.Context, alias: str, *, change: str):
     found = await reminder_to_change(ctx, alias)
     if found is None:
         return
     campaign, reminder = found
     now = datetime.now(timezone.utc)
+    anchor = date.fromisoformat(reminder.anchor)
     try:
-        if change.strip().lower().startswith("next "):
+        rest, new_lead = reminders.split_lead(change)
+        lead_minutes = reminder.lead_minutes if new_lead is None else new_lead
+        lead = timedelta(minutes=lead_minutes)
+        rest = re.sub(r"^(?:and\s+)?(?:remind(?:\s+(?:me|us))?|ping|warn(?:ing)?)?\s*", "", rest.strip(), flags=re.I)
+        schedule = reminder.schedule
+        if not rest:
+            # Just the warning, e.g. "30 minutes before": same schedule, same next session.
+            if new_lead is None:
+                raise reminders.ScheduleError("What should change? e.g. `30 minutes before`, `next 26 oct`, "
+                                              "or a new schedule like `every other monday 7pm`.")
+            first = reminder.next_game_at - lead
+            if first <= now:  # Too late for that session's ping now, so start with the one after.
+                first = next_ping(schedule, now, lead, anchor)
+        elif rest.lower().startswith("next "):
             # "next 26 oct": same schedule, but the next session (and a fortnightly cadence) moves to that date.
-            schedule = reminder.schedule
-            session = reminders.parse_date(change.strip()[5:], now.astimezone(REMINDER_TIMEZONE).date())
+            session = reminders.parse_date(rest[5:], now.astimezone(REMINDER_TIMEZONE).date())
             if session.weekday() not in schedule.days:
                 raise reminders.ScheduleError(f"{session:%A %d %b} isn't on the schedule ({schedule.describe()}). "
                                               "To change the day too, give the full schedule, e.g. "
                                               f"`{'every other ' if schedule.every_weeks > 1 else ''}{session:%A} "
                                               f"at {reminder.time} from {session:%d %b}`.")
-            first, anchor = reminders.first_on_or_after(schedule, session, now, REMINDER_TIMEZONE)
-            if first.astimezone(REMINDER_TIMEZONE).date() != session:
-                raise reminders.ScheduleError(f"The {reminder.time} reminder on {session:%d %b} has already passed.")
+            game, anchor = reminders.first_on_or_after(schedule, session, now + lead, REMINDER_TIMEZONE)
+            if game.astimezone(REMINDER_TIMEZONE).date() != session:
+                raise reminders.ScheduleError(f"It's too late for the {session:%d %b} reminder "
+                                              f"({ping_phrase(lead_minutes)} {reminder.time}).")
+            first = game - lead
         else:
-            schedule, first, anchor = plan_schedule(change, now, keep_anchor=date.fromisoformat(reminder.anchor))
+            schedule, first, anchor, lead_minutes = plan_schedule(rest, now, keep_anchor=anchor, keep_lead=lead_minutes)
     except reminders.ScheduleError as error:
         await send_campaign_reply(ctx, str(error), private=True)
         return
-    update_reminder_schedule(reminder.id, schedule, anchor, first)
-    log.info("[%s] %s rescheduled the reminder for %r: %s", ctx.guild.name, ctx.author, campaign.alias,
-             schedule.describe())
-    await send_campaign_reply(ctx, f"🗓️ Reminder for **{campaign.alias}** updated: {schedule.describe()}.\n"
-                                   f"Next one: {when_text(first)}. Everyone's {REMINDER_EMOJI} still counts.")
+    update_reminder_schedule(reminder.id, schedule, anchor, first, lead_minutes)
+    log.info("[%s] %s rescheduled the reminder for %r: %s, %s", ctx.guild.name, ctx.author, campaign.alias,
+             schedule.describe(), ping_phrase(lead_minutes))
+    await send_campaign_reply(ctx, f"🗓️ Reminder for **{campaign.alias}** updated: {schedule.describe()}, "
+                                   f"{ping_phrase(lead_minutes)}.\n"
+                                   f"Next ping: {when_text(first)}. Everyone's {REMINDER_EMOJI} still counts.")
 
 
 @campaign_group.command(name="skip", description="Skip the next reminder. Fortnightly games shift a week and carry on from there.")
@@ -1434,20 +1490,20 @@ async def campaign_skip(ctx: commands.Context, *, alias: str):
         return
     campaign, reminder = found
     schedule = reminder.schedule
-    upcoming = reminder.next_run_at.astimezone(REMINDER_TIMEZONE)
+    upcoming = reminder.next_game_at.astimezone(REMINDER_TIMEZONE)
     if schedule.every_weeks > 1:
         # Push the whole fortnightly cadence back a week, so it stays in step after the skipped week.
         moved = datetime.combine(upcoming.date() + timedelta(days=7), upcoming.time(), tzinfo=REMINDER_TIMEZONE)
-        next_run, anchor = moved.astimezone(timezone.utc), moved.date()
+        next_run, anchor = moved.astimezone(timezone.utc) - reminder.lead, moved.date()
         note = "The fortnightly schedule carries on from there."
     else:
-        next_run = reminders.next_occurrence(schedule, reminder.next_run_at, REMINDER_TIMEZONE)
+        next_run = reminders.next_occurrence(schedule, reminder.next_game_at, REMINDER_TIMEZONE) - reminder.lead
         anchor = date.fromisoformat(reminder.anchor)
         note = "Back to normal after that."
-    update_reminder_schedule(reminder.id, schedule, anchor, next_run)
+    update_reminder_schedule(reminder.id, schedule, anchor, next_run, reminder.lead_minutes)
     log.info("[%s] %s skipped a reminder for %r", ctx.guild.name, ctx.author, campaign.alias)
-    await send_campaign_reply(ctx, f"⏭️ Skipped the {upcoming:%a %d %b} reminder for **{campaign.alias}**.\n"
-                                   f"Next one: {when_text(next_run)}. {note}")
+    await send_campaign_reply(ctx, f"⏭️ Skipped the {upcoming:%a %d %b} session for **{campaign.alias}**.\n"
+                                   f"Next ping: {when_text(next_run)}. {note}")
 
 
 async def campaign_alias_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
@@ -1492,7 +1548,11 @@ async def send_reminder(reminder: Reminder) -> None:
         return
     people = subscribers(reminder.id)
     pings = " ".join(f"<@{user_id}>" for user_id in people)
-    content = f"⏰ **{campaign.alias}** is coming up! {pings}".strip()
+    start = int(reminder.next_game_at.timestamp())
+    if reminder.lead_minutes:
+        content = f"⏰ **{campaign.alias}** starts <t:{start}:R> (<t:{start}:t>)! {pings}".strip()
+    else:
+        content = f"⏰ **{campaign.alias}** is starting now! {pings}".strip()
     if not people:
         content += f"\n-# Nobody's subscribed yet. React {REMINDER_EMOJI} to the reminder setup message to get pinged."
     await channel.send(content, embed=campaign_embed(campaign), view=campaign_buttons(campaign),
@@ -1516,7 +1576,7 @@ async def reminder_loop():
             # Always move on to the next occurrence, so a failure can't cause repeated pings.
             if get_reminder(reminder.guild_id, reminder.alias_key):
                 anchor = date.fromisoformat(reminder.anchor)
-                set_next_run(reminder.id, reminders.next_occurrence(reminder.schedule, now, REMINDER_TIMEZONE, anchor))
+                set_next_run(reminder.id, next_ping(reminder.schedule, now, reminder.lead, anchor))
 
 
 @reminder_loop.before_loop
@@ -1742,12 +1802,14 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
                 f"• With `{COMMAND_PREFIX}campaign add`, put a multi-word alias in quotes: "
                 f"`{COMMAND_PREFIX}campaign add \"Monday game\" <D&D Beyond link> <VTT link>`.\n"
                 f"• To remove one link, `/campaign edit` it to `{CLEAR_LINK}`.\n"
-                "• **Reminders:** `/campaign remind Monday game mondays at 1800` (also `monday 6pm`, "
-                "`mondays and thursdays at 7pm`, `every other friday at 7:30pm from 23 oct`). "
+                "• **Reminders:** `/campaign remind Monday game mondays at 1900, 15 minutes before`. The time is when "
+                "the game starts; the warning is optional (`1h before`, `half an hour before`…). Schedules like "
+                "`monday 7pm`, `mondays and thursdays at 7pm`, `every other friday at 7:30pm from 23 oct` work. "
                 f"React {REMINDER_EMOJI} to the message it posts to get pinged; `/campaign unremind` stops it. "
                 f"Times are {REMINDER_TIMEZONE.key} time.\n"
                 "• **Game moved?** `/campaign skip` skips the next one (fortnightly games shift a week). "
-                "`/campaign reschedule` with `next 26 oct` sets the next session's date, or give a new schedule. "
+                "`/campaign reschedule` with `30 minutes before` changes the warning, `next 26 oct` sets the next "
+                "session's date, or give a new schedule. "
                 f"Both keep everyone's {REMINDER_EMOJI}."
             ),
             inline=False,
