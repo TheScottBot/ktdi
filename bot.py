@@ -28,9 +28,15 @@ COMMAND_PREFIX = os.getenv("COMMAND_PREFIX", "!")
 
 
 def parse_ids(*env_names: str) -> list[int]:
-    """Comma-separated IDs from the first of these env vars that is set."""
+    """Comma-separated IDs from the first of these env vars that is set. Skips (and warns about) typos."""
     raw = next((os.getenv(name) for name in env_names if os.getenv(name)), "")
-    return [int(i) for i in raw.replace(" ", "").split(",") if i]
+    ids = []
+    for item in raw.replace(" ", "").split(","):
+        if item.isdigit():
+            ids.append(int(item))
+        elif item:
+            logging.getLogger("ktdi").warning("Ignoring %r in %s: server IDs are numbers only.", item, env_names[0])
+    return ids
 
 
 # Comma-separated server IDs to register slash commands to (GUILD_ID also accepted).
@@ -38,7 +44,7 @@ GUILD_IDS = parse_ids("GUILD_IDS", "GUILD_ID")
 # Calibre-Web library for /books. The commands only work in BOOKS_GUILD_IDS, and only if CALIBRE_URL is set.
 BOOKS_GUILD_IDS = parse_ids("BOOKS_GUILD_IDS")
 CALIBRE_URL = os.getenv("CALIBRE_URL")
-BOOK_FORMATS = os.getenv("BOOK_FORMATS", "epub,kepub,azw3,mobi,pdf,cbz").replace(" ", "").split(",")
+BOOK_FORMATS = [f for f in (os.getenv("BOOK_FORMATS") or "epub,kepub,azw3,mobi,pdf,cbz").replace(" ", "").split(",") if f]
 calibre = (
     library.CalibreWeb(CALIBRE_URL, os.getenv("CALIBRE_USERNAME", ""), os.getenv("CALIBRE_PASSWORD", ""), BOOK_FORMATS)
     if CALIBRE_URL else None
@@ -258,6 +264,8 @@ class KTDIBot(commands.Bot):
             self.tree.clear_commands(guild=None)
             await self.tree.sync()
         else:
+            if calibre is None:
+                self.tree.remove_command("books")  # Library not set up, so don't show /books anywhere.
             synced = await self.tree.sync()
             log.info("Synced %d global slash commands", len(synced))
 
