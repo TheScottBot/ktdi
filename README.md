@@ -6,7 +6,7 @@ A tiny Discord bot for keeping your friends in line. Commands work as slash comm
 | Command | What it does |
 |---|---|
 | `spray [@user]` | Posts a spray bottle GIF. Target someone to add to their rap sheet. |
-| `abm <measurement>` | Anything But Metric: converts a metric measurement (`3cm`, `20C`, `2.5kg`, `100km/h`, `500ml`, `85dB`…) into an absurd unit. Units live in `abm_units.json`. |
+| `abm <measurement>` | Anything But Metric: converts a metric measurement (`3cm`, `20C`, `2.5kg`, `100km/h`, `500ml`, `85dB`…) into an absurd unit. Units live in `ktdi/lib/abm_units.json`. |
 | `imperial <measurement>` | The sincere version of `abm`: an accurate conversion to imperial/US units (e.g. `180cm` → 5 ft 10.9 in, `75kg` → 165.3 lb (11 st 11.3 lb), `1l` → US and UK pints). Same inputs as `abm`. |
 | `loot` | Declares you're looting the body (posts the perception check GIF). |
 | `rapsheet [@user]` | Shows someone's sprays and bribes (defaults to you). |
@@ -78,3 +78,38 @@ python bot.py --dev
 This loads `.env.dev` instead of `.env`. Give the dev bot a different `COMMAND_PREFIX`, only the test server in `GUILD_IDS`, and its own `DB_PATH`.
 
 Slash commands can take a while to appear or update when registered globally. Set `GUILD_IDS` in `.env` to a comma-separated list of server IDs to register them to those servers only, which updates instantly.
+
+## Project layout
+
+```
+bot.py                 # starts the bot (python bot.py [--dev]); also: python -m ktdi, or the ktdi command
+ktdi/
+├── bot.py             # the bot: startup, loading features, syncing slash commands, command logging
+├── config.py          # settings from .env
+├── db.py              # database connection, tables, upgrades, and shared state (scope())
+├── common.py          # small helpers shared by features
+├── features/          # one file per feature, each a discord.py extension with a setup(bot)
+│   ├── fun.py         # spray, loot, linux, blame, bribe, rapsheet, 💦, Champion Briber
+│   ├── units.py       # abm, imperial
+│   ├── quotes.py
+│   ├── campaigns.py   # campaigns and reminders
+│   ├── settings.py
+│   ├── books.py
+│   └── help.py        # asks each feature for its help_extras(), so new features don't touch it
+└── lib/               # no Discord code: unit conversions, reminder schedules, Calibre-Web client
+tests/                 # pytest
+```
+
+To add a feature: create `ktdi/features/<name>.py` with its commands and an `async def setup(bot)` that registers
+them, add it to `FEATURES` in `ktdi/features/__init__.py`, and optionally a `help_extras(command)` for `/help`.
+
+## Tests
+
+```bash
+pip install -e ".[dev]"
+python -m pytest
+```
+
+The tests use an in-memory database and fake Discord objects, never your real `.env`, database or token. They cover
+every feature, a fake Calibre-Web for `/books` (including that nothing is logged against a reader), and that every
+`/help` page fits Discord's limits.

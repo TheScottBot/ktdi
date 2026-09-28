@@ -1,0 +1,41 @@
+"""Shared test setup: a fresh in-memory database and a fake bot for every test.
+
+Run the tests with:  python -m pytest
+"""
+
+import os
+
+# Before importing ktdi: never read the real .env, and don't pick up library settings from the environment.
+os.environ["KTDI_NO_DOTENV"] = "1"
+for name in ("CALIBRE_URL", "BOOKS_GUILD_IDS", "GUILD_IDS", "COMMAND_PREFIX", "REMINDER_TIMEZONE"):
+    os.environ.pop(name, None)
+
+import pytest  # noqa: E402
+
+from ktdi import common, db  # noqa: E402
+from ktdi.features import books, fun  # noqa: E402
+from tests.fakes import FakeBot  # noqa: E402
+
+
+@pytest.fixture(autouse=True)
+def fresh_state():
+    db.init(":memory:")
+    fun.recent_speakers.clear()
+    fun.last_blame.clear()
+    books.recent_books.clear()
+    common.bot = FakeBot()
+    yield
+    db.conn.close()
+
+
+@pytest.fixture
+def bot() -> FakeBot:
+    return common.bot
+
+
+@pytest.fixture
+def clock(monkeypatch):
+    """Freeze datetime.now() in the given modules: clock.set(dt, module, ...)."""
+    from tests.fakes import FrozenClock
+    frozen = FrozenClock(monkeypatch)
+    return frozen

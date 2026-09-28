@@ -1,0 +1,248 @@
+"""Spray, loot, linux, blame, bribe and rap sheets, plus the 💦 reaction and the Champion Briber role."""
+
+import random
+from collections import defaultdict, deque
+
+import discord
+from discord.ext import commands
+
+from ktdi import common, config, db
+from ktdi.common import get_member, log, plural
+
+SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
+SPRAY_EMOJI = "💦"
+LOOT_GIF_URL = "https://klipy.com/gifs/perception-check-tom-cardy"
+
+BLAME_LINES = [
+    "This is {user}'s fault.",
+    "After a thorough investigation, the committee blames {user}.",
+    "{user} did this. Everyone saw it.",
+    "Sources confirm: {user}.",
+    "Not sure what happened, but it was definitely {user}.",
+    "{user}, explain yourself.",
+]
+
+BRIBE_LINES = [
+    "💰 {briber} slipped the committee **{amount}**. On review, this is actually {blamer}'s fault.",
+    "💰 After receiving **{amount}** from {briber}, new evidence points to {blamer}.",
+    "💰 {briber} paid **{amount}**. The committee now blames {blamer}. Justice is served.",
+]
+
+LINUX_LINES = [
+    "{user}, what're your opinions on Linux?",
+    "{user}, how much do you hate Linux? Scale of 1 to 10, and 10 isn't high enough.",
+    "{user}, quick question: is Linux the worst thing ever made, or just top three?",
+    "{user}, if Linux were a person, what would you say to it?",
+    "{user}, how many times this week has Linux personally wronged you?",
+    "{user}, describe your relationship with Linux in one word. Keep it PG.",
+    "{user}, someone just said \"it's the year of the Linux desktop\". Thoughts?",
+    "{user}, would you rather use Linux for a week or step on Lego for a week?",
+    "{user}, on a scale from \"mildly annoyed\" to \"burn it all down\", where does Linux sit today?",
+    "{user}, what's your favourite thing about Linux? Trick question, we know the answer.",
+    "{user}, how do you feel when someone says \"just compile it from source\"?",
+    "{user}, if you had to explain your hatred of Linux to a child, how would you do it?",
+    "{user}, we're taking a poll: how much do you hate Linux right now?",
+    "{user}, Linux says hi. Would you like to say anything back?",
+]
+
+# Recent message authors per channel, used to pick someone to blame.
+recent_speakers: dict[int, deque[int]] = defaultdict(lambda: deque(maxlen=50))
+
+# Most recent blame per channel: channel_id -> (blamer_id, blamed_id).
+last_blame: dict[int, tuple[int, int]] = {}
+
+
+# --- Sprays and bribes (read through db.scope, so shared servers pool them) ---
+def record_spray(guild_id: int, user_id: int) -> int:
+    db.conn.execute(
+        """
+        INSERT INTO sprays (guild_id, user_id, count) VALUES (?, ?, 1)
+        ON CONFLICT (guild_id, user_id) DO UPDATE SET count = count + 1
+        """,
+        (guild_id, user_id),
+    )
+    db.conn.commit()
+    return get_spray_count(guild_id, user_id)
+
+
+def get_spray_count(guild_id: int, user_id: int) -> int:
+    where, params = db.scope(guild_id)
+    row = db.conn.execute(f"SELECT COALESCE(SUM(count), 0) FROM sprays WHERE {where} AND user_id = ?",
+                          (*params, user_id)).fetchone()
+    return row[0]
+
+
+def record_bribe(guild_id: int, user_id: int, amount: int) -> None:
+    db.conn.execute(
+        """
+        INSERT INTO bribes (guild_id, user_id, count, total) VALUES (?, ?, 1, ?)
+        ON CONFLICT (guild_id, user_id) DO UPDATE SET count = count + 1, total = total + excluded.total
+        """,
+        (guild_id, user_id, amount),
+    )
+    db.conn.commit()
+
+
+def get_bribe_stats(guild_id: int, user_id: int) -> tuple[int, int]:
+    where, params = db.scope(guild_id)
+    row = db.conn.execute(f"SELECT COALESCE(SUM(count), 0), COALESCE(SUM(total), 0) FROM bribes WHERE {where} AND user_id = ?",
+                          (*params, user_id)).fetchone()
+    return row[0], row[1]
+
+
+def get_top_briber(guild_id: int) -> int | None:
+    where, params = db.scope(guild_id)
+    row = db.conn.execute(f"SELECT user_id FROM bribes WHERE {where} GROUP BY user_id ORDER BY SUM(total) DESC, user_id LIMIT 1",
+                          params).fetchone()
+    return row[0] if row else None
+
+
+def get_briber_role_holder(guild_id: int) -> int | None:
+    row = db.conn.execute("SELECT user_id FROM briber_role_holders WHERE guild_id = ?", (guild_id,)).fetchone()
+    return row[0] if row else None
+
+
+def set_briber_role_holder(guild_id: int, user_id: int) -> None:
+    db.conn.execute(
+        "INSERT INTO briber_role_holders (guild_id, user_id) VALUES (?, ?)"
+        " ON CONFLICT (guild_id) DO UPDATE SET user_id = excluded.user_id",
+        (guild_id, user_id),
+    )
+    db.conn.commit()
+
+
+async def update_briber_role(guild: discord.Guild) -> None:
+    """Move the briber role to the server's biggest briber. Does nothing if the role or permission is missing."""
+    role = discord.utils.get(guild.roles, name=config.BRIBER_ROLE_NAME)
+    top_id = get_top_briber(guild.id)
+    if role is None or top_id is None:
+        return
+    previous_id = get_briber_role_holder(guild.id)
+    try:
+        if previous_id and previous_id != top_id:
+            previous = await get_member(guild, previous_id)
+            if previous and role in previous.roles:
+                await previous.remove_roles(role, reason="No longer the biggest briber")
+                log.info("[%s] Took %r from %s", guild.name, config.BRIBER_ROLE_NAME, previous)
+        top = await get_member(guild, top_id)
+        if top and role not in top.roles:
+            await top.add_roles(role, reason="Biggest briber")
+            log.info("[%s] Gave %r to %s", guild.name, config.BRIBER_ROLE_NAME, top)
+        set_briber_role_holder(guild.id, top_id)
+    except discord.HTTPException as error:
+        # Usually missing Manage Roles, or the role sits above the bot's own role.
+        log.warning("[%s] Couldn't update %r role: %s", guild.name, config.BRIBER_ROLE_NAME, error)
+
+
+# --- Commands ---
+@commands.hybrid_command(name="spray", description="Spray the degenerate.")
+@commands.guild_only()
+async def spray(ctx: commands.Context, target: discord.Member | None = None):
+    if target is None:
+        await ctx.send(SPRAY_GIF_URL)
+        return
+    record_spray(ctx.guild.id, target.id)
+    await ctx.send(f"{target.mention} {SPRAY_GIF_URL}")
+
+
+@commands.hybrid_command(name="loot", description="Declare that you're looting the body.")
+async def loot(ctx: commands.Context):
+    await ctx.send(LOOT_GIF_URL)
+
+
+@commands.hybrid_command(name="rapsheet", description="See someone's sprays and bribes.")
+@commands.guild_only()
+async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
+    user = user or ctx.author
+    sprays = get_spray_count(ctx.guild.id, user.id)
+    bribes, bribe_total = get_bribe_stats(ctx.guild.id, user.id)
+    if sprays == 0 and bribes == 0:
+        await ctx.send(f"📋 {user.display_name} has a clean record. Suspicious.")
+        return
+    lines = [f"📋 **Rap sheet: {user.display_name}**"]
+    if sprays:
+        lines.append(f"Sprayed {plural(sprays, 'time')}.")
+    if bribes:
+        lines.append(f"Bribed the committee {plural(bribes, 'time')} (${bribe_total:,} total).")
+        if get_top_briber(ctx.guild.id) == user.id:
+            lines.append("👑 Biggest briber" + (" across the shared servers." if db.is_shared(ctx.guild.id) else " in the server."))
+    await ctx.send("\n".join(lines))
+
+
+@commands.hybrid_command(name="blame", description="Blame someone who's been talking recently.")
+@commands.guild_only()
+async def blame(ctx: commands.Context, *, reason: str | None = None):
+    candidates = set(recent_speakers[ctx.channel.id]) or {ctx.author.id}
+    blamed_id = random.choice(list(candidates))
+    last_blame[ctx.channel.id] = (ctx.author.id, blamed_id)
+    log.info("[%s] %s blamed user %s", ctx.guild.name, ctx.author, blamed_id)
+    line = random.choice(BLAME_LINES).format(user=f"<@{blamed_id}>")
+    if reason:
+        line = f"**{reason}**\n{line}"
+    await ctx.send(line)
+
+
+@commands.hybrid_command(name="bribe", description="Blamed? Pay to put the blame back on whoever blamed you.")
+@commands.guild_only()
+async def bribe(ctx: commands.Context, amount: commands.Range[int, 1, 1_000_000_000_000]):
+    blame_record = last_blame.get(ctx.channel.id)
+    if blame_record is None:
+        await ctx.send("Nobody's been blamed here. Save your money.", ephemeral=True)
+        return
+    blamer_id, blamed_id = blame_record
+    if ctx.author.id != blamed_id:
+        await ctx.send(f"You're not the one being blamed, <@{blamed_id}> is. Nice try.", ephemeral=True)
+        return
+    if blamer_id == blamed_id:
+        await ctx.send("You blamed yourself. There's nobody to pass it to.", ephemeral=True)
+        return
+    record_bribe(ctx.guild.id, ctx.author.id, amount)
+    # Flip the blame, so the original blamer can counter-bribe.
+    last_blame[ctx.channel.id] = (blamed_id, blamer_id)
+    log.info("[%s] %s bribed $%s, blame moved to user %s", ctx.guild.name, ctx.author, f"{amount:,}", blamer_id)
+    await ctx.send(
+        random.choice(BRIBE_LINES).format(briber=ctx.author.mention, blamer=f"<@{blamer_id}>", amount=f"${amount:,}")
+    )
+    await update_briber_role(ctx.guild)
+
+
+@commands.hybrid_command(name="linux", description="Ask our resident Linux hater how he's feeling about Linux.")
+async def linux(ctx: commands.Context):
+    await ctx.send(random.choice(LINUX_LINES).format(user=f"<@{config.LINUX_HATER_ID}>"))
+
+
+# --- Listeners ---
+async def remember_speaker(message: discord.Message):
+    if message.guild and not message.author.bot:
+        recent_speakers[message.channel.id].append(message.author.id)
+
+
+async def spray_reaction(payload: discord.RawReactionActionEvent):
+    # Reacting 💦 to a message sprays whoever sent it.
+    bot = common.bot
+    if str(payload.emoji) != SPRAY_EMOJI or payload.user_id == bot.user.id:
+        return
+    channel = bot.get_channel(payload.channel_id)
+    if channel is None:
+        return
+    target = ""
+    if payload.message_author_id:
+        target = f"<@{payload.message_author_id}> "
+        if payload.guild_id:
+            record_spray(payload.guild_id, payload.message_author_id)
+    reactor = payload.member or f"user {payload.user_id}"
+    log.info("[%s] %s reacted %s, spraying user %s", channel.guild if payload.guild_id else "DM",
+             reactor, SPRAY_EMOJI, payload.message_author_id)
+    await channel.send(f"{target}{SPRAY_GIF_URL}")
+
+
+def main_help_fields() -> list[tuple[str, str]]:
+    """Extra lines for the main /help list, for things that aren't commands."""
+    return [(f"React {SPRAY_EMOJI}", "Sprays whoever sent the message and adds to their rap sheet.")]
+
+
+async def setup(bot: commands.Bot):
+    for command in (spray, loot, rapsheet, blame, bribe, linux):
+        bot.add_command(command)
+    bot.add_listener(remember_speaker, "on_message")
+    bot.add_listener(spray_reaction, "on_raw_reaction_add")
