@@ -322,6 +322,12 @@ def anonymise_quote(guild_id: int, quote_id: int) -> None:
     db.commit()
 
 
+def claim_quote(guild_id: int, quote_id: int, user_id: int) -> None:
+    db.execute("UPDATE quotes SET user_id = ? WHERE guild_id = ? AND id = ? AND user_id = ?",
+               (user_id, guild_id, quote_id, ANONYMOUS))
+    db.commit()
+
+
 def delete_quote(guild_id: int, quote_id: int) -> None:
     db.execute("DELETE FROM quotes WHERE guild_id = ? AND id = ?", (guild_id, quote_id))
     db.commit()
@@ -589,6 +595,20 @@ def dissociate_quote(guild: discord.Guild, member: discord.Member, number: int) 
     return Reply(f"🕶️ Quote #{number} is now anonymous.", quote_embed(get_quote(guild.id, number)))
 
 
+def claim(guild: discord.Guild, member: discord.Member, number: int) -> Reply:
+    """Put your own name on an anonymous quote. Only ever yourself, so nobody can undo someone's dissociate."""
+    quote = get_quote(guild.id, number)
+    if quote is None:
+        return Reply(f"There's no quote #{number}.", private=True)
+    if quote.user_id == member.id:
+        return Reply(f"Quote #{number} is already yours.", private=True)
+    if quote.user_id != ANONYMOUS:
+        return Reply(f"Quote #{number} isn't anonymous, so it can't be claimed.", private=True)
+    claim_quote(guild.id, number, member.id)
+    log.info("[%s] %s claimed quote #%d", guild.name, member, number)
+    return Reply(f"🙋 {member.mention} claimed quote #{number}.", quote_embed(get_quote(guild.id, number)))
+
+
 def show_random_quote(guild: discord.Guild, user: discord.abc.User | None = None) -> Reply:
     quote = random_quote(guild.id, user.id if user else None)
     if quote is None:
@@ -713,6 +733,11 @@ async def quote_prefix_anon(ctx: commands.Context, *, text: str = ""):
                                      quote_text or replied.content, context))
 
 
+@quote_prefix.command(name="claim", aliases=["update"], description="Put your own name on an anonymous quote.")
+async def quote_prefix_claim(ctx: commands.Context, number: int):
+    await send_reply(ctx, claim(ctx.guild, ctx.author, number))
+
+
 @quote_prefix.command(name="dissociate", aliases=["anonymise", "anonymize"],
                       description="Remove the name from a quote, keeping the quote (the person quoted, whoever saved it, or a mod).")
 async def quote_prefix_dissociate(ctx: commands.Context, number: int):
@@ -782,6 +807,12 @@ async def quote_slash_anon(interaction: discord.Interaction, text: app_commands.
                      description="Remove the name from a quote, keeping the quote (the person quoted, whoever saved it, or a mod).")
 async def quote_slash_dissociate(interaction: discord.Interaction, number: int):
     await respond(interaction, dissociate_quote(interaction.guild, interaction.user, number))
+
+
+@quote_slash.command(name="claim", description="Put your own name on an anonymous quote.")
+@app_commands.describe(number="The anonymous quote's number")
+async def quote_slash_claim(interaction: discord.Interaction, number: int):
+    await respond(interaction, claim(interaction.guild, interaction.user, number))
 
 
 @quote_slash.command(name="random", description="A random quote, optionally from one person.")
@@ -1045,7 +1076,8 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
                 "(clear the picker to save it anonymously).\n"
                 f"• **Anonymous:** leave `user` empty in `/quote add`, use `/quote anon`, or reply with "
                 f"`{COMMAND_PREFIX}quote anon`. "
-                "`/quote dissociate <#>` takes the name off an existing quote.\n"
+                "`/quote dissociate <#>` takes the name off an existing quote, and `/quote claim <#>` "
+                "lets you put your own name back on an anonymous one.\n"
                 f"• `{COMMAND_PREFIX}quote` on its own gives a random quote; `{COMMAND_PREFIX}quote 12` shows quote #12."
             ),
             inline=False,
