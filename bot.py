@@ -264,7 +264,8 @@ async def on_raw_reaction_add(payload: discord.RawReactionActionEvent):
 
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user} (ID: {bot.user.id}), prefix: {COMMAND_PREFIX!r}")
+    # flush so the line shows up in journalctl straight away under systemd.
+    print(f"Logged in as {bot.user} (ID: {bot.user.id}), prefix: {COMMAND_PREFIX!r}", flush=True)
 
 
 def main():
