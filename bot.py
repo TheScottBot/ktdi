@@ -14,6 +14,8 @@ SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
 LOOT_GIF_URL = "https://klipy.com/gifs/perception-check-tom-cardy"
 COMMAND_PREFIX = os.getenv("COMMAND_PREFIX", "!")
+# Comma-separated server IDs to register slash commands to (GUILD_ID also accepted).
+GUILD_IDS = [int(g) for g in (os.getenv("GUILD_IDS") or os.getenv("GUILD_ID") or "").replace(" ", "").split(",") if g]
 DB_PATH = os.getenv("DB_PATH", str(Path(__file__).parent / "ktdi.db"))
 
 BLAME_LINES = [
@@ -135,7 +137,19 @@ class KTDIBot(commands.Bot):
         super().__init__(command_prefix=COMMAND_PREFIX, intents=intents, help_command=None)
 
     async def setup_hook(self):
-        await self.tree.sync()
+        if GUILD_IDS:
+            # Server-only slash commands update instantly; global ones can take a while to reach clients.
+            for guild_id in GUILD_IDS:
+                guild = discord.Object(id=guild_id)
+                self.tree.copy_global_to(guild=guild)
+                synced = await self.tree.sync(guild=guild)
+                print(f"Synced {len(synced)} slash commands to server {guild_id}", flush=True)
+            # Remove any old global copies so commands don't show up twice.
+            self.tree.clear_commands(guild=None)
+            await self.tree.sync()
+        else:
+            synced = await self.tree.sync()
+            print(f"Synced {len(synced)} global slash commands", flush=True)
 
     async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
         # Tell people when they typed a command wrong instead of failing silently.

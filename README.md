@@ -40,4 +40,4 @@ Text commands need the **Message Content Intent** enabled on the bot's page in t
 
    or `python bot.py`.
 
-Slash commands can take a few minutes to appear the first time they're synced.
+Slash commands can take a while to appear or update when registered globally. Set `GUILD_IDS` in `.env` to a comma-separated list of server IDs to register them to those servers only, which updates instantly.
