@@ -1446,7 +1446,7 @@ async def campaign_reschedule(ctx: commands.Context, alias: str, *, change: str)
         rest, new_lead = reminders.split_lead(change)
         lead_minutes = reminder.lead_minutes if new_lead is None else new_lead
         lead = timedelta(minutes=lead_minutes)
-        rest = re.sub(r"^(?:and\s+)?(?:remind(?:\s+(?:me|us))?|ping|warn(?:ing)?)?\s*", "", rest.strip(), flags=re.I)
+        rest = re.sub(r"^(?:and\s+)?(?:remind(?:ers?)?(?:\s+(?:me|us))?|ping|warn(?:ing)?)?\s*", "", rest.strip(), flags=re.I)
         schedule = reminder.schedule
         if not rest:
             # Just the warning, e.g. "30 minutes before": same schedule, same next session.
@@ -1762,22 +1762,99 @@ def can_use(command: commands.Command, ctx: commands.Context) -> bool:
     return True
 
 
+EMBED_FIELD_LIMIT = 1024  # Discord rejects the whole message if any field is longer.
+EMBED_TOTAL_LIMIT = 6000
+
+
+def add_help_field(embed: discord.Embed, name: str, value: str, inline: bool = False) -> None:
+    """Add a field, trimming (and logging) rather than letting an over-long one break the whole message."""
+    if len(value) > EMBED_FIELD_LIMIT:
+        log.warning("Help field %r is %d characters; trimmed to %d", name, len(value), EMBED_FIELD_LIMIT)
+        value = value[:EMBED_FIELD_LIMIT - 1] + "…"
+    embed.add_field(name=name[:256], value=value, inline=inline)
+
+
+def fit_embed(embed: discord.Embed) -> discord.Embed:
+    """Drop trailing fields if the whole embed is over Discord's limit."""
+    while len(embed) > EMBED_TOTAL_LIMIT and embed.fields:
+        log.warning("Help embed %r is %d characters; dropping field %r", embed.title, len(embed), embed.fields[-1].name)
+        embed.remove_field(len(embed.fields) - 1)
+    return embed
+
+
+def campaign_help_sections() -> list[tuple[str, str, set[str]]]:
+    """(title, text, subcommands it's relevant to) for /help campaign and /help campaign <subcommand>."""
+    p = COMMAND_PREFIX
+    return [
+        ("📋 Setting up", (
+            "• `/campaign add alias:Monday game dndbeyond:<link> vtt:<link>`. The alias can be anything that means "
+            "something to you. One link is enough; Roll20, Foundry, Owlbear Rodeo etc. all work as the VTT.\n"
+            "• `/campaign show Monday game` gives buttons for D&D Beyond and the VTT. `/campaign list` shows them all.\n"
+            f"• `/campaign edit` changes a link (`{CLEAR_LINK}` removes it) or `rename`s the campaign. "
+            "`/campaign remove` deletes it, along with its reminder.\n"
+            "• Start typing an alias and Discord suggests it."
+        ), {"add", "show", "list", "edit", "remove"}),
+        ("⏰ Reminders", (
+            "• `/campaign remind alias:Monday game when:mondays at 1900, 15 minutes before`\n"
+            "• The time is when the game **starts**. The warning is optional: `15m before`, `1h before`, "
+            "`half an hour before`, `1 day before`. Without one, it pings at the start time.\n"
+            "• Schedules: `monday 7pm`, `mondays and thursdays 19:30`, `weekends 2pm`, `every other friday 7:30pm`. "
+            "Add `from 23 oct` to choose when it starts (useful for fortnightly games).\n"
+            f"• React {REMINDER_EMOJI} to the message it posts to get pinged; remove your {REMINDER_EMOJI} to stop. "
+            "Reminders include the campaign's buttons.\n"
+            f"• One reminder per campaign. `/campaign unremind` stops it; a new `/campaign remind` replaces it "
+            f"(and everyone needs to {REMINDER_EMOJI} again).\n"
+            f"• Times are {REMINDER_TIMEZONE.key} time; summer time is handled."
+        ), {"remind", "unremind"}),
+        ("🗓️ When the game moves", (
+            "• `/campaign skip`: skip the next session. Fortnightly games shift a week and carry on from there.\n"
+            "• `/campaign reschedule change:next 26 oct`: the next session is on that date (a fortnightly "
+            "schedule counts from it).\n"
+            "• `change:30 minutes before`: change just the warning.\n"
+            "• `change:every other thursday 8pm from 5 nov`: a whole new schedule.\n"
+            f"• All of these keep everyone's {REMINDER_EMOJI}."
+        ), {"skip", "reschedule", "remind"}),
+        ("🔐 Who can change what", (
+            f"• Anyone can add a campaign, and anyone can {REMINDER_EMOJI} to get pinged.\n"
+            "• Editing or removing a campaign: whoever added it, or anyone with Manage Messages.\n"
+            "• Changing, skipping or stopping a reminder: whoever set it, whoever added the campaign, or a mod."
+        ), {"edit", "remove", "remind", "unremind", "skip", "reschedule"}),
+        (f"⌨️ Typing it with {p}", (
+            f"• `{p}campaign Monday game` shows one; `{p}campaign` lists them all.\n"
+            "• When more follows the alias, put a multi-word alias in quotes: "
+            f"`{p}campaign add \"Monday game\" <link> <link>`, "
+            f"`{p}campaign remind \"Monday game\" mondays at 1900, 15m before`, "
+            f"`{p}campaign reschedule \"Monday game\" next 26 oct`.\n"
+            f"• `{p}campaign skip Monday game` and `{p}campaign remove Monday game` don't need quotes."
+        ), {"add", "show", "list", "edit", "remove", "remind", "unremind", "skip", "reschedule"}),
+    ]
+
+
 def command_help_embed(command: commands.Command) -> discord.Embed:
-    """Detailed help for one command, e.g. /help abm."""
+    """Detailed help for one command or subcommand, e.g. /help abm or /help campaign remind."""
     embed = discord.Embed(
-        title=f"/{command.name} {command.signature}".strip(),
-        description=f"{command.description}\n\nAlso works as `{COMMAND_PREFIX}{command.name}`.",
+        title=f"/{command.qualified_name} {command.signature}".strip(),
+        description=f"{command.description}\n\nAlso works as `{COMMAND_PREFIX}{command.qualified_name}`.",
         color=discord.Color.blurple(),
     )
     if isinstance(command, commands.Group):
         embed.title = f"/{command.name}"
         embed.description = f"{command.description}\n\nAlso works as `{COMMAND_PREFIX}{command.name} <subcommand>`."
+        if command.name == "campaign":
+            embed.description += "\n-# For one command in detail: `/help campaign remind`, `/help campaign reschedule`…"
         for sub in sorted(command.commands, key=lambda c: c.name):
             prefix = COMMAND_PREFIX if sub.extras.get("prefix_only") else "/"
-            embed.add_field(name=f"{prefix}{sub.qualified_name} {sub.signature}".strip(), value=sub.description, inline=False)
-    if command.name == "quote":
-        embed.add_field(
-            name="More ways to save a quote",
+            add_help_field(embed, f"{prefix}{sub.qualified_name} {sub.signature}".strip(), sub.description)
+
+    parent = command.parent.name if command.parent else None
+    if command.name == "campaign" or parent == "campaign":
+        for title, text, subcommands in campaign_help_sections():
+            if command.name == "campaign" or command.name in subcommands:
+                add_help_field(embed, title, text)
+    if command.name == "quote" or (parent == "quote" and command.name in ("add", "anon")):
+        add_help_field(
+            embed,
+            "More ways to save a quote",
             value=(
                 f"• **Reply** to a message with `{COMMAND_PREFIX}quote` to save it, or `{COMMAND_PREFIX}quote @someone` "
                 "to credit someone else (handy when a person types out what someone said in voice).\n"
@@ -1790,36 +1867,13 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
                 "lets you put your own name back on an anonymous one.\n"
                 f"• `{COMMAND_PREFIX}quote` on its own gives a random quote; `{COMMAND_PREFIX}quote 12` shows quote #12."
             ),
-            inline=False,
         )
-    if command.name == "campaign":
-        embed.add_field(
-            name="Tips",
-            value=(
-                "• Aliases can be anything: `Monday game`, `Curse of Strahd`, `the cursed one`. In the slash commands, "
-                "start typing and Discord suggests them.\n"
-                f"• `{COMMAND_PREFIX}campaign Monday game` shows one; `{COMMAND_PREFIX}campaign` lists them all.\n"
-                f"• With `{COMMAND_PREFIX}campaign add`, put a multi-word alias in quotes: "
-                f"`{COMMAND_PREFIX}campaign add \"Monday game\" <D&D Beyond link> <VTT link>`.\n"
-                f"• To remove one link, `/campaign edit` it to `{CLEAR_LINK}`.\n"
-                "• **Reminders:** `/campaign remind Monday game mondays at 1900, 15 minutes before`. The time is when "
-                "the game starts; the warning is optional (`1h before`, `half an hour before`…). Schedules like "
-                "`monday 7pm`, `mondays and thursdays at 7pm`, `every other friday at 7:30pm from 23 oct` work. "
-                f"React {REMINDER_EMOJI} to the message it posts to get pinged; `/campaign unremind` stops it. "
-                f"Times are {REMINDER_TIMEZONE.key} time.\n"
-                "• **Game moved?** `/campaign skip` skips the next one (fortnightly games shift a week). "
-                "`/campaign reschedule` with `30 minutes before` changes the warning, `next 26 oct` sets the next "
-                "session's date, or give a new schedule. "
-                f"Both keep everyone's {REMINDER_EMOJI}."
-            ),
-            inline=False,
-        )
-    if command.name == "books":
-        embed.add_field(
-            name="Privacy",
-            value=(f"With `/books`, search results and books are only shown to you. With `{COMMAND_PREFIX}books`, "
-                   f"search results post in the channel and books are sent by DM."),
-            inline=False,
+    if command.name == "books" or parent == "books":
+        add_help_field(
+            embed,
+            "Privacy",
+            (f"With `/books`, search results and books are only shown to you. With `{COMMAND_PREFIX}books`, "
+             f"search results post in the channel and books are sent by DM."),
         )
     if command.name in ("abm", "imperial"):
         embed.description += (
@@ -1828,12 +1882,12 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
             "except `mW` vs `MW`."
         )
         for dimension, units in abm.input_unit_help():
-            embed.add_field(name=dimension, value=units, inline=True)
-    return embed
+            add_help_field(embed, dimension, units, inline=True)
+    return fit_embed(embed)
 
 
 @bot.hybrid_command(name="help", description="List everything this bot can do, or details for one command.")
-async def help_command(ctx: commands.Context, command: str | None = None):
+async def help_command(ctx: commands.Context, *, command: str | None = None):
     if command:
         found = bot.get_command(command.lstrip("/" + COMMAND_PREFIX).lower())
         if found is None or not can_use(found, ctx):

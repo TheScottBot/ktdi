@@ -96,7 +96,7 @@ LEAD_MAX_MINUTES = 48 * 60
 LEAD_UNITS = r"(m|mins?|minutes?|h|hrs?|hours?|d|days?)"
 LEAD_UNIT_MINUTES = {"m": 1, "h": 60, "d": 24 * 60}
 LEAD_RE = re.compile(
-    r"[,\s]*(?:and\s+)?(?:(?:remind(?:\s+(?:me|us))?|ping|warn(?:ing)?)\s+)?"
+    r"[,\s]*(?:and\s+)?(?:(?:remind(?:ers?)?(?:\s+(?:me|us))?|ping|warn(?:ing)?)\s+)?"
     rf"((?:\d+\s*{LEAD_UNITS}\s*(?:and\s+)?)+|half an hour|an hour|a half hour|a day)\s+(?:before|early|beforehand|ahead)\b",
     re.IGNORECASE,
 )
