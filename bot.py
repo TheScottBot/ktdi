@@ -7,17 +7,20 @@ import re
 import sys
 from collections import defaultdict, deque
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
+from urllib.parse import urlparse
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 import discord
 from discord import app_commands
-from discord.ext import commands
+from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
 import abm
 import library
+import reminders
 
 BASE_DIR = Path(__file__).parent
 
@@ -59,6 +62,12 @@ DB_PATH = str(BASE_DIR / os.getenv("DB_PATH", "ktdi.db"))
 LOG_FILE = BASE_DIR / os.getenv("LOG_FILE", "logs/ktdi-dev.log" if "--dev" in sys.argv else "logs/ktdi.log")
 LOG_MAX_BYTES = int(os.getenv("LOG_MAX_BYTES", 1_000_000))
 LOG_BACKUPS = int(os.getenv("LOG_BACKUPS", 5))
+# Timezone that campaign reminder times are in, e.g. "mondays at 1800" means 18:00 here (summer time handled).
+try:
+    REMINDER_TIMEZONE = ZoneInfo(os.getenv("REMINDER_TIMEZONE") or "Europe/London")
+except (ZoneInfoNotFoundError, ValueError):
+    logging.getLogger("ktdi").warning("Unknown REMINDER_TIMEZONE %r, using UTC.", os.getenv("REMINDER_TIMEZONE"))
+    REMINDER_TIMEZONE = ZoneInfo("UTC")
 # Optional role given to each server's biggest briber. Skipped on servers without a role by this name.
 BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")
 
@@ -146,6 +155,47 @@ db.execute(
         channel_id INTEGER,
         message_id INTEGER,           -- the original message, if it was saved from one
         created_at TEXT NOT NULL      -- ISO 8601, UTC
+    )
+    """
+)
+db.execute(
+    """
+    CREATE TABLE IF NOT EXISTS campaigns (
+        guild_id      INTEGER NOT NULL,
+        alias         TEXT NOT NULL,  -- as typed, e.g. "Monday game"
+        alias_key     TEXT NOT NULL,  -- lowercased, for case-insensitive lookups
+        dndbeyond_url TEXT,
+        vtt_url       TEXT,
+        added_by      INTEGER NOT NULL,
+        created_at    TEXT NOT NULL,
+        PRIMARY KEY (guild_id, alias_key)
+    )
+    """
+)
+db.execute(
+    """
+    CREATE TABLE IF NOT EXISTS campaign_reminders (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id    INTEGER NOT NULL,
+        alias_key   TEXT NOT NULL,     -- the campaign it belongs to (one reminder per campaign)
+        channel_id  INTEGER NOT NULL,  -- where the reminders are posted
+        message_id  INTEGER,           -- the setup message people react 🔔 to
+        days        TEXT NOT NULL,     -- "0,3" = Mondays and Thursdays
+        time        TEXT NOT NULL,     -- "18:00", in REMINDER_TIMEZONE
+        every_weeks INTEGER NOT NULL,  -- 1 weekly, 2 fortnightly
+        anchor      TEXT NOT NULL,     -- a date in an "on" week, for fortnightly schedules
+        next_run    TEXT NOT NULL,     -- ISO 8601, UTC
+        created_by  INTEGER NOT NULL,
+        UNIQUE (guild_id, alias_key)
+    )
+    """
+)
+db.execute(
+    """
+    CREATE TABLE IF NOT EXISTS campaign_reminder_subscribers (
+        reminder_id INTEGER NOT NULL,
+        user_id     INTEGER NOT NULL,
+        PRIMARY KEY (reminder_id, user_id)
     )
     """
 )
@@ -333,6 +383,159 @@ def delete_quote(guild_id: int, quote_id: int) -> None:
     db.commit()
 
 
+@dataclass
+class Campaign:
+    guild_id: int
+    alias: str
+    dndbeyond_url: str | None
+    vtt_url: str | None
+    added_by: int
+
+
+CAMPAIGN_COLUMNS = "guild_id, alias, dndbeyond_url, vtt_url, added_by"
+
+
+def get_campaign(guild_id: int, alias: str) -> Campaign | None:
+    row = db.execute(f"SELECT {CAMPAIGN_COLUMNS} FROM campaigns WHERE guild_id = ? AND alias_key = ?",
+                     (guild_id, alias.strip().casefold())).fetchone()
+    return Campaign(*row) if row else None
+
+
+def list_campaigns(guild_id: int) -> list[Campaign]:
+    rows = db.execute(f"SELECT {CAMPAIGN_COLUMNS} FROM campaigns WHERE guild_id = ? ORDER BY alias_key",
+                      (guild_id,)).fetchall()
+    return [Campaign(*row) for row in rows]
+
+
+def save_campaign(guild_id: int, alias: str, dndbeyond_url: str | None, vtt_url: str | None, added_by: int) -> None:
+    db.execute(
+        "INSERT INTO campaigns (guild_id, alias, alias_key, dndbeyond_url, vtt_url, added_by, created_at)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?)",
+        (guild_id, alias, alias.casefold(), dndbeyond_url, vtt_url, added_by,
+         datetime.now(timezone.utc).isoformat(timespec="seconds")),
+    )
+    db.commit()
+
+
+def update_campaign(guild_id: int, old_alias: str, alias: str, dndbeyond_url: str | None, vtt_url: str | None) -> None:
+    db.execute(
+        "UPDATE campaigns SET alias = ?, alias_key = ?, dndbeyond_url = ?, vtt_url = ? WHERE guild_id = ? AND alias_key = ?",
+        (alias, alias.casefold(), dndbeyond_url, vtt_url, guild_id, old_alias.casefold()),
+    )
+    # Keep the reminder attached through a rename.
+    db.execute("UPDATE campaign_reminders SET alias_key = ? WHERE guild_id = ? AND alias_key = ?",
+               (alias.casefold(), guild_id, old_alias.casefold()))
+    db.commit()
+
+
+def delete_campaign(guild_id: int, alias: str) -> None:
+    delete_reminder(guild_id, alias)
+    db.execute("DELETE FROM campaigns WHERE guild_id = ? AND alias_key = ?", (guild_id, alias.casefold()))
+    db.commit()
+
+
+@dataclass
+class Reminder:
+    id: int
+    guild_id: int
+    alias_key: str
+    channel_id: int
+    message_id: int | None
+    days: str
+    time: str
+    every_weeks: int
+    anchor: str
+    next_run: str
+    created_by: int
+
+    @property
+    def schedule(self) -> reminders.Schedule:
+        return reminders.Schedule.from_storage(self.days, self.time, self.every_weeks)
+
+    @property
+    def next_run_at(self) -> datetime:
+        return datetime.fromisoformat(self.next_run)
+
+
+REMINDER_COLUMNS = "id, guild_id, alias_key, channel_id, message_id, days, time, every_weeks, anchor, next_run, created_by"
+
+
+def get_reminder(guild_id: int, alias: str) -> Reminder | None:
+    row = db.execute(f"SELECT {REMINDER_COLUMNS} FROM campaign_reminders WHERE guild_id = ? AND alias_key = ?",
+                     (guild_id, alias.casefold())).fetchone()
+    return Reminder(*row) if row else None
+
+
+def reminder_for_message(message_id: int) -> Reminder | None:
+    row = db.execute(f"SELECT {REMINDER_COLUMNS} FROM campaign_reminders WHERE message_id = ?", (message_id,)).fetchone()
+    return Reminder(*row) if row else None
+
+
+def due_reminders(now: datetime) -> list[Reminder]:
+    rows = db.execute(f"SELECT {REMINDER_COLUMNS} FROM campaign_reminders WHERE next_run <= ?",
+                      (now.isoformat(timespec="seconds"),)).fetchall()
+    return [Reminder(*row) for row in rows]
+
+
+def save_reminder(guild_id: int, alias: str, channel_id: int, schedule: reminders.Schedule, anchor: date,
+                  next_run: datetime, created_by: int) -> int:
+    """Create the campaign's reminder, replacing any existing one (and its subscribers)."""
+    delete_reminder(guild_id, alias)
+    days, clock, every_weeks = schedule.to_storage()
+    cursor = db.execute(
+        "INSERT INTO campaign_reminders (guild_id, alias_key, channel_id, days, time, every_weeks, anchor, next_run, created_by)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (guild_id, alias.casefold(), channel_id, days, clock, every_weeks, anchor.isoformat(),
+         next_run.isoformat(timespec="seconds"), created_by),
+    )
+    db.commit()
+    return cursor.lastrowid
+
+
+def set_reminder_message(reminder_id: int, message_id: int) -> None:
+    db.execute("UPDATE campaign_reminders SET message_id = ? WHERE id = ?", (message_id, reminder_id))
+    db.commit()
+
+
+def update_reminder_schedule(reminder_id: int, schedule: reminders.Schedule, anchor: date, next_run: datetime) -> None:
+    """Change when a reminder goes off, keeping its setup message and subscribers."""
+    days, clock, every_weeks = schedule.to_storage()
+    db.execute("UPDATE campaign_reminders SET days = ?, time = ?, every_weeks = ?, anchor = ?, next_run = ? WHERE id = ?",
+               (days, clock, every_weeks, anchor.isoformat(), next_run.isoformat(timespec="seconds"), reminder_id))
+    db.commit()
+
+
+def set_next_run(reminder_id: int, next_run: datetime) -> None:
+    db.execute("UPDATE campaign_reminders SET next_run = ? WHERE id = ?",
+               (next_run.isoformat(timespec="seconds"), reminder_id))
+    db.commit()
+
+
+def delete_reminder(guild_id: int, alias: str) -> None:
+    existing = get_reminder(guild_id, alias)
+    if existing:
+        db.execute("DELETE FROM campaign_reminder_subscribers WHERE reminder_id = ?", (existing.id,))
+        db.execute("DELETE FROM campaign_reminders WHERE id = ?", (existing.id,))
+        db.commit()
+
+
+def subscribe(reminder_id: int, user_id: int) -> None:
+    db.execute("INSERT OR IGNORE INTO campaign_reminder_subscribers (reminder_id, user_id) VALUES (?, ?)",
+               (reminder_id, user_id))
+    db.commit()
+
+
+def unsubscribe(reminder_id: int, user_id: int) -> None:
+    db.execute("DELETE FROM campaign_reminder_subscribers WHERE reminder_id = ? AND user_id = ?", (reminder_id, user_id))
+    db.commit()
+
+
+def subscribers(reminder_id: int) -> list[int]:
+    rows = db.execute("SELECT user_id FROM campaign_reminder_subscribers WHERE reminder_id = ? ORDER BY rowid",
+                      (reminder_id,)).fetchall()
+    return [row[0] for row in rows]
+
+
 def record_spray(guild_id: int, user_id: int) -> int:
     db.execute(
         """
@@ -360,6 +563,7 @@ class KTDIBot(commands.Bot):
         super().__init__(command_prefix=COMMAND_PREFIX, intents=intents, help_command=None)
 
     async def setup_hook(self):
+        reminder_loop.start()
         if GUILD_IDS:
             # Server-only slash commands update instantly; global ones can take a while to reach clients.
             for guild_id in GUILD_IDS:
@@ -870,6 +1074,456 @@ async def save_quote_menu(interaction: discord.Interaction, message: discord.Mes
     await interaction.response.send_modal(SaveQuoteModal(message))
 
 
+# --- Campaigns: an alias ("Monday game") pointing at a D&D Beyond campaign and a VTT ---
+CAMPAIGN_ALIAS_MAX = 50
+# Can't be aliases, or !campaign <alias> would clash.
+CAMPAIGN_SUBCOMMANDS = {"add", "edit", "list", "remove", "show", "remind", "unremind", "reschedule", "skip"}
+REMINDER_EMOJI = "🔔"
+REMINDER_GRACE = timedelta(hours=1)  # If the bot was down at reminder time, still send it up to this late.
+CLEAR_LINK = "none"  # Pass this to /campaign edit to remove a link.
+KNOWN_VTTS = {
+    "roll20.net": "Roll20",
+    "owlbear.rodeo": "Owlbear Rodeo",
+    "forge-vtt.com": "The Forge",
+    "foundryvtt.com": "Foundry",
+    "fantasygrounds.com": "Fantasy Grounds",
+    "alchemyrpg.com": "Alchemy",
+    "talespire.com": "TaleSpire",
+    "dndbeyond.com": "D&D Beyond Maps",
+}
+
+
+class CampaignError(Exception):
+    """A problem with what the user typed. The message is safe to show them."""
+
+
+def host_of(url: str) -> str:
+    return (urlparse(url).hostname or "").lower()
+
+
+def on_domain(url: str, domain: str) -> bool:
+    host = host_of(url)
+    return host == domain or host.endswith("." + domain)
+
+
+def vtt_label(url: str) -> str:
+    """Name the VTT button after the site where we recognise it, e.g. Roll20. Self-hosted Foundry etc. is just 'VTT'."""
+    return next((label for domain, label in KNOWN_VTTS.items() if on_domain(url, domain)), "VTT")
+
+
+def clean_link(value: str | None) -> str | None:
+    if value is None or not value.strip():
+        return None
+    link = value.strip().strip("<>")  # People often wrap links in <> to stop Discord previewing them.
+    parsed = urlparse(link)
+    if parsed.scheme not in ("http", "https") or not parsed.netloc:
+        raise CampaignError(f"`{value[:100]}` doesn't look like a link. Paste the full address, starting with https://.")
+    return link
+
+
+def sort_links(first: str | None, second: str | None) -> tuple[str | None, str | None]:
+    """Work out which link is D&D Beyond and which is the VTT, whichever order they were given in."""
+    links = [link for link in (clean_link(first), clean_link(second)) if link]
+    dndbeyond = [link for link in links if on_domain(link, "dndbeyond.com") and "/campaigns/" in link]
+    others = [link for link in links if link not in dndbeyond]
+    if len(dndbeyond) > 1 or len(others) > 1:
+        raise CampaignError("Give one D&D Beyond campaign link and one VTT link.")
+    return (dndbeyond[0] if dndbeyond else None), (others[0] if others else None)
+
+
+def campaign_embed(campaign: Campaign) -> discord.Embed:
+    lines = []
+    if campaign.dndbeyond_url:
+        lines.append(f"**D&D Beyond:** {campaign.dndbeyond_url}")
+    if campaign.vtt_url:
+        lines.append(f"**{vtt_label(campaign.vtt_url)}:** {campaign.vtt_url}")
+    reminder = get_reminder(campaign.guild_id, campaign.alias)
+    if reminder:
+        lines.append(f"**Reminder:** {reminder_summary(reminder)}")
+    return discord.Embed(title=f"🎲 {campaign.alias}", description="\n".join(lines), color=discord.Color.dark_red())
+
+
+def reminder_summary(reminder: Reminder) -> str:
+    """e.g. 'Mondays at 18:00 · next <in 3 days> · 4 subscribed'."""
+    count = len(subscribers(reminder.id))
+    next_at = int(reminder.next_run_at.timestamp())
+    return f"⏰ {reminder.schedule.describe()} · next <t:{next_at}:R> · {count} subscribed"
+
+
+def campaign_buttons(campaign: Campaign) -> discord.ui.View:
+    view = discord.ui.View(timeout=None)  # Link buttons open the URL directly, so there's nothing to time out.
+    if campaign.dndbeyond_url:
+        view.add_item(discord.ui.Button(label="D&D Beyond", url=campaign.dndbeyond_url))
+    if campaign.vtt_url:
+        view.add_item(discord.ui.Button(label=vtt_label(campaign.vtt_url), url=campaign.vtt_url))
+    return view
+
+
+def can_manage_campaign(member: discord.Member, campaign: Campaign) -> bool:
+    return member.id == campaign.added_by or member.guild_permissions.manage_messages
+
+
+def check_alias(alias: str) -> str:
+    alias = " ".join(alias.split())  # Tidy stray spaces.
+    if not alias:
+        raise CampaignError("Give the campaign an alias, like `Monday game`.")
+    if len(alias) > CAMPAIGN_ALIAS_MAX:
+        raise CampaignError(f"That alias is too long (max {CAMPAIGN_ALIAS_MAX} characters).")
+    if alias.casefold() in CAMPAIGN_SUBCOMMANDS:
+        raise CampaignError(f"`{alias}` is a command name, so it can't be an alias. Try something like `{alias} game`.")
+    if "://" in alias:
+        raise CampaignError("The alias goes first, then the links. With `!campaign add`, put a multi-word alias in "
+                            "quotes: `!campaign add \"Monday game\" <link> <link>`.")
+    return alias
+
+
+async def send_campaign_reply(ctx: commands.Context, content: str | None = None, campaign: Campaign | None = None,
+                              embed: discord.Embed | None = None, private: bool = False) -> None:
+    kwargs = {"allowed_mentions": NO_PINGS, "ephemeral": private}
+    if campaign:
+        kwargs["embed"], kwargs["view"] = campaign_embed(campaign), campaign_buttons(campaign)
+    elif embed:
+        kwargs["embed"] = embed
+    await ctx.send(content, **kwargs)
+
+
+@bot.hybrid_group(name="campaign", description="Our campaigns' D&D Beyond and VTT links, by alias.",
+                  invoke_without_command=True)
+@commands.guild_only()
+async def campaign_group(ctx: commands.Context, *, alias: str = ""):
+    # Prefix only: "!campaign Monday game" shows it, "!campaign" lists them all.
+    if alias:
+        await campaign_show.callback(ctx, alias=alias)
+    else:
+        await campaign_list.callback(ctx)
+
+
+@campaign_group.command(name="show", description="Show a campaign's links.")
+@app_commands.describe(alias="The campaign's alias, e.g. Monday game")
+async def campaign_show(ctx: commands.Context, *, alias: str):
+    campaign = get_campaign(ctx.guild.id, alias)
+    if campaign is None:
+        await send_campaign_reply(ctx, f"There's no campaign called “{discord.utils.escape_markdown(alias)}”. "
+                                       "See them all with `/campaign list`.", private=True)
+        return
+    await send_campaign_reply(ctx, campaign=campaign)
+
+
+@campaign_group.command(name="list", description="List all our campaigns.")
+async def campaign_list(ctx: commands.Context):
+    campaigns = list_campaigns(ctx.guild.id)
+    if not campaigns:
+        await send_campaign_reply(ctx, "No campaigns yet. Add one with `/campaign add`.", private=True)
+        return
+    lines = []
+    for c in campaigns:
+        links = [f"[D&D Beyond]({c.dndbeyond_url})"] if c.dndbeyond_url else []
+        if c.vtt_url:
+            links.append(f"[{vtt_label(c.vtt_url)}]({c.vtt_url})")
+        lines.append(f"**{discord.utils.escape_markdown(c.alias)}** · " + " · ".join(links))
+        reminder = get_reminder(c.guild_id, c.alias)
+        if reminder:
+            lines.append(f"  ⏰ {reminder.schedule.describe()} · next <t:{int(reminder.next_run_at.timestamp())}:R>")
+    embed = discord.Embed(title="🎲 Campaigns", description="\n".join(lines), color=discord.Color.dark_red())
+    embed.set_footer(text="Show one with its buttons: /campaign show <alias>")
+    await send_campaign_reply(ctx, embed=embed)
+
+
+@campaign_group.command(name="add", description="Add a campaign: an alias plus its D&D Beyond and/or VTT link.")
+@app_commands.describe(alias="Anything that means something to you, e.g. Monday game",
+                       dndbeyond="The D&D Beyond campaign link", vtt="The VTT link (Roll20, Foundry, Owlbear…)")
+async def campaign_add(ctx: commands.Context, alias: str, dndbeyond: str | None = None, vtt: str | None = None):
+    try:
+        alias = check_alias(alias)
+        dndbeyond, vtt = sort_links(dndbeyond, vtt)
+    except CampaignError as error:
+        await send_campaign_reply(ctx, str(error), private=True)
+        return
+    if not dndbeyond and not vtt:
+        await send_campaign_reply(ctx, "Add at least one link: the D&D Beyond campaign, the VTT, or both.", private=True)
+        return
+    if get_campaign(ctx.guild.id, alias):
+        await send_campaign_reply(ctx, f"There's already a campaign called “{alias}”. Change it with `/campaign edit`.",
+                                  private=True)
+        return
+    save_campaign(ctx.guild.id, alias, dndbeyond, vtt, ctx.author.id)
+    log.info("[%s] %s added campaign %r", ctx.guild.name, ctx.author, alias)
+    await send_campaign_reply(ctx, "🎲 Campaign added.", campaign=get_campaign(ctx.guild.id, alias))
+
+
+@campaign_group.command(name="edit", description="Change a campaign's links or alias (whoever added it, or a mod).")
+@app_commands.describe(alias="The campaign to change", dndbeyond=f"New D&D Beyond link, or '{CLEAR_LINK}' to remove it",
+                       vtt=f"New VTT link, or '{CLEAR_LINK}' to remove it", rename="A new alias")
+async def campaign_edit(ctx: commands.Context, alias: str, dndbeyond: str | None = None, vtt: str | None = None,
+                        rename: str | None = None):
+    campaign = get_campaign(ctx.guild.id, alias)
+    if campaign is None:
+        await send_campaign_reply(ctx, f"There's no campaign called “{discord.utils.escape_markdown(alias)}”.", private=True)
+        return
+    if not can_manage_campaign(ctx.author, campaign):
+        await send_campaign_reply(ctx, "Only whoever added this campaign, or a moderator, can change it.", private=True)
+        return
+    try:
+        new_alias = check_alias(rename) if rename else campaign.alias
+        new_dndbeyond = None if (dndbeyond or "").strip().lower() == CLEAR_LINK else (clean_link(dndbeyond) or campaign.dndbeyond_url)
+        new_vtt = None if (vtt or "").strip().lower() == CLEAR_LINK else (clean_link(vtt) or campaign.vtt_url)
+        if new_dndbeyond and not on_domain(new_dndbeyond, "dndbeyond.com"):
+            raise CampaignError("That isn't a D&D Beyond link. Put other links in `vtt`.")
+    except CampaignError as error:
+        await send_campaign_reply(ctx, str(error), private=True)
+        return
+    if not new_dndbeyond and not new_vtt:
+        await send_campaign_reply(ctx, "A campaign needs at least one link. Use `/campaign remove` to delete it.", private=True)
+        return
+    if new_alias.casefold() != campaign.alias.casefold() and get_campaign(ctx.guild.id, new_alias):
+        await send_campaign_reply(ctx, f"There's already a campaign called “{new_alias}”.", private=True)
+        return
+    update_campaign(ctx.guild.id, campaign.alias, new_alias, new_dndbeyond, new_vtt)
+    log.info("[%s] %s edited campaign %r", ctx.guild.name, ctx.author, new_alias)
+    await send_campaign_reply(ctx, "✏️ Campaign updated.", campaign=get_campaign(ctx.guild.id, new_alias))
+
+
+@campaign_group.command(name="remove", description="Remove a campaign (whoever added it, or a mod).")
+@app_commands.describe(alias="The campaign to remove")
+async def campaign_remove(ctx: commands.Context, *, alias: str):
+    campaign = get_campaign(ctx.guild.id, alias)
+    if campaign is None:
+        await send_campaign_reply(ctx, f"There's no campaign called “{discord.utils.escape_markdown(alias)}”.", private=True)
+        return
+    if not can_manage_campaign(ctx.author, campaign):
+        await send_campaign_reply(ctx, "Only whoever added this campaign, or a moderator, can remove it.", private=True)
+        return
+    delete_campaign(ctx.guild.id, campaign.alias)
+    log.info("[%s] %s removed campaign %r", ctx.guild.name, ctx.author, campaign.alias)
+    await send_campaign_reply(ctx, f"🗑️ Removed the campaign “{campaign.alias}”.")
+
+
+def can_manage_reminder(member: discord.Member, reminder: Reminder, campaign: Campaign) -> bool:
+    return member.id in (reminder.created_by, campaign.added_by) or member.guild_permissions.manage_messages
+
+
+def plan_schedule(text: str, now: datetime, keep_anchor: date | None = None) -> tuple[reminders.Schedule, datetime, date]:
+    """Parse 'every other monday at 7pm [from 19 oct]' into (schedule, first reminder, anchor)."""
+    schedule_text, start_text = reminders.split_start(text)
+    schedule = reminders.parse_schedule(schedule_text)
+    if start_text:
+        start = reminders.parse_date(start_text, now.astimezone(REMINDER_TIMEZONE).date())
+        first, anchor = reminders.first_on_or_after(schedule, start, now, REMINDER_TIMEZONE)
+    else:
+        first = reminders.next_occurrence(schedule, now, REMINDER_TIMEZONE, keep_anchor)
+        anchor = keep_anchor or first.astimezone(REMINDER_TIMEZONE).date()
+    return schedule, first, anchor
+
+
+def when_text(moment: datetime) -> str:
+    return f"<t:{int(moment.timestamp())}:F> (<t:{int(moment.timestamp())}:R>)"
+
+
+@campaign_group.command(name="remind", description="Remind the group on a schedule, e.g. mondays at 1800. React 🔔 to get pinged.")
+@app_commands.describe(alias="The campaign",
+                       when="e.g. mondays at 1800, monday 6pm, every other friday at 7:30pm from 23 oct")
+async def campaign_remind(ctx: commands.Context, alias: str, *, when: str):
+    campaign = get_campaign(ctx.guild.id, alias)
+    if campaign is None:
+        await send_campaign_reply(ctx, f"There's no campaign called “{discord.utils.escape_markdown(alias)}”. "
+                                       "Add it first with `/campaign add`.", private=True)
+        return
+    existing = get_reminder(ctx.guild.id, campaign.alias)
+    if existing and not can_manage_reminder(ctx.author, existing, campaign):
+        await send_campaign_reply(ctx, "This campaign already has a reminder. Only whoever set it, whoever added the "
+                                       "campaign, or a moderator can replace it.", private=True)
+        return
+    now = datetime.now(timezone.utc)
+    try:
+        schedule, first, anchor = plan_schedule(when, now)
+    except reminders.ScheduleError as error:
+        await send_campaign_reply(ctx, str(error), private=True)
+        return
+    reminder_id = save_reminder(ctx.guild.id, campaign.alias, ctx.channel.id, schedule, anchor, first, ctx.author.id)
+    log.info("[%s] %s set a reminder for %r: %s", ctx.guild.name, ctx.author, campaign.alias, schedule.describe())
+
+    embed = discord.Embed(
+        title=f"⏰ Reminder: {campaign.alias}",
+        description=(f"**{schedule.describe()}** ({REMINDER_TIMEZONE.key} time)\n"
+                     f"First one: {when_text(first)}\n\n"
+                     f"**React {REMINDER_EMOJI} to this message to get pinged.** Remove your {REMINDER_EMOJI} to stop."),
+        color=discord.Color.dark_red(),
+    )
+    replaced = " It replaces the old one, so react again if you want pings." if existing else ""
+    message = await ctx.send(f"⏰ Reminder set.{replaced}", embed=embed, allowed_mentions=NO_PINGS)
+    set_reminder_message(reminder_id, message.id)
+    try:
+        await message.add_reaction(REMINDER_EMOJI)  # So people can just click it.
+    except discord.HTTPException:
+        pass  # Missing Add Reactions / Read Message History: people can still add 🔔 themselves.
+
+
+@campaign_group.command(name="unremind", description="Stop a campaign's reminders.")
+@app_commands.describe(alias="The campaign")
+async def campaign_unremind(ctx: commands.Context, *, alias: str):
+    campaign = get_campaign(ctx.guild.id, alias)
+    reminder = get_reminder(ctx.guild.id, alias)
+    if campaign is None or reminder is None:
+        await send_campaign_reply(ctx, f"“{discord.utils.escape_markdown(alias)}” doesn't have a reminder.", private=True)
+        return
+    if not can_manage_reminder(ctx.author, reminder, campaign):
+        await send_campaign_reply(ctx, "Only whoever set the reminder, whoever added the campaign, or a moderator can "
+                                       "stop it. To stop your own pings, remove your 🔔 from the reminder message.",
+                                  private=True)
+        return
+    delete_reminder(ctx.guild.id, campaign.alias)
+    log.info("[%s] %s stopped the reminder for %r", ctx.guild.name, ctx.author, campaign.alias)
+    await send_campaign_reply(ctx, f"🔕 Stopped the reminders for “{campaign.alias}”.")
+
+
+async def reminder_to_change(ctx: commands.Context, alias: str) -> tuple[Campaign, Reminder] | None:
+    """Look up a campaign's reminder and check the user may change it, replying if not."""
+    campaign = get_campaign(ctx.guild.id, alias)
+    reminder = get_reminder(ctx.guild.id, alias) if campaign else None
+    if campaign is None or reminder is None:
+        await send_campaign_reply(ctx, f"“{discord.utils.escape_markdown(alias)}” doesn't have a reminder. "
+                                       "Set one with `/campaign remind`.", private=True)
+        return None
+    if not can_manage_reminder(ctx.author, reminder, campaign):
+        await send_campaign_reply(ctx, "Only whoever set the reminder, whoever added the campaign, or a moderator can "
+                                       "change it.", private=True)
+        return None
+    return campaign, reminder
+
+
+@campaign_group.command(name="reschedule",
+                        description="Change a reminder's schedule or next date, keeping everyone's 🔔.")
+@app_commands.describe(alias="The campaign",
+                       change="e.g. next 26 oct · every other monday 7pm · mondays 6pm from 12 oct")
+async def campaign_reschedule(ctx: commands.Context, alias: str, *, change: str):
+    found = await reminder_to_change(ctx, alias)
+    if found is None:
+        return
+    campaign, reminder = found
+    now = datetime.now(timezone.utc)
+    try:
+        if change.strip().lower().startswith("next "):
+            # "next 26 oct": same schedule, but the next session (and a fortnightly cadence) moves to that date.
+            schedule = reminder.schedule
+            session = reminders.parse_date(change.strip()[5:], now.astimezone(REMINDER_TIMEZONE).date())
+            if session.weekday() not in schedule.days:
+                raise reminders.ScheduleError(f"{session:%A %d %b} isn't on the schedule ({schedule.describe()}). "
+                                              "To change the day too, give the full schedule, e.g. "
+                                              f"`{'every other ' if schedule.every_weeks > 1 else ''}{session:%A} "
+                                              f"at {reminder.time} from {session:%d %b}`.")
+            first, anchor = reminders.first_on_or_after(schedule, session, now, REMINDER_TIMEZONE)
+            if first.astimezone(REMINDER_TIMEZONE).date() != session:
+                raise reminders.ScheduleError(f"The {reminder.time} reminder on {session:%d %b} has already passed.")
+        else:
+            schedule, first, anchor = plan_schedule(change, now, keep_anchor=date.fromisoformat(reminder.anchor))
+    except reminders.ScheduleError as error:
+        await send_campaign_reply(ctx, str(error), private=True)
+        return
+    update_reminder_schedule(reminder.id, schedule, anchor, first)
+    log.info("[%s] %s rescheduled the reminder for %r: %s", ctx.guild.name, ctx.author, campaign.alias,
+             schedule.describe())
+    await send_campaign_reply(ctx, f"🗓️ Reminder for **{campaign.alias}** updated: {schedule.describe()}.\n"
+                                   f"Next one: {when_text(first)}. Everyone's {REMINDER_EMOJI} still counts.")
+
+
+@campaign_group.command(name="skip", description="Skip the next reminder. Fortnightly games shift a week and carry on from there.")
+@app_commands.describe(alias="The campaign")
+async def campaign_skip(ctx: commands.Context, *, alias: str):
+    found = await reminder_to_change(ctx, alias)
+    if found is None:
+        return
+    campaign, reminder = found
+    schedule = reminder.schedule
+    upcoming = reminder.next_run_at.astimezone(REMINDER_TIMEZONE)
+    if schedule.every_weeks > 1:
+        # Push the whole fortnightly cadence back a week, so it stays in step after the skipped week.
+        moved = datetime.combine(upcoming.date() + timedelta(days=7), upcoming.time(), tzinfo=REMINDER_TIMEZONE)
+        next_run, anchor = moved.astimezone(timezone.utc), moved.date()
+        note = "The fortnightly schedule carries on from there."
+    else:
+        next_run = reminders.next_occurrence(schedule, reminder.next_run_at, REMINDER_TIMEZONE)
+        anchor = date.fromisoformat(reminder.anchor)
+        note = "Back to normal after that."
+    update_reminder_schedule(reminder.id, schedule, anchor, next_run)
+    log.info("[%s] %s skipped a reminder for %r", ctx.guild.name, ctx.author, campaign.alias)
+    await send_campaign_reply(ctx, f"⏭️ Skipped the {upcoming:%a %d %b} reminder for **{campaign.alias}**.\n"
+                                   f"Next one: {when_text(next_run)}. {note}")
+
+
+async def campaign_alias_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
+    typed = current.casefold()
+    matches = [c.alias for c in list_campaigns(interaction.guild_id) if typed in c.alias.casefold()]
+    return [app_commands.Choice(name=alias, value=alias) for alias in matches[:25]]
+
+
+for _command in (campaign_show, campaign_edit, campaign_remove, campaign_remind, campaign_unremind,
+                 campaign_reschedule, campaign_skip):
+    _command.autocomplete("alias")(campaign_alias_autocomplete)
+
+
+@bot.listen("on_raw_reaction_add")
+async def reminder_subscribe(payload: discord.RawReactionActionEvent):
+    if str(payload.emoji) != REMINDER_EMOJI or payload.user_id == bot.user.id:
+        return
+    reminder = reminder_for_message(payload.message_id)
+    if reminder:
+        subscribe(reminder.id, payload.user_id)
+        log.info("Someone subscribed to reminder %d", reminder.id)
+
+
+@bot.listen("on_raw_reaction_remove")
+async def reminder_unsubscribe(payload: discord.RawReactionActionEvent):
+    if str(payload.emoji) != REMINDER_EMOJI:
+        return
+    reminder = reminder_for_message(payload.message_id)
+    if reminder:
+        unsubscribe(reminder.id, payload.user_id)
+        log.info("Someone unsubscribed from reminder %d", reminder.id)
+
+
+async def send_reminder(reminder: Reminder) -> None:
+    campaign = get_campaign(reminder.guild_id, reminder.alias_key)
+    if campaign is None:
+        delete_reminder(reminder.guild_id, reminder.alias_key)
+        return
+    channel = bot.get_channel(reminder.channel_id)
+    if channel is None:
+        log.warning("Reminder %d: can't find channel %s", reminder.id, reminder.channel_id)
+        return
+    people = subscribers(reminder.id)
+    pings = " ".join(f"<@{user_id}>" for user_id in people)
+    content = f"⏰ **{campaign.alias}** is coming up! {pings}".strip()
+    if not people:
+        content += f"\n-# Nobody's subscribed yet. React {REMINDER_EMOJI} to the reminder setup message to get pinged."
+    await channel.send(content, embed=campaign_embed(campaign), view=campaign_buttons(campaign),
+                       allowed_mentions=discord.AllowedMentions(users=[discord.Object(id=u) for u in people],
+                                                                everyone=False, roles=False))
+
+
+@tasks.loop(seconds=30)
+async def reminder_loop():
+    now = datetime.now(timezone.utc)
+    for reminder in due_reminders(now):
+        try:
+            if now - reminder.next_run_at <= REMINDER_GRACE:
+                await send_reminder(reminder)
+                log.info("Sent reminder %d", reminder.id)
+            else:
+                log.warning("Skipped reminder %d: it was due at %s, too long ago", reminder.id, reminder.next_run)
+        except discord.HTTPException as error:
+            log.warning("Couldn't send reminder %d: %s", reminder.id, error)
+        finally:
+            # Always move on to the next occurrence, so a failure can't cause repeated pings.
+            if get_reminder(reminder.guild_id, reminder.alias_key):
+                anchor = date.fromisoformat(reminder.anchor)
+                set_next_run(reminder.id, reminders.next_occurrence(reminder.schedule, now, REMINDER_TIMEZONE, anchor))
+
+
+@reminder_loop.before_loop
+async def before_reminder_loop():
+    await bot.wait_until_ready()
+
+
 DM_FILE_SIZE_LIMIT = 10 * 1024 * 1024  # Discord's upload limit outside boosted servers.
 SEARCH_RESULTS_SHOWN = 15
 # Books seen in recent searches, so /books download <id> knows their formats and sizes.
@@ -1075,6 +1729,26 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
                 "`/quote dissociate <#>` takes the name off an existing quote, and `/quote claim <#>` "
                 "lets you put your own name back on an anonymous one.\n"
                 f"• `{COMMAND_PREFIX}quote` on its own gives a random quote; `{COMMAND_PREFIX}quote 12` shows quote #12."
+            ),
+            inline=False,
+        )
+    if command.name == "campaign":
+        embed.add_field(
+            name="Tips",
+            value=(
+                "• Aliases can be anything: `Monday game`, `Curse of Strahd`, `the cursed one`. In the slash commands, "
+                "start typing and Discord suggests them.\n"
+                f"• `{COMMAND_PREFIX}campaign Monday game` shows one; `{COMMAND_PREFIX}campaign` lists them all.\n"
+                f"• With `{COMMAND_PREFIX}campaign add`, put a multi-word alias in quotes: "
+                f"`{COMMAND_PREFIX}campaign add \"Monday game\" <D&D Beyond link> <VTT link>`.\n"
+                f"• To remove one link, `/campaign edit` it to `{CLEAR_LINK}`.\n"
+                "• **Reminders:** `/campaign remind Monday game mondays at 1800` (also `monday 6pm`, "
+                "`mondays and thursdays at 7pm`, `every other friday at 7:30pm from 23 oct`). "
+                f"React {REMINDER_EMOJI} to the message it posts to get pinged; `/campaign unremind` stops it. "
+                f"Times are {REMINDER_TIMEZONE.key} time.\n"
+                "• **Game moved?** `/campaign skip` skips the next one (fortnightly games shift a week). "
+                "`/campaign reschedule` with `next 26 oct` sets the next session's date, or give a new schedule. "
+                f"Both keep everyone's {REMINDER_EMOJI}."
             ),
             inline=False,
         )
