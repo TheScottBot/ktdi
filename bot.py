@@ -11,6 +11,8 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
+import abm
+
 BASE_DIR = Path(__file__).parent
 
 # Run with --dev (e.g. "python bot.py --dev") to use the dev bot's settings in .env.dev.
@@ -276,6 +278,14 @@ async def loot(ctx: commands.Context):
     await ctx.send(LOOT_GIF_URL)
 
 
+@bot.hybrid_command(name="abm", description="Anything But Metric: convert a measurement into something absurd.")
+async def abm_command(ctx: commands.Context, *, measurement: str):
+    try:
+        await ctx.send(abm.convert(measurement))
+    except abm.ABMError as error:
+        await ctx.send(str(error), ephemeral=True)
+
+
 def plural(count: int, word: str) -> str:
     return f"{count} {word}" if count == 1 else f"{count} {word}s"
 
@@ -341,8 +351,34 @@ async def linux(ctx: commands.Context):
     await ctx.send(random.choice(LINUX_LINES).format(user=f"<@{LINUX_HATER_ID}>"))
 
 
-@bot.hybrid_command(name="help",description="List everything this bot can do.")
-async def help_command(ctx: commands.Context):
+def command_help_embed(command: commands.Command) -> discord.Embed:
+    """Detailed help for one command, e.g. /help abm."""
+    embed = discord.Embed(
+        title=f"/{command.name} {command.signature}".strip(),
+        description=f"{command.description}\n\nAlso works as `{COMMAND_PREFIX}{command.name}`.",
+        color=discord.Color.blurple(),
+    )
+    if command.name == "abm":
+        embed.description += (
+            "\n\nType a number and a metric unit, with or without a space: `3cm`, `2.5 kg`, `100 km/h`. "
+            "Spelled-out names like `metres` or `litres` work too. Capitals mostly don't matter, "
+            "except `mW` vs `MW`."
+        )
+        for dimension, units in abm.input_unit_help():
+            embed.add_field(name=dimension, value=units, inline=True)
+    return embed
+
+
+@bot.hybrid_command(name="help", description="List everything this bot can do, or details for one command.")
+async def help_command(ctx: commands.Context, command: str | None = None):
+    if command:
+        found = bot.get_command(command.lstrip("/" + COMMAND_PREFIX).lower())
+        if found is None:
+            await ctx.send(f"There's no `{command}` command. Try `/help` for the list.", ephemeral=True)
+        else:
+            # Private for /help <command>, so the details don't fill the channel.
+            await ctx.send(embed=command_help_embed(found), ephemeral=True)
+        return
     embed = discord.Embed(
         title="Keep The Degenerates Inline",
         description=f"Use `/command` or `{COMMAND_PREFIX}command`.",
@@ -359,6 +395,7 @@ async def help_command(ctx: commands.Context):
         value="Sprays whoever sent the message and adds to their rap sheet.",
         inline=False,
     )
+    embed.set_footer(text="Use /help <command> for details, e.g. /help abm for every unit it understands.")
     await ctx.send(embed=embed)
 
 
