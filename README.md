@@ -13,6 +13,7 @@ A tiny Discord bot for keeping your friends in line. Commands work as slash comm
 | `blame [reason]` | Blames a random person who's spoken recently in the channel. |
 | `bribe <amount>` | Only the person last blamed in the channel can use it. Pays to put the blame back on whoever blamed them (who can then bribe it back). Bribe totals go on the rap sheet. |
 | `linux` | Asks our resident Linux hater a random question about how much he hates Linux. Pings @poltergeis.t by default; set `LINUX_HATER_ID` in `.env` to change who. |
+| `books search <query>` / `books download <ID or title>` | Search a Calibre-Web library and download a book (optional; see below). |
 | `help [command]` | Lists all commands, or details for one (e.g. `/help abm` lists every unit it understands). |
 
 Reacting 💦 to any message also sprays the person who sent it and adds to their rap sheet.
@@ -43,6 +44,15 @@ Text commands need the **Message Content Intent** enabled on the bot's page in t
    ```
 
    or `python bot.py`.
+
+### Library (optional)
+
+`/books` searches a [Calibre-Web](https://github.com/janeczku/calibre-web) server through its OPDS feed and sends books as Discord attachments. To turn it on, set `CALIBRE_URL`, `CALIBRE_USERNAME`, `CALIBRE_PASSWORD` and `BOOKS_GUILD_IDS` in `.env` (see `.env.example`):
+
+- Create a dedicated Calibre-Web user for the bot with only the **download** permission.
+- The commands only work, and only appear, in the servers listed in `BOOKS_GUILD_IDS`.
+- `/books` replies are only visible to the person who asked; `!books download` sends the file by DM.
+- Discord's upload limit (10 MB on unboosted servers) applies. The bot sends the first format in `BOOK_FORMATS` that fits, or says the book is too big.
 
 ### Logs
 
