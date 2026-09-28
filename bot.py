@@ -263,6 +263,8 @@ class KTDIBot(commands.Bot):
 
     async def on_command(self, ctx: commands.Context):
         # Fires for both /commands and prefix commands.
+        if is_private_command(ctx):
+            return  # Library use isn't logged, so nobody's reading is tied back to them.
         if ctx.interaction:
             invocation = f"/{ctx.command.qualified_name} {describe_options(ctx.interaction.data.get('options', []))}".strip()
         else:
@@ -272,14 +274,20 @@ class KTDIBot(commands.Bot):
 
     async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
         # Tell people when they typed a command wrong instead of failing silently.
+        who = "Someone" if is_private_command(ctx) else str(ctx.author)
         if isinstance(error, (commands.UserInputError, commands.NoPrivateMessage)):
-            log.info("%s's command failed: %s", ctx.author, error)
+            log.info("%s's %s command failed: %s", who, ctx.command, error)
             await ctx.send(str(error), ephemeral=True)
         elif isinstance(error, commands.CheckFailure):
-            log.info("%s can't use %s here: %s", ctx.author, ctx.command, error)
+            log.info("%s can't use %s here: %s", who, ctx.command, error)
             await ctx.send(str(error) or "You can't use that here.", ephemeral=True)
         elif not isinstance(error, commands.CommandNotFound):
             await super().on_command_error(ctx, error)
+
+
+def is_private_command(ctx: commands.Context) -> bool:
+    """Library commands, which are never logged with who used them or what they looked for."""
+    return ctx.command is not None and (ctx.command.root_parent or ctx.command).name == "books"
 
 
 def describe_options(options: list[dict]) -> str:
@@ -434,7 +442,7 @@ async def books_search(ctx: commands.Context, *, query: str):
     try:
         results = await calibre.search(query)
     except library.LibraryError as error:
-        log.warning("Library search for %r failed: %s", query, error)
+        log.warning("Library search failed: %s", error.log_text)
         await ctx.send(str(error), ephemeral=True)
         return
     recent_books.update({book.id: book for book in results})
@@ -545,12 +553,12 @@ async def books_download(ctx: commands.Context, *, book: str):
             download = await calibre.download(found, size_limit)
             title = found.title
     except library.LibraryError as error:
-        log.warning("Library download for %r failed: %s", book, error)
+        log.warning("Library download failed: %s", error.log_text)
         await ctx.send(str(error), ephemeral=True)
         return
 
-    log.info("[%s] %s downloaded %r (%s)", ctx.guild.name, ctx.author, download.filename,
-             library.format_size(len(download.data)))
+    # Deliberately anonymous: no user, no title.
+    log.info("Library: a book was sent (%s)", library.format_size(len(download.data)))
     message = f"📖 **{discord.utils.escape_markdown(title)}**"
     file = discord.File(io.BytesIO(download.data), filename=download.filename)
     if ctx.interaction:
