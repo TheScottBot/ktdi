@@ -15,6 +15,8 @@ A tiny Discord bot for keeping your friends in line. Commands work as slash comm
 
 Reacting 💦 to any message also sprays the person who sent it and adds to their rap sheet.
 
+**Optional Champion Briber role:** if a server has a role named `Champion Briber`, the bot gives it to that server's biggest all-time briber after each bribe (and takes it off the previous holder). The bot needs **Manage Roles**, and its own role must sit above `Champion Briber` in the role list. Servers without the role, or where the bot lacks permission, are skipped. Change the name with `BRIBER_ROLE_NAME`.
+
 Spray counts are stored per server in `ktdi.db` (SQLite) next to `bot.py`; set `DB_PATH` to move it.
 
 Text commands need the **Message Content Intent** enabled on the bot's page in the Developer Portal.
@@ -39,5 +41,15 @@ Text commands need the **Message Content Intent** enabled on the bot's page in t
    ```
 
    or `python bot.py`.
+
+### Dev bot
+
+To try changes in a test server before they go live, create a second bot application, invite it to your test server only, fill in `.env.dev` (gitignored; same keys as `.env.example`) and run:
+
+```bash
+python bot.py --dev
+```
+
+This loads `.env.dev` instead of `.env`. Give the dev bot a different `COMMAND_PREFIX`, only the test server in `GUILD_IDS`, and its own `DB_PATH`.
 
 Slash commands can take a while to appear or update when registered globally. Set `GUILD_IDS` in `.env` to a comma-separated list of server IDs to register them to those servers only, which updates instantly.
