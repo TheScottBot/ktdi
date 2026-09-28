@@ -447,8 +447,15 @@ IMPERIAL_CONVERTERS = {
 }
 
 
+IMPERIAL_SIGN_OFF = "❤️"
+
+
 def to_imperial(text: str) -> str:
-    """The full reply for `imperial <text>`: a straight, accurate conversion."""
+    """The full reply for `imperial <text>`: a straight, accurate conversion, with love."""
+    return f"{_imperial_reply(text)} {IMPERIAL_SIGN_OFF}"
+
+
+def _imperial_reply(text: str) -> str:
     number, dimension, si_value = parse(text)
     emoji = DIMENSION_EMOJI.get(dimension, "📐")
     shown = text.strip()
