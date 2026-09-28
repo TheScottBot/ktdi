@@ -42,6 +42,14 @@ Text commands need the **Message Content Intent** enabled on the bot's page in t
 
    or `python bot.py`.
 
+### Logs
+
+The bot logs startup, every command used, 💦 sprays, bribes and role changes to `logs/ktdi.log` next to `bot.py` (and to the terminal/journal). The file rotates at 1 MB, keeping 5 old files (`ktdi.log.1` … `ktdi.log.5`). To follow it live:
+
+```bash
+tail -f logs/ktdi.log
+```
+
 ### Dev bot
 
 To try changes in a test server before they go live, create a second bot application, invite it to your test server only, fill in `.env.dev` (gitignored; same keys as `.env.example`) and run:

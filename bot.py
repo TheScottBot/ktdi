@@ -1,8 +1,10 @@
+import logging
 import os
 import random
 import sqlite3
 import sys
 from collections import defaultdict, deque
+from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 import discord
@@ -23,6 +25,10 @@ COMMAND_PREFIX = os.getenv("COMMAND_PREFIX", "!")
 GUILD_IDS = [int(g) for g in (os.getenv("GUILD_IDS") or os.getenv("GUILD_ID") or "").replace(" ", "").split(",") if g]
 # Relative paths are resolved next to bot.py.
 DB_PATH = str(BASE_DIR / os.getenv("DB_PATH", "ktdi.db"))
+# Rolling log file (relative to bot.py). Rotates at LOG_MAX_BYTES, keeping LOG_BACKUPS old files.
+LOG_FILE = BASE_DIR / os.getenv("LOG_FILE", "logs/ktdi-dev.log" if "--dev" in sys.argv else "logs/ktdi.log")
+LOG_MAX_BYTES = int(os.getenv("LOG_MAX_BYTES", 1_000_000))
+LOG_BACKUPS = int(os.getenv("LOG_BACKUPS", 5))
 # Optional role given to each server's biggest briber. Skipped on servers without a role by this name.
 BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")
 
@@ -101,6 +107,22 @@ db.execute(
 db.commit()
 
 
+log = logging.getLogger("ktdi")
+
+
+def setup_logging() -> None:
+    """Log to the terminal (so journalctl still works) and to a rolling log file."""
+    LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    formatter = logging.Formatter("[{asctime}] [{levelname:<7}] {name}: {message}", "%Y-%m-%d %H:%M:%S", style="{")
+    file_handler = RotatingFileHandler(LOG_FILE, maxBytes=LOG_MAX_BYTES, backupCount=LOG_BACKUPS, encoding="utf-8")
+    console_handler = logging.StreamHandler()
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+    for handler in (file_handler, console_handler):
+        handler.setFormatter(formatter)
+        root.addHandler(handler)
+
+
 def record_bribe(guild_id: int, user_id: int, amount: int) -> None:
     db.execute(
         """
@@ -159,13 +181,15 @@ async def update_briber_role(guild: discord.Guild) -> None:
             previous = await get_member(guild, previous_id)
             if previous and role in previous.roles:
                 await previous.remove_roles(role, reason="No longer the biggest briber")
+                log.info("[%s] Took %r from %s", guild.name, BRIBER_ROLE_NAME, previous)
         top = await get_member(guild, top_id)
         if top and role not in top.roles:
             await top.add_roles(role, reason="Biggest briber")
+            log.info("[%s] Gave %r to %s", guild.name, BRIBER_ROLE_NAME, top)
         set_briber_role_holder(guild.id, top_id)
     except discord.HTTPException as error:
         # Usually missing Manage Roles, or the role sits above the bot's own role.
-        print(f"Couldn't update {BRIBER_ROLE_NAME!r} role in {guild.name}: {error}", flush=True)
+        log.warning("[%s] Couldn't update %r role: %s", guild.name, BRIBER_ROLE_NAME, error)
 
 
 def record_spray(guild_id: int, user_id: int) -> int:
@@ -201,17 +225,28 @@ class KTDIBot(commands.Bot):
                 guild = discord.Object(id=guild_id)
                 self.tree.copy_global_to(guild=guild)
                 synced = await self.tree.sync(guild=guild)
-                print(f"Synced {len(synced)} slash commands to server {guild_id}", flush=True)
+                log.info("Synced %d slash commands to server %s", len(synced), guild_id)
             # Remove any old global copies so commands don't show up twice.
             self.tree.clear_commands(guild=None)
             await self.tree.sync()
         else:
             synced = await self.tree.sync()
-            print(f"Synced {len(synced)} global slash commands", flush=True)
+            log.info("Synced %d global slash commands", len(synced))
+
+    async def on_command(self, ctx: commands.Context):
+        # Fires for both /commands and prefix commands.
+        if ctx.interaction:
+            options = " ".join(f"{o['name']}={o.get('value')}" for o in ctx.interaction.data.get("options", []))
+            invocation = f"/{ctx.command.qualified_name} {options}".strip()
+        else:
+            invocation = ctx.message.content
+        where = f"{ctx.guild.name} #{ctx.channel}" if ctx.guild else "DM"
+        log.info("[%s] %s ran %r", where, ctx.author, invocation)
 
     async def on_command_error(self, ctx: commands.Context, error: commands.CommandError):
         # Tell people when they typed a command wrong instead of failing silently.
         if isinstance(error, (commands.UserInputError, commands.NoPrivateMessage)):
+            log.info("%s's command failed: %s", ctx.author, error)
             await ctx.send(str(error), ephemeral=True)
         elif not isinstance(error, commands.CommandNotFound):
             await super().on_command_error(ctx, error)
@@ -264,6 +299,7 @@ async def blame(ctx: commands.Context, *, reason: str | None = None):
     candidates = set(recent_speakers[ctx.channel.id]) or {ctx.author.id}
     blamed_id = random.choice(list(candidates))
     last_blame[ctx.channel.id] = (ctx.author.id, blamed_id)
+    log.info("[%s] %s blamed user %s", ctx.guild.name, ctx.author, blamed_id)
     line = random.choice(BLAME_LINES).format(user=f"<@{blamed_id}>")
     if reason:
         line = f"**{reason}**\n{line}"
@@ -287,6 +323,7 @@ async def bribe(ctx: commands.Context, amount: commands.Range[int, 1, 1_000_000_
     record_bribe(ctx.guild.id, ctx.author.id, amount)
     # Flip the blame, so the original blamer can counter-bribe.
     last_blame[ctx.channel.id] = (blamed_id, blamer_id)
+    log.info("[%s] %s bribed $%s, blame moved to user %s", ctx.guild.name, ctx.author, f"{amount:,}", blamer_id)
     await ctx.send(
         random.choice(BRIBE_LINES).format(briber=ctx.author.mention, blamer=f"<@{blamer_id}>", amount=f"${amount:,}")
     )
@@ -338,20 +375,24 @@ async def on_raw_reaction_add(payload: discord.RawReactionActionEvent):
         target = f"<@{payload.message_author_id}> "
         if payload.guild_id:
             record_spray(payload.guild_id, payload.message_author_id)
+    reactor = payload.member or f"user {payload.user_id}"
+    log.info("[%s] %s reacted %s, spraying user %s", channel.guild if payload.guild_id else "DM",
+             reactor, SPRAY_EMOJI, payload.message_author_id)
     await channel.send(f"{target}{SPRAY_GIF_URL}")
 
 
 @bot.event
 async def on_ready():
-    # flush so the line shows up in journalctl straight away under systemd.
-    print(f"Logged in as {bot.user} (ID: {bot.user.id}), prefix: {COMMAND_PREFIX!r}", flush=True)
+    log.info("Logged in as %s (ID: %s), prefix: %r, logging to %s", bot.user, bot.user.id, COMMAND_PREFIX, LOG_FILE)
 
 
 def main():
     token = os.getenv("DISCORD_TOKEN")
     if not token:
         raise SystemExit(f"DISCORD_TOKEN is not set. Copy .env.example to {ENV_FILE} and add your token.")
-    bot.run(token)
+    setup_logging()
+    # log_handler=None: use the logging set up above instead of discord.py's default.
+    bot.run(token, log_handler=None)
 
 
 if __name__ == "__main__":
