@@ -718,7 +718,9 @@ async def quote_prefix(ctx: commands.Context, *, args: str = ""):
     await send_reply(ctx, reply)
 
 
-@quote_prefix.command(name="anon", aliases=["anonymous"], description="Save a quote without crediting anyone.")
+# Prefix only: in /quote add you just leave the user empty. Marked so /help shows it as !quote anon.
+@quote_prefix.command(name="anon", aliases=["anonymous"], description="Save a quote without crediting anyone.",
+                      extras={"prefix_only": True})
 async def quote_prefix_anon(ctx: commands.Context, *, text: str = ""):
     try:
         replied = await replied_message(ctx)
@@ -744,7 +746,8 @@ async def quote_prefix_dissociate(ctx: commands.Context, number: int):
     await send_reply(ctx, dissociate_quote(ctx.guild, ctx.author, number))
 
 
-@quote_prefix.command(name="add", description="Save something someone said. Leave out the user (or use anon) for an anonymous quote.")
+@quote_prefix.command(name="add", usage="<text> [user] [context]",  # Shown in /help, which describes the slash version.
+                      description="Save something someone said. Leave out the user for an anonymous quote.")
 async def quote_prefix_add(ctx: commands.Context, user: discord.Member | None = None, *, text: str = ""):
     # "!quote add @Dave text", "!quote add anon text" and "!quote add text" (anonymous) all work.
     if user is None:
@@ -793,14 +796,6 @@ async def quote_slash_add(interaction: discord.Interaction, text: app_commands.R
                           context: app_commands.Range[str, 1, QUOTE_CONTEXT_MAX_LENGTH] | None = None):
     speaker = user.id if user else ANONYMOUS
     await respond(interaction, save_quote(interaction.guild, interaction.channel_id, interaction.user, speaker, text, context))
-
-
-@quote_slash.command(name="anon", description="Save a quote without crediting anyone.")
-@app_commands.describe(text="What was said", context="Optional: what was going on at the time")
-async def quote_slash_anon(interaction: discord.Interaction, text: app_commands.Range[str, 1, QUOTE_MAX_LENGTH],
-                           context: app_commands.Range[str, 1, QUOTE_CONTEXT_MAX_LENGTH] | None = None):
-    await respond(interaction, save_quote(interaction.guild, interaction.channel_id, interaction.user, ANONYMOUS,
-                                          text, context))
 
 
 @quote_slash.command(name="dissociate",
@@ -1064,7 +1059,8 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
         embed.title = f"/{command.name}"
         embed.description = f"{command.description}\n\nAlso works as `{COMMAND_PREFIX}{command.name} <subcommand>`."
         for sub in sorted(command.commands, key=lambda c: c.name):
-            embed.add_field(name=f"/{sub.qualified_name} {sub.signature}".strip(), value=sub.description, inline=False)
+            prefix = COMMAND_PREFIX if sub.extras.get("prefix_only") else "/"
+            embed.add_field(name=f"{prefix}{sub.qualified_name} {sub.signature}".strip(), value=sub.description, inline=False)
     if command.name == "quote":
         embed.add_field(
             name="More ways to save a quote",
@@ -1074,8 +1070,8 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
                 f"• **Type it:** `{COMMAND_PREFIX}quote @someone what they said`. Add ` -- context` on the end for context.\n"
                 "• **Right-click a message** → Apps → **Save quote** to edit the wording and pick who said it "
                 "(clear the picker to save it anonymously).\n"
-                f"• **Anonymous:** leave `user` empty in `/quote add`, use `/quote anon`, or reply with "
-                f"`{COMMAND_PREFIX}quote anon`. "
+                f"• **Anonymous:** leave `user` empty in `/quote add`, or use `{COMMAND_PREFIX}quote anon` "
+                "(which also works as a reply). "
                 "`/quote dissociate <#>` takes the name off an existing quote, and `/quote claim <#>` "
                 "lets you put your own name back on an anonymous one.\n"
                 f"• `{COMMAND_PREFIX}quote` on its own gives a random quote; `{COMMAND_PREFIX}quote 12` shows quote #12."
@@ -1118,7 +1114,7 @@ async def help_command(ctx: commands.Context, command: str | None = None):
     for command in sorted(bot.commands, key=lambda c: c.name):
         if not can_use(command, ctx):
             continue  # e.g. /books outside the library servers.
-        usage = (" | ".join(sorted(sub.name for sub in command.commands))
+        usage = (" | ".join(sorted(sub.name for sub in command.commands if not sub.extras.get("prefix_only")))
                  if isinstance(command, commands.Group) else command.signature)
         embed.add_field(
             name=f"/{command.name} {usage}".strip(),
