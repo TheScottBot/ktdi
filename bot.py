@@ -3,12 +3,16 @@ import logging
 import os
 import random
 import sqlite3
+import re
 import sys
 from collections import defaultdict, deque
+from dataclasses import dataclass
+from datetime import datetime, timezone
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
 import discord
+from discord import app_commands
 from discord.ext import commands
 from dotenv import load_dotenv
 
@@ -130,6 +134,21 @@ db.execute(
     )
     """
 )
+db.execute(
+    """
+    CREATE TABLE IF NOT EXISTS quotes (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id   INTEGER NOT NULL,
+        user_id    INTEGER NOT NULL,  -- who said it
+        text       TEXT NOT NULL,
+        context    TEXT,
+        added_by   INTEGER NOT NULL,
+        channel_id INTEGER,
+        message_id INTEGER,           -- the original message, if it was saved from one
+        created_at TEXT NOT NULL      -- ISO 8601, UTC
+    )
+    """
+)
 db.commit()
 
 
@@ -222,6 +241,82 @@ async def update_briber_role(guild: discord.Guild) -> None:
     except discord.HTTPException as error:
         # Usually missing Manage Roles, or the role sits above the bot's own role.
         log.warning("[%s] Couldn't update %r role: %s", guild.name, BRIBER_ROLE_NAME, error)
+
+
+QUOTE_MAX_LENGTH = 1000
+QUOTE_CONTEXT_MAX_LENGTH = 200
+QUOTE_COLUMNS = "id, guild_id, user_id, text, context, added_by, channel_id, message_id, created_at"
+
+
+@dataclass
+class Quote:
+    id: int
+    guild_id: int
+    user_id: int
+    text: str
+    context: str | None
+    added_by: int
+    channel_id: int | None
+    message_id: int | None
+    created_at: str
+
+
+def add_quote(guild_id: int, user_id: int, text: str, context: str | None, added_by: int,
+              channel_id: int | None = None, message_id: int | None = None) -> int:
+    cursor = db.execute(
+        "INSERT INTO quotes (guild_id, user_id, text, context, added_by, channel_id, message_id, created_at)"
+        " VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        (guild_id, user_id, text, context, added_by, channel_id, message_id,
+         datetime.now(timezone.utc).isoformat(timespec="seconds")),
+    )
+    db.commit()
+    return cursor.lastrowid
+
+
+def get_quote(guild_id: int, quote_id: int) -> Quote | None:
+    row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND id = ?", (guild_id, quote_id)).fetchone()
+    return Quote(*row) if row else None
+
+
+def quote_for_message(guild_id: int, message_id: int) -> Quote | None:
+    row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND message_id = ?",
+                     (guild_id, message_id)).fetchone()
+    return Quote(*row) if row else None
+
+
+def random_quote(guild_id: int, user_id: int | None = None) -> Quote | None:
+    if user_id is None:
+        row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? ORDER BY RANDOM() LIMIT 1",
+                         (guild_id,)).fetchone()
+    else:
+        row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND user_id = ? ORDER BY RANDOM() LIMIT 1",
+                         (guild_id, user_id)).fetchone()
+    return Quote(*row) if row else None
+
+
+def search_quotes(guild_id: int, text: str, limit: int = 10) -> list[Quote]:
+    pattern = "%" + text.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
+    rows = db.execute(
+        f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND (text LIKE ? ESCAPE '\\' OR context LIKE ? ESCAPE '\\')"
+        " ORDER BY id DESC LIMIT ?",
+        (guild_id, pattern, pattern, limit),
+    ).fetchall()
+    return [Quote(*row) for row in rows]
+
+
+def recent_quotes(guild_id: int, limit: int, user_id: int | None = None) -> list[Quote]:
+    if user_id is None:
+        rows = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? ORDER BY id DESC LIMIT ?",
+                          (guild_id, limit)).fetchall()
+    else:
+        rows = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND user_id = ? ORDER BY id DESC LIMIT ?",
+                          (guild_id, user_id, limit)).fetchall()
+    return [Quote(*row) for row in rows]
+
+
+def delete_quote(guild_id: int, quote_id: int) -> None:
+    db.execute("DELETE FROM quotes WHERE guild_id = ? AND id = ?", (guild_id, quote_id))
+    db.commit()
 
 
 def record_spray(guild_id: int, user_id: int) -> int:
@@ -406,6 +501,268 @@ async def bribe(ctx: commands.Context, amount: commands.Range[int, 1, 1_000_000_
 @bot.hybrid_command(name="linux", description="Ask our resident Linux hater how he's feeling about Linux.")
 async def linux(ctx: commands.Context):
     await ctx.send(random.choice(LINUX_LINES).format(user=f"<@{LINUX_HATER_ID}>"))
+
+
+# --- Quotes ---
+# Ways in: /quote add, !quote @user text, replying to a message with !quote [@user], or right-click > Apps > Save quote.
+NO_PINGS = discord.AllowedMentions.none()
+MENTION_AT_START_RE = re.compile(r"^\s*<@!?(\d+)>\s*(.*)$", re.DOTALL)
+
+
+@dataclass
+class Reply:
+    content: str | None = None
+    embed: discord.Embed | None = None
+    private: bool = False  # Only shown to the person who asked (slash commands only).
+
+
+def quote_embed(quote: Quote) -> discord.Embed:
+    description = f"“{quote.text}”\n— <@{quote.user_id}>"
+    if quote.context:
+        description += f"\n*{quote.context}*"
+    if quote.message_id and quote.channel_id:
+        description += f"\n[Original message](https://discord.com/channels/{quote.guild_id}/{quote.channel_id}/{quote.message_id})"
+    embed = discord.Embed(description=description, color=discord.Color.gold(),
+                          timestamp=datetime.fromisoformat(quote.created_at))
+    embed.set_footer(text=f"Quote #{quote.id}")
+    return embed
+
+
+def split_context(text: str) -> tuple[str, str | None]:
+    """'I cast fireball -- on myself' -> ('I cast fireball', 'on myself')."""
+    if " -- " in f" {text} ":
+        quote_text, _, context = f" {text} ".partition(" -- ")
+        return quote_text.strip(), context.strip() or None
+    return text.strip(), None
+
+
+def save_quote(guild: discord.Guild, channel_id: int | None, added_by: discord.abc.User, said_by: int,
+               text: str | None, context: str | None, source: discord.Message | None = None) -> Reply:
+    text = (text or "").strip()
+    context = (context or "").strip() or None
+    if not text:
+        return Reply("There's nothing to quote. That message has no text, so type it in: `/quote add`.", private=True)
+    if len(text) > QUOTE_MAX_LENGTH:
+        return Reply(f"That's a bit long for a quote (max {QUOTE_MAX_LENGTH} characters).", private=True)
+    if context and len(context) > QUOTE_CONTEXT_MAX_LENGTH:
+        return Reply(f"The context is too long (max {QUOTE_CONTEXT_MAX_LENGTH} characters).", private=True)
+    if source:
+        existing = quote_for_message(guild.id, source.id)
+        if existing and existing.text == text and existing.user_id == said_by:
+            return Reply(f"That's already saved as quote #{existing.id}.", private=True)
+    quote_id = add_quote(guild.id, said_by, text, context, added_by.id, channel_id, source.id if source else None)
+    log.info("[%s] %s saved quote #%d (said by user %s)", guild.name, added_by, quote_id, said_by)
+    return Reply(f"📌 Saved quote #{quote_id}.", quote_embed(get_quote(guild.id, quote_id)))
+
+
+def show_random_quote(guild: discord.Guild, user: discord.abc.User | None = None) -> Reply:
+    quote = random_quote(guild.id, user.id if user else None)
+    if quote is None:
+        if user:
+            return Reply(f"No quotes from {user.display_name} yet.", private=True)
+        return Reply("No quotes saved yet. Reply to a message with `!quote`, or use `/quote add`.", private=True)
+    return Reply(embed=quote_embed(quote))
+
+
+def show_quote(guild: discord.Guild, number: int) -> Reply:
+    quote = get_quote(guild.id, number)
+    return Reply(embed=quote_embed(quote)) if quote else Reply(f"There's no quote #{number}.", private=True)
+
+
+def remove_quote(guild: discord.Guild, member: discord.Member, number: int) -> Reply:
+    quote = get_quote(guild.id, number)
+    if quote is None:
+        return Reply(f"There's no quote #{number}.", private=True)
+    if member.id not in (quote.added_by, quote.user_id) and not member.guild_permissions.manage_messages:
+        return Reply(f"Only whoever saved quote #{number}, the person quoted, or a moderator can delete it.", private=True)
+    delete_quote(guild.id, number)
+    log.info("[%s] %s deleted quote #%d", guild.name, member, number)
+    return Reply(f"🗑️ Deleted quote #{number}.")
+
+
+QUOTE_LIST_MAX = 15
+
+
+def quote_line(quote: Quote, length: int = 80) -> str:
+    """One-line summary for lists: #12 “text…” — @user · date."""
+    text = quote.text if len(quote.text) <= length else quote.text[:length].rstrip() + "…"
+    when = int(datetime.fromisoformat(quote.created_at).timestamp())
+    return f"`#{quote.id}` “{text}” — <@{quote.user_id}> · <t:{when}:d>"
+
+
+def last_quotes(guild: discord.Guild, count: int, user: discord.abc.User | None = None) -> Reply:
+    count = max(1, min(count, QUOTE_LIST_MAX))
+    quotes = recent_quotes(guild.id, count, user.id if user else None)
+    if not quotes:
+        return show_random_quote(guild, user)  # Same "no quotes yet" message.
+    who = f" from {user.display_name}" if user else ""
+    embed = discord.Embed(title=f"🗒️ Last {len(quotes)} quote{'s' if len(quotes) != 1 else ''}{who}",
+                          description="\n".join(quote_line(q, 120) for q in quotes), color=discord.Color.gold())
+    embed.set_footer(text="Show one in full with /quote show <number>.")
+    return Reply(embed=embed)
+
+
+def find_quotes(guild: discord.Guild, text: str) -> Reply:
+    results = search_quotes(guild.id, text.strip())
+    if not results:
+        return Reply(f"No quotes mention “{discord.utils.escape_markdown(text)}”.", private=True)
+    lines = [quote_line(q) for q in results]
+    embed = discord.Embed(title=f"🔎 Quotes mentioning “{text[:100]}”", description="\n".join(lines),
+                          color=discord.Color.gold())
+    embed.set_footer(text="Show one with /quote show <number>." + (" Showing the 10 newest." if len(results) == 10 else ""))
+    return Reply(embed=embed)
+
+
+async def send_reply(ctx: commands.Context, reply: Reply) -> None:
+    await ctx.send(reply.content, embed=reply.embed, allowed_mentions=NO_PINGS)
+
+
+async def respond(interaction: discord.Interaction, reply: Reply) -> None:
+    await interaction.response.send_message(reply.content, embed=reply.embed, ephemeral=reply.private,
+                                            allowed_mentions=NO_PINGS)
+
+
+async def replied_message(ctx: commands.Context) -> discord.Message | None:
+    reference = ctx.message.reference
+    if reference is None or reference.message_id is None:
+        return None
+    if isinstance(reference.resolved, discord.Message):
+        return reference.resolved
+    return await ctx.channel.fetch_message(reference.message_id)
+
+
+# Prefix version: !quote handles replies and "@user text" itself, plus the same subcommands as /quote.
+@bot.group(name="quote", description="Save and replay the things people say.", invoke_without_command=True)
+@commands.guild_only()
+async def quote_prefix(ctx: commands.Context, *, args: str = ""):
+    match = MENTION_AT_START_RE.match(args)
+    said_by = int(match.group(1)) if match else None
+    text = (match.group(2) if match else args).strip()
+    try:
+        replied = await replied_message(ctx)
+    except discord.HTTPException:
+        await ctx.send("I couldn't read the message you replied to. I need the Read Message History permission here.")
+        return
+
+    if replied:
+        # "!quote" or "!quote @Dave" as a reply saves that message; any text typed replaces its wording.
+        quote_text, context = split_context(text)
+        reply = save_quote(ctx.guild, ctx.channel.id, ctx.author, said_by or replied.author.id,
+                           quote_text or replied.content, context, replied)
+    elif said_by is None and text.isdigit():
+        reply = show_quote(ctx.guild, int(text))
+    elif text and said_by is None:
+        reply = Reply(f"Who said it? Use `{COMMAND_PREFIX}quote @someone what they said`, "
+                      f"or reply to their message with `{COMMAND_PREFIX}quote`.")
+    elif text:
+        quote_text, context = split_context(text)
+        reply = save_quote(ctx.guild, ctx.channel.id, ctx.author, said_by, quote_text, context)
+    else:
+        # "!quote" or "!quote @Dave" on its own: a random quote.
+        user = discord.utils.get(ctx.message.mentions, id=said_by) if said_by else None
+        reply = show_random_quote(ctx.guild, user)
+    await send_reply(ctx, reply)
+
+
+@quote_prefix.command(name="add", description="Save something someone said.")
+async def quote_prefix_add(ctx: commands.Context, user: discord.Member, *, text: str):
+    quote_text, context = split_context(text)
+    await send_reply(ctx, save_quote(ctx.guild, ctx.channel.id, ctx.author, user.id, quote_text, context))
+
+
+@quote_prefix.command(name="random", description="A random quote, optionally from one person.")
+async def quote_prefix_random(ctx: commands.Context, user: discord.Member | None = None):
+    await send_reply(ctx, show_random_quote(ctx.guild, user))
+
+
+@quote_prefix.command(name="last", description=f"The most recent quotes (default 5, max {QUOTE_LIST_MAX}), optionally from one person.")
+async def quote_prefix_last(ctx: commands.Context, count: int | None = 5, user: discord.Member | None = None):
+    await send_reply(ctx, last_quotes(ctx.guild, count or 5, user))
+
+
+@quote_prefix.command(name="show", description="Show a quote by its number.")
+async def quote_prefix_show(ctx: commands.Context, number: int):
+    await send_reply(ctx, show_quote(ctx.guild, number))
+
+
+@quote_prefix.command(name="search", description="Find quotes containing some text.")
+async def quote_prefix_search(ctx: commands.Context, *, text: str):
+    await send_reply(ctx, find_quotes(ctx.guild, text))
+
+
+@quote_prefix.command(name="delete", description="Delete a quote (whoever saved it, the person quoted, or a mod).")
+async def quote_prefix_delete(ctx: commands.Context, number: int):
+    await send_reply(ctx, remove_quote(ctx.guild, ctx.author, number))
+
+
+# Slash version.
+quote_slash = app_commands.Group(name="quote", description="Save and replay the things people say.", guild_only=True)
+
+
+@quote_slash.command(name="add", description="Save something someone said (great for things said in voice).")
+@app_commands.describe(user="Who said it", text="What they said", context="Optional: what was going on at the time")
+async def quote_slash_add(interaction: discord.Interaction, user: discord.Member,
+                          text: app_commands.Range[str, 1, QUOTE_MAX_LENGTH],
+                          context: app_commands.Range[str, 1, QUOTE_CONTEXT_MAX_LENGTH] | None = None):
+    await respond(interaction, save_quote(interaction.guild, interaction.channel_id, interaction.user, user.id, text, context))
+
+
+@quote_slash.command(name="random", description="A random quote, optionally from one person.")
+async def quote_slash_random(interaction: discord.Interaction, user: discord.Member | None = None):
+    await respond(interaction, show_random_quote(interaction.guild, user))
+
+
+@quote_slash.command(name="last", description="The most recent quotes, optionally from one person.")
+@app_commands.describe(count=f"How many (default 5, max {QUOTE_LIST_MAX})", user="Only quotes from this person")
+async def quote_slash_last(interaction: discord.Interaction,
+                           count: app_commands.Range[int, 1, QUOTE_LIST_MAX] = 5, user: discord.Member | None = None):
+    await respond(interaction, last_quotes(interaction.guild, count, user))
+
+
+@quote_slash.command(name="show", description="Show a quote by its number.")
+async def quote_slash_show(interaction: discord.Interaction, number: int):
+    await respond(interaction, show_quote(interaction.guild, number))
+
+
+@quote_slash.command(name="search", description="Find quotes containing some text.")
+async def quote_slash_search(interaction: discord.Interaction, text: str):
+    await respond(interaction, find_quotes(interaction.guild, text))
+
+
+@quote_slash.command(name="delete", description="Delete a quote (whoever saved it, the person quoted, or a mod).")
+async def quote_slash_delete(interaction: discord.Interaction, number: int):
+    await respond(interaction, remove_quote(interaction.guild, interaction.user, number))
+
+
+bot.tree.add_command(quote_slash)
+
+
+class SaveQuoteModal(discord.ui.Modal, title="Save quote"):
+    """Opened from right-click > Apps > Save quote. Lets you fix the wording and pick who said it."""
+
+    def __init__(self, source: discord.Message):
+        super().__init__()
+        self.source = source
+        self.quote_text = discord.ui.TextInput(style=discord.TextStyle.paragraph, max_length=QUOTE_MAX_LENGTH,
+                                               default=source.content[:QUOTE_MAX_LENGTH] or None)
+        self.said_by = discord.ui.UserSelect(default_values=[discord.Object(id=source.author.id)], required=True)
+        self.context = discord.ui.TextInput(required=False, max_length=QUOTE_CONTEXT_MAX_LENGTH,
+                                            placeholder="e.g. mid-fight, right after rolling a nat 1")
+        self.add_item(discord.ui.Label(text="Quote", component=self.quote_text))
+        self.add_item(discord.ui.Label(text="Who said it?", component=self.said_by,
+                                       description="Change this if someone typed out what another person said."))
+        self.add_item(discord.ui.Label(text="Context (optional)", component=self.context))
+
+    async def on_submit(self, interaction: discord.Interaction):
+        said_by = self.said_by.values[0].id if self.said_by.values else self.source.author.id
+        await respond(interaction, save_quote(interaction.guild, self.source.channel.id, interaction.user, said_by,
+                                              self.quote_text.value, self.context.value, self.source))
+
+
+@bot.tree.context_menu(name="Save quote")
+@app_commands.guild_only()
+async def save_quote_menu(interaction: discord.Interaction, message: discord.Message):
+    await interaction.response.send_modal(SaveQuoteModal(message))
 
 
 DM_FILE_SIZE_LIMIT = 10 * 1024 * 1024  # Discord's upload limit outside boosted servers.
@@ -594,9 +951,22 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
         color=discord.Color.blurple(),
     )
     if isinstance(command, commands.Group):
+        embed.title = f"/{command.name}"
         embed.description = f"{command.description}\n\nAlso works as `{COMMAND_PREFIX}{command.name} <subcommand>`."
         for sub in sorted(command.commands, key=lambda c: c.name):
             embed.add_field(name=f"/{sub.qualified_name} {sub.signature}".strip(), value=sub.description, inline=False)
+    if command.name == "quote":
+        embed.add_field(
+            name="More ways to save a quote",
+            value=(
+                f"• **Reply** to a message with `{COMMAND_PREFIX}quote` to save it, or `{COMMAND_PREFIX}quote @someone` "
+                "to credit someone else (handy when a person types out what someone said in voice).\n"
+                f"• **Type it:** `{COMMAND_PREFIX}quote @someone what they said`. Add ` -- context` on the end for context.\n"
+                "• **Right-click a message** → Apps → **Save quote** to edit the wording and pick who said it.\n"
+                f"• `{COMMAND_PREFIX}quote` on its own gives a random quote; `{COMMAND_PREFIX}quote 12` shows quote #12."
+            ),
+            inline=False,
+        )
     if command.name == "books":
         embed.add_field(
             name="Privacy",
@@ -633,7 +1003,8 @@ async def help_command(ctx: commands.Context, command: str | None = None):
     for command in sorted(bot.commands, key=lambda c: c.name):
         if not can_use(command, ctx):
             continue  # e.g. /books outside the library servers.
-        usage = " | ".join(sub.name for sub in command.commands) if isinstance(command, commands.Group) else command.signature
+        usage = (" | ".join(sorted(sub.name for sub in command.commands))
+                 if isinstance(command, commands.Group) else command.signature)
         embed.add_field(
             name=f"/{command.name} {usage}".strip(),
             value=command.description or "No description.",
