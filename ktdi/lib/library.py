@@ -1,5 +1,6 @@
 """Talk to a Calibre-Web server through its OPDS feed: search the library and download books."""
 
+import base64
 import re
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass, field
@@ -59,12 +60,15 @@ class Download:
 class CalibreWeb:
     def __init__(self, base_url: str, username: str, password: str, preferred_formats: list[str]):
         self.base_url = base_url.rstrip("/") + "/"
-        self.auth = aiohttp.BasicAuth(username, password)
+        # HTTP basic auth, built by hand: aiohttp's BasicAuth / auth= are deprecated and go in aiohttp 4.
+        # Latin-1, as aiohttp.BasicAuth used, so the header sent to Calibre-Web is exactly the same as before.
+        credentials = base64.b64encode(f"{username}:{password}".encode("latin-1")).decode("ascii")
+        self.headers = {"Authorization": f"Basic {credentials}"}
         self.preferred_formats = [f.lower() for f in preferred_formats]
         self.timeout = aiohttp.ClientTimeout(total=60)
 
     def _session(self) -> aiohttp.ClientSession:
-        return aiohttp.ClientSession(auth=self.auth, timeout=self.timeout)
+        return aiohttp.ClientSession(headers=self.headers, timeout=self.timeout)
 
     @staticmethod
     def _check(response: aiohttp.ClientResponse) -> None:
