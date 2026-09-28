@@ -92,6 +92,49 @@ def parse_schedule(text: str) -> Schedule:
     return Schedule(tuple(sorted(days)), hour, minute, every_weeks)
 
 
+LEAD_MAX_MINUTES = 48 * 60
+LEAD_UNITS = r"(m|mins?|minutes?|h|hrs?|hours?|d|days?)"
+LEAD_UNIT_MINUTES = {"m": 1, "h": 60, "d": 24 * 60}
+LEAD_RE = re.compile(
+    r"[,\s]*(?:and\s+)?(?:(?:remind(?:\s+(?:me|us))?|ping|warn(?:ing)?)\s+)?"
+    rf"((?:\d+\s*{LEAD_UNITS}\s*(?:and\s+)?)+|half an hour|an hour|a half hour|a day)\s+(?:before|early|beforehand|ahead)\b",
+    re.IGNORECASE,
+)
+
+
+def split_lead(text: str) -> tuple[str, int | None]:
+    """'mondays at 1900, 15 minutes before' -> ('mondays at 1900', 15). None if no warning was given."""
+    match = LEAD_RE.search(text)
+    if not match:
+        return text, None
+    amount = match.group(1).lower()
+    if amount in ("half an hour", "a half hour"):
+        minutes = 30
+    elif amount == "an hour":
+        minutes = 60
+    elif amount == "a day":
+        minutes = 24 * 60
+    else:
+        minutes = sum(int(n) * LEAD_UNIT_MINUTES[unit[0].lower()]
+                      for n, unit in re.findall(rf"(\d+)\s*{LEAD_UNITS}", amount, re.IGNORECASE))
+    if minutes > LEAD_MAX_MINUTES:
+        raise ScheduleError(f"That's a long warning. The most is {LEAD_MAX_MINUTES // 60} hours before.")
+    return (text[:match.start()] + " " + text[match.end():]).strip(), minutes
+
+
+def describe_lead(minutes: int) -> str:
+    """15 -> '15 minutes before', 90 -> '1 hour 30 minutes before', 0 -> 'at the start time'."""
+    if minutes <= 0:
+        return "at the start time"
+    if minutes % (24 * 60) == 0:
+        days = minutes // (24 * 60)
+        return f"{days} day{'s' if days != 1 else ''} before"
+    hours, mins = divmod(minutes, 60)
+    parts = ([f"{hours} hour{'s' if hours != 1 else ''}"] if hours else []) + \
+            ([f"{mins} minute{'s' if mins != 1 else ''}"] if mins else [])
+    return " ".join(parts) + " before"
+
+
 MONTHS = {name: number for number, names in enumerate(
     [("jan", "january"), ("feb", "february"), ("mar", "march"), ("apr", "april"), ("may",), ("jun", "june"),
      ("jul", "july"), ("aug", "august"), ("sep", "sept", "september"), ("oct", "october"), ("nov", "november"),
