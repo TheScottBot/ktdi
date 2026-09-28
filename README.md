@@ -6,8 +6,10 @@ A tiny Discord bot for keeping your friends in line. Commands work as slash comm
 | Command | What it does |
 |---|---|
 | `spray [@user]` | Posts a spray bottle GIF. Target someone to add to their rap sheet. |
-| `rapsheet [@user]` | Shows how many times someone has been sprayed (defaults to you). |
+| `rapsheet [@user]` | Shows someone's sprays and bribes (defaults to you). |
 | `blame [reason]` | Blames a random person who's spoken recently in the channel. |
+| `bribe <amount>` | Only the person last blamed in the channel can use it. Pays to put the blame back on whoever blamed them (who can then bribe it back). Bribe totals go on the rap sheet. |
+| `linux` | Asks our resident Linux hater a random question about how much he hates Linux. Pings @poltergeis.t by default; set `LINUX_HATER_ID` in `.env` to change who. |
 | `help` | Lists all commands. |
 
 Reacting 💦 to any message also sprays the person who sent it and adds to their rap sheet.
