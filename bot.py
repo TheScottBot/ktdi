@@ -286,6 +286,14 @@ async def abm_command(ctx: commands.Context, *, measurement: str):
         await ctx.send(str(error), ephemeral=True)
 
 
+@bot.hybrid_command(name="imperial", description="Sincerely convert a metric measurement to imperial/US units.")
+async def imperial_command(ctx: commands.Context, *, measurement: str):
+    try:
+        await ctx.send(abm.to_imperial(measurement))
+    except abm.ABMError as error:
+        await ctx.send(str(error), ephemeral=True)
+
+
 def plural(count: int, word: str) -> str:
     return f"{count} {word}" if count == 1 else f"{count} {word}s"
 
@@ -358,7 +366,7 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
         description=f"{command.description}\n\nAlso works as `{COMMAND_PREFIX}{command.name}`.",
         color=discord.Color.blurple(),
     )
-    if command.name == "abm":
+    if command.name in ("abm", "imperial"):
         embed.description += (
             "\n\nType a number and a metric unit, with or without a space: `3cm`, `2.5 kg`, `100 km/h`. "
             "Spelled-out names like `metres` or `litres` work too. Capitals mostly don't matter, "

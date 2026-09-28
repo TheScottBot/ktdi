@@ -289,3 +289,182 @@ def convert(text: str) -> str:
     unit, value = pick_unit(si_value, dimension)
     about = "about " if unit["accuracy"] == "approximate" else ""
     return f"{emoji} {shown} is {about}{describe(value, unit)}."
+
+
+# --- Sincere imperial / US customary conversions (for /imperial) ---
+# Exact definitions, in SI units.
+INCH = 0.0254
+FOOT = 0.3048
+MILE = 1609.344
+OUNCE = 0.028349523125
+POUND = 0.45359237
+STONE = 6.35029318
+US_TON = 907.18474
+UK_TON = 1016.0469088
+US_TSP = 4.92892159375e-06
+US_TBSP = 1.478676478125e-05
+US_FL_OZ = 2.95735295625e-05
+UK_FL_OZ = 2.84130625e-05
+US_PINT = 0.000473176473
+UK_PINT = 0.00056826125
+US_GALLON = 0.003785411784
+UK_GALLON = 0.00454609
+CUBIC_FOOT = 0.028316846592
+ACRE_FOOT = 1233.48183754752
+SQ_INCH = 0.00064516
+SQ_FOOT = 0.09290304
+ACRE = 4046.8564224
+SQ_MILE = 2589988.110336
+MPH = 0.44704
+PSI = 6894.757293168
+IN_HG = 3386.389
+HORSEPOWER = 745.6998715822702
+BTU_PER_HOUR = 0.2930710701722222
+BTU = 1055.05585262
+THERM = 105505585.262
+FOOD_CALORIE = 4184
+STANDARD_GRAVITY = 9.80665
+
+
+def plain_number(value: float) -> str:
+    """Sensible precision for a sincere answer: 2,625 / 165.4 / 5.51 / 0.0394."""
+    if value == 0:
+        return "0"
+    if value >= 1e9 or value < 0.001:
+        return _scientific(value)
+    if value >= 1000:
+        return f"{value:,.0f}"
+    decimals = 1 if value >= 100 else 2 if value >= 1 else None
+    if decimals is None:
+        return _sig(value)
+    return f"{value:.{decimals}f}".rstrip("0").rstrip(".")
+
+
+def _compound(si_value: float, big: float, small: float, big_label: str, small_label: str) -> str:
+    """Split into two units, e.g. 5 ft 10.9 in or 11 st 11.3 lb."""
+    total_small = si_value / small
+    per_big = round(big / small)
+    whole = int(total_small // per_big)
+    rest = round(total_small - whole * per_big, 1)
+    if rest >= per_big:  # Rounding pushed it over, e.g. 5 ft 12.0 in.
+        whole, rest = whole + 1, 0
+    if rest == 0:
+        return f"{whole} {big_label}"
+    return f"{whole} {big_label} {plain_number(rest)} {small_label}"
+
+
+def _with_decimal(compound: str, value: float, label: str) -> str:
+    """'5 ft 10.9 in (5.91 ft)', but just '6 ft' when it's a whole number."""
+    decimal = f"{plain_number(value)} {label}"
+    return compound if compound == decimal else f"{compound} ({decimal})"
+
+
+def imperial_length(metres: float) -> str:
+    if metres < FOOT:
+        return f"{plain_number(metres / INCH)} in"
+    if metres < 3:
+        return _with_decimal(_compound(metres, FOOT, INCH, "ft", "in"), metres / FOOT, "ft")
+    if metres < MILE / 2:
+        return f"{plain_number(metres / FOOT)} ft"
+    return f"{plain_number(metres / MILE)} mi"
+
+
+def imperial_mass(kg: float) -> str:
+    if kg < POUND:
+        return f"{plain_number(kg / OUNCE)} oz"
+    if kg < 20 * POUND:
+        return _with_decimal(_compound(kg, POUND, OUNCE, "lb", "oz"), kg / POUND, "lb")
+    pounds = f"{plain_number(kg / POUND)} lb"
+    if kg < 250:
+        return f"{pounds} ({_compound(kg, STONE, POUND, 'st', 'lb')})"
+    if kg < US_TON:
+        return pounds
+    return f"{pounds} ({plain_number(kg / US_TON)} US tons, {plain_number(kg / UK_TON)} UK tons)"
+
+
+def imperial_volume(m3: float) -> str:
+    if m3 < US_TBSP:
+        return f"{plain_number(m3 / US_TSP)} US tsp"
+    if m3 < US_FL_OZ:
+        return f"{plain_number(m3 / US_TBSP)} US tbsp"
+    if m3 < 0.5e-3:
+        return f"{plain_number(m3 / US_FL_OZ)} US fl oz ({plain_number(m3 / UK_FL_OZ)} UK fl oz)"
+    if m3 < 4e-3:
+        return f"{plain_number(m3 / US_PINT)} US pints ({plain_number(m3 / UK_PINT)} UK pints)"
+    if m3 < 1:
+        return f"{plain_number(m3 / US_GALLON)} US gal ({plain_number(m3 / UK_GALLON)} UK gal)"
+    if m3 < ACRE_FOOT:
+        return f"{plain_number(m3 / CUBIC_FOOT)} cu ft ({plain_number(m3 / US_GALLON)} US gal)"
+    return f"{plain_number(m3 / ACRE_FOOT)} acre-feet"
+
+
+def imperial_area(m2: float) -> str:
+    if m2 < SQ_FOOT:
+        return f"{plain_number(m2 / SQ_INCH)} sq in"
+    if m2 < ACRE:
+        return f"{plain_number(m2 / SQ_FOOT)} sq ft"
+    if m2 < SQ_MILE:
+        return f"{plain_number(m2 / ACRE)} acres"
+    return f"{plain_number(m2 / SQ_MILE)} sq mi"
+
+
+def imperial_time(seconds: float) -> str:
+    parts = []
+    remaining = seconds
+    for size, label in ((86400, "d"), (3600, "h"), (60, "min")):
+        if remaining >= size:
+            count = int(remaining // size)
+            parts.append(f"{count:,} {label}")
+            remaining -= count * size
+    if remaining or not parts:
+        parts.append(f"{plain_number(remaining)} s")
+    return " ".join(parts)
+
+
+def imperial_energy(joules: float) -> str:
+    btu = f"{plain_number(joules / BTU)} BTU"
+    if joules >= THERM:
+        return f"{btu} ({plain_number(joules / THERM)} therms)"
+    return f"{btu} ({plain_number(joules / FOOD_CALORIE)} food Calories)"
+
+
+def _degrees(value: float) -> str:
+    text = f"{value:,.1f}".rstrip("0").rstrip(".")
+    return "0" if text == "-0" else text
+
+
+IMPERIAL_CONVERTERS = {
+    "length": imperial_length,
+    "mass": imperial_mass,
+    "volume": imperial_volume,
+    "area": imperial_area,
+    "time": imperial_time,
+    "speed": lambda v: f"{plain_number(v / MPH)} mph ({plain_number(v / FOOT)} ft/s)",
+    "acceleration": lambda v: f"{plain_number(v / FOOT)} ft/s² ({plain_number(v / STANDARD_GRAVITY)} g)",
+    "pressure": lambda v: f"{plain_number(v / PSI)} psi ({plain_number(v / IN_HG)} inHg)",
+    "power": lambda v: f"{plain_number(v / HORSEPOWER)} hp ({plain_number(v / BTU_PER_HOUR)} BTU/h)",
+    "energy": imperial_energy,
+}
+
+
+def to_imperial(text: str) -> str:
+    """The full reply for `imperial <text>`: a straight, accurate conversion."""
+    number, dimension, si_value = parse(text)
+    emoji = DIMENSION_EMOJI.get(dimension, "📐")
+    shown = text.strip()
+
+    if dimension == "sound_level":
+        return f"{emoji} {shown}. Decibels aren't metric, so it's the same in imperial."
+    if dimension == "temperature":
+        if si_value < 0:
+            return f"{emoji} {shown} is below absolute zero, so it can't be converted."
+        celsius = si_value - 273.15
+        if re.search(r"(°?f|fahrenheit|degf)$", shown, re.IGNORECASE):
+            return f"{emoji} {shown} is already Fahrenheit. In Celsius it's **{_degrees(celsius)} °C**."
+        return f"{emoji} {shown} = **{_degrees(celsius * 9 / 5 + 32)} °F**"
+    if si_value < 0:
+        return f"{emoji} {shown} is negative, so there's nothing to convert."
+    reply = f"{emoji} {shown} = **{IMPERIAL_CONVERTERS[dimension](si_value)}**"
+    if dimension == "time":
+        reply += " (time isn't metric, so it's the same everywhere)"
+    return reply
