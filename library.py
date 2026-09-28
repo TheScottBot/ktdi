@@ -16,7 +16,18 @@ MAX_SEARCH_RESULTS = 500
 
 
 class LibraryError(Exception):
-    """A problem talking to Calibre-Web. The message is safe to show users."""
+    """A problem talking to Calibre-Web. The message is safe to show the user who asked.
+
+    private=True means the message names a book, so it mustn't be logged.
+    """
+
+    def __init__(self, message: str, private: bool = False):
+        super().__init__(message)
+        self.private = private
+
+    @property
+    def log_text(self) -> str:
+        return "(details not logged)" if self.private else str(self)
 
 
 @dataclass
@@ -78,7 +89,7 @@ class CalibreWeb:
                     books.extend(self._parse_entries(feed))
                     url, params = self._next_page(feed, url), None
         except aiohttp.ClientError as error:
-            raise LibraryError(f"Couldn't reach Calibre-Web: {error}") from error
+            raise LibraryError(f"Couldn't reach Calibre-Web at {self.base_url} ({type(error).__name__}).") from error
         except ET.ParseError as error:
             raise LibraryError("Calibre-Web sent something that isn't an OPDS feed. Is CALIBRE_URL right?") from error
         return books
@@ -87,12 +98,13 @@ class CalibreWeb:
         """Download the book in the most preferred format that fits under size_limit bytes."""
         candidates = self._rank_formats(book)
         if not candidates:
-            raise LibraryError(f"**{book.title}** has no downloadable files.")
+            raise LibraryError(f"**{book.title}** has no downloadable files.", private=True)
         fitting = [f for f in candidates if f.size is None or f.size <= size_limit]
         if not fitting:
             sizes = ", ".join(f"{f.name.upper()} {format_size(f.size)}" for f in candidates)
             raise LibraryError(
-                f"**{book.title}** is too big for Discord (limit {format_size(size_limit)}; files: {sizes})."
+                f"**{book.title}** is too big for Discord (limit {format_size(size_limit)}; files: {sizes}).",
+                private=True,
             )
         chosen = fitting[0]
         try:
@@ -100,13 +112,13 @@ class CalibreWeb:
                 async with session.get(urljoin(self.base_url, chosen.href)) as response:
                     self._check(response)
                     if (response.content_length or 0) > size_limit:
-                        raise LibraryError(f"**{book.title}** is too big for Discord (limit {format_size(size_limit)}).")
+                        raise LibraryError(f"**{book.title}** is too big for Discord (limit {format_size(size_limit)}).", private=True)
                     data = await response.read()
                     filename = _filename_from_header(response.headers.get("Content-Disposition"))
         except aiohttp.ClientError as error:
-            raise LibraryError(f"Couldn't download from Calibre-Web: {error}") from error
+            raise LibraryError(f"Couldn't download from Calibre-Web at {self.base_url} ({type(error).__name__}).") from error
         if len(data) > size_limit:
-            raise LibraryError(f"**{book.title}** is too big for Discord (limit {format_size(size_limit)}).")
+            raise LibraryError(f"**{book.title}** is too big for Discord (limit {format_size(size_limit)}).", private=True)
         return Download(filename or _safe_filename(f"{book.title} - {book.author_text}.{chosen.name}"), data)
 
     async def download_by_id(self, book_id: int, size_limit: int) -> Download:
@@ -130,10 +142,12 @@ class CalibreWeb:
                         filename = _filename_from_header(response.headers.get("Content-Disposition"))
                         return Download(filename or f"book-{book_id}.{fmt}", data)
         except aiohttp.ClientError as error:
-            raise LibraryError(f"Couldn't download from Calibre-Web: {error}") from error
+            raise LibraryError(f"Couldn't download from Calibre-Web at {self.base_url} ({type(error).__name__}).") from error
         if too_big:
-            raise LibraryError(f"Book {book_id} is too big for Discord (limit {format_size(size_limit)}).")
-        raise LibraryError(f"Couldn't find book {book_id} in a format I can send ({', '.join(self.preferred_formats)}).")
+            raise LibraryError(f"Book {book_id} is too big for Discord (limit {format_size(size_limit)}).", private=True)
+        raise LibraryError(
+            f"Couldn't find book {book_id} in a format I can send ({', '.join(self.preferred_formats)}).", private=True
+        )
 
     def _rank_formats(self, book: Book) -> list[BookFormat]:
         def rank(fmt: BookFormat) -> int:
