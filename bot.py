@@ -12,6 +12,7 @@ load_dotenv()
 
 SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
+LOOT_GIF_URL = "https://klipy.com/gifs/perception-check-tom-cardy"
 COMMAND_PREFIX = os.getenv("COMMAND_PREFIX", "!")
 DB_PATH = os.getenv("DB_PATH", str(Path(__file__).parent / "ktdi.db"))
 
@@ -155,6 +156,11 @@ async def spray(ctx: commands.Context, target: discord.Member | None = None):
         return
     record_spray(ctx.guild.id, target.id)
     await ctx.send(f"{target.mention} {SPRAY_GIF_URL}")
+
+
+@bot.hybrid_command(name="loot", description="Declare that you're looting the body.")
+async def loot(ctx: commands.Context):
+    await ctx.send(LOOT_GIF_URL)
 
 
 def plural(count: int, word: str) -> str:

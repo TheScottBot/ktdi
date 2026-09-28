@@ -6,6 +6,7 @@ A tiny Discord bot for keeping your friends in line. Commands work as slash comm
 | Command | What it does |
 |---|---|
 | `spray [@user]` | Posts a spray bottle GIF. Target someone to add to their rap sheet. |
+| `loot` | Declares you're looting the body (posts the perception check GIF). |
 | `rapsheet [@user]` | Shows someone's sprays and bribes (defaults to you). |
 | `blame [reason]` | Blames a random person who's spoken recently in the channel. |
 | `bribe <amount>` | Only the person last blamed in the channel can use it. Pays to put the blame back on whoever blamed them (who can then bribe it back). Bribe totals go on the rap sheet. |
