@@ -1,3 +1,4 @@
+import io
 import logging
 import os
 import random
@@ -12,6 +13,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 
 import abm
+import library
 
 BASE_DIR = Path(__file__).parent
 
@@ -23,8 +25,24 @@ SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
 LOOT_GIF_URL = "https://klipy.com/gifs/perception-check-tom-cardy"
 COMMAND_PREFIX = os.getenv("COMMAND_PREFIX", "!")
+
+
+def parse_ids(*env_names: str) -> list[int]:
+    """Comma-separated IDs from the first of these env vars that is set."""
+    raw = next((os.getenv(name) for name in env_names if os.getenv(name)), "")
+    return [int(i) for i in raw.replace(" ", "").split(",") if i]
+
+
 # Comma-separated server IDs to register slash commands to (GUILD_ID also accepted).
-GUILD_IDS = [int(g) for g in (os.getenv("GUILD_IDS") or os.getenv("GUILD_ID") or "").replace(" ", "").split(",") if g]
+GUILD_IDS = parse_ids("GUILD_IDS", "GUILD_ID")
+# Calibre-Web library for /books. The commands only work in BOOKS_GUILD_IDS, and only if CALIBRE_URL is set.
+BOOKS_GUILD_IDS = parse_ids("BOOKS_GUILD_IDS")
+CALIBRE_URL = os.getenv("CALIBRE_URL")
+BOOK_FORMATS = os.getenv("BOOK_FORMATS", "epub,kepub,azw3,mobi,pdf,cbz").replace(" ", "").split(",")
+calibre = (
+    library.CalibreWeb(CALIBRE_URL, os.getenv("CALIBRE_USERNAME", ""), os.getenv("CALIBRE_PASSWORD", ""), BOOK_FORMATS)
+    if CALIBRE_URL else None
+)
 # Relative paths are resolved next to bot.py.
 DB_PATH = str(BASE_DIR / os.getenv("DB_PATH", "ktdi.db"))
 # Rolling log file (relative to bot.py). Rotates at LOG_MAX_BYTES, keeping LOG_BACKUPS old files.
@@ -232,6 +250,8 @@ class KTDIBot(commands.Bot):
             for guild_id in GUILD_IDS:
                 guild = discord.Object(id=guild_id)
                 self.tree.copy_global_to(guild=guild)
+                if calibre is None or guild_id not in BOOKS_GUILD_IDS:
+                    self.tree.remove_command("books", guild=guild)  # Don't show /books where it can't be used.
                 synced = await self.tree.sync(guild=guild)
                 log.info("Synced %d slash commands to server %s", len(synced), guild_id)
             # Remove any old global copies so commands don't show up twice.
@@ -244,8 +264,7 @@ class KTDIBot(commands.Bot):
     async def on_command(self, ctx: commands.Context):
         # Fires for both /commands and prefix commands.
         if ctx.interaction:
-            options = " ".join(f"{o['name']}={o.get('value')}" for o in ctx.interaction.data.get("options", []))
-            invocation = f"/{ctx.command.qualified_name} {options}".strip()
+            invocation = f"/{ctx.command.qualified_name} {describe_options(ctx.interaction.data.get('options', []))}".strip()
         else:
             invocation = ctx.message.content
         where = f"{ctx.guild.name} #{ctx.channel}" if ctx.guild else "DM"
@@ -256,8 +275,22 @@ class KTDIBot(commands.Bot):
         if isinstance(error, (commands.UserInputError, commands.NoPrivateMessage)):
             log.info("%s's command failed: %s", ctx.author, error)
             await ctx.send(str(error), ephemeral=True)
+        elif isinstance(error, commands.CheckFailure):
+            log.info("%s can't use %s here: %s", ctx.author, ctx.command, error)
+            await ctx.send(str(error) or "You can't use that here.", ephemeral=True)
         elif not isinstance(error, commands.CommandNotFound):
             await super().on_command_error(ctx, error)
+
+
+def describe_options(options: list[dict]) -> str:
+    """Slash command options as 'name=value', flattening subcommands like /books search."""
+    parts = []
+    for option in options:
+        if "options" in option:
+            parts.append(describe_options(option["options"]))
+        elif "value" in option:
+            parts.append(f"{option['name']}={option['value']}")
+    return " ".join(p for p in parts if p)
 
 
 bot = KTDIBot()
@@ -359,6 +392,126 @@ async def linux(ctx: commands.Context):
     await ctx.send(random.choice(LINUX_LINES).format(user=f"<@{LINUX_HATER_ID}>"))
 
 
+DM_FILE_SIZE_LIMIT = 10 * 1024 * 1024  # Discord's upload limit outside boosted servers.
+SEARCH_RESULTS_SHOWN = 15
+# Books seen in recent searches, so /books download <id> knows their formats and sizes.
+recent_books: dict[int, library.Book] = {}
+
+
+def books_available(guild: discord.Guild | None) -> bool:
+    return calibre is not None and guild is not None and guild.id in BOOKS_GUILD_IDS
+
+
+def books_enabled():
+    async def predicate(ctx: commands.Context) -> bool:
+        if calibre is None:
+            raise commands.CheckFailure("The library isn't set up on this bot.")
+        if not books_available(ctx.guild):
+            raise commands.CheckFailure("The library isn't available in this server.")
+        return True
+    return commands.check(predicate)
+
+
+def book_line(book: library.Book) -> str:
+    title = discord.utils.escape_markdown(book.title[:80])
+    formats = ", ".join(f.name.upper() for f in book.formats)
+    return f"`{book.id}` **{title}** — {discord.utils.escape_markdown(book.author_text[:60])} ({formats})"
+
+
+@bot.hybrid_group(name="books", description="Search and download books from the library.", invoke_without_command=True)
+@books_enabled()
+async def books(ctx: commands.Context):
+    await ctx.send(
+        "Use `/books search <anything>` to find books, then `/books download <title or ID>` to get one.",
+        ephemeral=True,
+    )
+
+
+@books.command(name="search", description="Search the library by title, author, series or tag.")
+@books_enabled()
+async def books_search(ctx: commands.Context, *, query: str):
+    await ctx.defer(ephemeral=True)
+    try:
+        results = await calibre.search(query)
+    except library.LibraryError as error:
+        log.warning("Library search for %r failed: %s", query, error)
+        await ctx.send(str(error), ephemeral=True)
+        return
+    recent_books.update({book.id: book for book in results})
+    if not results:
+        await ctx.send(f"No books match “{discord.utils.escape_markdown(query)}”.", ephemeral=True)
+        return
+    embed = discord.Embed(
+        title=f"📚 {len(results)} result{'s' if len(results) != 1 else ''} for “{query[:100]}”",
+        description="\n".join(book_line(book) for book in results[:SEARCH_RESULTS_SHOWN]),
+        color=discord.Color.blurple(),
+    )
+    footer = "Get one with /books download <ID or title>."
+    if len(results) > SEARCH_RESULTS_SHOWN:
+        footer = f"Showing {SEARCH_RESULTS_SHOWN} of {len(results)}. Narrow your search to see more. " + footer
+    embed.set_footer(text=footer)
+    await ctx.send(embed=embed, ephemeral=True)
+
+
+async def find_book(query: str) -> library.Book | int | list[library.Book]:
+    """A book ID, a single matching book, or a list of candidates if the title is ambiguous."""
+    if query.isdigit():
+        return recent_books.get(int(query)) or int(query)
+    results = await calibre.search(query)
+    recent_books.update({book.id: book for book in results})
+    exact = [book for book in results if book.title.casefold() == query.casefold()]
+    if len(exact) == 1 or len(results) == 1:
+        return (exact or results)[0]
+    return exact or results
+
+
+@books.command(name="download", description="Download a book by ID or title. Only you will see it.")
+@books_enabled()
+async def books_download(ctx: commands.Context, *, book: str):
+    await ctx.defer(ephemeral=True)
+    # Slash replies can be private; prefix commands can't, so those go by DM instead.
+    size_limit = ctx.guild.filesize_limit if ctx.interaction else DM_FILE_SIZE_LIMIT
+    try:
+        found = await find_book(book.strip())
+        if isinstance(found, list):
+            if not found:
+                await ctx.send(f"No books match “{discord.utils.escape_markdown(book)}”.", ephemeral=True)
+            else:
+                lines = "\n".join(book_line(b) for b in found[:10])
+                await ctx.send(f"Several books match. Download one by its ID:\n{lines}", ephemeral=True)
+            return
+        if isinstance(found, int):
+            download = await calibre.download_by_id(found, size_limit)
+            title = download.filename.rsplit(".", 1)[0]
+        else:
+            download = await calibre.download(found, size_limit)
+            title = found.title
+    except library.LibraryError as error:
+        log.warning("Library download for %r failed: %s", book, error)
+        await ctx.send(str(error), ephemeral=True)
+        return
+
+    log.info("[%s] %s downloaded %r (%s)", ctx.guild.name, ctx.author, download.filename,
+             library.format_size(len(download.data)))
+    message = f"📖 **{discord.utils.escape_markdown(title)}**"
+    file = discord.File(io.BytesIO(download.data), filename=download.filename)
+    if ctx.interaction:
+        await ctx.send(message, file=file, ephemeral=True)
+        return
+    try:
+        await ctx.author.send(message, file=file)
+        await ctx.reply("📬 Sent it to your DMs.")
+    except discord.Forbidden:
+        await ctx.reply("I couldn't DM you. Allow DMs from server members, or use `/books download` instead.")
+
+
+def can_use(command: commands.Command, ctx: commands.Context) -> bool:
+    """Whether to show a command in /help here."""
+    if (command.root_parent or command).name == "books":
+        return books_available(ctx.guild)
+    return True
+
+
 def command_help_embed(command: commands.Command) -> discord.Embed:
     """Detailed help for one command, e.g. /help abm."""
     embed = discord.Embed(
@@ -366,6 +519,17 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
         description=f"{command.description}\n\nAlso works as `{COMMAND_PREFIX}{command.name}`.",
         color=discord.Color.blurple(),
     )
+    if isinstance(command, commands.Group):
+        embed.description = f"{command.description}\n\nAlso works as `{COMMAND_PREFIX}{command.name} <subcommand>`."
+        for sub in sorted(command.commands, key=lambda c: c.name):
+            embed.add_field(name=f"/{sub.qualified_name} {sub.signature}".strip(), value=sub.description, inline=False)
+    if command.name == "books":
+        embed.add_field(
+            name="Privacy",
+            value=(f"With `/books`, search results and books are only shown to you. With `{COMMAND_PREFIX}books`, "
+                   f"search results post in the channel and books are sent by DM."),
+            inline=False,
+        )
     if command.name in ("abm", "imperial"):
         embed.description += (
             "\n\nType a number and a metric unit, with or without a space: `3cm`, `2.5 kg`, `100 km/h`. "
@@ -381,7 +545,7 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
 async def help_command(ctx: commands.Context, command: str | None = None):
     if command:
         found = bot.get_command(command.lstrip("/" + COMMAND_PREFIX).lower())
-        if found is None:
+        if found is None or not can_use(found, ctx):
             await ctx.send(f"There's no `{command}` command. Try `/help` for the list.", ephemeral=True)
         else:
             # Private for /help <command>, so the details don't fill the channel.
@@ -393,8 +557,11 @@ async def help_command(ctx: commands.Context, command: str | None = None):
         color=discord.Color.blurple(),
     )
     for command in sorted(bot.commands, key=lambda c: c.name):
+        if not can_use(command, ctx):
+            continue  # e.g. /books outside the library servers.
+        usage = " | ".join(sub.name for sub in command.commands) if isinstance(command, commands.Group) else command.signature
         embed.add_field(
-            name=f"/{command.name} {command.signature}".strip(),
+            name=f"/{command.name} {usage}".strip(),
             value=command.description or "No description.",
             inline=False,
         )
