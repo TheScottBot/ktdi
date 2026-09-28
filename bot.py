@@ -112,15 +112,21 @@ log = logging.getLogger("ktdi")
 
 def setup_logging() -> None:
     """Log to the terminal (so journalctl still works) and to a rolling log file."""
-    LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
     formatter = logging.Formatter("[{asctime}] [{levelname:<7}] {name}: {message}", "%Y-%m-%d %H:%M:%S", style="{")
-    file_handler = RotatingFileHandler(LOG_FILE, maxBytes=LOG_MAX_BYTES, backupCount=LOG_BACKUPS, encoding="utf-8")
-    console_handler = logging.StreamHandler()
     root = logging.getLogger()
     root.setLevel(logging.INFO)
-    for handler in (file_handler, console_handler):
-        handler.setFormatter(formatter)
-        root.addHandler(handler)
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+    root.addHandler(console_handler)
+    # The log file is best-effort: if it can't be opened, keep running with terminal/journal logging only.
+    try:
+        LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+        file_handler = RotatingFileHandler(LOG_FILE, maxBytes=LOG_MAX_BYTES, backupCount=LOG_BACKUPS, encoding="utf-8")
+    except OSError as error:
+        log.warning("Couldn't open log file %s, logging to terminal only: %s", LOG_FILE, error)
+        return
+    file_handler.setFormatter(formatter)
+    root.addHandler(file_handler)
 
 
 def record_bribe(guild_id: int, user_id: int, amount: int) -> None:
