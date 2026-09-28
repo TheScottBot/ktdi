@@ -227,6 +227,38 @@ def setup_logging() -> None:
     root.addHandler(file_handler)
 
 
+# --- Shared state: which servers pool their quotes, sprays, bribes and campaigns ---
+# Every row keeps the server it came from. Reads use scope(): an isolated server sees only its own rows,
+# a shared server sees every row except those from isolated servers. Switching back and forth loses nothing.
+# A server that has never set it is shared.
+db.execute("CREATE TABLE IF NOT EXISTS guild_settings (guild_id INTEGER PRIMARY KEY, shared_state INTEGER NOT NULL)")
+db.commit()
+shared_state: dict[int, bool] = {
+    guild_id: bool(shared) for guild_id, shared in db.execute("SELECT guild_id, shared_state FROM guild_settings")
+}
+
+
+def is_shared(guild_id: int) -> bool:
+    return shared_state.get(guild_id, True)
+
+
+def set_shared(guild_id: int, shared: bool) -> None:
+    db.execute("INSERT INTO guild_settings (guild_id, shared_state) VALUES (?, ?)"
+               " ON CONFLICT (guild_id) DO UPDATE SET shared_state = excluded.shared_state", (guild_id, int(shared)))
+    db.commit()
+    shared_state[guild_id] = shared
+
+
+def scope(guild_id: int) -> tuple[str, list[int]]:
+    """The WHERE condition (and its parameters) for the rows this server can see."""
+    if not is_shared(guild_id):
+        return "guild_id = ?", [guild_id]
+    isolated = [g for g, shared in shared_state.items() if not shared]
+    if not isolated:
+        return "1 = 1", []
+    return f"guild_id NOT IN ({', '.join('?' * len(isolated))})", isolated
+
+
 def record_bribe(guild_id: int, user_id: int, amount: int) -> None:
     db.execute(
         """
@@ -239,16 +271,16 @@ def record_bribe(guild_id: int, user_id: int, amount: int) -> None:
 
 
 def get_bribe_stats(guild_id: int, user_id: int) -> tuple[int, int]:
-    row = db.execute(
-        "SELECT count, total FROM bribes WHERE guild_id = ? AND user_id = ?", (guild_id, user_id)
-    ).fetchone()
-    return row if row else (0, 0)
+    where, params = scope(guild_id)
+    row = db.execute(f"SELECT COALESCE(SUM(count), 0), COALESCE(SUM(total), 0) FROM bribes WHERE {where} AND user_id = ?",
+                     (*params, user_id)).fetchone()
+    return row[0], row[1]
 
 
 def get_top_briber(guild_id: int) -> int | None:
-    row = db.execute(
-        "SELECT user_id FROM bribes WHERE guild_id = ? ORDER BY total DESC, user_id LIMIT 1", (guild_id,)
-    ).fetchone()
+    where, params = scope(guild_id)
+    row = db.execute(f"SELECT user_id FROM bribes WHERE {where} GROUP BY user_id ORDER BY SUM(total) DESC, user_id LIMIT 1",
+                     params).fetchone()
     return row[0] if row else None
 
 
@@ -327,62 +359,67 @@ def add_quote(guild_id: int, user_id: int, text: str, context: str | None, added
     return cursor.lastrowid
 
 
+# Quote functions take the asking server's ID and see whatever its shared state allows. Quote IDs are unique
+# across all servers, so #12 means the same quote everywhere it's visible.
 def get_quote(guild_id: int, quote_id: int) -> Quote | None:
-    row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND id = ?", (guild_id, quote_id)).fetchone()
+    where, params = scope(guild_id)
+    row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE {where} AND id = ?", (*params, quote_id)).fetchone()
     return Quote(*row) if row else None
 
 
 def quote_for_message(guild_id: int, message_id: int) -> Quote | None:
-    row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND message_id = ?",
-                     (guild_id, message_id)).fetchone()
+    where, params = scope(guild_id)
+    row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE {where} AND message_id = ?",
+                     (*params, message_id)).fetchone()
     return Quote(*row) if row else None
 
 
 def random_quote(guild_id: int, user_id: int | None = None) -> Quote | None:
-    if user_id is None:
-        row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? ORDER BY RANDOM() LIMIT 1",
-                         (guild_id,)).fetchone()
-    else:
-        row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND user_id = ? ORDER BY RANDOM() LIMIT 1",
-                         (guild_id, user_id)).fetchone()
+    where, params = scope(guild_id)
+    if user_id is not None:
+        where, params = f"{where} AND user_id = ?", [*params, user_id]
+    row = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE {where} ORDER BY RANDOM() LIMIT 1", params).fetchone()
     return Quote(*row) if row else None
 
 
 def search_quotes(guild_id: int, text: str, limit: int = 10) -> list[Quote]:
+    where, params = scope(guild_id)
     pattern = "%" + text.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
     rows = db.execute(
-        f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND (text LIKE ? ESCAPE '\\' OR context LIKE ? ESCAPE '\\')"
+        f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE {where} AND (text LIKE ? ESCAPE '\\' OR context LIKE ? ESCAPE '\\')"
         " ORDER BY id DESC LIMIT ?",
-        (guild_id, pattern, pattern, limit),
+        (*params, pattern, pattern, limit),
     ).fetchall()
     return [Quote(*row) for row in rows]
 
 
 def recent_quotes(guild_id: int, limit: int, user_id: int | None = None) -> list[Quote]:
-    if user_id is None:
-        rows = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? ORDER BY id DESC LIMIT ?",
-                          (guild_id, limit)).fetchall()
-    else:
-        rows = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE guild_id = ? AND user_id = ? ORDER BY id DESC LIMIT ?",
-                          (guild_id, user_id, limit)).fetchall()
+    where, params = scope(guild_id)
+    if user_id is not None:
+        where, params = f"{where} AND user_id = ?", [*params, user_id]
+    rows = db.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE {where} ORDER BY id DESC LIMIT ?",
+                      (*params, limit)).fetchall()
     return [Quote(*row) for row in rows]
 
 
 def anonymise_quote(guild_id: int, quote_id: int) -> None:
     # The message link goes too, since it would show who wrote it.
-    db.execute("UPDATE quotes SET user_id = ?, channel_id = NULL, message_id = NULL WHERE guild_id = ? AND id = ?",
-               (ANONYMOUS, guild_id, quote_id))
+    where, params = scope(guild_id)
+    db.execute(f"UPDATE quotes SET user_id = ?, channel_id = NULL, message_id = NULL WHERE {where} AND id = ?",
+               (ANONYMOUS, *params, quote_id))
     db.commit()
 
 
 def claim_quote(guild_id: int, quote_id: int, user_id: int) -> None:
-    db.execute("UPDATE quotes SET user_id = ? WHERE guild_id = ? AND id = ? AND user_id = ?",
-               (user_id, guild_id, quote_id, ANONYMOUS))
+    where, params = scope(guild_id)
+    db.execute(f"UPDATE quotes SET user_id = ? WHERE {where} AND id = ? AND user_id = ?",
+               (user_id, *params, quote_id, ANONYMOUS))
     db.commit()
 
 
 def delete_quote(guild_id: int, quote_id: int) -> None:
-    db.execute("DELETE FROM quotes WHERE guild_id = ? AND id = ?", (guild_id, quote_id))
+    where, params = scope(guild_id)
+    db.execute(f"DELETE FROM quotes WHERE {where} AND id = ?", (*params, quote_id))
     db.commit()
 
 
@@ -399,14 +436,24 @@ CAMPAIGN_COLUMNS = "guild_id, alias, dndbeyond_url, vtt_url, added_by"
 
 
 def get_campaign(guild_id: int, alias: str) -> Campaign | None:
+    """Find a campaign this server can see. If two shared servers use the same alias, this server's own wins."""
+    where, params = scope(guild_id)
+    row = db.execute(f"SELECT {CAMPAIGN_COLUMNS} FROM campaigns WHERE {where} AND alias_key = ?"
+                     " ORDER BY guild_id = ? DESC, rowid LIMIT 1", (*params, alias.strip().casefold(), guild_id)).fetchone()
+    return Campaign(*row) if row else None
+
+
+def get_campaign_exact(guild_id: int, alias: str) -> Campaign | None:
+    """A campaign by the server it was added in (reminders are tied to that)."""
     row = db.execute(f"SELECT {CAMPAIGN_COLUMNS} FROM campaigns WHERE guild_id = ? AND alias_key = ?",
                      (guild_id, alias.strip().casefold())).fetchone()
     return Campaign(*row) if row else None
 
 
 def list_campaigns(guild_id: int) -> list[Campaign]:
-    rows = db.execute(f"SELECT {CAMPAIGN_COLUMNS} FROM campaigns WHERE guild_id = ? ORDER BY alias_key",
-                      (guild_id,)).fetchall()
+    where, params = scope(guild_id)
+    rows = db.execute(f"SELECT {CAMPAIGN_COLUMNS} FROM campaigns WHERE {where} ORDER BY alias_key, guild_id != ?",
+                      (*params, guild_id)).fetchall()
     return [Campaign(*row) for row in rows]
 
 
@@ -567,10 +614,10 @@ def record_spray(guild_id: int, user_id: int) -> int:
 
 
 def get_spray_count(guild_id: int, user_id: int) -> int:
-    row = db.execute(
-        "SELECT count FROM sprays WHERE guild_id = ? AND user_id = ?", (guild_id, user_id)
-    ).fetchone()
-    return row[0] if row else 0
+    where, params = scope(guild_id)
+    row = db.execute(f"SELECT COALESCE(SUM(count), 0) FROM sprays WHERE {where} AND user_id = ?",
+                     (*params, user_id)).fetchone()
+    return row[0]
 
 
 class KTDIBot(commands.Bot):
@@ -693,7 +740,7 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     if bribes:
         lines.append(f"Bribed the committee {plural(bribes, 'time')} (${bribe_total:,} total).")
         if get_top_briber(ctx.guild.id) == user.id:
-            lines.append("👑 Biggest briber in the server.")
+            lines.append("👑 Biggest briber" + (" across the shared servers." if is_shared(ctx.guild.id) else " in the server."))
     await ctx.send("\n".join(lines))
 
 
@@ -1096,6 +1143,7 @@ async def save_quote_menu(interaction: discord.Interaction, message: discord.Mes
 CAMPAIGN_ALIAS_MAX = 50
 # Can't be aliases, or !campaign <alias> would clash.
 CAMPAIGN_SUBCOMMANDS = {"add", "edit", "list", "remove", "show", "remind", "unremind", "reschedule", "skip"}
+# Note: with shared state, aliases must be unique across all shared servers (checked in campaign add / edit).
 REMINDER_EMOJI = "🔔"
 REMINDER_GRACE = timedelta(hours=1)  # If the bot was down at reminder time, still send it up to this late.
 CLEAR_LINK = "none"  # Pass this to /campaign edit to remove a link.
@@ -1298,9 +1346,9 @@ async def campaign_edit(ctx: commands.Context, alias: str, dndbeyond: str | None
     if new_alias.casefold() != campaign.alias.casefold() and get_campaign(ctx.guild.id, new_alias):
         await send_campaign_reply(ctx, f"There's already a campaign called “{new_alias}”.", private=True)
         return
-    update_campaign(ctx.guild.id, campaign.alias, new_alias, new_dndbeyond, new_vtt)
+    update_campaign(campaign.guild_id, campaign.alias, new_alias, new_dndbeyond, new_vtt)
     log.info("[%s] %s edited campaign %r", ctx.guild.name, ctx.author, new_alias)
-    await send_campaign_reply(ctx, "✏️ Campaign updated.", campaign=get_campaign(ctx.guild.id, new_alias))
+    await send_campaign_reply(ctx, "✏️ Campaign updated.", campaign=get_campaign_exact(campaign.guild_id, new_alias))
 
 
 @campaign_group.command(name="remove", description="Remove a campaign (whoever added it, or a mod).")
@@ -1313,7 +1361,7 @@ async def campaign_remove(ctx: commands.Context, *, alias: str):
     if not can_manage_campaign(ctx.author, campaign):
         await send_campaign_reply(ctx, "Only whoever added this campaign, or a moderator, can remove it.", private=True)
         return
-    delete_campaign(ctx.guild.id, campaign.alias)
+    delete_campaign(campaign.guild_id, campaign.alias)
     log.info("[%s] %s removed campaign %r", ctx.guild.name, ctx.author, campaign.alias)
     await send_campaign_reply(ctx, f"🗑️ Removed the campaign “{campaign.alias}”.")
 
@@ -1365,7 +1413,7 @@ async def campaign_remind(ctx: commands.Context, alias: str, *, when: str):
         await send_campaign_reply(ctx, f"There's no campaign called “{discord.utils.escape_markdown(alias)}”. "
                                        "Add it first with `/campaign add`.", private=True)
         return
-    existing = get_reminder(ctx.guild.id, campaign.alias)
+    existing = get_reminder(campaign.guild_id, campaign.alias)
     if existing and not can_manage_reminder(ctx.author, existing, campaign):
         await send_campaign_reply(ctx, "This campaign already has a reminder. Only whoever set it, whoever added the "
                                        "campaign, or a moderator can replace it.", private=True)
@@ -1376,7 +1424,7 @@ async def campaign_remind(ctx: commands.Context, alias: str, *, when: str):
     except reminders.ScheduleError as error:
         await send_campaign_reply(ctx, str(error), private=True)
         return
-    reminder_id = save_reminder(ctx.guild.id, campaign.alias, ctx.channel.id, schedule, anchor, first, ctx.author.id,
+    reminder_id = save_reminder(campaign.guild_id, campaign.alias, ctx.channel.id, schedule, anchor, first, ctx.author.id,
                                 lead_minutes)
     log.info("[%s] %s set a reminder for %r: %s, %s", ctx.guild.name, ctx.author, campaign.alias,
              schedule.describe(), ping_phrase(lead_minutes))
@@ -1402,7 +1450,7 @@ async def campaign_remind(ctx: commands.Context, alias: str, *, when: str):
 @app_commands.describe(alias="The campaign")
 async def campaign_unremind(ctx: commands.Context, *, alias: str):
     campaign = get_campaign(ctx.guild.id, alias)
-    reminder = get_reminder(ctx.guild.id, alias)
+    reminder = get_reminder(campaign.guild_id, campaign.alias) if campaign else None
     if campaign is None or reminder is None:
         await send_campaign_reply(ctx, f"“{discord.utils.escape_markdown(alias)}” doesn't have a reminder.", private=True)
         return
@@ -1411,7 +1459,7 @@ async def campaign_unremind(ctx: commands.Context, *, alias: str):
                                        "stop it. To stop your own pings, remove your 🔔 from the reminder message.",
                                   private=True)
         return
-    delete_reminder(ctx.guild.id, campaign.alias)
+    delete_reminder(campaign.guild_id, campaign.alias)
     log.info("[%s] %s stopped the reminder for %r", ctx.guild.name, ctx.author, campaign.alias)
     await send_campaign_reply(ctx, f"🔕 Stopped the reminders for “{campaign.alias}”.")
 
@@ -1419,7 +1467,7 @@ async def campaign_unremind(ctx: commands.Context, *, alias: str):
 async def reminder_to_change(ctx: commands.Context, alias: str) -> tuple[Campaign, Reminder] | None:
     """Look up a campaign's reminder and check the user may change it, replying if not."""
     campaign = get_campaign(ctx.guild.id, alias)
-    reminder = get_reminder(ctx.guild.id, alias) if campaign else None
+    reminder = get_reminder(campaign.guild_id, campaign.alias) if campaign else None
     if campaign is None or reminder is None:
         await send_campaign_reply(ctx, f"“{discord.utils.escape_markdown(alias)}” doesn't have a reminder. "
                                        "Set one with `/campaign remind`.", private=True)
@@ -1538,7 +1586,7 @@ async def reminder_unsubscribe(payload: discord.RawReactionActionEvent):
 
 
 async def send_reminder(reminder: Reminder) -> None:
-    campaign = get_campaign(reminder.guild_id, reminder.alias_key)
+    campaign = get_campaign_exact(reminder.guild_id, reminder.alias_key)
     if campaign is None:
         delete_reminder(reminder.guild_id, reminder.alias_key)
         return
@@ -1582,6 +1630,54 @@ async def reminder_loop():
 @reminder_loop.before_loop
 async def before_reminder_loop():
     await bot.wait_until_ready()
+
+
+# --- Server settings ---
+SHARED_THINGS = "quotes, sprays, bribes and campaigns"
+
+
+def shared_state_text(guild: discord.Guild) -> str:
+    if not is_shared(guild.id):
+        return f"🔒 **Off**: {SHARED_THINGS} are local to this server."
+    others = sum(1 for g in bot.guilds if g.id != guild.id and is_shared(g.id))
+    if others == 0:
+        return f"🔗 **On**, but no other server the bot is in has it on, so {SHARED_THINGS} aren't shared with anyone yet."
+    servers = "1 other server that has" if others == 1 else f"{others} other servers that have"
+    return f"🔗 **On**: {SHARED_THINGS} are shared with the {servers} it on."
+
+
+@bot.hybrid_group(name="settings", description="This server's settings for the bot.", invoke_without_command=True)
+@commands.guild_only()
+async def settings_group(ctx: commands.Context):
+    await settings_show.callback(ctx)
+
+
+@settings_group.command(name="show", description="Show this server's settings.")
+async def settings_show(ctx: commands.Context):
+    embed = discord.Embed(title=f"⚙️ Settings for {ctx.guild.name}", color=discord.Color.blurple())
+    embed.add_field(name="Shared state", value=shared_state_text(ctx.guild), inline=False)
+    embed.set_footer(text="Change it with /settings shared_state (needs Manage Server).")
+    await ctx.send(embed=embed)
+
+
+@settings_group.command(name="shared_state",
+                        description="Share quotes, sprays, bribes and campaigns with the bot's other servers, or not.")
+@commands.has_guild_permissions(manage_guild=True)
+@app_commands.describe(value="True: shared with the bot's other servers. False: only this server.")
+async def settings_shared_state(ctx: commands.Context, value: bool):
+    if value == is_shared(ctx.guild.id):
+        await ctx.send(f"Shared state is already {'on' if value else 'off'}.\n{shared_state_text(ctx.guild)}",
+                       ephemeral=True)
+        return
+    set_shared(ctx.guild.id, value)
+    log.info("[%s] %s turned shared state %s", ctx.guild.name, ctx.author, "on" if value else "off")
+    if value:
+        note = ("This server now sees what the other shared servers have added, and they see what this server added. "
+                "If two servers have a campaign with the same alias, each server's own comes first.")
+    else:
+        note = ("From now on this server only sees what was added here, and the other servers stop seeing it. "
+                "Nothing is deleted: turning it back on shares everything again.")
+    await ctx.send(f"{shared_state_text(ctx.guild)}\n{note}")
 
 
 DM_FILE_SIZE_LIMIT = 10 * 1024 * 1024  # Discord's upload limit outside boosted servers.
@@ -1867,6 +1963,18 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
                 "lets you put your own name back on an anonymous one.\n"
                 f"• `{COMMAND_PREFIX}quote` on its own gives a random quote; `{COMMAND_PREFIX}quote 12` shows quote #12."
             ),
+        )
+    if command.name == "settings" or parent == "settings":
+        add_help_field(
+            embed,
+            "Shared state",
+            (f"• **On** (the default): {SHARED_THINGS} are pooled with every other server the bot is in that has it "
+             "on. Quotes, rap sheets and `/campaign list` include theirs.\n"
+             f"• **Off**: {SHARED_THINGS} are local to this server, and other servers can't see them.\n"
+             "• Switching is reversible: everything remembers which server it came from, so nothing is lost.\n"
+             "• Books, reminders' channels and each server's roles stay per-server either way.\n"
+             f"• Only people with **Manage Server** can change it: `/settings shared_state value:False`, "
+             f"or `{COMMAND_PREFIX}settings shared_state false`."),
         )
     if command.name == "books" or parent == "books":
         add_help_field(
