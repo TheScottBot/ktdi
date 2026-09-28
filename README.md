@@ -81,6 +81,8 @@ Slash commands can take a while to appear or update when registered globally. Se
 
 ## Project layout
 
+For how it all fits together, conventions, and rules for changes, see [ARCHITECTURE.md](ARCHITECTURE.md).
+
 ```
 bot.py                 # starts the bot (python bot.py [--dev]); also: python -m ktdi, or the ktdi command
 ktdi/
