@@ -1,6 +1,7 @@
 import os
 import random
 import sqlite3
+import sys
 from collections import defaultdict, deque
 from pathlib import Path
 
@@ -8,7 +9,11 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 
-load_dotenv()
+BASE_DIR = Path(__file__).parent
+
+# Run with --dev (e.g. "python bot.py --dev") to use the dev bot's settings in .env.dev.
+ENV_FILE = ".env.dev" if "--dev" in sys.argv else ".env"
+load_dotenv(BASE_DIR / ENV_FILE)
 
 SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
@@ -16,7 +21,10 @@ LOOT_GIF_URL = "https://klipy.com/gifs/perception-check-tom-cardy"
 COMMAND_PREFIX = os.getenv("COMMAND_PREFIX", "!")
 # Comma-separated server IDs to register slash commands to (GUILD_ID also accepted).
 GUILD_IDS = [int(g) for g in (os.getenv("GUILD_IDS") or os.getenv("GUILD_ID") or "").replace(" ", "").split(",") if g]
-DB_PATH = os.getenv("DB_PATH", str(Path(__file__).parent / "ktdi.db"))
+# Relative paths are resolved next to bot.py.
+DB_PATH = str(BASE_DIR / os.getenv("DB_PATH", "ktdi.db"))
+# Optional role given to each server's biggest briber. Skipped on servers without a role by this name.
+BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")
 
 BLAME_LINES = [
     "This is {user}'s fault.",
@@ -82,6 +90,14 @@ db.execute(
     )
     """
 )
+db.execute(
+    """
+    CREATE TABLE IF NOT EXISTS briber_role_holders (
+        guild_id INTEGER PRIMARY KEY,
+        user_id  INTEGER NOT NULL
+    )
+    """
+)
 db.commit()
 
 
@@ -105,9 +121,51 @@ def get_bribe_stats(guild_id: int, user_id: int) -> tuple[int, int]:
 
 def get_top_briber(guild_id: int) -> int | None:
     row = db.execute(
-        "SELECT user_id FROM bribes WHERE guild_id = ? ORDER BY total DESC LIMIT 1", (guild_id,)
+        "SELECT user_id FROM bribes WHERE guild_id = ? ORDER BY total DESC, user_id LIMIT 1", (guild_id,)
     ).fetchone()
     return row[0] if row else None
+
+
+def get_briber_role_holder(guild_id: int) -> int | None:
+    row = db.execute("SELECT user_id FROM briber_role_holders WHERE guild_id = ?", (guild_id,)).fetchone()
+    return row[0] if row else None
+
+
+def set_briber_role_holder(guild_id: int, user_id: int) -> None:
+    db.execute(
+        "INSERT INTO briber_role_holders (guild_id, user_id) VALUES (?, ?)"
+        " ON CONFLICT (guild_id) DO UPDATE SET user_id = excluded.user_id",
+        (guild_id, user_id),
+    )
+    db.commit()
+
+
+async def get_member(guild: discord.Guild, user_id: int) -> discord.Member | None:
+    try:
+        return guild.get_member(user_id) or await guild.fetch_member(user_id)
+    except discord.HTTPException:
+        return None  # Left the server, or couldn't look them up.
+
+
+async def update_briber_role(guild: discord.Guild) -> None:
+    """Move the briber role to the server's biggest briber. Does nothing if the role or permission is missing."""
+    role = discord.utils.get(guild.roles, name=BRIBER_ROLE_NAME)
+    top_id = get_top_briber(guild.id)
+    if role is None or top_id is None:
+        return
+    previous_id = get_briber_role_holder(guild.id)
+    try:
+        if previous_id and previous_id != top_id:
+            previous = await get_member(guild, previous_id)
+            if previous and role in previous.roles:
+                await previous.remove_roles(role, reason="No longer the biggest briber")
+        top = await get_member(guild, top_id)
+        if top and role not in top.roles:
+            await top.add_roles(role, reason="Biggest briber")
+        set_briber_role_holder(guild.id, top_id)
+    except discord.HTTPException as error:
+        # Usually missing Manage Roles, or the role sits above the bot's own role.
+        print(f"Couldn't update {BRIBER_ROLE_NAME!r} role in {guild.name}: {error}", flush=True)
 
 
 def record_spray(guild_id: int, user_id: int) -> int:
@@ -232,6 +290,7 @@ async def bribe(ctx: commands.Context, amount: commands.Range[int, 1, 1_000_000_
     await ctx.send(
         random.choice(BRIBE_LINES).format(briber=ctx.author.mention, blamer=f"<@{blamer_id}>", amount=f"${amount:,}")
     )
+    await update_briber_role(ctx.guild)
 
 
 @bot.hybrid_command(name="linux", description="Ask our resident Linux hater how he's feeling about Linux.")
@@ -291,7 +350,7 @@ async def on_ready():
 def main():
     token = os.getenv("DISCORD_TOKEN")
     if not token:
-        raise SystemExit("DISCORD_TOKEN is not set. Copy .env.example to .env and add your token.")
+        raise SystemExit(f"DISCORD_TOKEN is not set. Copy .env.example to {ENV_FILE} and add your token.")
     bot.run(token)
 
 
