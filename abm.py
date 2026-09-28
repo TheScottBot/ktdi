@@ -209,7 +209,7 @@ def format_fraction(value: float) -> str | None:
 
 def _weight(unit: dict, value: float) -> float:
     weight = 3 if SWEET_SPOT[0] <= value <= SWEET_SPOT[1] else 1
-    # Plain imperial units are less funny than bananas and giraffes.
+    # Everyday units like inches and pints are less surprising than bananas and giraffes, so pick them less often.
     if "us_customary" in unit.get("tags", []):
         weight /= 2
     return weight
@@ -242,7 +242,7 @@ def describe(value: float, unit: dict) -> str:
     return f"{fraction} of {with_article(unit)}"
 
 
-def describe_temperature(kelvin: float, unit: dict, typed_fahrenheit: bool = False) -> str:
+def describe_temperature(kelvin: float, unit: dict) -> str:
     ratio = kelvin / unit["si_value"]
     reference = with_article(unit)
     if 0.95 <= ratio <= 1.05:
@@ -252,10 +252,7 @@ def describe_temperature(kelvin: float, unit: dict, typed_fahrenheit: bool = Fal
     else:
         fraction = format_fraction(ratio) or _scientific(ratio)
         comparison = f"{fraction} as hot as {reference}"
-    if typed_fahrenheit:
-        return f"{comparison} (in kelvin, obviously). Also, you typed Fahrenheit into a metric converter. Bold."
-    fahrenheit = round((kelvin - 273.15) * 9 / 5 + 32)
-    return f"{comparison} (in kelvin, obviously). That's {fahrenheit:,}°F for the freedom-inclined."
+    return f"{comparison} (comparing in kelvin)."
 
 
 def describe_sound(decibels: float) -> str:
@@ -281,8 +278,7 @@ def convert(text: str) -> str:
         if si_value <= 0:
             return f"{emoji} {shown} is at or below absolute zero. Physics would like a word."
         unit, _ = pick_unit(si_value, dimension)
-        typed_fahrenheit = re.search(r"(°?f|fahrenheit|degf)$", shown, re.IGNORECASE) is not None
-        return f"{emoji} {shown} is {describe_temperature(si_value, unit, typed_fahrenheit)}"
+        return f"{emoji} {shown} is {describe_temperature(si_value, unit)}"
     if si_value <= 0:
         return f"{emoji} {shown} is… nothing. That's 0 of everything. Try a positive number."
 
