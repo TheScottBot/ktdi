@@ -92,6 +92,9 @@ def _upgrade() -> None:
     # How many minutes before the start time to ping. Existing reminders get 0 (ping at the time given).
     if "lead_minutes" not in _columns("campaign_reminders"):
         conn.execute("ALTER TABLE campaign_reminders ADD COLUMN lead_minutes INTEGER NOT NULL DEFAULT 0")
+    # Who /whospray asks, per server. Unset until someone chooses.
+    if "whospray_user_id" not in _columns("guild_settings"):
+        conn.execute("ALTER TABLE guild_settings ADD COLUMN whospray_user_id INTEGER")
 
 
 def init(path: str) -> None:
@@ -123,6 +126,19 @@ def set_shared(guild_id: int, shared: bool) -> None:
                  " ON CONFLICT (guild_id) DO UPDATE SET shared_state = excluded.shared_state", (guild_id, int(shared)))
     conn.commit()
     shared_state[guild_id] = shared
+
+
+def whospray_user(guild_id: int) -> int | None:
+    """Who /whospray asks on this server (a per-server setting, never shared)."""
+    row = conn.execute("SELECT whospray_user_id FROM guild_settings WHERE guild_id = ?", (guild_id,)).fetchone()
+    return row[0] if row else None
+
+
+def set_whospray_user(guild_id: int, user_id: int | None) -> None:
+    conn.execute("INSERT INTO guild_settings (guild_id, shared_state, whospray_user_id) VALUES (?, ?, ?)"
+                 " ON CONFLICT (guild_id) DO UPDATE SET whospray_user_id = excluded.whospray_user_id",
+                 (guild_id, int(is_shared(guild_id)), user_id))
+    conn.commit()
 
 
 def scope(guild_id: int) -> tuple[str, list[int]]:

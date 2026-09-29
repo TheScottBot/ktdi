@@ -1,9 +1,10 @@
-"""Spray, loot, linux, blame, bribe and rap sheets, plus the 💦 reaction and the Champion Briber role."""
+"""Spray, whospray, loot, linux, blame, bribe and rap sheets, plus the 💦 reaction and the Champion Briber role."""
 
 import random
 from collections import defaultdict, deque
 
 import discord
+from discord import app_commands
 from discord.ext import commands
 
 from ktdi import common, config, db
@@ -43,6 +44,21 @@ LINUX_LINES = [
     "{user}, if you had to explain your hatred of Linux to a child, how would you do it?",
     "{user}, we're taking a poll: how much do you hate Linux right now?",
     "{user}, Linux says hi. Would you like to say anything back?",
+]
+
+WHOSPRAY_LINES = [
+    "{user}, the spray bottle is loaded. Who's getting it?",
+    "{user}, who's been a degenerate lately? Name names.",
+    "{user}, you've been handed the spray bottle. Choose wisely.",
+    "{user}, somebody needs spraying. Who?",
+    "{user}, the committee requests your judgement: who gets sprayed?",
+    "{user}, point the bottle. Who's first?",
+    "{user}, if you could spray one person right now, who would it be?",
+    "{user}, the bottle is full and the day is young. Who's getting sprayed?",
+    "{user}, justice needs a target. Who?",
+    "{user}, pick a degenerate. Any degenerate.",
+    "{user}, it's spray o'clock. Who's it going to be?",
+    "{user}, who's earned a spritz today?",
 ]
 
 # Recent message authors per channel, used to pick someone to blame.
@@ -145,6 +161,22 @@ async def spray(ctx: commands.Context, target: discord.Member | None = None):
     await ctx.send(f"{target.mention} {SPRAY_GIF_URL}")
 
 
+@commands.hybrid_command(name="whospray", description="Ask the server's chosen sprayer who should get sprayed.")
+@commands.guild_only()
+@app_commands.describe(user="Ask someone else this time, instead of the server's chosen sprayer")
+async def whospray(ctx: commands.Context, user: discord.Member | None = None):
+    asked = user.id if user else db.whospray_user(ctx.guild.id)
+    if asked is None:
+        await ctx.send("Nobody's been chosen to ask yet. Someone with Manage Server can set it with "
+                       "`/settings whospray_user`, or ask someone directly with `/whospray user:@someone`.",
+                       ephemeral=True)
+        return
+    line = random.choice(WHOSPRAY_LINES).format(user=f"<@{asked}>")
+    # Ping only the person being asked.
+    await ctx.send(f"{SPRAY_EMOJI} {line}\n-# Deliver it with `/spray @them`.",
+                   allowed_mentions=discord.AllowedMentions(users=[discord.Object(id=asked)], everyone=False, roles=False))
+
+
 @commands.hybrid_command(name="loot", description="Declare that you're looting the body.")
 async def loot(ctx: commands.Context):
     await ctx.send(LOOT_GIF_URL)
@@ -242,7 +274,7 @@ def main_help_fields() -> list[tuple[str, str]]:
 
 
 async def setup(bot: commands.Bot):
-    for command in (spray, loot, rapsheet, blame, bribe, linux):
+    for command in (spray, whospray, loot, rapsheet, blame, bribe, linux):
         bot.add_command(command)
     bot.add_listener(remember_speaker, "on_message")
     bot.add_listener(spray_reaction, "on_raw_reaction_add")

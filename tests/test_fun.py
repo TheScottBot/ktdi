@@ -58,6 +58,37 @@ def test_blame_then_bribe_and_counter_bribe():
     assert fun.get_top_briber(111) == SCOTT.id
 
 
+def test_whospray_asks_the_chosen_person_and_only_pings_them():
+    from ktdi import db
+    db.set_whospray_user(111, DAVE.id)
+    ctx = Ctx(SCOTT)
+    run(fun.whospray.callback(ctx))
+    reply = ctx.last
+    assert reply.content.startswith("💦 <@2>")
+    assert any(line.format(user="<@2>") in reply.content for line in fun.WHOSPRAY_LINES)
+    assert [u.id for u in reply.allowed_mentions.users] == [DAVE.id]
+    assert reply.allowed_mentions.everyone is False and reply.allowed_mentions.roles is False
+
+
+def test_whospray_can_ask_someone_else():
+    ctx = Ctx(SCOTT)
+    run(fun.whospray.callback(ctx, User(3, "polter")))
+    assert "<@3>" in ctx.last.content
+
+
+def test_whospray_with_nobody_chosen():
+    ctx = Ctx(SCOTT)
+    run(fun.whospray.callback(ctx))
+    assert "Nobody's been chosen" in ctx.last.content and ctx.last.private
+
+
+def test_whospray_setting_is_per_server():
+    from ktdi import db
+    db.set_whospray_user(111, DAVE.id)
+    assert db.whospray_user(222) is None
+    assert db.is_shared(111)  # setting it didn't change shared state
+
+
 def test_bribe_with_nobody_blamed():
     ctx = Ctx(DAVE)
     run(fun.bribe.callback(ctx, 10))
