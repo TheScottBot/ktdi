@@ -80,6 +80,14 @@ SCHEMA = [
     )
     """,
     "CREATE TABLE IF NOT EXISTS guild_settings (guild_id INTEGER PRIMARY KEY, shared_state INTEGER NOT NULL)",
+    """
+    CREATE TABLE IF NOT EXISTS don_orders (
+        guild_id INTEGER NOT NULL,
+        user_id  INTEGER NOT NULL,
+        count    INTEGER NOT NULL DEFAULT 0,  -- times the Don made them spray themselves (/tdoi)
+        PRIMARY KEY (guild_id, user_id)
+    )
+    """,
 ]
 
 

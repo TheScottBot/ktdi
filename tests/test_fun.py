@@ -76,11 +76,42 @@ def test_whospray_has_no_options():
     assert fun.whospray.clean_params == {}
 
 
-def test_whospray_with_nobody_chosen():
+def test_whospray_with_no_don():
     ctx = Ctx(SCOTT)
     run(fun.whospray.callback(ctx))
-    assert "Nobody's been chosen" in ctx.last.content and ctx.last.private
+    assert "There's no Don on this server yet" in ctx.last.content and ctx.last.private
     assert "user:" not in ctx.last.content
+
+
+def test_tdoi_sprays_yourself_and_counts_twice():
+    from ktdi import db
+    db.set_whospray_user(111, DAVE.id)  # Dave is the Don
+    ctx = Ctx(SCOTT)
+    run(fun.tdoi.callback(ctx))
+    run(fun.tdoi.callback(ctx))
+    reply = ctx.last
+    assert reply.content.startswith("🤌 The Don ordered it. <@1> sprays themselves.")
+    assert fun.SPRAY_GIF_URL in reply.content and "That's 2 times the Don has made them do it." in reply.content
+    assert reply.allowed_mentions.users is False and reply.allowed_mentions.everyone is False  # no pings
+    assert fun.get_spray_count(111, SCOTT.id) == 2  # a normal spray...
+    assert fun.get_don_order_count(111, SCOTT.id) == 2  # ...and a Don order
+    run(fun.rapsheet.callback(ctx, SCOTT))
+    assert "Sprayed 2 times." in ctx.last.content
+    assert "🤌 Sprayed themselves on the Don's orders 2 times." in ctx.last.content
+
+
+def test_tdoi_with_no_don():
+    ctx = Ctx(SCOTT)
+    run(fun.tdoi.callback(ctx))
+    assert "There's no Don" in ctx.last.content and ctx.last.private
+    assert fun.get_spray_count(111, SCOTT.id) == 0
+
+
+def test_rap_sheet_without_don_orders_has_no_don_line():
+    fun.record_spray(111, DAVE.id)
+    ctx = Ctx(SCOTT)
+    run(fun.rapsheet.callback(ctx, DAVE))
+    assert "Don" not in ctx.last.content
 
 
 def test_whospray_setting_is_per_server():
