@@ -11,11 +11,11 @@ from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "blame", "books", "bribe", "campaign", "help", "imperial", "linux", "loot", "quote",
-                  "rapsheet", "settings", "spray"]
+                  "rapsheet", "settings", "spray", "whospray"]
 SUBCOMMANDS = {
     "campaign": ["add", "edit", "list", "remind", "remove", "reschedule", "show", "skip", "unremind"],
     "quote": ["add", "claim", "delete", "dissociate", "last", "random", "search", "show"],
-    "settings": ["shared_state", "show"],
+    "settings": ["shared_state", "show", "whospray_user"],
     "books": ["download", "search"],
 }
 

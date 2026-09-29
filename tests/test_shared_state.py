@@ -81,6 +81,19 @@ def test_settings_needs_manage_server(bot):
     assert "already off" in ctx.last.content
 
 
+def test_whospray_user_setting(bot):
+    check = settings.settings_whospray_user.checks[0]
+    with pytest.raises(commands.CheckFailure, match="Manage Server"):
+        run(check(Ctx(DAVE, A)))
+    ctx = Ctx(ADMIN, A)
+    run(settings.settings_whospray_user.callback(ctx, DAVE))
+    assert "will now ask <@2>" in ctx.last.content and db.whospray_user(A.id) == DAVE.id
+    run(settings.settings_show.callback(ctx))
+    assert "Who /whospray asks: <@2>" in ctx.last.text
+    run(settings.settings_whospray_user.callback(ctx))
+    assert db.whospray_user(A.id) is None and "won't ask anyone" in ctx.last.content
+
+
 def test_settings_show_counts_other_servers(bot):
     bot.guilds = [A, B, C]
     ctx = Ctx(SCOTT, A)

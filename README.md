@@ -6,6 +6,7 @@ A tiny Discord bot for keeping your friends in line. Commands work as slash comm
 | Command | What it does |
 |---|---|
 | `spray [@user]` | Posts a spray bottle GIF. Target someone to add to their rap sheet. |
+| `whospray [@user]` | Asks the server's chosen sprayer (set with `/settings whospray_user`) who should be sprayed, with a random phrase. Give a user to ask someone else instead. Only that person is pinged. |
 | `abm <measurement>` | Anything But Metric: converts a metric measurement (`3cm`, `20C`, `2.5kg`, `100km/h`, `500ml`, `85dB`…) into an absurd unit. Units live in `ktdi/lib/abm_units.json`. |
 | `imperial <measurement>` | The sincere version of `abm`: an accurate conversion to imperial/US units (e.g. `180cm` → 5 ft 10.9 in, `75kg` → 165.3 lb (11 st 11.3 lb), `1l` → US and UK pints). Same inputs as `abm`. |
 | `loot` | Declares you're looting the body (posts the perception check GIF). |
@@ -18,7 +19,7 @@ A tiny Discord bot for keeping your friends in line. Commands work as slash comm
 | `campaign remind <alias> <when>` / `campaign unremind <alias>` | Scheduled reminders. The time is when the game starts, plus an optional warning: `mondays at 1900, 15 minutes before`, `monday 7pm 1h before`, `every other friday at 7:30pm from 23 oct, half an hour before`. People react 🔔 to the setup message to get pinged; reminders post the campaign's buttons. Times are in `REMINDER_TIMEZONE` (default UK time). |
 | `campaign skip <alias>` / `campaign reschedule <alias> <change>` | For when things change. `skip` skips the next session (fortnightly games shift a week and carry on from there). `reschedule` takes a new warning (`30 minutes before`), `next 26 oct` (the next session's date) or a whole new schedule. All keep everyone's 🔔. |
 | `books search <query>` / `books download <ID or title>` | Search a Calibre-Web library and download a book (optional; see below). |
-| `settings show` / `settings shared_state <true/false>` | Per-server settings. **Shared state** (on by default) pools quotes, sprays, bribes and campaigns with every other server that has it on; off keeps them local to that server. Stored in the database per server; changing it needs Manage Server and loses nothing. |
+| `settings show` / `settings shared_state <true/false>` / `settings whospray_user [@user]` | Per-server settings, stored in the database; changing them needs Manage Server. **Shared state** (on by default) pools quotes, sprays, bribes and campaigns with every other server that has it on; off keeps them local to that server, and switching loses nothing. **whospray_user** chooses who `/whospray` asks (leave it empty to clear). |
 | `help [command]` | Lists all commands, or details for one (e.g. `/help abm` lists every unit it understands). |
 
 Reacting 💦 to any message also sprays the person who sent it and adds to their rap sheet.

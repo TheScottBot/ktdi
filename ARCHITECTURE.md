@@ -47,11 +47,11 @@ ktdi/
 ├── common.py          helpers shared by features (Reply, send_reply/respond, NO_PINGS, get_member, common.bot)
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
-│   ├── fun.py         spray, loot, linux, blame, bribe, rapsheet, 💦 reaction, Champion Briber role
+│   ├── fun.py         spray, whospray, loot, linux, blame, bribe, rapsheet, 💦 reaction, Champion Briber role
 │   ├── units.py       /abm, /imperial
 │   ├── quotes.py      quotes (prefix group, slash group, right-click form)
 │   ├── campaigns.py   campaigns, reminders, the reminder loop
-│   ├── settings.py    /settings (shared state)
+│   ├── settings.py    /settings (shared state, whospray user)
 │   ├── books.py       /books (Calibre-Web)
 │   └── help.py        /help
 └── lib/               plain Python, no Discord imports
@@ -145,7 +145,7 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `campaigns` | alias → D&D Beyond / VTT links, per server; `alias_key` is the lowercased alias |
 | `campaign_reminders` | one per campaign: schedule, start time, `lead_minutes`, `next_run`, setup message |
 | `campaign_reminder_subscribers` | who reacted 🔔 to a reminder |
-| `guild_settings` | per-server settings (shared state) |
+| `guild_settings` | per-server settings: shared state, and who `/whospray` asks (`whospray_user_id`). Never shared between servers. |
 
 ### Rules
 

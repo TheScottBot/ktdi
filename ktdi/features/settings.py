@@ -1,11 +1,11 @@
-"""/settings: per-server settings. For now, shared state (see db.scope)."""
+"""/settings: per-server settings: shared state (see db.scope) and who /whospray asks."""
 
 import discord
 from discord import app_commands
 from discord.ext import commands
 
 from ktdi import common, config, db
-from ktdi.common import log
+from ktdi.common import NO_PINGS, log
 
 SHARED_THINGS = "quotes, sprays, bribes and campaigns"
 
@@ -26,12 +26,30 @@ async def settings_group(ctx: commands.Context):
     await settings_show.callback(ctx)
 
 
+def whospray_text(guild: discord.Guild) -> str:
+    user_id = db.whospray_user(guild.id)
+    return f"<@{user_id}>" if user_id else "Nobody yet. Set someone with `/settings whospray_user`."
+
+
 @settings_group.command(name="show", description="Show this server's settings.")
 async def settings_show(ctx: commands.Context):
     embed = discord.Embed(title=f"⚙️ Settings for {ctx.guild.name}", color=discord.Color.blurple())
     embed.add_field(name="Shared state", value=shared_state_text(ctx.guild), inline=False)
-    embed.set_footer(text="Change it with /settings shared_state (needs Manage Server).")
-    await ctx.send(embed=embed)
+    embed.add_field(name="Who /whospray asks", value=whospray_text(ctx.guild), inline=False)
+    embed.set_footer(text="Change these with /settings shared_state and /settings whospray_user (needs Manage Server).")
+    await ctx.send(embed=embed, allowed_mentions=NO_PINGS)
+
+
+@settings_group.command(name="whospray_user", description="Choose who /whospray asks. Leave empty to clear it.")
+@commands.has_guild_permissions(manage_guild=True)
+@app_commands.describe(user="Who gets asked who should be sprayed")
+async def settings_whospray_user(ctx: commands.Context, user: discord.Member | None = None):
+    db.set_whospray_user(ctx.guild.id, user.id if user else None)
+    log.info("[%s] %s set the whospray user to %s", ctx.guild.name, ctx.author, user or "nobody")
+    if user:
+        await ctx.send(f"💦 `/whospray` will now ask {user.mention}.", allowed_mentions=NO_PINGS)
+    else:
+        await ctx.send("💦 `/whospray` won't ask anyone until someone is chosen again.")
 
 
 @settings_group.command(name="shared_state",
@@ -65,7 +83,9 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
             "• Books, reminders' channels and each server's roles stay per-server either way.\n"
             f"• Only people with **Manage Server** can change it: `/settings shared_state value:False`, "
             f"or `{config.COMMAND_PREFIX}settings shared_state false`.")
-    return "", [("Shared state", text, False)]
+    whospray = ("• `/settings whospray_user user:@someone` chooses who `/whospray` asks; leave `user` empty to clear it.\n"
+                "• It's per server (never shared), and needs **Manage Server** to change.")
+    return "", [("Shared state", text, False), ("Who /whospray asks", whospray, False)]
 
 
 async def setup(bot: commands.Bot):
