@@ -1,4 +1,8 @@
-"""Spray, whospray, loot, linux, blame, bribe and rap sheets, plus the 💦 reaction and the Champion Briber role."""
+"""Spray, whospray, tdoi, loot, linux, blame, bribe and rap sheets, plus the 💦 reaction and the Champion Briber role.
+
+"The Don" is the person chosen with /settings whospray_user: /whospray asks them who to spray, and /tdoi
+(The Don Ordered It) is someone spraying themselves on the Don's orders.
+"""
 
 import random
 from collections import defaultdict, deque
@@ -60,6 +64,9 @@ WHOSPRAY_LINES = [
     "{user}, who's earned a spritz today?",
 ]
 
+NO_DON = ("There's no Don on this server yet. Only the people listed in the bot's `WHOSPRAY_ADMIN_IDS` "
+          "can choose one, with `/settings whospray_user`.")
+
 # Recent message authors per channel, used to pick someone to blame.
 recent_speakers: dict[int, deque[int]] = defaultdict(lambda: deque(maxlen=50))
 
@@ -83,6 +90,25 @@ def record_spray(guild_id: int, user_id: int) -> int:
 def get_spray_count(guild_id: int, user_id: int) -> int:
     where, params = db.scope(guild_id)
     row = db.conn.execute(f"SELECT COALESCE(SUM(count), 0) FROM sprays WHERE {where} AND user_id = ?",
+                          (*params, user_id)).fetchone()
+    return row[0]
+
+
+def record_don_order(guild_id: int, user_id: int) -> int:
+    db.conn.execute(
+        """
+        INSERT INTO don_orders (guild_id, user_id, count) VALUES (?, ?, 1)
+        ON CONFLICT (guild_id, user_id) DO UPDATE SET count = count + 1
+        """,
+        (guild_id, user_id),
+    )
+    db.conn.commit()
+    return get_don_order_count(guild_id, user_id)
+
+
+def get_don_order_count(guild_id: int, user_id: int) -> int:
+    where, params = db.scope(guild_id)
+    row = db.conn.execute(f"SELECT COALESCE(SUM(count), 0) FROM don_orders WHERE {where} AND user_id = ?",
                           (*params, user_id)).fetchone()
     return row[0]
 
@@ -163,15 +189,28 @@ async def spray(ctx: commands.Context, target: discord.Member | None = None):
 @commands.hybrid_command(name="whospray", description="Ask the server's chosen sprayer who should get sprayed.")
 @commands.guild_only()
 async def whospray(ctx: commands.Context):
-    asked = db.whospray_user(ctx.guild.id)  # Only ever the person chosen in /settings whospray_user.
+    asked = db.whospray_user(ctx.guild.id)  # The Don: only ever the person chosen in /settings whospray_user.
     if asked is None:
-        await ctx.send("Nobody's been chosen to ask yet. Someone with Manage Server can set it with "
-                       "`/settings whospray_user`.", ephemeral=True)
+        await ctx.send(NO_DON, ephemeral=True)
         return
     line = random.choice(WHOSPRAY_LINES).format(user=f"<@{asked}>")
     # Ping only the person being asked.
     await ctx.send(f"{SPRAY_EMOJI} {line}\n-# Deliver it with `/spray @them`.",
                    allowed_mentions=discord.AllowedMentions(users=[discord.Object(id=asked)], everyone=False, roles=False))
+
+
+@commands.hybrid_command(name="tdoi", description="The Don Ordered It: spray yourself, on the Don's orders.")
+@commands.guild_only()
+async def tdoi(ctx: commands.Context):
+    if db.whospray_user(ctx.guild.id) is None:
+        await ctx.send(NO_DON, ephemeral=True)
+        return
+    record_spray(ctx.guild.id, ctx.author.id)  # It's still a spray...
+    times = record_don_order(ctx.guild.id, ctx.author.id)  # ...and one more the Don made them do.
+    log.info("[%s] %s sprayed themselves on the Don's orders", ctx.guild.name, ctx.author)
+    await ctx.send(f"🤌 The Don ordered it. {ctx.author.mention} sprays themselves.\n{SPRAY_GIF_URL}\n"
+                   f"-# That's {plural(times, 'time')} the Don has made them do it.",
+                   allowed_mentions=discord.AllowedMentions.none())
 
 
 @commands.hybrid_command(name="loot", description="Declare that you're looting the body.")
@@ -191,6 +230,9 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     lines = [f"📋 **Rap sheet: {user.display_name}**"]
     if sprays:
         lines.append(f"Sprayed {plural(sprays, 'time')}.")
+    don_orders = get_don_order_count(ctx.guild.id, user.id)
+    if don_orders:
+        lines.append(f"🤌 Sprayed themselves on the Don's orders {plural(don_orders, 'time')}.")
     if bribes:
         lines.append(f"Bribed the committee {plural(bribes, 'time')} (${bribe_total:,} total).")
         if get_top_briber(ctx.guild.id) == user.id:
@@ -271,7 +313,7 @@ def main_help_fields() -> list[tuple[str, str]]:
 
 
 async def setup(bot: commands.Bot):
-    for command in (spray, whospray, loot, rapsheet, blame, bribe, linux):
+    for command in (spray, whospray, tdoi, loot, rapsheet, blame, bribe, linux):
         bot.add_command(command)
     bot.add_listener(remember_speaker, "on_message")
     bot.add_listener(spray_reaction, "on_raw_reaction_add")

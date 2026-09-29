@@ -81,17 +81,37 @@ def test_settings_needs_manage_server(bot):
     assert "already off" in ctx.last.content
 
 
-def test_whospray_user_setting(bot):
+def test_only_the_env_allowlist_can_choose_the_don(bot, monkeypatch):
+    from ktdi import config
+    monkeypatch.setattr(config, "WHOSPRAY_ADMIN_IDS", [SCOTT.id])
     check = settings.settings_whospray_user.checks[0]
-    with pytest.raises(commands.CheckFailure, match="Manage Server"):
-        run(check(Ctx(DAVE, A)))
-    ctx = Ctx(ADMIN, A)
+    for refused in (DAVE, ADMIN):  # a server admin isn't enough
+        with pytest.raises(commands.CheckFailure, match="WHOSPRAY_ADMIN_IDS"):
+            run(check(Ctx(refused, A)))
+    assert run(check(Ctx(SCOTT, A)))
+
+    ctx = Ctx(SCOTT, A)
     run(settings.settings_whospray_user.callback(ctx, DAVE))
-    assert "will now ask <@2>" in ctx.last.content and db.whospray_user(A.id) == DAVE.id
+    assert "<@2> is now the Don" in ctx.last.content and db.whospray_user(A.id) == DAVE.id
     run(settings.settings_show.callback(ctx))
-    assert "Who /whospray asks: <@2>" in ctx.last.text
+    assert "The Don (asked by /whospray, obeyed with /tdoi): <@2>" in ctx.last.text
     run(settings.settings_whospray_user.callback(ctx))
-    assert db.whospray_user(A.id) is None and "won't ask anyone" in ctx.last.content
+    assert db.whospray_user(A.id) is None and "There's no Don now" in ctx.last.content
+
+
+def test_empty_allowlist_means_nobody_can_choose_the_don(monkeypatch):
+    from ktdi import config
+    monkeypatch.setattr(config, "WHOSPRAY_ADMIN_IDS", [])
+    with pytest.raises(commands.CheckFailure):
+        run(settings.settings_whospray_user.checks[0](Ctx(ADMIN, A)))
+
+
+def test_don_orders_follow_shared_state():
+    fun.record_don_order(A.id, DAVE.id)
+    fun.record_don_order(B.id, DAVE.id)
+    assert fun.get_don_order_count(A.id, DAVE.id) == 2
+    db.set_shared(B.id, False)
+    assert fun.get_don_order_count(A.id, DAVE.id) == 1 and fun.get_don_order_count(B.id, DAVE.id) == 1
 
 
 def test_settings_show_counts_other_servers(bot):

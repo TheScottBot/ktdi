@@ -56,5 +56,7 @@ except (ZoneInfoNotFoundError, ValueError):
 
 # Optional role given to each server's biggest briber. Skipped on servers without a role by this name.
 BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")
+# Who may choose the Don (/settings whospray_user). Nobody else can, not even server admins. Empty = nobody.
+WHOSPRAY_ADMIN_IDS = parse_ids("WHOSPRAY_ADMIN_IDS")
 # The /linux target (@poltergeis.t).
 LINUX_HATER_ID = os.getenv("LINUX_HATER_ID") or "351350774435151873"

@@ -47,7 +47,7 @@ ktdi/
 ├── common.py          helpers shared by features (Reply, send_reply/respond, NO_PINGS, get_member, common.bot)
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
-│   ├── fun.py         spray, whospray, loot, linux, blame, bribe, rapsheet, 💦 reaction, Champion Briber role
+│   ├── fun.py         spray, whospray, tdoi, loot, linux, blame, bribe, rapsheet, 💦 reaction, Champion Briber role
 │   ├── units.py       /abm, /imperial
 │   ├── quotes.py      quotes (prefix group, slash group, right-click form)
 │   ├── campaigns.py   campaigns, reminders, the reminder loop
@@ -145,7 +145,8 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `campaigns` | alias → D&D Beyond / VTT links, per server; `alias_key` is the lowercased alias |
 | `campaign_reminders` | one per campaign: schedule, start time, `lead_minutes`, `next_run`, setup message |
 | `campaign_reminder_subscribers` | who reacted 🔔 to a reminder |
-| `guild_settings` | per-server settings: shared state, and who `/whospray` asks (`whospray_user_id`). Never shared between servers. |
+| `guild_settings` | per-server settings: shared state, and the Don (`whospray_user_id`: who `/whospray` asks and `/tdoi` obeys). Never shared between servers. |
+| `don_orders` | times each person sprayed themselves on the Don's orders (`/tdoi`), per (server, person) |
 
 ### Rules
 
@@ -174,7 +175,7 @@ db.scope(guild_id):
     shared, some isolated      -> "guild_id NOT IN (?, ?)", [the isolated servers]
 ```
 
-Covers quotes, sprays, bribes and campaigns. Not books (per `BOOKS_GUILD_IDS`), not roles (each server gives out its
+Covers quotes, sprays (including Don orders), bribes and campaigns. Not books (per `BOOKS_GUILD_IDS`), not roles (each server gives out its
 own Champion Briber role), not blame/bribe state (per channel, in memory). Switching is reversible because nothing
 moves; only the condition changes. Campaign aliases must be unique across the servers in scope; lookups prefer the
 asking server's own row.
@@ -259,7 +260,7 @@ python -m pytest            # ~3 seconds
 7. **Don't break the start command.** `python /opt/ktdi/bot.py` must keep working; don't move `.env`, `ktdi.db` or
    `logs/` without updating deployment.
 8. **Permissions pattern:** people can change what they created; whoever it's about can change it where that makes
-   sense (quotes); `manage_messages` (mods) can change anything; server settings need `manage_guild`.
+   sense (quotes); `manage_messages` (mods) can change anything; server settings need `manage_guild`, except choosing the Don, which only the user IDs in `WHOSPRAY_ADMIN_IDS` (`.env`) can do.
 9. **Commits are made by the maintainer.** Assistants make and verify changes; they don't commit or push.
 
 ## Decisions and their reasons
