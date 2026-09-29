@@ -70,16 +70,17 @@ def test_whospray_asks_the_chosen_person_and_only_pings_them():
     assert reply.allowed_mentions.everyone is False and reply.allowed_mentions.roles is False
 
 
-def test_whospray_can_ask_someone_else():
-    ctx = Ctx(SCOTT)
-    run(fun.whospray.callback(ctx, User(3, "polter")))
-    assert "<@3>" in ctx.last.content
+def test_whospray_has_no_options():
+    # Only ever asks the person chosen in /settings whospray_user.
+    assert fun.whospray.app_command.parameters == []
+    assert fun.whospray.clean_params == {}
 
 
 def test_whospray_with_nobody_chosen():
     ctx = Ctx(SCOTT)
     run(fun.whospray.callback(ctx))
     assert "Nobody's been chosen" in ctx.last.content and ctx.last.private
+    assert "user:" not in ctx.last.content
 
 
 def test_whospray_setting_is_per_server():

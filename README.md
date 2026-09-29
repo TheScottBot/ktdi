@@ -6,7 +6,7 @@ A tiny Discord bot for keeping your friends in line. Commands work as slash comm
 | Command | What it does |
 |---|---|
 | `spray [@user]` | Posts a spray bottle GIF. Target someone to add to their rap sheet. |
-| `whospray [@user]` | Asks the server's chosen sprayer (set with `/settings whospray_user`) who should be sprayed, with a random phrase. Give a user to ask someone else instead. Only that person is pinged. |
+| `whospray` | Asks the server's chosen sprayer (set with `/settings whospray_user`) who should be sprayed, with a random phrase. Only that person is pinged. |
 | `abm <measurement>` | Anything But Metric: converts a metric measurement (`3cm`, `20C`, `2.5kg`, `100km/h`, `500ml`, `85dB`…) into an absurd unit. Units live in `ktdi/lib/abm_units.json`. |
 | `imperial <measurement>` | The sincere version of `abm`: an accurate conversion to imperial/US units (e.g. `180cm` → 5 ft 10.9 in, `75kg` → 165.3 lb (11 st 11.3 lb), `1l` → US and UK pints). Same inputs as `abm`. |
 | `loot` | Declares you're looting the body (posts the perception check GIF). |

@@ -4,7 +4,6 @@ import random
 from collections import defaultdict, deque
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import common, config, db
@@ -163,13 +162,11 @@ async def spray(ctx: commands.Context, target: discord.Member | None = None):
 
 @commands.hybrid_command(name="whospray", description="Ask the server's chosen sprayer who should get sprayed.")
 @commands.guild_only()
-@app_commands.describe(user="Ask someone else this time, instead of the server's chosen sprayer")
-async def whospray(ctx: commands.Context, user: discord.Member | None = None):
-    asked = user.id if user else db.whospray_user(ctx.guild.id)
+async def whospray(ctx: commands.Context):
+    asked = db.whospray_user(ctx.guild.id)  # Only ever the person chosen in /settings whospray_user.
     if asked is None:
         await ctx.send("Nobody's been chosen to ask yet. Someone with Manage Server can set it with "
-                       "`/settings whospray_user`, or ask someone directly with `/whospray user:@someone`.",
-                       ephemeral=True)
+                       "`/settings whospray_user`.", ephemeral=True)
         return
     line = random.choice(WHOSPRAY_LINES).format(user=f"<@{asked}>")
     # Ping only the person being asked.
