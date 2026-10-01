@@ -7,7 +7,8 @@ import os
 
 # Before importing ktdi: never read the real .env, and don't pick up library settings from the environment.
 os.environ["KTDI_NO_DOTENV"] = "1"
-for name in ("CALIBRE_URL", "BOOKS_GUILD_IDS", "GUILD_IDS", "COMMAND_PREFIX", "REMINDER_TIMEZONE"):
+for name in ("CALIBRE_URL", "BOOKS_GUILD_IDS", "GUILD_IDS", "COMMAND_PREFIX", "REMINDER_TIMEZONE", "ANIME_USER_ID",
+             "WHOSPRAY_ADMIN_IDS"):
     os.environ.pop(name, None)
 
 import pytest  # noqa: E402

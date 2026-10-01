@@ -10,11 +10,12 @@ How the bot is put together, why, and the rules to follow when changing it. Writ
 
 A Discord bot for a group of friends who play D&D together, mostly in voice chat. It lives on a few servers (one
 "hangout" server that serves three campaigns, plus others), and is deliberately small and personal: in-jokes
-(spray, blame, `/linux`), quotes from game night, campaign links and session reminders, a private book library, and
-two unit converters.
+(spray, blame, `/linux`, `/anime`), quotes from game night, campaign links and session reminders, a private book
+library, and two unit converters.
 
-It is run by one person on a homelab, so it favours: simple deployment, no external services beyond Discord (and an
-optional Calibre-Web), a single SQLite file, and failing gracefully over failing loudly.
+It is run by one person on a homelab, so it favours: simple deployment, few external services (Discord, plus the
+optional Calibre-Web, and AniList's free public API for `/anime`), a single SQLite file, and failing gracefully over
+failing loudly. Anything that calls an outside service must keep working, or say so nicely, when it's down.
 
 ## 2. Runtime and deployment
 
@@ -48,6 +49,7 @@ ktdi/
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
 │   ├── fun.py         spray, whospray, tdoi, loot, linux, blame, bribe, rapsheet, 💦 reaction, Champion Briber role
+│   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── units.py       /abm, /imperial
 │   ├── quotes.py      quotes (prefix group, slash group, right-click form)
 │   ├── campaigns.py   campaigns, reminders, the reminder loop
@@ -57,7 +59,8 @@ ktdi/
 └── lib/               plain Python, no Discord imports
     ├── abm.py         unit parsing and conversion (+ abm_units.json dataset)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths
-    └── library.py     Calibre-Web OPDS client
+    ├── library.py     Calibre-Web OPDS client
+    └── anilist.py     random popular anime from AniList
 tests/                 pytest; fakes.py has stand-ins for Discord objects
 ```
 
@@ -218,6 +221,9 @@ Everything logs through `logging.getLogger("ktdi")` (`common.log`) to the file a
   `first_on_or_after`, `describe*`. Raises `ScheduleError` with user-safe messages.
 - **`library.py`**: Calibre-Web OPDS search (follows pagination) and download (prefers formats in order, respects
   Discord's upload limit). Basic auth is built by hand (aiohttp's `BasicAuth` is deprecated).
+- **`anilist.py`**: `random_anime()` picks one of AniList's 500 most popular non-adult anime (GraphQL, no key needed,
+  10 s timeout). It never raises: if AniList is unreachable it picks from `FALLBACK_TITLES`. Tests never call the
+  real API; they fake `random_anime` or point `API_URL` at a closed port.
 
 ## 12. Tone and content
 
