@@ -49,6 +49,7 @@ ktdi/
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
 │   ├── fun.py         spray, whospray, tdoi, loot, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
+│   ├── committee.py   /committee: the committee's funds (bribes in, spending out)
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── units.py       /abm, /imperial
 │   ├── quotes.py      quotes (prefix group, slash group, right-click form)
@@ -161,6 +162,7 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `don_orders` | times each person sprayed themselves on the Don's orders (`/tdoi`), per (server, person) |
 | `spray_expunges` | sprays each person paid to remove (`/expunge`), per (server, person). Subtracted from sprays on read; sprays are never deleted. |
 | `spray_bails` | sprays removed from someone's record by someone else (`/bail`), per (server, person, payer). Also subtracted on read. |
+| `committee_spending` | what the committee's money was spent on (`/committee spend`): amount, item, who. Money in isn't stored separately: it's the `bribes` totals (bribe, expunge and bail all record a bribe), so the balance is bribes minus spending, both read through `scope()`. |
 
 ### Rules
 

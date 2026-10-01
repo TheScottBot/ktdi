@@ -10,10 +10,10 @@ from ktdi.bot import KTDIBot, describe_options
 from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
-SLASH_COMMANDS = ["abm", "anime", "bail", "blame", "books", "bribe", "campaign", "expunge", "help", "imperial", "linux",
-                  "loot", "quote",
-                  "rapsheet", "settings", "spray", "tdoi", "whospray"]
+SLASH_COMMANDS = ["abm", "anime", "bail", "blame", "books", "bribe", "campaign", "committee", "expunge", "help",
+                  "imperial", "linux", "loot", "quote", "rapsheet", "settings", "spray", "tdoi", "whospray"]
 SUBCOMMANDS = {
+    "committee": ["funds", "ledger", "propose", "spend"],
     "campaign": ["add", "edit", "list", "remind", "remove", "reschedule", "show", "skip", "unremind"],
     "quote": ["add", "claim", "delete", "dissociate", "last", "random", "search", "show"],
     "settings": ["shared_state", "show", "whospray_user"],
