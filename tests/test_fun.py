@@ -121,6 +121,98 @@ def test_whospray_setting_is_per_server():
     assert db.is_shared(111)  # setting it didn't change shared state
 
 
+def test_expunge_removes_a_spray_and_counts_as_a_bribe():
+    for _ in range(3):
+        fun.record_spray(111, DAVE.id)
+    ctx = Ctx(DAVE)
+    run(fun.expunge.callback(ctx, 500))
+    reply = ctx.last
+    assert any(line.format(user="<@2>", amount="$500") in reply.content for line in fun.EXPUNGE_LINES)
+    assert "2 sprays left on their record." in reply.content
+    assert reply.allowed_mentions.users is False  # no pings
+    assert fun.get_spray_count(111, DAVE.id) == 2
+    assert fun.get_bribe_stats(111, DAVE.id) == (1, 500)  # it's a bribe, so it counts toward the crown
+    assert fun.get_top_briber(111) == DAVE.id
+    run(fun.rapsheet.callback(ctx, DAVE))
+    sheet = ctx.last.content
+    assert "Sprayed 2 times." in sheet and "🧽 Paid to have 1 spray expunged." in sheet
+    assert "Bribed the committee 1 time ($500 total)." in sheet
+
+
+def test_expunge_needs_a_spray_to_remove():
+    ctx = Ctx(DAVE)
+    run(fun.expunge.callback(ctx, 100))
+    assert "no sprays on it" in ctx.last.content and ctx.last.private
+    assert fun.get_bribe_stats(111, DAVE.id) == (0, 0)  # nothing charged
+
+
+def test_expunging_everything_then_being_sprayed_again():
+    fun.record_spray(111, DAVE.id)
+    run(fun.expunge.callback(Ctx(DAVE), 10))
+    assert fun.get_spray_count(111, DAVE.id) == 0
+    run(fun.expunge.callback(Ctx(DAVE), 10))  # nothing left to expunge
+    assert fun.get_expunge_count(111, DAVE.id) == 1
+    fun.record_spray(111, DAVE.id)
+    assert fun.get_spray_count(111, DAVE.id) == 1
+
+
+def test_expunge_leaves_the_don_count_alone():
+    from ktdi import db
+    db.set_whospray_user(111, SCOTT.id)
+    run(fun.tdoi.callback(Ctx(DAVE)))
+    run(fun.expunge.callback(Ctx(DAVE), 50))
+    assert fun.get_spray_count(111, DAVE.id) == 0
+    assert fun.get_don_order_count(111, DAVE.id) == 1  # the Don remembers
+
+
+def test_bail_removes_someone_elses_spray_and_counts_as_the_payers_bribe():
+    fun.record_spray(111, DAVE.id)
+    fun.record_spray(111, DAVE.id)
+    ctx = Ctx(SCOTT)
+    run(fun.bail.callback(ctx, DAVE, 300))
+    reply = ctx.last
+    expected = [line.format(payer="<@1>", target="<@2>", amount="$300") for line in fun.BAIL_LINES]
+    assert any(line in reply.content for line in expected)
+    assert "1 spray left on their record." in reply.content and reply.allowed_mentions.users is False
+    assert fun.get_spray_count(111, DAVE.id) == 1
+    assert fun.get_bribe_stats(111, SCOTT.id) == (1, 300)  # the payer's bribe...
+    assert fun.get_bribe_stats(111, DAVE.id) == (0, 0)  # ...not the person bailed out
+    run(fun.rapsheet.callback(ctx, DAVE))
+    assert "🔓 Bailed out of 1 spray by others." in ctx.last.content
+    run(fun.rapsheet.callback(ctx, SCOTT))
+    assert "🤝 Bailed others out 1 time." in ctx.last.content
+
+
+def test_bail_refusals():
+    ctx = Ctx(SCOTT)
+    run(fun.bail.callback(ctx, SCOTT, 10))
+    assert "can't bail yourself" in ctx.last.content and ctx.last.private
+    run(fun.bail.callback(ctx, DAVE, 10))
+    assert "no sprays on their record" in ctx.last.content and ctx.last.private
+    assert fun.get_bribe_stats(111, SCOTT.id) == (0, 0)  # nothing charged
+
+
+def test_expunge_and_bail_together():
+    for _ in range(3):
+        fun.record_spray(111, DAVE.id)
+    run(fun.expunge.callback(Ctx(DAVE), 10))
+    run(fun.bail.callback(Ctx(SCOTT), DAVE, 10))
+    run(fun.bail.callback(Ctx(User(3, "polter")), DAVE, 10))
+    assert fun.get_spray_count(111, DAVE.id) == 0
+    ctx = Ctx(SCOTT)
+    run(fun.bail.callback(ctx, DAVE, 10))  # nothing left
+    assert "no sprays" in ctx.last.content
+
+
+def test_fully_bailed_out_still_shows_a_rap_sheet():
+    fun.record_spray(111, DAVE.id)
+    run(fun.bail.callback(Ctx(SCOTT), DAVE, 10))
+    ctx = Ctx(SCOTT)
+    run(fun.rapsheet.callback(ctx, DAVE))
+    assert "clean record" not in ctx.last.content
+    assert "🔓 Bailed out of 1 spray by others." in ctx.last.content and "Sprayed" not in ctx.last.content
+
+
 def test_bribe_with_nobody_blamed():
     ctx = Ctx(DAVE)
     run(fun.bribe.callback(ctx, 10))

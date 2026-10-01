@@ -48,7 +48,7 @@ ktdi/
 ├── common.py          helpers shared by features (Reply, send_reply/respond, NO_PINGS, get_member, common.bot)
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
-│   ├── fun.py         spray, whospray, tdoi, loot, linux, blame, bribe, rapsheet, 💦 reaction, Champion Briber role
+│   ├── fun.py         spray, whospray, tdoi, loot, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── units.py       /abm, /imperial
 │   ├── quotes.py      quotes (prefix group, slash group, right-click form)
@@ -150,6 +150,8 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `campaign_reminder_subscribers` | who reacted 🔔 to a reminder |
 | `guild_settings` | per-server settings: shared state, and the Don (`whospray_user_id`: who `/whospray` asks and `/tdoi` obeys). Never shared between servers. |
 | `don_orders` | times each person sprayed themselves on the Don's orders (`/tdoi`), per (server, person) |
+| `spray_expunges` | sprays each person paid to remove (`/expunge`), per (server, person). Subtracted from sprays on read; sprays are never deleted. |
+| `spray_bails` | sprays removed from someone's record by someone else (`/bail`), per (server, person, payer). Also subtracted on read. |
 
 ### Rules
 
@@ -158,7 +160,9 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
   record the server the command ran in.
 - **Changes to an existing row target that row's own server**: e.g. editing a campaign uses `campaign.guild_id`, not
   `ctx.guild.id`. Reminders belong to their campaign's server (`get_campaign_exact`), even if set up from another.
-- **Counters are summed on read** (`SUM(count)` across the servers in scope), not stored pooled.
+- **Counters are summed on read** (`SUM(count)` across the servers in scope), not stored pooled. Removals are
+  recorded as their own counter and subtracted (sprays minus expunges minus bails), so nothing is ever deleted from another
+  server's rows.
 - **Upgrades are additive**: add columns with defaults that keep old behaviour (e.g. `lead_minutes DEFAULT 0` kept old
   reminders pinging at their old time). Never drop or rewrite data in an upgrade. `db.init()` must work on any older
   database.

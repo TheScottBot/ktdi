@@ -1,4 +1,5 @@
-"""Spray, whospray, tdoi, loot, linux, blame, bribe and rap sheets, plus the 💦 reaction and the Champion Briber role.
+"""Spray, whospray, tdoi, loot, linux, blame, bribe, expunge, bail and rap sheets, plus the 💦 reaction and the
+Champion Briber role.
 
 "The Don" is the person chosen with /settings whospray_user: /whospray asks them who to spray, and /tdoi
 (The Don Ordered It) is someone spraying themselves on the Don's orders.
@@ -8,6 +9,7 @@ import random
 from collections import defaultdict, deque
 
 import discord
+from discord import app_commands
 from discord.ext import commands
 
 from ktdi import common, config, db
@@ -64,6 +66,20 @@ WHOSPRAY_LINES = [
     "{user}, who's earned a spritz today?",
 ]
 
+EXPUNGE_LINES = [
+    "💰 {user} slipped the committee **{amount}** and one spray quietly disappeared from their record.",
+    "💰 After a generous **{amount}** donation from {user}, the committee has no record of that spray.",
+    "💰 {user} paid **{amount}**. What spray? There was never any spray.",
+    "💰 **{amount}** changes hands. {user}'s rap sheet is now one spray lighter.",
+]
+
+BAIL_LINES = [
+    "🔓 {payer} posted **{amount}** bail. One spray is off {target}'s record.",
+    "🔓 {payer} paid the committee **{amount}** to clear one of {target}'s sprays. Friendship.",
+    "🔓 **{amount}** later, {target} has one less spray, courtesy of {payer}.",
+    "🔓 {payer} thought one of {target}'s sprays was unfair, and put **{amount}** where their mouth is.",
+]
+
 NO_DON = ("There's no Don on this server yet. Only the people listed in the bot's `WHOSPRAY_ADMIN_IDS` "
           "can choose one, with `/settings whospray_user`.")
 
@@ -87,11 +103,52 @@ def record_spray(guild_id: int, user_id: int) -> int:
     return get_spray_count(guild_id, user_id)
 
 
-def get_spray_count(guild_id: int, user_id: int) -> int:
+def _scoped_sum(table: str, guild_id: int, user_id: int, column: str = "user_id") -> int:
     where, params = db.scope(guild_id)
-    row = db.conn.execute(f"SELECT COALESCE(SUM(count), 0) FROM sprays WHERE {where} AND user_id = ?",
+    row = db.conn.execute(f"SELECT COALESCE(SUM(count), 0) FROM {table} WHERE {where} AND {column} = ?",
                           (*params, user_id)).fetchone()
     return row[0]
+
+
+def get_spray_count(guild_id: int, user_id: int) -> int:
+    """Sprays on someone's record: every spray, minus the ones expunged (by them) or bailed (by others)."""
+    removed = get_expunge_count(guild_id, user_id) + get_bails_received(guild_id, user_id)
+    return max(_scoped_sum("sprays", guild_id, user_id) - removed, 0)
+
+
+def record_bail(guild_id: int, user_id: int, paid_by: int) -> None:
+    db.conn.execute(
+        """
+        INSERT INTO spray_bails (guild_id, user_id, paid_by, count) VALUES (?, ?, ?, 1)
+        ON CONFLICT (guild_id, user_id, paid_by) DO UPDATE SET count = count + 1
+        """,
+        (guild_id, user_id, paid_by),
+    )
+    db.conn.commit()
+
+
+def get_bails_received(guild_id: int, user_id: int) -> int:
+    return _scoped_sum("spray_bails", guild_id, user_id)
+
+
+def get_bails_given(guild_id: int, user_id: int) -> int:
+    return _scoped_sum("spray_bails", guild_id, user_id, column="paid_by")
+
+
+def record_expunge(guild_id: int, user_id: int) -> None:
+    # Recorded, not deleted: the sprays stay where they were, and the rap sheet shows the net total.
+    db.conn.execute(
+        """
+        INSERT INTO spray_expunges (guild_id, user_id, count) VALUES (?, ?, 1)
+        ON CONFLICT (guild_id, user_id) DO UPDATE SET count = count + 1
+        """,
+        (guild_id, user_id),
+    )
+    db.conn.commit()
+
+
+def get_expunge_count(guild_id: int, user_id: int) -> int:
+    return _scoped_sum("spray_expunges", guild_id, user_id)
 
 
 def record_don_order(guild_id: int, user_id: int) -> int:
@@ -107,10 +164,7 @@ def record_don_order(guild_id: int, user_id: int) -> int:
 
 
 def get_don_order_count(guild_id: int, user_id: int) -> int:
-    where, params = db.scope(guild_id)
-    row = db.conn.execute(f"SELECT COALESCE(SUM(count), 0) FROM don_orders WHERE {where} AND user_id = ?",
-                          (*params, user_id)).fetchone()
-    return row[0]
+    return _scoped_sum("don_orders", guild_id, user_id)
 
 
 def record_bribe(guild_id: int, user_id: int, amount: int) -> None:
@@ -218,18 +272,24 @@ async def loot(ctx: commands.Context):
     await ctx.send(LOOT_GIF_URL)
 
 
-@commands.hybrid_command(name="rapsheet", description="See someone's sprays and bribes.")
+@commands.hybrid_command(name="rapsheet", description="See someone's sprays, bribes, expunges and bails.")
 @commands.guild_only()
 async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     user = user or ctx.author
     sprays = get_spray_count(ctx.guild.id, user.id)
     bribes, bribe_total = get_bribe_stats(ctx.guild.id, user.id)
-    if sprays == 0 and bribes == 0:
-        await ctx.send(f"📋 {user.display_name} has a clean record. Suspicious.")
-        return
-    lines = [f"📋 **Rap sheet: {user.display_name}**"]
+    lines = []
     if sprays:
         lines.append(f"Sprayed {plural(sprays, 'time')}.")
+    expunged = get_expunge_count(ctx.guild.id, user.id)
+    if expunged:
+        lines.append(f"🧽 Paid to have {plural(expunged, 'spray')} expunged.")
+    bailed = get_bails_received(ctx.guild.id, user.id)
+    if bailed:
+        lines.append(f"🔓 Bailed out of {plural(bailed, 'spray')} by others.")
+    bails_given = get_bails_given(ctx.guild.id, user.id)
+    if bails_given:
+        lines.append(f"🤝 Bailed others out {plural(bails_given, 'time')}.")
     don_orders = get_don_order_count(ctx.guild.id, user.id)
     if don_orders:
         lines.append(f"🤌 Sprayed themselves on the Don's orders {plural(don_orders, 'time')}.")
@@ -237,7 +297,10 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
         lines.append(f"Bribed the committee {plural(bribes, 'time')} (${bribe_total:,} total).")
         if get_top_briber(ctx.guild.id) == user.id:
             lines.append("👑 Biggest briber" + (" across the shared servers." if db.is_shared(ctx.guild.id) else " in the server."))
-    await ctx.send("\n".join(lines))
+    if not lines:
+        await ctx.send(f"📋 {user.display_name} has a clean record. Suspicious.")
+        return
+    await ctx.send("\n".join([f"📋 **Rap sheet: {user.display_name}**", *lines]))
 
 
 @commands.hybrid_command(name="blame", description="Blame someone who's been talking recently.")
@@ -277,6 +340,42 @@ async def bribe(ctx: commands.Context, amount: commands.Range[int, 1, 1_000_000_
     await update_briber_role(ctx.guild)
 
 
+@commands.hybrid_command(name="expunge", description="Pay the committee to remove a spray from your own rap sheet.")
+@commands.guild_only()
+async def expunge(ctx: commands.Context, amount: commands.Range[int, 1, 1_000_000_000_000]):
+    if get_spray_count(ctx.guild.id, ctx.author.id) == 0:
+        await ctx.send("Your record has no sprays on it. Keep your money.", ephemeral=True)
+        return
+    record_expunge(ctx.guild.id, ctx.author.id)
+    record_bribe(ctx.guild.id, ctx.author.id, amount)  # Paying off the committee is still a bribe.
+    left = get_spray_count(ctx.guild.id, ctx.author.id)
+    log.info("[%s] %s paid $%s to expunge a spray", ctx.guild.name, ctx.author, f"{amount:,}")
+    line = random.choice(EXPUNGE_LINES).format(user=ctx.author.mention, amount=f"${amount:,}")
+    await ctx.send(f"{line}\n-# {plural(left, 'spray')} left on their record.",
+                   allowed_mentions=discord.AllowedMentions.none())
+    await update_briber_role(ctx.guild)
+
+
+@commands.hybrid_command(name="bail", description="Pay the committee to remove a spray from someone else's rap sheet.")
+@commands.guild_only()
+@app_commands.describe(user="Whose spray to remove", amount="How much bail to post")
+async def bail(ctx: commands.Context, user: discord.Member, amount: commands.Range[int, 1, 1_000_000_000_000]):
+    if user.id == ctx.author.id:
+        await ctx.send("You can't bail yourself out. Use `/expunge` for your own record.", ephemeral=True)
+        return
+    if get_spray_count(ctx.guild.id, user.id) == 0:
+        await ctx.send(f"{user.display_name} has no sprays on their record to bail them out of.", ephemeral=True)
+        return
+    record_bail(ctx.guild.id, user.id, ctx.author.id)
+    record_bribe(ctx.guild.id, ctx.author.id, amount)  # Paying off the committee is still a bribe, by whoever paid.
+    left = get_spray_count(ctx.guild.id, user.id)
+    log.info("[%s] %s paid $%s bail for user %s", ctx.guild.name, ctx.author, f"{amount:,}", user.id)
+    line = random.choice(BAIL_LINES).format(payer=ctx.author.mention, target=user.mention, amount=f"${amount:,}")
+    await ctx.send(f"{line}\n-# {plural(left, 'spray')} left on their record.",
+                   allowed_mentions=discord.AllowedMentions.none())
+    await update_briber_role(ctx.guild)
+
+
 @commands.hybrid_command(name="linux", description="Ask our resident Linux hater how he's feeling about Linux.")
 async def linux(ctx: commands.Context):
     await ctx.send(random.choice(LINUX_LINES).format(user=f"<@{config.LINUX_HATER_ID}>"))
@@ -313,7 +412,7 @@ def main_help_fields() -> list[tuple[str, str]]:
 
 
 async def setup(bot: commands.Bot):
-    for command in (spray, whospray, tdoi, loot, rapsheet, blame, bribe, linux):
+    for command in (spray, whospray, tdoi, loot, rapsheet, blame, bribe, expunge, bail, linux):
         bot.add_command(command)
     bot.add_listener(remember_speaker, "on_message")
     bot.add_listener(spray_reaction, "on_raw_reaction_add")
