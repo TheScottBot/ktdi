@@ -105,6 +105,16 @@ SCHEMA = [
         PRIMARY KEY (guild_id, user_id, paid_by)
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS committee_spending (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id   INTEGER NOT NULL,
+        amount     INTEGER NOT NULL,  -- dollars out; money in is the bribes table
+        item       TEXT NOT NULL,     -- what it was spent on
+        spent_by   INTEGER NOT NULL,
+        created_at TEXT NOT NULL      -- ISO 8601, UTC
+    )
+    """,
 ]
 
 

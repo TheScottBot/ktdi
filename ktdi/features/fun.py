@@ -14,6 +14,7 @@ from discord.ext import commands
 
 from ktdi import common, config, db
 from ktdi.common import get_member, log, plural
+from ktdi.features import committee
 
 SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
@@ -300,6 +301,9 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
         lines.append(f"Bribed the committee {plural(bribes, 'time')} (${bribe_total:,} total).")
         if get_top_briber(ctx.guild.id) == user.id:
             lines.append("👑 Biggest briber" + (" across the shared servers." if db.is_shared(ctx.guild.id) else " in the server."))
+    spent = committee.total_spent(ctx.guild.id, user.id)
+    if spent:
+        lines.append(f"🧾 Spent {committee.money(spent)} of the committee's funds.")
     if not lines:
         await ctx.send(f"📋 {user.display_name} has a clean record. Suspicious.")
         return

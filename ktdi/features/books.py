@@ -13,7 +13,7 @@ from ktdi.common import log
 from ktdi.lib import library
 
 HELP_CATEGORY = "🔧 Utilities"
-DM_FILE_SIZE_LIMIT =10 * 1024 * 1024  # Discord's upload limit outside boosted servers.
+DM_FILE_SIZE_LIMIT = 10 * 1024 * 1024  # Discord's upload limit outside boosted servers.
 SEARCH_RESULTS_SHOWN = 15
 
 calibre = (
