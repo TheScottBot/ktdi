@@ -12,6 +12,7 @@ from discord.ext import commands
 from ktdi import config, db
 from ktdi.common import NO_PINGS, Reply, log, respond, send_reply
 
+HELP_CATEGORY = "💬 Quotes"
 ANONYMOUS = 0  # user_id for quotes that aren't credited to anyone.
 QUOTE_MAX_LENGTH = 1000
 QUOTE_CONTEXT_MAX_LENGTH = 200

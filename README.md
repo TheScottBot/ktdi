@@ -24,7 +24,7 @@ A tiny Discord bot for keeping your friends in line. Commands work as slash comm
 | `campaign skip <alias>` / `campaign reschedule <alias> <change>` | For when things change. `skip` skips the next session (fortnightly games shift a week and carry on from there). `reschedule` takes a new warning (`30 minutes before`), `next 26 oct` (the next session's date) or a whole new schedule. All keep everyone's 🔔. |
 | `books search <query>` / `books download <ID or title>` | Search a Calibre-Web library and download a book (optional; see below). |
 | `settings show` / `settings shared_state <true/false>` / `settings whospray_user [@user]` | Per-server settings, stored in the database. **Shared state** (on by default, needs Manage Server to change) pools quotes, sprays, bribes and campaigns with every other server that has it on; off keeps them local to that server, and switching loses nothing. **whospray_user** chooses the Don, who `/whospray` asks and `/tdoi` obeys (leave it empty to clear); only the user IDs in `WHOSPRAY_ADMIN_IDS` in `.env` can change it, not even server admins. |
-| `help [command]` | Lists all commands, or details for one (e.g. `/help abm` lists every unit it understands). |
+| `help [command]` | Lists all commands, grouped by category (Rap sheet, Fun, Measurements, Quotes, Campaigns, Utilities), or details for one (e.g. `/help abm` lists every unit it understands). If the list ever outgrows one message it gets ◀ / ▶ page buttons. |
 
 Reacting 💦 to any message also sprays the person who sent it and adds to their rap sheet.
 
@@ -102,13 +102,14 @@ ktdi/
 │   ├── campaigns.py   # campaigns and reminders
 │   ├── settings.py
 │   ├── books.py
-│   └── help.py        # asks each feature for its help_extras(), so new features don't touch it
+│   └── help.py        # asks each feature for its HELP_CATEGORY and help_extras(), so new features don't touch it
 └── lib/               # no Discord code: unit conversions, reminder schedules, Calibre-Web client
 tests/                 # pytest
 ```
 
 To add a feature: create `ktdi/features/<name>.py` with its commands and an `async def setup(bot)` that registers
-them, add it to `FEATURES` in `ktdi/features/__init__.py`, and optionally a `help_extras(command)` for `/help`.
+them, add it to `FEATURES` in `ktdi/features/__init__.py`, set `HELP_CATEGORY` (where it sits on the `/help` list), and
+optionally a `help_extras(command)` for `/help <command>`.
 
 ## Tests
 

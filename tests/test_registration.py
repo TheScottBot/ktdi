@@ -83,10 +83,80 @@ def test_help_details(loaded_bot):
 def test_main_help_list(loaded_bot):
     ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
     asyncio.run(help_feature.help_command.callback(ctx))
-    names = [f.name for f in ctx.last.embed.fields]
-    assert "/quote add | claim | delete | dissociate | last | random | search | show" in names
-    assert "React 💦" in names
-    assert not any(n.startswith("/books") for n in names)  # library not set up here
+    embed = ctx.last.embed
+    assert ctx.last.view is None  # fits on one page, so no buttons
+    assert [f.name for f in embed.fields] == [
+        "💦 Rap sheet", "🎲 Fun", "📏 Measurements", "💬 Quotes", "🗓️ Campaigns", "🔧 Utilities"]
+    fields = {f.name: f.value for f in embed.fields}
+    assert "`/quote add | claim | delete | dissociate | last | random | search | show`: " in fields["💬 Quotes"]
+    assert "`/bail <user> <amount>`: " in fields["💦 Rap sheet"] and "React 💦: " in fields["💦 Rap sheet"]
+    assert "`/loot`: " in fields["🎲 Fun"] and "`/anime`: " in fields["🎲 Fun"]
+    assert "/books" not in ctx.last.text  # library not set up here
+
+
+def test_every_command_has_a_category_and_is_listed(loaded_bot, monkeypatch):
+    monkeypatch.setattr(help_feature, "can_use", lambda command, ctx: True)  # include /books
+    for command in loaded_bot.commands:
+        assert help_feature.command_category(command) in help_feature.CATEGORY_ORDER, command.name
+    ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
+    text = "\n".join(f.value for page in help_feature.main_help_pages(ctx) for f in page.fields)
+    for name in SLASH_COMMANDS:
+        assert f"`/{name}" in text, name
+
+
+def assert_fits(embed):
+    assert len(embed) <= help_feature.EMBED_TOTAL_LIMIT
+    assert len(embed.fields) <= help_feature.EMBED_FIELD_COUNT_LIMIT
+    assert all(len(f.value) <= help_feature.EMBED_FIELD_LIMIT for f in embed.fields)
+
+
+def test_main_help_list_fits_discord(loaded_bot, monkeypatch):
+    monkeypatch.setattr(help_feature, "can_use", lambda command, ctx: True)
+    pages = help_feature.main_help_pages(Ctx(User(1, "scott"), Guild(111), bot=loaded_bot))
+    assert len(pages) == 1
+    assert_fits(pages[0])
+
+
+def test_long_categories_continue_in_another_field():
+    lines = {"🎲 Fun": [f"`/cmd{i}`: " + "x" * 90 for i in range(30)], "💬 Quotes": ["`/quote`: q"]}
+    fields = help_feature.category_fields(lines)
+    assert [name for name, _ in fields] == ["🎲 Fun", "🎲 Fun (cont.)", "🎲 Fun (cont.)", "💬 Quotes"]
+    assert all(len(value) <= help_feature.EMBED_FIELD_LIMIT for _, value in fields)
+    assert "\n".join(value for _, value in fields[:3]).count("`/cmd") == 30  # nothing lost
+
+
+def test_pagination_when_it_no_longer_fits():
+    fields = [(f"Category {i}", "y" * 1000) for i in range(40)]
+    pages = help_feature.paginate("Title", "Description", "Footer.", fields)
+    assert len(pages) > 1
+    for number, page in enumerate(pages, 1):
+        assert_fits(page)
+        assert page.footer.text == f"Page {number} of {len(pages)}. Footer."
+    assert sum(len(page.fields) for page in pages) == 40  # nothing dropped
+    many_small = help_feature.paginate("T", "D", "F", [(f"C{i}", "z") for i in range(60)])
+    assert [len(page.fields) for page in many_small] == [25, 25, 10]
+
+
+def test_help_buttons_flip_pages(loaded_bot, monkeypatch):
+    from tests.fakes import Interaction
+    monkeypatch.setattr(help_feature, "EMBED_FIELD_COUNT_LIMIT", 2)  # force several pages
+    scott = User(1, "scott")
+    ctx = Ctx(scott, Guild(111), bot=loaded_bot)
+
+    async def go():
+        await help_feature.help_command.callback(ctx)
+        view = ctx.last.view
+        assert isinstance(view, help_feature.HelpPages) and len(view.pages) == 3
+        assert view.previous_page.disabled and not view.next_page.disabled
+        interaction = Interaction(scott)
+        await view.next_page.callback(interaction)
+        assert view.page == 1 and interaction.last.embed is view.pages[1]
+        stranger = Interaction(User(2, "dave"))
+        assert not await view.interaction_check(stranger)
+        assert "Run your own `/help`" in stranger.last.content
+        await view.next_page.callback(interaction)
+        assert view.next_page.disabled
+    asyncio.run(go())
 
 
 def test_help_unknown_command(loaded_bot):
