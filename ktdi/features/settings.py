@@ -7,7 +7,8 @@ from discord.ext import commands
 from ktdi import common, config, db
 from ktdi.common import NO_PINGS, log
 
-SHARED_THINGS = "quotes, sprays, bribes and campaigns"
+HELP_CATEGORY = "🔧 Utilities"
+SHARED_THINGS ="quotes, sprays, bribes and campaigns"
 
 
 def shared_state_text(guild: discord.Guild) -> str:

@@ -122,7 +122,11 @@ changing:
 
 - `help_extras(command) -> (extra description, [(field name, text, inline), ...])`: detail for `/help <command>`
   and `/help <group> <subcommand>`. Return `("", [])` for commands that aren't yours.
-- `main_help_fields() -> [(name, text)]`: extra lines on the main list for things that aren't commands (e.g. 💦).
+- `HELP_CATEGORY = "🎲 Fun"`: where the feature's commands sit on the main `/help` list. One command can differ with
+  `extras={"category": ...}` (`/loot` and `/linux` are 🎲 Fun, the rest of `fun.py` is 💦 Rap sheet). Categories are
+  shown in `help.CATEGORY_ORDER`, and a new one goes after those; a command with no category lands in 🧩 Other, which
+  a test refuses.
+- `main_help_lines() -> [(category, line)]`: extra lines on the main list for things that aren't commands (e.g. 💦).
 - Command `extras`:
   - `"prefix_only": True` → shown as `!quote anon`, left out of the `/…` summary.
   - `"available": fn(guild) -> bool` → hidden from `/help` where it can't be used (`/books`).
@@ -133,6 +137,11 @@ changing:
 **Discord limits** (Discord rejects the *whole* message if exceeded): embed field value 1024 characters, embed total
 6000, 25 fields. `help.add_help_field()` / `fit_embed()` trim and log instead of failing, and
 `tests/test_registration.py` checks every help page. Split long help into several topic fields, as campaigns does.
+
+The main list is one field per category, one line per command. A category over 1024 characters carries on in a
+"(cont.)" field, and if the fields outgrow one embed, `help.paginate()` spreads them over pages with ◀ / ▶ buttons
+(`HelpPages`, only the person who asked can flip them). Today it's one page (6 fields, ~1,700 characters), so the
+buttons don't appear; tests force pagination to keep that path working.
 
 ## 7. Data
 
@@ -250,7 +259,7 @@ python -m pytest            # ~3 seconds
   Call commands directly: `run(feature.command.callback(ctx, ...))`; check `ctx.last.content`, `.embed`, `.private`.
 - Freeze time with the `clock` fixture: `clock.set(datetime(...), campaigns)` patches that module's `datetime.now()`.
 - `test_registration.py` loads every feature onto a real `KTDIBot` and checks the command list, listeners and that
-  every `/help` page fits Discord's limits. Update its expected lists when you add commands.
+  every `/help` page, including the main list, fits Discord's limits. Update its expected lists when you add commands.
 - `test_books.py` runs a fake Calibre-Web with aiohttp.
 
 ## Rules for changes
@@ -259,7 +268,7 @@ python -m pytest            # ~3 seconds
 2. **New feature** → new `ktdi/features/<name>.py` with `setup(bot)`, add it to `FEATURES`, optionally `help_extras`.
    New settings go in `config.py` and `.env.example`.
 3. **Help and README stay accurate.** Command descriptions appear in `/help` automatically; anything that isn't a
-   command (reactions, extra tips) needs `help_extras` / `main_help_fields`. Update the README command table.
+   command (reactions, extra tips) needs `help_extras` / `main_help_lines`. Give new features a `HELP_CATEGORY`. Update the README command table.
 4. **Data:** reads through `db.scope()`, writes record the current server, edits target the row's own server,
    schema changes are additive upgrades in `db._upgrade()`.
 5. **Privacy:** nothing about `/books` use may be logged against a person. Don't add logging that reveals what a

@@ -9,6 +9,8 @@ from ktdi import config
 from ktdi.common import log
 from ktdi.lib import anilist
 
+HELP_CATEGORY = "🎲 Fun"
+
 ANIME_LINES = [
     "{user}, what are your thoughts on {anime}?",
     "{user}, quick one: {anime}. Good or overrated?",

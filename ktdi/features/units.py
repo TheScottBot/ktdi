@@ -4,6 +4,8 @@ from discord.ext import commands
 
 from ktdi.lib import abm
 
+HELP_CATEGORY = "📏 Measurements"
+
 
 @commands.hybrid_command(name="abm", description="Anything But Metric: convert a measurement into something absurd.")
 async def abm_command(ctx: commands.Context, *, measurement: str):

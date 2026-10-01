@@ -19,6 +19,9 @@ SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
 LOOT_GIF_URL = "https://klipy.com/gifs/perception-check-tom-cardy"
 
+HELP_CATEGORY = "💦 Rap sheet"  # loot and linux say otherwise.
+FUN = {"category": "🎲 Fun"}
+
 BLAME_LINES = [
     "This is {user}'s fault.",
     "After a thorough investigation, the committee blames {user}.",
@@ -267,7 +270,7 @@ async def tdoi(ctx: commands.Context):
                    allowed_mentions=discord.AllowedMentions.none())
 
 
-@commands.hybrid_command(name="loot", description="Declare that you're looting the body.")
+@commands.hybrid_command(name="loot", description="Declare that you're looting the body.", extras=FUN)
 async def loot(ctx: commands.Context):
     await ctx.send(LOOT_GIF_URL)
 
@@ -376,7 +379,8 @@ async def bail(ctx: commands.Context, user: discord.Member, amount: commands.Ran
     await update_briber_role(ctx.guild)
 
 
-@commands.hybrid_command(name="linux", description="Ask our resident Linux hater how he's feeling about Linux.")
+@commands.hybrid_command(name="linux", description="Ask our resident Linux hater how he's feeling about Linux.",
+                         extras=FUN)
 async def linux(ctx: commands.Context):
     await ctx.send(random.choice(LINUX_LINES).format(user=f"<@{config.LINUX_HATER_ID}>"))
 
@@ -406,9 +410,9 @@ async def spray_reaction(payload: discord.RawReactionActionEvent):
     await channel.send(f"{target}{SPRAY_GIF_URL}")
 
 
-def main_help_fields() -> list[tuple[str, str]]:
-    """Extra lines for the main /help list, for things that aren't commands."""
-    return [(f"React {SPRAY_EMOJI}", "Sprays whoever sent the message and adds to their rap sheet.")]
+def main_help_lines() -> list[tuple[str, str]]:
+    """Extra (category, line)s for the main /help list, for things that aren't commands."""
+    return [(HELP_CATEGORY, f"React {SPRAY_EMOJI}: sprays whoever sent the message and adds to their rap sheet.")]
 
 
 async def setup(bot: commands.Bot):

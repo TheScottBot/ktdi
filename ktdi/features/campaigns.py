@@ -13,6 +13,7 @@ from ktdi import common, config, db
 from ktdi.common import NO_PINGS, log
 from ktdi.lib import reminders
 
+HELP_CATEGORY = "🗓️ Campaigns"
 CAMPAIGN_ALIAS_MAX = 50
 # Can't be aliases, or !campaign <alias> would clash.
 CAMPAIGN_SUBCOMMANDS = {"add", "edit", "list", "remove", "show", "remind", "unremind", "reschedule", "skip"}
