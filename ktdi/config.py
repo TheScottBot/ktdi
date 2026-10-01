@@ -58,5 +58,7 @@ except (ZoneInfoNotFoundError, ValueError):
 BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")
 # Who may choose the Don (/settings whospray_user). Nobody else can, not even server admins. Empty = nobody.
 WHOSPRAY_ADMIN_IDS = parse_ids("WHOSPRAY_ADMIN_IDS")
+# Who /anime asks about a random anime (a user ID). Unset = /anime says it isn't set up.
+ANIME_USER_ID = next(iter(parse_ids("ANIME_USER_ID")), None)
 # The /linux target (@poltergeis.t).
 LINUX_HATER_ID = os.getenv("LINUX_HATER_ID") or "351350774435151873"
