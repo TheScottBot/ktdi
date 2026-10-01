@@ -88,6 +88,23 @@ SCHEMA = [
         PRIMARY KEY (guild_id, user_id)
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS spray_expunges (
+        guild_id INTEGER NOT NULL,
+        user_id  INTEGER NOT NULL,
+        count    INTEGER NOT NULL DEFAULT 0,  -- sprays bribed off their record (/expunge); subtracted from sprays
+        PRIMARY KEY (guild_id, user_id)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS spray_bails (
+        guild_id INTEGER NOT NULL,
+        user_id  INTEGER NOT NULL,  -- whose spray was removed
+        paid_by  INTEGER NOT NULL,  -- who paid (/bail)
+        count    INTEGER NOT NULL DEFAULT 0,  -- subtracted from user_id's sprays
+        PRIMARY KEY (guild_id, user_id, paid_by)
+    )
+    """,
 ]
 
 

@@ -106,6 +106,25 @@ def test_empty_allowlist_means_nobody_can_choose_the_don(monkeypatch):
         run(settings.settings_whospray_user.checks[0](Ctx(ADMIN, A)))
 
 
+def test_expunges_follow_shared_state():
+    fun.record_spray(A.id, DAVE.id)
+    fun.record_spray(B.id, DAVE.id)
+    run(fun.expunge.callback(Ctx(DAVE, A), 10))  # expunged while on A
+    assert fun.get_spray_count(A.id, DAVE.id) == 1 and fun.get_spray_count(B.id, DAVE.id) == 1
+    db.set_shared(B.id, False)  # B goes it alone: A's expunge doesn't apply there
+    assert fun.get_spray_count(B.id, DAVE.id) == 1 and fun.get_spray_count(A.id, DAVE.id) == 0
+
+
+def test_bails_follow_shared_state():
+    fun.record_spray(A.id, DAVE.id)
+    fun.record_spray(B.id, DAVE.id)
+    run(fun.bail.callback(Ctx(SCOTT, B), DAVE, 10))  # bailed out while on B
+    assert fun.get_spray_count(A.id, DAVE.id) == 1 and fun.get_bails_given(A.id, SCOTT.id) == 1
+    db.set_shared(B.id, False)  # A no longer sees B's bail
+    assert fun.get_spray_count(A.id, DAVE.id) == 1 and fun.get_bails_given(A.id, SCOTT.id) == 0
+    assert fun.get_spray_count(B.id, DAVE.id) == 0
+
+
 def test_don_orders_follow_shared_state():
     fun.record_don_order(A.id, DAVE.id)
     fun.record_don_order(B.id, DAVE.id)
