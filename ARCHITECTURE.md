@@ -51,7 +51,9 @@ ktdi/
 │   ├── fun.py         spray, whospray, tdoi, loot, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
 │   ├── committee.py   /committee: the committee's funds (bribes in, spending out)
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
+│   ├── movie.py       movie night: /np, /shhh, /rate, /predict, /bingo (✅/❌ judging listener)
 │   ├── units.py       /abm, /imperial
+│   ├── timezones.py   /timezone (convert, set, show, clear); parsing lives in lib/timezones.py
 │   ├── quotes.py      quotes (prefix group, slash group, right-click form)
 │   ├── campaigns.py   campaigns, reminders, the reminder loop
 │   ├── settings.py    /settings (shared state, whospray user)
@@ -113,8 +115,9 @@ Extensions were chosen over Cog classes so commands stay plain functions that te
 
 ### In-memory state (lost on restart, by design)
 
-`fun.recent_speakers` and `fun.last_blame` (blame and bribe work per channel and are meant to be ephemeral) and
-`books.recent_books` (a cache so `/books download <id>` knows formats and sizes).
+`fun.recent_speakers` and `fun.last_blame` (blame and bribe work per channel and are meant to be ephemeral), and
+`books.recent_books` (a cache so `/books download <id>` knows
+formats and sizes).
 
 ## 6. /help
 
@@ -162,11 +165,18 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `don_orders` | times each person sprayed themselves on the Don's orders (`/tdoi`), per (server, person) |
 | `spray_expunges` | sprays each person paid to remove (`/expunge`), per (server, person). Subtracted from sprays on read; sprays are never deleted. |
 | `spray_bails` | sprays removed from someone's record by someone else (`/bail`), per (server, person, payer). Also subtracted on read. |
+| `movies` | one row per **watch** of a film: title (and `title_key`, casefolded, to match rewatches), who set it, started/paused/ended times, seconds paused, `watch_number` (fixed at `/np start`, counting earlier watches through `scope()`), and `archived_at` for the watchlist. A server's current film is its row that's neither ended nor archived; that and the watchlist are per server, never shared. `/np history` and `/np predictions` read through `scope()`. Nothing is deleted: a film swapped or ended before it starts is archived, predictions and all, and `/np set` of the same title restores it. |
+| `movie_ratings` | `/rate` scores, per (movie, person) |
+| `movie_predictions` / `movie_prediction_votes` | sealed `/predict`ions, each tied to its film by `movie_id`. `message_id` is set when `/np end` reveals them, and ✅/❌ reactions on that message are the votes (called it if ✅ > ❌). Only revealed ones are ever shown (`/np predictions`, rap sheets); archived films keep theirs, still sealed. |
+| `movie_bingo_marks` / `movie_bingo_wins` | squares marked and wins. Cards aren't stored: `movie.bingo_card()` shuffles the squares with a seed of (movie, person). |
+| `user_timezones` | each person's own timezone (`/timezone set`), per person, not per server: an IANA name or a fixed offset like `UTC+5:30`. Logged as "set their timezone", never which one. |
 | `committee_spending` | what the committee's money was spent on (`/committee spend`): amount, item, who. Money in isn't stored separately: it's the `bribes` totals (bribe, expunge and bail all record a bribe), so the balance is bribes minus spending, both read through `scope()`. |
 
 ### Rules
 
-- **Every row records the server it came from (`guild_id`).** Never move or copy rows between servers.
+- **Every row records the server it came from (`guild_id`).** Never move or copy rows between servers. The one
+  exception is `user_timezones`: a person's timezone is about them, not a server, so it has no `guild_id` and
+  follows them everywhere (and only exists if they set it).
 - **Reads go through `db.scope(guild_id)`**, which returns a `WHERE` condition + parameters (see §8). Writes always
   record the server the command ran in.
 - **Changes to an existing row target that row's own server**: e.g. editing a campaign uses `campaign.guild_id`, not
@@ -216,7 +226,8 @@ Everything logs through `logging.getLogger("ktdi")` (`common.log`) to the file a
 
 - **The time in a schedule is when the game starts.** `lead_minutes` is the optional warning; the ping goes at
   start − lead. `Reminder.next_run_at` is the ping; `next_game_at` is the session it's for.
-- Times are in `config.REMINDER_TIMEZONE` (default Europe/London). Always build local times with `zoneinfo` so summer
+- Times are in `config.REMINDER_TIMEZONE` (defaults to `config.BOT_TIMEZONE`, the bot's own timezone, which defaults
+  to Europe/London and is also `/timezone convert`'s fallback). Always build local times with `zoneinfo` so summer
   time is handled; store UTC ISO strings.
 - **Fortnightly** schedules have an `anchor` date: its week is an "on" week. `from <date>` sets it; `skip` on a
   fortnightly game moves the whole cadence a week (the anchor moves); `reschedule next <date>` re-anchors.

@@ -10,10 +10,15 @@ from ktdi.bot import KTDIBot, describe_options
 from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
-SLASH_COMMANDS = ["abm", "anime", "bail", "blame", "books", "bribe", "campaign", "committee", "expunge", "help",
-                  "imperial", "linux", "loot", "quote", "rapsheet", "settings", "spray", "tdoi", "whospray"]
+SLASH_COMMANDS = ["abm", "anime", "bail", "bingo", "blame", "books", "bribe", "campaign", "committee", "expunge",
+                  "help", "imperial", "linux", "loot", "np", "predict", "quote", "rapsheet", "rate", "settings", "shhh",
+                  "spray", "tdoi", "timezone", "whospray"]
 SUBCOMMANDS = {
     "committee": ["funds", "ledger", "propose", "spend"],
+    "np": ["countdown", "elapsed", "end", "history", "pause", "predictions", "resume", "set", "show", "start",
+           "watchlist"],
+    "bingo": ["card", "mark", "unmark"],
+    "timezone": ["clear", "convert", "set", "show"],
     "campaign": ["add", "edit", "list", "remind", "remove", "reschedule", "show", "skip", "unremind"],
     "quote": ["add", "claim", "delete", "dissociate", "last", "random", "search", "show"],
     "settings": ["shared_state", "show", "whospray_user"],
@@ -48,8 +53,8 @@ def test_prefix_commands(loaded_bot):
 def test_listeners(loaded_bot):
     assert {name: sorted(f.__name__ for f in funcs) for name, funcs in loaded_bot.extra_events.items()} == {
         "on_message": ["remember_speaker"],
-        "on_raw_reaction_add": ["reminder_subscribe", "spray_reaction"],
-        "on_raw_reaction_remove": ["reminder_unsubscribe"],
+        "on_raw_reaction_add": ["prediction_vote", "reminder_subscribe", "spray_reaction"],
+        "on_raw_reaction_remove": ["prediction_unvote", "reminder_unsubscribe"],
     }
 
 
@@ -86,7 +91,8 @@ def test_main_help_list(loaded_bot):
     embed = ctx.last.embed
     assert ctx.last.view is None  # fits on one page, so no buttons
     assert [f.name for f in embed.fields] == [
-        "💦 Rap sheet", "🎲 Fun", "📏 Measurements", "💬 Quotes", "🗓️ Campaigns", "🔧 Utilities"]
+        "💦 Rap sheet", "🎲 Fun", "🎬 Movie night", "📏 Measurements", "💬 Quotes", "🗓️ Campaigns",
+        "🔧 Utilities"]
     fields = {f.name: f.value for f in embed.fields}
     assert "`/quote add | claim | delete | dissociate | last | random | search | show`: " in fields["💬 Quotes"]
     assert "`/bail <user> <amount>`: " in fields["💦 Rap sheet"] and "React 💦: " in fields["💦 Rap sheet"]
@@ -146,7 +152,8 @@ def test_help_buttons_flip_pages(loaded_bot, monkeypatch):
     async def go():
         await help_feature.help_command.callback(ctx)
         view = ctx.last.view
-        assert isinstance(view, help_feature.HelpPages) and len(view.pages) == 3
+        assert isinstance(view, help_feature.HelpPages)
+        assert len(view.pages) == -(-len(help_feature.CATEGORY_ORDER) // 2)  # two categories a page, rounded up
         assert view.previous_page.disabled and not view.next_page.disabled
         interaction = Interaction(scott)
         await view.next_page.callback(interaction)
@@ -154,8 +161,9 @@ def test_help_buttons_flip_pages(loaded_bot, monkeypatch):
         stranger = Interaction(User(2, "dave"))
         assert not await view.interaction_check(stranger)
         assert "Run your own `/help`" in stranger.last.content
-        await view.next_page.callback(interaction)
-        assert view.next_page.disabled
+        for _ in view.pages:
+            await view.next_page.callback(interaction)
+        assert view.page == len(view.pages) - 1 and view.next_page.disabled  # stops at the last page
     asyncio.run(go())
 
 

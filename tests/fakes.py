@@ -42,6 +42,8 @@ class Sent:
         self.private, self.allowed_mentions = private, allowed_mentions
         self.id = id(self)
         self.reactions: list = []
+        self.edits: list[str] = []  # each content it was edited to, in order
+        self.original = content
 
     @property
     def text(self) -> str:
@@ -57,7 +59,9 @@ class Sent:
         self.reactions.append(emoji)
 
     async def edit(self, **kwargs):
-        pass
+        if "content" in kwargs:
+            self.content = kwargs["content"]
+            self.edits.append(kwargs["content"])
 
 
 class Channel:
@@ -100,7 +104,12 @@ class Ctx:
         if reply_to:
             self.channel.messages[reply_to.id] = reply_to
         reference = types.SimpleNamespace(message_id=reply_to.id, resolved=None) if reply_to else None
-        self.message = types.SimpleNamespace(content=content, reference=reference, mentions=list(mentions))
+        self.message = types.SimpleNamespace(content=content, reference=reference, mentions=list(mentions),
+                                             deleted=False)
+
+        async def delete():
+            self.message.deleted = True
+        self.message.delete = delete
         self.sent: list[Sent] = []
 
     async def send(self, content=None, embed=None, view=None, file=None, ephemeral=False, allowed_mentions=None, **kwargs):
@@ -151,6 +160,10 @@ class FakeBot:
         self.channels: dict[int, Channel] = {}
         self.guilds: list[Guild] = []
         self.commands = []
+        self.activity = None
+
+    async def change_presence(self, activity=None):
+        self.activity = activity
 
     def get_channel(self, channel_id):
         return self.channels.get(channel_id)
