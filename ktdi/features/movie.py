@@ -249,6 +249,30 @@ def timecode(seconds: int) -> str:
     return f"{hours}:{minutes:02}:{seconds:02}"
 
 
+TIMECODE_RE = re.compile(r"^(?:(\d+):)?(\d{1,2}):(\d{2})$")
+TIME_PART_RE = re.compile(r"(\d+)\s*(hours?|hrs?|h|minutes?|mins?|m|seconds?|secs?|s)")  # Longest first.
+TIMECODE_EXAMPLES = "`1:07:30`, `47:30`, `1h 7m`, `47m` or `47` (minutes)"
+TIMECODE_MAX = 12 * 60 * 60
+
+
+def parse_timecode(text: str) -> int | None:
+    """Seconds into the film, from 1:07:30, 47:30, 1h 7m 30s, 47m or 47 (minutes); None if it isn't one."""
+    text = " ".join(text.lower().split())
+    if text.isdigit():
+        seconds = int(text) * 60
+    elif match := TIMECODE_RE.match(text):
+        hours, minutes, secs = int(match.group(1) or 0), int(match.group(2)), int(match.group(3))
+        if secs > 59 or (match.group(1) and minutes > 59):
+            return None
+        seconds = hours * 3600 + minutes * 60 + secs
+    else:
+        parts = TIME_PART_RE.findall(text)
+        if not parts or TIME_PART_RE.sub("", text).strip(" ,") != "":
+            return None
+        seconds = sum(int(n) * {"h": 3600, "m": 60, "s": 1}[unit[0]] for n, unit in parts)
+    return seconds if seconds <= TIMECODE_MAX else None
+
+
 def live(moment: datetime) -> str:
     """A timestamp Discord shows as "3 minutes ago" and keeps up to date by itself, for everyone."""
     return f"<t:{int(moment.timestamp())}:R>"
@@ -632,6 +656,41 @@ async def np_pause(ctx: commands.Context, *, reason: str | None = None):
     await set_bot_status(ctx.bot, f"{movie.title} (paused)")
 
 
+@np_group.command(name="sct", aliases=["seek"], usage="<time>",
+                  description="Set current time: correct where the film is (e.g. 1:07:30), if the bot's clock is off.")
+@app_commands.describe(position="Where the film is now: 1:07:30, 47:30, 1h 7m, 47m...")
+async def np_sct(ctx: commands.Context, *, position: str):
+    seconds = parse_timecode(position)
+    if seconds is None:
+        await ctx.send(f"I don't understand `{one_line(position, 50)}` as a time in the film. Try {TIMECODE_EXAMPLES}.",
+                       ephemeral=True)
+        return
+    movie = current_movie(ctx.guild.id)
+    if movie is None:
+        await ctx.send("Nothing's lined up. `/np set <title>` first.", ephemeral=True)
+        return
+    note = ""
+    if movie.started_at is None:  # Started without the bot: start it now, already that far in.
+        if ctx.guild.id in counting_down:
+            await ctx.send("There's a countdown going. Wait for it, then correct the time.", ephemeral=True)
+            return
+        await start_movie(ctx, movie)
+        movie = get_movie(movie.id)
+        note = " It's started too."
+    # Move the start so the film is exactly that far in, now (or as of the pause). Pauses so far still count as
+    # pauses, so the time-paused total at the end stays right.
+    reference = movie.paused_at or now()
+    _update(movie.id, started_at=reference - timedelta(seconds=seconds + movie.paused_seconds))
+    movie = get_movie(movie.id)
+    log.info("[%s] %s set %r to %s", ctx.guild.name, ctx.author, movie.title, timecode(seconds))
+    text = f"⏱️ **{movie.label}** is now at **{timecode(seconds)}**.{note}"
+    if movie.paused_at:
+        text += "\n-# Still paused. `/np resume` to carry on."
+    else:
+        text += f"\n-# {film_clock(movie)}. Out of sync? `/np elapsed` to catch up."
+    await ctx.send(text)
+
+
 @np_group.command(name="elapsed", description="Exactly how far into the film we are, to get back in sync.")
 async def np_elapsed(ctx: commands.Context):
     movie = await _playing(ctx)
@@ -921,7 +980,8 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
             f"2. `/np start` starts it (the bot's status shows what's on), or `/np countdown` counts down from "
             f"{COUNTDOWN_FROM} first so everyone presses play together. `/np pause [reason]` and `/np resume` "
             "for breaks, which don't count towards the time watched. `/shhh` when people won't be quiet. Fallen out "
-            "of sync? `/np elapsed` gives the exact spot and when to press play to catch up.\n"
+            "of sync? `/np elapsed` gives the exact spot and when to press play to catch up. Bot's clock wrong "
+            "(restarted the film, started it without the bot)? `/np sct 1:07:30` sets where it really is.\n"
             "3. `/bingo mark <number>` as things happen. Five in a row wins.\n"
             f"4. `/np end` reveals the predictions: react {CALLED_IT} if they called it, {NOT_IT} if not "
             "(not on your own). Then everyone `/rate`s it.\n"
