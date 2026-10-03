@@ -685,20 +685,15 @@ async def start_movie(ctx: commands.Context, movie: Movie) -> str:
             f"-# {film_clock(movie)}. `/np pause` if you need to, `/shhh` if people won't be quiet.")
 
 
-@np_group.command(name="start", description="Start the film that's lined up.")
-async def np_start(ctx: commands.Context):
-    movie = await _ready_to_start(ctx)
-    if movie:
-        await ctx.send(await start_movie(ctx, movie))
-
-
 # Servers with a countdown running, so two can't start the film twice.
 counting_down: set[int] = set()
 
 
-@np_group.command(name="countdown",
+@np_group.command(name="start", aliases=["countdown"],
                   description=f"Count down from {COUNTDOWN_FROM}, then start, so everyone presses play together.")
-async def np_countdown(ctx: commands.Context):
+async def np_start(ctx: commands.Context):
+    """Always counts down: the whole point is everyone pressing play at once. (Already playing without the bot?
+    /np sct starts it at the right spot instead.)"""
     movie = await _ready_to_start(ctx)
     if movie is None:
         return
@@ -1076,8 +1071,8 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
         return "", []
     text = ("1. `/np set <title>` lines it up. Nothing starts yet, so people can `/predict` and look at their "
             "`/bingo` card.\n"
-            f"2. `/np start` starts it (the bot's status shows what's on), or `/np countdown` counts down from "
-            f"{COUNTDOWN_FROM} first so everyone presses play together. `/np pause [reason]` and `/np resume` "
+            f"2. `/np start` counts down from {COUNTDOWN_FROM} and starts it on GO, so everyone presses play "
+            "together (the bot's status shows what's on). `/np pause [reason]` and `/np resume` "
             "for breaks, which don't count towards the time watched. `/shhh` when people won't be quiet. Fallen out "
             "of sync? `/np elapsed` gives the exact spot and when to press play to catch up. Bot's clock wrong "
             "(restarted the film, started it without the bot)? `/np sct 1:07:30` sets where it really is.\n"

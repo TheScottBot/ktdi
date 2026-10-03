@@ -48,7 +48,7 @@ def test_start_pause_resume_end(at, bot):
     np("set", title="Shrek 2")
     at(5)
     reply = np("start")
-    assert reply.content.startswith("🎬 **Starting: Shrek 2.** Phones down, lights off.\n"
+    assert reply.content.startswith("# ▶️ GO!\n🎬 **Starting: Shrek 2.** Phones down, lights off.\n"
                                     f"-# ⏱️ Started {live(5)}. `/np pause`")
     assert bot.activity.type == discord.ActivityType.watching and bot.activity.name == "Shrek 2"
     assert "already started" in np("start").content
@@ -104,7 +104,7 @@ def test_elapsed_for_catching_up(at, sleeps):
                               f"To catch up: skip to **0:47:40**, pause, and press play <t:{now + 10}:R>.")
     assert reply.private  # only for the person catching up
     # When the moment comes, the countdown is replaced rather than left saying "press play 8 seconds ago".
-    assert sleeps.delays == [10]
+    assert sleeps.delays[-1] == 10  # (after the start's countdown)
     assert reply.edits == ["▶️ **Shrek 2**: you should be at **0:47:40** and back in sync."]
 
     np("pause")
@@ -629,10 +629,10 @@ def test_sealed_predictions_stay_sealed(at):
     assert movie.revealed_predictions(movie.current_movie(111).id) == []
 
 
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def sleeps(monkeypatch):
-    """Countdowns don't really wait: the clock reads 1000.4 seconds, each sleep is recorded instead, and something
-    can run mid-countdown."""
+    """Countdowns (every /np start) don't really wait: the clock reads 1000.4 seconds, each sleep is recorded
+    instead, and something can run mid-countdown."""
     record = types.SimpleNamespace(delays=[], during=None)
 
     async def fake_sleep(delay):
@@ -644,18 +644,19 @@ def sleeps(monkeypatch):
     return record
 
 
-def test_countdown_then_start(at, sleeps, bot):
-    assert "Nothing's lined up" in np("countdown").content
+def test_start_counts_down(at, sleeps, bot):
+    assert "Nothing's lined up" in np("start").content
     np("set", title="Alien")
-    reply = np("countdown")
+    reply = np("start")
     # A live Discord timestamp counts down by itself: the next whole second (1001) plus 5. Only one edit, for GO.
     assert reply.edits[0].startswith("# ▶️ GO!\n🎬 **Starting: Alien.**") and len(reply.edits) == 1
     assert sleeps.delays == [5.6]  # from 1000.4 to 1006
     assert reply.original == ("# 🎬 Alien starts <t:1006:R>\n"
                               "-# Get ready to press play. This changes to GO when it's time.")
     assert movie.current_movie(111).started_at is not None and bot.activity.name == "Alien"
-    assert "already started" in np("countdown").content
+    assert "already started" in np("start").content
     assert not movie.counting_down
+    assert movie.np_start.aliases == ["countdown"]  # !np countdown still works
 
 
 def test_no_starting_twice_during_a_countdown(at, sleeps):
@@ -663,13 +664,15 @@ def test_no_starting_twice_during_a_countdown(at, sleeps):
     others = []
 
     async def someone_else_tries():
-        for command in (movie.np_start, movie.np_countdown):
-            ctx = Ctx(DAVE)
-            await command.callback(ctx)
-            others.append(ctx.last)
+        ctx = Ctx(DAVE)
+        await movie.np_start.callback(ctx)
+        await movie.np_sct.callback(ctx, position="10:00")
+        others.extend(ctx.sent)
     sleeps.during = someone_else_tries
-    reply = np("countdown")
-    assert [o.content for o in others] == ["There's already a countdown going."] * 2 and others[0].private
+    reply = np("start")
+    assert [o.content for o in others] == ["There's already a countdown going.",
+                                          "There's a countdown going. Wait for it, then correct the time."]
+    assert all(o.private for o in others)
     assert reply.content.startswith("# ▶️ GO!")
 
 
@@ -679,7 +682,7 @@ def test_countdown_called_off_if_the_film_changes(at, sleeps):
     async def change_film():
         await movie.np_set.callback(Ctx(DAVE), title="Jaws")
     sleeps.during = change_film
-    reply = np("countdown")
+    reply = np("start")
     assert reply.content.startswith("🎬 Countdown called off")
     assert movie.current_movie(111).title == "Jaws" and movie.current_movie(111).started_at is None
     assert not movie.counting_down
