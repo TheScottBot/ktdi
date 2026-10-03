@@ -26,6 +26,7 @@ include = ["ktdi*"]
 
 [tool.setuptools.package-data]
 "ktdi.lib" = ["*.json"]
+"ktdi" = ["assets/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

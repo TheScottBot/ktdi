@@ -7,6 +7,7 @@ Champion Briber role.
 
 import random
 from collections import defaultdict, deque
+from pathlib import Path
 
 import discord
 from discord import app_commands
@@ -19,6 +20,7 @@ from ktdi.features import committee, movie
 SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
 LOOT_GIF_URL = "https://klipy.com/gifs/perception-check-tom-cardy"
+NOSE_IMAGE = Path(__file__).resolve().parent.parent / "assets" / "nose.png"  # Attached, not linked, so it can't vanish.
 
 HELP_CATEGORY = "💦 Rap sheet"  # loot and linux say otherwise.
 FUN = {"category": "🎲 Fun"}
@@ -276,6 +278,16 @@ async def loot(ctx: commands.Context):
     await ctx.send(LOOT_GIF_URL)
 
 
+@commands.hybrid_command(name="nose", description="The nose. You know the one.", extras=FUN)
+@app_commands.describe(user="Optional: who it's for")
+async def nose(ctx: commands.Context, user: discord.Member | None = None):
+    if not NOSE_IMAGE.exists():
+        log.warning("The /nose image is missing: %s", NOSE_IMAGE)
+        await ctx.send("👃 The nose has gone missing.", ephemeral=True)
+        return
+    await ctx.send(user.mention if user else None, file=discord.File(NOSE_IMAGE, filename="nose.png"))
+
+
 @commands.hybrid_command(name="rapsheet", description="See someone's sprays, bribes, expunges and bails.")
 @commands.guild_only()
 async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
@@ -426,6 +438,8 @@ def main_help_lines() -> list[tuple[str, str]]:
 
 
 async def setup(bot: commands.Bot):
+    # `nose` is written but not registered: Discord's sensitive-media filter blurs its image (and asks UK users for ID).
+    # Add it back here to bring it back.
     for command in (spray, whospray, tdoi, loot, rapsheet, blame, bribe, expunge, bail, linux):
         bot.add_command(command)
     bot.add_listener(remember_speaker, "on_message")

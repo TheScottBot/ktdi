@@ -452,11 +452,85 @@ def test_watchlist(at):
     np("set", title="Jaws", user=DAVE)
     np("end")
     run(movie.np_watchlist.callback(ctx))
-    assert ctx.last.embed.description == ("**Jaws**, lined up by <@2>\n"
-                                          "**Cats**, lined up by <@1>, 1 sealed prediction")
+    assert ctx.last.embed.description == ("**Jaws**, added by <@2>\n"
+                                          "**Cats**, added by <@1>, 1 sealed prediction")
     choices = run(movie.watchlist_autocomplete(types.SimpleNamespace(guild_id=111), "ca"))
     assert [(c.name, c.value) for c in choices] == [("Cats (watchlist)", "Cats")]
     assert run(movie.watchlist_autocomplete(types.SimpleNamespace(guild_id=222), "")) == []  # per server
+
+
+def watchlist_cmd(command, user=SCOTT, **kwargs):
+    ctx = Ctx(user)
+    run(getattr(movie, f"np_watchlist_{command}").callback(ctx, **kwargs))
+    return ctx.last
+
+
+def test_watchlist_add_and_remove(at):
+    assert watchlist_cmd("add", title="  Alien ").content == "🍿 Added **Alien** to the watchlist (1 to watch)."
+    assert "already on the watchlist" in watchlist_cmd("add", title="ALIEN").content
+    watchlist_cmd("add", title="Jaws", user=DAVE)
+    assert [m.title for m in movie.watchlist(111)] == ["Alien", "Jaws"]
+    assert watchlist_cmd("remove", title="alien").content == "🍿 Took **Alien** off the watchlist."
+    assert [m.title for m in movie.watchlist(111)] == ["Jaws"]
+    assert "There's no Alien on the watchlist" in watchlist_cmd("remove", title="Alien").content
+    assert db.conn.execute("SELECT COUNT(*) FROM movies WHERE dropped_at IS NOT NULL").fetchone()[0] == 1  # kept
+    np("set", title="Alien")  # a dropped film doesn't come back: this is a new one
+    assert movie.current_movie(111).dropped_at is None
+
+
+FILMS = [("Alien (1979)", "alien"), ("Halloween (1978)", "halloween-1978"), ("Halloween (2018)", "halloween-2018"),
+         ("Braindead (1992)", "braindead-1992")]
+
+
+@pytest.fixture
+def letterboxd_list(monkeypatch):
+    """/np watchlist import reads this instead of Letterboxd."""
+    from ktdi.lib import letterboxd
+
+    async def fake_fetch(url):
+        if "nope" in url:
+            raise letterboxd.LetterboxdError("Letterboxd says that list doesn't exist (or it's private).")
+        return letterboxd.FilmList("Halloween 2026", "jenny", "https://letterboxd.com/jenny/list/halloween-2026/",
+                                   [letterboxd.Film(n, f"https://letterboxd.com/film/{s}/") for n, s in FILMS])
+    monkeypatch.setattr(movie.letterboxd, "fetch_list", fake_fetch)
+
+
+def test_import_from_letterboxd(at, letterboxd_list):
+    watchlist_cmd("add", title="Braindead (1992)", user=DAVE)
+    at(1)
+    reply = watchlist_cmd("import", url="https://letterboxd.com/jenny/list/halloween-2026/")
+    assert reply.content == (
+        "🍿 Added **3 films** from [Halloween 2026](<https://letterboxd.com/jenny/list/halloween-2026/>) by jenny "
+        "to the watchlist: Alien (1979), Halloween (1978), Halloween (2018).\n"
+        "-# 1 was already on it.\n-# `/np watchlist` to see them, `/np set <title>` to line one up.")
+    # The list's own order, after what was there (newest first by when it was added).
+    assert [m.title for m in movie.watchlist(111)] == ["Alien (1979)", "Halloween (1978)", "Halloween (2018)",
+                                                       "Braindead (1992)"]
+    assert "Everything on" in watchlist_cmd("import", url="https://letterboxd.com/jenny/list/halloween-2026/").content
+
+    ctx = Ctx(SCOTT)
+    run(movie.np_watchlist.callback(ctx))
+    embed = ctx.last.embed
+    assert embed.title == "🍿 To watch (4)"
+    assert embed.description.startswith("**[Alien (1979)](<https://letterboxd.com/film/alien/>)**, added by <@1>\n")
+
+
+def test_import_errors_are_shown(at, letterboxd_list):
+    assert watchlist_cmd("import", url="https://letterboxd.com/jenny/list/nope/").content == (
+        "🍿 Letterboxd says that list doesn't exist (or it's private).")
+    assert movie.watchlist(111) == []
+
+
+def test_lining_up_an_imported_film(at, letterboxd_list):
+    watchlist_cmd("import", url="https://letterboxd.com/jenny/list/halloween-2026/")
+    reply = np("set", title="alien")  # without the year: there's only one Alien
+    assert reply.content.startswith("🎬 **Up next:** [Alien (1979)](<https://letterboxd.com/film/alien/>)")
+    assert "Back from the watchlist" in reply.content
+    np("set", title="Halloween")  # two Halloweens: neither is guessed, so it's a new film
+    assert movie.current_movie(111).link is None
+    assert len([m for m in movie.watchlist(111) if m.title.startswith("Halloween (")]) == 2
+    np("set", title="Halloween (2018)")  # exact
+    assert movie.current_movie(111).link == "https://letterboxd.com/film/halloween-2018/"
 
 
 def test_watchlist_films_are_never_revealed_or_rated(at):

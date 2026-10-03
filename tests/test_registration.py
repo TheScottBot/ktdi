@@ -11,8 +11,8 @@ from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "anime", "bail", "bingo", "blame", "books", "bribe", "campaign", "committee", "expunge",
-                  "help", "imperial", "linux", "loot", "np", "predict", "quote", "rapsheet", "rate", "settings", "shhh",
-                  "spray", "tdoi", "timezone", "whospray"]
+                  "help", "imperial", "linux", "loot", "np", "predict", "quote", "rapsheet", "rate", "settings",
+                  "shhh", "spray", "tdoi", "timezone", "whospray"]
 SUBCOMMANDS = {
     "committee": ["funds", "ledger", "propose", "spend"],
     "np": ["countdown", "elapsed", "end", "history", "pause", "predictions", "resume", "sct", "set", "show", "start",
@@ -43,6 +43,8 @@ def test_slash_commands(loaded_bot):
     assert [c.name for c in tree.get_commands(type=discord.AppCommandType.message)] == ["Save quote"]
     for group, subs in SUBCOMMANDS.items():
         assert sorted(c.name for c in tree.get_command(group).commands) == subs
+    watchlist = tree.get_command("np").get_command("watchlist")
+    assert sorted(c.name for c in watchlist.commands) == ["add", "import", "remove", "show"]
 
 
 def test_prefix_commands(loaded_bot):

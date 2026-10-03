@@ -217,3 +217,19 @@ def test_bribe_with_nobody_blamed():
     ctx = Ctx(DAVE)
     run(fun.bribe.callback(ctx, 10))
     assert "Nobody's been blamed" in ctx.last.content
+
+
+def test_nose():
+    ctx = Ctx(SCOTT)
+    run(fun.nose.callback(ctx))
+    assert ctx.last.content is None and ctx.last.file.filename == "nose.png"
+    run(fun.nose.callback(ctx, DAVE))
+    assert ctx.last.content == "<@2>" and ctx.last.file.filename == "nose.png"
+    assert fun.NOSE_IMAGE.stat().st_size < 10 * 1024 * 1024  # fits Discord's upload limit
+
+
+def test_nose_missing(monkeypatch, tmp_path):
+    monkeypatch.setattr(fun, "NOSE_IMAGE", tmp_path / "gone.png")
+    ctx = Ctx(SCOTT)
+    run(fun.nose.callback(ctx))
+    assert "gone missing" in ctx.last.content and ctx.last.private

@@ -19,6 +19,7 @@ from discord.ext import commands
 
 from ktdi import common, db
 from ktdi.common import NO_PINGS, log, plural
+from ktdi.lib import letterboxd
 
 HELP_CATEGORY = "🎬 Movie night"
 TITLE_MAX_LENGTH = 100
@@ -117,10 +118,17 @@ class Movie:
     ended_at: datetime | None
     archived_at: datetime | None  # Set aside before it started: on the watchlist, not yet watched.
     watch_number: int | None  # 1 for the first time we watched this title, 2 for the second...; set by /np start.
+    link: str | None  # Its Letterboxd page, if it was imported from a list.
+    dropped_at: datetime | None  # Taken off the watchlist.
 
     @property
     def name(self) -> str:
         return discord.utils.escape_markdown(self.title)
+
+    @property
+    def linked_name(self) -> str:
+        """The name, linked to its Letterboxd page if it has one (<> stops Discord adding a big preview)."""
+        return f"[{self.name}](<{self.link}>)" if self.link else self.name
 
     @property
     def label(self) -> str:
@@ -136,12 +144,18 @@ def plain_label(movie: Movie) -> str:
 
 
 MOVIE_COLUMNS = ("id, guild_id, title, set_by, created_at, started_at, paused_at, paused_seconds, ended_at, "
-                 "archived_at, watch_number")
+                 "archived_at, watch_number, link, dropped_at")
+YEAR_RE = re.compile(r"\s*\(\d{4}\)$")
 
 
 def title_key(title: str) -> str:
     """Titles match whatever the capitals or spacing: "the  THING" is "The Thing"."""
     return " ".join(title.split()).casefold()
+
+
+def without_year(title: str) -> str:
+    """"Alien (1979)" -> "alien": so typing "Alien" finds an imported "Alien (1979)"."""
+    return YEAR_RE.sub("", title_key(title))
 
 
 def now() -> datetime:
@@ -155,9 +169,10 @@ def _time(value: str | None) -> datetime | None:
 def _movie(row) -> Movie | None:
     if row is None:
         return None
-    id_, guild_id, title, set_by, created, started, paused, paused_seconds, ended, archived, watch_number = row
+    (id_, guild_id, title, set_by, created, started, paused, paused_seconds, ended, archived, watch_number, link,
+     dropped) = row
     return Movie(id_, guild_id, title, set_by, _time(created), _time(started), _time(paused), paused_seconds,
-                 _time(ended), _time(archived), watch_number)
+                 _time(ended), _time(archived), watch_number, link, _time(dropped))
 
 
 def one_line(text: str | None, limit: int = TEXT_MAX_LENGTH) -> str:
@@ -190,10 +205,33 @@ def next_watch_number(guild_id: int, title: str) -> int:
 
 
 def watchlist(guild_id: int) -> list[Movie]:
-    """Films set aside before they started: not yet watched, newest first. Per server, like the current film."""
+    """Not yet watched: films set aside before they started, added, or imported. Newest first, but an imported list
+    keeps its own order. Per server, like the current film."""
     rows = db.conn.execute(f"SELECT {MOVIE_COLUMNS} FROM movies WHERE guild_id = ? AND archived_at IS NOT NULL "
-                           "ORDER BY archived_at DESC, id DESC", (guild_id,)).fetchall()
+                           "AND dropped_at IS NULL ORDER BY archived_at DESC, id", (guild_id,)).fetchall()
     return [_movie(row) for row in rows]
+
+
+def find_on_watchlist(guild_id: int, title: str) -> Movie | None:
+    """By exact title, or else by title without the year if only one matches ("Alien" finds "Alien (1979)")."""
+    saved = watchlist(guild_id)
+    exact = next((m for m in saved if title_key(m.title) == title_key(title)), None)
+    if exact:
+        return exact
+    loose = [m for m in saved if without_year(m.title) == without_year(title)]
+    return loose[0] if len(loose) == 1 else None
+
+
+def add_to_watchlist(guild_id: int, title: str, user_id: int, link: str | None = None) -> Movie | None:
+    """A new film for the watchlist, or None if it's already on it."""
+    if any(title_key(m.title) == title_key(title) for m in watchlist(guild_id)):
+        return None
+    moment = now().isoformat()
+    cursor = db.conn.execute("INSERT INTO movies (guild_id, title, title_key, set_by, created_at, archived_at, link) "
+                             "VALUES (?, ?, ?, ?, ?, ?, ?)",
+                             (guild_id, title, title_key(title), user_id, moment, moment, link))
+    db.conn.commit()
+    return get_movie(cursor.lastrowid)
 
 
 def sealed_count(movie_id: int) -> int:
@@ -211,8 +249,10 @@ def archive(movie: Movie) -> str:
 def line_up(guild_id: int, title: str, user_id: int) -> tuple[Movie, bool]:
     """Line up a title: back from the watchlist (predictions and all) if it's there, otherwise new.
     Returns the film and whether it came off the watchlist."""
-    saved = next((m for m in watchlist(guild_id) if title_key(m.title) == title_key(title)), None)
+    saved = find_on_watchlist(guild_id, title)
     if saved:
+        if title_key(saved.title) != title_key(title):
+            title = saved.title  # Found without the year: keep the fuller "Alien (1979)".
         _update(saved.id, archived_at=None, title=title, title_key=title_key(title), set_by=user_id)
         return get_movie(saved.id), True
     cursor = db.conn.execute("INSERT INTO movies (guild_id, title, title_key, set_by, created_at) VALUES (?, ?, ?, ?, ?)",
@@ -288,7 +328,8 @@ def status_text(movie: Movie | None) -> str:
     if movie is None:
         return "🎬 Nothing's lined up. Pick something with `/np set <title>`."
     if movie.started_at is None:
-        return f"🎬 **Up next:** {movie.label}\n-# Lined up by <@{movie.set_by}>. `/np start` when everyone's ready."
+        label = f"[{movie.label}](<{movie.link}>)" if movie.link else movie.label
+        return f"🎬 **Up next:** {label}\n-# Lined up by <@{movie.set_by}>. `/np start` when everyone's ready."
     if movie.paused_at:
         return (f"⏸️ **Paused:** {movie.label} at {timecode(watched_seconds(movie))}\n"
                 f"-# Paused {live(movie.paused_at)}. `/np resume` to carry on.")
@@ -537,20 +578,77 @@ async def np_set(ctx: commands.Context, *, title: str):
     await ctx.send("\n".join([status_text(movie), *(f"-# {note}" for note in notes)]), allowed_mentions=NO_PINGS)
 
 
-@np_group.command(name="watchlist", description="Films we lined up but never started, saved for another night.")
+WATCHLIST_SHOWN = 30
+
+
+@np_group.group(name="watchlist", fallback="show", invoke_without_command=True,
+                description="Films to watch: added, imported from Letterboxd, or lined up and never started.")
 async def np_watchlist(ctx: commands.Context):
     saved = watchlist(ctx.guild.id)
     if not saved:
-        await ctx.send("🍿 The watchlist is empty. Films lined up and never started end up here.", ephemeral=True)
+        await ctx.send("🍿 The watchlist is empty. `/np watchlist add <title>`, `/np watchlist import <Letterboxd list>`, "
+                       "or line something up and never start it.", ephemeral=True)
         return
     lines = []
-    for movie in saved[:HISTORY_SHOWN * 2]:
+    for movie in saved[:WATCHLIST_SHOWN]:
         sealed = sealed_count(movie.id)
-        line = f"**{movie.label}**, lined up by <@{movie.set_by}>"
+        line = f"**{movie.linked_name}**, added by <@{movie.set_by}>"
         lines.append(line + (f", {plural(sealed, 'sealed prediction')}" if sealed else ""))
-    embed = discord.Embed(title="🍿 Not yet watched", description="\n".join(lines), color=discord.Color.dark_red())
-    embed.set_footer(text="Bring one back with /np set <title>; its predictions come with it.")
+    if len(saved) > WATCHLIST_SHOWN:
+        lines.append(f"…and {len(saved) - WATCHLIST_SHOWN} more.")
+    embed = discord.Embed(title=f"🍿 To watch ({len(saved)})", description="\n".join(lines),
+                          color=discord.Color.dark_red())
+    embed.set_footer(text="Line one up with /np set <title> (it autocompletes); any predictions come with it.")
     await ctx.send(embed=embed, allowed_mentions=NO_PINGS)
+
+
+@np_watchlist.command(name="add", description="Add a film to the watchlist.")
+@app_commands.describe(title="The film")
+async def np_watchlist_add(ctx: commands.Context, *, title: str):
+    title = one_line(title, TITLE_MAX_LENGTH)
+    if not title:
+        await ctx.send("Add what?", ephemeral=True)
+        return
+    movie = add_to_watchlist(ctx.guild.id, title, ctx.author.id)
+    if movie is None:
+        await ctx.send(f"{discord.utils.escape_markdown(title)} is already on the watchlist.", ephemeral=True)
+        return
+    await ctx.send(f"🍿 Added **{movie.name}** to the watchlist ({len(watchlist(ctx.guild.id))} to watch).")
+
+
+@np_watchlist.command(name="remove", description="Take a film off the watchlist.")
+@app_commands.describe(title="The film")
+async def np_watchlist_remove(ctx: commands.Context, *, title: str):
+    movie = find_on_watchlist(ctx.guild.id, one_line(title, TITLE_MAX_LENGTH))
+    if movie is None:
+        await ctx.send(f"There's no {discord.utils.escape_markdown(one_line(title, TITLE_MAX_LENGTH))} on the "
+                       "watchlist.", ephemeral=True)
+        return
+    _update(movie.id, dropped_at=now())  # Kept (with any predictions), just off the list.
+    await ctx.send(f"🍿 Took **{movie.name}** off the watchlist.")
+
+
+@np_watchlist.command(name="import", description="Add every film from a public Letterboxd list to the watchlist.")
+@app_commands.describe(url="The list's address, e.g. https://letterboxd.com/someone/list/halloween/")
+async def np_watchlist_import(ctx: commands.Context, url: str):
+    await ctx.defer()  # Reading Letterboxd can take a few seconds.
+    try:
+        film_list = await letterboxd.fetch_list(url)
+    except letterboxd.LetterboxdError as error:
+        await ctx.send(f"🍿 {error}")
+        return
+    added = [m for m in (add_to_watchlist(ctx.guild.id, f.name, ctx.author.id, f.link) for f in film_list.films) if m]
+    already = len(film_list.films) - len(added)
+    log.info("[%s] %s imported %d films from %s", ctx.guild.name, ctx.author, len(added), film_list.url)
+    source = f"[{discord.utils.escape_markdown(film_list.title)}](<{film_list.url}>) by {film_list.owner}"
+    if not added:
+        await ctx.send(f"🍿 Everything on {source} is already on the watchlist.")
+        return
+    names = ", ".join(m.name for m in added[:15]) + (f" and {len(added) - 15} more" if len(added) > 15 else "")
+    text = f"🍿 Added **{plural(len(added), 'film')}** from {source} to the watchlist: {names}."
+    if already:
+        text += f"\n-# {already} {'was' if already == 1 else 'were'} already on it."
+    await ctx.send(text + "\n-# `/np watchlist` to see them, `/np set <title>` to line one up.")
 
 
 async def watchlist_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
@@ -561,6 +659,7 @@ async def watchlist_autocomplete(interaction: discord.Interaction, current: str)
 
 
 np_set.autocomplete("title")(watchlist_autocomplete)
+np_watchlist_remove.autocomplete("title")(watchlist_autocomplete)
 
 
 async def _ready_to_start(ctx: commands.Context) -> Movie | None:
@@ -988,8 +1087,9 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
             "• Anyone can run any of it. Called predictions and bingo wins go on the rap sheet; `/np history` "
             "lists what you've watched with its ratings, and `/np predictions <title>` shows what was predicted "
             "for a film and who called it.\n"
-            "• Change the film with `/np set` before it starts, or `/np end` it unstarted, and it goes on the "
-            "`/np watchlist` (not yet watched) with its predictions. `/np set` the same title to bring it back.\n"
+            "• `/np watchlist` is what's still to watch: `add` a film, `import` a public Letterboxd list (with "
+            "years and links), `remove` one. Films swapped out with `/np set` or ended before they started go "
+            "on it too, with their predictions. `/np set` autocompletes from it; `Alien` finds `Alien (1979)`.\n"
             "• Watching something again is a new watch (Alien (watch #2)), with fresh predictions, bingo cards and "
             "ratings. `/np predictions Alien #1` looks up an earlier one.")
     return "", [("🎬 How movie night works", text, False)]

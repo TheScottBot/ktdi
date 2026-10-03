@@ -137,7 +137,9 @@ SCHEMA = [
         paused_seconds INTEGER NOT NULL DEFAULT 0, -- time spent paused, not counted as watched
         ended_at       TEXT,
         archived_at    TEXT,                       -- set aside before starting: on the watchlist, not yet watched
-        watch_number   INTEGER                     -- 1st, 2nd... time we've watched this title; set at /np start
+        watch_number   INTEGER,                    -- 1st, 2nd... time we've watched this title; set at /np start
+        link           TEXT,                       -- its Letterboxd page, if it came from an imported list
+        dropped_at     TEXT                        -- taken off the watchlist (/np watchlist remove); kept, not deleted
     )
     """,
     """
@@ -207,6 +209,10 @@ def _upgrade() -> None:
     if "watch_number" not in movie_columns:
         conn.execute("ALTER TABLE movies ADD COLUMN watch_number INTEGER")
         conn.execute("UPDATE movies SET watch_number = 1 WHERE started_at IS NOT NULL")
+    # The to-watch list: Letterboxd links, and films taken off it.
+    for column in ("link", "dropped_at"):
+        if column not in movie_columns:
+            conn.execute(f"ALTER TABLE movies ADD COLUMN {column} TEXT")
 
 
 def init(path: str) -> None:

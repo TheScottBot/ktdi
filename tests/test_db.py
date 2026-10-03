@@ -47,4 +47,5 @@ def test_upgrades_a_movies_table_from_before_the_watchlist(tmp_path):
     assert alien.watch_number == 1 and alien.archived_at is None
     assert movie.next_watch_number(111, "Alien") == 2  # an old watch counts towards the next number
     assert movie.current_movie(111).title == "Jaws" and movie.current_movie(111).watch_number is None
+    assert movie.current_movie(111).link is None and movie.watchlist(111) == []  # to-watch list columns added
     db.conn.close()

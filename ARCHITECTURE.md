@@ -63,7 +63,9 @@ ktdi/
     ├── abm.py         unit parsing and conversion (+ abm_units.json dataset)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths
     ├── library.py     Calibre-Web OPDS client
-    └── anilist.py     random popular anime from AniList
+    ├── anilist.py     random popular anime from AniList
+    ├── timezones.py   timezone and time parsing for /timezone
+    └── letterboxd.py  reads a public Letterboxd list page (no open API); only letterboxd.com/boxd.it URLs
 tests/                 pytest; fakes.py has stand-ins for Discord objects
 ```
 
@@ -165,7 +167,7 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `don_orders` | times each person sprayed themselves on the Don's orders (`/tdoi`), per (server, person) |
 | `spray_expunges` | sprays each person paid to remove (`/expunge`), per (server, person). Subtracted from sprays on read; sprays are never deleted. |
 | `spray_bails` | sprays removed from someone's record by someone else (`/bail`), per (server, person, payer). Also subtracted on read. |
-| `movies` | one row per **watch** of a film: title (and `title_key`, casefolded, to match rewatches), who set it, started/paused/ended times, seconds paused, `watch_number` (fixed at `/np start`, counting earlier watches through `scope()`), and `archived_at` for the watchlist. A server's current film is its row that's neither ended nor archived; that and the watchlist are per server, never shared. `/np history` and `/np predictions` read through `scope()`. Nothing is deleted: a film swapped or ended before it starts is archived, predictions and all, and `/np set` of the same title restores it. |
+| `movies` | one row per **watch** of a film: title (and `title_key`, casefolded, to match rewatches), who set it, started/paused/ended times, seconds paused, `watch_number` (fixed at `/np start`, counting earlier watches through `scope()`), `archived_at` for the watchlist (the to-watch list: added, imported from Letterboxd, or set aside unstarted), `link` (its Letterboxd page) and `dropped_at` (taken off the watchlist; kept). A server's current film is its row that's neither ended nor archived; that and the watchlist are per server, never shared. `/np history` and `/np predictions` read through `scope()`. Nothing is deleted: a film swapped or ended before it starts is archived, predictions and all, and `/np set` of the same title restores it. |
 | `movie_ratings` | `/rate` scores, per (movie, person) |
 | `movie_predictions` / `movie_prediction_votes` | sealed `/predict`ions, each tied to its film by `movie_id`. `message_id` is set when `/np end` reveals them, and ✅/❌ reactions on that message are the votes (called it if ✅ > ❌). Only revealed ones are ever shown (`/np predictions`, rap sheets); archived films keep theirs, still sealed. |
 | `movie_bingo_marks` / `movie_bingo_wins` | squares marked and wins. Cards aren't stored: `movie.bingo_card()` shuffles the squares with a seed of (movie, person). |
