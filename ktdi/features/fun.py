@@ -14,7 +14,7 @@ from discord.ext import commands
 
 from ktdi import common, config, db
 from ktdi.common import get_member, log, plural
-from ktdi.features import committee
+from ktdi.features import committee, movie
 
 SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
@@ -304,6 +304,12 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     spent = committee.total_spent(ctx.guild.id, user.id)
     if spent:
         lines.append(f"🧾 Spent {committee.money(spent)} of the committee's funds.")
+    called, predicted = movie.prediction_record(ctx.guild.id, user.id)
+    if predicted:
+        lines.append(f"🔮 Called it {plural(called, 'time')} (of {plural(predicted, 'movie prediction')}).")
+    bingos = movie.bingo_win_count(ctx.guild.id, user.id)
+    if bingos:
+        lines.append(f"🎉 Won movie bingo {plural(bingos, 'time')}.")
     if not lines:
         await ctx.send(f"📋 {user.display_name} has a clean record. Suspicious.")
         return

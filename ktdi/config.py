@@ -47,12 +47,22 @@ LOG_FILE = BASE_DIR / os.getenv("LOG_FILE", "logs/ktdi-dev.log" if DEV else "log
 LOG_MAX_BYTES = int(os.getenv("LOG_MAX_BYTES", 1_000_000))
 LOG_BACKUPS = int(os.getenv("LOG_BACKUPS", 5))
 
-# Timezone that campaign reminder times are in, e.g. "mondays at 1800" means 18:00 here (summer time handled).
-try:
-    REMINDER_TIMEZONE = ZoneInfo(os.getenv("REMINDER_TIMEZONE") or "Europe/London")
-except (ZoneInfoNotFoundError, ValueError):
-    logging.getLogger("ktdi").warning("Unknown REMINDER_TIMEZONE %r, using UTC.", os.getenv("REMINDER_TIMEZONE"))
-    REMINDER_TIMEZONE = ZoneInfo("UTC")
+def zone_setting(name: str, default: ZoneInfo | str) -> ZoneInfo:
+    """An IANA timezone name from .env, e.g. Europe/London (summer time handled)."""
+    value = os.getenv(name)
+    if not value:
+        return default if isinstance(default, ZoneInfo) else ZoneInfo(default)
+    try:
+        return ZoneInfo(value)
+    except (ZoneInfoNotFoundError, ValueError):
+        logging.getLogger("ktdi").warning("Unknown %s %r, using UTC.", name, value)
+        return ZoneInfo("UTC")
+
+
+# The bot's own timezone: what "now" means in /timezone convert when you leave out the zones and haven't set yours.
+BOT_TIMEZONE = zone_setting("BOT_TIMEZONE", "Europe/London")
+# Timezone that campaign reminder times are in, e.g. "mondays at 1800" means 18:00 here. Defaults to BOT_TIMEZONE.
+REMINDER_TIMEZONE = zone_setting("REMINDER_TIMEZONE", BOT_TIMEZONE)
 
 # Optional role given to each server's biggest briber. Skipped on servers without a role by this name.
 BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")

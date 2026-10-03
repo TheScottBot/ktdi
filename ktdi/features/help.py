@@ -20,7 +20,7 @@ EMBED_FIELD_LIMIT = 1024  # Discord rejects the whole message if any field is lo
 EMBED_TOTAL_LIMIT = 6000
 EMBED_FIELD_COUNT_LIMIT = 25
 # The main list's categories, in this order. A category not listed here goes after these, alphabetically.
-CATEGORY_ORDER = ["💦 Rap sheet", "🎲 Fun", "📏 Measurements", "💬 Quotes", "🗓️ Campaigns", "🔧 Utilities"]
+CATEGORY_ORDER = ["💦 Rap sheet", "🎲 Fun", "🎬 Movie night", "📏 Measurements", "💬 Quotes", "🗓️ Campaigns", "🔧 Utilities"]
 UNCATEGORISED = "🧩 Other"
 
 

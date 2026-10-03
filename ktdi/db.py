@@ -115,6 +115,73 @@ SCHEMA = [
         created_at TEXT NOT NULL      -- ISO 8601, UTC
     )
     """,
+    # A person's own timezone (/timezone set). About them, not a server, so no guild_id: it follows them everywhere.
+    """
+    CREATE TABLE IF NOT EXISTS user_timezones (
+        user_id INTEGER PRIMARY KEY,
+        zone    TEXT NOT NULL  -- an IANA name (Europe/London) or a fixed offset (UTC+5:30)
+    )
+    """,
+    # Movie night. Each row is one watch of a film (watch it twice, get two rows, each with its own predictions,
+    # bingo and ratings). A server's current film is its row that's neither ended nor archived. Times are ISO 8601, UTC.
+    """
+    CREATE TABLE IF NOT EXISTS movies (
+        id             INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id       INTEGER NOT NULL,
+        title          TEXT NOT NULL,
+        title_key      TEXT NOT NULL DEFAULT '',   -- the title casefolded, for matching rewatches
+        set_by         INTEGER NOT NULL,
+        created_at     TEXT NOT NULL,
+        started_at     TEXT,                       -- NULL until /np start
+        paused_at      TEXT,                       -- set while paused
+        paused_seconds INTEGER NOT NULL DEFAULT 0, -- time spent paused, not counted as watched
+        ended_at       TEXT,
+        archived_at    TEXT,                       -- set aside before starting: on the watchlist, not yet watched
+        watch_number   INTEGER                     -- 1st, 2nd... time we've watched this title; set at /np start
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS movie_ratings (
+        movie_id INTEGER NOT NULL,
+        user_id  INTEGER NOT NULL,
+        score    INTEGER NOT NULL,  -- 1 to 10
+        PRIMARY KEY (movie_id, user_id)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS movie_predictions (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        movie_id   INTEGER NOT NULL,
+        guild_id   INTEGER NOT NULL,
+        user_id    INTEGER NOT NULL,
+        text       TEXT NOT NULL,
+        message_id INTEGER  -- the reveal message people react ✅/❌ to; NULL until /np end
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS movie_prediction_votes (
+        prediction_id INTEGER NOT NULL,
+        user_id       INTEGER NOT NULL,
+        vote          INTEGER NOT NULL,  -- 1 called it, 0 didn't
+        PRIMARY KEY (prediction_id, user_id, vote)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS movie_bingo_marks (
+        movie_id INTEGER NOT NULL,
+        user_id  INTEGER NOT NULL,
+        square   INTEGER NOT NULL,  -- 1 to 25 on their card (cards aren't stored: they're seeded by movie and person)
+        PRIMARY KEY (movie_id, user_id, square)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS movie_bingo_wins (
+        movie_id INTEGER NOT NULL,
+        guild_id INTEGER NOT NULL,
+        user_id  INTEGER NOT NULL,
+        PRIMARY KEY (movie_id, user_id)
+    )
+    """,
 ]
 
 
@@ -130,6 +197,16 @@ def _upgrade() -> None:
     # Who /whospray asks, per server. Unset until someone chooses.
     if "whospray_user_id" not in _columns("guild_settings"):
         conn.execute("ALTER TABLE guild_settings ADD COLUMN whospray_user_id INTEGER")
+    # Movie watchlist and rewatches. Films from before are each a first watch; LOWER() is close enough for old titles.
+    movie_columns = _columns("movies")
+    if "title_key" not in movie_columns:
+        conn.execute("ALTER TABLE movies ADD COLUMN title_key TEXT NOT NULL DEFAULT ''")
+        conn.execute("UPDATE movies SET title_key = LOWER(title)")
+    if "archived_at" not in movie_columns:
+        conn.execute("ALTER TABLE movies ADD COLUMN archived_at TEXT")
+    if "watch_number" not in movie_columns:
+        conn.execute("ALTER TABLE movies ADD COLUMN watch_number INTEGER")
+        conn.execute("UPDATE movies SET watch_number = 1 WHERE started_at IS NOT NULL")
 
 
 def init(path: str) -> None:
