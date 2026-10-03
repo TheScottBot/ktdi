@@ -123,6 +123,83 @@ def test_elapsed_lines_up_on_a_whole_second(clock, sleeps):
     assert "is at **0:01:01**" in reply and f"skip to **0:01:12**, pause, and press play <t:{sync_at}:R>" in reply
 
 
+@pytest.mark.parametrize("typed, seconds", [
+    ("1:07:30", 4050), ("47:30", 2850), ("0:00:05", 5), ("1h 7m 30s", 4050), ("1h7m", 4020), ("47m", 2820),
+    ("47 mins", 2820), ("2 hours", 7200), ("90s", 90), ("47", 2820), ("1hr 5min", 3900),
+])
+def test_parse_timecode(typed, seconds):
+    assert movie.parse_timecode(typed) == seconds
+
+
+@pytest.mark.parametrize("typed", ["", "soon", "1:75:00", "47:99", "13h", "5 bananas", "1h and a bit"])
+def test_parse_timecode_rejects(typed):
+    assert movie.parse_timecode(typed) is None
+
+
+def sct(position, user=SCOTT):
+    ctx = Ctx(user)
+    run(movie.np_sct.callback(ctx, position=position))
+    return ctx.last
+
+
+def test_sct_corrects_a_playing_film(at, sleeps):
+    np("set", title="Alien")
+    np("start")
+    at(30)  # the bot thinks 30 minutes in, but we restarted it and it's really 12:00 in
+    reply = sct("12:00")
+    assert reply.content == (f"⏱️ **Alien** is now at **0:12:00**.\n"
+                             f"-# ⏱️ Started {live(30 - 12)}. Out of sync? `/np elapsed` to catch up.")
+    assert not reply.private
+    assert movie.watched_seconds(movie.current_movie(111)) == 12 * 60
+    at(40)
+    assert "is at **0:22:00**" in np("elapsed").original  # elapsed follows the correction
+
+
+def test_sct_keeps_the_pause_total(at):
+    np("set", title="Alien")
+    np("start")
+    at(10)
+    np("pause")
+    at(20)
+    np("resume")  # 10 minutes paused
+    at(50)
+    sct("1h 5m")
+    assert movie.watched_seconds(movie.current_movie(111)) == 65 * 60
+    assert "⏱️ Started" in np("show").content and "not counting pauses" in np("show").content
+    at(60)
+    reply = np("end")
+    assert "1h 15m watched, plus 10m paused." in reply.content
+
+
+def test_sct_while_paused(at):
+    np("set", title="Alien")
+    np("start")
+    at(30)
+    np("pause")
+    at(35)
+    reply = sct("25:00")
+    assert reply.content.startswith("⏱️ **Alien** is now at **0:25:00**.\n-# Still paused.")
+    at(45)  # still paused: doesn't move
+    assert np("show").content.startswith("⏸️ **Paused:** Alien at 0:25:00")
+    at(46)
+    assert np("resume").content.startswith("▶️ **Resumed** Alien at 0:25:00, after 16m.")
+
+
+def test_sct_starts_a_film_started_without_the_bot(at, bot):
+    assert "Nothing's lined up" in sct("10:00").content
+    np("set", title="Alien")
+    reply = sct("10m")
+    assert "is now at **0:10:00**. It's started too." in reply.content
+    assert movie.watched_seconds(movie.current_movie(111)) == 600 and bot.activity.name == "Alien"
+
+
+def test_sct_rejects_nonsense(at):
+    np("set", title="Alien")
+    np("start")
+    reply = sct("soon")
+    assert reply.private and "I don't understand `soon`" in reply.content
+
+
 def test_timecodes():
     assert [movie.timecode(s) for s in (0, 59, 61, 3600, 4062)] == [
         "0:00:00", "0:00:59", "0:01:01", "1:00:00", "1:07:42"]

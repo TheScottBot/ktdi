@@ -15,7 +15,7 @@ SLASH_COMMANDS = ["abm", "anime", "bail", "bingo", "blame", "books", "bribe", "c
                   "spray", "tdoi", "timezone", "whospray"]
 SUBCOMMANDS = {
     "committee": ["funds", "ledger", "propose", "spend"],
-    "np": ["countdown", "elapsed", "end", "history", "pause", "predictions", "resume", "set", "show", "start",
+    "np": ["countdown", "elapsed", "end", "history", "pause", "predictions", "resume", "sct", "set", "show", "start",
            "watchlist"],
     "bingo": ["card", "mark", "unmark"],
     "timezone": ["clear", "convert", "set", "show"],
