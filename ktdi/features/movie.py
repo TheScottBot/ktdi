@@ -120,6 +120,8 @@ class Movie:
     watch_number: int | None  # 1 for the first time we watched this title, 2 for the second...; set by /np start.
     link: str | None  # Its Letterboxd page, if it was imported from a list.
     dropped_at: datetime | None  # Taken off the watchlist.
+    struck_at: datetime | None  # Struck off the watchlist as watched: still listed (crossed out), left out of votes.
+    from_watchlist: bool  # Lined up from the watchlist, so it goes back on it, struck off, when it ends.
 
     @property
     def name(self) -> str:
@@ -144,7 +146,7 @@ def plain_label(movie: Movie) -> str:
 
 
 MOVIE_COLUMNS = ("id, guild_id, title, set_by, created_at, started_at, paused_at, paused_seconds, ended_at, "
-                 "archived_at, watch_number, link, dropped_at")
+                 "archived_at, watch_number, link, dropped_at, struck_at, from_watchlist")
 YEAR_RE = re.compile(r"\s*\(\d{4}\)$")
 
 
@@ -170,9 +172,9 @@ def _movie(row) -> Movie | None:
     if row is None:
         return None
     (id_, guild_id, title, set_by, created, started, paused, paused_seconds, ended, archived, watch_number, link,
-     dropped) = row
+     dropped, struck, from_watchlist) = row
     return Movie(id_, guild_id, title, set_by, _time(created), _time(started), _time(paused), paused_seconds,
-                 _time(ended), _time(archived), watch_number, link, _time(dropped))
+                 _time(ended), _time(archived), watch_number, link, _time(dropped), _time(struck), bool(from_watchlist))
 
 
 def one_line(text: str | None, limit: int = TEXT_MAX_LENGTH) -> str:
@@ -206,9 +208,10 @@ def next_watch_number(guild_id: int, title: str) -> int:
 
 def watchlist(guild_id: int) -> list[Movie]:
     """Not yet watched: films set aside before they started, added, or imported. Newest first, but an imported list
-    keeps its own order. Per server, like the current film."""
+    keeps its own order, and struck-off films go last. Per server, like the current film."""
     rows = db.conn.execute(f"SELECT {MOVIE_COLUMNS} FROM movies WHERE guild_id = ? AND archived_at IS NOT NULL "
-                           "AND dropped_at IS NULL ORDER BY archived_at DESC, id", (guild_id,)).fetchall()
+                           "AND dropped_at IS NULL ORDER BY struck_at IS NOT NULL, archived_at DESC, id",
+                           (guild_id,)).fetchall()
     return [_movie(row) for row in rows]
 
 
@@ -234,6 +237,22 @@ def add_to_watchlist(guild_id: int, title: str, user_id: int, link: str | None =
     return get_movie(cursor.lastrowid)
 
 
+def keep_on_watchlist_struck(movie: Movie) -> None:
+    """A film lined up from the watchlist has just been watched: it goes back on the list, struck off. (Its watch
+    keeps the ratings and predictions; this is a fresh entry, ready to line up again for a rewatch.)"""
+    moment = now().isoformat()
+    existing = next((m for m in watchlist(movie.guild_id) if title_key(m.title) == title_key(movie.title)), None)
+    if existing:  # Someone added it again meanwhile: strike that one.
+        if not existing.struck_at:
+            _update(existing.id, struck_at=moment)
+        return
+    db.conn.execute("INSERT INTO movies (guild_id, title, title_key, set_by, created_at, archived_at, link, struck_at) "
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    (movie.guild_id, movie.title, title_key(movie.title), movie.set_by, moment, moment, movie.link,
+                     moment))
+    db.conn.commit()
+
+
 def sealed_count(movie_id: int) -> int:
     return db.conn.execute("SELECT COUNT(*) FROM movie_predictions WHERE movie_id = ?", (movie_id,)).fetchone()[0]
 
@@ -253,7 +272,7 @@ def line_up(guild_id: int, title: str, user_id: int) -> tuple[Movie, bool]:
     if saved:
         if title_key(saved.title) != title_key(title):
             title = saved.title  # Found without the year: keep the fuller "Alien (1979)".
-        _update(saved.id, archived_at=None, title=title, title_key=title_key(title), set_by=user_id)
+        _update(saved.id, archived_at=None, title=title, title_key=title_key(title), set_by=user_id, from_watchlist=1)
         return get_movie(saved.id), True
     cursor = db.conn.execute("INSERT INTO movies (guild_id, title, title_key, set_by, created_at) VALUES (?, ?, ?, ?, ?)",
                              (guild_id, title, title_key(title), user_id, now().isoformat()))
@@ -561,21 +580,27 @@ async def np_set(ctx: commands.Context, *, title: str):
     if movie and movie.started_at:
         await ctx.send(f"{movie.name} is still on. `/np end` it first.", ephemeral=True)
         return
+    log.info("[%s] %s lined up %r", ctx.guild.name, ctx.author, title)
+    await ctx.send(set_up_next(ctx.guild.id, title, ctx.author.id), allowed_mentions=NO_PINGS)
+
+
+def set_up_next(guild_id: int, title: str, user_id: int) -> str:
+    """Line up a title (when nothing's playing), swapping out anything already lined up. Returns the announcement."""
+    movie = current_movie(guild_id)
     notes = []
     if movie and title_key(title) == title_key(movie.title):
-        _update(movie.id, title=title, set_by=ctx.author.id)  # Same film, just retyped.
+        _update(movie.id, title=title, set_by=user_id)  # Same film, just retyped.
         movie = get_movie(movie.id)
     else:
         if movie:  # Changed our minds before starting: the old one keeps its predictions, on the watchlist.
             notes.append(archive(movie))
-        movie, restored = line_up(ctx.guild.id, title, ctx.author.id)
+        movie, restored = line_up(guild_id, title, user_id)
         sealed = sealed_count(movie.id)
         if restored:
             notes.append("Back from the watchlist" + (f" with {plural(sealed, 'sealed prediction')}." if sealed else "."))
     if not notes:
         notes.append("Get your `/predict`ions in and your `/bingo` card ready.")
-    log.info("[%s] %s lined up %r", ctx.guild.name, ctx.author, title)
-    await ctx.send("\n".join([status_text(movie), *(f"-# {note}" for note in notes)]), allowed_mentions=NO_PINGS)
+    return "\n".join([status_text(movie), *(f"-# {note}" for note in notes)])
 
 
 WATCHLIST_SHOWN = 30
@@ -591,29 +616,76 @@ async def np_watchlist(ctx: commands.Context):
         return
     lines = []
     for movie in saved[:WATCHLIST_SHOWN]:
+        if movie.struck_at:
+            lines.append(f"~~{movie.linked_name}~~ (watched {movie.struck_at.strftime('%d %b')})")
+            continue
         sealed = sealed_count(movie.id)
         line = f"**{movie.linked_name}**, added by <@{movie.set_by}>"
         lines.append(line + (f", {plural(sealed, 'sealed prediction')}" if sealed else ""))
     if len(saved) > WATCHLIST_SHOWN:
         lines.append(f"…and {len(saved) - WATCHLIST_SHOWN} more.")
-    embed = discord.Embed(title=f"🍿 To watch ({len(saved)})", description="\n".join(lines),
+    struck = sum(1 for m in saved if m.struck_at)
+    embed = discord.Embed(title=f"🍿 To watch ({len(saved) - struck})", description="\n".join(lines),
                           color=discord.Color.dark_red())
-    embed.set_footer(text="Line one up with /np set <title> (it autocompletes); any predictions come with it.")
+    footer = "Line one up with /np set <title> (it autocompletes); any predictions come with it."
+    if struck:
+        footer = f"{struck} struck off as watched. " + footer
+    embed.set_footer(text=footer)
     await ctx.send(embed=embed, allowed_mentions=NO_PINGS)
 
 
-@np_watchlist.command(name="add", description="Add a film to the watchlist.")
-@app_commands.describe(title="The film")
-async def np_watchlist_add(ctx: commands.Context, *, title: str):
-    title = one_line(title, TITLE_MAX_LENGTH)
-    if not title:
-        await ctx.send("Add what?", ephemeral=True)
+def to_watch_count(guild_id: int) -> int:
+    return sum(1 for m in watchlist(guild_id) if not m.struck_at)
+
+
+def link_onto_watchlist(guild_id: int, film: letterboxd.Film, typed_title: str) -> tuple[Movie | None, str]:
+    """Give a Letterboxd film's name and link to the watchlist entry it already has, if any (one added by title
+    only: "Nosferatu" becomes "Nosferatu (1922)", linked). Returns (that entry, "linked"/"already"), or (None, "")."""
+    for movie in watchlist(guild_id):
+        if movie.link == film.link:
+            return movie, "already"
+    names = {title_key(film.name), without_year(film.name)} | ({title_key(typed_title)} if typed_title else set())
+    for movie in watchlist(guild_id):
+        if not movie.link and title_key(movie.title) in names:
+            _update(movie.id, title=film.name, title_key=title_key(film.name), link=film.link)
+            return get_movie(movie.id), "linked"
+    return None, ""
+
+
+@np_watchlist.command(name="add", description="Add a film to the watchlist, by title or Letterboxd link (or both).")
+@app_commands.describe(title="The film's title", link="Its Letterboxd page, e.g. https://letterboxd.com/film/nosferatu/")
+async def np_watchlist_add(ctx: commands.Context, title: str | None = None, *, link: str | None = None):
+    # Typed with !, it's all one string, so pick any link out of the words (either way round works).
+    words = " ".join(part for part in (title, link) if part).split()
+    links = [word for word in words if letterboxd.looks_like_link(word)]
+    title = one_line(" ".join(word for word in words if word not in links), TITLE_MAX_LENGTH)
+    if len(links) > 1:
+        await ctx.send("One link at a time, please.", ephemeral=True)
         return
-    movie = add_to_watchlist(ctx.guild.id, title, ctx.author.id)
+    if not title and not links:
+        await ctx.send("Add what? Give a title, a Letterboxd link, or both.", ephemeral=True)
+        return
+    film = None
+    if links:
+        await ctx.defer()  # Reading Letterboxd can take a moment.
+        try:
+            film = await letterboxd.fetch_film(links[0])
+        except letterboxd.LetterboxdError as error:
+            await ctx.send(f"🍿 {error}")
+            return
+        merged, how = link_onto_watchlist(ctx.guild.id, film, title)
+        if how == "already":
+            await ctx.send(f"🍿 {merged.linked_name} is already on the watchlist.")
+            return
+        if how == "linked":
+            await ctx.send(f"🍿 Linked **{merged.linked_name}** on the watchlist to its Letterboxd page.")
+            return
+        title = film.name  # Letterboxd's name, with the year: "Nosferatu (1922)".
+    movie = add_to_watchlist(ctx.guild.id, title, ctx.author.id, film.link if film else None)
     if movie is None:
         await ctx.send(f"{discord.utils.escape_markdown(title)} is already on the watchlist.", ephemeral=True)
         return
-    await ctx.send(f"🍿 Added **{movie.name}** to the watchlist ({len(watchlist(ctx.guild.id))} to watch).")
+    await ctx.send(f"🍿 Added **{movie.linked_name}** to the watchlist ({to_watch_count(ctx.guild.id)} to watch).")
 
 
 @np_watchlist.command(name="remove", description="Take a film off the watchlist.")
@@ -626,6 +698,41 @@ async def np_watchlist_remove(ctx: commands.Context, *, title: str):
         return
     _update(movie.id, dropped_at=now())  # Kept (with any predictions), just off the list.
     await ctx.send(f"🍿 Took **{movie.name}** off the watchlist.")
+
+
+async def _on_watchlist(ctx: commands.Context, title: str) -> Movie | None:
+    movie = find_on_watchlist(ctx.guild.id, one_line(title, TITLE_MAX_LENGTH))
+    if movie is None:
+        await ctx.send(f"There's no {discord.utils.escape_markdown(one_line(title, TITLE_MAX_LENGTH))} on the "
+                       "watchlist.", ephemeral=True)
+    return movie
+
+
+@np_watchlist.command(name="strike", description="Strike a film off as watched. It stays listed, crossed out.")
+@app_commands.describe(title="The film")
+async def np_watchlist_strike(ctx: commands.Context, *, title: str):
+    movie = await _on_watchlist(ctx, title)
+    if movie is None:
+        return
+    if movie.struck_at:
+        await ctx.send(f"{movie.name} is already struck off.", ephemeral=True)
+        return
+    _update(movie.id, struck_at=now())
+    await ctx.send(f"🍿 ~~{movie.name}~~ struck off as watched. It stays on the list, but votes leave it out "
+                   f"(unless they `include_watched`). {to_watch_count(ctx.guild.id)} to watch.")
+
+
+@np_watchlist.command(name="unstrike", description="Put a struck-off film back on the watchlist properly.")
+@app_commands.describe(title="The film")
+async def np_watchlist_unstrike(ctx: commands.Context, *, title: str):
+    movie = await _on_watchlist(ctx, title)
+    if movie is None:
+        return
+    if not movie.struck_at:
+        await ctx.send(f"{movie.name} isn't struck off.", ephemeral=True)
+        return
+    _update(movie.id, struck_at=None)
+    await ctx.send(f"🍿 **{movie.name}** is back on the watchlist. {to_watch_count(ctx.guild.id)} to watch.")
 
 
 @np_watchlist.command(name="import", description="Add every film from a public Letterboxd list to the watchlist.")
@@ -651,15 +758,184 @@ async def np_watchlist_import(ctx: commands.Context, url: str):
     await ctx.send(text + "\n-# `/np watchlist` to see them, `/np set <title>` to line one up.")
 
 
+def _watchlist_choices(guild_id: int, current: str, struck: bool | None = None) -> list[app_commands.Choice[str]]:
+    """Watchlist films matching what's typed: all of them, or only struck-off (True) or not (False) ones."""
+    typed = current.casefold()
+    return [app_commands.Choice(name=f"{m.title} ({'watched' if m.struck_at else 'watchlist'})"[:100],
+                                value=m.title[:100])
+            for m in watchlist(guild_id)
+            if typed in m.title.casefold() and (struck is None or bool(m.struck_at) == struck)][:25]
+
+
 async def watchlist_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
     """/np set suggests the watchlist, but any title can still be typed."""
-    typed = current.casefold()
-    return [app_commands.Choice(name=f"{m.title} (watchlist)"[:100], value=m.title[:100])
-            for m in watchlist(interaction.guild_id) if typed in m.title.casefold()][:25]
+    return _watchlist_choices(interaction.guild_id, current)
+
+
+async def unstruck_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
+    return _watchlist_choices(interaction.guild_id, current, struck=False)
+
+
+async def struck_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
+    return _watchlist_choices(interaction.guild_id, current, struck=True)
 
 
 np_set.autocomplete("title")(watchlist_autocomplete)
 np_watchlist_remove.autocomplete("title")(watchlist_autocomplete)
+np_watchlist_strike.autocomplete("title")(unstruck_autocomplete)
+np_watchlist_unstrike.autocomplete("title")(struck_autocomplete)
+
+
+# --- Voting on what's next: a native Discord poll of watchlist films. Discord counts the votes; we remember which
+# answer is which film, and line up the winner when it closes (early with /np vote end, or when its time runs out).
+VOTE_QUESTION = "🍿 What are we watching next?"
+POLL_MAX_HOURS = 32 * 24  # Discord's longest poll. Votes default to it, so they're open until /np vote end.
+POLL_ANSWER_MAX = 55  # Discord's limit for an answer's text.
+
+
+@dataclass
+class Vote:
+    id: int
+    guild_id: int
+    channel_id: int
+    message_id: int
+    created_by: int
+
+
+VOTE_COLUMNS = "id, guild_id, channel_id, message_id, created_by"
+
+
+def open_vote(guild_id: int) -> Vote | None:
+    row = db.conn.execute(f"SELECT {VOTE_COLUMNS} FROM movie_votes WHERE guild_id = ? AND closed_at IS NULL",
+                          (guild_id,)).fetchone()
+    return Vote(*row) if row else None
+
+
+def open_vote_by_message(message_id: int) -> Vote | None:
+    row = db.conn.execute(f"SELECT {VOTE_COLUMNS} FROM movie_votes WHERE message_id = ? AND closed_at IS NULL",
+                          (message_id,)).fetchone()
+    return Vote(*row) if row else None
+
+
+def answer_text(title: str) -> str:
+    return title if len(title) <= POLL_ANSWER_MAX else title[:POLL_ANSWER_MAX - 1] + "…"
+
+
+def finish_vote(vote: Vote, poll: discord.Poll | None, user_id: int) -> str:
+    """Close the vote, pick the winner and line it up if nothing's playing. Returns the announcement."""
+    options = dict(db.conn.execute("SELECT answer_id, movie_id FROM movie_vote_options WHERE vote_id = ?",
+                                   (vote.id,)).fetchall())
+    counts = {answer.id: answer.vote_count for answer in poll.answers} if poll else {}
+    best = max(counts.values(), default=0)
+    if best == 0:
+        db.conn.execute("UPDATE movie_votes SET closed_at = ? WHERE id = ?", (now().isoformat(), vote.id))
+        db.conn.commit()
+        return "🗳️ Voting's closed, but nobody voted. Still undecided."
+    tied = [answer_id for answer_id, count in counts.items() if count == best and answer_id in options]
+    winner = get_movie(options[random.choice(tied)])
+    db.conn.execute("UPDATE movie_votes SET closed_at = ?, winner_movie_id = ? WHERE id = ?",
+                    (now().isoformat(), winner.id, vote.id))
+    db.conn.commit()
+    log.info("Movie vote %d won by %r", vote.id, winner.title)
+
+    text = f"🗳️ **{winner.name}** wins with {plural(best, 'vote')}"
+    text += f" (a {len(tied)}-way tie, settled by coin toss)." if len(tied) > 1 else "."
+    playing = current_movie(vote.guild_id)
+    on_watchlist = any(m.id == winner.id for m in watchlist(vote.guild_id))
+    if playing and playing.started_at:
+        text += f"\n-# {playing.name} is still on: `/np set {winner.title}` when it's done."
+    elif on_watchlist:
+        text += "\n" + set_up_next(vote.guild_id, winner.title, user_id)
+    else:
+        text += "\n-# It's not on the watchlist any more, so it hasn't been lined up."
+    tally = sorted(((counts.get(a, 0), get_movie(m)) for a, m in options.items()), key=lambda c: -c[0])
+    return text + "\n-# " + " · ".join(f"{m.name}: {count}" for count, m in tally)
+
+
+@np_group.group(name="vote", fallback="start", invoke_without_command=True,
+                description="Vote on what to watch next, from the watchlist (a Discord poll).")
+@app_commands.describe(count="How many random films from the watchlist (if you don't name them)",
+                       hours="Optional: close it after this many hours (otherwise it's open until /np vote end)",
+                       include_watched="Also pick from films struck off as watched (named films are always allowed)",
+                       films="Optional: which films, separated by commas")
+async def np_vote(ctx: commands.Context, count: commands.Range[int, 2, 10] = 5,
+                  hours: commands.Range[int, 1, POLL_MAX_HOURS] | None = None, include_watched: bool = False, *,
+                  films: str | None = None):
+    if open_vote(ctx.guild.id):
+        await ctx.send("There's already a vote going. `/np vote end` closes it.", ephemeral=True)
+        return
+    if films:
+        chosen, missing = [], []
+        for name in (part.strip() for part in films.split(",")):
+            if name:
+                found = find_on_watchlist(ctx.guild.id, name)
+                if found is None:
+                    missing.append(name)
+                elif found not in chosen:
+                    chosen.append(found)
+        if missing:
+            await ctx.send(f"Not on the watchlist: {', '.join(missing)}. `/np watchlist add` them first.",
+                           ephemeral=True)
+            return
+        if len(chosen) > 10:
+            await ctx.send("Discord polls take up to 10 films.", ephemeral=True)
+            return
+    else:
+        saved = [m for m in watchlist(ctx.guild.id) if include_watched or not m.struck_at]
+        chosen = random.sample(saved, min(count, len(saved)))
+    if len(chosen) < 2:
+        hint = ("`/np watchlist add` some, or `/np watchlist import` a Letterboxd list"
+                if films or include_watched or len(watchlist(ctx.guild.id)) < 2
+                else "the rest are struck off as watched; add `include_watched:True` to use them")
+        await ctx.send(f"A vote needs at least two films: {hint}.", ephemeral=True)
+        return
+    poll = discord.Poll(VOTE_QUESTION, duration=timedelta(hours=hours or POLL_MAX_HOURS))
+    for movie in chosen:
+        poll.add_answer(text=answer_text(movie.title))
+    when = f"in {plural(hours, 'hour')}, or when someone runs" if hours else "when someone runs"
+    try:
+        message = await ctx.send(f"-# Voting closes {when} `/np vote end`. The winner gets lined up.", poll=poll)
+    except discord.Forbidden:
+        await ctx.send("I need the **Send Polls** permission in this channel.", ephemeral=True)
+        return
+    cursor = db.conn.execute("INSERT INTO movie_votes (guild_id, channel_id, message_id, created_by, created_at) "
+                             "VALUES (?, ?, ?, ?, ?)",
+                             (ctx.guild.id, ctx.channel.id, message.id, ctx.author.id, now().isoformat()))
+    db.conn.executemany("INSERT INTO movie_vote_options (vote_id, answer_id, movie_id) VALUES (?, ?, ?)",
+                        [(cursor.lastrowid, n, movie.id) for n, movie in enumerate(chosen, 1)])
+    db.conn.commit()
+    log.info("[%s] %s started a movie vote between %d films", ctx.guild.name, ctx.author, len(chosen))
+
+
+@np_vote.command(name="end", description="Close the vote now and line up the winner.")
+async def np_vote_end(ctx: commands.Context):
+    vote = open_vote(ctx.guild.id)
+    if vote is None:
+        await ctx.send("There's no vote going. `/np vote` starts one.", ephemeral=True)
+        return
+    channel = ctx.bot.get_channel(vote.channel_id) or ctx.channel
+    try:
+        message = await channel.fetch_message(vote.message_id)
+        if not message.poll.is_finalised():
+            message = await message.end_poll()
+        poll = message.poll
+    except discord.HTTPException:
+        poll = None  # The poll's gone (deleted?): close the vote without a winner.
+    await ctx.send(finish_vote(vote, poll, ctx.author.id), allowed_mentions=NO_PINGS)
+
+
+async def vote_closed_by_itself(message: discord.Message):
+    """Discord posts a "poll results" message when a poll's time runs out: finish that vote."""
+    if message.type != discord.MessageType.poll_result or message.reference is None:
+        return
+    vote = open_vote_by_message(message.reference.message_id)
+    if vote is None:
+        return  # Not ours, or already closed with /np vote end.
+    try:
+        poll = (await message.channel.fetch_message(vote.message_id)).poll
+    except discord.HTTPException:
+        poll = None
+    await message.channel.send(finish_vote(vote, poll, vote.created_by), allowed_mentions=NO_PINGS)
 
 
 async def _ready_to_start(ctx: commands.Context) -> Movie | None:
@@ -848,6 +1124,9 @@ async def np_end(ctx: commands.Context):
     if winners:
         text += "\n🎉 Bingo: " + ", ".join(f"<@{u}>" for u in winners)
     text += "\n⭐ Rate it with `/rate <1-10>`."
+    if movie.from_watchlist:
+        keep_on_watchlist_struck(movie)
+        text += "\n-# Struck off the watchlist."
     await ctx.send(text, allowed_mentions=NO_PINGS)
     await reveal_predictions(ctx.channel, movie)
     await set_bot_status(ctx.bot, None)
@@ -1082,9 +1361,14 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
             "• Anyone can run any of it. Called predictions and bingo wins go on the rap sheet; `/np history` "
             "lists what you've watched with its ratings, and `/np predictions <title>` shows what was predicted "
             "for a film and who called it.\n"
-            "• `/np watchlist` is what's still to watch: `add` a film, `import` a public Letterboxd list (with "
-            "years and links), `remove` one. Films swapped out with `/np set` or ended before they started go "
+            "• `/np watchlist` is what's still to watch: `add` a film (by title, or by Letterboxd link to get its year "
+            "and link), `import` a public Letterboxd list (with "
+            "years and links), `remove` one, or `strike` one off as watched (it stays listed, crossed out, and "
+            "votes skip it; `unstrike` undoes it). Films watched from the list are struck off when they end. Films swapped out with `/np set` or ended before they started go "
             "on it too, with their predictions. `/np set` autocompletes from it; `Alien` finds `Alien (1979)`.\n"
+            "• Can't decide? `/np vote` posts a poll of 5 random films from the watchlist (or name them: "
+            "`films:Alien, Deadstream`). It's open until `/np vote end` (or `hours:` for a timed one); then the "
+            "winner's lined up.\n"
             "• Watching something again is a new watch (Alien (watch #2)), with fresh predictions, bingo cards and "
             "ratings. `/np predictions Alien #1` looks up an earlier one.")
     return "", [("🎬 How movie night works", text, False)]
@@ -1095,3 +1379,4 @@ async def setup(bot: commands.Bot):
         bot.add_command(command)
     bot.add_listener(prediction_vote, "on_raw_reaction_add")
     bot.add_listener(prediction_unvote, "on_raw_reaction_remove")
+    bot.add_listener(vote_closed_by_itself, "on_message")

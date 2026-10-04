@@ -686,3 +686,272 @@ def test_countdown_called_off_if_the_film_changes(at, sleeps):
     assert reply.content.startswith("🎬 Countdown called off")
     assert movie.current_movie(111).title == "Jaws" and movie.current_movie(111).started_at is None
     assert not movie.counting_down
+
+
+# --- /np vote ---
+HALLOWEEN = ["Alien (1979)", "Deadstream (2022)", "Braindead (1992)", "Nosferatu (2024)", "Tarantula (1955)",
+             "Life (2017)"]
+
+
+@pytest.fixture
+def theatre(at, bot):
+    """A shared channel (the poll lives there) and a watchlist to vote from."""
+    channel = bot.add_channel(Channel(500, Guild()))
+    for title in HALLOWEEN:
+        movie.add_to_watchlist(111, title, SCOTT.id)
+    return channel
+
+
+def vote(user=SCOTT, channel=None, **kwargs):
+    ctx = Ctx(user, channel=channel)
+    run(movie.np_vote.callback(ctx, **kwargs))
+    return ctx.last
+
+
+def end_vote(channel, user=DAVE):
+    ctx = Ctx(user, channel=channel)
+    run(movie.np_vote_end.callback(ctx))
+    return ctx.last
+
+
+def cast(poll_message, **votes_by_title):
+    for answer in poll_message.poll.answers:
+        answer._vote_count = votes_by_title.get(answer.text, 0)
+
+
+def test_vote_picks_random_films_from_the_watchlist(theatre):
+    reply = vote(channel=theatre)
+    poll = reply.poll
+    # Open until someone ends it: as long as Discord allows (32 days).
+    assert poll.question == "🍿 What are we watching next?" and poll.duration.total_seconds() == 32 * 24 * 3600
+    assert len(poll.answers) == 5 and {a.text for a in poll.answers} <= set(HALLOWEEN)
+    assert reply.content.startswith("-# Voting closes when someone runs `/np vote end`. The winner gets lined up.")
+    assert "There's already a vote going" in vote(channel=theatre).content
+
+
+def test_vote_on_chosen_films_then_end_it(theatre):
+    reply = vote(channel=theatre, hours=3, films="alien, braindead (1992),  Deadstream")
+    assert [a.text for a in reply.poll.answers] == ["Alien (1979)", "Braindead (1992)", "Deadstream (2022)"]
+    assert reply.poll.duration.total_seconds() == 3 * 3600
+    assert reply.content.startswith("-# Voting closes in 3 hours, or when someone runs `/np vote end`.")
+    cast(reply, **{"Alien (1979)": 1, "Braindead (1992)": 3})
+    result = end_vote(theatre)
+    assert result.content.startswith("🗳️ **Braindead (1992)** wins with 3 votes.\n🎬 **Up next:** Braindead (1992)")
+    assert result.content.endswith("-# Braindead (1992): 3 · Alien (1979): 1 · Deadstream (2022): 0")
+    assert reply.poll.is_finalised()  # the poll was closed in Discord too
+    assert movie.current_movie(111).title == "Braindead (1992)"
+    assert "There's no vote going" in end_vote(theatre).content
+    assert "Braindead (1992)" not in [m.title for m in movie.watchlist(111)]
+
+
+def test_vote_refusals(theatre):
+    assert "Not on the watchlist: Jaws" in vote(channel=theatre, films="Alien, Jaws").content
+    assert "at least two films" in vote(channel=theatre, films="Alien, alien (1979)").content  # the same film twice
+    assert "There's no vote going" in end_vote(theatre).content
+
+
+def test_vote_needs_two_films_on_the_watchlist(at, bot):
+    movie.add_to_watchlist(111, "Alien", SCOTT.id)
+    assert "at least two films" in vote().content
+
+
+def test_ties_and_no_votes(theatre, monkeypatch):
+    reply = vote(channel=theatre, films="Alien, Life")
+    assert end_vote(theatre).content == "🗳️ Voting's closed, but nobody voted. Still undecided."
+    assert movie.current_movie(111) is None
+    reply = vote(channel=theatre, films="Alien, Life, Tarantula")
+    cast(reply, **{"Alien (1979)": 2, "Life (2017)": 2, "Tarantula (1955)": 1})
+    monkeypatch.setattr(movie.random, "choice", lambda options: options[-1])  # the coin lands on Life
+    assert end_vote(theatre).content.startswith("🗳️ **Life (2017)** wins with 2 votes (a 2-way tie, settled by coin toss).")
+
+
+def test_the_winner_waits_if_something_is_playing(theatre):
+    np("set", title="Jaws")
+    np("start")
+    reply = vote(channel=theatre, films="Alien, Life")
+    cast(reply, **{"Alien (1979)": 1})
+    assert "-# Jaws is still on: `/np set Alien (1979)` when it's done." in end_vote(theatre).content
+    assert movie.current_movie(111).title == "Jaws"
+
+
+def test_the_winner_swaps_out_whatever_was_lined_up(theatre):
+    np("set", title="Jaws")
+    reply = vote(channel=theatre, films="Alien, Life")
+    cast(reply, **{"Life (2017)": 1})
+    result = end_vote(theatre).content
+    assert "**Up next:** Life (2017)" in result and "Jaws is on the watchlist" in result
+
+
+def test_vote_closes_by_itself_when_time_runs_out(theatre):
+    reply = vote(channel=theatre, films="Alien, Life")
+    cast(reply, **{"Alien (1979)": 2})
+    reply.poll._finalized = True
+    results = types.SimpleNamespace(type=discord.MessageType.poll_result, channel=theatre,
+                                    reference=types.SimpleNamespace(message_id=reply.id))
+    run(movie.vote_closed_by_itself(results))
+    assert theatre.sent[-1].content.startswith("🗳️ **Alien (1979)** wins with 2 votes.\n🎬 **Up next:** Alien (1979)")
+    run(movie.vote_closed_by_itself(results))  # already closed: nothing more
+    assert len([m for m in theatre.sent if m.content and m.content.startswith("🗳️")]) == 1
+    other = types.SimpleNamespace(type=discord.MessageType.default, channel=theatre, reference=None)
+    run(movie.vote_closed_by_itself(other))  # ordinary messages are ignored
+
+
+def test_poll_answers_fit_discord():
+    assert movie.answer_text("x" * 80) == "x" * 54 + "…" and len(movie.answer_text("x" * 80)) == 55
+    assert movie.answer_text("Alien (1979)") == "Alien (1979)"
+
+
+# --- Striking films off the watchlist ---
+def test_strike_and_unstrike(theatre):
+    reply = watchlist_cmd("strike", title="alien")
+    assert reply.content.startswith("🍿 ~~Alien (1979)~~ struck off as watched.") and reply.content.endswith("5 to watch.")
+    assert "already struck off" in watchlist_cmd("strike", title="Alien").content
+    assert "There's no Jaws on the watchlist" in watchlist_cmd("strike", title="Jaws").content
+
+    ctx = Ctx(SCOTT)
+    run(movie.np_watchlist.callback(ctx))
+    embed = ctx.last.embed
+    assert embed.title == "🍿 To watch (5)"
+    assert embed.description.splitlines()[-1] == "~~Alien (1979)~~ (watched 03 Oct)"  # still listed, crossed out, last
+    assert embed.footer.text.startswith("1 struck off as watched.")
+
+    choices = run(movie.unstruck_autocomplete(types.SimpleNamespace(guild_id=111), "a"))
+    assert "Alien (1979)" not in [c.value for c in choices]
+    assert [c.name for c in run(movie.struck_autocomplete(types.SimpleNamespace(guild_id=111), ""))] == [
+        "Alien (1979) (watched)"]
+
+    assert watchlist_cmd("unstrike", title="Alien").content == "🍿 **Alien (1979)** is back on the watchlist. 6 to watch."
+    assert "isn't struck off" in watchlist_cmd("unstrike", title="Alien").content
+
+
+def test_votes_leave_out_struck_films_unless_asked(theatre):
+    for title in HALLOWEEN[:4]:
+        watchlist_cmd("strike", title=title)
+    left = set(HALLOWEEN[4:])
+    reply = vote(channel=theatre, count=10)
+    assert {a.text for a in reply.poll.answers} == left  # only the two not struck off
+    end_vote(theatre)
+    reply = vote(channel=theatre, count=10, include_watched=True)
+    assert {a.text for a in reply.poll.answers} == set(HALLOWEEN)
+    end_vote(theatre)
+    reply = vote(channel=theatre, films="Alien, Life")  # named films are always allowed
+    assert [a.text for a in reply.poll.answers] == ["Alien (1979)", "Life (2017)"]
+
+
+def test_vote_hints_at_include_watched(theatre):
+    for title in HALLOWEEN[:5]:
+        watchlist_cmd("strike", title=title)
+    assert "add `include_watched:True`" in vote(channel=theatre).content
+
+
+def test_lining_up_a_struck_film(theatre):
+    watchlist_cmd("strike", title="Alien")
+    assert "Back from the watchlist" in np("set", title="Alien").content  # watching it again is fine
+
+
+def struck_titles(guild_id=111):
+    return [m.title for m in movie.watchlist(guild_id) if m.struck_at]
+
+
+def test_watching_a_film_from_the_watchlist_strikes_it(theatre):
+    np("set", title="Alien")
+    np("start")
+    rate(SCOTT, 9)
+    reply = np("end")
+    assert reply.content.endswith("\n-# Struck off the watchlist.")
+    assert struck_titles() == ["Alien (1979)"]
+    assert movie.to_watch_count(111) == 5
+    entry = next(m for m in movie.watchlist(111) if m.title == "Alien (1979)")
+    assert entry.started_at is None and entry.ended_at is None  # a fresh entry: the watch keeps its own row
+    assert movie.movie_to_rate(111).title == "Alien (1979)" and movie.movie_to_rate(111).id != entry.id
+    assert "**9.0/10** from 1 rating" in rate(SCOTT).content  # the rating stayed with the watch
+
+
+def test_films_not_from_the_watchlist_stay_off_it(theatre):
+    np("set", title="Jaws")
+    np("start")
+    assert "Struck off" not in np("end").content
+    assert "Jaws" not in [m.title for m in movie.watchlist(111)]
+
+
+def test_rewatching_keeps_one_struck_entry(theatre):
+    for _ in range(2):
+        np("set", title="Alien")  # the second time, it's the struck entry being lined up again
+        np("start")
+        np("end")
+    assert struck_titles() == ["Alien (1979)"]
+    assert movie.movie_to_rate(111).watch_number == 2
+
+
+def test_readding_a_watched_film_then_watching_it(theatre):
+    np("set", title="Alien")
+    np("start")
+    movie.add_to_watchlist(111, "Life (2017)", SCOTT.id)  # already there: nothing new
+    np("end")
+    watchlist_cmd("unstrike", title="Alien")
+    np("set", title="Alien")
+    np("start")
+    np("end")
+    assert struck_titles() == ["Alien (1979)"]
+
+
+def test_the_vote_winner_is_struck_once_watched(theatre):
+    reply = vote(channel=theatre, films="Alien, Life")
+    cast(reply, **{"Life (2017)": 2})
+    end_vote(theatre)
+    np("start")
+    np("end")
+    assert struck_titles() == ["Life (2017)"]
+
+
+def test_a_swapped_out_film_goes_back_unstruck(theatre):
+    np("set", title="Alien")
+    np("set", title="Life")  # Alien back on the watchlist, not watched
+    assert struck_titles() == [] and movie.to_watch_count(111) == 5
+
+
+# --- Adding by Letterboxd link ---
+@pytest.fixture
+def letterboxd_films(monkeypatch):
+    from ktdi.lib import letterboxd
+    films = {"https://letterboxd.com/film/nosferatu/": "Nosferatu (1922)",
+             "https://letterboxd.com/film/nosferatu-2024/": "Nosferatu (2024)"}
+
+    async def fake_fetch_film(url):
+        link = letterboxd.check_film_url(url)
+        if link not in films:
+            raise letterboxd.LetterboxdError("Letterboxd says that film doesn't exist.")
+        return letterboxd.Film(films[link], link)
+    monkeypatch.setattr(movie.letterboxd, "fetch_film", fake_fetch_film)
+
+
+NOSFERATU = "https://letterboxd.com/film/nosferatu/"
+
+
+def test_add_by_link(at, letterboxd_films):
+    reply = watchlist_cmd("add", link=NOSFERATU)
+    assert reply.content == f"🍿 Added **[Nosferatu (1922)](<{NOSFERATU}>)** to the watchlist (1 to watch)."
+    assert "already on the watchlist" in watchlist_cmd("add", link="letterboxd.com/film/nosferatu").content
+    assert "doesn't exist" in watchlist_cmd("add", link="https://letterboxd.com/film/nope/").content
+    assert "isn't a Letterboxd film" in watchlist_cmd("add", link="https://example.com/film/x/").content
+
+
+def test_link_merges_into_a_title_only_entry(at, letterboxd_films):
+    watchlist_cmd("add", title="Nosferatu")
+    movie.add_to_watchlist(111, "Nosferatu (2024)", SCOTT.id, "https://letterboxd.com/film/nosferatu-2024/")
+    reply = watchlist_cmd("add", title="Nosferatu", link=NOSFERATU)
+    assert reply.content == f"🍿 Linked **[Nosferatu (1922)](<{NOSFERATU}>)** on the watchlist to its Letterboxd page."
+    titles = sorted((m.title, m.link) for m in movie.watchlist(111))
+    assert titles == [("Nosferatu (1922)", NOSFERATU), ("Nosferatu (2024)", "https://letterboxd.com/film/nosferatu-2024/")]
+
+
+def test_add_with_a_link_typed_in_with_the_title(at, letterboxd_films):
+    watchlist_cmd("add", title="nosferatu")
+    # Typed with !, everything arrives as one string, in either order.
+    assert "Linked" in watchlist_cmd("add", title=f"Nosferatu {NOSFERATU}").content
+    assert len(movie.watchlist(111)) == 1
+    reply = watchlist_cmd("add", title="https://letterboxd.com/film/nosferatu-2024/")
+    assert "Added **[Nosferatu (2024)]" in reply.content
+    assert "One link at a time" in watchlist_cmd("add", title=f"{NOSFERATU} {NOSFERATU}").content
+    assert "Add what?" in watchlist_cmd("add").content
+    assert watchlist_cmd("add", title="The", link="Thing").content.startswith("🍿 Added **The Thing**")

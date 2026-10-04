@@ -139,7 +139,29 @@ SCHEMA = [
         archived_at    TEXT,                       -- set aside before starting: on the watchlist, not yet watched
         watch_number   INTEGER,                    -- 1st, 2nd... time we've watched this title; set at /np start
         link           TEXT,                       -- its Letterboxd page, if it came from an imported list
-        dropped_at     TEXT                        -- taken off the watchlist (/np watchlist remove); kept, not deleted
+        dropped_at     TEXT,                       -- taken off the watchlist (/np watchlist remove); kept, not deleted
+        struck_at      TEXT,                       -- struck off as watched (/np watchlist strike): still listed
+        from_watchlist INTEGER NOT NULL DEFAULT 0  -- lined up from the watchlist: goes back on it, struck, when it ends
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS movie_votes (
+        id              INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id        INTEGER NOT NULL,
+        channel_id      INTEGER NOT NULL,
+        message_id      INTEGER NOT NULL,  -- the Discord poll; the votes themselves live in Discord
+        created_by      INTEGER NOT NULL,
+        created_at      TEXT NOT NULL,
+        closed_at       TEXT,              -- NULL while voting's open (one open vote per server)
+        winner_movie_id INTEGER
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS movie_vote_options (
+        vote_id   INTEGER NOT NULL,
+        answer_id INTEGER NOT NULL,  -- the poll answer's number: 1, 2, 3... in the order they were added
+        movie_id  INTEGER NOT NULL,  -- a film on the watchlist
+        PRIMARY KEY (vote_id, answer_id)
     )
     """,
     """
@@ -209,10 +231,12 @@ def _upgrade() -> None:
     if "watch_number" not in movie_columns:
         conn.execute("ALTER TABLE movies ADD COLUMN watch_number INTEGER")
         conn.execute("UPDATE movies SET watch_number = 1 WHERE started_at IS NOT NULL")
-    # The to-watch list: Letterboxd links, and films taken off it.
-    for column in ("link", "dropped_at"):
+    # The to-watch list: Letterboxd links, films taken off it, and films struck off as watched.
+    for column in ("link", "dropped_at", "struck_at"):
         if column not in movie_columns:
             conn.execute(f"ALTER TABLE movies ADD COLUMN {column} TEXT")
+    if "from_watchlist" not in movie_columns:
+        conn.execute("ALTER TABLE movies ADD COLUMN from_watchlist INTEGER NOT NULL DEFAULT 0")
 
 
 def init(path: str) -> None:

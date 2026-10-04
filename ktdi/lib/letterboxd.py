@@ -1,4 +1,4 @@
-"""Reading a public Letterboxd list, for /np watchlist import. No Discord code.
+"""Reading a public Letterboxd list (/np watchlist import) or film page (/np watchlist add). No Discord code.
 
 Letterboxd has no open API, so this reads the list's web page, the same one anyone can open in a browser. Each film
 on it carries data-item-name="Alien (1979)" and data-item-link="/film/alien/"; long lists have a "next" page link.
@@ -7,6 +7,7 @@ If Letterboxd changes its pages, parse_page() is the bit to fix (tests/test_lib_
 
 import html
 import re
+from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from typing import Awaitable, Callable
 from urllib.parse import urljoin, urlparse
@@ -17,6 +18,7 @@ SITE = "https://letterboxd.com"
 HOSTS = {"letterboxd.com", "www.letterboxd.com"}
 SHORT_HOSTS = {"boxd.it"}  # Letterboxd's own short links, which redirect to letterboxd.com.
 LIST_PATH_RE = re.compile(r"^/([^/]+)/list/([^/]+)/?(?:page/\d+/?)?$")
+FILM_PATH_RE = re.compile(r"^/(?:[^/]+/)?film/([^/]+)(?:/.*)?$")
 MAX_PAGES = 10  # Letterboxd shows 100 films a page, so up to 1000.
 USER_AGENT = "KTDI Discord bot (reading one public list for a movie night)"
 
@@ -87,33 +89,83 @@ def parse_page(page: str, url: str) -> Page:
 Getter = Callable[[str], Awaitable[tuple[str, int, str]]]
 
 
+@asynccontextmanager
+async def _reader(get: Getter | None):
+    """The given getter (tests), or a real one for the duration."""
+    if get is not None:
+        yield get
+        return
+    async with aiohttp.ClientSession(headers={"User-Agent": USER_AGENT},
+                                     timeout=aiohttp.ClientTimeout(total=20)) as session:
+        async def real_get(page_url: str) -> tuple[str, int, str]:
+            async with session.get(page_url) as response:
+                return str(response.url), response.status, await response.text()
+        yield real_get
+
+
+async def _load(get: Getter, url: str, what: str, check: Callable[[str], str] | None = None) -> tuple[str, str]:
+    """(where it landed, page text), or a LetterboxdError saying what went wrong with the `what` ("list", "film").
+    `check` vets where it landed first, so a short link that lands somewhere else is refused as such."""
+    try:
+        final_url, status, text = await get(url)
+    except (aiohttp.ClientError, TimeoutError) as error:
+        raise LetterboxdError("I couldn't reach Letterboxd. Try again in a bit.") from error
+    if check:
+        final_url = check(final_url)
+    if status == 404:
+        raise LetterboxdError(f"Letterboxd says that {what} doesn't exist" + (" (or it's private)." if what == "list"
+                                                                               else "."))
+    if status != 200:
+        raise LetterboxdError(f"Letterboxd wouldn't show me that {what} (it said {status}). Try again later.")
+    return final_url, text
+
+
+def looks_like_link(text: str) -> bool:
+    """Whether a word someone typed is meant as a link (rather than part of a title)."""
+    lowered = text.lower()
+    return lowered.startswith(("http://", "https://")) or any(f"{host}/" in lowered for host in HOSTS | SHORT_HOSTS)
+
+
+def check_film_url(url: str) -> str:
+    """A Letterboxd film page (or boxd.it short link), tidied to https://letterboxd.com/film/<slug>/."""
+    url = url.strip().strip("<>")
+    if "://" not in url:
+        url = "https://" + url
+    parsed = urlparse(url)
+    host = (parsed.hostname or "").lower()
+    if host in SHORT_HOSTS and parsed.path.strip("/"):
+        return f"https://boxd.it{parsed.path}"
+    match = FILM_PATH_RE.match(parsed.path)  # Also someone's own page for a film: /jenny/film/alien/.
+    if host not in HOSTS or not match:
+        raise LetterboxdError("That isn't a Letterboxd film. It should look like `https://letterboxd.com/film/alien/`.")
+    return f"{SITE}/film/{match.group(1)}/"
+
+
+async def fetch_film(url: str, get: Getter | None = None) -> Film:
+    """A film's name with its year, as Letterboxd shows it ("Nosferatu (1922)"), and its page."""
+    url = check_film_url(url)
+    async with _reader(get) as get:
+        link, text = await _load(get, url, "film", check_film_url)  # A boxd.it link must land on a film.
+    title = OG_TITLE_RE.search(text)
+    if not title or not title.group(1).strip():
+        raise LetterboxdError("I couldn't find the film's name on that page.")
+    return Film(html.unescape(title.group(1)).strip(), link)
+
+
 async def fetch_list(url: str, get: Getter | None = None) -> FilmList:
     url = check_url(url)
     films: list[Film] = []
     seen: set[str] = set()
     title = None
-    session = None
-    if get is None:
-        session = aiohttp.ClientSession(headers={"User-Agent": USER_AGENT}, timeout=aiohttp.ClientTimeout(total=20))
-
-        async def get(page_url: str) -> tuple[str, int, str]:
-            async with session.get(page_url) as response:
-                return str(response.url), response.status, await response.text()
-    try:
+    async with _reader(get) as get:
         page_url: str | None = url
         for _ in range(MAX_PAGES):
             if page_url is None:
                 break
-            try:
-                final_url, status, text = await get(page_url)
-            except (aiohttp.ClientError, TimeoutError) as error:
-                raise LetterboxdError("I couldn't reach Letterboxd. Try again in a bit.") from error
-            if page_url == url:
-                url = check_url(final_url)  # Wherever a link (e.g. boxd.it) landed, it must be a list.
-            if status == 404:
-                raise LetterboxdError("Letterboxd says that list doesn't exist (or it's private).")
-            if status != 200:
-                raise LetterboxdError(f"Letterboxd wouldn't show me that list (it said {status}). Try again later.")
+            first = page_url == url
+            final_url, text = await _load(get, page_url, "list", check_url if first else None)
+            if first:
+                url = final_url  # Wherever a link (e.g. boxd.it) landed: checked to be a list.
             page = parse_page(text, final_url)
             title = title or page.title
             for film in page.films:
@@ -121,9 +173,6 @@ async def fetch_list(url: str, get: Getter | None = None) -> FilmList:
                     seen.add(film.link)
                     films.append(film)
             page_url = page.next_url if page.next_url and urlparse(page.next_url).hostname in HOSTS else None
-    finally:
-        if session:
-            await session.close()
     if not films:
         raise LetterboxdError("I couldn't find any films on that list.")
     owner = LIST_PATH_RE.match(urlparse(url).path).group(1)

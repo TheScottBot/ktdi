@@ -15,7 +15,7 @@ SLASH_COMMANDS = ["abm", "anime", "bail", "bingo", "blame", "books", "bribe", "c
                   "shhh", "spray", "tdoi", "timezone", "whospray"]
 SUBCOMMANDS = {
     "committee": ["funds", "ledger", "propose", "spend"],
-    "np": ["elapsed", "end", "history", "pause", "predictions", "resume", "sct", "set", "show", "start",
+    "np": ["elapsed", "end", "history", "pause", "predictions", "resume", "sct", "set", "show", "start", "vote",
            "watchlist"],
     "bingo": ["card", "mark", "unmark"],
     "timezone": ["clear", "convert", "set", "show"],
@@ -44,7 +44,8 @@ def test_slash_commands(loaded_bot):
     for group, subs in SUBCOMMANDS.items():
         assert sorted(c.name for c in tree.get_command(group).commands) == subs
     watchlist = tree.get_command("np").get_command("watchlist")
-    assert sorted(c.name for c in watchlist.commands) == ["add", "import", "remove", "show"]
+    assert sorted(c.name for c in watchlist.commands) == ["add", "import", "remove", "show", "strike", "unstrike"]
+    assert sorted(c.name for c in tree.get_command("np").get_command("vote").commands) == ["end", "start"]
 
 
 def test_prefix_commands(loaded_bot):
@@ -54,7 +55,7 @@ def test_prefix_commands(loaded_bot):
 
 def test_listeners(loaded_bot):
     assert {name: sorted(f.__name__ for f in funcs) for name, funcs in loaded_bot.extra_events.items()} == {
-        "on_message": ["remember_speaker"],
+        "on_message": ["remember_speaker", "vote_closed_by_itself"],
         "on_raw_reaction_add": ["prediction_vote", "reminder_subscribe", "spray_reaction"],
         "on_raw_reaction_remove": ["prediction_unvote", "reminder_unsubscribe"],
     }

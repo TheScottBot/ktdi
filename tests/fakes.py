@@ -37,8 +37,9 @@ class Guild:
 class Sent:
     """A message the bot sent."""
 
-    def __init__(self, content=None, embed=None, view=None, file=None, private=False, allowed_mentions=None):
-        self.content, self.embed, self.view, self.file = content, embed, view, file
+    def __init__(self, content=None, embed=None, view=None, file=None, private=False, allowed_mentions=None,
+                 poll=None):
+        self.content, self.embed, self.view, self.file, self.poll = content, embed, view, file, poll
         self.private, self.allowed_mentions = private, allowed_mentions
         self.id = id(self)
         self.reactions: list = []
@@ -57,6 +58,10 @@ class Sent:
 
     async def add_reaction(self, emoji):
         self.reactions.append(emoji)
+
+    async def end_poll(self):
+        self.poll._finalized = True
+        return self
 
     async def edit(self, **kwargs):
         if "content" in kwargs:
@@ -112,9 +117,11 @@ class Ctx:
         self.message.delete = delete
         self.sent: list[Sent] = []
 
-    async def send(self, content=None, embed=None, view=None, file=None, ephemeral=False, allowed_mentions=None, **kwargs):
-        message = Sent(content, embed, view, file, ephemeral, allowed_mentions)
+    async def send(self, content=None, embed=None, view=None, file=None, ephemeral=False, allowed_mentions=None,
+                   poll=None, **kwargs):
+        message = Sent(content, embed, view, file, ephemeral, allowed_mentions, poll)
         self.sent.append(message)
+        self.channel.messages[message.id] = message  # so it can be fetched again, like a real one
         return message
 
     async def reply(self, content=None, **kwargs):

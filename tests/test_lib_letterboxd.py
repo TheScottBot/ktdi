@@ -98,3 +98,46 @@ def test_errors():
         fetch(LIST, getter({LIST: 403}))
     with pytest.raises(LetterboxdError, match="couldn't find any films"):
         fetch(LIST, getter({LIST: page([])}))
+
+
+FILM = "https://letterboxd.com/film/nosferatu/"
+
+
+def film_page(name):
+    return f'<html><head><meta property="og:title" content="{name}"><title>{name} directed by…</title></head></html>'
+
+
+@pytest.mark.parametrize("typed", [
+    FILM, "letterboxd.com/film/nosferatu", "https://letterboxd.com/film/nosferatu/reviews/",
+    "https://letterboxd.com/jenny/film/nosferatu/", "<https://www.letterboxd.com/film/nosferatu/>",
+])
+def test_check_film_url(typed):
+    assert letterboxd.check_film_url(typed) == FILM
+
+
+@pytest.mark.parametrize("typed", [LIST, "https://example.com/film/nosferatu/", "https://letterboxd.com/jenny/"])
+def test_only_letterboxd_films(typed):
+    with pytest.raises(LetterboxdError, match="isn't a Letterboxd film"):
+        letterboxd.check_film_url(typed)
+
+
+def test_fetch_film():
+    film = asyncio.run(letterboxd.fetch_film(FILM, getter({FILM: film_page("Nosferatu (1922)")})))
+    assert (film.name, film.link) == ("Nosferatu (1922)", FILM)
+    film = asyncio.run(letterboxd.fetch_film("https://boxd.it/x", getter({FILM: film_page("Tom &amp; Jerry (2021)")},
+                                                                        {"https://boxd.it/x": FILM})))
+    assert film.name == "Tom & Jerry (2021)" and film.link == FILM
+    with pytest.raises(LetterboxdError, match="that film doesn't exist"):
+        asyncio.run(letterboxd.fetch_film(FILM, getter({})))
+    with pytest.raises(LetterboxdError, match="isn't a Letterboxd film"):  # a short link that lands on a list
+        asyncio.run(letterboxd.fetch_film("https://boxd.it/y", getter({LIST: page([])}, {"https://boxd.it/y": LIST})))
+    with pytest.raises(LetterboxdError, match="couldn't find the film's name"):
+        asyncio.run(letterboxd.fetch_film(FILM, getter({FILM: "<html></html>"})))
+
+
+@pytest.mark.parametrize("word, is_link", [
+    (FILM, True), ("letterboxd.com/film/alien/", True), ("boxd.it/abc", True), ("http://example.com", True),
+    ("Nosferatu", False), ("(1922)", False), ("letterboxd", False),
+])
+def test_looks_like_link(word, is_link):
+    assert letterboxd.looks_like_link(word) == is_link
