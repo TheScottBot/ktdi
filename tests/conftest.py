@@ -7,14 +7,15 @@ import os
 
 # Before importing ktdi: never read the real .env, and don't pick up library settings from the environment.
 os.environ["KTDI_NO_DOTENV"] = "1"
-for name in ("CALIBRE_URL", "BOOKS_GUILD_IDS", "GUILD_IDS", "COMMAND_PREFIX", "REMINDER_TIMEZONE", "BOT_TIMEZONE", "ANIME_USER_ID",
-             "WHOSPRAY_ADMIN_IDS"):
+for name in ("CALIBRE_URL", "BOOKS_GUILD_IDS", "GUILD_IDS", "COMMAND_PREFIX", "REMINDER_TIMEZONE", "BOT_TIMEZONE",
+             "ANIME_USER_ID", "WHOSPRAY_ADMIN_IDS", "DROPBOX_APP_KEY", "DROPBOX_APP_SECRET", "DROPBOX_REFRESH_TOKEN",
+             "RPG_DROPBOX_PATH", "RPG_GUILD_IDS"):
     os.environ.pop(name, None)
 
 import pytest  # noqa: E402
 
 from ktdi import common, db  # noqa: E402
-from ktdi.features import books, fun  # noqa: E402
+from ktdi.features import books, fun, rpg  # noqa: E402
 from tests.fakes import FakeBot  # noqa: E402
 
 
@@ -24,6 +25,7 @@ def fresh_state():
     fun.recent_speakers.clear()
     fun.last_blame.clear()
     books.recent_books.clear()
+    rpg.recent_files.clear()
     common.bot = FakeBot()
     yield
     db.conn.close()

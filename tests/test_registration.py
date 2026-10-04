@@ -11,7 +11,7 @@ from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "anime", "bail", "bingo", "blame", "books", "bribe", "campaign", "committee", "expunge",
-                  "help", "imperial", "linux", "loot", "np", "predict", "quote", "rapsheet", "rate", "settings",
+                  "help", "imperial", "linux", "loot", "np", "predict", "quote", "rapsheet", "rate", "rpg", "settings",
                   "shhh", "spray", "tdoi", "timezone", "whospray"]
 SUBCOMMANDS = {
     "committee": ["funds", "ledger", "propose", "spend"],
@@ -23,6 +23,7 @@ SUBCOMMANDS = {
     "quote": ["add", "claim", "delete", "dissociate", "last", "random", "search", "show"],
     "settings": ["shared_state", "show", "whospray_user"],
     "books": ["download", "search"],
+    "rpg": ["download", "search"],
 }
 
 
@@ -100,7 +101,7 @@ def test_main_help_list(loaded_bot):
     assert "`/quote add | claim | delete | dissociate | last | random | search | show`: " in fields["💬 Quotes"]
     assert "`/bail <user> <amount>`: " in fields["💦 Rap sheet"] and "React 💦: " in fields["💦 Rap sheet"]
     assert "`/loot`: " in fields["🎲 Fun"] and "`/anime`: " in fields["🎲 Fun"]
-    assert "/books" not in ctx.last.text  # library not set up here
+    assert "/books" not in ctx.last.text and "/rpg" not in ctx.last.text  # library and rulebooks not set up here
 
 
 def test_every_command_has_a_category_and_is_listed(loaded_bot, monkeypatch):

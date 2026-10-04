@@ -31,6 +31,7 @@ A tiny Discord bot for keeping your friends in line. Commands work as slash comm
 | `campaign remind <alias> <when>` / `campaign unremind <alias>` | Scheduled reminders. The time is when the game starts, plus an optional warning: `mondays at 1900, 15 minutes before`, `monday 7pm 1h before`, `every other friday at 7:30pm from 23 oct, half an hour before`. People react 🔔 to the setup message to get pinged; reminders post the campaign's buttons. Times are in `REMINDER_TIMEZONE` (defaults to `BOT_TIMEZONE`, which defaults to UK time). |
 | `campaign skip <alias>` / `campaign reschedule <alias> <change>` | For when things change. `skip` skips the next session (fortnightly games shift a week and carry on from there). `reschedule` takes a new warning (`30 minutes before`), `next 26 oct` (the next session's date) or a whole new schedule. All keep everyone's 🔔. |
 | `books search <query>` / `books download <ID or title>` | Search a Calibre-Web library and download a book (optional; see below). |
+| `rpg search <query>` / `rpg download <number or name>` | Search the RPG rulebooks in a Dropbox folder (words from the name or folder, any order: `5e player`) and get a private download link (optional; see below). |
 | `settings show` / `settings shared_state <true/false>` / `settings whospray_user [@user]` | Per-server settings, stored in the database. **Shared state** (on by default, needs Manage Server to change) pools quotes, sprays, bribes and campaigns with every other server that has it on; off keeps them local to that server, and switching loses nothing. **whospray_user** chooses the Don, who `/whospray` asks and `/tdoi` obeys (leave it empty to clear); only the user IDs in `WHOSPRAY_ADMIN_IDS` in `.env` can change it, not even server admins. |
 | `help [command]` | Lists all commands, grouped by category (Rap sheet, Fun, Movie night, Measurements, Quotes, Campaigns, Utilities), or details for one (e.g. `/help abm` lists every unit it understands). If the list ever outgrows one message it gets ◀ / ▶ page buttons. |
 
@@ -71,6 +72,23 @@ Text commands need the **Message Content Intent** enabled on the bot's page in t
 - The commands only work, and only appear, in the servers listed in `BOOKS_GUILD_IDS`.
 - `/books` replies are only visible to the person who asked; `!books download` sends the file by DM.
 - Discord's upload limit (10 MB on unboosted servers) applies. The bot sends the first format in `BOOK_FORMATS` that fits, or says the book is too big.
+
+### RPG rulebooks (optional)
+
+`/rpg` searches a folder of rulebooks in your Dropbox and sends a **private download link** straight from Dropbox (it lasts 4 hours), so big PDFs work: they're usually far over Discord's upload limit. Like `/books`, replies are only visible to the person who asked (`!rpg download` sends the link by DM), and nobody's searches or downloads are logged. To turn it on:
+
+1. Go to https://www.dropbox.com/developers/apps → **Create app** → **Scoped access** → **Full Dropbox** (needed to reach a folder like `Family Room`; the bot only ever reads the folder you give it) → name it, e.g. `KTDI rulebooks`.
+2. On the app's **Permissions** tab, tick **files.metadata.read** and **files.content.read** (nothing else) and **Submit**.
+3. On the **Settings** tab, copy the **App key** and **App secret**.
+4. On your PC, run `python -m ktdi.tools.dropbox_login`, paste the key and secret, open the link it prints, allow the app, and paste back the code. It prints the three `DROPBOX_*` lines for `.env`.
+5. In the bot's `.env`, add those, plus the folder as it appears in Dropbox (`https://www.dropbox.com/home/Family%20Room/RPGs` is `/Family Room/RPGs`) and the servers it's for:
+
+   ```
+   RPG_DROPBOX_PATH=/Family Room/RPGs
+   RPG_GUILD_IDS=111111111111111111
+   ```
+
+The commands only work, and only appear, in the servers in `RPG_GUILD_IDS`, and only once every one of these is set. The folder is re-read at most every 10 minutes, so new rulebooks show up within that. The refresh token is like a password for reading your Dropbox: keep `.env` private, and you can revoke it any time under Dropbox → Settings → Connected apps.
 
 ### Logs
 
@@ -113,8 +131,10 @@ ktdi/
 │   ├── campaigns.py   # campaigns and reminders
 │   ├── settings.py
 │   ├── books.py
+│   ├── rpg.py         # RPG rulebooks from Dropbox
 │   └── help.py        # asks each feature for its HELP_CATEGORY and help_extras(), so new features don't touch it
-└── lib/               # no Discord code: unit conversions, reminder schedules, Calibre-Web client
+├── lib/               # no Discord code: unit conversions, reminder schedules, Calibre-Web and Dropbox clients...
+└── tools/             # one-off helpers, e.g. python -m ktdi.tools.dropbox_login
 tests/                 # pytest
 ```
 

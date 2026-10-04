@@ -9,7 +9,7 @@ import discord
 from discord.ext import commands
 
 from ktdi import config
-from ktdi.common import log
+from ktdi.common import SearchPages, log, send_search_pages
 from ktdi.lib import library
 
 HELP_CATEGORY = "🔧 Utilities"
@@ -22,6 +22,10 @@ calibre = (
 )
 # Books seen in recent searches, so /books download <id> knows their formats and sizes.
 recent_books: dict[int, library.Book] = {}
+
+
+def books_configured() -> bool:
+    return calibre is not None
 
 
 def books_available(guild: discord.Guild | None) -> bool:
@@ -44,9 +48,11 @@ def book_line(book: library.Book) -> str:
     return f"`{book.id}` **{title}** — {discord.utils.escape_markdown(book.author_text[:60])} ({formats})"
 
 
-# "private": never log who used it (see is_private_command). "available": whether /help shows it here.
+# "private": never log who used it (see is_private_command). "available": whether it's synced to (and /help shows
+# it in) a server. "configured": whether it's synced at all.
 @commands.hybrid_group(name="books", description="Search and download books from the library.",
-                       invoke_without_command=True, extras={"private": True, "available": books_available})
+                       invoke_without_command=True,
+                       extras={"private": True, "available": books_available, "configured": books_configured})
 @books_enabled()
 async def books(ctx: commands.Context):
     await ctx.send(
@@ -69,74 +75,11 @@ async def books_search(ctx: commands.Context, *, query: str):
     if not results:
         await ctx.send(f"No books match “{discord.utils.escape_markdown(query)}”.", ephemeral=True)
         return
-    pages = BookSearchPages(results, query, ctx.author.id)
-    if pages.page_count == 1:
-        await ctx.send(embed=pages.embed(), ephemeral=True)
-        return
-    pages.message = await ctx.send(embed=pages.embed(), view=pages, ephemeral=True)
-
-
-class BookSearchPages(discord.ui.View):
-    """Search results with ◀ / ▶ buttons to page through them."""
-
-    def __init__(self, results: list[library.Book], query: str, author_id: int):
-        super().__init__(timeout=600)
-        self.results = results
-        self.query = query
-        self.author_id = author_id
-        self.page = 0
-        self.page_count = -(-len(results) // SEARCH_RESULTS_SHOWN)  # Round up.
-        self.message: discord.Message | None = None
-        self._update_buttons()
-
-    def embed(self) -> discord.Embed:
-        start = self.page * SEARCH_RESULTS_SHOWN
-        count = len(self.results)
-        embed = discord.Embed(
-            title=f"📚 {count} result{'s' if count != 1 else ''} for “{self.query[:100]}”",
-            description="\n".join(book_line(book) for book in self.results[start:start + SEARCH_RESULTS_SHOWN]),
-            color=discord.Color.blurple(),
-        )
-        footer = "Get one with /books download <ID or title>."
-        if self.page_count > 1:
-            footer = f"Page {self.page + 1} of {self.page_count}. " + footer
-        embed.set_footer(text=footer)
-        return embed
-
-    def _update_buttons(self) -> None:
-        self.previous_page.disabled = self.page == 0
-        self.next_page.disabled = self.page >= self.page_count - 1
-
-    async def interaction_check(self, interaction: discord.Interaction) -> bool:
-        # Matters for !books search, which posts in the channel where anyone could click.
-        if interaction.user.id != self.author_id:
-            await interaction.response.send_message("These are someone else's results. Run your own `/books search`.", ephemeral=True)
-            return False
-        return True
-
-    async def _show(self, interaction: discord.Interaction) -> None:
-        self._update_buttons()
-        await interaction.response.edit_message(embed=self.embed(), view=self)
-
-    @discord.ui.button(label="◀", style=discord.ButtonStyle.secondary)
-    async def previous_page(self, interaction: discord.Interaction, button: discord.ui.Button):
-        self.page = max(self.page - 1, 0)
-        await self._show(interaction)
-
-    @discord.ui.button(label="▶", style=discord.ButtonStyle.secondary)
-    async def next_page(self, interaction: discord.Interaction, button: discord.ui.Button):
-        self.page = min(self.page + 1, self.page_count - 1)
-        await self._show(interaction)
-
-    async def on_timeout(self) -> None:
-        # Buttons stop working after 10 minutes, so grey them out.
-        for item in self.children:
-            item.disabled = True
-        if self.message:
-            try:
-                await self.message.edit(view=self)
-            except discord.HTTPException:
-                pass  # Private messages can only be edited for 15 minutes; not worth failing over.
+    count = len(results)
+    await send_search_pages(ctx, SearchPages(
+        results, title=f"📚 {count} result{'s' if count != 1 else ''} for “{query[:100]}”", line=book_line,
+        footer="Get one with /books download <ID or title>.", command="/books search", author_id=ctx.author.id,
+        per_page=SEARCH_RESULTS_SHOWN))
 
 
 async def find_book(query: str) -> library.Book | int | list[library.Book]:

@@ -58,6 +58,17 @@ class KTDIBot(commands.Bot):
         for feature in FEATURES:
             await self.load_extension(feature)
 
+    def unavailable_commands(self, guild: discord.abc.Snowflake | None) -> list[str]:
+        """Top-level commands not to sync: extras["configured"]() is False (not set up on this bot), or, for a
+        server, extras["available"](guild) is False (e.g. /books outside BOOKS_GUILD_IDS)."""
+        names = []
+        for command in self.commands:
+            configured = command.extras.get("configured")
+            available = command.extras.get("available")
+            if (configured and not configured()) or (guild is not None and available and not available(guild)):
+                names.append(command.name)
+        return names
+
     async def setup_hook(self):
         await self.load_features()
         if config.GUILD_IDS:
@@ -65,16 +76,16 @@ class KTDIBot(commands.Bot):
             for guild_id in config.GUILD_IDS:
                 guild = discord.Object(id=guild_id)
                 self.tree.copy_global_to(guild=guild)
-                if not config.CALIBRE_URL or guild_id not in config.BOOKS_GUILD_IDS:
-                    self.tree.remove_command("books", guild=guild)  # Don't show /books where it can't be used.
+                for name in self.unavailable_commands(guild):  # e.g. /books outside the library servers
+                    self.tree.remove_command(name, guild=guild)
                 synced = await self.tree.sync(guild=guild)
                 log.info("Synced %d slash commands to server %s", len(synced), guild_id)
             # Remove any old global copies so commands don't show up twice.
             self.tree.clear_commands(guild=None)
             await self.tree.sync()
         else:
-            if not config.CALIBRE_URL:
-                self.tree.remove_command("books")  # Library not set up, so don't show /books anywhere.
+            for name in self.unavailable_commands(None):  # Not set up, so don't show them anywhere.
+                self.tree.remove_command(name)
             synced = await self.tree.sync()
             log.info("Synced %d global slash commands", len(synced))
 

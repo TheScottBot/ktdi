@@ -58,11 +58,13 @@ ktdi/
 │   ├── campaigns.py   campaigns, reminders, the reminder loop
 │   ├── settings.py    /settings (shared state, whospray user)
 │   ├── books.py       /books (Calibre-Web)
+│   ├── rpg.py         /rpg (RPG rulebooks in a Dropbox folder; download links)
 │   └── help.py        /help
 └── lib/               plain Python, no Discord imports
     ├── abm.py         unit parsing and conversion (+ abm_units.json dataset)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths
     ├── library.py     Calibre-Web OPDS client
+    ├── dropbox.py     Dropbox API client for /rpg: refresh-token login, folder listing, temporary links
     ├── anilist.py     random popular anime from AniList
     ├── timezones.py   timezone and time parsing for /timezone
     └── letterboxd.py  reads public Letterboxd list and film pages (no open API); only letterboxd.com/boxd.it URLs
@@ -135,7 +137,9 @@ changing:
 - `main_help_lines() -> [(category, line)]`: extra lines on the main list for things that aren't commands (e.g. 💦).
 - Command `extras`:
   - `"prefix_only": True` → shown as `!quote anon`, left out of the `/…` summary.
-  - `"available": fn(guild) -> bool` → hidden from `/help` where it can't be used (`/books`).
+  - `"available": fn(guild) -> bool` → hidden from `/help`, and not synced as a slash command, where it can't be
+    used (`/books`, `/rpg`).
+  - `"configured": fn() -> bool` → not synced at all when the feature isn't set up on this bot (`KTDIBot.unavailable_commands`).
   - `"private": True` → never logged with who used it (see §9).
 - If a prefix command's arguments are in a different order to its slash version, set `usage=` to the slash form
   (e.g. `quote add`).
@@ -220,6 +224,8 @@ Everything logs through `logging.getLogger("ktdi")` (`common.log`) to the file a
 - **`/books` is never logged against a person**: no user, search text, title or book ID. `LibraryError(private=True)`
   marks errors that name a book; log `error.log_text`, never `str(error)`. aiohttp errors are reduced to their type,
   because their messages can contain the request URL. `tests/test_books.py` checks the logs.
+- **`/rpg` gets the same treatment**: no user, search text, rulebook name or number. `DropboxError(private=True)` marks
+  errors that name a file. Only the size of a sent link is logged. `tests/test_rpg.py` checks the logs.
 - **Dissociating a quote doesn't log who asked**, since that would reveal whose quote it was. Saving a quote logs who
   saved it, not who said it.
 - Replies never ping unexpectedly: quote and campaign replies use `NO_PINGS`; reminders ping only subscribers and
@@ -250,6 +256,9 @@ Everything logs through `logging.getLogger("ktdi")` (`common.log`) to the file a
   `first_on_or_after`, `describe*`. Raises `ScheduleError` with user-safe messages.
 - **`library.py`**: Calibre-Web OPDS search (follows pagination) and download (prefers formats in order, respects
   Discord's upload limit). Basic auth is built by hand (aiohttp's `BasicAuth` is deprecated).
+- **`dropbox.py`**: swaps the refresh token for short-lived access tokens (and retries once on a 401), lists the folder
+  recursively (cached 10 minutes), searches it by words in the path, and makes 4-hour temporary links. Only for files
+  in its own listing, so nothing outside the folder can be fetched. `ktdi/tools/dropbox_login.py` gets the token.
 - **`anilist.py`**: `random_anime()` picks one of AniList's 500 most popular non-adult anime (GraphQL, no key needed,
   10 s timeout). It never raises: if AniList is unreachable it picks from `FALLBACK_TITLES`. Tests never call the
   real API; they fake `random_anime` or point `API_URL` at a closed port.
@@ -276,7 +285,7 @@ python -m pytest            # ~3 seconds
 - Freeze time with the `clock` fixture: `clock.set(datetime(...), campaigns)` patches that module's `datetime.now()`.
 - `test_registration.py` loads every feature onto a real `KTDIBot` and checks the command list, listeners and that
   every `/help` page, including the main list, fits Discord's limits. Update its expected lists when you add commands.
-- `test_books.py` runs a fake Calibre-Web with aiohttp.
+- `test_books.py` runs a fake Calibre-Web with aiohttp; `test_rpg.py` runs a fake Dropbox.
 
 ## Rules for changes
 
@@ -287,7 +296,7 @@ python -m pytest            # ~3 seconds
    command (reactions, extra tips) needs `help_extras` / `main_help_lines`. Give new features a `HELP_CATEGORY`. Update the README command table.
 4. **Data:** reads through `db.scope()`, writes record the current server, edits target the row's own server,
    schema changes are additive upgrades in `db._upgrade()`.
-5. **Privacy:** nothing about `/books` use may be logged against a person. Don't add logging that reveals what a
+5. **Privacy:** nothing about `/books` or `/rpg` use may be logged against a person. Don't add logging that reveals what a
    dissociated/anonymous action was meant to hide.
 6. **Discord limits:** slash command and option descriptions ≤ 100 characters, ≤ 25 options/choices/autocomplete
    results, embed fields ≤ 1024, embeds ≤ 6000, uploads 10 MB on unboosted servers, and a reply to a slash command
@@ -311,4 +320,5 @@ python -m pytest            # ~3 seconds
 | Blame/bribe state in memory | It's a per-channel, in-the-moment joke; persisting it adds complexity for no benefit. |
 | One reminder per campaign; warnings as `lead_minutes` | Matches how the group plays; the schedule stays "when the game starts". |
 | `/books` private and unlogged | People shouldn't feel watched for what they read. |
+| `/rpg` sends Dropbox links, not files | Rulebooks are usually 50–300 MB, far over Discord's upload limit. Links last 4 hours. |
 | Root `bot.py` launcher kept | The systemd service never needs editing. |

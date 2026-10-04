@@ -18,5 +18,6 @@ FEATURES = [
     "ktdi.features.campaigns",
     "ktdi.features.settings",
     "ktdi.features.books",
+    "ktdi.features.rpg",
     "ktdi.features.help",
 ]
