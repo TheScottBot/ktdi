@@ -3,6 +3,7 @@
 import logging
 import os
 import sys
+from datetime import time as dt_time
 from pathlib import Path
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
@@ -71,6 +72,20 @@ def zone_setting(name: str, default: ZoneInfo | str) -> ZoneInfo:
 BOT_TIMEZONE = zone_setting("BOT_TIMEZONE", "Europe/London")
 # Timezone that campaign reminder times are in, e.g. "mondays at 1800" means 18:00 here. Defaults to BOT_TIMEZONE.
 REMINDER_TIMEZONE = zone_setting("REMINDER_TIMEZONE", BOT_TIMEZONE)
+
+
+def time_setting(name: str, default: str) -> dt_time:
+    """A time of day from .env, as HH:MM (24-hour)."""
+    value = os.getenv(name) or default
+    try:
+        return dt_time.fromisoformat(value)
+    except ValueError:
+        logging.getLogger("ktdi").warning("%s %r isn't a time like 00:00; using %s.", name, value, default)
+        return dt_time.fromisoformat(default)
+
+
+# When each day's spray interest rate (/sprayfutures, /sprayrate) is set, in BOT_TIMEZONE. Defaults to midnight.
+SPRAY_RATE_TIME = time_setting("SPRAY_RATE_TIME", "00:00")
 
 # Optional role given to each server's biggest briber. Skipped on servers without a role by this name.
 BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")

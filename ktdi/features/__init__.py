@@ -9,6 +9,7 @@ Optional hooks a feature module can define, used by /help:
 # Load order is also the order /help asks features for extra help sections.
 FEATURES = [
     "ktdi.features.fun",
+    "ktdi.features.futures",
     "ktdi.features.committee",
     "ktdi.features.anime",
     "ktdi.features.movie",

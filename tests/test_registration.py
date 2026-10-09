@@ -12,7 +12,7 @@ from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "anime", "bail", "bingo", "blame", "books", "bribe", "campaign", "committee", "expunge",
                   "help", "imperial", "linux", "loot", "np", "predict", "quote", "rapsheet", "rate", "rpg", "settings",
-                  "shhh", "spray", "tdoi", "timezone", "whospray"]
+                  "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone", "whospray"]
 SUBCOMMANDS = {
     "committee": ["funds", "ledger", "propose", "spend"],
     "np": ["elapsed", "end", "history", "pause", "predictions", "resume", "sct", "set", "show", "start", "vote",

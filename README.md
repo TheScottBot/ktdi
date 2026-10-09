@@ -13,13 +13,15 @@ Grouped the same way as `/help`.
 |---|---|
 | `spray [@user]` | Posts a spray bottle GIF. Target someone to add to their rap sheet. |
 | React 💦 | Reacting 💦 to any message sprays whoever sent it and adds to their rap sheet. |
-| `rapsheet [@user]` | Shows someone's sprays, expunges, bails, Don orders, bribes, committee spending, called predictions and bingo wins (defaults to you). |
+| `rapsheet [@user]` | Shows someone's sprays, expunges, bails, Don orders, bribes, committee spending, called predictions, bingo wins and spray futures (defaults to you). |
 | `whospray` | Asks the server's Don (set with `/settings whospray_user`) who should be sprayed, with a random phrase. Only the Don is pinged. |
 | `tdoi` | The Don Ordered It: sprays yourself, on the Don's orders. Counts as a spray, and as a separate "sprayed themselves on the Don's orders" count on your rap sheet. |
 | `blame [reason]` | Blames a random person who's spoken recently in the channel. |
 | `bribe <amount>` | Only the person last blamed in the channel can use it. Pays to put the blame back on whoever blamed them (who can then bribe it back). Bribe totals go on the rap sheet. |
 | `expunge <amount>` | Pay the committee to remove one spray from your own rap sheet. Only works if you have a spray to remove. The payment counts as a bribe (toward your bribe total, the 👑 and the Champion Briber role), and your rap sheet shows how many you've had expunged. |
 | `bail <@user> <amount>` | The counterpart to `expunge`: pay to remove one spray from **someone else's** rap sheet (if you think it was unfair). The payment counts as your bribe. Both rap sheets show it: "Bailed out of N sprays by others" and "Bailed others out N times". |
+| `sprayfutures <@user> [stake] [hours]` | Bet that someone gets sprayed within `hours` (1 to 24, default 1), staking 1 to 10 sprays (default 1) per hour. On the line: stake × hours, plus the day's spray interest rate, rounded (e.g. 2 sprays × 3 hours at 15% = 7); the rate is fixed when you bet. The moment someone **other than you** sprays them (`spray`, a 💦 reaction, even `tdoi`), you win and that comes off your rap sheet (never below a clean record). If the time runs out, you lose and it goes on. Spraying them yourself doesn't count, you can't bet on yourself, and it's one open bet per person you're betting on. The result is announced where you bet, and bets survive a restart. |
+| `sprayrate` | Today's spray interest rate: a whole number from 1 to 20%, picked each day at `SPRAY_RATE_TIME` in `.env` (default midnight, in `BOT_TIMEZONE`). One rate for the whole bot. |
 | `committee funds / spend / ledger / propose` | The committee's money. Every `bribe`, `expunge` and `bail` pays in (including ones from before it kept accounts). `funds` (or just `!committee`) shows the balance and recent spending; anyone can `spend <amount> <item>`, but not more than it has, and it goes on the `ledger` and their rap sheet; `propose` suggests something to argue about, and how many the funds would buy. Shared servers share one committee. |
 
 **Optional Champion Briber role:** if a server has a role named `Champion Briber`, the bot gives it to that server's biggest all-time briber after each bribe (and takes it off the previous holder). The bot needs **Manage Roles**, and its own role must sit above `Champion Briber` in the role list. Servers without the role, or where the bot lacks permission, are skipped. Change the name with `BRIBER_ROLE_NAME`.
@@ -170,6 +172,7 @@ ktdi/
 ├── common.py          # small helpers shared by features
 ├── features/          # one file per feature, each a discord.py extension with a setup(bot)
 │   ├── fun.py         # spray, loot, linux, blame, bribe, rapsheet, 💦, Champion Briber
+│   ├── futures.py     # sprayfutures
 │   ├── committee.py   # the committee's funds
 │   ├── movie.py       # movie night: np, shhh, rate, predict, bingo
 │   ├── units.py       # abm, imperial

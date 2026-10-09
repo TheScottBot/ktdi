@@ -106,6 +106,33 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS spray_futures (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id   INTEGER NOT NULL,
+        channel_id INTEGER NOT NULL,  -- where the bet was placed, and where it's settled
+        bettor_id  INTEGER NOT NULL,
+        target_id  INTEGER NOT NULL,  -- who the bettor says will be sprayed
+        stake      INTEGER NOT NULL,  -- sprays staked per hour
+        hours      INTEGER NOT NULL DEFAULT 1,  -- how long the bet runs; the stake is multiplied by it
+        rate       INTEGER NOT NULL DEFAULT 0,  -- the day's spray interest rate (%) when the bet was placed
+        amount     INTEGER,           -- what's on the line: stake x hours, plus interest. Off if right, on if wrong
+        created_at TEXT NOT NULL,
+        expires_at TEXT NOT NULL,
+        settled_at TEXT,              -- NULL while the bet's open
+        outcome    TEXT,              -- 'won' or 'lost'
+        paid       INTEGER NOT NULL DEFAULT 0,  -- sprays actually taken off on a win (never below a clean record)
+        sprayed_by INTEGER            -- who sprayed the target, on a win (never the bettor)
+    )
+    """,
+    # One spray interest rate a day for the whole bot (so no guild_id), picked when it's first needed.
+    """
+    CREATE TABLE IF NOT EXISTS spray_rates (
+        day     TEXT PRIMARY KEY,  -- the date (in BOT_TIMEZONE) whose SPRAY_RATE_TIME started this rate
+        rate    INTEGER NOT NULL,  -- 1 to 20 (%)
+        set_at  TEXT NOT NULL
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS committee_spending (
         id         INTEGER PRIMARY KEY AUTOINCREMENT,
         guild_id   INTEGER NOT NULL,
@@ -237,6 +264,13 @@ def _upgrade() -> None:
             conn.execute(f"ALTER TABLE movies ADD COLUMN {column} TEXT")
     if "from_watchlist" not in movie_columns:
         conn.execute("ALTER TABLE movies ADD COLUMN from_watchlist INTEGER NOT NULL DEFAULT 0")
+    # Spray futures by the hour, with interest. Older bets were one hour at no interest: the amount is the stake.
+    future_columns = _columns("spray_futures")
+    for column, definition in (("hours", "INTEGER NOT NULL DEFAULT 1"), ("rate", "INTEGER NOT NULL DEFAULT 0"),
+                               ("amount", "INTEGER")):
+        if column not in future_columns:
+            conn.execute(f"ALTER TABLE spray_futures ADD COLUMN {column} {definition}")
+    conn.execute("UPDATE spray_futures SET amount = stake WHERE amount IS NULL")
 
 
 def init(path: str) -> None:

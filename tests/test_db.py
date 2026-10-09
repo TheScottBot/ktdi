@@ -49,3 +49,22 @@ def test_upgrades_a_movies_table_from_before_the_watchlist(tmp_path):
     assert movie.current_movie(111).title == "Jaws" and movie.current_movie(111).watch_number is None
     assert movie.current_movie(111).link is None and movie.watchlist(111) == []  # to-watch list columns added
     db.conn.close()
+
+
+def test_upgrades_spray_futures_from_before_hours_and_interest(tmp_path):
+    from ktdi.features import fun
+    path = str(tmp_path / "old.db")
+    old = sqlite3.connect(path)
+    old.execute("CREATE TABLE spray_futures (id INTEGER PRIMARY KEY AUTOINCREMENT, guild_id INTEGER NOT NULL,"
+                " channel_id INTEGER NOT NULL, bettor_id INTEGER NOT NULL, target_id INTEGER NOT NULL,"
+                " stake INTEGER NOT NULL, created_at TEXT NOT NULL, expires_at TEXT NOT NULL, settled_at TEXT,"
+                " outcome TEXT, paid INTEGER NOT NULL DEFAULT 0, sprayed_by INTEGER)")
+    old.execute("INSERT INTO spray_futures (guild_id, channel_id, bettor_id, target_id, stake, created_at, expires_at,"
+                " settled_at, outcome) VALUES (111, 500, 1, 2, 3, 'x', 'x', 'x', 'lost')")
+    old.commit()
+    old.close()
+
+    db.init(path)
+    assert db.conn.execute("SELECT hours, rate, amount FROM spray_futures").fetchone() == (1, 0, 3)
+    assert fun.get_spray_count(111, 1) == 3  # an old lost bet still counts its stake
+    db.conn.close()

@@ -117,9 +117,42 @@ def _scoped_sum(table: str, guild_id: int, user_id: int, column: str = "user_id"
 
 
 def get_spray_count(guild_id: int, user_id: int) -> int:
-    """Sprays on someone's record: every spray, minus the ones expunged (by them) or bailed (by others)."""
+    """Sprays on someone's record: every spray, minus the ones expunged (by them) or bailed (by others), plus or
+    minus their spray futures (/sprayfutures: lost stakes go on, winnings come off)."""
     removed = get_expunge_count(guild_id, user_id) + get_bails_received(guild_id, user_id)
-    return max(_scoped_sum("sprays", guild_id, user_id) - removed, 0)
+    lost, won = get_futures_totals(guild_id, user_id)
+    return max(_scoped_sum("sprays", guild_id, user_id) + lost - won - removed, 0)
+
+
+def get_futures_totals(guild_id: int, user_id: int) -> tuple[int, int]:
+    """(sprays put on their record by lost futures, sprays taken off by won ones)."""
+    where, params = db.scope(guild_id)
+    row = db.conn.execute(
+        f"SELECT COALESCE(SUM(CASE WHEN outcome = 'lost' THEN amount END), 0), "
+        f"COALESCE(SUM(CASE WHEN outcome = 'won' THEN paid END), 0) FROM spray_futures WHERE {where} AND bettor_id = ?",
+        (*params, user_id)).fetchone()
+    return row[0], row[1]
+
+
+def get_futures_record(guild_id: int, user_id: int) -> tuple[int, int]:
+    """(spray futures won, lost)."""
+    where, params = db.scope(guild_id)
+    row = db.conn.execute(
+        f"SELECT COUNT(CASE WHEN outcome = 'won' THEN 1 END), COUNT(CASE WHEN outcome = 'lost' THEN 1 END) "
+        f"FROM spray_futures WHERE {where} AND bettor_id = ?", (*params, user_id)).fetchone()
+    return row[0], row[1]
+
+
+async def after_spray(guild_id: int, target_id: int, sprayer_id: int) -> None:
+    """Every spray (/spray, 💦, /tdoi) goes through here, so spray futures on the target can pay out."""
+    from ktdi.features import futures  # Here, not at the top: futures needs this module first.
+    for channel_id, text in futures.settle_on_spray(guild_id, target_id, sprayer_id):
+        channel = common.bot.get_channel(channel_id)
+        if channel is not None:
+            try:
+                await channel.send(text, allowed_mentions=discord.AllowedMentions.none())
+            except discord.HTTPException:
+                pass  # Settled in the database either way; the announcement is a bonus.
 
 
 def record_bail(guild_id: int, user_id: int, paid_by: int) -> None:
@@ -244,6 +277,7 @@ async def spray(ctx: commands.Context, target: discord.Member | None = None):
         return
     record_spray(ctx.guild.id, target.id)
     await ctx.send(f"{target.mention} {SPRAY_GIF_URL}")
+    await after_spray(ctx.guild.id, target.id, ctx.author.id)
 
 
 @commands.hybrid_command(name="whospray", description="Ask the server's chosen sprayer who should get sprayed.")
@@ -271,6 +305,7 @@ async def tdoi(ctx: commands.Context):
     await ctx.send(f"🤌 The Don ordered it. {ctx.author.mention} sprays themselves.\n{SPRAY_GIF_URL}\n"
                    f"-# That's {plural(times, 'time')} the Don has made them do it.",
                    allowed_mentions=discord.AllowedMentions.none())
+    await after_spray(ctx.guild.id, ctx.author.id, ctx.author.id)  # Sprayed by themselves, for anyone betting on it.
 
 
 @commands.hybrid_command(name="loot", description="Declare that you're looting the body.", extras=FUN)
@@ -322,6 +357,11 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     bingos = movie.bingo_win_count(ctx.guild.id, user.id)
     if bingos:
         lines.append(f"🎉 Won movie bingo {plural(bingos, 'time')}.")
+    won, lost = get_futures_record(ctx.guild.id, user.id)
+    if won or lost:
+        sprays_on, sprays_off = get_futures_totals(ctx.guild.id, user.id)
+        lines.append(f"📈 Spray futures: {won} won ({plural(sprays_off, 'spray')} off), "
+                     f"{lost} lost ({plural(sprays_on, 'spray')} on).")
     if not lines:
         await ctx.send(f"📋 {user.display_name} has a clean record. Suspicious.")
         return
@@ -430,6 +470,8 @@ async def spray_reaction(payload: discord.RawReactionActionEvent):
     log.info("[%s] %s reacted %s, spraying user %s", channel.guild if payload.guild_id else "DM",
              reactor, SPRAY_EMOJI, payload.message_author_id)
     await channel.send(f"{target}{SPRAY_GIF_URL}")
+    if payload.message_author_id and payload.guild_id:
+        await after_spray(payload.guild_id, payload.message_author_id, payload.user_id)
 
 
 def main_help_lines() -> list[tuple[str, str]]:

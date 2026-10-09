@@ -49,6 +49,7 @@ ktdi/
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
 │   ├── fun.py         spray, whospray, tdoi, loot, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
+│   ├── futures.py     /sprayfutures, /sprayrate: bets on someone being sprayed; settled by fun.after_spray or expiry_loop
 │   ├── committee.py   /committee: the committee's funds (bribes in, spending out)
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /np, /shhh, /rate, /predict, /bingo (✅/❌ judging listener)
@@ -177,19 +178,21 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `movie_predictions` / `movie_prediction_votes` | sealed `/predict`ions, each tied to its film by `movie_id`. `message_id` is set when `/np end` reveals them, and ✅/❌ reactions on that message are the votes (called it if ✅ > ❌). Only revealed ones are ever shown (`/np predictions`, rap sheets); archived films keep theirs, still sealed. |
 | `movie_bingo_marks` / `movie_bingo_wins` | squares marked and wins. Cards aren't stored: `movie.bingo_card()` shuffles the squares with a seed of (movie, person). |
 | `user_timezones` | each person's own timezone (`/timezone set`), per person, not per server: an IANA name or a fixed offset like `UTC+5:30`. Logged as "set their timezone", never which one. |
+| `spray_futures` | `/sprayfutures` bets: who bet on whom, the stake, `hours`, the day's `rate` and the `amount` on the line (stake × hours plus interest, fixed when placed), when it expires, and how it settled (`outcome` won/lost, `paid` on a win, capped so a record never goes below zero, and `sprayed_by`, never the bettor). Lost amounts and paid winnings are part of `fun.get_spray_count`. Every spray goes through `fun.after_spray`, which pays out open bets on the target; `futures.expiry_loop` settles the rest as lost. |
+| `spray_rates` | the daily spray interest rate (1-20%), one row per day: picked at random the first time it's needed after `SPRAY_RATE_TIME` (in `BOT_TIMEZONE`). Bot-wide, so no `guild_id`. |
 | `committee_spending` | what the committee's money was spent on (`/committee spend`): amount, item, who. Money in isn't stored separately: it's the `bribes` totals (bribe, expunge and bail all record a bribe), so the balance is bribes minus spending, both read through `scope()`. |
 
 ### Rules
 
-- **Every row records the server it came from (`guild_id`).** Never move or copy rows between servers. The one
-  exception is `user_timezones`: a person's timezone is about them, not a server, so it has no `guild_id` and
-  follows them everywhere (and only exists if they set it).
+- **Every row records the server it came from (`guild_id`).** Never move or copy rows between servers. The two
+  exceptions: `user_timezones` (a person's timezone is about them, not a server, so it follows them everywhere, and
+  only exists if they set it) and `spray_rates` (one daily rate for the whole bot).
 - **Reads go through `db.scope(guild_id)`**, which returns a `WHERE` condition + parameters (see §8). Writes always
   record the server the command ran in.
 - **Changes to an existing row target that row's own server**: e.g. editing a campaign uses `campaign.guild_id`, not
   `ctx.guild.id`. Reminders belong to their campaign's server (`get_campaign_exact`), even if set up from another.
 - **Counters are summed on read** (`SUM(count)` across the servers in scope), not stored pooled. Removals are
-  recorded as their own counter and subtracted (sprays minus expunges minus bails), so nothing is ever deleted from another
+  recorded as their own counter and subtracted (sprays minus expunges minus bails, plus lost spray futures minus won ones), so nothing is ever deleted from another
   server's rows.
 - **Upgrades are additive**: add columns with defaults that keep old behaviour (e.g. `lead_minutes DEFAULT 0` kept old
   reminders pinging at their old time). Never drop or rewrite data in an upgrade. `db.init()` must work on any older
