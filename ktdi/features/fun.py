@@ -27,11 +27,11 @@ BAD_GIF_URLS = [
     "https://klipy.com/gifs/knock-it-off-knock-it-out",
     "https://klipy.com/gifs/regular-show-benson-8",
     "https://klipy.com/gifs/daddys-home2-daddys-home2gifs-23",
-    "https://klipy.com/gifs/bad-kitty",
 ]
 BADBONK_GIF_URLS = [
     "https://klipy.com/gifs/kanon-head-slap",
     "https://klipy.com/gifs/no-family-guy-2",
+    "https://klipy.com/gifs/bad-kitty",
 ]
 TOES_GIF_URL = "https://klipy.com/gifs/toes-test-water"
 TOES_SECONDS = 5  # How long the cryptid is visible before it's gone.
