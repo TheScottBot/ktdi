@@ -272,6 +272,31 @@ SCHEMA = [
         PRIMARY KEY (movie_id, user_id)
     )
     """,
+    # Wars (/wars): every act of hostility (a spray, /bad or /badbonk at someone else), and the bursts declared wars.
+    """
+    CREATE TABLE IF NOT EXISTS hostilities (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id   INTEGER NOT NULL,
+        channel_id INTEGER NOT NULL,
+        actor_id   INTEGER NOT NULL,
+        target_id  INTEGER NOT NULL,
+        weapon     TEXT NOT NULL,  -- 'spray', 'bad' or 'badbonk'
+        at         TEXT NOT NULL,  -- ISO 8601, UTC
+        war_id     INTEGER,        -- the war it was part of, if any
+        covered    INTEGER NOT NULL DEFAULT 0  -- insurance paid out on it (so it's not a casualty)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS wars (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id    INTEGER NOT NULL,
+        channel_id  INTEGER NOT NULL,  -- where it was fought (wars stay in their channel), and where it's reported
+        title       TEXT NOT NULL,     -- '' until it's over and named after how it went
+        started_at  TEXT NOT NULL,     -- the first act in the burst that started it
+        last_act_at TEXT NOT NULL,
+        ended_at    TEXT               -- NULL while it's going on (a secret); then its last act
+    )
+    """,
     # Alternative canon (/nowplaying canon): proposed during a watch, voted on with ✅/❌, and kept against the title
     # (title_key) so it resurfaces when the film's watched again.
     """
@@ -344,6 +369,8 @@ def _upgrade() -> None:
         if column not in future_columns:
             conn.execute(f"ALTER TABLE spray_futures ADD COLUMN {column} {definition}")
     conn.execute("UPDATE spray_futures SET amount = stake WHERE amount IS NULL")
+    if "covered" not in _columns("hostilities"):
+        conn.execute("ALTER TABLE hostilities ADD COLUMN covered INTEGER NOT NULL DEFAULT 0")
     # Insurance covers being bad (/bad, /badbonk) as well as sprays.
     if "kind" not in _columns("insurance_claims"):
         conn.execute("ALTER TABLE insurance_claims ADD COLUMN kind TEXT NOT NULL DEFAULT 'spray'")

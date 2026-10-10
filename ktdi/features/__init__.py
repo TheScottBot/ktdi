@@ -11,6 +11,7 @@ FEATURES = [
     "ktdi.features.fun",
     "ktdi.features.futures",
     "ktdi.features.insurance",
+    "ktdi.features.wars",
     "ktdi.features.committee",
     "ktdi.features.anime",
     "ktdi.features.herbal",

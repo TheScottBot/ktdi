@@ -13,7 +13,7 @@ from tests.fakes import Ctx, Guild, User
 SLASH_COMMANDS = ["abm", "anime", "bad", "badbonk", "bail", "blame", "books", "bribe", "campaign", "committee",
                   "cure", "expunge", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot",
                   "nowplaying", "plant", "quote", "rapsheet", "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
-                  "tdoi", "timezone", "whospray"]
+                  "tdoi", "timezone", "wars", "whospray"]
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
 HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {

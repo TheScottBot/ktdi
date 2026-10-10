@@ -124,14 +124,14 @@ def record_spray(guild_id: int, user_id: int) -> int:
     return get_spray_count(guild_id, user_id)
 
 
-def take_spray(guild_id: int, user_id: int, sprayer_id: int) -> str:
-    """Every spray lands here: it goes on their record unless their /insurance covers it.
-    Returns a line to add to the spray's message ("" if there's nothing to say)."""
+def take_spray(guild_id: int, user_id: int, sprayer_id: int) -> tuple[bool, str]:
+    """Every spray lands here: it goes on their record unless their /insurance covers it. Returns whether insurance
+    covered it, and a line to add to the spray's message ("" if there's nothing to say)."""
     from ktdi.features import insurance  # Here, not at the top: insurance needs this module first.
     covered, note = insurance.adjudicate(guild_id, user_id, sprayer_id)
     if not covered:
         record_spray(guild_id, user_id)
-    return f"\n{note}" if note else ""
+    return covered, f"\n{note}" if note else ""
 
 
 def _scoped_sum(table: str, guild_id: int, user_id: int, column: str = "user_id") -> int:
@@ -168,16 +168,19 @@ def get_futures_record(guild_id: int, user_id: int) -> tuple[int, int]:
     return row[0], row[1]
 
 
-async def after_spray(guild_id: int, target_id: int, sprayer_id: int) -> None:
-    """Every spray (/spray, 💦, /tdoi) goes through here, so spray futures on the target can pay out."""
-    from ktdi.features import futures  # Here, not at the top: futures needs this module first.
-    for channel_id, text in futures.settle_on_spray(guild_id, target_id, sprayer_id):
-        channel = common.bot.get_channel(channel_id)
+async def after_spray(guild_id: int, target_id: int, sprayer_id: int, channel_id: int,
+                      covered: bool = False) -> None:
+    """Every spray (/spray, 💦, /tdoi) goes through here, so spray futures on the target can pay out, and it can
+    count towards a war (/wars)."""
+    from ktdi.features import futures, wars  # Here, not at the top: they need this module first.
+    for settled_channel_id, text in futures.settle_on_spray(guild_id, target_id, sprayer_id):
+        channel = common.bot.get_channel(settled_channel_id)
         if channel is not None:
             try:
                 await channel.send(text, allowed_mentions=discord.AllowedMentions.none())
             except discord.HTTPException:
                 pass  # Settled in the database either way; the announcement is a bonus.
+    await wars.hostility(guild_id, channel_id, sprayer_id, target_id, "spray", covered)
 
 
 def record_bail(guild_id: int, user_id: int, paid_by: int) -> None:
@@ -316,9 +319,9 @@ async def spray(ctx: commands.Context, target: discord.Member | None = None):
     if target is None:
         await ctx.send(SPRAY_GIF_URL)
         return
-    note = take_spray(ctx.guild.id, target.id, ctx.author.id)
+    covered, note = take_spray(ctx.guild.id, target.id, ctx.author.id)
     await ctx.send(f"{target.mention} {SPRAY_GIF_URL}{note}")
-    await after_spray(ctx.guild.id, target.id, ctx.author.id)
+    await after_spray(ctx.guild.id, target.id, ctx.author.id, ctx.channel.id, covered)
 
 
 @commands.hybrid_command(name="whospray", description="Ask the server's chosen sprayer who should get sprayed.")
@@ -340,13 +343,13 @@ async def tdoi(ctx: commands.Context):
     if db.whospray_user(ctx.guild.id) is None:
         await ctx.send(NO_DON, ephemeral=True)
         return
-    note = take_spray(ctx.guild.id, ctx.author.id, ctx.author.id)  # It's still a spray...
+    _, note = take_spray(ctx.guild.id, ctx.author.id, ctx.author.id)  # It's still a spray...
     times = record_don_order(ctx.guild.id, ctx.author.id)  # ...and one more the Don made them do.
     log.info("[%s] %s sprayed themselves on the Don's orders", ctx.guild.name, ctx.author)
     await ctx.send(f"🤌 The Don ordered it. {ctx.author.mention} sprays themselves.\n{SPRAY_GIF_URL}\n"
                    f"-# That's {plural(times, 'time')} the Don has made them do it.{note}",
                    allowed_mentions=discord.AllowedMentions.none())
-    await after_spray(ctx.guild.id, ctx.author.id, ctx.author.id)  # Sprayed by themselves, for anyone betting on it.
+    await after_spray(ctx.guild.id, ctx.author.id, ctx.author.id, ctx.channel.id)  # By themselves, for any bets on it.
 
 
 @commands.hybrid_command(name="loot", description="Declare that you're looting the body.", extras=FUN)
@@ -354,33 +357,36 @@ async def loot(ctx: commands.Context):
     await ctx.send(LOOT_GIF_URL)
 
 
-async def tell_off(ctx: commands.Context, user: discord.Member | None, gifs: list[str]) -> None:
+async def tell_off(ctx: commands.Context, user: discord.Member | None, gifs: list[str], weapon: str) -> None:
     """A random GIF from the list, at someone if named (which goes on their rap sheet as being bad, unless their
     /insurance covers it)."""
     gif = random.choice(gifs)
     if user is None:
         await ctx.send(gif)
         return
-    note = ""
+    note, covered = "", False
     if ctx.guild:
         from ktdi.features import insurance  # Here, not at the top: insurance needs this module first.
         covered, note = insurance.adjudicate(ctx.guild.id, user.id, ctx.author.id, kind="bad")
         if not covered:
             record_bad(ctx.guild.id, user.id)
     await ctx.send(f"{user.mention} {gif}" + (f"\n{note}" if note else ""))
+    if ctx.guild:
+        from ktdi.features import wars  # Here, not at the top: wars needs this module first.
+        await wars.hostility(ctx.guild.id, ctx.channel.id, ctx.author.id, user.id, weapon, covered)  # A war?
 
 
 @commands.hybrid_command(name="bad", description="Bad. Posts a random (non-violent) telling-off GIF.", extras=FUN)
 @app_commands.describe(user="Optional: who's being bad (it goes on their rap sheet)")
 async def bad(ctx: commands.Context, user: discord.Member | None = None):
-    await tell_off(ctx, user, BAD_GIF_URLS)
+    await tell_off(ctx, user, BAD_GIF_URLS, "bad")
 
 
 @commands.hybrid_command(name="badbonk", description="Bad, with a bonk. Posts a random (violent) telling-off GIF.",
                          extras=FUN)
 @app_commands.describe(user="Optional: who's getting bonked (it goes on their rap sheet as being bad)")
 async def badbonk(ctx: commands.Context, user: discord.Member | None = None):
-    await tell_off(ctx, user, BADBONK_GIF_URLS)
+    await tell_off(ctx, user, BADBONK_GIF_URLS, "badbonk")
 
 
 # A cryptid: !-only, so it's not in Discord's slash menu; left off the /help list (extras["hidden"]); and gone again
@@ -556,17 +562,18 @@ async def spray_reaction(payload: discord.RawReactionActionEvent):
     channel = bot.get_channel(payload.channel_id)
     if channel is None:
         return
-    target, note = "", ""
+    target, note, covered = "", "", False
     if payload.message_author_id:
         target = f"<@{payload.message_author_id}> "
         if payload.guild_id:
-            note = take_spray(payload.guild_id, payload.message_author_id, payload.user_id)
+            covered, note = take_spray(payload.guild_id, payload.message_author_id, payload.user_id)
     reactor = payload.member or f"user {payload.user_id}"
     log.info("[%s] %s reacted %s, spraying user %s", channel.guild if payload.guild_id else "DM",
              reactor, SPRAY_EMOJI, payload.message_author_id)
     await channel.send(f"{target}{SPRAY_GIF_URL}{note}")
     if payload.message_author_id and payload.guild_id:
-        await after_spray(payload.guild_id, payload.message_author_id, payload.user_id)
+        await after_spray(payload.guild_id, payload.message_author_id, payload.user_id, payload.channel_id,
+                          covered)
 
 
 def main_help_lines() -> list[tuple[str, str]]:
