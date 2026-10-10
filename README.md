@@ -37,6 +37,7 @@ Grouped the same way as `/help`.
 | `herbal` | Wisdom from a 1531 herbal, the *Tacuini sanitatis*: a random box from its grids, as badly OCR'd by archive.org and translated by Google Translate, with the original cell cropped from the scan. React ⛏️ to dig: each dig is one translation worse (round-tripped through Japanese, Zulu, Finnish, then Korean), down to 🪨 bedrock, the Latin as the scanner read it. The bot takes your ⛏️ back off so you can dig again (needs Manage Messages; otherwise un-react and react). Needs `ktdi/lib/herbal.json` (see Herbal below). |
 | `hammeredofwitches` | A witch-finding tip from the *Malleus Maleficarum* (1486), "the Hammer of Witches", which reads like someone hammered wrote it, in Montague Summers' 1928 translation (public domain): how to spot a witch, and the book's wilder lore, linked to its page on archive.org. 45 tips picked by hand into `ktdi/lib/malleus.json`; the book's torture, execution and child-harm passages are left out, and a test keeps it that way. |
 | `cure <ailment>` | Nicholas Culpeper's remedy from his *Complete Herbal* (1653, public domain, via Project Gutenberg) for whatever ails you: about 90 ailments from a cold to a missing arm, being cursed and death. It understands how people actually say things ("tickly throat", "my throat is tickly", "the runs", "can't get it up", typos like "diarhea") with a hand-built synonym list, no AI (`ktdi/lib/ailments.py`), and says what it filed yours under. Anything it can't place gets All-heal. The slash version autocompletes. To change which of Culpeper's words count for an ailment, edit its `culpeper` terms there and run `python -m ktdi.tools.cure_build`. |
+| `plant <name>` | The other way round: look up one of Culpeper's 320 herbs by any name he gives it ("ground ivy", "piss-a-beds") or its Latin name ("Glechoma hederacea"), and see its Latin name, the planet he puts it under, everything on `/cure`'s list he says it's good for, and one of his remedies. Typos are fine and the slash version autocompletes. The Latin names were checked by hand (`ktdi/lib/herb_latin.json`), and a few herbs Culpeper doesn't pin down are left without one. After editing that file, run `python -m ktdi.tools.cure_build` again. |
 | `anime` | Asks our resident anime watcher (`ANIME_USER_ID` in `.env`) what they think of a random popular anime from [AniList](https://anilist.co), with a random question. Only they are pinged. If AniList is down it picks from a built-in list. |
 
 ### 🎬 Movie night
@@ -194,7 +195,7 @@ ktdi/
 │   ├── anime.py       # anime
 │   ├── herbal.py      # herbal
 │   ├── malleus.py     # hammeredofwitches
-│   ├── cure.py        # cure
+│   ├── cure.py        # cure, plant
 │   ├── movie.py       # movie night: nowplaying (np), shhh
 │   ├── units.py       # abm, imperial
 │   ├── timezones.py   # timezone

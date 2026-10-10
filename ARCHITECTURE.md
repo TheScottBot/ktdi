@@ -53,7 +53,8 @@ ktdi/
 │   ├── committee.py   /committee: the committee's funds (bribes in, spending out)
 │   ├── herbal.py      /herbal (a random box from a 1531 herbal, from lib/herbal.json; ⛏️ digs to worse translations)
 │   ├── malleus.py     /hammeredofwitches (a hand-picked witch-finding tip from the 1928 Malleus, lib/malleus.json)
-│   ├── cure.py        /cure (Culpeper's 1653 remedy for an ailment; lookup in lib/cure.py, data in lib/cures.json)
+│   ├── cure.py        /cure (Culpeper's 1653 remedy for an ailment) and /plant (what a herb treats, by any name or
+│   │                  its Latin one); lookups in lib/cure.py, data in lib/cures.json
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
 │   ├── units.py       /abm, /imperial
@@ -69,8 +70,10 @@ ktdi/
     ├── malleus.json   /hammeredofwitches's tips: hand-picked from the 1928 translation, OCR fixed against the scans; no torture
     │                  or execution passages (tests/test_malleus.py checks)
     ├── ailments.py    /cure's dictionary: ~90 ailments, each with the names people use and Culpeper's 1653 terms
-    ├── cure.py        /cure's no-AI lookup: synonyms, any word order, typo-tolerant matching
-    ├── cures.json     /cure's remedies, built by tools/cure_build.py from Culpeper's Complete Herbal (Gutenberg)
+    ├── cure.py        /cure's and /plant's no-AI lookup: synonyms, any word order, typo-tolerant matching
+    ├── cures.json     /cure's remedies and /plant's herbs, built by tools/cure_build.py from Culpeper's Complete
+    │                  Herbal (Gutenberg)
+    ├── herb_latin.json  /plant's Latin names, checked by hand, keyed by the start of Culpeper's herb names
     ├── herbal.json    /herbal's data: built by tools/herbal_build.py (archive.org OCR -> Google Sheets' GOOGLETRANSLATE)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths
     ├── library.py     Calibre-Web OPDS client

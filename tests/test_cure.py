@@ -1,6 +1,7 @@
-"""/cure: Culpeper's remedies (ktdi.features.cure), the ailment lookup (ktdi.lib.cure, ktdi.lib.ailments) and the
-build from the herbal (ktdi.tools.cure_build)."""
+"""/cure and /plant: Culpeper's remedies (ktdi.features.cure), the ailment and plant lookups (ktdi.lib.cure,
+ktdi.lib.ailments) and the build from the herbal (ktdi.tools.cure_build)."""
 
+import json
 import types
 
 import pytest
@@ -80,20 +81,104 @@ green wounds. It is good to bring away the dead child.
     ALL-HEAL.
 
 _Government and virtues._] It is called All-heal, because it heals all diseases of the body.
+
+    ALEHOOF, OR GROUND-IVY.
+
+_Descript._] This well known herb is called by some Cat's-foot, Gill-go-by-ground,
+and Haymaids.
+
+_Government and virtues._] It is an herb of Venus, and helps the gout.
+
+    CAMOMILE.
+
+IT is so well known every where, that it is but lost time and labour to
+describe it. A decoction made of Camomile takes away all pains and stitches in the side.
+
+    THE ELDER TREE.
+
+I HOLD it needless to write any description of this.
+
+    ROOTS.
+
+_Acanths._ Of bearsbreech, it helps the gout.
 """
 
 
 def test_build_reads_each_herbs_virtues():
-    assert build.herbs(BOOK) == [
-        ("Water Agrimony", "It is a plant of Jupiter. It helps the yellow-jaundice. It kills worms, and helps the "
-                           "cough: It consolidates green wounds. It is good to bring away the dead child."),
-        ("All-Heal", "It is called All-heal, because it heals all diseases of the body.")]
+    herbs = build.herbs(BOOK)
+    assert [h.name for h in herbs] == ["Water Agrimony", "All-Heal", "Alehoof, or Ground-Ivy", "Camomile", "Elder Tree"]
+    assert herbs[0].virtues == ("It is a plant of Jupiter. It helps the yellow-jaundice. It kills worms, and helps the "
+                                "cough: It consolidates green wounds. It is good to bring away the dead child.")
+    assert herbs[0].planet == "Jupiter" and herbs[1].planet is None
+    assert herbs[2].aliases == ["Alehoof", "Ground-Ivy", "Cat's-foot", "Gill-go-by-ground", "Haymaids"]
+    assert herbs[3].virtues.endswith("takes away all pains and stitches in the side.") and not herbs[3].headed
     data = build.build(BOOK)
     assert [r["text"] for r in data["remedies"]["worms"]] == ["It kills worms, and helps the cough:"]
     limb = data["remedies"]["missing limb"][0]
     assert limb["text"][slice(*limb["match"])] == "consolidates"  # bolded to the end of the word
     assert not any("dead child" in r["text"] for found in data["remedies"].values() for r in found)
     assert data["allheal"][0]["herb"] == "All-Heal"
+
+
+def test_build_lists_each_herb_with_what_it_treats():
+    data = build.build(BOOK, {"_about": "notes", "Alehoof": "Glechoma hederacea", "Water Agrimony": "Bidens"})
+    herbs = {h["name"]: h for h in data["herbs"]}
+    alehoof = herbs["Alehoof, or Ground-Ivy"]
+    assert alehoof["latin"] == "Glechoma hederacea"  # keyed by the start of the name
+    assert alehoof["planet"] == "Venus" and alehoof["treats"] == ["gout"]
+    assert herbs["Water Agrimony"]["latin"] == "Bidens" and "worms" in herbs["Water Agrimony"]["treats"]
+    assert herbs["All-Heal"]["latin"] is None
+    assert "aches and pains" in herbs["Camomile"]["treats"]
+    assert "Elder Tree" not in herbs  # well known, and only points on to the next herb
+
+
+def test_latin_names_are_keyed_by_the_start_of_the_name():
+    latin = {"Water": "wrong", "Water Agrimony": "Bidens tripartita", "Oak": "Quercus robur"}
+    assert build.latin_name("Water Agrimony", latin) == "Bidens tripartita"
+    assert build.latin_name("Oak", latin) == "Quercus robur" and build.latin_name("Oaks", latin) is None
+
+
+def test_every_herbs_latin_name_is_used():
+    latin = json.loads(build.LATIN.read_text(encoding="utf-8"))
+    used = {h["latin"] for h in cure.data["herbs"]}
+    assert [k for k, v in latin.items() if not k.startswith("_") and v not in used] == []
+
+
+@pytest.mark.parametrize("typed, herb", [
+    ("ground ivy", "Alehoof, or Ground-Ivy"), ("Glechoma hederacea", "Alehoof, or Ground-Ivy"),
+    ("piss a beds", "Dandelion, vulgarly called Piss-A-Beds"), ("rosemarry", "Rosemary"), ("daisy", "Daisies"),
+    ("chamomile", "Camomile"), ("foxglove", "Fox-Glove"), ("digitalis", "Fox-Glove"), ("cannabis", "Hemp"),
+    ("bugloss", "Borage and Bugloss"), ("st johns wort", "St. John's Wort"),
+])
+def test_finds_plants_by_any_name(typed, herb):
+    assert lookup.find_herb(typed, cure.herb_entries).herb["name"] == herb
+
+
+@pytest.mark.parametrize("typed", ["dave", "", "xyzzy plugh"])
+def test_no_plant_for_nonsense(typed):
+    assert lookup.find_herb(typed, cure.herb_entries) is None
+
+
+def test_plant_embed(monkeypatch):
+    monkeypatch.setattr(cure.random, "choice", lambda options: options[0])
+    embed = cure.plant_embed("ground ivy")
+    assert embed.title == "🌿 Alehoof, or Ground-Ivy" and embed.footer.text == "Culpeper's Complete Herbal (1653)"
+    lines = embed.description.split("\n")
+    assert lines[:3] == ["*Glechoma hederacea*", "♀ Governed by Venus",
+                         "Also called Cat's-foot, Gill-go-by-ground, Gill-creep-by-ground, Turn-hoof, Haymaids"]
+    assert lines[4].startswith("**Good for:** ") and "gout" in lines[4] and lines[5].startswith("> ")
+    assert "Also called St John" not in cure.plant_embed("st johns wort").description  # same as the title
+    assert cure.plant_embed("dave").description == "Culpeper never wrote about *dave*, not by that name anyway."
+    assert cure.plant_embed("sweet maudlin").description.endswith("Nothing on /cure's list, it turns out.")
+
+
+def test_plant_command_and_autocomplete():
+    ctx = Ctx(User(1, "scott"))
+    run(cure.plant.callback(ctx, name="sage"))
+    assert ctx.last.embed.title == "🌿 Sage"
+    choices = [c.value for c in run(cure.plant_autocomplete(types.SimpleNamespace(), "glech"))]
+    assert choices == ["Glechoma hederacea"]
+    assert len(run(cure.plant_autocomplete(types.SimpleNamespace(), ""))) == 25
 
 
 def test_long_sentences_are_cut_around_the_match():
