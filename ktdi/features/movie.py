@@ -3,6 +3,10 @@
 A server has at most one current movie: its newest row in `movies` with no ended_at. It's lined up with /nowplaying set,
 and nothing starts until /nowplaying start. Ending it reveals the predictions (people react ✅/❌ to judge them) and asks
 for ratings. Bingo cards aren't stored: each is shuffled from a seed of (movie, person), so it's the same every time.
+
+And what the group does to the film: /nowplaying objection (timestamped, ruled on by the committee), /nowplaying canon
+(alternative canon, voted in with ✅/❌ and kept against the title, so it's read out on every rewatch) and
+/nowplaying committeesviews (the committee's official report on a finished watch).
 """
 
 import asyncio
@@ -52,6 +56,47 @@ LONG_PAUSE_LINES = [
     "The committee notes this was meant to be a five-minute break.",
     "The committee would like to know what took so long.",
     "The committee has started the clock on future intermissions.",
+]
+
+CANON_SHOWN = 5  # Established canon listed when a film starts again.
+SUSTAINED_ONE_IN = 6  # The committee sustains about one objection in six.
+OBJECTIONS_SHOWN = 5  # In the committee's report.
+
+OVERRULED_LINES = [
+    "The committee has determined that this is, in fact, a film. Objection overruled.",
+    "Overruled. The characters can't hear you.",
+    "Overruled. That's the plot.",
+    "Overruled. Nobody in this film has ever seen a film.",
+    "Overruled. The committee is enjoying it.",
+    "Noted, and ignored. Overruled.",
+    "Overruled. If they did the sensible thing, it'd be a much shorter film.",
+    "Overruled. The committee has seen worse decisions in this server.",
+]
+SUSTAINED_LINES = [
+    "Sustained. The committee also has questions.",
+    "Sustained. Nobody would do that.",
+    "Sustained. The committee will be writing to the director.",
+    "Sustained. Strike that scene from the record.",
+]
+REPORT_FINDINGS = [
+    "The crew demonstrated a concerning disregard for workplace safety.",
+    "Nobody in this film has read a risk assessment.",
+    "Too many people went off on their own.",
+    "Communication between characters was found to be inadequate.",
+    "The plot was found to be broadly present.",
+    "The committee notes several decisions it would not have made.",
+    "The committee was not consulted on the casting.",
+    "The film ran for approximately the length of a film.",
+]
+REPORT_RECOMMENDATIONS = [
+    "Mandatory training before viewing the sequel.",
+    "No further action.",
+    "A strongly worded letter to the director.",
+    "More snacks next time.",
+    "Rewatch it with the subtitles on.",
+    "Everyone to have a little think about what they've done.",
+    "A sequel nobody asked for.",
+    "Refer the matter to a subcommittee.",
 ]
 
 BINGO_FREE_SPACE = "Free space: snacks"
@@ -488,29 +533,157 @@ async def reveal_predictions(channel, movie: Movie) -> None:
             pass  # No Add Reactions permission: people can still add them.
 
 
-def _vote(payload: discord.RawReactionActionEvent) -> tuple[int, int] | None:
-    """(prediction id, vote) if this reaction is someone judging a prediction."""
+# What ✅/❌ reactions vote on: a revealed prediction (called it?) or proposed canon (accept it?).
+VOTE_TABLES = {"prediction": ("movie_prediction_votes", "prediction_id"), "canon": ("movie_canon_votes", "canon_id")}
+
+
+def _vote(payload: discord.RawReactionActionEvent) -> tuple[str, int, int] | None:
+    """(what's voted on, its id, vote) if this reaction is someone judging a prediction or proposed canon."""
     emoji = str(payload.emoji)
     if emoji not in (CALLED_IT, NOT_IT) or payload.user_id == common.bot.user.id:
         return None
-    found = prediction_by_message(payload.message_id)
+    kind, found = "prediction", prediction_by_message(payload.message_id)
+    if found is None:
+        kind, found = "canon", canon_by_message(payload.message_id)
     if found is None or found[1] == payload.user_id:  # Nobody judges their own.
         return None
-    return found[0], int(emoji == CALLED_IT)
+    return kind, found[0], int(emoji == CALLED_IT)
 
 
 async def prediction_vote(payload: discord.RawReactionActionEvent):
+    """A ✅/❌ on a revealed prediction or proposed canon."""
     if vote := _vote(payload):
-        db.conn.execute("INSERT OR IGNORE INTO movie_prediction_votes (prediction_id, user_id, vote) VALUES (?, ?, ?)",
-                        (vote[0], payload.user_id, vote[1]))
+        table, column = VOTE_TABLES[vote[0]]
+        db.conn.execute(f"INSERT OR IGNORE INTO {table} ({column}, user_id, vote) VALUES (?, ?, ?)",
+                        (vote[1], payload.user_id, vote[2]))
         db.conn.commit()
 
 
 async def prediction_unvote(payload: discord.RawReactionActionEvent):
     if vote := _vote(payload):
-        db.conn.execute("DELETE FROM movie_prediction_votes WHERE prediction_id = ? AND user_id = ? AND vote = ?",
-                        (vote[0], payload.user_id, vote[1]))
+        table, column = VOTE_TABLES[vote[0]]
+        db.conn.execute(f"DELETE FROM {table} WHERE {column} = ? AND user_id = ? AND vote = ?",
+                        (vote[1], payload.user_id, vote[2]))
         db.conn.commit()
+
+
+# --- Canon and objections ---
+@dataclass
+class Canon:
+    """Proposed alternative canon. It's accepted if more people said ✅ than ❌ (the proposer can't vote)."""
+    id: int
+    movie_id: int
+    user_id: int
+    text: str
+    yes: int
+    no: int
+
+    @property
+    def accepted(self) -> bool:
+        return self.yes > self.no
+
+
+def add_canon(movie: Movie, user_id: int, text: str) -> int:
+    cursor = db.conn.execute("INSERT INTO movie_canon (movie_id, guild_id, title_key, user_id, text, created_at) "
+                             "VALUES (?, ?, ?, ?, ?, ?)",
+                             (movie.id, movie.guild_id, title_key(movie.title), user_id, text, now().isoformat()))
+    db.conn.commit()
+    return cursor.lastrowid
+
+
+def canon_by_message(message_id: int) -> tuple[int, int] | None:
+    return db.conn.execute("SELECT id, user_id FROM movie_canon WHERE message_id = ?", (message_id,)).fetchone()
+
+
+def _canon(where: str, params) -> list[Canon]:
+    rows = db.conn.execute(
+        f"""
+        SELECT c.id, c.movie_id, c.user_id, c.text,
+               (SELECT COUNT(*) FROM movie_canon_votes v WHERE v.canon_id = c.id AND v.vote = 1),
+               (SELECT COUNT(*) FROM movie_canon_votes v WHERE v.canon_id = c.id AND v.vote = 0)
+        FROM movie_canon c WHERE {where} ORDER BY c.id
+        """, params).fetchall()
+    return [Canon(*row) for row in rows]
+
+
+def accepted_canon(guild_id: int, title: str, before_movie_id: int | None = None) -> list[Canon]:
+    """Everything accepted as canon for a title, over every watch (across shared servers), or only watches before
+    this one."""
+    where, params = db.scope(guild_id)
+    where, params = f"{where.replace('guild_id', 'c.guild_id')} AND c.title_key = ?", [*params, title_key(title)]
+    if before_movie_id is not None:
+        where, params = f"{where} AND c.movie_id < ?", [*params, before_movie_id]
+    return [c for c in _canon(where, params) if c.accepted]
+
+
+def canon_for_watch(movie_id: int) -> list[Canon]:
+    return _canon("c.movie_id = ?", [movie_id])
+
+
+def canon_list(canon: list[Canon], limit: int) -> str:
+    lines = [f"• {c.text} (<@{c.user_id}>)" for c in canon[:limit]]
+    if len(canon) > limit:
+        lines.append(f"-# …and {len(canon) - limit} more: `/nowplaying canon`.")
+    return "\n".join(lines)
+
+
+def objections(movie_id: int) -> list[tuple[int, int, str | None, bool]]:
+    """(user, seconds in, reason, sustained) for a watch, in film order."""
+    rows = db.conn.execute("SELECT user_id, at_seconds, reason, sustained FROM movie_objections WHERE movie_id = ? "
+                           "ORDER BY at_seconds, id", (movie_id,)).fetchall()
+    return [(user_id, at, reason, bool(sustained)) for user_id, at, reason, sustained in rows]
+
+
+# --- The committee's report ---
+def morale(scores: list[int]) -> str:
+    if not scores:
+        return "Unknown. Nobody rated it, which says something."
+    average = sum(scores) / len(scores)
+    if average >= 8:
+        return "High. Suspiciously high."
+    if average >= 6:
+        return "Adequate."
+    if average >= 4:
+        return "Questionable."
+    return "Low. Someone should check on everyone."
+
+
+def viewing_report(movie: Movie) -> discord.Embed:
+    """The committee's official report on a finished watch. The same every time it's asked for."""
+    scores = [s for _, s in ratings(movie.id)]
+    verdicts = revealed_predictions(movie.id)
+    winners = bingo_winners(movie.id)
+    filed = objections(movie.id)
+    canon = [c for c in canon_for_watch(movie.id) if c.accepted]
+    rng = random.Random(f"report:{movie.id}")  # Its findings don't change if someone asks twice.
+    watched = duration(watched_seconds(movie))
+    if movie.paused_seconds >= 60:
+        watched += f" (plus {duration(movie.paused_seconds)} paused)"
+    lines = [f"**Film:** {movie.linked_name}" + (f" (watch #{movie.watch_number})" if (movie.watch_number or 1) > 1
+                                                    else ""),
+             f"**Watched:** {watched}, ended {movie.ended_at.strftime('%d %b %Y')}",
+             f"**Rating:** {sum(scores) / len(scores):.1f}/10 from {plural(len(scores), 'rating')}" if scores
+             else "**Rating:** none submitted",
+             f"**Morale:** {morale(scores)}",
+             f"**Predictions upheld:** {sum(v.called for v in verdicts)} of {len(verdicts)}" if verdicts
+             else "**Predictions upheld:** nobody predicted anything",
+             f"**Bingo incidents:** {len(winners)}" + (f" ({', '.join(f'<@{u}>' for u in winners)})" if winners else "")]
+    sustained = sum(s for *_, s in filed)
+    lines.append(f"**Objections filed:** {len(filed)}" + (f" ({sustained} sustained)" if sustained else ""))
+    for user_id, at, reason, upheld in filed[:OBJECTIONS_SHOWN]:
+        lines.append(f"-# `{timecode(at)}` <@{user_id}>: {reason or 'no reason given'} "
+                     f"({'sustained' if upheld else 'overruled'})")
+    if len(filed) > OBJECTIONS_SHOWN:
+        lines.append(f"-# …and {len(filed) - OBJECTIONS_SHOWN} more.")
+    lines.append(f"**New canon:** {len(canon)}")
+    if canon:
+        lines.append(canon_list(canon, CANON_SHOWN))
+    lines += ["", f"**Committee finding:** {rng.choice(REPORT_FINDINGS)}",
+              f"**Recommendation:** {rng.choice(REPORT_RECOMMENDATIONS)}"]
+    embed = discord.Embed(title="📋 OFFICIAL VIEWING REPORT", description="\n".join(lines)[:4096],
+                          color=discord.Color.dark_gold())
+    embed.set_footer(text="Filed by the committee. No further correspondence will be entered into.")
+    return embed
 
 
 # --- Bingo ---
@@ -960,8 +1133,12 @@ async def start_movie(ctx: commands.Context, movie: Movie) -> str:
     movie = get_movie(movie.id)
     log.info("[%s] %s started %r", ctx.guild.name, ctx.author, movie.title)
     await set_bot_status(ctx.bot, movie.title)
-    return (f"🎬 **Starting: {movie.label}.** Phones down, lights off.\n"
+    text = (f"🎬 **Starting: {movie.label}.** Phones down, lights off.\n"
             f"-# {film_clock(movie)}. `/nowplaying pause` if you need to, `/shhh` if people won't be quiet.")
+    canon = accepted_canon(movie.guild_id, movie.title, before_movie_id=movie.id)
+    if canon:  # Watched before: remind everyone what's been established.
+        text += f"\n📜 **Established canon:**\n{canon_list(canon, CANON_SHOWN)}"
+    return text
 
 
 # Servers with a countdown running, so two can't start the film twice.
@@ -1126,7 +1303,7 @@ async def np_end(ctx: commands.Context):
     winners = bingo_winners(movie.id)
     if winners:
         text += "\n🎉 Bingo: " + ", ".join(f"<@{u}>" for u in winners)
-    text += "\n⭐ Rate it with `/nowplaying rate <1-10>`."
+    text += "\n⭐ Rate it with `/nowplaying rate <1-10>`, then `/nowplaying committeesviews` for the official report."
     if movie.from_watchlist:
         keep_on_watchlist_struck(movie)
         text += "\n-# Struck off the watchlist."
@@ -1193,6 +1370,74 @@ async def watched_title_autocomplete(interaction: discord.Interaction, current: 
 
 
 np_predictions.autocomplete("title")(watched_title_autocomplete)
+
+
+@np_group.command(name="committeesviews", description="The committee's official report on a film we've watched.")
+@app_commands.describe(title="Which film (leave empty for the last one)")
+async def np_committeesviews(ctx: commands.Context, *, title: str | None = None):
+    movie = find_watched(ctx.guild.id, title)
+    if movie is None:
+        await ctx.send(f"No finished film called “{one_line(title, TITLE_MAX_LENGTH)}”. Try `/nowplaying history`."
+                       if title else "🎬 Nothing watched yet. The committee has nothing to report.", ephemeral=True)
+        return
+    await ctx.send(embed=viewing_report(movie), allowed_mentions=NO_PINGS)
+
+
+np_committeesviews.autocomplete("title")(watched_title_autocomplete)
+
+
+@np_group.command(name="canon", description="Propose alternative canon for the film, for a vote. Empty: what's canon.")
+@app_commands.describe(claim="What's now true about this film, e.g. Jones the cat works for Weyland-Yutani")
+async def np_canon(ctx: commands.Context, *, claim: str | None = None):
+    claim = one_line(claim)
+    if not claim:
+        movie = current_movie(ctx.guild.id) or movie_to_rate(ctx.guild.id)
+        if movie is None:
+            await ctx.send("No film to have canon for. `/nowplaying set <title>` first.", ephemeral=True)
+            return
+        canon = accepted_canon(ctx.guild.id, movie.title)
+        if not canon:
+            await ctx.send(f"📜 Nothing's canon for {movie.name} yet. `/nowplaying canon <claim>` to change that.",
+                           allowed_mentions=NO_PINGS)
+            return
+        await ctx.send(f"📜 **Canon for {movie.name}:**\n{canon_list(canon, 20)}", allowed_mentions=NO_PINGS)
+        return
+    movie = current_movie(ctx.guild.id)
+    if movie is None:
+        await ctx.send("Nothing's on to rewrite. `/nowplaying set <title>` first.", ephemeral=True)
+        return
+    canon_id = add_canon(movie, ctx.author.id, claim)
+    message = await ctx.send(f"📜 {ctx.author.mention} proposes, as canon for **{movie.label}**:\n> {claim}\n"
+                             f"-# React {CALLED_IT} to accept it, {NOT_IT} to reject it (not on your own). Accepted "
+                             "canon comes back every time it's watched.", allowed_mentions=NO_PINGS)
+    if message is not None:
+        db.conn.execute("UPDATE movie_canon SET message_id = ? WHERE id = ?", (message.id, canon_id))
+        db.conn.commit()
+        try:
+            await message.add_reaction(CALLED_IT)
+            await message.add_reaction(NOT_IT)
+        except discord.HTTPException:
+            pass  # No Add Reactions permission: people can still add them.
+
+
+@np_group.command(name="objection", description="Formally object to something in the film. The committee will rule.")
+@app_commands.describe(reason="Optional: what you object to")
+async def np_objection(ctx: commands.Context, *, reason: str | None = None):
+    movie = await _playing(ctx)
+    if movie is None:
+        return
+    at = watched_seconds(movie)
+    reason = one_line(reason) or None
+    sustained = random.randrange(SUSTAINED_ONE_IN) == 0
+    db.conn.execute("INSERT INTO movie_objections (movie_id, guild_id, user_id, at_seconds, reason, sustained, "
+                    "created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                    (movie.id, movie.guild_id, ctx.author.id, at, reason, int(sustained), now().isoformat()))
+    db.conn.commit()
+    text = f"⚖️ **OBJECTION FILED — {timecode(at)}**"
+    if reason:
+        text += f"\n> {reason}"
+    text += f"\n{random.choice(SUSTAINED_LINES if sustained else OVERRULED_LINES)}\n-# Filed by {ctx.author.mention}."
+    await ctx.send(text, allowed_mentions=NO_PINGS)
 
 
 # --- /shhh, /nowplaying rate, /nowplaying predict ---
@@ -1354,9 +1599,13 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
             "for breaks, which don't count towards the time watched. `/shhh` when people won't be quiet. Fallen out "
             "of sync? `/nowplaying elapsed` gives the exact spot and when to press play to catch up. Bot's clock wrong "
             "(restarted the film, started it without the bot)? `/nowplaying sct 1:07:30` sets where it really is.\n"
-            "3. `/nowplaying bingo mark <number>` as things happen. Five in a row wins.\n"
+            "3. `/nowplaying bingo mark <number>` as things happen. Five in a row wins. `/nowplaying objection "
+            "[reason]` formally objects (timestamped; the committee rules). `/nowplaying canon <claim>` proposes "
+            f"alternative canon: {CALLED_IT}/{NOT_IT} to vote, and accepted canon is read out whenever it's watched "
+            "again.\n"
             f"4. `/nowplaying end` reveals the predictions: react {CALLED_IT} if they called it, {NOT_IT} if not "
-            "(not on your own). Then everyone `/nowplaying rate`s it.\n"
+            "(not on your own). Then everyone `/nowplaying rate`s it, and `/nowplaying committeesviews` gets the "
+            "committee's official report.\n"
             "• Anyone can run any of it. Called predictions and bingo wins go on the rap sheet; `/nowplaying history` "
             "lists what you've watched with its ratings, and `/nowplaying predictions <title>` shows what was predicted "
             "for a film and who called it.\n"

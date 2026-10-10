@@ -19,8 +19,8 @@ HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /he
 SUBCOMMANDS = {
     "committee": ["funds", "ledger", "propose", "spend"],
     "insurance": ["buy", "complain", "status"],
-    "nowplaying": ["bingo", "elapsed", "end", "history", "pause", "predict", "predictions", "rate", "resume", "sct",
-                   "set", "show", "start", "vote", "watchlist"],
+    "nowplaying": ["bingo", "canon", "committeesviews", "elapsed", "end", "history", "objection", "pause", "predict",
+                   "predictions", "rate", "resume", "sct", "set", "show", "start", "vote", "watchlist"],
     "timezone": ["clear", "convert", "set", "show"],
     "campaign": ["add", "edit", "list", "remind", "remove", "reschedule", "show", "skip", "unremind"],
     "quote": ["add", "claim", "delete", "dissociate", "last", "random", "search", "show"],

@@ -955,3 +955,106 @@ def test_add_with_a_link_typed_in_with_the_title(at, letterboxd_films):
     assert "One link at a time" in watchlist_cmd("add", title=f"{NOSFERATU} {NOSFERATU}").content
     assert "Add what?" in watchlist_cmd("add").content
     assert watchlist_cmd("add", title="The", link="Thing").content.startswith("🍿 Added **The Thing**")
+
+
+# --- Canon, objections and the committee's report ---
+def react(handler, message, user, emoji):
+    run(handler(types.SimpleNamespace(emoji=emoji, user_id=user.id, message_id=message.id)))
+
+
+def test_canon_is_voted_in_and_read_out_on_a_rewatch(at, bot):
+    assert "No film to have canon for" in np("canon").content
+    assert "Nothing's on to rewrite" in np("canon", claim="Jones is a spy").content
+    np("set", title="Alien")
+    np("start")
+    accepted = np("canon", user=DAVE, claim="Jones the cat is an  undercover Weyland-Yutani executive")
+    assert accepted.content.startswith("📜 <@2> proposes, as canon for **Alien**:\n"
+                                       "> Jones the cat is an undercover Weyland-Yutani executive\n")
+    assert accepted.reactions == ["✅", "❌"] and accepted.allowed_mentions.users is False
+    rejected = np("canon", user=PAT, claim="Ripley is three cats in a trench coat")
+    react(movie.prediction_vote, accepted, SCOTT, "✅")
+    react(movie.prediction_vote, accepted, DAVE, "✅")  # can't vote on your own: ignored
+    react(movie.prediction_vote, accepted, bot.user, "❌")  # the bot's own: ignored
+    react(movie.prediction_vote, rejected, SCOTT, "❌")
+    react(movie.prediction_vote, rejected, AMY, "✅")
+    react(movie.prediction_vote, rejected, DAVE, "❌")
+    assert [c.text for c in movie.accepted_canon(111, "Alien")] == [
+        "Jones the cat is an undercover Weyland-Yutani executive"]
+    assert np("canon").content == ("📜 **Canon for Alien:**\n"
+                                   "• Jones the cat is an undercover Weyland-Yutani executive (<@2>)")
+    react(movie.prediction_unvote, accepted, SCOTT, "✅")
+    assert movie.accepted_canon(111, "Alien") == []  # 0-0 isn't accepted
+    react(movie.prediction_vote, accepted, SCOTT, "✅")
+    assert movie.revealed_predictions(movie.current_movie(111).id) == []  # canon isn't a prediction
+
+    at(120)
+    np("end")
+    np("set", title="Alien")
+    reply = np("start")
+    assert "(watch #2)" in reply.content
+    assert reply.content.endswith("📜 **Established canon:**\n"
+                                  "• Jones the cat is an undercover Weyland-Yutani executive (<@2>)")
+    np("set", title="Aliens")  # Different title, different canon.
+    assert "Nothing's canon for Alien" not in np("canon").content
+
+
+def test_objections_are_timestamped_and_ruled_on(at, monkeypatch):
+    assert "Nothing's playing" in np("objection", reason="why").content
+    np("set", title="Alien")
+    np("start")
+    at(47)
+    monkeypatch.setattr(movie.random, "randrange", lambda n: 1)  # overruled
+    monkeypatch.setattr(movie.random, "choice", lambda options: options[0])
+    reply = np("objection", user=DAVE, reason="Why are they investigating the ominous noise?")
+    assert reply.content == ("⚖️ **OBJECTION FILED — 0:47:00**\n> Why are they investigating the ominous noise?\n"
+                             "The committee has determined that this is, in fact, a film. Objection overruled.\n"
+                             "-# Filed by <@2>.")
+    at(60)
+    monkeypatch.setattr(movie.random, "randrange", lambda n: 0)  # sustained
+    reply = np("objection", user=PAT)
+    assert reply.content.startswith("⚖️ **OBJECTION FILED — 1:00:00**\nSustained.")
+    assert movie.objections(movie.current_movie(111).id) == [(DAVE.id, 47 * 60, "Why are they investigating the "
+                                                              "ominous noise?", False), (PAT.id, 3600, None, True)]
+
+
+def test_committees_views(at, bot, monkeypatch):
+    monkeypatch.setattr(movie.random, "randrange", lambda n: 1)  # objections overruled
+    assert "Nothing watched yet" in np("committeesviews").content
+    np("set", title="Alien")
+    run(movie.predict.callback(Ctx(DAVE), guess="The cat lives"))
+    np("start")
+    film = movie.current_movie(111)
+    db.conn.execute("INSERT INTO movie_bingo_wins (movie_id, guild_id, user_id) VALUES (?, 111, ?)", (film.id, PAT.id))
+    at(47)
+    np("objection", user=DAVE, reason="Why are they investigating the ominous noise?")
+    canon = np("canon", user=DAVE, claim="Jones is in charge")
+    react(movie.prediction_vote, canon, SCOTT, "✅")
+    np("canon", user=PAT, claim="Nobody votes for this")
+    at(117)
+    channel = Channel(500, Guild())
+    ending = Ctx(SCOTT, channel=channel)
+    run(movie.np_end.callback(ending))
+    assert "/nowplaying committeesviews" in ending.sent[0].content
+    react(movie.prediction_vote, channel.sent[1], SCOTT, "✅")  # Dave's prediction: upheld
+    run(movie.rate.callback(Ctx(SCOTT), score=3))
+    run(movie.rate.callback(Ctx(DAVE), score=5))
+
+    report = np("committeesviews").embed
+    assert report.title == "📋 OFFICIAL VIEWING REPORT"
+    lines = report.description.split("\n")
+    assert lines[:8] == ["**Film:** Alien", "**Watched:** 1h 57m, ended 03 Oct 2026",
+                         "**Rating:** 4.0/10 from 2 ratings", "**Morale:** Questionable.",
+                         "**Predictions upheld:** 1 of 1", "**Bingo incidents:** 1 (<@3>)", "**Objections filed:** 1",
+                         "-# `0:47:00` <@2>: Why are they investigating the ominous noise? (overruled)"]
+    assert "**New canon:** 1\n• Jones is in charge (<@2>)" in report.description
+    assert "Nobody votes for this" not in report.description
+    assert any(f"**Committee finding:** {f}" in report.description for f in movie.REPORT_FINDINGS)
+    assert any(f"**Recommendation:** {r}" in report.description for r in movie.REPORT_RECOMMENDATIONS)
+    assert np("committeesviews", title="Alien").embed.description == report.description  # the same every time
+    assert "No finished film called" in np("committeesviews", title="Shrek").content
+
+
+@pytest.mark.parametrize("scores, verdict", [([], "Unknown"), ([9, 8], "High"), ([7, 6], "Adequate"),
+                                             ([4, 5], "Questionable"), ([1, 2], "Low")])
+def test_morale(scores, verdict):
+    assert movie.morale(scores).startswith(verdict)

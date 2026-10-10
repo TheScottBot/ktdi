@@ -272,6 +272,40 @@ SCHEMA = [
         PRIMARY KEY (movie_id, user_id)
     )
     """,
+    # Alternative canon (/nowplaying canon): proposed during a watch, voted on with ✅/❌, and kept against the title
+    # (title_key) so it resurfaces when the film's watched again.
+    """
+    CREATE TABLE IF NOT EXISTS movie_canon (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        movie_id   INTEGER NOT NULL,  -- the watch it was proposed during
+        guild_id   INTEGER NOT NULL,
+        title_key  TEXT NOT NULL,
+        user_id    INTEGER NOT NULL,
+        text       TEXT NOT NULL,
+        message_id INTEGER,           -- the message people vote on
+        created_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS movie_canon_votes (
+        canon_id INTEGER NOT NULL,
+        user_id  INTEGER NOT NULL,
+        vote     INTEGER NOT NULL,  -- 1 accept, 0 reject
+        PRIMARY KEY (canon_id, user_id, vote)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS movie_objections (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        movie_id   INTEGER NOT NULL,
+        guild_id   INTEGER NOT NULL,
+        user_id    INTEGER NOT NULL,
+        at_seconds INTEGER NOT NULL,  -- how far into the film
+        reason     TEXT,
+        sustained  INTEGER NOT NULL DEFAULT 0,  -- the committee's ruling: usually overruled
+        created_at TEXT NOT NULL
+    )
+    """,
 ]
 
 
