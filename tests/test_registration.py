@@ -67,7 +67,7 @@ def test_prefix_commands(loaded_bot):
 def test_listeners(loaded_bot):
     assert {name: sorted(f.__name__ for f in funcs) for name, funcs in loaded_bot.extra_events.items()} == {
         "on_message": ["remember_speaker", "vote_closed_by_itself"],
-        "on_raw_reaction_add": ["prediction_vote", "reminder_subscribe", "spray_reaction"],
+        "on_raw_reaction_add": ["dig", "prediction_vote", "reminder_subscribe", "spray_reaction"],
         "on_raw_reaction_remove": ["prediction_unvote", "reminder_unsubscribe"],
     }
 

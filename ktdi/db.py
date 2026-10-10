@@ -132,6 +132,14 @@ SCHEMA = [
         sprayed_by INTEGER            -- who sprayed the target, on a win (never the bettor)
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS herbal_posts (
+        message_id INTEGER PRIMARY KEY,  -- a /herbal post people can dig into with ⛏️
+        guild_id   INTEGER,              -- NULL in DMs
+        entry_id   INTEGER NOT NULL,     -- which box from ktdi/lib/herbal.json
+        depth      INTEGER NOT NULL DEFAULT 0  -- 0 is the best guess; one past the last level is bedrock
+    )
+    """,
     # One spray interest rate a day for the whole bot (so no guild_id), picked when it's first needed.
     """
     CREATE TABLE IF NOT EXISTS spray_rates (

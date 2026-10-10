@@ -51,7 +51,7 @@ ktdi/
 │   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
 │   ├── futures.py     /sprayfutures, /sprayrate: bets on someone being sprayed; settled by fun.after_spray or expiry_loop
 │   ├── committee.py   /committee: the committee's funds (bribes in, spending out)
-│   ├── herbal.py      /herbal (a random box from a 1531 herbal, from lib/herbal.json)
+│   ├── herbal.py      /herbal (a random box from a 1531 herbal, from lib/herbal.json; ⛏️ digs to worse translations)
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
 │   ├── units.py       /abm, /imperial
@@ -188,6 +188,7 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `user_timezones` | each person's own timezone (`/timezone set`), per person, not per server: an IANA name or a fixed offset like `UTC+5:30`. Logged as "set their timezone", never which one. |
 | `spray_futures` | `/sprayfutures` bets: who bet on whom, the stake, `hours`, the day's `rate` and the `amount` on the line (stake × hours plus interest, fixed when placed), when it expires, and how it settled (`outcome` won/lost, `paid` on a win, capped so a record never goes below zero, and `sprayed_by`, never the bettor). Lost amounts and paid winnings are part of `fun.get_spray_count`. Every spray goes through `fun.after_spray`, which pays out open bets on the target; `futures.expiry_loop` settles the rest as lost. |
 | `spray_rates` | the daily spray interest rate (1-20%), one row per day: picked at random the first time it's needed after `SPRAY_RATE_TIME` (in `BOT_TIMEZONE`). Bot-wide, so no `guild_id`. |
+| `herbal_posts` | each `/herbal` post: which box from `herbal.json` and how deep it's been dug with ⛏️, so a dig carries on after a restart. |
 | `committee_spending` | what the committee's money was spent on (`/committee spend`): amount, item, who. Money in isn't stored separately: it's the `bribes` totals (bribe, expunge and bail all record a bribe), so the balance is bribes minus spending, both read through `scope()`. |
 
 ### Rules

@@ -1,5 +1,6 @@
 [
  {
+  "id": 1,
   "page": 34,
   "box": [
    490,
@@ -8,9 +9,16 @@
    437
   ],
   "latin": "Albsr,excorticare, et a pu uidu rnun- • dat*.",
-  "english": "Albsr, to peel off, and a pu uidu rnun- • dat*."
+  "levels": [
+   "Albsr, to peel off, and a pu uidu rnun- • dat*.",
+   "Albsr, peel off, and pu uidu rnun- • dat*.",
+   "Albsr, peel, and pu uidu rnun- • dat*.",
+   "Albsr, bark and wood float rnun- dat*.",
+   "Albsr, tree bark and wood are floating on rnun- dat*."
+  ]
  },
  {
+  "id": 3,
   "page": 34,
   "box": [
    945,
@@ -19,9 +27,15 @@
    403
   ],
   "latin": "Faciunt infU donem.",
-  "english": "They make an infU gift."
+  "levels": [
+   "They make an infU gift.",
+   "These will become infU gifts.",
+   "These will be infU gifts.",
+   "These are infU gifts."
+  ]
  },
  {
+  "id": 4,
   "page": 34,
   "box": [
    1170,
@@ -30,9 +44,16 @@
    435
   ],
   "latin": "Cum muri, & (ynipo aceto lo.",
-  "english": "With the wall, and (with vinegar lo."
+  "levels": [
+   "With the wall, and (with vinegar lo.",
+   "Along with the wall, and (along with the vinegar.)",
+   "And the wall, and (and the vinegar.)",
+   "And the wall, and (and vinegar.)",
+   "And the wall, (and vinegar.)"
+  ]
  },
  {
+  "id": 6,
   "page": 34,
   "box": [
    489,
@@ -41,9 +62,16 @@
    660
   ],
   "latin": "Maturae, a - quoke,fubuliura corti, cum.",
-  "english": "Mature, a - also, short hair, with."
+  "levels": [
+   "Mature, a - also, short hair, with.",
+   "Mature, a - also, with short hair.",
+   "Mature, too, with short hair.",
+   "Mature too, with short hair.",
+   "You've gotten old, and your hair is short."
+  ]
  },
  {
+  "id": 7,
   "page": 34,
   "box": [
    714,
@@ -52,9 +80,16 @@
    660
   ],
   "latin": "Laxant ucn. trcra,& accelerant pingue rimem.",
-  "english": "Let them relax. trcra, & speed up the fat rime."
+  "levels": [
+   "Let them relax. trcra, & speed up the fat rime.",
+   "Let them relax. trcra, and then accelerate the fat rhymes.",
+   "Let them rest. trcra, then speed up the fat rhymes.",
+   "Let them rest. trcra, and then accelerate the thick rhymes.",
+   "Let them rest. Then accelerate the thick rhyme."
+  ]
  },
  {
+  "id": 8,
   "page": 34,
   "box": [
    943,
@@ -63,9 +98,16 @@
    660
   ],
   "latin": "Sitim indu, eunt, & nocent uclicx.",
-  "english": "They are thirsty, they go, and they do harm."
+  "levels": [
+   "They are thirsty, they go, and they do harm.",
+   "When they get thirsty, they go out and cause harm.",
+   "If they are dry, they come out to harm.",
+   "If they are dry, they will appear damaged.",
+   "If it dries, it will look damaged."
+  ]
  },
  {
+  "id": 9,
   "page": 34,
   "box": [
    1169,
@@ -74,9 +116,16 @@
    663
   ],
   "latin": "Cum Grana to aceto, fo.",
-  "english": "With Grana to vinegar, fo."
+  "levels": [
+   "With Grana to vinegar, fo.",
+   "Add vinegar to Grana cheese, then f.",
+   "Add vinegar to the Grana cheese, then f.",
+   "Add vinegar to the Grana cheese and then f.",
+   "Add vinegar to Grana cheese and f."
+  ]
  },
  {
+  "id": 10,
   "page": 34,
   "box": [
    523,
@@ -85,9 +134,16 @@
    855
   ],
   "latin": "Odori. fera.",
-  "english": "Smells. Wild."
+  "levels": [
+   "Smells. Wild.",
+   "It smells. It's wild.",
+   "It smells bad. It's very delicious.",
+   "It smells bad. It is very delicious.",
+   "It smells awful, but it tastes really good."
+  ]
  },
  {
+  "id": 11,
   "page": 34,
   "box": [
    718,
@@ -96,9 +152,15 @@
    855
   ],
   "latin": "Febribus adurentibus.",
-  "english": "Burning fevers."
+  "levels": [
+   "Burning fevers.",
+   "Intense heat.",
+   "Great heat.",
+   "Tremendous heat."
+  ]
  },
  {
+  "id": 12,
   "page": 34,
   "box": [
    957,
@@ -107,9 +169,13 @@
    892
   ],
   "latin": "Hunaortaa corrumpunt.",
-  "english": "They corrupt the people."
+  "levels": [
+   "They corrupt the people.",
+   "They corrupt people."
+  ]
  },
  {
+  "id": 13,
   "page": 34,
   "box": [
    1182,
@@ -118,9 +184,15 @@
    888
   ],
   "latin": "Cum ufno odorifero.",
-  "english": "With fragrant incense."
+  "levels": [
+   "With fragrant incense.",
+   "Enjoy it with fragrant incense.",
+   "Enjoy the fragrant incense.",
+   "Enjoy the fragrant scent."
+  ]
  },
  {
+  "id": 14,
   "page": 34,
   "box": [
    501,
@@ -129,9 +201,16 @@
    1081
   ],
   "latin": "pamafrena dulcia.",
-  "english": "Sweet pamphlets."
+  "levels": [
+   "Sweet pamphlets.",
+   "A lovely brochure.",
+   "A good book.",
+   "Good book.",
+   "It is a good book."
+  ]
  },
  {
+  "id": 15,
   "page": 34,
   "box": [
    717,
@@ -140,9 +219,15 @@
    1081
   ],
   "latin": "• Educunt dio Ieram.",
-  "english": "• They lead the god Hiera."
+  "levels": [
+   "• They lead the god Hiera.",
+   "They are led by the god Hiera.",
+   "They were led by the god Hiera.",
+   "They were guided by the god Hiera."
+  ]
  },
  {
+  "id": 17,
   "page": 34,
   "box": [
    1170,
@@ -151,9 +236,14 @@
    1082
   ],
   "latin": "Cumxarclu ro rof.",
-  "english": "With a red rose."
+  "levels": [
+   "With a red rose.",
+   "Along with red roses.",
+   "And red roses."
+  ]
  },
  {
+  "id": 18,
   "page": 34,
   "box": [
    489,
@@ -162,9 +252,16 @@
    1346
   ],
   "latin": "Dulcia, mi. cura,& non lipcdoii.",
-  "english": "Sweetness, my dear, care, and do not be stingy."
+  "levels": [
+   "Sweetness, my dear, care, and do not be stingy.",
+   "My dearest, be kind to her, and don't be stingy.",
+   "My dear, be kind to him, and don't be a bore.",
+   "Dear friend, be kind to him and don't be bored.",
+   "Dear friend, be kind to him and don't get bored."
+  ]
  },
  {
+  "id": 19,
   "page": 34,
   "box": [
    729,
@@ -173,9 +270,15 @@
    1339
   ],
   "latin": "Stomachis debilibus.",
-  "english": "For weak stomachs."
+  "levels": [
+   "For weak stomachs.",
+   "Suitable for people with sensitive stomachs.",
+   "Suitable for those with sensitive stomachs.",
+   "It is suitable for people with sensitive stomachs."
+  ]
  },
  {
+  "id": 20,
   "page": 34,
   "box": [
    1169,
@@ -184,9 +287,16 @@
    1341
   ],
   "latin": "Cum aliis pri moipfacomilia.",
-  "english": "With others, first of all, I am a friend."
+  "levels": [
+   "With others, first of all, I am a friend.",
+   "My primary concern for others is to be a friend.",
+   "The thing I care most about other people is being a friend.",
+   "The thing I care about most about other people is that I am a friend.",
+   "What I value most about other people is that I am their friend."
+  ]
  },
  {
+  "id": 22,
   "page": 34,
   "box": [
    941,
@@ -195,9 +305,13 @@
    1532
   ],
   "latin": "Faciilt infla . tioncm.",
-  "english": "It was easy to inflate."
+  "levels": [
+   "It was easy to inflate.",
+   "It was easy to spray."
+  ]
  },
  {
+  "id": 23,
   "page": 34,
   "box": [
    1169,
@@ -206,9 +320,14 @@
    1567
   ],
   "latin": "Cum Grana cis aceto fia.",
-  "english": "When the grain is made with vinegar."
+  "levels": [
+   "When the grain is made with vinegar.",
+   "When cooking grains with vinegar.",
+   "If you cook grains with vinegar."
+  ]
  },
  {
+  "id": 24,
   "page": 34,
   "box": [
    489,
@@ -217,9 +336,15 @@
    1761
   ],
   "latin": "Mutnr furco ficatis.",
-  "english": "You are a fork in the road."
+  "levels": [
+   "You are a fork in the road.",
+   "You are at a crossroads in your life.",
+   "You are in trouble in your life.",
+   "You are having difficulties in life."
+  ]
  },
  {
+  "id": 25,
   "page": 34,
   "box": [
    737,
@@ -228,9 +353,15 @@
    1761
   ],
   "latin": "Epari calido.",
-  "english": "Serve warm."
+  "levels": [
+   "Serve warm.",
+   "Please enjoy it while it's still warm.",
+   "Enjoy it while it's still warm.",
+   "Please eat it while it is warm."
+  ]
  },
  {
+  "id": 26,
   "page": 34,
   "box": [
    954,
@@ -239,9 +370,14 @@
    1758
   ],
   "latin": "Pedori,! uoci.",
-  "english": "Pedorus, I call."
+  "levels": [
+   "Pedorus, I call.",
+   "Pedrus, I'll call you.",
+   "Pedro, I'll call you."
+  ]
  },
  {
+  "id": 27,
   "page": 34,
   "box": [
    1171,
@@ -250,9 +386,16 @@
    1760
   ],
   "latin": "Cum chalct mellito.",
-  "english": "With honeydew mellito."
+  "levels": [
+   "With honeydew mellito.",
+   "Contains honeydew melit.",
+   "It contains honeydew melit.",
+   "It contains honeydew melon.",
+   "This product contains honeydew melon."
+  ]
  },
  {
+  "id": 29,
   "page": 34,
   "box": [
    687,
@@ -261,9 +404,14 @@
    2051
   ],
   "latin": "IVVAi , M E Ns T V M eius.",
-  "english": "IVVAi , M E Ns T V M his."
+  "levels": [
+   "IVVAi , M E Ns T V M his.",
+   "IVVAi, M E Ns T V M Him.",
+   "IVVAi, M E Ns T V M Geu."
+  ]
  },
  {
+  "id": 31,
   "page": 34,
   "box": [
    1167,
@@ -272,9 +420,15 @@
    2053
   ],
   "latin": "REMO; t»o Nocu^ menti eius.",
-  "english": "REMO: To the detriment of his mind."
+  "levels": [
+   "REMO: To the detriment of his mind.",
+   "Remo: It has a negative impact on his mental state.",
+   "Remo: It has a negative effect on his state of mind.",
+   "Remo: That has a negative effect on his mental state."
+  ]
  },
  {
+  "id": 32,
   "page": 41,
   "box": [
    735,
@@ -283,9 +437,16 @@
    401
   ],
   "latin": "Aperit a potionata .",
-  "english": "It opens with a potion."
+  "levels": [
+   "It opens with a potion.",
+   "It all starts with a magic potion.",
+   "It all starts with a magic drink.",
+   "It all starts with a magic potion.",
+   "Everything starts with a magic potion."
+  ]
  },
  {
+  "id": 33,
   "page": 41,
   "box": [
    961,
@@ -294,9 +455,15 @@
    405
   ],
   "latin": "Fade oprtadones.",
-  "english": "Fade the opportunists."
+  "levels": [
+   "Fade the opportunists.",
+   "It's best to stay away from opportunists.",
+   "It's better to avoid opportunists.",
+   "It is better to avoid opportunists."
+  ]
  },
  {
+  "id": 34,
   "page": 41,
   "box": [
    1181,
@@ -305,9 +472,13 @@
    441
   ],
   "latin": "Quando bene opera- *tur.",
-  "english": "When it works well."
+  "levels": [
+   "When it works well.",
+   "If it works well."
+  ]
  },
  {
+  "id": 36,
   "page": 41,
   "box": [
    733,
@@ -316,9 +487,16 @@
    628
   ],
   "latin": "Pimiram fedatehoierz.",
-  "english": "I will give you my first credit."
+  "levels": [
+   "I will give you my first credit.",
+   "I'll give you your first credit.",
+   "I will give you your first honor.",
+   "I'll give you your first tribute.",
+   "I will offer you my first tribute."
+  ]
  },
  {
+  "id": 37,
   "page": 41,
   "box": [
    958,
@@ -327,9 +505,15 @@
    630
   ],
   "latin": "Tardi digeittonis.",
-  "english": "Slow pace."
+  "levels": [
+   "Slow pace.",
+   "A slow pace.",
+   "Slow pace.",
+   "Slow speed."
+  ]
  },
  {
+  "id": 38,
   "page": 41,
   "box": [
    1190,
@@ -338,9 +522,13 @@
    633
   ],
   "latin": "Cumrebui dii{fihH4.",
-  "english": "I received the gift."
+  "levels": [
+   "I received the gift.",
+   "I received a gift."
+  ]
  },
  {
+  "id": 39,
   "page": 41,
   "box": [
    445,
@@ -349,9 +537,15 @@
    917
   ],
   "latin": "r ~ T rmprrat* ? torre Ia - u. «Sum, a •*",
-  "english": "r ~ T rmprrat* ? tower Ia - u \"I am, a"
+  "levels": [
+   "r ~ T rmprrat* ? tower Ia - u \"I am, a",
+   "r ~ T rmprrat* ? Tower Ia - u \"I am,",
+   "r ~ T rmprrat* ? Tower Ia - \"I am,",
+   "r ~ T rmprrat* ? Tower Ia - \"I,"
+  ]
  },
  {
+  "id": 40,
   "page": 41,
   "box": [
    744,
@@ -360,9 +554,13 @@
    852
   ],
   "latin": "Vifceribu, hmnidis.",
-  "english": "Viferibu, mnidis."
+  "levels": [
+   "Viferibu, mnidis.",
+   "Viperibu, Mnidis."
+  ]
  },
  {
+  "id": 41,
   "page": 41,
   "box": [
    956,
@@ -371,9 +569,15 @@
    856
   ],
   "latin": "Exafperat pe «Sue.",
-  "english": "He was exasperated by Sue."
+  "levels": [
+   "He was exasperated by Sue.",
+   "He was irritated with Sue.",
+   "He was angry with Sue.",
+   "He was angry at Sue."
+  ]
  },
  {
+  "id": 42,
   "page": 41,
   "box": [
    1191,
@@ -382,9 +586,16 @@
    890
   ],
   "latin": "Cumtauaturaqua cabda.",
-  "english": "With the cab."
+  "levels": [
+   "With the cab.",
+   "Taxi included.",
+   "A taxi has been installed.",
+   "The taxi is installed.",
+   "A taxi has been installed."
+  ]
  },
  {
+  "id": 43,
   "page": 41,
   "box": [
    723,
@@ -393,9 +604,15 @@
    1142
   ],
   "latin": "Cofornt expulfiuam, & d(fc<ndit uclociicf.",
-  "english": "They expel the enemy, and they destroy the enemy."
+  "levels": [
+   "They expel the enemy, and they destroy the enemy.",
+   "They drive out their enemies and destroy them.",
+   "They chase their enemies and destroy them.",
+   "They pursue and annihilate the enemy."
+  ]
  },
  {
+  "id": 44,
   "page": 41,
   "box": [
    950,
@@ -404,9 +621,14 @@
    1114
   ],
   "latin": "Dolorem indurit debilem.",
-  "english": "Pain hardens the weak."
+  "levels": [
+   "Pain hardens the weak.",
+   "Pain makes the weak stronger.",
+   "Pain makes the weak strong."
+  ]
  },
  {
+  "id": 45,
   "page": 41,
   "box": [
    436,
@@ -415,9 +637,16 @@
    1375
   ],
   "latin": "tl 2. rTemperate ? forrefa2. dum, a I»",
-  "english": "tl 2. Temperate? forrefa2. while, from 1"
+  "levels": [
+   "tl 2. Temperate? forrefa2. while, from 1",
+   "tl 2. Temperate zone? forrefa2. On the other hand, from 1",
+   "tl 2. Cool place? forrefa2. On the other hand, from 1",
+   "tl 2. Cool place? forrefa2. On the other hand, from point 1",
+   "tl 2. Is it a nice place? forrefa2. On the other hand, looking at item 1"
+  ]
  },
  {
+  "id": 46,
   "page": 41,
   "box": [
    723,
@@ -426,9 +655,15 @@
    1303
   ],
   "latin": "Fluxui Chokrico.",
-  "english": "I flowed to Chokric."
+  "levels": [
+   "I flowed to Chokric.",
+   "I ended up going to Chokrich.",
+   "I finally ended up in Chokrich.",
+   "Eventually, I arrived at Chokrich."
+  ]
  },
  {
+  "id": 47,
   "page": 41,
   "box": [
    948,
@@ -437,9 +672,16 @@
    1307
   ],
   "latin": "Generat fnfla cioncm.",
-  "english": "It generates a chain of events."
+  "levels": [
+   "It generates a chain of events.",
+   "That triggers a series of events.",
+   "That sets off a chain of events.",
+   "It starts a chain of events.",
+   "It triggers a series of events."
+  ]
  },
  {
+  "id": 48,
   "page": 41,
   "box": [
    1172,
@@ -448,9 +690,14 @@
    1312
   ],
   "latin": "CumZacch. rofa.",
-  "english": "With Zacchaeus."
+  "levels": [
+   "With Zacchaeus.",
+   "Together with Zacchaeus.",
+   "And Zacchaeus."
+  ]
  },
  {
+  "id": 49,
   "page": 41,
   "box": [
    431,
@@ -459,9 +706,15 @@
    1605
   ],
   "latin": "jj l.| Complete eo ? da,leuis. S’ r",
-  "english": "jj l.| Complete it ? da,leuis. S’ r"
+  "levels": [
+   "jj l.| Complete it ? da,leuis. S’ r",
+   "JJL | Are you done? Yes, Lewis. S'r",
+   "JJL | Are you ready? Yes, Lewis. Senior",
+   "JJL | Ready? Yeah, Lewis. Senior"
+  ]
  },
  {
+  "id": 50,
   "page": 41,
   "box": [
    957,
@@ -470,9 +723,13 @@
    1540
   ],
   "latin": "Vifceribu» ingidu.",
-  "english": "I am a poor man."
+  "levels": [
+   "I am a poor man.",
+   "I am poor."
+  ]
  },
  {
+  "id": 52,
   "page": 41,
   "box": [
    430,
@@ -481,9 +738,16 @@
    1789
   ],
   "latin": "S? .=, Compleotoc peratum. 3*",
-  "english": "S? .=, Completed. 3*"
+  "levels": [
+   "S? .=, Completed. 3*",
+   "S? .=, complete. 3*",
+   "S? .=, finished. 3*",
+   "S? .=, done. 3*",
+   "S? .=, Done. 3*"
+  ]
  },
  {
+  "id": 55,
   "page": 41,
   "box": [
    432,
@@ -492,9 +756,16 @@
    2052
   ],
   "latin": "3 HELII JV 8 B X R Eipla quam qupis.",
-  "english": "3 HELII JV 8 B X R Eipla than any other."
+  "levels": [
+   "3 HELII JV 8 B X R Eipla than any other.",
+   "The 3 HELII JV 8 B X R Eipla is superior to all other models.",
+   "The 3 HELII JV 8 B X R Eipla is better than all other models.",
+   "3 HELII JV 8 B X R Eipla is better than all other models.",
+   "The 3 HELII JV 8 B X R Eipla is superior to all other models."
+  ]
  },
  {
+  "id": 57,
   "page": 43,
   "box": [
    481,
@@ -503,9 +774,16 @@
    449
   ],
   "latin": "Margaririnfi, quod crcfcic incoctura.",
-  "english": "Margarine, which is uncooked."
+  "levels": [
+   "Margarine, which is uncooked.",
+   "Margarine is not cooked.",
+   "The margarine is not cooked.",
+   "The margarine has not been cooked.",
+   "The margarine was not cooked."
+  ]
  },
  {
+  "id": 59,
   "page": 43,
   "box": [
    942,
@@ -514,9 +792,16 @@
    419
   ],
   "latin": "Patientibus Colicam*",
-  "english": "For patients with Colic*"
+  "levels": [
+   "For patients with Colic*",
+   "For patients with colic*",
+   "Patients with colic*",
+   "Colic patients*",
+   "Patient with colic*"
+  ]
  },
  {
+  "id": 61,
   "page": 43,
   "box": [
    482,
@@ -525,9 +810,16 @@
    649
   ],
   "latin": "Clara, mun - da & integra.",
-  "english": "Clear, clean & whole."
+  "levels": [
+   "Clear, clean & whole.",
+   "Transparent, clean, and perfect.",
+   "Clear, clean, and complete.",
+   "Bright, clean and perfect.",
+   "It is bright, clean, and perfect."
+  ]
  },
  {
+  "id": 63,
   "page": 43,
   "box": [
    933,
@@ -536,9 +828,14 @@
    644
   ],
   "latin": "Hebetat fen - fui*",
-  "english": "Hebetas fen - fui*"
+  "levels": [
+   "Hebetas fen - fui*",
+   "Hebetasfen - fui*",
+   "Hebetaspen - Puyi*"
+  ]
  },
  {
+  "id": 64,
   "page": 43,
   "box": [
    1157,
@@ -547,9 +844,15 @@
    648
   ],
   "latin": "Cum falc Si origano.",
-  "english": "With a sickle If oregano."
+  "levels": [
+   "With a sickle If oregano.",
+   "Use a sickle to cut the oregano.",
+   "Use a scissor to cut the oregano.",
+   "Cut the oregano with scissors."
+  ]
  },
  {
+  "id": 65,
   "page": 43,
   "box": [
    503,
@@ -558,9 +861,16 @@
    873
   ],
   "latin": "Retentes, grandes.",
-  "english": "Retaining, great."
+  "levels": [
+   "Retaining, great.",
+   "It's great that you've been able to maintain it.",
+   "It's good that you were able to keep it.",
+   "Good thing you managed to save it.",
+   "Fortunately, you managed to save them."
+  ]
  },
  {
+  "id": 66,
   "page": 43,
   "box": [
    709,
@@ -569,9 +879,14 @@
    864
   ],
   "latin": "Tufsicnribus cum febri.",
-  "english": "With fever."
+  "levels": [
+   "With fever.",
+   "It is accompanied by a fever.",
+   "It is accompanied by fever."
+  ]
  },
  {
+  "id": 67,
   "page": 43,
   "box": [
    952,
@@ -580,9 +895,13 @@
    866
   ],
   "latin": "Debilitati dentium*",
-  "english": "Weakness of the teeth*"
+  "levels": [
+   "Weakness of the teeth*",
+   "Weak teeth*"
+  ]
  },
  {
+  "id": 68,
   "page": 43,
   "box": [
    1156,
@@ -591,9 +910,16 @@
    931
   ],
   "latin": "Cum decoquitur cum oleo Amigdaiino.",
-  "english": "When it is boiled with almond oil."
+  "levels": [
+   "When it is boiled with almond oil.",
+   "When you boil it in almond oil...",
+   "If you boil it in almond oil...",
+   "If you cook it in almond oil...",
+   "If you sauté it in almond oil..."
+  ]
  },
  {
+  "id": 69,
   "page": 43,
   "box": [
    497,
@@ -602,9 +928,15 @@
    1090
   ],
   "latin": "Rubcf,non curruli.",
-  "english": "Rubcf, not the carriages."
+  "levels": [
+   "Rubcf, not the carriages.",
+   "It's a rubeuf, not a carriage.",
+   "It's a rubeuf, not a cart.",
+   "This isn't a cart, it's a rubeuf (table)."
+  ]
  },
  {
+  "id": 70,
   "page": 43,
   "box": [
    707,
@@ -613,9 +945,16 @@
    1158
   ],
   "latin": "Prouoc2t u - rinam,# impinguant cor pus.",
-  "english": "They provoke urine, and pus fills the heart."
+  "levels": [
+   "They provoke urine, and pus fills the heart.",
+   "They induce urination, and pus fills the heart.",
+   "They cause urination, and pus fills the heart.",
+   "They cause the need to urinate, and pus fills the heart.",
+   "It causes the urge to urinate and leads to pus accumulating in the heart."
+  ]
  },
  {
+  "id": 71,
   "page": 43,
   "box": [
    932,
@@ -624,9 +963,15 @@
    1121
   ],
   "latin": "Faciunt naufcara y & Ib - oiniaiTula.",
-  "english": "They make sailors and Ib - oiniaiTula."
+  "levels": [
+   "They make sailors and Ib - oiniaiTula.",
+   "They make sailors and Ib-oinai-Tura.",
+   "They made sailors and Ib-oinai-Tura.",
+   "They made sailors and Iveoinaitura."
+  ]
  },
  {
+  "id": 72,
   "page": 43,
   "box": [
    1167,
@@ -635,9 +980,16 @@
    1151
   ],
   "latin": "Cum oleo, muri.ft fynafl. •",
-  "english": "With oil, wall.ft fynafl. •"
+  "levels": [
+   "With oil, wall.ft fynafl. •",
+   "Smooth the wall surface with oil.",
+   "Degrease the wall surface with oil.",
+   "Grease the wall surface with oil.",
+   "Apply oil to the wall."
+  ]
  },
  {
+  "id": 73,
   "page": 43,
   "box": [
    483,
@@ -646,9 +998,13 @@
    1376
   ],
   "latin": "Quae in aqua Kicrfx^cico ta men lTccan - cur.",
-  "english": "Which in the water Kicrfx^cico ta men lTccan - cur."
+  "levels": [
+   "Which in the water Kicrfx^cico ta men lTccan - cur.",
+   "Kicrfx^cico ta men lTccan - cur."
+  ]
  },
  {
+  "id": 74,
   "page": 43,
   "box": [
    708,
@@ -657,9 +1013,16 @@
    1376
   ],
   "latin": "• Sedant acufratem (angui nis,t5c' eo» for tiefroraaehu.",
-  "english": "• They sit in a coffin (angui nis,t5c' eo» for tiefroraaehu."
+  "levels": [
+   "• They sit in a coffin (angui nis,t5c' eo» for tiefroraaehu.",
+   "• They are sitting in the coffin (angui nis,t5c' eo» represents tiefroraaehu).",
+   "• They are sitting in a box (angui nis,t5c' eo» represents tiefroraaehu).",
+   "• They sit in a box (angui nis,t5c' eo» represents tiefroraaehu).",
+   "• They are sitting inside a box (angui nis,t5c' eo» represents Tiefroraaehu)."
+  ]
  },
  {
+  "id": 75,
   "page": 43,
   "box": [
    930,
@@ -668,9 +1031,16 @@
    1345
   ],
   "latin": "Melanrholif, coitui, Si ui - fui.",
-  "english": "Melanrholif, to the coitus, If I lived - I was."
+  "levels": [
+   "Melanrholif, to the coitus, If I lived - I was.",
+   "Melan Loriff, to sexual intercourse, if I were alive, that's what I would have done.",
+   "Melan Loriff, having sex, if I were alive, is what I would do.",
+   "Melan Loriff, if I were alive, I would have sex.",
+   "Melan Lorif, if I were alive, I would have had sex."
+  ]
  },
  {
+  "id": 76,
   "page": 43,
   "box": [
    1157,
@@ -679,9 +1049,15 @@
    1347
   ],
   "latin": "Cum blctf», & arriplicL bus.",
-  "english": "With blctf», & arriplicL bus."
+  "levels": [
+   "With blctf», & arriplicL bus.",
+   "blctf», and arriplicL with bus.",
+   "blctf», and arriplicL with a bus.",
+   "blctf» and arriplicL on the fairway."
+  ]
  },
  {
+  "id": 78,
   "page": 43,
   "box": [
    709,
@@ -690,9 +1066,15 @@
    1599
   ],
   "latin": "LSbricos pel lunt,purgant afcabiccrma listiuiuonb.",
-  "english": "The LSbricos are pel lunt, purgant afcabiccrma ​​listiuiuonb."
+  "levels": [
+   "The LSbricos are pel lunt, purgant afcabiccrma ​​listiuiuonb.",
+   "LSbricos is Perlant, Purgant afcabiccrma ​​listiuiuonb.",
+   "LSbricos Perlant, Purgant afcabiccrma​​​​listuiuonb.",
+   "LSbricos Perlant, Purgant afcabiccrmalistuiuonb."
+  ]
  },
  {
+  "id": 79,
   "page": 43,
   "box": [
    933,
@@ -701,9 +1083,15 @@
    1570
   ],
   "latin": "Difficile dige rirur Sfdcfcendic.",
-  "english": "It is difficult to say that Sfdcfcendic laughs."
+  "levels": [
+   "It is difficult to say that Sfdcfcendic laughs.",
+   "It's difficult to say that Sfdcfcendic laughs.",
+   "It's hard to tell if Sfdcfcendic is laughing.",
+   "It is difficult to tell whether Sfdcfcendic is laughing or not."
+  ]
  },
  {
+  "id": 80,
   "page": 43,
   "box": [
    1157,
@@ -712,9 +1100,16 @@
    1603
   ],
   "latin": "Qn dimitti! in eo amari tu do, 6i comeditur c5 aceto 3i muri.",
-  "english": "What is left! You give it to be bitter, it is eaten with vinegar from the wall."
+  "levels": [
+   "What is left! You give it to be bitter, it is eaten with vinegar from the wall.",
+   "What's left? If you make it bitter, you can eat it with the vinegar on the wall.",
+   "What's left? If you make it sweet, you can eat it with vinegar on the wall.",
+   "What's left? If you make it sweet, you can eat it with vinegar sauce on the wall.",
+   "What's left? If I make it sweet, I could pour vinegar sauce on the wall and eat it."
+  ]
  },
  {
+  "id": 81,
   "page": 43,
   "box": [
    494,
@@ -723,9 +1118,15 @@
    1831
   ],
   "latin": "Vilcofum, poderofum, plenum & iqualkns.",
-  "english": "Strong, powerful, full & equal."
+  "levels": [
+   "Strong, powerful, full & equal.",
+   "Strong, powerful, perfect, and equal.",
+   "You are strong, powerful, complete, and equal.",
+   "You are strong, powerful, whole, and equal."
+  ]
  },
  {
+  "id": 82,
   "page": 43,
   "box": [
    721,
@@ -734,9 +1135,15 @@
    1761
   ],
   "latin": "Corporibus laxis.",
-  "english": "With loose bodies."
+  "levels": [
+   "With loose bodies.",
+   "Along with the dismembered corpse.",
+   "And a dismembered body.",
+   "And the dismembered body."
+  ]
  },
  {
+  "id": 83,
   "page": 43,
   "box": [
    934,
@@ -745,9 +1152,16 @@
    1824
   ],
   "latin": "Tarde digrfri onis.generis humore* uf- £iofos.",
-  "english": "Slowly, the various kinds of humor* of £iofos."
+  "levels": [
+   "Slowly, the various kinds of humor* of £iofos.",
+   "Slowly, £iofos's various kinds of humor*.",
+   "Gradually, £iofos* different types of humor.",
+   "Gradually £iofos* different types of humor.",
+   "You will gradually come across various types of humor."
+  ]
  },
  {
+  "id": 84,
   "page": 43,
   "box": [
    1168,
@@ -756,9 +1170,16 @@
    1765
   ],
   "latin": "Cum multo Tale.",
-  "english": "With much of that."
+  "levels": [
+   "With much of that.",
+   "That's true for most of them.",
+   "That is true for many of them.",
+   "That's true for many of them.",
+   "That applies to many of them."
+  ]
  },
  {
+  "id": 86,
   "page": 43,
   "box": [
    714,
@@ -767,9 +1188,15 @@
    2053
   ],
   "latin": "IV V AS MEN# T V M eius.",
-  "english": "IV V AS MEN# T V M his."
+  "levels": [
+   "IV V AS MEN# T V M his.",
+   "IV V AS MEN# T V M His.",
+   "IV V AS A MAN# T V M His.",
+   "IV V As a man# T V M His."
+  ]
  },
  {
+  "id": 88,
   "page": 43,
   "box": [
    1155,
@@ -778,9 +1205,16 @@
    2056
   ],
   "latin": "REMO# tio Nocu# menti eius.",
-  "english": "REMO# tion Harms his mind."
+  "levels": [
+   "REMO# tion Harms his mind.",
+   "REMO# tion is harmful to his mental state.",
+   "DELETING is dangerous to his mental state.",
+   "REMOVING it is dangerous for his mental state.",
+   "Removing it is dangerous to his mental state."
+  ]
  },
  {
+  "id": 89,
   "page": 48,
   "box": [
    496,
@@ -789,9 +1223,14 @@
    367
   ],
   "latin": "Crofn, non coriola.",
-  "english": "Crofn, not Coriola."
+  "levels": [
+   "Crofn, not Coriola.",
+   "It's not Coriola, it's Kurofun.",
+   "It's not Coriola, it's Kuropun."
+  ]
  },
  {
+  "id": 90,
   "page": 48,
   "box": [
    736,
@@ -800,9 +1239,15 @@
    372
   ],
   "latin": "Ad Juni in (permale.",
-  "english": "To June in (permalink."
+  "levels": [
+   "To June in (permalink.",
+   "To June (permalink)",
+   "Until June (permanent link)",
+   "Until June (Permanent Link)"
+  ]
  },
  {
+  "id": 91,
   "page": 48,
   "box": [
    949,
@@ -811,9 +1256,12 @@
    398
   ],
   "latin": "Apofteraari rei m m, A ue hae.",
-  "english": "Apofteraari rei m m, A ue hae"
+  "levels": [
+   "Apofteraari rei m m, A ue hae"
+  ]
  },
  {
+  "id": 92,
   "page": 48,
   "box": [
    1177,
@@ -822,9 +1270,14 @@
    397
   ],
   "latin": "f Cum feminibui papauens.",
-  "english": "f With a female child, a poplar."
+  "levels": [
+   "f With a female child, a poplar.",
+   "f. For girls, poplar.",
+   "f. Poplar trees are good for girls."
+  ]
  },
  {
+  "id": 93,
   "page": 48,
   "box": [
    507,
@@ -833,9 +1286,14 @@
    623
   ],
   "latin": "Recens, rubea ^hortulana.",
-  "english": "Fresh, red ^gardenia."
+  "levels": [
+   "Fresh, red ^gardenia.",
+   "Fresh red gardenias.",
+   "Fresh red gardenia flower."
+  ]
  },
  {
+  "id": 94,
   "page": 48,
   "box": [
    726,
@@ -844,9 +1302,14 @@
    624
   ],
   "latin": "Podagra, Se diiioluit duncicm.",
-  "english": "Gout, it resolved itself quickly."
+  "levels": [
+   "Gout, it resolved itself quickly.",
+   "My gout cleared up quickly.",
+   "My gout improved quickly."
+  ]
  },
  {
+  "id": 95,
   "page": 48,
   "box": [
    1185,
@@ -855,9 +1318,14 @@
    629
   ],
   "latin": "Praparacum cum atnigda iit,& accio.",
-  "english": "The preparation went with the preparation, and the action."
+  "levels": [
+   "The preparation went with the preparation, and the action.",
+   "Preparation was linked to action.",
+   "Preparation was related to action."
+  ]
  },
  {
+  "id": 96,
   "page": 48,
   "box": [
    510,
@@ -866,9 +1334,16 @@
    850
   ],
   "latin": "Viride, recrns,& tenerum.",
-  "english": "Green, fresh, and tender."
+  "levels": [
+   "Green, fresh, and tender.",
+   "It's green, fresh, and tender.",
+   "It's green, fresh, and soft.",
+   "It is green, fresh and soft.",
+   "It is green, fresh, and soft."
+  ]
  },
  {
+  "id": 97,
   "page": 48,
   "box": [
    734,
@@ -877,9 +1352,13 @@
    861
   ],
   "latin": "Prodet flornaclto cum lu^coiuo.",
-  "english": "It produces flowers with light."
+  "levels": [
+   "It produces flowers with light.",
+   "It blooms when exposed to light."
+  ]
  },
  {
+  "id": 100,
   "page": 48,
   "box": [
    729,
@@ -888,9 +1367,15 @@
    1080
   ],
   "latin": "Prouocat uri nam,# addit in coitu.",
-  "english": "It provokes burning, for,# he adds, in intercourse."
+  "levels": [
+   "It provokes burning, for,# he adds, in intercourse.",
+   "He adds that it causes a burning sensation during intercourse.",
+   "He adds that it causes a burning sensation during sex.",
+   "He added that it causes a burning sensation during sexual intercourse."
+  ]
  },
  {
+  "id": 101,
   "page": 48,
   "box": [
    961,
@@ -899,9 +1384,13 @@
    1047
   ],
   "latin": "CfTebro, di feniibus.",
-  "english": "CfTebro, gods of the forest."
+  "levels": [
+   "CfTebro, gods of the forest.",
+   "The God of the Forest, Tebro."
+  ]
  },
  {
+  "id": 102,
   "page": 48,
   "box": [
    1184,
@@ -910,9 +1399,15 @@
    1112
   ],
   "latin": "Cii oleo fefaunno, icfanu nis noexcor nearis.",
-  "english": "I trust in the oil, I will not be afraid of the end."
+  "levels": [
+   "I trust in the oil, I will not be afraid of the end.",
+   "I believe in oil. I have no fear of the end.",
+   "I believe in oil. I am not afraid of the end.",
+   "I believe in oil. I am not afraid of the apocalypse."
+  ]
  },
  {
+  "id": 103,
   "page": 48,
   "box": [
    731,
@@ -921,9 +1416,15 @@
    1339
   ],
   "latin": "Venae fciadcar, flu coicui, & odore aro inaurat oris.",
-  "english": "The veins are fciadcar, the flu is coicui, and the smell of the aro inaurat mouth."
+  "levels": [
+   "The veins are fciadcar, the flu is coicui, and the smell of the aro inaurat mouth.",
+   "Veins are fciadcar, influenza is coicui, and bad breath is aro inaurat.",
+   "Blood vessels are dangerous, fever is dangerous, and bad breath is dangerous.",
+   "Vascular disease is dangerous, fever is dangerous, and bad breath is also dangerous."
+  ]
  },
  {
+  "id": 104,
   "page": 48,
   "box": [
    1187,
@@ -932,9 +1433,16 @@
    1276
   ],
   "latin": "Cum ferculi. unAuofis.",
-  "english": "With dishes. unAuofis."
+  "levels": [
+   "With dishes. unAuofis.",
+   "Includes tableware. unAuofis.",
+   "Including food items on the table.",
+   "Also included are the food items on the table.",
+   "The food placed on the table is also included."
+  ]
  },
  {
+  "id": 105,
   "page": 48,
   "box": [
    509,
@@ -943,9 +1451,15 @@
    1500
   ],
   "latin": "• & Recens, dulce.",
-  "english": "• & Fresh, sweet."
+  "levels": [
+   "• & Fresh, sweet.",
+   "Fresh and sweet.",
+   "It's fresh and delicious.",
+   "It is fresh and delicious."
+  ]
  },
  {
+  "id": 107,
   "page": 48,
   "box": [
    976,
@@ -954,9 +1468,13 @@
    1503
   ],
   "latin": "Vilcmbu» dcbdibut.",
-  "english": "William is a genius."
+  "levels": [
+   "William is a genius.",
+   "William is a smart person."
+  ]
  },
  {
+  "id": 108,
   "page": 48,
   "box": [
    753,
@@ -965,9 +1483,15 @@
    1730
   ],
   "latin": "« Vifceribus cholcrtcu.",
-  "english": "« The living are cholera."
+  "levels": [
+   "« The living are cholera.",
+   "\"Everyone who is alive has cholera.\"",
+   "\"Every living person has cholera.\"",
+   "Every living person is at risk of contracting cholera."
+  ]
  },
  {
+  "id": 110,
   "page": 48,
   "box": [
    1195,
@@ -976,9 +1500,16 @@
    1767
   ],
   "latin": "Cum urt Atio iii.tydulcibui.",
-  "english": "With the sweet smell of Atio III.tydulcibui."
+  "levels": [
+   "With the sweet smell of Atio III.tydulcibui.",
+   "Along with the sweet fragrance of Atio III.tydulcibui.",
+   "And the sweet scent of Atio III.tydulcibui.",
+   "And the sweet scent of Atio III.",
+   "And the sweet scent of Artio III."
+  ]
  },
  {
+  "id": 111,
   "page": 48,
   "box": [
    519,
@@ -987,9 +1518,15 @@
    2031
   ],
   "latin": "MELI» V S EX R E ipfa quamqupis.",
-  "english": "BETTER THAN R E ipfa quamqupis."
+  "levels": [
+   "BETTER THAN R E ipfa quamqupis.",
+   "It is superior to R E ipfa quamqupis.",
+   "It is higher than R E ipfa quamqupis.",
+   "R E is higher than ipfa quamqupis."
+  ]
  },
  {
+  "id": 113,
   "page": 48,
   "box": [
    1198,
@@ -998,9 +1535,15 @@
    2030
   ],
   "latin": "REMO? do Nocu: mena aui.",
-  "english": "REMO? I am afraid of Nocus: I have come."
+  "levels": [
+   "REMO? I am afraid of Nocus: I have come.",
+   "Remo? I'm scared of Nox. Here it comes.",
+   "Are you coming back? I'm afraid of Nox. Here it comes.",
+   "Are you coming back? I'm scared of Knox. There comes."
+  ]
  },
  {
+  "id": 114,
   "page": 50,
   "box": [
    523,
@@ -1009,9 +1552,15 @@
    382
   ],
   "latin": "Q^uod fiicx uino.",
-  "english": "What a fine wine."
+  "levels": [
+   "What a fine wine.",
+   "What a wonderful wine.",
+   "What a very delicious wine.",
+   "This is a really delicious wine."
+  ]
  },
  {
+  "id": 115,
   "page": 50,
   "box": [
    739,
@@ -1020,9 +1569,13 @@
    420
   ],
   "latin": "Choler*, & jgingiuis ,& appetitui.",
-  "english": "Cholera*, & jginguis, & appetite."
+  "levels": [
+   "Cholera*, & jginguis, & appetite.",
+   "Cholera*, Genghis Khan, appetite."
+  ]
  },
  {
+  "id": 116,
   "page": 50,
   "box": [
    1197,
@@ -1031,9 +1584,14 @@
    414
   ],
   "latin": "Cum aqua, & scuccha- . ro.",
-  "english": "With water, and vinegar."
+  "levels": [
+   "With water, and vinegar.",
+   "With water and vinegar.",
+   "And water and vinegar."
+  ]
  },
  {
+  "id": 117,
   "page": 50,
   "box": [
    516,
@@ -1042,9 +1600,16 @@
    698
   ],
   "latin": "Recens &jI. ba.ctnonpcr forata. t",
-  "english": "Recent &jI. ba.ctnonpcr forata. t"
+  "levels": [
+   "Recent &jI. ba.ctnonpcr forata. t",
+   "Recent &jI. ba.ctnonPCR forum. t",
+   "The latest forum for &jI. ba.ctnonPCR. t",
+   "The latest forum for &jI.ba.ctnonPCR.t",
+   "Latest forum of &jI.ba.ctnonPCR.t"
+  ]
  },
  {
+  "id": 118,
   "page": 50,
   "box": [
    740,
@@ -1053,9 +1618,16 @@
    691
   ],
   "latin": "Abftcrgit fio machu,& $- uocar uomiquani cxaduftoflcginaie pellit.",
-  "english": "He is a man, and he drives away the man who is a man."
+  "levels": [
+   "He is a man, and he drives away the man who is a man.",
+   "He is a man, and he drives away other men who are men.",
+   "He is a man, and he chases away other men who are men.",
+   "He is a man, and he drives away other men who are men.",
+   "He is a man, and he drives away other men."
+  ]
  },
  {
+  "id": 119,
   "page": 50,
   "box": [
    969,
@@ -1064,9 +1636,12 @@
    621
   ],
   "latin": "Cerebro, Sc # ncruu.",
-  "english": "Brain, Sc # ncruu."
+  "levels": [
+   "Brain, Sc # ncruu."
+  ]
  },
  {
+  "id": 120,
   "page": 50,
   "box": [
    1165,
@@ -1075,9 +1650,16 @@
    663
   ],
   "latin": "Cum accio. jt",
-  "english": "With action. jt"
+  "levels": [
+   "With action. jt",
+   "Through action.",
+   "In action.",
+   "In operation.",
+   "It is in operation."
+  ]
  },
  {
+  "id": 122,
   "page": 50,
   "box": [
    743,
@@ -1086,9 +1668,16 @@
    894
   ],
   "latin": "Febribus adurcnribus, dC urinam prouocanc.",
-  "english": "With severe fevers, it provokes urination."
+  "levels": [
+   "With severe fevers, it provokes urination.",
+   "When you have a high fever, the diuretic effect of your body increases.",
+   "If you have a high fever, the effect of the abortion on your body increases.",
+   "If you have a high fever, the effect of the abortion on your body will be intensified.",
+   "If you have a high fever, the effects of abortion on your body can be more severe."
+  ]
  },
  {
+  "id": 123,
   "page": 50,
   "box": [
    965,
@@ -1097,9 +1686,13 @@
    863
   ],
   "latin": "Faciunt Ilio - rum dolore. & iiomadu.",
-  "english": "They cause pain and suffering."
+  "levels": [
+   "They cause pain and suffering.",
+   "They bring pain and suffering."
+  ]
  },
  {
+  "id": 124,
   "page": 50,
   "box": [
    1193,
@@ -1108,9 +1701,14 @@
    834
   ],
   "latin": "Cum meile, Qc oleo.",
-  "english": "With honey, which is oil."
+  "levels": [
+   "With honey, which is oil.",
+   "Honey is a type of oil.",
+   "Honey is a type of fat."
+  ]
  },
  {
+  "id": 125,
   "page": 50,
   "box": [
    521,
@@ -1119,9 +1717,15 @@
    1086
   ],
   "latin": "Recfs, cuius dulce munus.",
-  "english": "Recfs, whose sweet gift."
+  "levels": [
+   "Recfs, whose sweet gift.",
+   "Recfs gave me a wonderful gift.",
+   "Recfs gave me a very nice gift.",
+   "Recfs gave me a very good gift."
+  ]
  },
  {
+  "id": 128,
   "page": 50,
   "box": [
    1191,
@@ -1130,9 +1734,14 @@
    1092
   ],
   "latin": "Cum tientolis.ct mulrtiu dincaccu.",
-  "english": "With the tientolis.ct mulrtiu dincaccu."
+  "levels": [
+   "With the tientolis.ct mulrtiu dincaccu.",
+   "Along with tientolis.ct multirtiu dincaccu.",
+   "And tientolis.ct multirtiu dincaccu."
+  ]
  },
  {
+  "id": 129,
   "page": 50,
   "box": [
    536,
@@ -1141,9 +1750,16 @@
    1280
   ],
   "latin": "Tenera,recens.",
-  "english": "Tender, fresh."
+  "levels": [
+   "Tender, fresh.",
+   "Soft and fresh.",
+   "It is soft and young.",
+   "It is soft and youthful.",
+   "It has a soft and youthful feel."
+  ]
  },
  {
+  "id": 130,
   "page": 50,
   "box": [
    976,
@@ -1152,9 +1768,15 @@
    1347
   ],
   "latin": "Minuit fanguinem, & (penna mul tum.",
-  "english": "It reduced the blood, and (the feathers a lot."
+  "levels": [
+   "It reduced the blood, and (the feathers a lot.",
+   "We significantly reduced the amount of blood and feathers.",
+   "We have significantly reduced the amount of blood and feathers.",
+   "The amount of blood and feathers has been significantly reduced."
+  ]
  },
  {
+  "id": 131,
   "page": 50,
   "box": [
    1191,
@@ -1163,9 +1785,15 @@
    1255
   ],
   "latin": "Cum areto.",
-  "english": "With a dry land."
+  "levels": [
+   "With a dry land.",
+   "In arid lands.",
+   "On dry lands.",
+   "In dry land."
+  ]
  },
  {
+  "id": 134,
   "page": 50,
   "box": [
    969,
@@ -1174,9 +1802,13 @@
    1515
   ],
   "latin": "Facit fodi* in capicc.",
-  "english": "He makes holes in the head."
+  "levels": [
+   "He makes holes in the head.",
+   "He drills a hole in his head."
+  ]
  },
  {
+  "id": 135,
   "page": 50,
   "box": [
    1201,
@@ -1185,9 +1817,14 @@
    1512
   ],
   "latin": "Cum aceto, & liCtr.",
-  "english": "With vinegar, & liqueur."
+  "levels": [
+   "With vinegar, & liqueur.",
+   "Contains vinegar and liqueur.",
+   "It contains vinegar and alcohol."
+  ]
  },
  {
+  "id": 136,
   "page": 50,
   "box": [
    524,
@@ -1196,9 +1833,15 @@
    1731
   ],
   "latin": "NodaTa bulbis.",
-  "english": "NodaTa bulbs."
+  "levels": [
+   "NodaTa bulbs.",
+   "Noda bulbs.",
+   "Noda's guns.",
+   "Noda's weapons."
+  ]
  },
  {
+  "id": 137,
   "page": 50,
   "box": [
    981,
@@ -1207,9 +1850,12 @@
    1766
   ],
   "latin": "Expolitu*, ccrcbio, Sl utfut.",
-  "english": "Exploitation, ecrcbio, Sl utfut."
+  "levels": [
+   "Exploitation, ecrcbio, Sl utfut."
+  ]
  },
  {
+  "id": 138,
   "page": 50,
   "box": [
    1184,
@@ -1218,9 +1864,14 @@
    1742
   ],
   "latin": "i : ' ' Cum acetoks,«5t oleis.",
-  "english": "i : ' ' With vinegar,«5t oils."
+  "levels": [
+   "i : ' ' With vinegar,«5t oils.",
+   "i: ' ' Contains 5 tons of vinegar and oil.",
+   "i: ' ' It contains 5 tons of vinegar and oil."
+  ]
  },
  {
+  "id": 139,
   "page": 50,
   "box": [
    526,
@@ -1229,9 +1880,13 @@
    2030
   ],
   "latin": "HELI! V S EX R E ipfa quam qupia.",
-  "english": "HELI! V S EX R E ipfa than qupia."
+  "levels": [
+   "HELI! V S EX R E ipfa than qupia.",
+   "Helicopter! V SEX R E ipfa is better than Qupia."
+  ]
  },
  {
+  "id": 141,
   "page": 50,
   "box": [
    1198,
@@ -1240,9 +1895,16 @@
    2029
   ],
   "latin": "REMO^ tio Nocu# menti cius.",
-  "english": "REMO^ tion Harmful to the mind."
+  "levels": [
+   "REMO^ tion Harmful to the mind.",
+   "Remove. Harmful to the mind.",
+   "Remove it. It's dangerous to the mind.",
+   "Remove it. It is dangerous to the mind.",
+   "Remove it. It is harmful to your mental health."
+  ]
  },
  {
+  "id": 142,
   "page": 58,
   "box": [
    489,
@@ -1251,9 +1913,14 @@
    400
   ],
   "latin": "1 Animales, pingue*.",
-  "english": "1 Animals, fat*."
+  "levels": [
+   "1 Animals, fat*.",
+   "1 Animal fat*",
+   "1. Animal fats*"
+  ]
  },
  {
+  "id": 143,
   "page": 58,
   "box": [
    732,
@@ -1262,9 +1929,14 @@
    399
   ],
   "latin": "Stomacho wperato.",
-  "english": "Stomach operated."
+  "levels": [
+   "Stomach operated.",
+   "Stomach surgery.",
+   "Abdominal surgery."
+  ]
  },
  {
+  "id": 144,
   "page": 58,
   "box": [
    941,
@@ -1273,9 +1945,16 @@
    457
   ],
   "latin": "Co luetis pati naufeam, & abomina» uoncra.",
-  "english": "You will suffer shipwreck, and you will abhor it."
+  "levels": [
+   "You will suffer shipwreck, and you will abhor it.",
+   "You will be shipwrecked and will find it extremely unpleasant.",
+   "You will be shipwrecked and you will find it very unpleasant.",
+   "You will be shipwrecked and it will be very unpleasant for you.",
+   "You will be shipwrecked, and that will be a very unpleasant thing for you."
+  ]
  },
  {
+  "id": 145,
   "page": 58,
   "box": [
    1164,
@@ -1284,9 +1963,14 @@
    402
   ],
   "latin": "Cumbrodfjt. fiipucit.",
-  "english": "Cumbria."
+  "levels": [
+   "Cumbria.",
+   "Cambrian.",
+   "Welshman."
+  ]
  },
  {
+  "id": 149,
   "page": 58,
   "box": [
    1172,
@@ -1295,9 +1979,13 @@
    620
   ],
   "latin": "Cum cti alce meUino.",
-  "english": "With a mellow elk."
+  "levels": [
+   "With a mellow elk.",
+   "With a gentle moose."
+  ]
  },
  {
+  "id": 150,
   "page": 58,
   "box": [
    469,
@@ -1306,9 +1994,15 @@
    874
   ],
   "latin": "Propinqulo- ' res naciui- «a«i.",
-  "english": "Relatives are born."
+  "levels": [
+   "Relatives are born.",
+   "A relative is born.",
+   "A relative has been born.",
+   "A relative was born."
+  ]
  },
  {
+  "id": 151,
   "page": 58,
   "box": [
    719,
@@ -1317,9 +2011,16 @@
    842
   ],
   "latin": "Vatibus excremo.",
-  "english": "I excrete from the bards."
+  "levels": [
+   "I excrete from the bards.",
+   "I obtain excrement from the minstrel.",
+   "I get a kick out of a musician.",
+   "I get compliments from the musician.",
+   "I receive praise from that musician."
+  ]
  },
  {
+  "id": 152,
   "page": 58,
   "box": [
    1165,
@@ -1328,9 +2029,16 @@
    847
   ],
   "latin": "Cum mora. & balneo.",
-  "english": "With a stay. & a bathroom."
+  "levels": [
+   "With a stay. & a bathroom.",
+   "Accommodation included. Bathroom included.",
+   "Living area included. Bathroom included.",
+   "Living room included in the price. Bathroom included in the price.",
+   "The living room and bathroom usage fees are included in the price."
+  ]
  },
  {
+  "id": 153,
   "page": 58,
   "box": [
    464,
@@ -1339,9 +2047,16 @@
    1064
   ],
   "latin": "* iuuenet exer ci unces.",
-  "english": "* I am young, exercise is important."
+  "levels": [
+   "* I am young, exercise is important.",
+   "Since I'm young, exercise is important.",
+   "Since I was young, exercise is important.",
+   "Exercise has been important to me since I was young.",
+   "I have valued exercise since I was young."
+  ]
  },
  {
+  "id": 154,
   "page": 58,
   "box": [
    717,
@@ -1350,9 +2065,15 @@
    1131
   ],
   "latin": "Excrcitantib. &'fluxu eholeticuin paucnubu»•",
-  "english": "Excretion. &'flux of eholeticuin paucnubu»•"
+  "levels": [
+   "Excretion. &'flux of eholeticuin paucnubu»•",
+   "Excretion. &'Flax of Ehorechik'inpauknub'",
+   "To extract. &'Ehorechik'inpauknub's flax'",
+   "Extract. &'Ehorechik' pauknubin flax'"
+  ]
  },
  {
+  "id": 155,
   "page": 58,
   "box": [
    944,
@@ -1361,9 +2082,15 @@
    1071
   ],
   "latin": "Aegritudinibus mutui.",
-  "english": "I borrow from illnesses."
+  "levels": [
+   "I borrow from illnesses.",
+   "I draw inspiration from illness.",
+   "I find inspiration in illness.",
+   "I get inspiration from disease."
+  ]
  },
  {
+  "id": 156,
   "page": 58,
   "box": [
    1163,
@@ -1372,9 +2099,15 @@
    1110
   ],
   "latin": "Cum xinzi. berc,& pt. ‘ pete.",
-  "english": "With xinzi. berc,& pt. ‘ ask."
+  "levels": [
+   "With xinzi. berc,& pt. ‘ ask.",
+   "xinzi.berc, along with &pt. \"I have a question.\"",
+   "xinzi.berc, and &pt. \"I have a question.\"",
+   "xinzi.berc and &pt. \"I have a question.\""
+  ]
  },
  {
+  "id": 157,
   "page": 58,
   "box": [
    715,
@@ -1383,9 +2116,16 @@
    1324
   ],
   "latin": "Cibum dige rtre facit, & deiVendere.",
-  "english": "He makes food to be eaten, and to be sold."
+  "levels": [
+   "He makes food to be eaten, and to be sold.",
+   "He makes food to eat and to sell.",
+   "You make food for eating and selling.",
+   "You prepare food to eat and sell.",
+   "You prepare food to eat and food to sell."
+  ]
  },
  {
+  "id": 158,
   "page": 58,
   "box": [
    945,
@@ -1394,9 +2134,15 @@
    1295
   ],
   "latin": "Cerebro, Si udui.",
-  "english": "Brain, if I had it."
+  "levels": [
+   "Brain, if I had it.",
+   "If I had a brain.",
+   "If only I had a brain.",
+   "I wish I had a head."
+  ]
  },
  {
+  "id": 159,
   "page": 58,
   "box": [
    1164,
@@ -1405,9 +2151,16 @@
    1296
   ],
   "latin": "Locus, &' tor refa&ys.",
-  "english": "Place, &' tor refa&ys."
+  "levels": [
+   "Place, &' tor refa&ys.",
+   "Please double-check the location.",
+   "Please check the location.",
+   "Check the location.",
+   "Please check the location."
+  ]
  },
  {
+  "id": 160,
   "page": 58,
   "box": [
    492,
@@ -1416,9 +2169,16 @@
    1514
   ],
   "latin": "Pingues, huM.tilt .",
-  "english": "Fat, huM.tilt ."
+  "levels": [
+   "Fat, huM.tilt .",
+   "I'm fat, huM.tilt.",
+   "I am fat, I am chubby.",
+   "I'm fat, I'm chubby.",
+   "I'm fat, chubby."
+  ]
  },
  {
+  "id": 161,
   "page": 58,
   "box": [
    1165,
@@ -1427,9 +2187,15 @@
    1560
   ],
   "latin": "Cumdeco. quuturcum oiru.OtUotc.",
-  "english": "With a good deed."
+  "levels": [
+   "With a good deed.",
+   "Through good deeds.",
+   "With good deeds.",
+   "Through good deeds."
+  ]
  },
  {
+  "id": 162,
   "page": 58,
   "box": [
    497,
@@ -1438,9 +2204,13 @@
    1774
   ],
   "latin": "De animalibus humi - dis»",
-  "english": "About animals of the earth - dis»"
+  "levels": [
+   "About animals of the earth - dis»",
+   "About animals on Earth - dis»"
+  ]
  },
  {
+  "id": 163,
   "page": 58,
   "box": [
    715,
@@ -1449,9 +2219,16 @@
    1746
   ],
   "latin": "Corporibus prjdtic uires.",
-  "english": "The bodies are endowed with powers."
+  "levels": [
+   "The bodies are endowed with powers.",
+   "That body is endowed with power.",
+   "That body is empowered.",
+   "That body is authorized.",
+   "The organization has been authorized."
+  ]
  },
  {
+  "id": 164,
   "page": 58,
   "box": [
    941,
@@ -1460,9 +2237,15 @@
    1745
   ],
   "latin": "Faciunt pni. ritum.",
-  "english": "They perform the ritual."
+  "levels": [
+   "They perform the ritual.",
+   "They perform a ritual.",
+   "They are doing a ritual.",
+   "They perform a ritual."
+  ]
  },
  {
+  "id": 165,
   "page": 58,
   "box": [
    1164,
@@ -1471,9 +2254,16 @@
    1780
   ],
   "latin": "Cum fpeeie. but frigidi., Ahumidts.",
-  "english": "With fpeeie. but frigid., Ahumidts."
+  "levels": [
+   "With fpeeie. but frigid., Ahumidts.",
+   "Together with fpeeie. But it's freezing cold. Ahumidts.",
+   "And fpeeie. But it's very cold. Ahumidts.",
+   "And help. But it's really cold. Damp.",
+   "Please help me. But it is too cold and humid."
+  ]
  },
  {
+  "id": 168,
   "page": 58,
   "box": [
    1163,
@@ -1482,9 +2272,15 @@
    2039
   ],
   "latin": "RIMO? do Nocumena ei ii5»",
-  "english": "RIMO? Do you harm him?"
+  "levels": [
+   "RIMO? Do you harm him?",
+   "Rimo? Are you going to harm him?",
+   "Rimo? Are you going to hurt him?",
+   "Rimo? Are you planning to hurt him?"
+  ]
  },
  {
+  "id": 169,
   "page": 78,
   "box": [
    486,
@@ -1493,9 +2289,15 @@
    390
   ],
   "latin": "Afsumfupra aquam.",
-  "english": "Sulfurous water."
+  "levels": [
+   "Sulfurous water.",
+   "Sulfur water.",
+   "Sulfurous water.",
+   "Sulfur water."
+  ]
  },
  {
+  "id": 170,
   "page": 78,
   "box": [
    718,
@@ -1504,9 +2306,15 @@
    424
   ],
   "latin": "Carnei effidi carulagmofai.",
-  "english": "The flesh is made of carulagmofa."
+  "levels": [
+   "The flesh is made of carulagmofa.",
+   "The meat is made from Karlagomofa.",
+   "The meat is made from Karlagomof.",
+   "This meat is from Karlagomov."
+  ]
  },
  {
+  "id": 172,
   "page": 78,
   "box": [
    1161,
@@ -1515,9 +2323,15 @@
    390
   ],
   "latin": "Cum cxcrclCio forti.",
-  "english": "With strong exercise."
+  "levels": [
+   "With strong exercise.",
+   "Through strenuous exercise.",
+   "With heavy exercise.",
+   "Along with intense exercise."
+  ]
  },
  {
+  "id": 173,
   "page": 78,
   "box": [
    500,
@@ -1526,9 +2340,14 @@
    637
   ],
   "latin": "Cum pane ftrmcnUlO.",
-  "english": "With bread from the quinoa."
+  "levels": [
+   "With bread from the quinoa.",
+   "Served with quinoa bread.",
+   "It is served with quinoa bread."
+  ]
  },
  {
+  "id": 175,
   "page": 78,
   "box": [
    951,
@@ -1537,9 +2356,13 @@
    611
   ],
   "latin": "Vifceribui liunudis.",
-  "english": "I live in peace."
+  "levels": [
+   "I live in peace.",
+   "I am living peacefully."
+  ]
  },
  {
+  "id": 176,
   "page": 78,
   "box": [
    1160,
@@ -1548,9 +2371,15 @@
    646
   ],
   "latin": "Cum ftipri. cis pofupfas comraeilis.",
-  "english": "With the first. cis pofupfas comraeilis."
+  "levels": [
+   "With the first. cis pofupfas comraeilis.",
+   "Along with the first one. cis pofupfas comraeilis.",
+   "And the first one. cis pofuffas comraeilis.",
+   "And the first. cis puffas comraeilis."
+  ]
  },
  {
+  "id": 177,
   "page": 78,
   "box": [
    487,
@@ -1559,9 +2388,15 @@
    835
   ],
   "latin": "Carens nudbus,& meile.",
-  "english": "Missing, naked, and me."
+  "levels": [
+   "Missing, naked, and me.",
+   "I am lost, naked, too.",
+   "I too am lost, naked.",
+   "I, too, was lost and wasn't even wearing clothes."
+  ]
  },
  {
+  "id": 178,
   "page": 78,
   "box": [
    714,
@@ -1570,9 +2405,16 @@
    871
   ],
   "latin": "Vtcubug uei natione ienu per.",
-  "english": "Vtcubug you nation eat through."
+  "levels": [
+   "Vtcubug you nation eat through.",
+   "Vtcubug, you will devour the country.",
+   "Vtcubug, you will eat the country.",
+   "Vtcubug, you eat the earth.",
+   "Vtcubug, you are eating the Earth."
+  ]
  },
  {
+  "id": 179,
   "page": 78,
   "box": [
    1162,
@@ -1581,9 +2423,16 @@
    836
   ],
   "latin": "Cum cimil - In. dulcibus.",
-  "english": "With a little - In. sweets."
+  "levels": [
+   "With a little - In. sweets.",
+   "A little bit of candy.",
+   "A little candy.",
+   "A small candy.",
+   "One small candy."
+  ]
  },
  {
+  "id": 180,
   "page": 78,
   "box": [
    487,
@@ -1592,9 +2441,15 @@
    1118
   ],
   "latin": "Cum rueearo,oleo anu. gdal.fif galli».",
-  "english": "When I run, I oil my anus. gdal.fif galli»."
+  "levels": [
+   "When I run, I oil my anus. gdal.fif galli».",
+   "When running, I apply oil to my anus. gdal.fif galli»",
+   "When I run, I put oil in my anus. gdal.fif galli»",
+   "I apply oil to my anus when I run."
+  ]
  },
  {
+  "id": 182,
   "page": 78,
   "box": [
    948,
@@ -1603,9 +2458,14 @@
    1060
   ],
   "latin": "Vifceribui debilibus.",
-  "english": "I have lived with the weak."
+  "levels": [
+   "I have lived with the weak.",
+   "I have lived alongside the vulnerable.",
+   "I live with weak people."
+  ]
  },
  {
+  "id": 183,
   "page": 78,
   "box": [
    1168,
@@ -1614,9 +2474,14 @@
    1098
   ],
   "latin": "Cum fripricisijlcuiry. donrjs.",
-  "english": "With fripricisijlcuiry. donrjs"
+  "levels": [
+   "With fripricisijlcuiry. donrjs",
+   "Together with fripricisijlcuiry. donrjs",
+   "And fripricisijlcuiry. donrjs"
+  ]
  },
  {
+  "id": 184,
   "page": 78,
   "box": [
    486,
@@ -1625,9 +2490,16 @@
    1312
   ],
   "latin": "Zuccaru rrra prrai* dulcedinis.",
-  "english": "Zuccaru rrra prrai* sweetness."
+  "levels": [
+   "Zuccaru rrra prrai* sweetness.",
+   "Zuccar la prelai sweetness.",
+   "The sweetness of Zuccar la prelai.",
+   "Zuccar la prelai sweetness.",
+   "The sweetness of Zuccar La Prelai."
+  ]
  },
  {
+  "id": 185,
   "page": 78,
   "box": [
    725,
@@ -1636,9 +2508,13 @@
    1313
   ],
   "latin": "Prouoeant fpcrma,& urinam.",
-  "english": "They produce urine and feces."
+  "levels": [
+   "They produce urine and feces.",
+   "They excrete urine and feces."
+  ]
  },
  {
+  "id": 186,
   "page": 78,
   "box": [
    941,
@@ -1647,9 +2523,15 @@
    1292
   ],
   "latin": "Comrmpffe langurium.",
-  "english": "Compromise languor."
+  "levels": [
+   "Compromise languor.",
+   "The weariness of compromise.",
+   "The fatigue of compromise.",
+   "Fatigue related to compromise."
+  ]
  },
  {
+  "id": 187,
   "page": 78,
   "box": [
    1175,
@@ -1658,9 +2540,16 @@
    1287
   ],
   "latin": "Cum obi. accio fis.",
-  "english": "With death, action is done."
+  "levels": [
+   "With death, action is done.",
+   "The act is completed by death.",
+   "The action is completed by death.",
+   "The action ends in death.",
+   "That action ends in death."
+  ]
  },
  {
+  "id": 188,
   "page": 78,
   "box": [
    487,
@@ -1669,9 +2558,14 @@
    1506
   ],
   "latin": "Cum dadyl. reventibus, •",
-  "english": "With the return of the fathers, •"
+  "levels": [
+   "With the return of the fathers, •",
+   "With the return of our fathers,",
+   "With the return of our ancestors,"
+  ]
  },
  {
+  "id": 189,
   "page": 78,
   "box": [
    944,
@@ -1680,9 +2574,14 @@
    1543
   ],
   "latin": "Sanguinent cairuumcfUdu",
-  "english": "They bleed."
+  "levels": [
+   "They bleed.",
+   "They bind blood.",
+   "They combine blood."
+  ]
  },
  {
+  "id": 190,
   "page": 78,
   "box": [
    1160,
@@ -1691,9 +2590,15 @@
    1512
   ],
   "latin": "Cum grana, tismuxis.",
-  "english": "With beads, tismuxis."
+  "levels": [
+   "With beads, tismuxis.",
+   "Beads, Tysmuxis.",
+   "Pearls, Tysmuxis.",
+   "Pearl, Thimusis."
+  ]
  },
  {
+  "id": 191,
   "page": 78,
   "box": [
    494,
@@ -1702,9 +2607,14 @@
    1729
   ],
   "latin": "Hortulana, reccm.",
-  "english": "Hortulana, rec."
+  "levels": [
+   "Hortulana, rec.",
+   "Hortulana, recreation area.",
+   "Hortulana, resort."
+  ]
  },
  {
+  "id": 192,
   "page": 78,
   "box": [
    711,
@@ -1713,9 +2623,16 @@
    1765
   ],
   "latin": "Extfngufr ea lorem i angui nit.",
-  "english": "Extngufr that lorem i snake nit."
+  "levels": [
+   "Extngufr that lorem i snake nit.",
+   "I would like to learn how to make a snake-patterned knit.",
+   "I would like to learn how to do snake pattern stitching.",
+   "I would like to learn how to sew snake patterns.",
+   "I want to learn how to sew a snake pattern."
+  ]
  },
  {
+  "id": 193,
   "page": 78,
   "box": [
    1161,
@@ -1724,9 +2641,15 @@
    1808
   ],
   "latin": "Cum fyrupo acetofo de cy donrjs, feu gallis.",
-  "english": "With a vinegary sour taste, the chickens are fragrant."
+  "levels": [
+   "With a vinegary sour taste, the chickens are fragrant.",
+   "It has a vinegary, sour taste, and the chicken has a nice aroma.",
+   "It has a sour taste, similar to vinegar, and the chicken has a sweet aroma.",
+   "It has a sour taste similar to vinegar, and the chicken has a sweet aroma."
+  ]
  },
  {
+  "id": 195,
   "page": 78,
   "box": [
    686,
@@ -1735,9 +2658,12 @@
    2025
   ],
   "latin": "3 'jiy v A! HEN» C T V M eius.",
-  "english": "3 'jiy v A! HEN» C T V M his."
+  "levels": [
+   "3 'jiy v A! HEN» C T V M his."
+  ]
  },
  {
+  "id": 197,
   "page": 80,
   "box": [
    399,
@@ -1746,9 +2672,15 @@
    398
   ],
   "latin": "Album, darum.",
-  "english": "White, give."
+  "levels": [
+   "White, give.",
+   "Give me a white one.",
+   "Give me white.",
+   "Please make it white."
+  ]
  },
  {
+  "id": 198,
   "page": 80,
   "box": [
    635,
@@ -1757,9 +2689,14 @@
    460
   ],
   "latin": "Mu udi litae corpus, $C prodeft renibus.",
-  "english": "Mu udi litae body, $C0 benefits the kidneys."
+  "levels": [
+   "Mu udi litae body, $C0 benefits the kidneys.",
+   "Mu udi litae body, C0 dollars benefits the kidneys.",
+   "Mu udi litae body, C0 dollars is beneficial for the kidneys."
+  ]
  },
  {
+  "id": 199,
   "page": 80,
   "box": [
    848,
@@ -1768,9 +2705,16 @@
    427
   ],
   "latin": "Sitim efficit, ctconitnouct «hotcrara.",
-  "english": "Thirst makes, ctconitnouct «hotcrara."
+  "levels": [
+   "Thirst makes, ctconitnouct «hotcrara.",
+   "When you get thirsty, you can make hotcrara.",
+   "If it's dry, you can make hotcrara.",
+   "If it is dry, you can make hotcrara.",
+   "You can make hot crayon by drying it."
+  ]
  },
  {
+  "id": 200,
   "page": 80,
   "box": [
    1072,
@@ -1779,9 +2723,15 @@
    392
   ],
   "latin": "Cum granau nimiis.",
-  "english": "With too many grains."
+  "levels": [
+   "With too many grains.",
+   "There's too much grain.",
+   "There is too much grain.",
+   "There are too many grains."
+  ]
  },
  {
+  "id": 201,
   "page": 80,
   "box": [
    396,
@@ -1790,9 +2740,15 @@
    625
   ],
   "latin": "Quod cft in. . hui*.",
-  "english": "That is what is in. . here*."
+  "levels": [
+   "That is what is in. . here*.",
+   "That's what's here.",
+   "That's it.",
+   "That's all."
+  ]
  },
  {
+  "id": 202,
   "page": 80,
   "box": [
    623,
@@ -1801,9 +2757,13 @@
    691
   ],
   "latin": "MuJificat.la aatyct.pijibct coj.up.iocm carniu,ecaiio ru.ahuctut.",
-  "english": "The MuJificat.la aatyct.pijibct coj.up.iocm carniu,ecaiio ru.ahuctut."
+  "levels": [
+   "The MuJificat.la aatyct.pijibct coj.up.iocm carniu,ecaiio ru.ahuctut.",
+   "MuJificat.la aatyct.pijibct coj.up.iocm carniu,ecaiio ru.ahuctut."
+  ]
  },
  {
+  "id": 203,
   "page": 80,
   "box": [
    865,
@@ -1812,9 +2772,15 @@
    621
   ],
   "latin": "Sium cfflat« ,",
-  "english": "It is flat,"
+  "levels": [
+   "It is flat,",
+   "Flat,",
+   "Apartment,",
+   "apartment,"
+  ]
  },
  {
+  "id": 204,
   "page": 80,
   "box": [
    1080,
@@ -1823,9 +2789,14 @@
    695
   ],
   "latin": "Cum pomis n*ulis. 0",
-  "english": "With no apples. 0"
+  "levels": [
+   "With no apples. 0",
+   "No apples. 0",
+   "There are no apples. 0"
+  ]
  },
  {
+  "id": 205,
   "page": 80,
   "box": [
    375,
@@ -1834,9 +2805,14 @@
    850
   ],
   "latin": "Zucwrt - i num.",
-  "english": "Sugar - i number."
+  "levels": [
+   "Sugar - i number.",
+   "Sugar - number.",
+   "Sugar - Number."
+  ]
  },
  {
+  "id": 206,
   "page": 80,
   "box": [
    638,
@@ -1845,9 +2821,14 @@
    857
   ],
   "latin": "Pedori , & pulmoni.",
-  "english": "To the feet and lungs."
+  "levels": [
+   "To the feet and lungs.",
+   "In the feet and lungs.",
+   "In the legs and lungs."
+  ]
  },
  {
+  "id": 208,
   "page": 80,
   "box": [
    1074,
@@ -1856,9 +2837,16 @@
    910
   ],
   "latin": "Cum modi - eo anudo, 3C multo Zuc-‘ divo.",
-  "english": "With the way - I bow to him, 3C much Zuc-‘ divine."
+  "levels": [
+   "With the way - I bow to him, 3C much Zuc-‘ divine.",
+   "That way, I bow my head to him, 3C is so 'sacred'.",
+   "In that way, I bow my head to him, the 3C is very 'holy'.",
+   "In that sense, I bow my head before him, 3C is very \"sacred\".",
+   "In that sense, I pay my respects to him. 3C is a truly \"sacred\" place."
+  ]
  },
  {
+  "id": 211,
   "page": 80,
   "box": [
    852,
@@ -1867,9 +2855,15 @@
    1111
   ],
   "latin": "Efficit bothor in ore, & opil.it hepar.",
-  "english": "It has a bitter taste in the mouth, and it is a stimulant to the liver."
+  "levels": [
+   "It has a bitter taste in the mouth, and it is a stimulant to the liver.",
+   "It has a bitter taste when consumed and stimulates the liver.",
+   "It has a bitter taste when eaten and stimulates the liver.",
+   "It tastes bitter when eaten and stimulates liver function."
+  ]
  },
  {
+  "id": 212,
   "page": 80,
   "box": [
    1077,
@@ -1878,9 +2872,16 @@
    1073
   ],
   "latin": "Cum granaux bonis.",
-  "english": "With good grains."
+  "levels": [
+   "With good grains.",
+   "Made with high-quality grains.",
+   "Made with high quality beads.",
+   "Made from high quality pearls.",
+   "It is made of high-quality pearls."
+  ]
  },
  {
+  "id": 213,
   "page": 80,
   "box": [
    414,
@@ -1889,9 +2890,15 @@
    1335
   ],
   "latin": "Cum micis parui,bcnt co&i.",
-  "english": "When I was little, I was old."
+  "levels": [
+   "When I was little, I was old.",
+   "When I was little, I was already old.",
+   "When I was young, I was already old.",
+   "I was already old when I was young."
+  ]
  },
  {
+  "id": 214,
   "page": 80,
   "box": [
    628,
@@ -1900,9 +2907,14 @@
    1335
   ],
   "latin": "Mdiores tciudichi cerebro.",
-  "english": "The middle of the brain."
+  "levels": [
+   "The middle of the brain.",
+   "The central part of the brain.",
+   "The middle part of the brain."
+  ]
  },
  {
+  "id": 215,
   "page": 80,
   "box": [
    852,
@@ -1911,9 +2923,14 @@
    1302
   ],
   "latin": "Hepati groC fo.",
-  "english": "Liver growth."
+  "levels": [
+   "Liver growth.",
+   "Liver enlargement.",
+   "Hepatomegaly."
+  ]
  },
  {
+  "id": 216,
   "page": 80,
   "box": [
    1077,
@@ -1922,9 +2939,15 @@
    1333
   ],
   "latin": "Cura omilUs recentibus.",
-  "english": "Care for recent omilus."
+  "levels": [
+   "Care for recent omilus.",
+   "Care for patients who have recently given birth.",
+   "Care of newborn patients.",
+   "Treatment of newborn patients."
+  ]
  },
  {
+  "id": 217,
   "page": 80,
   "box": [
    406,
@@ -1933,9 +2956,16 @@
    1530
   ],
   "latin": "■' Quod cft pu tac albcduus.",
-  "english": "■' That is why it is so white."
+  "levels": [
+   "■' That is why it is so white.",
+   "■That's why they're so pale.",
+   "■That's why they are so white.",
+   "■That's why they're so white.",
+   "That is why your skin is so white."
+  ]
  },
  {
+  "id": 218,
   "page": 80,
   "box": [
    629,
@@ -1944,9 +2974,13 @@
    1559
   ],
   "latin": "Stomacho fle gmai.co. 8c roubuc.",
-  "english": "Stomach fle gmai.co. 8c roubuc."
+  "levels": [
+   "Stomach fle gmai.co. 8c roubuc.",
+   "The stomach is fle gmai.co. 8c roubuc."
+  ]
  },
  {
+  "id": 219,
   "page": 80,
   "box": [
    860,
@@ -1955,9 +2989,14 @@
    1564
   ],
   "latin": "Facit grauc* dmem capiti*.",
-  "english": "It makes my head hurt."
+  "levels": [
+   "It makes my head hurt.",
+   "I'm getting a headache.",
+   "I have a headache."
+  ]
  },
  {
+  "id": 220,
   "page": 80,
   "box": [
    1088,
@@ -1966,9 +3005,14 @@
    1558
   ],
   "latin": "Cum taAu cis.ccpapau eribus.",
-  "english": "With taAu cis.ccpapau eribus."
+  "levels": [
+   "With taAu cis.ccpapau eribus.",
+   "TaAu cis.ccpapau with eribus.",
+   "TaAu cis.ccpapau and eribus."
+  ]
  },
  {
+  "id": 221,
   "page": 80,
   "box": [
    407,
@@ -1977,9 +3021,16 @@
    1756
   ],
   "latin": "BcbccuA\\4' modici ola.",
-  "english": "BcbccuA\\4' moderate heat."
+  "levels": [
+   "BcbccuA\\4' moderate heat.",
+   "BcbccuA\\4' Moderate heat.",
+   "Medium heat.",
+   "Over medium heat.",
+   "At medium heat."
+  ]
  },
  {
+  "id": 222,
   "page": 80,
   "box": [
    642,
@@ -1988,9 +3039,14 @@
    1787
   ],
   "latin": "Synthcricis (alias, dyfbHoid),",
-  "english": "Synthricis (alias, dyphbHoid),"
+  "levels": [
+   "Synthricis (alias, dyphbHoid),",
+   "Synthricis (also known as dyphbHoid),",
+   "Syntricis (also known as dyphbHoid)"
+  ]
  },
  {
+  "id": 223,
   "page": 80,
   "box": [
    1096,
@@ -1999,9 +3055,14 @@
    1784
   ],
   "latin": "Cum uino lymphato-",
-  "english": "With lymphed wine"
+  "levels": [
+   "With lymphed wine",
+   "Wine containing lymphatic fluid",
+   "Wine containing lymph"
+  ]
  },
  {
+  "id": 227,
   "page": 82,
   "box": [
    491,
@@ -2010,9 +3071,16 @@
    385
   ],
   "latin": "Quod efl o - dora tuiti.",
-  "english": "That efl o - dora tuiti."
+  "levels": [
+   "That efl o - dora tuiti.",
+   "That is efl o - dora tuiti.",
+   "That is an efl o - dora tuiti.",
+   "It's an efl o - dora tweet.",
+   "This is an Apple Odora tweet."
+  ]
  },
  {
+  "id": 228,
   "page": 82,
   "box": [
    717,
@@ -2021,9 +3089,13 @@
    417
   ],
   "latin": "Dolori dm - dum cx frigidi uic.",
-  "english": "Painful - while cold here."
+  "levels": [
+   "Painful - while cold here.",
+   "It hurts. And it's cold here."
+  ]
  },
  {
+  "id": 229,
   "page": 82,
   "box": [
    1164,
@@ -2032,9 +3104,14 @@
    416
   ],
   "latin": "Cum lauan - cur ex acjua tofacea.",
-  "english": "When lauan - why from acjua tofacea."
+  "levels": [
+   "When lauan - why from acjua tofacea.",
+   "Why is the name \"Lauan\" derived from Acqua tophacea?",
+   "Why did the name \"Lauran\" originate from Aqua tophacea?"
+  ]
  },
  {
+  "id": 230,
   "page": 82,
   "box": [
    488,
@@ -2043,9 +3120,14 @@
    643
   ],
   "latin": "Rccen», magni! ,&pondaolura.",
-  "english": "Rccen», great! ,&pondaolura."
+  "levels": [
+   "Rccen», great! ,&pondaolura.",
+   "Rccen», wonderful!, &pondaolura.",
+   "Rccen», fun!, &pondaolura."
+  ]
  },
  {
+  "id": 231,
   "page": 82,
   "box": [
    713,
@@ -2054,9 +3136,16 @@
    673
   ],
   "latin": "Cingiuis , & urina prouocac, ex fngidi uic retenti.",
-  "english": "You are girdling and causing urine to be retained due to the pain."
+  "levels": [
+   "You are girdling and causing urine to be retained due to the pain.",
+   "The pain causes urine to accumulate, preventing urination.",
+   "The pain causes urine to pool, which prevents urination.",
+   "The pain causes urine to accumulate, which prevents urination.",
+   "Due to pain, urine pools, making urination difficult."
+  ]
  },
  {
+  "id": 232,
   "page": 82,
   "box": [
    944,
@@ -2065,9 +3154,15 @@
    609
   ],
   "latin": "Cerebro aUdo„",
-  "english": "Brain aud"
+  "levels": [
+   "Brain aud",
+   "Brain hearing",
+   "Brain sensation",
+   "Brain senses"
+  ]
  },
  {
+  "id": 233,
   "page": 82,
   "box": [
    1163,
@@ -2076,9 +3171,15 @@
    647
   ],
   "latin": "Cum temperatur eu oleo rcfrigcraduo*",
-  "english": "When the temperature of the oil is cooled*"
+  "levels": [
+   "When the temperature of the oil is cooled*",
+   "When the oil temperature drops *",
+   "If the oil temperature drops *",
+   "When the oil temperature drops *"
+  ]
  },
  {
+  "id": 234,
   "page": 82,
   "box": [
    490,
@@ -2087,9 +3188,16 @@
    898
   ],
   "latin": "Quod afsfmi Ut in eoiore, & ciiriniutc oleo (ailanti.",
-  "english": "That is, as in the above, and in the oil of the (ailanti."
+  "levels": [
+   "That is, as in the above, and in the oil of the (ailanti.",
+   "In other words, as described above, and in the oil of (Ailanthi).",
+   "In other words, as explained above, along with (Ailanthi) oil.",
+   "In other words, as explained above, together with (Ailanthi) oil.",
+   "In other words, as explained above, use it with (leather) oil."
+  ]
  },
  {
+  "id": 235,
   "page": 82,
   "box": [
    723,
@@ -2098,9 +3206,15 @@
    833
   ],
   "latin": "Mundificat fordea.",
-  "english": "It cleanses the ford."
+  "levels": [
+   "It cleanses the ford.",
+   "It purifies the shallow waters.",
+   "It cleans shallow water.",
+   "It purifies shallow water."
+  ]
  },
  {
+  "id": 237,
   "page": 82,
   "box": [
    1174,
@@ -2109,9 +3223,15 @@
    863
   ],
   "latin": "Mixtu cum oleo molarum.",
-  "english": "Mixture with mill oil."
+  "levels": [
+   "Mixture with mill oil.",
+   "A mixture with milling oil.",
+   "A mixture of cooking oils.",
+   "A mixture of various types of cooking oil."
+  ]
  },
  {
+  "id": 238,
   "page": 82,
   "box": [
    489,
@@ -2120,9 +3240,16 @@
    1124
   ],
   "latin": "Kenifen mu dum. alias, berbin mundum.",
-  "english": "Kenifen mu while. other times, berbin the world."
+  "levels": [
+   "Kenifen mu while. other times, berbin the world.",
+   "Kenifen Mu Wan. At other times, Belbin the World.",
+   "Kenifen Mu Wan. Sometimes, Belbin the World.",
+   "Kenifen Mu Wan. Sometimes Belbin, the world.",
+   "Kenifen Mu Wan. Sometimes Belvin, the world."
+  ]
  },
  {
+  "id": 240,
   "page": 82,
   "box": [
    939,
@@ -2131,9 +3258,16 @@
    1090
   ],
   "latin": "Cumiri obefl,& dentes adurit.",
-  "english": "Cumiri dies, and his teeth burn."
+  "levels": [
+   "Cumiri dies, and his teeth burn.",
+   "Kumiri died, and her teeth were burned.",
+   "Kumiri died, his teeth burned.",
+   "The idol died, his teeth burned.",
+   "The idol is dead, and his teeth are burned."
+  ]
  },
  {
+  "id": 241,
   "page": 82,
   "box": [
    1163,
@@ -2142,9 +3276,15 @@
    1122
   ],
   "latin": "Cu medullis feminis melo num, & oleo uioiacco.",
-  "english": "With the marrow of women, I eat melon, and with oil, I drink wine."
+  "levels": [
+   "With the marrow of women, I eat melon, and with oil, I drink wine.",
+   "I eat melon with the marrow of a woman and drink wine with oil.",
+   "I eat watermelon and woman's marrow and drink wine and oil.",
+   "I eat watermelon and women's bone marrow, and drink wine and oil."
+  ]
  },
  {
+  "id": 242,
   "page": 82,
   "box": [
    492,
@@ -2153,9 +3293,16 @@
    1287
   ],
   "latin": "Horiulanum album.",
-  "english": "Horiulanum white."
+  "levels": [
+   "Horiulanum white.",
+   "Horioranum white.",
+   "White Horioranum.",
+   "White Horticulture.",
+   "White gardening."
+  ]
  },
  {
+  "id": 244,
   "page": 82,
   "box": [
    952,
@@ -2164,9 +3311,14 @@
    1284
   ],
   "latin": "Cutturi,& Ulixi.",
-  "english": "Cutturi, & Ulysses."
+  "levels": [
+   "Cutturi, & Ulysses.",
+   "Cattleya, and Ulysses.",
+   "Cattleya and Odysseus."
+  ]
  },
  {
+  "id": 245,
   "page": 82,
   "box": [
    1162,
@@ -2175,9 +3327,15 @@
    1316
   ],
   "latin": "Cum mifce - tur rueearu, ucilandalii.",
-  "english": "When the enemy is killed, the enemy is killed."
+  "levels": [
+   "When the enemy is killed, the enemy is killed.",
+   "If the enemy is killed, then the enemy is killed.",
+   "If the enemy is killed, the enemy is killed.",
+   "If the enemy dies, they're dead."
+  ]
  },
  {
+  "id": 246,
   "page": 82,
   "box": [
    715,
@@ -2186,9 +3344,16 @@
    1511
   ],
   "latin": "Ori,& hepati calidi».",
-  "english": "\"The mouth and liver are warm.\""
+  "levels": [
+   "\"The mouth and liver are warm.\"",
+   "\"My mouth and liver feel warm.\"",
+   "\"My mouth and my heart feel hot.\"",
+   "\"My mouth and heart feel hot.\"",
+   "My mouth and heart are burning."
+  ]
  },
  {
+  "id": 247,
   "page": 82,
   "box": [
    948,
@@ -2197,9 +3362,15 @@
    1477
   ],
   "latin": "Voci obdi.",
-  "english": "Obey the voice."
+  "levels": [
+   "Obey the voice.",
+   "Obey that voice.",
+   "Listen to that voice.",
+   "Listen closely to that voice."
+  ]
  },
  {
+  "id": 248,
   "page": 82,
   "box": [
    1162,
@@ -2208,9 +3379,16 @@
    1479
   ],
   "latin": "Cura candi.",
-  "english": "Care for the candied."
+  "levels": [
+   "Care for the candied.",
+   "Please handle the candied items with care.",
+   "Please handle items containing candy with care.",
+   "Please handle objects containing candy with care.",
+   "Please handle items containing candy carefully."
+  ]
  },
  {
+  "id": 249,
   "page": 82,
   "box": [
    714,
@@ -2219,9 +3397,14 @@
    1769
   ],
   "latin": "DA«ttc(gingiuas confor CUM.",
-  "english": "DA«ttc(gingiuas conform CUM."
+  "levels": [
+   "DA«ttc(gingiuas conform CUM.",
+   "DA«ttc (ginger-shaped CUM).",
+   "DA«ttc (ginger-shaped semen)."
+  ]
  },
  {
+  "id": 250,
   "page": 82,
   "box": [
    949,
@@ -2230,9 +3413,15 @@
    1738
   ],
   "latin": "Coitui nim comeditur.",
-  "english": "It is eaten for intercourse."
+  "levels": [
+   "It is eaten for intercourse.",
+   "It is eaten for sexual intercourse.",
+   "It is eaten during sex.",
+   "It is consumed during sexual intercourse."
+  ]
  },
  {
+  "id": 251,
   "page": 82,
   "box": [
    1162,
@@ -2241,9 +3430,16 @@
    1801
   ],
   "latin": "Cum granis zetun iccunda mtnfa come ffas.",
-  "english": "With the grains of zetun, the mtnfa comes to you."
+  "levels": [
+   "With the grains of zetun, the mtnfa comes to you.",
+   "mtnfa will come to you along with Zetun grains.",
+   "The mtnfa will come to you along with the Zetun letters.",
+   "Mtnfa comes to you with Zetun letters.",
+   "Mtnfa comes to you with a letter in Jetoon."
+  ]
  },
  {
+  "id": 252,
   "page": 82,
   "box": [
    494,
@@ -2252,9 +3448,15 @@
    2038
   ],
   "latin": "MELI* V * EX R E ipla quamqupis.",
-  "english": "MELI* V * EX R E ipla though."
+  "levels": [
+   "MELI* V * EX R E ipla though.",
+   "MELI* V * EX R E ipla, but...",
+   "REPRESENTATIVE* V * EX R E ipla, but...",
+   "Representative* V * EX R E ipla, but..."
+  ]
  },
  {
+  "id": 253,
   "page": 82,
   "box": [
    1166,
@@ -2263,9 +3465,14 @@
    2030
   ],
   "latin": "R E M Os do Nocus , tnend oux.",
-  "english": "R E M The evil of the evil, the evil of the evil."
+  "levels": [
+   "R E M The evil of the evil, the evil of the evil.",
+   "R E M The worst of the worst, the worst of the worst.",
+   "REM The worst of the worst, the worst of the worst."
+  ]
  },
  {
+  "id": 254,
   "page": 86,
   "box": [
    420,
@@ -2274,9 +3481,14 @@
    363
   ],
   "latin": "Ciirinum,odonfcnira.",
-  "english": "Cirinium, odonfenira."
+  "levels": [
+   "Cirinium, odonfenira.",
+   "Kylinium, Odonphenira.",
+   "Kilinium, Odonphenira."
+  ]
  },
  {
+  "id": 256,
   "page": 86,
   "box": [
    870,
@@ -2285,9 +3497,14 @@
    363
   ],
   "latin": "Bibi cum immoderate.",
-  "english": "I drank excessively."
+  "levels": [
+   "I drank excessively.",
+   "I drank too much.",
+   "I drank too much alcohol."
+  ]
  },
  {
+  "id": 257,
   "page": 86,
   "box": [
    1096,
@@ -2296,9 +3513,16 @@
    430
   ],
   "latin": "Cu rebus fecundsrrnrix, & cum aqua mutum.",
-  "english": "With things fruitful, and with water dumb."
+  "levels": [
+   "With things fruitful, and with water dumb.",
+   "Those that yield abundant harvests, and those that leave waters in awe.",
+   "Those that yield a large harvest, and those that leave water stagnant.",
+   "Those that produce a great harvest, and those that leave the water standing.",
+   "Farming that yields a bountiful harvest and farming that leaves the water as it is."
+  ]
  },
  {
+  "id": 258,
   "page": 86,
   "box": [
    419,
@@ -2307,9 +3531,15 @@
    590
   ],
   "latin": "Vndhiofum. odori i er uin.",
-  "english": "The smell of wine."
+  "levels": [
+   "The smell of wine.",
+   "The aroma of wine.",
+   "The smell of wine.",
+   "Smell of wine."
+  ]
  },
  {
+  "id": 259,
   "page": 86,
   "box": [
    653,
@@ -2318,9 +3548,15 @@
    591
   ],
   "latin": "Curat ophth almum.",
-  "english": "It cures eye diseases."
+  "levels": [
+   "It cures eye diseases.",
+   "To cure eye diseases.",
+   "Treating eye diseases.",
+   "Treatment of eye diseases."
+  ]
  },
  {
+  "id": 260,
   "page": 86,
   "box": [
    872,
@@ -2329,9 +3565,16 @@
    621
   ],
   "latin": "SenObus, 8c mcmoriar pu erorum.",
-  "english": "SenObus, 8c memorial of the dead."
+  "levels": [
+   "SenObus, 8c memorial of the dead.",
+   "SenObus, 8th century, monument to the dead.",
+   "SenObus, 8th century, a memorial to the dead.",
+   "SenObus, 8th century, monument to the dead.",
+   "Senobus, 8th century, monument for the dead."
+  ]
  },
  {
+  "id": 261,
   "page": 86,
   "box": [
    1098,
@@ -2340,9 +3583,16 @@
    655
   ],
   "latin": "Cum pomis muzu»,# me dullis lactucarum.",
-  "english": "With apples I muse,# me dull lettuces."
+  "levels": [
+   "With apples I muse,# me dull lettuces.",
+   "A bored lettuce, lost in thought with an apple.",
+   "Bored, lost in mind lettuce and apple.",
+   "Bored, with salad and apple in my thoughts.",
+   "I'm bored, so I'm only thinking about salad and apples."
+  ]
  },
  {
+  "id": 262,
   "page": 86,
   "box": [
    447,
@@ -2351,9 +3601,15 @@
    814
   ],
   "latin": "Spicndi. duu).",
-  "english": "Spindi. duu)."
+  "levels": [
+   "Spindi. duu).",
+   "Spindy. (duu).",
+   "Slim. (doo).",
+   "Slim. (Two)."
+  ]
  },
  {
+  "id": 263,
   "page": 86,
   "box": [
    649,
@@ -2362,9 +3618,15 @@
    850
   ],
   "latin": ".Sedat fyncopim. (alus, lino.)",
-  "english": ". (alley, flax.)"
+  "levels": [
+   ". (alley, flax.)",
+   "(Alleyway, flax.)",
+   "(In the alley, flax.)",
+   "(There is an Ama in the alley.)"
+  ]
  },
  {
+  "id": 264,
   "page": 86,
   "box": [
    895,
@@ -2373,9 +3635,14 @@
    847
   ],
   "latin": "he- |iari debilibus.",
-  "english": "to the weak."
+  "levels": [
+   "to the weak.",
+   "For the vulnerable.",
+   "For the weak."
+  ]
  },
  {
+  "id": 265,
   "page": 86,
   "box": [
    1098,
@@ -2384,9 +3651,15 @@
    817
   ],
   "latin": "Cum granaus acctolis.",
-  "english": "With the grain you eat."
+  "levels": [
+   "With the grain you eat.",
+   "Along with the grains you eat.",
+   "And the grain you eat.",
+   "And the grains you eat."
+  ]
  },
  {
+  "id": 266,
   "page": 86,
   "box": [
    423,
@@ -2395,9 +3668,15 @@
    1041
   ],
   "latin": "Annator,et Iu culum.",
-  "english": "Hunter, and the hunter."
+  "levels": [
+   "Hunter, and the hunter.",
+   "Hunter, and then another hunter.",
+   "A hunter, then another hunter.",
+   "One hunter, and another hunter."
+  ]
  },
  {
+  "id": 267,
   "page": 86,
   "box": [
    655,
@@ -2406,9 +3685,16 @@
    1074
   ],
   "latin": "Aufert nocu metuum coxi eorum.",
-  "english": "It takes away the harm of their fears."
+  "levels": [
+   "It takes away the harm of their fears.",
+   "It eliminates the harm caused by their fear.",
+   "It eliminates the damage caused by their fear.",
+   "It removes the damage caused by their fear.",
+   "It eliminates the damage caused by their fear."
+  ]
  },
  {
+  "id": 268,
   "page": 86,
   "box": [
    877,
@@ -2417,9 +3703,15 @@
    1049
   ],
   "latin": "Sedat coitus appetitum.",
-  "english": "Coitus calms the appetite."
+  "levels": [
+   "Coitus calms the appetite.",
+   "Sexual intercourse suppresses appetite.",
+   "Sex reduces appetite.",
+   "Sexual intercourse reduces appetite."
+  ]
  },
  {
+  "id": 269,
   "page": 86,
   "box": [
    1100,
@@ -2428,9 +3720,15 @@
    1050
   ],
   "latin": "Cum eido* n/js mazis.",
-  "english": "With the eido* n/js mazis."
+  "levels": [
+   "With the eido* n/js mazis.",
+   "Together with eido* n/js mazis.",
+   "And the eido* n/js cows.",
+   "And eido* n/js cows."
+  ]
  },
  {
+  "id": 270,
   "page": 86,
   "box": [
    425,
@@ -2439,9 +3737,15 @@
    1299
   ],
   "latin": "Quod fit dc uinca quf dtf tunditur.",
-  "english": "Which happens because the dtf is beaten."
+  "levels": [
+   "Which happens because the dtf is beaten.",
+   "This happens because DTF was defeated.",
+   "This happened because the DTF was defeated.",
+   "This happened because DTF lost."
+  ]
  },
  {
+  "id": 271,
   "page": 86,
   "box": [
    889,
@@ -2450,9 +3754,16 @@
    1269
   ],
   "latin": "Ncruis, & uilccnbux.",
-  "english": "Necruis, & vilccnbux."
+  "levels": [
+   "Necruis, & vilccnbux.",
+   "Necruz, & Wilkunbax.",
+   "Necruz, and Wilkunbax.",
+   "Necruz and Wilkunbax.",
+   "Neckreese and Wilkun Box."
+  ]
  },
  {
+  "id": 272,
   "page": 86,
   "box": [
    1101,
@@ -2461,9 +3772,15 @@
    1301
   ],
   "latin": "Cum chaloe iccudx menU.",
-  "english": "With chaloe iccudx menU."
+  "levels": [
+   "With chaloe iccudx menU.",
+   "Together with Charoeikhdukmen U.",
+   "And Charoeikhdukmen U.",
+   "And Charoykdukmen U."
+  ]
  },
  {
+  "id": 274,
   "page": 86,
   "box": [
    653,
@@ -2472,9 +3789,15 @@
    1499
   ],
   "latin": "Impiguarcor pui, 3c laxat.",
-  "english": "I am a poor boy, 3c is loose."
+  "levels": [
+   "I am a poor boy, 3c is loose.",
+   "I'm a poor boy, so 3c is easy for me.",
+   "I'm a poor guy, so 3c is easy for me.",
+   "I am a poor person, so the 3 Cs are an easy problem for me."
+  ]
  },
  {
+  "id": 275,
   "page": 86,
   "box": [
    1102,
@@ -2483,9 +3806,16 @@
    1497
   ],
   "latin": "Cum grana - os dulcibus.",
-  "english": "With grains - sweet mouth."
+  "levels": [
+   "With grains - sweet mouth.",
+   "Contains grains - sweet taste.",
+   "It contains grains - a delicious taste.",
+   "It contains grain - delicious taste.",
+   "It tastes good because it contains grains."
+  ]
  },
  {
+  "id": 276,
   "page": 86,
   "box": [
    426,
@@ -2494,9 +3824,16 @@
    1751
   ],
   "latin": "Magne, dulces,# unduofsr.",
-  "english": "Great, sweet,# unduofsr."
+  "levels": [
+   "Great, sweet,# unduofsr.",
+   "Amazing, sweet, #unduofsr.",
+   "It's amazing, it's fun, #unduofsr.",
+   "It's awesome, it's fun, #unduofsr.",
+   "It's really cool and fun! #unduofsr"
+  ]
  },
  {
+  "id": 278,
   "page": 86,
   "box": [
    1103,
@@ -2505,9 +3842,13 @@
    1789
   ],
   "latin": "Cum ferucur eu amrgdalia dulcibus,papaucnb.fcu ruccbaro.",
-  "english": "With ferucur eu amrgdalia dulcibus, papaucnb.fcu ruccbaro."
+  "levels": [
+   "With ferucur eu amrgdalia dulcibus, papaucnb.fcu ruccbaro.",
+   "ferucur eu amrgdalia dulcibus, papaucnb.fcu ruccbaro and."
+  ]
  },
  {
+  "id": 280,
   "page": 86,
   "box": [
    1103,
@@ -2516,9 +3857,15 @@
    2021
   ],
   "latin": "REMO* uo Nocus menti dus*",
-  "english": "REMO* You are harmful to the mind*"
+  "levels": [
+   "REMO* You are harmful to the mind*",
+   "Lemo* You are harmful to the mind*",
+   "Lemo* You are mentally dangerous*",
+   "Remo* You are mentally dangerous*"
+  ]
  },
  {
+  "id": 281,
   "page": 92,
   "box": [
    486,
@@ -2527,9 +3874,14 @@
    393
   ],
   "latin": "Qui allide au e».",
-  "english": "Who is the one who"
+  "levels": [
+   "Who is the one who",
+   "Who",
+   "WHO"
+  ]
  },
  {
+  "id": 282,
   "page": 92,
   "box": [
    694,
@@ -2538,9 +3890,15 @@
    428
   ],
   "latin": "Libcnub aegritudinibus.",
-  "english": "For diseases."
+  "levels": [
+   "For diseases.",
+   "Because of illness.",
+   "Due to illness.",
+   "Due to disease."
+  ]
  },
  {
+  "id": 283,
   "page": 92,
   "box": [
    920,
@@ -2549,9 +3907,16 @@
    435
   ],
   "latin": "Quado allue fcunt propter deledauone. •",
-  "english": "Where do they come from because of destruction? •"
+  "levels": [
+   "Where do they come from because of destruction? •",
+   "Where do they come from through destruction?",
+   "Where did they come from for destruction?",
+   "Where did they come from to destroy?",
+   "Where did they come from to commit such destruction?"
+  ]
  },
  {
+  "id": 284,
   "page": 92,
   "box": [
    1146,
@@ -2560,9 +3925,16 @@
    420
   ],
   "latin": "Cu uritur per i uti at nent um camum.",
-  "english": "It is cooked by using a steamer."
+  "levels": [
+   "It is cooked by using a steamer.",
+   "We will cook it using a steamer.",
+   "We will cook it using a stove burner.",
+   "We cook it on the stovetop.",
+   "We cook on the gas stove."
+  ]
  },
  {
+  "id": 285,
   "page": 92,
   "box": [
    471,
@@ -2571,9 +3943,16 @@
    684
   ],
   "latin": "Quod «ft pro poraonacum concorditer cum uocc.",
-  "english": "That \"it is for the sake of the word, in agreement with the word.\""
+  "levels": [
+   "That \"it is for the sake of the word, in agreement with the word.\"",
+   "It is \"for the sake of the language, and to conform to the language.\"",
+   "\"It's because of the language, and it's consistent with the language.\"",
+   "\"It's because of the language, and it's in accordance with the language.\"",
+   "It is because of language, and it is in accordance with language."
+  ]
  },
  {
+  "id": 286,
   "page": 92,
   "box": [
    698,
@@ -2582,9 +3961,16 @@
    656
   ],
   "latin": "Quando can urur iuaut- .tcr.",
-  "english": "When can urur iuaut- .tcr."
+  "levels": [
+   "When can urur iuaut- .tcr.",
+   "When can I get urur iuaut- .tcr?",
+   "When can I get the urur iuaut- .tcr?",
+   "When can I get urur iuaut-.tcr file?",
+   "When can I receive the iuaut-.tcr file?"
+  ]
  },
  {
+  "id": 287,
   "page": 92,
   "box": [
    923,
@@ -2593,9 +3979,13 @@
    682
   ],
   "latin": "Qn difeor diter cnnrar.cjd rpfoRt altcrti uixaudtf.",
-  "english": "I differ in different ways from the other."
+  "levels": [
+   "I differ in different ways from the other.",
+   "I am different from other people in many ways."
+  ]
  },
  {
+  "id": 289,
   "page": 92,
   "box": [
    473,
@@ -2604,9 +3994,15 @@
    919
   ],
   "latin": "Qn proporri onabtlitcr ad arquaf micn - cio camus, & adus plonx.",
-  "english": "Which is suitable for a small arc - that is, a camus, and adus plonx."
+  "levels": [
+   "Which is suitable for a small arc - that is, a camus, and adus plonx.",
+   "This is suitable for small arcs, such as those of Camus or Adus Pronx.",
+   "This is suitable for small arches, such as Camus or Adus Pronx arches.",
+   "This product is suitable for small arches, such as Camus arches or Adus prongs arches."
+  ]
  },
  {
+  "id": 290,
   "page": 92,
   "box": [
    699,
@@ -2615,9 +4011,14 @@
    911
   ],
   "latin": "Partidparlo utdedi, ec audiedi drledalionctn tonlouaiuuc.",
-  "english": "Partidparlo utdedi, and I heard drledalionctn tonlouaiuuc."
+  "levels": [
+   "Partidparlo utdedi, and I heard drledalionctn tonlouaiuuc.",
+   "I heard Partidparlo utdedi and drledalionctn tonlouaiuuc.",
+   "I heard Partidparlo utded and drledalionctn tonlouaiuuc."
+  ]
  },
  {
+  "id": 291,
   "page": 92,
   "box": [
    925,
@@ -2626,9 +4027,14 @@
    908
   ],
   "latin": "Cum receditur a conionantia nou * lUlZU",
-  "english": "When he withdraws from conionantia nou * lUlZU"
+  "levels": [
+   "When he withdraws from conionantia nou * lUlZU",
+   "When he withdrew from the conionantia nou * lUlZU",
+   "When he withdrew from the conionantia nou organization * lUlZU"
+  ]
  },
  {
+  "id": 292,
   "page": 92,
   "box": [
    1162,
@@ -2637,9 +4043,16 @@
    875
   ],
   "latin": "Reditus ad nouru con funanuara.",
-  "english": "Return to the new with funanuara."
+  "levels": [
+   "Return to the new with funanuara.",
+   "Let's return to a new world with funanuara.",
+   "Let's go back to the new world with funanuara.",
+   "Let's return to the new world with Funanuara.",
+   "Let's return to the new world with Punanua."
+  ]
  },
  {
+  "id": 293,
   "page": 92,
   "box": [
    474,
@@ -2648,9 +4061,14 @@
    1107
   ],
   "latin": "Quod durii ad pn>fj>criutera.",
-  "english": "That I was hard at work."
+  "levels": [
+   "That I was hard at work.",
+   "I was working very hard.",
+   "I worked hard."
+  ]
  },
  {
+  "id": 294,
   "page": 92,
   "box": [
    709,
@@ -2659,9 +4077,16 @@
    1106
   ],
   "latin": "Periclitantibus, & initibus.",
-  "english": "Those in danger, and those entering."
+  "levels": [
+   "Those in danger, and those entering.",
+   "People in danger, and people in danger.",
+   "People at risk, and people at risk.",
+   "People at risk and people at risk.",
+   "People in danger, and people in danger."
+  ]
  },
  {
+  "id": 295,
   "page": 92,
   "box": [
    926,
@@ -2670,9 +4095,15 @@
    1104
   ],
   "latin": "Eo Cjd multi plicatu mortem inducte.",
-  "english": "That's why many people have brought death upon themselves."
+  "levels": [
+   "That's why many people have brought death upon themselves.",
+   "That is precisely why so many people end up taking their own lives.",
+   "That's why so many people end up killing themselves.",
+   "That is why many people eventually end their lives by suicide."
+  ]
  },
  {
+  "id": 296,
   "page": 92,
   "box": [
    1149,
@@ -2681,9 +4112,14 @@
    1134
   ],
   "latin": "Cum inhabitatione lapi - cmu,eidikrc uunc.",
-  "english": "With the inhabitation of stone - cmu,eidikrc uunc."
+  "levels": [
+   "With the inhabitation of stone - cmu,eidikrc uunc.",
+   "Along with stone dwellings - cmu, eidikrc uunc.",
+   "And stone houses - cmu, eidikrc uunc."
+  ]
  },
  {
+  "id": 297,
   "page": 92,
   "box": [
    487,
@@ -2692,9 +4128,14 @@
    1303
   ],
   "latin": "Abfejr certa caufau",
-  "english": "Abfejr certain cause"
+  "levels": [
+   "Abfejr certain cause",
+   "Specific causes of Abfezil",
+   "Specific causes of Avpezil"
+  ]
  },
  {
+  "id": 298,
   "page": 92,
   "box": [
    701,
@@ -2703,9 +4144,15 @@
    1300
   ],
   "latin": "Occulcare uc rccundiatn.",
-  "english": "To cover up the loss."
+  "levels": [
+   "To cover up the loss.",
+   "To conceal losses.",
+   "Hiding the loss.",
+   "Hiding a sense of loss."
+  ]
  },
  {
+  "id": 299,
   "page": 92,
   "box": [
    929,
@@ -2714,9 +4161,15 @@
    1299
   ],
   "latin": "Ex malo fu - rore unafa».",
-  "english": "From evil fury alone."
+  "levels": [
+   "From evil fury alone.",
+   "Out of evil rage alone.",
+   "Only because of bad anger.",
+   "Just because of bad anger."
+  ]
  },
  {
+  "id": 300,
   "page": 92,
   "box": [
    1153,
@@ -2725,9 +4178,15 @@
    1329
   ],
   "latin": "Cu reformatione diliTCcioms.",
-  "english": "With reformation diliTCcioms."
+  "levels": [
+   "With reformation diliTCcioms.",
+   "Along with the dilemma of reform.",
+   "And the problem of state change.",
+   "And the problem of national transformation."
+  ]
  },
  {
+  "id": 301,
   "page": 92,
   "box": [
    477,
@@ -2736,9 +4195,15 @@
    1595
   ],
   "latin": "rropfnguans & colorf trif mutatum re. futuens.",
-  "english": "The colors and the three colors are changing."
+  "levels": [
+   "The colors and the three colors are changing.",
+   "The colors, and then the three colors, change.",
+   "The colors, then three colors, change.",
+   "The color, then the next three colors change."
+  ]
  },
  {
+  "id": 302,
   "page": 92,
   "box": [
    715,
@@ -2747,9 +4212,16 @@
    1559
   ],
   "latin": "ParalylT, &C torturae oria.",
-  "english": "ParalylT, &C torture oria."
+  "levels": [
+   "ParalylT, &C torture oria.",
+   "Paralysis T, &C Torture Olya.",
+   "Disability T, & C Abuse Olya.",
+   "Disability T and C abuse Olya.",
+   "Abuse of terms of service for the disabled."
+  ]
  },
  {
+  "id": 303,
   "page": 92,
   "box": [
    931,
@@ -2758,9 +4230,16 @@
    1559
   ],
   "latin": "Confcnnenri bus illicite uo luiuaxu",
-  "english": "Confcnnenri bus illicitly u luiuaxu"
+  "levels": [
+   "Confcnnenri bus illicitly u luiuaxu",
+   "Confcnnenri Buses are illegal u luiuaxu",
+   "Confcnnenri buses are illegal in luiuaxu",
+   "Confcnnenri buses are illegal in Luiuaxu",
+   "Confcnnenri buses are illegal in Louis-Oise."
+  ]
  },
  {
+  "id": 304,
   "page": 92,
   "box": [
    1156,
@@ -2769,9 +4248,16 @@
    1599
   ],
   "latin": "RccHBcanda cum curiali - ratcphiiofophica.",
-  "english": "RccHBcanda with curial - ratcphiiofophica."
+  "levels": [
+   "RccHBcanda with curial - ratcphiiofophica.",
+   "RccHBcanda Curial - with Ratcphiiofophica.",
+   "RccHBcanda Curial - and Ratcphiiofophica.",
+   "RccHBcanda Curial - and Ratchhiiofophica.",
+   "RccHBcanda Curial - and Ratchiiofophica."
+  ]
  },
  {
+  "id": 306,
   "page": 92,
   "box": [
    707,
@@ -2780,9 +4266,16 @@
    1793
   ],
   "latin": "Deficcat apo Item a , cu car i»<m generat.",
-  "english": "It fails apo Also a , cu car i»<m generates."
+  "levels": [
+   "It fails apo Also a , cu car i»<m generates.",
+   "That will fail. Also, cu car i»<m will be generated.",
+   "That will fail. Also, a cu car i»<m will be produced.",
+   "It fails. A copper car is also made.",
+   "It failed. A car made of copper was also created."
+  ]
  },
  {
+  "id": 307,
   "page": 92,
   "box": [
    945,
@@ -2791,9 +4284,14 @@
    1787
   ],
   "latin": "Facir redirt fttpcriUmatesad cor.",
-  "english": "The heart is made to return."
+  "levels": [
+   "The heart is made to return.",
+   "The heart is restored.",
+   "The heart has recovered."
+  ]
  },
  {
+  "id": 308,
   "page": 92,
   "box": [
    1171,
@@ -2802,9 +4300,16 @@
    1755
   ],
   "latin": "Cum Oleo rofacco.",
-  "english": "With oil I rub."
+  "levels": [
+   "With oil I rub.",
+   "Apply oil and rub it.",
+   "Add oil and rub it in.",
+   "Add the oil and rub it in.",
+   "Please add oil and rub well."
+  ]
  },
  {
+  "id": 309,
   "page": 92,
   "box": [
    485,
@@ -2813,9 +4318,15 @@
    2058
   ],
   "latin": "K E L If V 8 EX R Eipfi quam quiris.",
-  "english": "K E L If V 8 EX R Eipfi than you ask."
+  "levels": [
+   "K E L If V 8 EX R Eipfi than you ask.",
+   "K E L If V 8 EX R Eipfi then you ask.",
+   "K E L If V 8 EX R Eipfi ask.",
+   "K E L If you ask V 8 EX R Eipfi."
+  ]
  },
  {
+  "id": 312,
   "page": 94,
   "box": [
    428,
@@ -2824,9 +4335,15 @@
    424
   ],
   "latin": "Quf deloSaoonem non abfcindit.",
-  "english": "Which does not remove the deloSaoon."
+  "levels": [
+   "Which does not remove the deloSaoon.",
+   "This will not remove Derosaon.",
+   "This does not eliminate Deroson.",
+   "This does not exclude Deroson."
+  ]
  },
  {
+  "id": 313,
   "page": 94,
   "box": [
    654,
@@ -2835,9 +4352,15 @@
    391
   ],
   "latin": "Gntuibus do laribus.",
-  "english": "I give to the poor."
+  "levels": [
+   "I give to the poor.",
+   "I give alms to the poor.",
+   "I give gifts to the poor.",
+   "I give gifts to poor people."
+  ]
  },
  {
+  "id": 314,
   "page": 94,
   "box": [
    878,
@@ -2846,9 +4369,14 @@
    391
   ],
   "latin": "Generationi, dfcercbio.",
-  "english": "Generation, dedication."
+  "levels": [
+   "Generation, dedication.",
+   "Generations, dedication.",
+   "Dedication passed down through generations."
+  ]
  },
  {
+  "id": 315,
   "page": 94,
   "box": [
    1103,
@@ -2857,9 +4385,15 @@
    454
   ],
   "latin": "Cum confor ta nbbus ccre brii.cr deinde cuuiuomicub",
-  "english": "With comfort and peace, then the"
+  "levels": [
+   "With comfort and peace, then the",
+   "With peace and tranquility,",
+   "In peace and quiet,",
+   "In a peaceful and quiet place,"
+  ]
  },
  {
+  "id": 316,
   "page": 94,
   "box": [
    429,
@@ -2868,9 +4402,16 @@
    656
   ],
   "latin": "Quf eft facilis habitibus pe dora ani pia.",
-  "english": "It is easy to be a good person with good habits."
+  "levels": [
+   "It is easy to be a good person with good habits.",
+   "If you develop good habits, it's easy to become a good person.",
+   "If you cultivate good habits, it is easier to be a good person.",
+   "If you cultivate good habits, it's easier to be a good person.",
+   "It becomes easier to become a good person if you develop good habits."
+  ]
  },
  {
+  "id": 317,
   "page": 94,
   "box": [
    655,
@@ -2879,9 +4420,16 @@
    688
   ],
   "latin": "Stomacho,it inferioribus rxtremnanb. corpori».",
-  "english": "Stomach, and lower extremities of the body."
+  "levels": [
+   "Stomach, and lower extremities of the body.",
+   "Stomach and lower limbs.",
+   "Abdomen and lower legs.",
+   "Stomach and legs.",
+   "Belly and legs."
+  ]
  },
  {
+  "id": 318,
   "page": 94,
   "box": [
    891,
@@ -2890,9 +4438,12 @@
    650
   ],
   "latin": "Cerebro, 9c ftndo pedori.",
-  "english": "Brain, 9c ftndo pedori."
+  "levels": [
+   "Brain, 9c ftndo pedori."
+  ]
  },
  {
+  "id": 319,
   "page": 94,
   "box": [
    1106,
@@ -2901,9 +4452,15 @@
    648
   ],
   "latin": "Cum ligatura oculotf.Sl anadu.",
-  "english": "With the ligature of the eye.Sl anadu."
+  "levels": [
+   "With the ligature of the eye.Sl anadu.",
+   "Along with ligation of the eyeball. Slanadu.",
+   "And to tie the eyeball. Slanadu.",
+   "And tie up the eyeballs. Slanado."
+  ]
  },
  {
+  "id": 321,
   "page": 94,
   "box": [
    656,
@@ -2912,9 +4469,14 @@
    914
   ],
   "latin": "Ancecibu ad uonutidu,pv adlax4du, & ad purgaudu aqua (lirina.",
-  "english": "Ancecibu ad uonutidu, pv adlax4du, & a purgadudu water (lirina."
+  "levels": [
+   "Ancecibu ad uonutidu, pv adlax4du, & a purgadudu water (lirina.",
+   "Ancecibu ad uonutidu, pv adlax4du, and Purgadudu water (Lilina.",
+   "Ancecibu ad uonutidu, pv adlax4du and Purgadudu water (Lilina."
+  ]
  },
  {
+  "id": 322,
   "page": 94,
   "box": [
    882,
@@ -2923,9 +4485,16 @@
    874
   ],
   "latin": "i Coinmoucn do cibum, & humores.",
-  "english": "I give food and drinks in exchange."
+  "levels": [
+   "I give food and drinks in exchange.",
+   "I will provide food and drinks in return.",
+   "I will provide you with food and drinks in return.",
+   "I will offer you food and drink in return.",
+   "In return, I will treat you to food and drinks."
+  ]
  },
  {
+  "id": 323,
   "page": 94,
   "box": [
    1127,
@@ -2934,9 +4503,15 @@
    839
   ],
   "latin": "Cum nomini.",
-  "english": "With the name."
+  "levels": [
+   "With the name.",
+   "With that name.",
+   "By that name.",
+   "In that name."
+  ]
  },
  {
+  "id": 324,
   "page": 94,
   "box": [
    431,
@@ -2945,9 +4520,16 @@
    1146
   ],
   "latin": "Dormire t. honsfmcdrjs iter duas primas nodis, &duas ultimas nodis.",
-  "english": "Sleep t. honsfmcdrjs journey the first two knots, & the last two knots."
+  "levels": [
+   "Sleep t. honsfmcdrjs journey the first two knots, & the last two knots.",
+   "Sleep t. honsfmcdrjs The first two knots and the last two knots of the journey.",
+   "Sleeping t. honsfmcdrjs The first two knots and the last two knots of the journey.",
+   "Sleeping t. honsfmcdrjs The first two and last two knots of the journey.",
+   "Sleeping t. honsfmcdrjs The first two knots and the last two knots of the journey."
+  ]
  },
  {
+  "id": 325,
   "page": 94,
   "box": [
    661,
@@ -2956,9 +4538,15 @@
    1102
   ],
   "latin": "Ad quiefeen dum,& dige rendum.",
-  "english": "To rest while, and to tell."
+  "levels": [
+   "To rest while, and to tell.",
+   "Take a break, and then talk.",
+   "Take a break and then talk.",
+   "Please take a break and talk later."
+  ]
  },
  {
+  "id": 326,
   "page": 94,
   "box": [
    881,
@@ -2967,9 +4555,15 @@
    1138
   ],
   "latin": "Qiiadomuluplicarur, dc liceat corpus.",
-  "english": "Qiiadomulplicarur, dc liceat corpus."
+  "levels": [
+   "Qiiadomulplicarur, dc liceat corpus.",
+   "Qiiadomulplicarur, DC corpus of lice.",
+   "Qiiadomulplicarur, DC filling.",
+   "Qiiadomulplicarur, DC charging."
+  ]
  },
  {
+  "id": 327,
   "page": 94,
   "box": [
    1107,
@@ -2978,9 +4572,15 @@
    1098
   ],
   "latin": "CG «ibis hunicdamibus.",
-  "english": "CG «You will go to these ladies."
+  "levels": [
+   "CG «You will go to these ladies.",
+   "CG: \"You will go to these women.\"",
+   "CG: \"You're going to these women.\"",
+   "CG: \"You are going to meet these women.\""
+  ]
  },
  {
+  "id": 328,
   "page": 94,
   "box": [
    405,
@@ -2989,9 +4589,16 @@
    1360
   ],
   "latin": "ConuenJens naturae uo. ' lenti dormire.",
-  "english": "It is fitting for nature to sleep slowly."
+  "levels": [
+   "It is fitting for nature to sleep slowly.",
+   "In a way, it's fitting that nature slowly goes to sleep.",
+   "In a way, it is fitting that nature should gradually fall asleep.",
+   "In a way, it's fitting that nature is gradually falling asleep.",
+   "In a way, the gradual descent of nature might be an appropriate phenomenon."
+  ]
  },
  {
+  "id": 330,
   "page": 94,
   "box": [
    879,
@@ -3000,9 +4607,16 @@
    1369
   ],
   "latin": "Sf noluerit ni ii unius cofabulatoib.uii, et iun epiure* confabulatores .",
-  "english": "If he would not have wished for a single co-worker, and for a single co-worker."
+  "levels": [
+   "If he would not have wished for a single co-worker, and for a single co-worker.",
+   "What if he didn't want a single colleague, and what if he didn't want a single colleague?",
+   "What if he doesn't want one person to work with, and what if he doesn't want one person to work with?",
+   "What if he doesn't want to work with one person, and what if he doesn't want to work with one person?",
+   "What if he doesn't want to work with a specific person? And what if he doesn't want to work with a specific person?"
+  ]
  },
  {
+  "id": 331,
   "page": 94,
   "box": [
    1106,
@@ -3011,9 +4625,15 @@
    1331
   ],
   "latin": "No audirc.ni fi nbunoimgularircr.",
-  "english": "No one will hear it."
+  "levels": [
+   "No one will hear it.",
+   "No one will hear that.",
+   "Nobody hears it.",
+   "No one can hear."
+  ]
  },
  {
+  "id": 332,
   "page": 94,
   "box": [
    434,
@@ -3022,9 +4642,16 @@
    1555
   ],
   "latin": "Coouenienbores ad audiendum.",
-  "english": "Coouenienbores to hear."
+  "levels": [
+   "Coouenienbores to hear.",
+   "It's boring to listen to.",
+   "It's tiring to listen.",
+   "It's tiring to listen to.",
+   "It's tiring to listen."
+  ]
  },
  {
+  "id": 333,
   "page": 94,
   "box": [
    671,
@@ -3033,9 +4660,14 @@
    1521
   ],
   "latin": "Inducit foluiiuru.",
-  "english": "It induces folliure."
+  "levels": [
+   "It induces folliure.",
+   "It induces leaf growth.",
+   "It promotes leaf growth."
+  ]
  },
  {
+  "id": 334,
   "page": 94,
   "box": [
    889,
@@ -3044,9 +4676,16 @@
    1554
   ],
   "latin": "Quado fune rumores mali.",
-  "english": "Sometimes, bad rumors are spread by cable."
+  "levels": [
+   "Sometimes, bad rumors are spread by cable.",
+   "Sometimes, bad rumors can spread by telegram.",
+   "Sometimes, bad rumors can be spread via telegram.",
+   "Sometimes bad rumors can be spread via telegram.",
+   "There are also cases where malicious rumors spread through Telegram."
+  ]
  },
  {
+  "id": 335,
   "page": 94,
   "box": [
    1114,
@@ -3055,9 +4694,16 @@
    1560
   ],
   "latin": "Cumulando ingrata, ad grata.",
-  "english": "By accumulating the unpleasant, to the pleasant."
+  "levels": [
+   "By accumulating the unpleasant, to the pleasant.",
+   "By accumulating unpleasant experiences, one can eventually reach something pleasant.",
+   "By accumulating unpleasant experiences, one can eventually reach something enjoyable.",
+   "By accumulating unpleasant experiences, you can eventually achieve something enjoyable.",
+   "If you accumulate unpleasant experiences, you can eventually gain something enjoyable."
+  ]
  },
  {
+  "id": 336,
   "page": 94,
   "box": [
    433,
@@ -3066,9 +4712,15 @@
    1782
   ],
   "latin": "Quibus eom pletur dige- «ta.",
-  "english": "With which the digest is filled."
+  "levels": [
+   "With which the digest is filled.",
+   "The summary contains all of this information.",
+   "The summary contains all this information.",
+   "The summary includes all this information."
+  ]
  },
  {
+  "id": 337,
   "page": 94,
   "box": [
    662,
@@ -3077,9 +4729,15 @@
    1809
   ],
   "latin": "Ad adquifictonem corti quot funi ad uitara.",
-  "english": "To obtain a short rope, how many ropes to use?"
+  "levels": [
+   "To obtain a short rope, how many ropes to use?",
+   "How many ropes do I need to make a short rope?",
+   "How many strands do I need to make a short rope?",
+   "How many strands do you need to make a short rope?"
+  ]
  },
  {
+  "id": 338,
   "page": 94,
   "box": [
    881,
@@ -3088,9 +4746,14 @@
    1777
   ],
   "latin": "TcJium fenfuum quado excedunt.",
-  "english": "They sometimes exceed the limit."
+  "levels": [
+   "They sometimes exceed the limit.",
+   "They sometimes go beyond the limit.",
+   "Sometimes they cross the line."
+  ]
  },
  {
+  "id": 339,
   "page": 94,
   "box": [
    1127,
@@ -3099,9 +4762,13 @@
    1743
   ],
   "latin": "Cum tamno.",
-  "english": "With that."
+  "levels": [
+   "With that.",
+   "That's all."
+  ]
  },
  {
+  "id": 340,
   "page": 94,
   "box": [
    433,
@@ -3110,9 +4777,15 @@
    2050
   ],
   "latin": "MELIO V S B X R E ipfa quam quiris.",
-  "english": "BETTER V S B X R E than you ask."
+  "levels": [
+   "BETTER V S B X R E than you ask.",
+   "It's BETTER V S B X R E more than you could ever ask for.",
+   "It's much better than you could ask for.",
+   "It's much better than I expected."
+  ]
  },
  {
+  "id": 342,
   "page": 94,
   "box": [
    1111,
@@ -3121,9 +4794,15 @@
    2037
   ],
   "latin": "RBHOl cio Nocuo menti cius.",
-  "english": "RBHOl cio I harm the mind of cio."
+  "levels": [
+   "RBHOl cio I harm the mind of cio.",
+   "RBHOl cio I hurt cio's spirit.",
+   "RBHOl cio I offended Cio's spirit.",
+   "RBHOl cio I went against the Cio's spirit."
+  ]
  },
  {
+  "id": 343,
   "page": 96,
   "box": [
    420,
@@ -3132,9 +4811,16 @@
    481
   ],
   "latin": "| Expellens hu moreta fupcr fluum unium .",
-  "english": "| Expelling this moreta from the rivers of one."
+  "levels": [
+   "| Expelling this moreta from the rivers of one.",
+   "This Moreta will be banished from one of the rivers.",
+   "This Moreta will be expelled from one of the rivers.",
+   "This Moreta is being expelled from one of the rivers.",
+   "This Moreta is being driven out of one of the rivers."
+  ]
  },
  {
+  "id": 344,
   "page": 96,
   "box": [
    681,
@@ -3143,9 +4829,14 @@
    448
   ],
   "latin": "Viituri reun tiuxquicfcaui.",
-  "english": "The visitors were reunited."
+  "levels": [
+   "The visitors were reunited.",
+   "The guests reunited.",
+   "The guests gathered again."
+  ]
  },
  {
+  "id": 345,
   "page": 96,
   "box": [
    1137,
@@ -3154,9 +4845,15 @@
    414
   ],
   "latin": "Cum fiiptitis»",
-  "english": "With the help of the"
+  "levels": [
+   "With the help of the",
+   "With help",
+   "Through",
+   "through"
+  ]
  },
  {
+  "id": 346,
   "page": 96,
   "box": [
    454,
@@ -3165,9 +4862,13 @@
    682
   ],
   "latin": "Relinere uirlutcni.douec yrofii.",
-  "english": "Leave the two of you alone."
+  "levels": [
+   "Leave the two of you alone.",
+   "Leave them alone."
+  ]
  },
  {
+  "id": 347,
   "page": 96,
   "box": [
    678,
@@ -3176,9 +4877,15 @@
    671
   ],
   "latin": "Co feruru hu inorum radice».",
-  "english": "\"I will kill you with my roots.\""
+  "levels": [
+   "\"I will kill you with my roots.\"",
+   "\"I'll kill you with my roots.\"",
+   "\"I will kill you with my roots.\"",
+   "I will kill you with my roots."
+  ]
  },
  {
+  "id": 348,
   "page": 96,
   "box": [
    905,
@@ -3187,9 +4894,15 @@
    671
   ],
   "latin": "Retentioni Tu prrfluitacuru.",
-  "english": "You are a survivor of retention."
+  "levels": [
+   "You are a survivor of retention.",
+   "You are the one who earned the right to stay in the league.",
+   "You're the one who earned the right to stay in the league.",
+   "You are the one who deserves to remain in the league."
+  ]
  },
  {
+  "id": 349,
   "page": 96,
   "box": [
    1136,
@@ -3198,9 +4911,16 @@
    671
   ],
   "latin": "Cum medicinis laxaUU1J.",
-  "english": "With laxaUU1J medicines."
+  "levels": [
+   "With laxaUU1J medicines.",
+   "Along with the drug laxaUU1J.",
+   "And the medicine is laxaUU1J.",
+   "And the medicine is a laxative.",
+   "And that medicine is a laxative."
+  ]
  },
  {
+  "id": 350,
   "page": 96,
   "box": [
    453,
@@ -3209,9 +4929,15 @@
    901
   ],
   "latin": "Qui fit donec cd picte fpernuurcu-r.",
-  "english": "Which is done until the cd picture is fpernuurcu-r."
+  "levels": [
+   "Which is done until the cd picture is fpernuurcu-r.",
+   "This process continues until the image on the CD becomes fpernuurcu-r.",
+   "This process continues until the image on the CD changes to fpernuurcu-r.",
+   "This process continues until the CD image changes to fpernuurcu-r."
+  ]
  },
  {
+  "id": 353,
   "page": 96,
   "box": [
    1131,
@@ -3220,9 +4946,14 @@
    905
   ],
   "latin": "Cura cibis ge ncramibus Ipcrmfe",
-  "english": "Care for food and drinks."
+  "levels": [
+   "Care for food and drinks.",
+   "Please be very careful with food and drinks.",
+   "Please be very careful when handling food and beverages."
+  ]
  },
  {
+  "id": 354,
   "page": 96,
   "box": [
    451,
@@ -3231,9 +4962,14 @@
    1160
   ],
   "latin": "Tpatti quantitate, &'qualitate m aqua» dcfccndc* ad fundum»-",
-  "english": "The quantity, quality of water, and the depth of the water"
+  "levels": [
+   "The quantity, quality of water, and the depth of the water",
+   "Water volume, water quality, water depth",
+   "Water quantity, water quality, water depth"
+  ]
  },
  {
+  "id": 355,
   "page": 96,
   "box": [
    904,
@@ -3242,9 +4978,16 @@
    1122
   ],
   "latin": "Cutn in gene ratione hicru delectu*.",
-  "english": "How is this selection made in the gene ratio?"
+  "levels": [
+   "How is this selection made in the gene ratio?",
+   "How is this selection in gene ratios carried out?",
+   "How is this selection of genetic ratios done?",
+   "How is this selection of genetic relationships made?",
+   "How is the selection of these genetic relationships made?"
+  ]
  },
  {
+  "id": 356,
   "page": 96,
   "box": [
    1128,
@@ -3253,9 +4996,16 @@
    1154
   ],
   "latin": "Cum cautela /permaus, Gc loci recipienti».",
-  "english": "With utmost caution, Gc of the recipient of the place."
+  "levels": [
+   "With utmost caution, Gc of the recipient of the place.",
+   "Take the utmost care and ensure the recipient of the location is safe.",
+   "Be very careful and make sure the recipient of the location is safe.",
+   "Be extremely careful and make sure the recipient of the location is safe.",
+   "Please make sure to verify that the person receiving the location information is safe, and exercise extreme caution."
+  ]
  },
  {
+  "id": 357,
   "page": 96,
   "box": [
    458,
@@ -3264,9 +5014,15 @@
    1359
   ],
   "latin": "Non offendentes gingiuoa.",
-  "english": "Not offending the gums."
+  "levels": [
+   "Not offending the gums.",
+   "It doesn't put a strain on the gums.",
+   "It does not compress the gums.",
+   "It does not pinch the gums."
+  ]
  },
  {
+  "id": 358,
   "page": 96,
   "box": [
    676,
@@ -3275,9 +5031,13 @@
    1317
   ],
   "latin": "Loris grofCs, dCconiauis.",
-  "english": "Loris grofs, deConiauis."
+  "levels": [
+   "Loris grofs, deConiauis.",
+   "Loris Grofs, Deconiaus."
+  ]
  },
  {
+  "id": 359,
   "page": 96,
   "box": [
    902,
@@ -3286,9 +5046,16 @@
    1380
   ],
   "latin": "Comouetiria dcturpantia gin giuas , & excoriantia.",
-  "english": "Commodities that are disgusting, disgusting, and excoriating."
+  "levels": [
+   "Commodities that are disgusting, disgusting, and excoriating.",
+   "An unpleasant, unpleasant, and scathing product.",
+   "An unpleasant, unpleasant, and irritating product.",
+   "Unpleasant, unpleasant and irritating product.",
+   "It is an unpleasant, unpleasant, and irritating product."
+  ]
  },
  {
+  "id": 360,
   "page": 96,
   "box": [
    1128,
@@ -3297,9 +5064,15 @@
    1345
   ],
   "latin": "Cum non Crt quenter udtur cis.",
-  "english": "When not Crt is used frequently."
+  "levels": [
+   "When not Crt is used frequently.",
+   "If Crt is not used frequently.",
+   "If Crt is not used regularly.",
+   "If you do not use CRT regularly."
+  ]
  },
  {
+  "id": 361,
   "page": 96,
   "box": [
    444,
@@ -3308,9 +5081,16 @@
    1578
   ],
   "latin": "Qimc nunquaaicft bonum»",
-  "english": "\"What is never good?\""
+  "levels": [
+   "\"What is never good?\"",
+   "\"What is something that is definitely not good?\"",
+   "\"What is something that is absolutely wrong?\"",
+   "\"What is completely wrong?\"",
+   "What is completely wrong?"
+  ]
  },
  {
+  "id": 362,
   "page": 96,
   "box": [
    905,
@@ -3319,9 +5099,15 @@
    1634
   ],
   "latin": "Cerebro, & utrtuubus. •",
-  "english": "The brain, & both. •"
+  "levels": [
+   "The brain, & both. •",
+   "The brain, and both.",
+   "Brain and both.",
+   "Both the brain and."
+  ]
  },
  {
+  "id": 363,
   "page": 96,
   "box": [
    1130,
@@ -3330,9 +5116,15 @@
    1581
   ],
   "latin": "Cum odorationibus Iri - gidw.",
-  "english": "With the scents of Iri - gidw."
+  "levels": [
+   "With the scents of Iri - gidw.",
+   "Along with the fragrance of Iri Guidou.",
+   "And the scent of Iri Guidou.",
+   "And the scent of the glans."
+  ]
  },
  {
+  "id": 364,
   "page": 96,
   "box": [
    445,
@@ -3341,9 +5133,15 @@
    1771
   ],
   "latin": "Acutura, (p€ ciacum.",
-  "english": "Sharpness, (p€ each."
+  "levels": [
+   "Sharpness, (p€ each.",
+   "Sharpness, (each p€.",
+   "Sharpness, (each p €.",
+   "Sharpness (each p €."
+  ]
  },
  {
+  "id": 365,
   "page": 96,
   "box": [
    672,
@@ -3352,9 +5150,13 @@
    1833
   ],
   "latin": "Fxririguttcalitliuu acuicaris, & ebrie tatis.",
-  "english": "You are drunk and drunk."
+  "levels": [
+   "You are drunk and drunk.",
+   "You are drunk."
+  ]
  },
  {
+  "id": 366,
   "page": 96,
   "box": [
    899,
@@ -3363,9 +5165,15 @@
    1799
   ],
   "latin": "Nemo» iflat, &laocfaib« dium.",
-  "english": "No one\" iflat, &laocfaib\" dium."
+  "levels": [
+   "No one\" iflat, &laocfaib\" dium.",
+   "Nobody has \"iflat, &laocfaib\"dium.",
+   "No one has a \"flat, &laocfaib\"dium.",
+   "No one has \"flat and &laocfaib\"dium."
+  ]
  },
  {
+  "id": 367,
   "page": 96,
   "box": [
    1127,
@@ -3374,9 +5182,15 @@
    1863
   ],
   "latin": "Cif mifcef d» fucco limoncdlofy,ctace loittaicum. 1",
-  "english": "If you want to know the meaning of the word \"limoncdlofy\", then you should read the following. 1"
+  "levels": [
+   "If you want to know the meaning of the word \"limoncdlofy\", then you should read the following. 1",
+   "If you want to know the meaning of the word \"limoncdlofy\", please read the following. 1",
+   "If you want to know the meaning of the word \"limoncdlofy\", read the following. 1",
+   "If you want to know the meaning of the word \"limoncdlofy,\" please read the following. 1"
+  ]
  },
  {
+  "id": 369,
   "page": 96,
   "box": [
    907,
@@ -3385,9 +5199,15 @@
    2058
   ],
   "latin": "NOCVS M E N# T V M CIUS.",
-  "english": "HARMFUL M E N# T V M CIUS."
+  "levels": [
+   "HARMFUL M E N# T V M CIUS.",
+   "Harmful men # TV M CIUS.",
+   "Dangerous men # TV M CIUS.",
+   "Dangerous Men # TV M CIUS."
+  ]
  },
  {
+  "id": 370,
   "page": 96,
   "box": [
    1131,
@@ -3396,9 +5216,14 @@
    2059
   ],
   "latin": "R E M O* tio Nocui in ciui CIUS»",
-  "english": "R E M O* tio Harm in the city CIUS»"
+  "levels": [
+   "R E M O* tio Harm in the city CIUS»",
+   "R E M O * tio Urban nuisances CIUS »",
+   "R E M O * tio Urban Concerns CIUS »"
+  ]
  },
  {
+  "id": 372,
   "page": 105,
   "box": [
    928,
@@ -3407,9 +5232,15 @@
    447
   ],
   "latin": "Exafperat guuur pectus.",
-  "english": "The gurgling chest is exasperating."
+  "levels": [
+   "The gurgling chest is exasperating.",
+   "The rumbling sound in my chest is really irritating.",
+   "The thundering sound in my chest is really annoying.",
+   "The pounding sound in my chest is really annoying."
+  ]
  },
  {
+  "id": 373,
   "page": 105,
   "box": [
    1110,
@@ -3418,9 +5249,16 @@
    450
   ],
   "latin": "Cym fympo . dulci, Gemde papaucubus*",
-  "english": "Sweet Cym, sweet Gemde, the father of the flock*"
+  "levels": [
+   "Sweet Cym, sweet Gemde, the father of the flock*",
+   "My dearest Sim, my dearest Gemde, father of the pack*",
+   "My dear Sim, my dear Gemde, the father of the group*",
+   "Dear Sim, dear Gemde, group father*",
+   "Dear Sim, Dear Jemde, Father of the Group*"
+  ]
  },
  {
+  "id": 374,
   "page": 105,
   "box": [
    914,
@@ -3429,9 +5267,15 @@
    703
   ],
   "latin": "Offendit eo - picxioes uil - cerum ex frigiditate.",
-  "english": "He offends him - the pictures are ugly - because of his coldness."
+  "levels": [
+   "He offends him - the pictures are ugly - because of his coldness.",
+   "His coldness makes others uncomfortable. The photo is ugly.",
+   "His coldness makes others uncomfortable. The picture is bad.",
+   "His coldness makes others uncomfortable. The situation is not good."
+  ]
  },
  {
+  "id": 375,
   "page": 105,
   "box": [
    1135,
@@ -3440,9 +5284,16 @@
    673
   ],
   "latin": "Cumina bona, (alus, niyrrha.",
-  "english": "Good cumin, (alus, niyrrha."
+  "levels": [
+   "Good cumin, (alus, niyrrha.",
+   "High-quality cumin, (alus, niyrrha.",
+   "High-quality cumin, (alus, niyrrha.)",
+   "High quality cumin (alus, niyrrha.)",
+   "High-quality cumin (Alus, Nirha)"
+  ]
  },
  {
+  "id": 376,
   "page": 111,
   "box": [
    759,
@@ -3451,9 +5302,16 @@
    1582
   ],
   "latin": "margine citatorum.",
-  "english": "in the margin of the cited."
+  "levels": [
+   "in the margin of the cited.",
+   "It is noted in the margin of the cited reference.",
+   "It is noted next to the cited reference.",
+   "It is marked next to the mentioned reference.",
+   "It is displayed next to the corresponding reference item."
+  ]
  },
  {
+  "id": 377,
   "page": 111,
   "box": [
    1067,
@@ -3462,9 +5320,15 @@
    1623
   ],
   "latin": "Filius Alb.",
-  "english": "Son of Alb."
+  "levels": [
+   "Son of Alb.",
+   "Alb's son.",
+   "Albin's son.",
+   "Alvin's son."
+  ]
  },
  {
+  "id": 378,
   "page": 111,
   "box": [
    701,
@@ -3473,9 +5337,14 @@
    1678
   ],
   "latin": "Filius Mcf.",
-  "english": "Son of McF."
+  "levels": [
+   "Son of McF.",
+   "McF's son.",
+   "McPhee's son."
+  ]
  },
  {
+  "id": 380,
   "page": 137,
   "box": [
    364,
@@ -3484,9 +5353,14 @@
    944
   ],
   "latin": "Multiplex fuperparriens.",
-  "english": "Multiple fuperparriens."
+  "levels": [
+   "Multiple fuperparriens.",
+   "Multiple fuperpariens.",
+   "Many fuperpariens."
+  ]
  },
  {
+  "id": 381,
   "page": 152,
   "box": [
    335,
@@ -3495,9 +5369,15 @@
    1006
   ],
   "latin": "Pondera Caliditads Frigiditaris",
-  "english": "Weight Temperatures Refrigeration"
+  "levels": [
+   "Weight Temperatures Refrigeration",
+   "weight, temperature, refrigeration",
+   "weight, temperature, refrigerator",
+   "Weight, temperature, refrigerator"
+  ]
  },
  {
+  "id": 382,
   "page": 152,
   "box": [
    901,
@@ -3506,9 +5386,15 @@
    1002
   ],
   "latin": "Siccitans Humidit.",
-  "english": "The Drying Moistens."
+  "levels": [
+   "The Drying Moistens.",
+   "It becomes damp when it dries.",
+   "It gets wet when it's dry.",
+   "It gets wet when dry."
+  ]
  },
  {
+  "id": 383,
   "page": 152,
   "box": [
    486,
@@ -3517,9 +5403,14 @@
    1053
   ],
   "latin": "pars una. pars media.",
-  "english": "one part, the middle part."
+  "levels": [
+   "one part, the middle part.",
+   "One is the middle section.",
+   "Another middle class."
+  ]
  },
  {
+  "id": 384,
   "page": 152,
   "box": [
    900,
@@ -3528,9 +5419,16 @@
    1056
   ],
   "latin": "pars una. ps media.",
-  "english": "one part. ps middle."
+  "levels": [
+   "one part. ps middle.",
+   "part. ps central.",
+   "part. ps middle.",
+   "part. ps in the middle.",
+   "Part. There is a ps in the middle."
+  ]
  },
  {
+  "id": 385,
   "page": 152,
   "box": [
    488,
@@ -3539,9 +5437,16 @@
    1098
   ],
   "latin": "partes dux. pars una.",
-  "english": "parts leader, part one."
+  "levels": [
+   "parts leader, part one.",
+   "Parts Leader, Part 1.",
+   "Leader of the Parts, Part 1.",
+   "Section Leader, Part 1.",
+   "Department Head, Part 1."
+  ]
  },
  {
+  "id": 387,
   "page": 152,
   "box": [
    486,
@@ -3550,9 +5455,15 @@
    1144
   ],
   "latin": "pars media, pars lina.",
-  "english": "Part middle, part linen."
+  "levels": [
+   "Part middle, part linen.",
+   "Part is medium-weight cotton, part is linen.",
+   "Half medium-weight cotton, half linen.",
+   "It is a medium-thickness cotton and linen blend."
+  ]
  },
  {
+  "id": 388,
   "page": 152,
   "box": [
    485,
@@ -3561,9 +5472,13 @@
    1190
   ],
   "latin": "pars una. partes dug.",
-  "english": "one part, two parts."
+  "levels": [
+   "one part, two parts.",
+   "Part 1, Part 2."
+  ]
  },
  {
+  "id": 389,
   "page": 152,
   "box": [
    897,
@@ -3572,9 +5487,14 @@
    1193
   ],
   "latin": "ptcsduf. pars una.",
-  "english": "one part."
+  "levels": [
+   "one part.",
+   "part.",
+   "part time job."
+  ]
  },
  {
+  "id": 390,
   "page": 153,
   "box": [
    1147,
@@ -3583,9 +5503,13 @@
    1303
   ],
   "latin": "Siccitatis Humidi.",
-  "english": "Dryness of Wetness."
+  "levels": [
+   "Dryness of Wetness.",
+   "Dryness and humidity."
+  ]
  },
  {
+  "id": 391,
   "page": 153,
   "box": [
    1147,
@@ -3594,9 +5518,12 @@
    1352
   ],
   "latin": "Partes tirjPars una.",
-  "english": "Three parts, one part."
+  "levels": [
+   "Three parts, one part."
+  ]
  },
  {
+  "id": 392,
   "page": 153,
   "box": [
    1145,
@@ -3605,9 +5532,13 @@
    1405
   ],
   "latin": "partes i), pars",
-  "english": "parts i), part"
+  "levels": [
+   "parts i), part",
+   "Part i), Part"
+  ]
  },
  {
+  "id": 393,
   "page": 153,
   "box": [
    1146,
@@ -3616,9 +5547,14 @@
    1449
   ],
   "latin": "parces i), pars 5.",
-  "english": "part i), part 5."
+  "levels": [
+   "part i), part 5.",
+   "Part i), Part 5.",
+   "Part 1), Part 5."
+  ]
  },
  {
+  "id": 394,
   "page": 153,
   "box": [
    1147,
@@ -3627,9 +5563,15 @@
    1495
   ],
   "latin": "panes nij. pars",
-  "english": "bread, part"
+  "levels": [
+   "bread, part",
+   "Bread, part",
+   "Bread, half",
+   "half a piece of bread"
+  ]
  },
  {
+  "id": 395,
   "page": 153,
   "box": [
    1149,
@@ -3638,9 +5580,13 @@
    1543
   ],
   "latin": "pars 1 pars y.",
-  "english": "part 1 part y."
+  "levels": [
+   "part 1 part y.",
+   "Part 1 Part y."
+  ]
  },
  {
+  "id": 396,
   "page": 153,
   "box": [
    1145,
@@ -3649,9 +5595,15 @@
    1589
   ],
   "latin": "parces viij. pars u",
-  "english": "spare eight. part one"
+  "levels": [
+   "spare eight. part one",
+   "Eight spares. Part 1",
+   "Eight backups. Part 1",
+   "8 Backups. Part 1"
+  ]
  },
  {
+  "id": 397,
   "page": 153,
   "box": [
    735,
@@ -3660,9 +5612,13 @@
    1636
   ],
   "latin": "parces viij.",
-  "english": "You will save eight."
+  "levels": [
+   "You will save eight.",
+   "You can save $8."
+  ]
  },
  {
+  "id": 398,
   "page": 153,
   "box": [
    1149,
@@ -3671,9 +5627,16 @@
    1635
   ],
   "latin": "partes vitj. pars y.",
-  "english": "parts of vitj. parts of y."
+  "levels": [
+   "parts of vitj. parts of y.",
+   "vitj component. y component.",
+   "part of vitj. part of y.",
+   "part vitj. part y.",
+   "Part vitj. Part y."
+  ]
  },
  {
+  "id": 399,
   "page": 153,
   "box": [
    1149,
@@ -3682,9 +5645,15 @@
    1680
   ],
   "latin": "partes virj.pars y.",
-  "english": "parts of man and parts of woman."
+  "levels": [
+   "parts of man and parts of woman.",
+   "The male part and the female part.",
+   "Half male and half female.",
+   "The male-female ratio is 50/50."
+  ]
  },
  {
+  "id": 400,
   "page": 154,
   "box": [
    331,
@@ -3693,9 +5662,16 @@
    588
   ],
   "latin": "Pondera Caliditatis Frigiditatis",
-  "english": "Weights of Heat and Cold"
+  "levels": [
+   "Weights of Heat and Cold",
+   "The weight of heat and cold",
+   "Heat and cold weight",
+   "Heat and cold printing",
+   "Hot and cold printing"
+  ]
  },
  {
+  "id": 401,
   "page": 154,
   "box": [
    879,
@@ -3704,9 +5680,14 @@
    579
   ],
   "latin": "Siccitatis Humiditatis",
-  "english": "Dryness Humidity"
+  "levels": [
+   "Dryness Humidity",
+   "dryness humidity",
+   "dryness and humidity"
+  ]
  },
  {
+  "id": 402,
   "page": 154,
   "box": [
    489,
@@ -3715,9 +5696,13 @@
    634
   ],
   "latin": "Paries ui). Pars i.",
-  "english": "Wall 6). Part i."
+  "levels": [
+   "Wall 6). Part i.",
+   "Wall 6). Part 1."
+  ]
  },
  {
+  "id": 403,
   "page": 154,
   "box": [
    878,
@@ -3726,9 +5711,16 @@
    631
   ],
   "latin": "Paries. Mi], rar»",
-  "english": "Walls. My, rare»"
+  "levels": [
+   "Walls. My, rare»",
+   "A wall. My unusual »",
+   "Wall. My strangeness »",
+   "The wall. My strangeness »",
+   "Wall. My Strangeness »"
+  ]
  },
  {
+  "id": 404,
   "page": 154,
   "box": [
    492,
@@ -3737,9 +5729,15 @@
    684
   ],
   "latin": "partes ij. pars y.",
-  "english": "parts ij. part y."
+  "levels": [
+   "parts ij. part y.",
+   "Part ij. Part y.",
+   "Part j. Part y.",
+   "J Department. Y Department."
+  ]
  },
  {
+  "id": 405,
   "page": 154,
   "box": [
    866,
@@ -3748,9 +5746,14 @@
    679
   ],
   "latin": "•partes ij, partf",
-  "english": "•parts ij, partf"
+  "levels": [
+   "•parts ij, partf",
+   "• Part ij, Part f",
+   "• ij section, f section"
+  ]
  },
  {
+  "id": 406,
   "page": 154,
   "box": [
    491,
@@ -3759,9 +5762,13 @@
    730
   ],
   "latin": "pars y. partes i).",
-  "english": "part y. parts i)."
+  "levels": [
+   "part y. parts i).",
+   "Part Y. Part I."
+  ]
  },
  {
+  "id": 407,
   "page": 154,
   "box": [
    877,
@@ -3770,9 +5777,14 @@
    725
   ],
   "latin": "partes I). pars",
-  "english": "parts (1). part"
+  "levels": [
+   "parts (1). part",
+   "Parts (1) Parts",
+   "Part (1) Part"
+  ]
  },
  {
+  "id": 408,
   "page": 154,
   "box": [
    493,
@@ -3781,9 +5793,16 @@
    776
   ],
   "latin": "partes urj. pars 5.",
-  "english": "parts of the urj. part 5."
+  "levels": [
+   "parts of the urj. part 5.",
+   "Parts of URJ. Part 5.",
+   "URJ Parts. Part 5.",
+   "URJ parts. Part 5.",
+   "URJ Parts. Part 5."
+  ]
  },
  {
+  "id": 409,
   "page": 154,
   "box": [
    879,
@@ -3792,9 +5811,14 @@
    771
   ],
   "latin": "partes urj. pars",
-  "english": "parts of the body. part"
+  "levels": [
+   "parts of the body. part",
+   "Body parts.",
+   "Body part."
+  ]
  },
  {
+  "id": 410,
   "page": 154,
   "box": [
    491,
@@ -3803,9 +5827,16 @@
    868
   ],
   "latin": "partes vuj. pars i, partes VII]. pars 1;",
-  "english": "vuj parts part I, parts VII]. part 1;"
+  "levels": [
+   "vuj parts part I, parts VII]. part 1;",
+   "vuj Part Part I, Part VII]. Part 1;",
+   "vuj Part I, Part VII]. Part 1;",
+   "vuj part I, part VII]. Part 1;",
+   "[vuj Part I, Part VII]. Part 1;"
+  ]
  },
  {
+  "id": 411,
   "page": 154,
   "box": [
    881,
@@ -3814,9 +5845,16 @@
    860
   ],
   "latin": "gres viij. pars ptes viii. pars",
-  "english": "sandstone part of ptes viii. part"
+  "levels": [
+   "sandstone part of ptes viii. part",
+   "The sandstone section, part of ptes viii.",
+   "Part sandstone, part ptes viii.",
+   "Partly sandstone, partly 8th-century.",
+   "Some are made of sandstone, and some are 8th-century structures."
+  ]
  },
  {
+  "id": 412,
   "page": 154,
   "box": [
    492,
@@ -3825,9 +5863,14 @@
    918
   ],
   "latin": "partes vii). pars y.",
-  "english": "parts vii). part y."
+  "levels": [
+   "parts vii). part y.",
+   "Part vii) Part y.",
+   "Part 7) Part 8."
+  ]
  },
  {
+  "id": 413,
   "page": 154,
   "box": [
    879,
@@ -3836,9 +5879,13 @@
    911
   ],
   "latin": "ptes viij. pars",
-  "english": "eighth part"
+  "levels": [
+   "eighth part",
+   "Part 8"
+  ]
  },
  {
+  "id": 416,
   "page": 154,
   "box": [
    493,
@@ -3847,9 +5894,14 @@
    1006
   ],
   "latin": "partes cc. pars i.",
-  "english": "parts cc. part i."
+  "levels": [
+   "parts cc. part i.",
+   "Parts cc. Parts i.",
+   "Part cc. Part i."
+  ]
  },
  {
+  "id": 417,
   "page": 154,
   "box": [
    884,
@@ -3858,9 +5910,16 @@
    1001
   ],
   "latin": "partes cc. pars",
-  "english": "parts cc. part"
+  "levels": [
+   "parts cc. part",
+   "Parts cc. Parts",
+   "Parts of the cc. Parts",
+   "Parts of CC. Parts",
+   "Part of CC. Parts"
+  ]
  },
  {
+  "id": 418,
   "page": 154,
   "box": [
    433,
@@ -3869,9 +5928,15 @@
    1844
   ],
   "latin": "Pondera Caliditatis",
-  "english": "Weights of Heat"
+  "levels": [
+   "Weights of Heat",
+   "Weight of heat",
+   "Heat load",
+   "thermal load"
+  ]
  },
  {
+  "id": 419,
   "page": 154,
   "box": [
    434,
@@ -3880,9 +5945,14 @@
    1896
   ],
   "latin": "3 i. Partes virj.",
-  "english": "3 i. Parts of man."
+  "levels": [
+   "3 i. Parts of man.",
+   "3. i. Parts of the human body.",
+   "3. i. Components of the human body."
+  ]
  },
  {
+  "id": 420,
   "page": 154,
   "box": [
    434,
@@ -3891,9 +5961,16 @@
    1945
   ],
   "latin": "3 q.&f vr). Pars i. et media vrj.",
-  "english": "3 q.&f vr). Part i. and the middle vrj."
+  "levels": [
+   "3 q.&f vr). Part i. and the middle vrj.",
+   "3 q.&f vr). Part i. and central vrj.",
+   "3 q.&f vr). Part i. and the middle vrj.",
+   "3 questions and questions vr.). Part i. and middle vrj.",
+   "3 Questions and Questions (vr.). Part 1 and Middle Section (vrj)."
+  ]
  },
  {
+  "id": 421,
   "page": 154,
   "box": [
    971,
@@ -3902,9 +5979,14 @@
    1937
   ],
   "latin": "Partes 8,et a. vij»",
-  "english": "Parts 8, and a. vij»"
+  "levels": [
+   "Parts 8, and a. vij»",
+   "Part 8, and a.vij»",
+   "Part 8 and a.vij»"
+  ]
  },
  {
+  "id": 422,
   "page": 155,
   "box": [
    805,
@@ -3913,9 +5995,15 @@
    1640
   ],
   "latin": "Partes iig. Pars y.",
-  "english": "Parts iig. Part y."
+  "levels": [
+   "Parts iig. Part y.",
+   "Part iig. Part y.",
+   "Part II. Part y.",
+   "Part 2. Part 3."
+  ]
  },
  {
+  "id": 423,
   "page": 155,
   "box": [
    806,
@@ -3924,9 +6012,14 @@
    1691
   ],
   "latin": "Partes iq. et y. Partes vq.",
-  "english": "Parts iq. and y. Parts vq."
+  "levels": [
+   "Parts iq. and y. Parts vq.",
+   "Parts iq. and y. Part vq.",
+   "iq and y parts. vq part."
+  ]
  },
  {
+  "id": 424,
   "page": 155,
   "box": [
    372,
@@ -3935,9 +6028,16 @@
    1888
   ],
   "latin": "Huiusmcdicinaecompofitae partes calidae funt, vij. et media: frigida:, vrj. & media. C Compofirio gradus fecundi, cum eo quod ex. fuo contrario in primo gradu inuemturi",
-  "english": "The parts of this medicine are warm, vij. and medium: cold, vrj. and medium. C The composition is of a fertile grade, with what is found in the first grade."
+  "levels": [
+   "The parts of this medicine are warm, vij. and medium: cold, vrj. and medium. C The composition is of a fertile grade, with what is found in the first grade.",
+   "The components of this medicine are warm, vij. and neutral, cold, vrj. and neutral. The C composition is of fertile grade, as seen in first grade.",
+   "The elements of this tree are warm, and neutral, cold, neutral and neutral. The composition of C is of a fertile level, as seen in the first grade.",
+   "The elements of this tree are warm and neutral, cold, neutral and neutral. The composition of C is at the fertile level, as observed in the first class.",
+   "The elements of this tree are warm and neutral, cold and neutral, and neutral again. The composition of C is at a fertile level, as observed in Grade 1."
+  ]
  },
  {
+  "id": 425,
   "page": 155,
   "box": [
    373,
@@ -3946,9 +6046,14 @@
    1940
   ],
   "latin": "Medicinae Pondera",
-  "english": "Medicine Weights"
+  "levels": [
+   "Medicine Weights",
+   "Weight of the medicine",
+   "The weight of the medicine"
+  ]
  },
  {
+  "id": 426,
   "page": 155,
   "box": [
    763,
@@ -3957,9 +6062,15 @@
    1951
   ],
   "latin": "Caliditaris Frigiditatis",
-  "english": "Hot Cold"
+  "levels": [
+   "Hot Cold",
+   "Cold Heat",
+   "Cold heat",
+   "Cold and heat"
+  ]
  },
  {
+  "id": 427,
   "page": 155,
   "box": [
    760,
@@ -3968,9 +6079,13 @@
    1995
   ],
   "latin": "Panes q. Pars yt",
-  "english": "Bread q. Part yt"
+  "levels": [
+   "Bread q. Part yt",
+   "Bread q. Party yt"
+  ]
  },
  {
+  "id": 428,
   "page": 155,
   "box": [
    762,
@@ -3979,9 +6094,15 @@
    2044
   ],
   "latin": "Pirtrs 1. et y. Partes irj.",
-  "english": "Pirtrs 1. and y. Parts irj."
+  "levels": [
+   "Pirtrs 1. and y. Parts irj.",
+   "Pirtrs 1. and y. parts irj.",
+   "Parts of Pirtrs 1. and y. irj.",
+   "Part of Pirtrs 1. and y. irj."
+  ]
  },
  {
+  "id": 430,
   "page": 157,
   "box": [
    347,
@@ -3990,9 +6111,15 @@
    780
   ],
   "latin": "Acetata proprie",
-  "english": "Acetates properly"
+  "levels": [
+   "Acetates properly",
+   "Acetate appropriately",
+   "Acetate accordingly",
+   "Accordingly, acetate"
+  ]
  },
  {
+  "id": 431,
   "page": 157,
   "box": [
    914,
@@ -4001,9 +6128,13 @@
    781
   ],
   "latin": "Alia rum, # aflatura",
-  "english": "Another rum, # aflatura"
+  "levels": [
+   "Another rum, # aflatura",
+   "Another rum, #Aflatura"
+  ]
  },
  {
+  "id": 432,
   "page": 157,
   "box": [
    348,
@@ -4012,9 +6143,15 @@
    812
   ],
   "latin": "Acetofa non proprie.",
-  "english": "Not exactly vinegar."
+  "levels": [
+   "Not exactly vinegar.",
+   "It's not exactly vinegar.",
+   "It's not really vinegar.",
+   "This isn't real vinegar."
+  ]
  },
  {
+  "id": 434,
   "page": 157,
   "box": [
    349,
@@ -4023,9 +6160,15 @@
    876
   ],
   "latin": "Adeps,# pinguedo",
-  "english": "Fat, # fat"
+  "levels": [
+   "Fat, # fat",
+   "fat, #fat",
+   "oil, #oil",
+   "Oil, #oil"
+  ]
  },
  {
+  "id": 435,
   "page": 157,
   "box": [
    916,
@@ -4034,9 +6177,15 @@
    878
   ],
   "latin": "Aflum fuper carbones",
-  "english": "The river flows over the coals."
+  "levels": [
+   "The river flows over the coals.",
+   "The river flows over coal.",
+   "The river flows over the coals.",
+   "The river flows over the charcoal fire."
+  ]
  },
  {
+  "id": 436,
   "page": 157,
   "box": [
    915,
@@ -4045,9 +6194,15 @@
    903
   ],
   "latin": "Aflumin ueru",
-  "english": "I'm sure"
+  "levels": [
+   "I'm sure",
+   "I am sure.",
+   "I'm sure.",
+   "I am certain."
+  ]
  },
  {
+  "id": 437,
   "page": 157,
   "box": [
    349,
@@ -4056,9 +6211,15 @@
    939
   ],
   "latin": "Aer temperatus,# difremperarus",
-  "english": "The air is temperate,# diffracting"
+  "levels": [
+   "The air is temperate,# diffracting",
+   "The air is calm, # Diffraction",
+   "The wind is calm, # Diffraction",
+   "The wind is calm, and # diffraction"
+  ]
  },
  {
+  "id": 438,
   "page": 157,
   "box": [
    348,
@@ -4067,9 +6228,15 @@
    972
   ],
   "latin": "Aeris quadruplicis uirtus # operario",
-  "english": "The fourfold virtue of copper # for the worker"
+  "levels": [
+   "The fourfold virtue of copper # for the worker",
+   "Four advantages for copper workers",
+   "Four benefits for copper workers",
+   "4 Benefits for Copper Miners"
+  ]
  },
  {
+  "id": 439,
   "page": 157,
   "box": [
    349,
@@ -4078,9 +6245,15 @@
    1003
   ],
   "latin": "Aer epidimitus",
-  "english": "The air is released."
+  "levels": [
+   "The air is released.",
+   "Air is released.",
+   "The air is released.",
+   "The air escapes."
+  ]
  },
  {
+  "id": 440,
   "page": 157,
   "box": [
    915,
@@ -4089,9 +6262,14 @@
    1008
   ],
   "latin": "Augmentorum modi quinque",
-  "english": "Five ways of growth"
+  "levels": [
+   "Five ways of growth",
+   "Five ways to grow",
+   "Five Ways to Grow"
+  ]
  },
  {
+  "id": 441,
   "page": 157,
   "box": [
    915,
@@ -4100,9 +6278,14 @@
    1039
   ],
   "latin": "Auium fylucflrium ordines",
-  "english": "The orders of birds"
+  "levels": [
+   "The orders of birds",
+   "Birds",
+   "birds"
+  ]
  },
  {
+  "id": 442,
   "page": 157,
   "box": [
    350,
@@ -4111,9 +6294,16 @@
    1097
   ],
   "latin": "Alx, # Colla animalium",
-  "english": "Alx, ​​# Necks of animals"
+  "levels": [
+   "Alx, ​​# Necks of animals",
+   "Alx, ​​# Animal neck",
+   "Alx, ​​​​# Animal neck",
+   "Alx, ​​​​​​​​# Animal neck",
+   "Alex, # animal neck"
+  ]
  },
  {
+  "id": 443,
   "page": 157,
   "box": [
    915,
@@ -4122,9 +6312,16 @@
    1136
   ],
   "latin": "Balnei opcrariones,iuuamcnu & nocu-",
-  "english": "Bath operations, beneficial & harmful"
+  "levels": [
+   "Bath operations, beneficial & harmful",
+   "Bathing procedures, beneficial and harmful aspects",
+   "Bathing procedures, beneficial and harmful properties",
+   "Bath procedures, beneficial and harmful properties",
+   "Bathing methods, benefits, and harmful effects"
+  ]
  },
  {
+  "id": 444,
   "page": 157,
   "box": [
    352,
@@ -4133,9 +6330,15 @@
    1157
   ],
   "latin": "Alrerationisriborum # medianarum uelo-",
-  "english": "Alrelation of ribs # medians velo-"
+  "levels": [
+   "Alrelation of ribs # medians velo-",
+   "Rib correlation # Midline velocity -",
+   "Rib compatibility # Centerline speed -",
+   "Side compatibility # Centerline speed -"
+  ]
  },
  {
+  "id": 446,
   "page": 157,
   "box": [
    918,
@@ -4144,9 +6347,15 @@
    1194
   ],
   "latin": "Balneorum ornatus",
-  "english": "Bath decoration"
+  "levels": [
+   "Bath decoration",
+   "Bathroom decoration",
+   "Bathroom interior design",
+   "Bathroom Interior Design"
+  ]
  },
  {
+  "id": 447,
   "page": 157,
   "box": [
    353,
@@ -4155,9 +6364,15 @@
    1291
   ],
   "latin": "Amigdalx amari*",
-  "english": "Bitter almond*"
+  "levels": [
+   "Bitter almond*",
+   "Bitter tonsils*",
+   "Sore tonsils*",
+   "Tonsil pain*"
+  ]
  },
  {
+  "id": 448,
   "page": 157,
   "box": [
    921,
@@ -4166,9 +6381,16 @@
    1329
   ],
   "latin": "Blctx parux",
-  "english": "Very small"
+  "levels": [
+   "Very small",
+   "very small",
+   "too small",
+   "undersized",
+   "It is small in size."
+  ]
  },
  {
+  "id": 449,
   "page": 157,
   "box": [
    921,
@@ -4177,9 +6399,13 @@
    1362
   ],
   "latin": "Bletx magnx",
-  "english": "Big Bletx"
+  "levels": [
+   "Big Bletx",
+   "Big Brex"
+  ]
  },
  {
+  "id": 450,
   "page": 157,
   "box": [
    921,
@@ -4188,9 +6414,14 @@
    1387
   ],
   "latin": "Brodium cicerum",
-  "english": "Chickpea broth"
+  "levels": [
+   "Chickpea broth",
+   "Chickpea soup",
+   "chickpea soup"
+  ]
  },
  {
+  "id": 451,
   "page": 157,
   "box": [
    355,
@@ -4199,9 +6430,16 @@
    1453
   ],
   "latin": "Animx accidenda quinque",
-  "english": "Five accidents occur in the soul."
+  "levels": [
+   "Five accidents occur in the soul.",
+   "Five accidents happen to the soul.",
+   "Five accidents occur in the soul.",
+   "Five misfortunes occur in the soul.",
+   "Five misfortunes befall the soul."
+  ]
  },
  {
+  "id": 452,
   "page": 157,
   "box": [
    353,
@@ -4210,9 +6448,15 @@
    1482
   ],
   "latin": "Apericntiaorificia ucnarura",
-  "english": "Openings of the orifices of the nose"
+  "levels": [
+   "Openings of the orifices of the nose",
+   "Nose opening",
+   "Opening the nose",
+   "open your nose"
+  ]
  },
  {
+  "id": 453,
   "page": 157,
   "box": [
    919,
@@ -4221,9 +6465,15 @@
    1487
   ],
   "latin": "Butyrum recens #codura",
-  "english": "Fresh butter #codura"
+  "levels": [
+   "Fresh butter #codura",
+   "Fresh butter #Cordura",
+   "New #Cordura butter",
+   "New #CorduraButter"
+  ]
  },
  {
+  "id": 454,
   "page": 157,
   "box": [
    353,
@@ -4232,9 +6482,12 @@
    1547
   ],
   "latin": "Apium Apium duplex",
-  "english": "Celery, double celery"
+  "levels": [
+   "Celery, double celery"
+  ]
  },
  {
+  "id": 455,
   "page": 157,
   "box": [
    922,
@@ -4243,9 +6496,16 @@
    1584
   ],
   "latin": "Caloris ignis.&uaporis hiimanidifcrtrio tu",
-  "english": "The heat of fire and the vapors of the human being"
+  "levels": [
+   "The heat of fire and the vapors of the human being",
+   "The heat of the fire and the steam rising from the human body",
+   "The heat of the fire and the smoke from the human body",
+   "The heat of fire and the smoke rising from the human body",
+   "The heat of the fire and the smoke rising from the human body"
+  ]
  },
  {
+  "id": 456,
   "page": 157,
   "box": [
    354,
@@ -4254,9 +6514,13 @@
    1611
   ],
   "latin": "Aqua hordei",
-  "english": "Barley water"
+  "levels": [
+   "Barley water",
+   "barley water"
+  ]
  },
  {
+  "id": 457,
   "page": 157,
   "box": [
    355,
@@ -4265,9 +6529,13 @@
    1675
   ],
   "latin": "Aqua fontalis",
-  "english": "Spring water"
+  "levels": [
+   "Spring water",
+   "spring water"
+  ]
  },
  {
+  "id": 458,
   "page": 157,
   "box": [
    924,
@@ -4276,9 +6544,15 @@
    1680
   ],
   "latin": "Camerx hyemales",
-  "english": "Winter ants"
+  "levels": [
+   "Winter ants",
+   "Winter Ants",
+   "Winter ants",
+   "winter ants"
+  ]
  },
  {
+  "id": 459,
   "page": 157,
   "box": [
    355,
@@ -4287,9 +6561,16 @@
    1706
   ],
   "latin": "Aqua plumalis",
-  "english": "Plume water"
+  "levels": [
+   "Plume water",
+   "Ploom Water",
+   "Plum Water",
+   "Plum water",
+   "plum tree"
+  ]
  },
  {
+  "id": 460,
   "page": 157,
   "box": [
    924,
@@ -4298,9 +6579,14 @@
    1713
   ],
   "latin": "Camerarum prxparario",
-  "english": "Preparing the rooms"
+  "levels": [
+   "Preparing the rooms",
+   "Preparing the room",
+   "Room preparation"
+  ]
  },
  {
+  "id": 461,
   "page": 157,
   "box": [
    354,
@@ -4309,9 +6595,16 @@
    1738
   ],
   "latin": "Aqua niui mixta",
-  "english": "Water mixed with snow"
+  "levels": [
+   "Water mixed with snow",
+   "A mixture of snow and water",
+   "A mixture of ice and water",
+   "Ice and water mixture",
+   "A mixture of ice and water"
+  ]
  },
  {
+  "id": 462,
   "page": 157,
   "box": [
    356,
@@ -4320,9 +6613,13 @@
    1770
   ],
   "latin": "Aqua calida",
-  "english": "Hot water"
+  "levels": [
+   "Hot water",
+   "hot water"
+  ]
  },
  {
+  "id": 463,
   "page": 157,
   "box": [
    354,
@@ -4331,9 +6628,13 @@
    1801
   ],
   "latin": "Aqua fortiter calida",
-  "english": "Very hot water"
+  "levels": [
+   "Very hot water",
+   "very hot water"
+  ]
  },
  {
+  "id": 464,
   "page": 157,
   "box": [
    356,
@@ -4342,9 +6643,13 @@
    1833
   ],
   "latin": "Aqua frigida",
-  "english": "Cold water"
+  "levels": [
+   "Cold water",
+   "cold water"
+  ]
  },
  {
+  "id": 465,
   "page": 157,
   "box": [
    925,
@@ -4353,9 +6658,16 @@
    1831
   ],
   "latin": "Cannx mellis •",
-  "english": "Honey canes •"
+  "levels": [
+   "Honey canes •",
+   "Honey stalks •",
+   "Honey stems •",
+   "Honey sticks •",
+   "Honey Sticks •"
+  ]
  },
  {
+  "id": 466,
   "page": 157,
   "box": [
    356,
@@ -4364,9 +6676,14 @@
    1865
   ],
   "latin": "Aqua falfa",
-  "english": "Fake water"
+  "levels": [
+   "Fake water",
+   "Counterfeit water",
+   "fake water"
+  ]
  },
  {
+  "id": 467,
   "page": 157,
   "box": [
    355,
@@ -4375,9 +6692,13 @@
    1896
   ],
   "latin": "Aqua fu 1 fu rea",
-  "english": "Water fu 1 fu rea"
+  "levels": [
+   "Water fu 1 fu rea",
+   "water fu 1 fu rea"
+  ]
  },
  {
+  "id": 468,
   "page": 157,
   "box": [
    926,
@@ -4386,9 +6707,16 @@
    1896
   ],
   "latin": "Cantus muficus",
-  "english": "Musical song"
+  "levels": [
+   "Musical song",
+   "Musical songs",
+   "Music songs",
+   "Music tracks",
+   "music track"
+  ]
  },
  {
+  "id": 469,
   "page": 157,
   "box": [
    356,
@@ -4397,9 +6725,13 @@
    1928
   ],
   "latin": "Aqua xris",
-  "english": "Water is cold."
+  "levels": [
+   "Water is cold.",
+   "The water is cold."
+  ]
  },
  {
+  "id": 470,
   "page": 157,
   "box": [
    356,
@@ -4408,9 +6740,14 @@
    1960
   ],
   "latin": "Aqua terrea",
-  "english": "Earthly water"
+  "levels": [
+   "Earthly water",
+   "Water on land",
+   "Water on Earth"
+  ]
  },
  {
+  "id": 471,
   "page": 157,
   "box": [
    926,
@@ -4419,9 +6756,16 @@
    1971
   ],
   "latin": "Capitis lotio,abfterfio,#pc<itinario",
-  "english": "Head wash, absterfio, #pc<itinar"
+  "levels": [
+   "Head wash, absterfio, #pc<itinar",
+   "Head wash, Absterfio, #pc<itinar",
+   "Head washing, Absterfio, #pc",
+   "Headwash, Absterfio, #pc",
+   "Headwash, Abstorpio, #pc"
+  ]
  },
  {
+  "id": 472,
   "page": 157,
   "box": [
    926,
@@ -4430,9 +6774,13 @@
    1997
   ],
   "latin": "Capita animalium",
-  "english": "Animal heads"
+  "levels": [
+   "Animal heads",
+   "animal head"
+  ]
  },
  {
+  "id": 473,
   "page": 157,
   "box": [
    356,
@@ -4441,9 +6789,13 @@
    2024
   ],
   "latin": "Aqua deleda bilis",
-  "english": "Water is diluted with bile."
+  "levels": [
+   "Water is diluted with bile.",
+   "Water mixed with bile."
+  ]
  },
  {
+  "id": 474,
   "page": 157,
   "box": [
    927,
@@ -4452,9 +6804,13 @@
    2023
   ],
   "latin": "Cardones ladauli",
-  "english": "Cardoons ladauli"
+  "levels": [
+   "Cardoons ladauli",
+   "Cardon Radauli"
+  ]
  },
  {
+  "id": 475,
   "page": 157,
   "box": [
    927,
@@ -4463,9 +6819,13 @@
    2055
   ],
   "latin": "Cardoncs aiinini",
-  "english": "Cardoons ainini"
+  "levels": [
+   "Cardoons ainini",
+   "Cardon Ainini"
+  ]
  },
  {
+  "id": 476,
   "page": 158,
   "box": [
    144,
@@ -4474,9 +6834,15 @@
    382
   ],
   "latin": "Carnium natura ,& dclcAua",
-  "english": "The nature of the flesh, & the"
+  "levels": [
+   "The nature of the flesh, & the",
+   "The nature of the body, and",
+   "Body type, and",
+   "Body type and"
+  ]
  },
  {
+  "id": 477,
   "page": 158,
   "box": [
    144,
@@ -4485,9 +6851,13 @@
    414
   ],
   "latin": "Carnes porcinx",
-  "english": "Pork meat"
+  "levels": [
+   "Pork meat",
+   "pork"
+  ]
  },
  {
+  "id": 478,
   "page": 158,
   "box": [
    145,
@@ -4496,9 +6866,16 @@
    446
   ],
   "latin": "Carnes fylueftres",
-  "english": "The flesh of the falconers"
+  "levels": [
+   "The flesh of the falconers",
+   "Falconer's Meat",
+   "Falconer's meat",
+   "Falconer meat",
+   "Falconer's meat"
+  ]
  },
  {
+  "id": 479,
   "page": 158,
   "box": [
    146,
@@ -4507,9 +6884,16 @@
    472
   ],
   "latin": "Carnes membrorum animalium",
-  "english": "Meat of animal limbs"
+  "levels": [
+   "Meat of animal limbs",
+   "Meat from animal limbs",
+   "Meat from animal joints",
+   "Animal joint meat",
+   "Meat from animal joints"
+  ]
  },
  {
+  "id": 480,
   "page": 158,
   "box": [
    146,
@@ -4518,9 +6902,14 @@
    503
   ],
   "latin": "Carnes arietum",
-  "english": "Ram meat"
+  "levels": [
+   "Ram meat",
+   "Lamb",
+   "lamb"
+  ]
  },
  {
+  "id": 481,
   "page": 158,
   "box": [
    145,
@@ -4529,9 +6918,13 @@
    541
   ],
   "latin": "Camesxaprarura & ledorum",
-  "english": "Camexaprarura & ledorum"
+  "levels": [
+   "Camexaprarura & ledorum",
+   "Camexaprarura and ledorum"
+  ]
  },
  {
+  "id": 482,
   "page": 158,
   "box": [
    146,
@@ -4540,9 +6933,13 @@
    567
   ],
   "latin": "Carnes uitulorum",
-  "english": "Veal meat"
+  "levels": [
+   "Veal meat",
+   "veal"
+  ]
  },
  {
+  "id": 483,
   "page": 158,
   "box": [
    146,
@@ -4551,9 +6948,13 @@
    599
   ],
   "latin": "Carnes uaccinx & camelinas",
-  "english": "Beef & camel meat"
+  "levels": [
+   "Beef & camel meat",
+   "Beef and camel meat"
+  ]
  },
  {
+  "id": 484,
   "page": 158,
   "box": [
    145,
@@ -4562,9 +6963,14 @@
    630
   ],
   "latin": "Carnes falicx",
-  "english": "Happy flesh"
+  "levels": [
+   "Happy flesh",
+   "Happy body",
+   "Happy Body"
+  ]
  },
  {
+  "id": 485,
   "page": 158,
   "box": [
    146,
@@ -4573,9 +6979,12 @@
    662
   ],
   "latin": "Carnes Gazelorum",
-  "english": "Gazelle meat"
+  "levels": [
+   "Gazelle meat"
+  ]
  },
  {
+  "id": 486,
   "page": 158,
   "box": [
    146,
@@ -4584,9 +6993,13 @@
    700
   ],
   "latin": "Carnes leporinx",
-  "english": "Rabbit meat"
+  "levels": [
+   "Rabbit meat",
+   "rabbit meat"
+  ]
  },
  {
+  "id": 487,
   "page": 158,
   "box": [
    145,
@@ -4595,9 +7008,13 @@
    732
   ],
   "latin": "Carnes gruum",
-  "english": "Crane meat"
+  "levels": [
+   "Crane meat",
+   "Cranberry"
+  ]
  },
  {
+  "id": 488,
   "page": 158,
   "box": [
    144,
@@ -4606,9 +7023,14 @@
    757
   ],
   "latin": "Carnes biftardi",
-  "english": "Beefsteak"
+  "levels": [
+   "Beefsteak",
+   "Beef",
+   "beef"
+  ]
  },
  {
+  "id": 489,
   "page": 158,
   "box": [
    146,
@@ -4617,9 +7039,12 @@
    795
   ],
   "latin": "Carnes pauonum",
-  "english": "Peacock meat"
+  "levels": [
+   "Peacock meat"
+  ]
  },
  {
+  "id": 490,
   "page": 158,
   "box": [
    144,
@@ -4628,9 +7053,15 @@
    821
   ],
   "latin": "Carnes anatum 8c an ferum",
-  "english": "Duck meat 8c or wild"
+  "levels": [
+   "Duck meat 8c or wild",
+   "Duck meat for 8 cents or wild",
+   "Duck meat for 8 cents or wild duck",
+   "Duck meat 8 cents or wild duck meat"
+  ]
  },
  {
+  "id": 491,
   "page": 158,
   "box": [
    143,
@@ -4639,9 +7070,15 @@
    859
   ],
   "latin": "Carnes pcrdicum,ftumorum,phafianorura.",
-  "english": "Meat of birds, pigs, and pheasants."
+  "levels": [
+   "Meat of birds, pigs, and pheasants.",
+   "Poultry, pork, pheasant meat.",
+   "Chicken, pork, pheasant meat.",
+   "Chicken, pork, pheasant."
+  ]
  },
  {
+  "id": 492,
   "page": 158,
   "box": [
    173,
@@ -4650,9 +7087,16 @@
    888
   ],
   "latin": "coturnicum,a turturum",
-  "english": "quail, a turtledove"
+  "levels": [
+   "quail, a turtledove",
+   "Quail, Oriental Turtle Dove",
+   "Quail, Eastern Turtle Dove",
+   "Quail, Eastern dove",
+   "Quail, Eastern pigeon"
+  ]
  },
  {
+  "id": 493,
   "page": 158,
   "box": [
    143,
@@ -4661,9 +7105,14 @@
    916
   ],
   "latin": "Carnes auicularum",
-  "english": "Poultry meat"
+  "levels": [
+   "Poultry meat",
+   "chicken meat",
+   "chicken"
+  ]
  },
  {
+  "id": 494,
   "page": 158,
   "box": [
    144,
@@ -4672,9 +7121,14 @@
    954
   ],
   "latin": "Carnes gallinarum",
-  "english": "Chicken meat"
+  "levels": [
+   "Chicken meat",
+   "chicken meat",
+   "chicken"
+  ]
  },
  {
+  "id": 495,
   "page": 158,
   "box": [
    144,
@@ -4683,9 +7137,14 @@
    985
   ],
   "latin": "C irnes gallorum",
-  "english": "The crows of roosters"
+  "levels": [
+   "The crows of roosters",
+   "Rooster crowing",
+   "The rooster crows."
+  ]
  },
  {
+  "id": 496,
   "page": 158,
   "box": [
    144,
@@ -4694,9 +7153,13 @@
    1019
   ],
   "latin": "Carnes pullorum,columbarum, #",
-  "english": "Meat of chickens, pigeons, #"
+  "levels": [
+   "Meat of chickens, pigeons, #",
+   "Chicken, pigeon meat, #"
+  ]
  },
  {
+  "id": 497,
   "page": 158,
   "box": [
    144,
@@ -4705,9 +7168,16 @@
    1076
   ],
   "latin": "Carnes animalium caftracorum",
-  "english": "Meat of wild animals"
+  "levels": [
+   "Meat of wild animals",
+   "wild animal meat",
+   "wild game meat",
+   "game meat",
+   "Game meat"
+  ]
  },
  {
+  "id": 498,
   "page": 158,
   "box": [
    145,
@@ -4716,9 +7186,12 @@
    1106
   ],
   "latin": "Cartami flos",
-  "english": "Saffron flower"
+  "levels": [
+   "Saffron flower"
+  ]
  },
  {
+  "id": 499,
   "page": 158,
   "box": [
    146,
@@ -4727,9 +7200,13 @@
    1201
   ],
   "latin": "Cafeus recens",
-  "english": "Fresh coffee"
+  "levels": [
+   "Fresh coffee",
+   "Freshly brewed coffee"
+  ]
  },
  {
+  "id": 500,
   "page": 158,
   "box": [
    145,
@@ -4738,9 +7215,13 @@
    1233
   ],
   "latin": "Cafeus uctus",
-  "english": "Coffee beans"
+  "levels": [
+   "Coffee beans",
+   "coffee beans"
+  ]
  },
  {
+  "id": 501,
   "page": 158,
   "box": [
    144,
@@ -4749,9 +7230,14 @@
    1272
   ],
   "latin": "Catayf cum nucibus",
-  "english": "Catayf with nuts"
+  "levels": [
+   "Catayf with nuts",
+   "Nut-filled kataf",
+   "Kataf containing nuts"
+  ]
  },
  {
+  "id": 502,
   "page": 158,
   "box": [
    144,
@@ -4760,9 +7246,13 @@
    1329
   ],
   "latin": "Cerebra animalium",
-  "english": "Animal brains"
+  "levels": [
+   "Animal brains",
+   "animal brain"
+  ]
  },
  {
+  "id": 503,
   "page": 158,
   "box": [
    145,
@@ -4771,9 +7261,15 @@
    1424
   ],
   "latin": "Chdloe cum nudbus",
-  "english": "Chdloe with naked"
+  "levels": [
+   "Chdloe with naked",
+   "Naked Chdloe",
+   "Nude Chdloe",
+   "Nude Chidori"
+  ]
  },
  {
+  "id": 504,
   "page": 158,
   "box": [
    143,
@@ -4782,9 +7278,13 @@
    1519
   ],
   "latin": "Chures cum oleribus",
-  "english": "Chures with vegetables"
+  "levels": [
+   "Chures with vegetables",
+   "Vegetable churros"
+  ]
  },
  {
+  "id": 505,
   "page": 158,
   "box": [
    141,
@@ -4793,9 +7293,16 @@
    1558
   ],
   "latin": "Ciborum fimplicium qualitates dfgradus y",
-  "english": "The qualities of the foods are different."
+  "levels": [
+   "The qualities of the foods are different.",
+   "The properties of the foods are different.",
+   "Food structures are different.",
+   "The structures of the dishes are different.",
+   "The structures of the foods are different."
+  ]
  },
  {
+  "id": 506,
   "page": 158,
   "box": [
    141,
@@ -4804,9 +7311,14 @@
    1590
   ],
   "latin": "Cibus fimpliciter compoflcus",
-  "english": "Simple food composition"
+  "levels": [
+   "Simple food composition",
+   "Simple Food Composition",
+   "Simple food composition"
+  ]
  },
  {
+  "id": 507,
   "page": 158,
   "box": [
    141,
@@ -4815,9 +7327,16 @@
    1622
   ],
   "latin": "Ciborum compofltorum naturx",
-  "english": "The nature of compound foods"
+  "levels": [
+   "The nature of compound foods",
+   "Properties of compound foods",
+   "Compound food properties",
+   "Characteristics of combined foods",
+   "Characteristics of complex foods"
+  ]
  },
  {
+  "id": 508,
   "page": 158,
   "box": [
    140,
@@ -4826,9 +7345,14 @@
    1653
   ],
   "latin": "Ciborum iudicium iuxtafapores",
-  "english": "Food judgment by food experts"
+  "levels": [
+   "Food judgment by food experts",
+   "Food evaluation by food experts",
+   "Food testing by food experts"
+  ]
  },
  {
+  "id": 509,
   "page": 158,
   "box": [
    142,
@@ -4837,9 +7361,14 @@
    1683
   ],
   "latin": "Ciborum rcAificatio,# remotio nocumen-",
-  "english": "Food refinement,# removal of harmful substances"
+  "levels": [
+   "Food refinement,# removal of harmful substances",
+   "Food refining, removal of harmful substances",
+   "Food filtration, removal of harmful substances"
+  ]
  },
  {
+  "id": 510,
   "page": 159,
   "box": [
    343,
@@ -4848,9 +7377,14 @@
    555
   ],
   "latin": "Ficus ficcx",
-  "english": "Ficus ficusx"
+  "levels": [
+   "Ficus ficusx",
+   "Ficus ficus",
+   "Picus Picus"
+  ]
  },
  {
+  "id": 511,
   "page": 159,
   "box": [
    864,
@@ -4859,9 +7393,16 @@
    595
   ],
   "latin": "«i | .. Ac dulce Scjoagulatum",
-  "english": "«i| .. And sweet Scjoagulatum"
+  "levels": [
+   "«i| .. And sweet Scjoagulatum",
+   "\"i| .. And sweet Scjoagulatum",
+   "\"i| .. And the delicious Scjoagulatum",
+   "\"I| .. And delicious Scjoagulatum",
+   "Me | .. and delicious Scjoagulatum"
+  ]
  },
  {
+  "id": 512,
   "page": 159,
   "box": [
    345,
@@ -4870,9 +7411,15 @@
    626
   ],
   "latin": "Flos panis pordni",
-  "english": "The flower of bread is a gift."
+  "levels": [
+   "The flower of bread is a gift.",
+   "Bread flowers are a gift.",
+   "Breadfruit flowers are a gift.",
+   "Breadfruit is a gift."
+  ]
  },
  {
+  "id": 513,
   "page": 159,
   "box": [
    856,
@@ -4881,9 +7428,15 @@
    649
   ],
   "latin": "101 Lactis uarictas",
-  "english": "101 Milk curds"
+  "levels": [
+   "101 Milk curds",
+   "101 Milk Cards",
+   "101 milk cards",
+   "101 Milk Cards"
+  ]
  },
  {
+  "id": 514,
   "page": 159,
   "box": [
    345,
@@ -4892,9 +7445,14 @@
    683
   ],
   "latin": "Folia Afx",
-  "english": "Leaves Afx"
+  "levels": [
+   "Leaves Afx",
+   "Leaf Afx",
+   "Magazine Afx"
+  ]
  },
  {
+  "id": 515,
   "page": 159,
   "box": [
    867,
@@ -4903,9 +7461,15 @@
    689
   ],
   "latin": "« Laccx uarijs fubilanti}s componitur",
-  "english": "« The milk is composed of various ingredients"
+  "levels": [
+   "« The milk is composed of various ingredients",
+   "\"Milk is made up of various components.\"",
+   "\"Milk is made up of different parts.\"",
+   "Milk is made up of various components."
+  ]
  },
  {
+  "id": 517,
   "page": 159,
   "box": [
    347,
@@ -4914,9 +7478,13 @@
    810
   ],
   "latin": "Frumentum elixum",
-  "english": "Boiled corn"
+  "levels": [
+   "Boiled corn",
+   "boiled corn"
+  ]
  },
  {
+  "id": 518,
   "page": 159,
   "box": [
    865,
@@ -4925,9 +7493,16 @@
    848
   ],
   "latin": "S9_ Lapidem frangentia",
-  "english": "S9_ Stone breaking"
+  "levels": [
+   "S9_ Stone breaking",
+   "S9_ Stone Splitting",
+   "S9_ Stone Cracking",
+   "S9_ Rock cracking",
+   "S9_ Rock Breaker"
+  ]
  },
  {
+  "id": 519,
   "page": 159,
   "box": [
    918,
@@ -4936,9 +7511,15 @@
    880
   ],
   "latin": "Leguminum naturx, 8 iledionet",
-  "english": "Legumes, 8 ounces"
+  "levels": [
+   "Legumes, 8 ounces",
+   "Beans, 8 ounces",
+   "Beans, 225 g",
+   "Beans, 225g"
+  ]
  },
  {
+  "id": 520,
   "page": 159,
   "box": [
    864,
@@ -4947,9 +7528,16 @@
    1007
   ],
   "latin": "92_ Lingux animalium",
-  "english": "92_ Animal tongue"
+  "levels": [
+   "92_ Animal tongue",
+   "92_ Animal Tongue",
+   "92_ Animal Language",
+   "92_ Animal language",
+   "92_ Animal Language"
+  ]
  },
  {
+  "id": 522,
   "page": 159,
   "box": [
    919,
@@ -4958,9 +7546,13 @@
    1127
   ],
   "latin": "Lutum corafccnom",
-  "english": "Clay is a beautiful thing."
+  "levels": [
+   "Clay is a beautiful thing.",
+   "Clay is a beautiful material."
+  ]
  },
  {
+  "id": 523,
   "page": 159,
   "box": [
    352,
@@ -4969,9 +7561,15 @@
    1164
   ],
   "latin": "Gradus primi Sdecundi cognlrio",
-  "english": "First Grade Second Grade"
+  "levels": [
+   "First Grade Second Grade",
+   "1st year 2nd year",
+   "Year 1 Year 2",
+   "1st year 2nd year"
+  ]
  },
  {
+  "id": 524,
   "page": 159,
   "box": [
    351,
@@ -4980,9 +7578,16 @@
    1196
   ],
   "latin": "Gradus tcrtij Suquarti cognitio",
-  "english": "The third degree of Suqar knowledge"
+  "levels": [
+   "The third degree of Suqar knowledge",
+   "Skull Knowledge, Third Stage",
+   "Mental Knowledge, Third Stage",
+   "Mind knowledge, third stage",
+   "Knowledge of the Mind, 3 Stages"
+  ]
  },
  {
+  "id": 525,
   "page": 159,
   "box": [
    351,
@@ -4991,9 +7596,15 @@
    1227
   ],
   "latin": "Graduum adinuicem comparationes",
-  "english": "Comparisons of degrees of adunuim"
+  "levels": [
+   "Comparisons of degrees of adunuim",
+   "Comparison of age levels",
+   "Comparison of age groups",
+   "Comparison by age group"
+  ]
  },
  {
+  "id": 526,
   "page": 159,
   "box": [
    352,
@@ -5002,9 +7613,16 @@
    1259
   ],
   "latin": "Graduum appellatio duplex",
-  "english": "The appeal of degrees is twofold."
+  "levels": [
+   "The appeal of degrees is twofold.",
+   "There are two main attractions to obtaining a degree.",
+   "There are two main attractive places to get a degree.",
+   "There are two attractive places to complete your degree.",
+   "There are two attractive places to finish your degree."
+  ]
  },
  {
+  "id": 528,
   "page": 159,
   "box": [
    352,
@@ -5013,9 +7631,16 @@
    1291
   ],
   "latin": "Graduum uirtutes quidam aliter opinad",
-  "english": "Some people think differently about the virtues of degrees."
+  "levels": [
+   "Some people think differently about the virtues of degrees.",
+   "People have different opinions on the value of a degree.",
+   "People have different opinions about the importance of qualifications.",
+   "People have different opinions about the importance of competence.",
+   "Opinions vary from person to person regarding the importance of competence."
+  ]
  },
  {
+  "id": 529,
   "page": 159,
   "box": [
    865,
@@ -5024,9 +7649,15 @@
    1287
   ],
   "latin": "»fi_ Mala dulcia",
-  "english": "»fi_ Sweet apples"
+  "levels": [
+   "»fi_ Sweet apples",
+   "»fi_ Sweet apple",
+   "»en_ Sweet apple",
+   "»en_ Sweet Apple"
+  ]
  },
  {
+  "id": 530,
   "page": 159,
   "box": [
    352,
@@ -5035,9 +7666,16 @@
    1323
   ],
   "latin": "Graduum in compofitis difcrctio",
-  "english": "Diffraction of degrees in composites"
+  "levels": [
+   "Diffraction of degrees in composites",
+   "Diffraction degree in composite materials",
+   "The level of diversity of the combined elements",
+   "Level of diversity of combined elements",
+   "Level of diversity of combination elements"
+  ]
  },
  {
+  "id": 531,
   "page": 159,
   "box": [
    861,
@@ -5046,9 +7684,12 @@
    1318
   ],
   "latin": "■t« Mala aettofa",
-  "english": "■t« Bad things"
+  "levels": [
+   "■t« Bad things"
+  ]
  },
  {
+  "id": 532,
   "page": 159,
   "box": [
    353,
@@ -5057,9 +7698,15 @@
    1347
   ],
   "latin": "Graduum rcdificario",
-  "english": "Building grade"
+  "levels": [
+   "Building grade",
+   "Construction grade",
+   "Construction class",
+   "Construction grade"
+  ]
  },
  {
+  "id": 533,
   "page": 159,
   "box": [
    353,
@@ -5068,9 +7715,13 @@
    1379
   ],
   "latin": "Granata dulcia",
-  "english": "Sweet pomegranates"
+  "levels": [
+   "Sweet pomegranates",
+   "Sweet pomegranate"
+  ]
  },
  {
+  "id": 534,
   "page": 159,
   "box": [
    354,
@@ -5079,9 +7730,12 @@
    1415
   ],
   "latin": "Granata ac^tofa",
-  "english": "Pomegranate juice"
+  "levels": [
+   "Pomegranate juice"
+  ]
  },
  {
+  "id": 535,
   "page": 159,
   "box": [
    354,
@@ -5090,9 +7744,15 @@
    1447
   ],
   "latin": "De Granis,& uichialibusquxexeis fiunt",
-  "english": "Of Grains, and the Vehicles Which Are Made of Them"
+  "levels": [
+   "Of Grains, and the Vehicles Which Are Made of Them",
+   "About grains and vehicles made from them",
+   "About grain and the cars made of it",
+   "About grain and cars made from it"
+  ]
  },
  {
+  "id": 536,
   "page": 159,
   "box": [
    871,
@@ -5101,9 +7761,15 @@
    1510
   ],
   "latin": "Ti— Medicina cibali.",
-  "english": "You— Food medicine."
+  "levels": [
+   "You— Food medicine.",
+   "You—food is medicine.",
+   "You – food is medicine.",
+   "Food is medicine."
+  ]
  },
  {
+  "id": 537,
   "page": 159,
   "box": [
    875,
@@ -5112,9 +7778,14 @@
    1544
   ],
   "latin": "yr MedirinxiQtcntio.raniras",
-  "english": "The MedirinxiQtcntio.raniras"
+  "levels": [
+   "The MedirinxiQtcntio.raniras",
+   "Medilinsiktio Raniras",
+   "Medillin Sicthio Laniras"
+  ]
  },
  {
+  "id": 538,
   "page": 159,
   "box": [
    876,
@@ -5123,9 +7794,15 @@
    1583
   ],
   "latin": "6i_ Medicinarum&_Ciborumcognfriodifdtur",
-  "english": "6i_ Medicines &_Foods are known"
+  "levels": [
+   "6i_ Medicines &_Foods are known",
+   "6i_ Pharmaceuticals and food are known",
+   "6i_ Medicines and food are known",
+   "6i_ Medicines and foods are known."
+  ]
  },
  {
+  "id": 539,
   "page": 160,
   "box": [
    156,
@@ -5134,9 +7811,14 @@
    1359
   ],
   "latin": "Mundificantia inteftina exfter-",
-  "english": "Intestinal cleansing exter-"
+  "levels": [
+   "Intestinal cleansing exter-",
+   "colon cleansing",
+   "Colon cleansing"
+  ]
  },
  {
+  "id": 540,
   "page": 160,
   "box": [
    155,
@@ -5145,9 +7827,16 @@
    1462
   ],
   "latin": "Mundificantia gibboOcatcm he-",
-  "english": "Cleaning gibboOcatcm he-"
+  "levels": [
+   "Cleaning gibboOcatcm he-",
+   "Clean up gibboOcatcm.",
+   "Clean gibboOcatcm.",
+   "Pure gibboOcatcm.",
+   "Pure Giboocat cm."
+  ]
  },
  {
+  "id": 541,
   "page": 160,
   "box": [
    732,
@@ -5156,9 +7845,14 @@
    1459
   ],
   "latin": "l Anis natura, ct uartaciuldcm pU",
-  "english": "l Anis nature, ct uartaciuldcm pU"
+  "levels": [
+   "l Anis nature, ct uartaciuldcm pU",
+   "properties of anise, ct uartaciuldcm pU",
+   "Characteristics of Anise, ct uartaciuldcm pU"
+  ]
  },
  {
+  "id": 542,
   "page": 160,
   "box": [
    155,
@@ -5167,9 +7861,14 @@
    1518
   ],
   "latin": "Mundificantia renes",
-  "english": "Cleansing the kidneys"
+  "levels": [
+   "Cleansing the kidneys",
+   "Kidney cleansing",
+   "Kidney purification"
+  ]
  },
  {
+  "id": 543,
   "page": 160,
   "box": [
    725,
@@ -5178,9 +7877,14 @@
    1515
   ],
   "latin": "Panis de fimila",
-  "english": "Bread from the millet"
+  "levels": [
+   "Bread from the millet",
+   "Millet bread",
+   "Gijang bread"
+  ]
  },
  {
+  "id": 544,
   "page": 160,
   "box": [
    155,
@@ -5189,9 +7893,14 @@
    1557
   ],
   "latin": "Mundificanda fplenem",
-  "english": "Cleaning the whole"
+  "levels": [
+   "Cleaning the whole",
+   "Clean the whole thing.",
+   "Clean everything."
+  ]
  },
  {
+  "id": 545,
   "page": 160,
   "box": [
    727,
@@ -5200,9 +7909,14 @@
    1554
   ],
   "latin": "Panis opirus",
-  "english": "Bread of opirus"
+  "levels": [
+   "Bread of opirus",
+   "Bread of Opirus",
+   "Opirus bread"
+  ]
  },
  {
+  "id": 546,
   "page": 160,
   "box": [
    154,
@@ -5211,9 +7925,16 @@
    1582
   ],
   "latin": "Mundificantia ueficam",
-  "english": "Cleaning the house"
+  "levels": [
+   "Cleaning the house",
+   "house cleaning",
+   "cleaning the house",
+   "house cleaning",
+   "House cleaning"
+  ]
  },
  {
+  "id": 547,
   "page": 160,
   "box": [
    727,
@@ -5222,9 +7943,15 @@
    1585
   ],
   "latin": "Panis azymus",
-  "english": "Unleavened bread"
+  "levels": [
+   "Unleavened bread",
+   "Unsowed bread",
+   "Unsown bread",
+   "unsown bread"
+  ]
  },
  {
+  "id": 548,
   "page": 160,
   "box": [
    154,
@@ -5233,9 +7960,14 @@
    1621
   ],
   "latin": "Mundificanda lapidem exue-",
-  "english": "To clean the stone, remove it."
+  "levels": [
+   "To clean the stone, remove it.",
+   "Clean the stone by removing it.",
+   "Remove the stones to clean it."
+  ]
  },
  {
+  "id": 549,
   "page": 160,
   "box": [
    727,
@@ -5244,9 +7976,13 @@
    1610
   ],
   "latin": "Panis rizon",
-  "english": "Rice bread"
+  "levels": [
+   "Rice bread",
+   "Rice flour bread"
+  ]
  },
  {
+  "id": 550,
   "page": 160,
   "box": [
    726,
@@ -5255,9 +7991,13 @@
    1642
   ],
   "latin": "Panis de furno",
-  "english": "Bread from the oven"
+  "levels": [
+   "Bread from the oven",
+   "Bread taken out of the oven"
+  ]
  },
  {
+  "id": 551,
   "page": 160,
   "box": [
    154,
@@ -5266,9 +8006,14 @@
    1679
   ],
   "latin": "Mundificanda cutem",
-  "english": "Cleansing the skin"
+  "levels": [
+   "Cleansing the skin",
+   "Cleanse the skin",
+   "Wash your skin thoroughly."
+  ]
  },
  {
+  "id": 552,
   "page": 160,
   "box": [
    726,
@@ -5277,9 +8022,13 @@
    1674
   ],
   "latin": "Panis in refta factus",
-  "english": "Bread made in yeast"
+  "levels": [
+   "Bread made in yeast",
+   "Bread made with yeast"
+  ]
  },
  {
+  "id": 553,
   "page": 160,
   "box": [
    726,
@@ -5288,9 +8037,14 @@
    1714
   ],
   "latin": "Panis degafteliis",
-  "english": "Bread with forks"
+  "levels": [
+   "Bread with forks",
+   "Bread with a fork",
+   "Pick up bread with a fork and eat it"
+  ]
  },
  {
+  "id": 554,
   "page": 160,
   "box": [
    154,
@@ -5299,9 +8053,16 @@
    1813
   ],
   "latin": "M uficx ufus & opera",
-  "english": "M office & works"
+  "levels": [
+   "M office & works",
+   "M Office & Works",
+   "Office and M-Services",
+   "Office and M-services",
+   "Office and mobile services"
+  ]
  },
  {
+  "id": 555,
   "page": 160,
   "box": [
    726,
@@ -5310,9 +8071,13 @@
    1802
   ],
   "latin": "Pedes & dbix animalium",
-  "english": "Feet & legs of animals"
+  "levels": [
+   "Feet & legs of animals",
+   "Animal feet and legs"
+  ]
  },
  {
+  "id": 556,
   "page": 160,
   "box": [
    726,
@@ -5321,9 +8086,16 @@
    1963
   ],
   "latin": "Pili ut non crefcanf",
-  "english": "Hair so it doesn't grow"
+  "levels": [
+   "Hair so it doesn't grow",
+   "To prevent hair from growing",
+   "Preventing hair from growing",
+   "Inhibiting hair growth",
+   "Hair growth inhibition"
+  ]
  },
  {
+  "id": 557,
   "page": 160,
   "box": [
    727,
@@ -5332,9 +8104,13 @@
    2003
   ],
   "latin": "Piper longum",
-  "english": "Long pepper"
+  "levels": [
+   "Long pepper",
+   "long pepper"
+  ]
  },
  {
+  "id": 558,
   "page": 161,
   "box": [
    353,
@@ -5343,9 +8119,15 @@
    351
   ],
   "latin": "Pifcfum narun,dc!rflus,&' digcitio",
-  "english": "The name of the city, the city of the gods, the city of the gods."
+  "levels": [
+   "The name of the city, the city of the gods, the city of the gods.",
+   "The name of that city is City of the Gods, City of the Gods.",
+   "The name of that city is the City of the Gods, the City of the Gods.",
+   "The name of that city is the City of Gods, the City of Gods."
+  ]
  },
  {
+  "id": 559,
   "page": 161,
   "box": [
    354,
@@ -5354,9 +8136,13 @@
    381
   ],
   "latin": "Pifces faliti",
-  "english": "The fish have fallen."
+  "levels": [
+   "The fish have fallen.",
+   "The fish died."
+  ]
  },
  {
+  "id": 560,
   "page": 161,
   "box": [
    354,
@@ -5365,9 +8151,14 @@
    416
   ],
   "latin": "Pifccs codt,&in accio dtpofiri",
-  "english": "Pifccs codt, & in accio dtpofiri"
+  "levels": [
+   "Pifccs codt, & in accio dtpofiri",
+   "Pifccs codt, and accio dtpofiri",
+   "Pifccs codt and accio dtpofiri"
+  ]
  },
  {
+  "id": 561,
   "page": 161,
   "box": [
    354,
@@ -5376,9 +8167,13 @@
    569
   ],
   "latin": "Pulmones animalium",
-  "english": "Animal lungs"
+  "levels": [
+   "Animal lungs",
+   "animal lungs"
+  ]
  },
  {
+  "id": 562,
   "page": 161,
   "box": [
    353,
@@ -5387,9 +8182,14 @@
    671
   ],
   "latin": "Purgationes uariar",
-  "english": "Various purges"
+  "levels": [
+   "Various purges",
+   "Various cleaning",
+   "Various cleaning services"
+  ]
  },
  {
+  "id": 563,
   "page": 161,
   "box": [
    352,
@@ -5398,9 +8198,15 @@
    702
   ],
   "latin": "Purgatio medicinalis *",
-  "english": "Medicinal cleansing *"
+  "levels": [
+   "Medicinal cleansing *",
+   "Medicinal Purification*",
+   "Medical Cleaning*",
+   "Medical cleaning*"
+  ]
  },
  {
+  "id": 564,
   "page": 161,
   "box": [
    352,
@@ -5409,9 +8215,15 @@
    727
   ],
   "latin": "Putrefacienda & corrodentia",
-  "english": "Putrefaction & corrosion"
+  "levels": [
+   "Putrefaction & corrosion",
+   "decay and corrosion",
+   "decay and rust",
+   "Corrosion and rust"
+  ]
  },
  {
+  "id": 565,
   "page": 161,
   "box": [
    353,
@@ -5420,9 +8232,14 @@
    826
   ],
   "latin": "f q. K^J VIES Quies fuperflua",
-  "english": "f q. K^J WAY Quiet is overflowing."
+  "levels": [
+   "f q. K^J WAY Quiet is overflowing.",
+   "f q. K^J WAY Silence permeates the air.",
+   "f q. K^J WAY Silence fills the air."
+  ]
  },
  {
+  "id": 566,
   "page": 161,
   "box": [
    351,
@@ -5431,9 +8248,14 @@
    922
   ],
   "latin": "D 9 * £\\.Abes Radix plancae",
-  "english": "D 9 * £\\.Abes Root plantain"
+  "levels": [
+   "D 9 * £\\.Abes Root plantain",
+   "D 9 * £\\. Abesroot Planten",
+   "D 9 * £\\. Root crops"
+  ]
  },
  {
+  "id": 567,
   "page": 161,
   "box": [
    351,
@@ -5442,9 +8264,14 @@
    1042
   ],
   "latin": "Rari fica n da cutem",
-  "english": "Rarely give skin"
+  "levels": [
+   "Rarely give skin",
+   "I rarely expose my skin.",
+   "I rarely show my skin."
+  ]
  },
  {
+  "id": 568,
   "page": 161,
   "box": [
    351,
@@ -5453,9 +8280,16 @@
    1144
   ],
   "latin": "Regionum qua tuor deferiptio",
-  "english": "Regions where you carry your burden"
+  "levels": [
+   "Regions where you carry your burden",
+   "The region where you bear the burden",
+   "The region where you carry the load",
+   "The area where you transport the load",
+   "Area for transporting cargo"
+  ]
  },
  {
+  "id": 569,
   "page": 161,
   "box": [
    350,
@@ -5464,9 +8298,13 @@
    1168
   ],
   "latin": "Res non nacurales fex",
-  "english": "Non-natural things are not good."
+  "levels": [
+   "Non-natural things are not good.",
+   "Unnatural things are not good."
+  ]
  },
  {
+  "id": 570,
   "page": 161,
   "box": [
    350,
@@ -5475,9 +8313,16 @@
    1231
   ],
   "latin": "Refolurionis intendo",
-  "english": "I intend to renovate."
+  "levels": [
+   "I intend to renovate.",
+   "I'm planning to renovate it.",
+   "I plan to renew it.",
+   "I'm going to renew it.",
+   "I will update it."
+  ]
  },
  {
+  "id": 571,
   "page": 161,
   "box": [
    352,
@@ -5486,9 +8331,14 @@
    1333
   ],
   "latin": "Rizon & Milium prepiratum cum lade",
-  "english": "Rizon & Millet prepared with lade"
+  "levels": [
+   "Rizon & Millet prepared with lade",
+   "Rizon & Millet is",
+   "Rizone & Millet are"
+  ]
  },
  {
+  "id": 572,
   "page": 161,
   "box": [
    351,
@@ -5497,9 +8347,13 @@
    1616
   ],
   "latin": "Ssndalus albus, rubeus",
-  "english": "White sandalwood, red"
+  "levels": [
+   "White sandalwood, red",
+   "Sandalwood, red"
+  ]
  },
  {
+  "id": 573,
   "page": 161,
   "box": [
    350,
@@ -5508,9 +8362,15 @@
    1647
   ],
   "latin": "Sanitas, medianae in tendo",
-  "english": "Health, medians in the tend"
+  "levels": [
+   "Health, medians in the tend",
+   "Health, median trend",
+   "Health, moderate tendency",
+   "Health, average level"
+  ]
  },
  {
+  "id": 574,
   "page": 161,
   "box": [
    351,
@@ -5519,9 +8379,15 @@
    1682
   ],
   "latin": "Sapores fimplices odo",
-  "english": "I smell simple flavors."
+  "levels": [
+   "I smell simple flavors.",
+   "It has a simple scent.",
+   "It has a light scent.",
+   "It has a subtle scent."
+  ]
  },
  {
+  "id": 575,
   "page": 161,
   "box": [
    352,
@@ -5530,9 +8396,15 @@
    1705
   ],
   "latin": "Sauicli tritici",
-  "english": "Wheat straw"
+  "levels": [
+   "Wheat straw",
+   "Straw",
+   "Grass",
+   "grass"
+  ]
  },
  {
+  "id": 576,
   "page": 161,
   "box": [
    349,
@@ -5541,9 +8413,13 @@
    1738
   ],
   "latin": "Sauich hordei",
-  "english": "Barley porridge"
+  "levels": [
+   "Barley porridge",
+   "barley porridge"
+  ]
  },
  {
+  "id": 577,
   "page": 161,
   "box": [
    349,
@@ -5552,9 +8428,15 @@
    1801
   ],
   "latin": "Sedanda dolorem",
-  "english": "To soothe the pain"
+  "levels": [
+   "To soothe the pain",
+   "To relieve pain",
+   "Relieves pain",
+   "It relieves pain."
+  ]
  },
  {
+  "id": 578,
   "page": 161,
   "box": [
    347,
@@ -5563,9 +8445,15 @@
    1865
   ],
   "latin": "Seminum naturae & ufus ao",
-  "english": "Nature of seeds & their uses"
+  "levels": [
+   "Nature of seeds & their uses",
+   "Seed properties and uses",
+   "Properties and uses of seeds",
+   "Characteristics and Uses of Seeds"
+  ]
  },
  {
+  "id": 579,
   "page": 161,
   "box": [
    348,
@@ -5574,9 +8462,14 @@
    1902
   ],
   "latin": "Semen papauens",
-  "english": "Poppy seed"
+  "levels": [
+   "Poppy seed",
+   "Poppy seeds",
+   "poppy seeds"
+  ]
  },
  {
+  "id": 580,
   "page": 161,
   "box": [
    349,
@@ -5585,9 +8478,15 @@
    1935
   ],
   "latin": "Septentrionalium regio",
-  "english": "Northern region"
+  "levels": [
+   "Northern region",
+   "Northern Region",
+   "Northern region",
+   "north"
+  ]
  },
  {
+  "id": 581,
   "page": 161,
   "box": [
    919,
@@ -5596,9 +8495,13 @@
    379
   ],
   "latin": "Somni operatio",
-  "english": "Sleep operation"
+  "levels": [
+   "Sleep operation",
+   "sleep surgery"
+  ]
  },
  {
+  "id": 582,
   "page": 161,
   "box": [
    918,
@@ -5607,9 +8510,15 @@
    404
   ],
   "latin": "Somniorum caufsae",
-  "english": "Causes of dreams"
+  "levels": [
+   "Causes of dreams",
+   "The cause of dreams",
+   "The reason for dreams",
+   "The reason for the dream"
+  ]
  },
  {
+  "id": 583,
   "page": 161,
   "box": [
    919,
@@ -5618,9 +8527,14 @@
    436
   ],
   "latin": "Somnia rimorofa",
-  "english": "Dreams of the dreamer"
+  "levels": [
+   "Dreams of the dreamer",
+   "The dream of a dreamer",
+   "A dreamer's dream"
+  ]
  },
  {
+  "id": 584,
   "page": 161,
   "box": [
    919,
@@ -5629,9 +8543,16 @@
    505
   ],
   "latin": "Spccierum u arietas, 8c ad deco&ioncm prar-",
-  "english": "Spices or aries, 8c for decoctions,"
+  "levels": [
+   "Spices or aries, 8c for decoctions,",
+   "Spices or arises, for use in decoctions, 8cm",
+   "Spices or seasonings, for use in mixing, 8cm",
+   "Spices or seasonings, for mixing, 8 cm",
+   "Spices or seasonings (for mixing), 8cm"
+  ]
  },
  {
+  "id": 585,
   "page": 161,
   "box": [
    919,
@@ -5640,9 +8561,14 @@
    569
   ],
   "latin": "Speciatorum adminiftrado",
-  "english": "Spectator management"
+  "levels": [
+   "Spectator management",
+   "Audience management",
+   "Audience Management"
+  ]
  },
  {
+  "id": 586,
   "page": 161,
   "box": [
    920,
@@ -5651,9 +8577,16 @@
    632
   ],
   "latin": "Spica aromatica",
-  "english": "Aromatic spike"
+  "levels": [
+   "Aromatic spike",
+   "Aromatic stimulation",
+   "A fragrant renewal",
+   "Fragrant renewal",
+   "Fragrant recharge"
+  ]
  },
  {
+  "id": 587,
   "page": 161,
   "box": [
    919,
@@ -5662,9 +8595,15 @@
    751
   ],
   "latin": "Stomachi calidiras",
-  "english": "Stomach aches"
+  "levels": [
+   "Stomach aches",
+   "abdominal pain",
+   "stomach ache",
+   "colic"
+  ]
  },
  {
+  "id": 588,
   "page": 161,
   "box": [
    919,
@@ -5673,9 +8612,15 @@
    782
   ],
   "latin": "Stomachi fenum fortificatio",
-  "english": "Stomach hay fortification"
+  "levels": [
+   "Stomach hay fortification",
+   "Hay for strengthening the digestive system",
+   "Herbs to strengthen the digestive system",
+   "Herbs that enhance digestive function"
+  ]
  },
  {
+  "id": 589,
   "page": 161,
   "box": [
    919,
@@ -5684,9 +8629,14 @@
    851
   ],
   "latin": "Succi uarij",
-  "english": "Various juices"
+  "levels": [
+   "Various juices",
+   "Different types of juices",
+   "Various types of juice"
+  ]
  },
  {
+  "id": 590,
   "page": 161,
   "box": [
    920,
@@ -5695,9 +8645,15 @@
    884
   ],
   "latin": "Sudorem prouocantia",
-  "english": "Sweat-inducing"
+  "levels": [
+   "Sweat-inducing",
+   "sweat",
+   "sweating",
+   "perspiration"
+  ]
  },
  {
+  "id": 591,
   "page": 161,
   "box": [
    920,
@@ -5706,9 +8662,12 @@
    1106
   ],
   "latin": "Syrnporum diferetio",
-  "english": "The difference between the two"
+  "levels": [
+   "The difference between the two"
+  ]
  },
  {
+  "id": 592,
   "page": 161,
   "box": [
    920,
@@ -5717,9 +8676,16 @@
    1138
   ],
   "latin": "Syruporum confcdionet uariar",
-  "english": "Syrups are made in various ways."
+  "levels": [
+   "Syrups are made in various ways.",
+   "Syrup is made in a variety of ways.",
+   "Syrup is made in different ways.",
+   "Syrup is prepared in different ways.",
+   "Syrup is made in various ways."
+  ]
  },
  {
+  "id": 593,
   "page": 161,
   "box": [
    919,
@@ -5728,9 +8694,15 @@
    1232
   ],
   "latin": "Syrupus de ritonijs",
-  "english": "Syrup of the rytoniums"
+  "levels": [
+   "Syrup of the rytoniums",
+   "Lithonium syrup",
+   "Lithium syrup",
+   "lithium syrup"
+  ]
  },
  {
+  "id": 595,
   "page": 161,
   "box": [
    919,
@@ -5739,9 +8711,15 @@
    1328
   ],
   "latin": "Syrupus de lulep",
-  "english": "Syrup of lulep"
+  "levels": [
+   "Syrup of lulep",
+   "Lurep Syrup",
+   "Lurep syrup",
+   "Lureb syrup"
+  ]
  },
  {
+  "id": 597,
   "page": 161,
   "box": [
    920,
@@ -5750,9 +8728,13 @@
    1422
   ],
   "latin": "'T' f t 1 Aculni in gradam Magnatum com..",
-  "english": "T' f t 1 Aculni in gradam Magnatum com.."
+  "levels": [
+   "T' f t 1 Aculni in gradam Magnatum com..",
+   "T'f t 1 Aculni in gradam Magnatum com.."
+  ]
  },
  {
+  "id": 598,
   "page": 161,
   "box": [
    918,
@@ -5761,9 +8743,16 @@
    1484
   ],
   "latin": "Tacuinorum partitio in Domos",
-  "english": "The division of the Tacuini into Houses"
+  "levels": [
+   "The division of the Tacuini into Houses",
+   "Division of the Taquini tribe into houses",
+   "The division of the Taquini tribe into houses",
+   "Division of the Taquini tribe into houses",
+   "Taquini tribe's family lineage"
+  ]
  },
  {
+  "id": 599,
   "page": 161,
   "box": [
    920,
@@ -5772,9 +8761,16 @@
    1516
   ],
   "latin": "Tacuinorum autor, Arabs",
-  "english": "Author of the Tacuinos, Arab"
+  "levels": [
+   "Author of the Tacuinos, Arab",
+   "The author of \"The Takino Tribe,\" an Arab",
+   "The author of the book \"The Takino Tribe,\" an Arab",
+   "Author of the book \"The Takino Tribe\", Arab",
+   "The author of the book \"The Takino Tribe,\" an Arab"
+  ]
  },
  {
+  "id": 600,
   "page": 161,
   "box": [
    915,
@@ -5783,9 +8779,16 @@
    1604
   ],
   "latin": "Terra tufuli",
-  "english": "The land of the tuff"
+  "levels": [
+   "The land of the tuff",
+   "Tuff land",
+   "Tuff Country",
+   "Tuff country",
+   "rugged region"
+  ]
  },
  {
+  "id": 601,
   "page": 161,
   "box": [
    918,
@@ -5794,9 +8797,13 @@
    1637
   ],
   "latin": "Teihculi animalium",
-  "english": "Small animals"
+  "levels": [
+   "Small animals",
+   "small animals"
+  ]
  },
  {
+  "id": 602,
   "page": 161,
   "box": [
    919,
@@ -5805,9 +8812,14 @@
    1894
   ],
   "latin": "\\/ f V V Bera animalium",
-  "english": "\\/ f V V Bera of animals"
+  "levels": [
+   "\\/ f V V Bera of animals",
+   "\\/ f V V Animals",
+   "\\/ f V V animals"
+  ]
  },
  {
+  "id": 603,
   "page": 161,
   "box": [
    918,
@@ -5816,9 +8828,14 @@
    1929
   ],
   "latin": "Vegetabilium comparatio",
-  "english": "Comparison of vegetables"
+  "levels": [
+   "Comparison of vegetables",
+   "Vegetable comparison",
+   "Vegetable Comparison"
+  ]
  },
  {
+  "id": 604,
   "page": 161,
   "box": [
    918,
@@ -5827,9 +8844,15 @@
    1954
   ],
   "latin": "Venatio terreftris",
-  "english": "The hunt for the dead"
+  "levels": [
+   "The hunt for the dead",
+   "Pursuing the dead",
+   "Exorcism of the dead",
+   "Exorcism ritual for the dead"
+  ]
  },
  {
+  "id": 605,
   "page": 161,
   "box": [
    917,
@@ -5838,9 +8861,15 @@
    1985
   ],
   "latin": "Ventres animalium",
-  "english": "The bellies of animals"
+  "levels": [
+   "The bellies of animals",
+   "animal's belly",
+   "animal stomach",
+   "Animal stomach"
+  ]
  },
  {
+  "id": 606,
   "page": 161,
   "box": [
    917,
@@ -5849,9 +8878,15 @@
    2022
   ],
   "latin": "Vcntrorum operationes",
-  "english": "Stomach operations"
+  "levels": [
+   "Stomach operations",
+   "Stomach surgery",
+   "Abdominal surgery",
+   "abdominal surgery"
+  ]
  },
  {
+  "id": 607,
   "page": 161,
   "box": [
    914,
@@ -5860,9 +8895,13 @@
    2056
   ],
   "latin": "Ventorum quacuor dcfcripdoneg",
-  "english": "The winds are blowing."
+  "levels": [
+   "The winds are blowing.",
+   "The wind is blowing."
+  ]
  },
  {
+  "id": 608,
   "page": 162,
   "box": [
    716,
@@ -5871,9 +8910,16 @@
    338
   ],
   "latin": "Vinum temperatum",
-  "english": "Temperate wine"
+  "levels": [
+   "Temperate wine",
+   "Mild wine",
+   "Soft wine",
+   "Soft drink",
+   "soft drinks"
+  ]
  },
  {
+  "id": 609,
   "page": 162,
   "box": [
    146,
@@ -5882,9 +8928,14 @@
    395
   ],
   "latin": "Vermes facienda dcfccndcre",
-  "english": "Worms are made of dcfccndcre"
+  "levels": [
+   "Worms are made of dcfccndcre",
+   "The worm is made of dcfccndcre.",
+   "The bug was made of dcfccndcre."
+  ]
  },
  {
+  "id": 610,
   "page": 162,
   "box": [
    715,
@@ -5893,9 +8944,13 @@
    395
   ],
   "latin": "Vifccra # in tcftina",
-  "english": "Life # in the text"
+  "levels": [
+   "Life # in the text",
+   "Life in the text #"
+  ]
  },
  {
+  "id": 611,
   "page": 162,
   "box": [
    146,
@@ -5904,9 +8959,16 @@
    427
   ],
   "latin": "Veftis linea",
-  "english": "The line of the veil"
+  "levels": [
+   "The line of the veil",
+   "The boundary of the veil",
+   "Curtain border",
+   "Curtain edging",
+   "curtain edge"
+  ]
  },
  {
+  "id": 612,
   "page": 162,
   "box": [
    146,
@@ -5915,9 +8977,15 @@
    465
   ],
   "latin": "Veftis de fera,& pellibus",
-  "english": "You wear clothes made of wild animals and skins."
+  "levels": [
+   "You wear clothes made of wild animals and skins.",
+   "You wear clothes made from the hides of wild animals.",
+   "He wears clothes made from the skins of wild animals.",
+   "He wears clothes made of wild animal hides."
+  ]
  },
  {
+  "id": 613,
   "page": 162,
   "box": [
    146,
@@ -5926,9 +8994,14 @@
    498
   ],
   "latin": "V igiliarum operatio",
-  "english": "Vigil service"
+  "levels": [
+   "Vigil service",
+   "wake",
+   "awakening"
+  ]
  },
  {
+  "id": 614,
   "page": 162,
   "box": [
    715,
@@ -5937,9 +9010,16 @@
    500
   ],
   "latin": "V rinam prouocantia",
-  "english": "V rina provoking"
+  "levels": [
+   "V rina provoking",
+   "V rina provocative",
+   "V rina is arousing",
+   "The vibration is arousing.",
+   "The vibration is stimulating."
+  ]
  },
  {
+  "id": 615,
   "page": 162,
   "box": [
    145,
@@ -5948,9 +9028,14 @@
    527
   ],
   "latin": "Vini uanetas,uimis 8c narura",
-  "english": "Wines of the 8th century, the 8th century"
+  "levels": [
+   "Wines of the 8th century, the 8th century",
+   "8th century wine, 8th century",
+   "8th-century wine, 8th century"
+  ]
  },
  {
+  "id": 616,
   "page": 162,
   "box": [
    147,
@@ -5959,9 +9044,13 @@
    562
   ],
   "latin": "Vinum quomodo,# a quibus bibendum 17",
-  "english": "How to drink wine, from whom 17"
+  "levels": [
+   "How to drink wine, from whom 17",
+   "How to Drink Wine, 17 Wines Purchased from Who"
+  ]
  },
  {
+  "id": 617,
   "page": 162,
   "box": [
    147,
@@ -5970,9 +9059,14 @@
    592
   ],
   "latin": "V inum album, rubrum,odorifcrum.dulce,",
-  "english": "White wine, red, sweet-smelling,"
+  "levels": [
+   "White wine, red, sweet-smelling,",
+   "White wine, red wine, sweet aroma,",
+   "White wine, red wine, fragrant,"
+  ]
  },
  {
+  "id": 619,
   "page": 162,
   "box": [
    148,
@@ -5981,9 +9075,14 @@
    651
   ],
   "latin": "V inum nouum & uetus",
-  "english": "New and old wine"
+  "levels": [
+   "New and old wine",
+   "New and old wines",
+   "New wine and old wine"
+  ]
  },
  {
+  "id": 620,
   "page": 162,
   "box": [
    148,
@@ -5992,9 +9091,16 @@
    683
   ],
   "latin": "Vinum uerus odoriferum",
-  "english": "True fragrant wine"
+  "levels": [
+   "True fragrant wine",
+   "A truly rich wine",
+   "A really rich wine",
+   "A really full-bodied wine",
+   "A wine with a truly rich body"
+  ]
  },
  {
+  "id": 621,
   "page": 162,
   "box": [
    148,
@@ -6003,9 +9109,14 @@
    721
   ],
   "latin": "Vinum rubeum groHum",
-  "english": "Red wine is grown."
+  "levels": [
+   "Red wine is grown.",
+   "Red wine is grown here.",
+   "Red wine is produced here."
+  ]
  },
  {
+  "id": 622,
   "page": 162,
   "box": [
    148,
@@ -6014,9 +9125,13 @@
    747
   ],
   "latin": "Vinum album",
-  "english": "White wine"
+  "levels": [
+   "White wine",
+   "white wine"
+  ]
  },
  {
+  "id": 623,
   "page": 162,
   "box": [
    149,
@@ -6025,9 +9140,14 @@
    779
   ],
   "latin": "Vinum dtrinum acu cum",
-  "english": "Three-leafed wine with"
+  "levels": [
+   "Three-leafed wine with",
+   "Mitsuha's Wine",
+   "Mitsuha's wine"
+  ]
  },
  {
+  "id": 624,
   "page": 162,
   "box": [
    148,
@@ -6036,9 +9156,14 @@
    810
   ],
   "latin": "Vinum acetofum",
-  "english": "Vinegar wine"
+  "levels": [
+   "Vinegar wine",
+   "Vinegar sake",
+   "Sake vinegar"
+  ]
  },
  {
+  "id": 625,
   "page": 162,
   "box": [
    151,
@@ -6047,6 +9172,11 @@
    850
   ],
   "latin": "Vinum dcdaAylis",
-  "english": "Wine from Aylis"
+  "levels": [
+   "Wine from Aylis",
+   "Wine from Iris",
+   "Wine from iris",
+   "Wine made from irises"
+  ]
  }
 ]

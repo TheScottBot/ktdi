@@ -34,7 +34,7 @@ Grouped the same way as `/help`.
 | `bad [@user]` | Bad. Posts a random non-violent telling-off GIF (from `BAD_GIF_URLS` in `ktdi/features/fun.py`), optionally at someone, which goes on their rap sheet as "Has been bad N times" (separate from sprays). |
 | `badbonk [@user]` | The violent version of `bad`: a random GIF from `BADBONK_GIF_URLS`. Counts as being bad on the rap sheet, the same as `bad`. |
 | `linux` | Asks our resident Linux hater (`LINUX_HATER_ID` in `.env`) a random question about how much they hate Linux. Only they are pinged. |
-| `herbal` | Wisdom from a 1531 herbal, the *Tacuini sanitatis*: a random box from its grids, as badly OCR'd by archive.org and translated by Google Translate, with the original cell cropped from the scan. Needs `ktdi/lib/herbal.json` (see Herbal below). |
+| `herbal` | Wisdom from a 1531 herbal, the *Tacuini sanitatis*: a random box from its grids, as badly OCR'd by archive.org and translated by Google Translate, with the original cell cropped from the scan. React ⛏️ to dig: each dig is one translation worse (round-tripped through Japanese, Zulu, Finnish, then Korean), down to 🪨 bedrock, the Latin as the scanner read it. The bot takes your ⛏️ back off so you can dig again (needs Manage Messages; otherwise un-react and react). Needs `ktdi/lib/herbal.json` (see Herbal below). |
 | `anime` | Asks our resident anime watcher (`ANIME_USER_ID` in `.env`) what they think of a random popular anime from [AniList](https://anilist.co), with a random question. Only they are pinged. If AniList is down it picks from a built-in list. |
 
 ### 🎬 Movie night
@@ -148,8 +148,8 @@ The commands only work, and only appear, in the servers in `RPG_GUILD_IDS`, and 
 
 `/herbal` posts from `ktdi/lib/herbal.json`, built once from the [1531 *Tacuini sanitatis* on archive.org](https://archive.org/details/bub_gb_9lIU1a_-ddAC). The bad translations are the point, and they come from Google Translate, through Google Sheets (free, no API key):
 
-1. `python -m ktdi.tools.herbal_build extract` reads archive.org's OCR of the book's tables, keeps the cells that look like words (about 600), and writes `herbal-build/herbal_cells.csv` (gitignored), with a `GOOGLETRANSLATE` formula on each row.
-2. In Google Sheets: **File → Import → Upload** that CSV (**Replace spreadsheet**). Wait until no cell says *Loading…* (scroll to the bottom to check), then **File → Download → Comma-separated values**.
+1. `python -m ktdi.tools.herbal_build extract` reads archive.org's OCR of the book's tables, keeps the cells that look like words (about 600), and writes `herbal-build/herbal_cells.csv` (gitignored), with `GOOGLETRANSLATE` formulas on each row: the translation, then four worse levels for digging.
+2. In Google Sheets: **File → Import → Upload** that CSV (**Replace spreadsheet**). Wait until no cell says *Loading…*: it's a few thousand translations, so give it a while (scroll to the bottom right to check), then **File → Download → Comma-separated values**.
 3. `python -m ktdi.tools.herbal_build merge` finds that download in your Downloads folder and writes `ktdi/lib/herbal.json`. Commit it, deploy, and `/herbal` is live.
 
 ### Logs

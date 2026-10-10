@@ -6,11 +6,13 @@
         herbal-build/herbal_cells.json.
 
     Then: in Google Sheets, File > Import > Upload herbal_cells.csv ("Replace spreadsheet"). Wait until no cell says
-    "Loading...", then File > Download > Comma-separated values.
+    "Loading..." (the worse levels are thousands of translations, so give it a while), then File > Download >
+    Comma-separated values.
 
     python -m ktdi.tools.herbal_build merge
         Finds the downloaded sheet in your Downloads folder (the newest CSV with id, latin and english columns), joins
-        the translations onto the cells and writes ktdi/lib/herbal.json, which /herbal posts from.
+        the translations (and the worse levels for digging) onto the cells and writes ktdi/lib/herbal.json, which
+        /herbal posts from.
 
 The OCR is bad (blackletter, long s read as f...) and machine translation of bad Latin is worse. That's the point.
 """
@@ -79,27 +81,49 @@ def extract_cells(abbyy_xml: bytes) -> list[Cell]:
     return cells
 
 
+# The dig: each level round-trips the level above it through one more language, so it gets worse as you go down.
+WORSE = [("worse1", "ja"), ("worse2", "zu"), ("worse3", "fi"), ("worse4", "ko")]
+
+
 def write_sheet(cells: list[Cell], path: Path) -> None:
-    """A CSV that Google Sheets imports with a translation formula on every row."""
+    """A CSV that Google Sheets imports with the translation formulas on every row: Latin to English, then each
+    worse level is the one before it, there and back again through another language."""
+    columns = ["id", "latin", "english", *(name for name, _ in WORSE)]
     with path.open("w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow(["id", "latin", "english"])
+        writer.writerow(columns)
         for row, cell in enumerate(cells, start=2):
-            writer.writerow([cell.id, cell.latin, f'=GOOGLETRANSLATE(B{row},"la","en")'])
+            formulas = [f'=GOOGLETRANSLATE(B{row},"la","en")']
+            for column, (_, language) in enumerate(WORSE, start=3):  # C is english, D the first worse level...
+                above = f"{chr(ord('A') + column - 1)}{row}"
+                formulas.append(f'=GOOGLETRANSLATE(GOOGLETRANSLATE({above},"en","{language}"),"{language}","en")')
+            writer.writerow([cell.id, cell.latin, *formulas])
+
+
+def _usable(text: str | None) -> str | None:
+    text = (text or "").strip()
+    return text if text and not text.startswith(("#", "Loading")) else None
 
 
 def merge(cells: list[Cell], sheet_rows: list[dict]) -> list[dict]:
-    """The cells that came back translated. Errors, blanks and "translations" identical to the Latin are dropped."""
-    english = {}
-    for row in sheet_rows:
-        text = (row.get("english") or "").strip()
-        if row.get("id", "").strip().isdigit() and text and not text.startswith(("#", "Loading")):
-            english[int(row["id"])] = text
+    """The cells that came back translated, each with its dig: the best guess, then each worse level. Errors, blanks
+    and "translations" identical to the Latin are dropped; a dig stops at the first level that failed."""
+    by_id = {int(row["id"]): row for row in sheet_rows if (row.get("id") or "").strip().isdigit()}
     entries = []
     for cell in cells:
-        text = english.get(cell.id)
-        if text and text.casefold() != cell.latin.casefold():
-            entries.append({"page": cell.page, "box": list(cell.box), "latin": cell.latin, "english": text})
+        row = by_id.get(cell.id, {})
+        english = _usable(row.get("english"))
+        if not english or english.casefold() == cell.latin.casefold():
+            continue
+        levels = [english]
+        for name, _ in WORSE:
+            text = _usable(row.get(name))
+            if text is None:
+                break
+            if text != levels[-1]:  # The same again isn't a level worth digging for.
+                levels.append(text)
+        entries.append({"id": cell.id, "page": cell.page, "box": list(cell.box), "latin": cell.latin,
+                        "levels": levels})
     return entries
 
 

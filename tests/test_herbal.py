@@ -3,12 +3,13 @@
 import csv
 import html
 import io
+import types
 
 import pytest
 
 from ktdi.features import herbal
 from ktdi.tools import herbal_build as build
-from tests.fakes import Ctx, User, run
+from tests.fakes import Channel, Ctx, Guild, User, run
 
 SCOTT = User(1, "scott")
 
@@ -56,13 +57,17 @@ def test_looks_like_words(text, keep):
     assert build.looks_like_words(text) == keep
 
 
-def test_sheet_has_a_translate_formula_per_row(tmp_path):
+def test_sheet_has_the_translation_and_each_worse_level(tmp_path):
     path = tmp_path / "cells.csv"
     build.write_sheet(build.extract_cells(ABBYY), path)
     rows = list(csv.reader(path.open(encoding="utf-8")))
-    assert rows == [["id", "latin", "english"],
-                    ["1", "Calida, & humida in 2.", '=GOOGLETRANSLATE(B2,"la","en")'],
-                    ["2", "Prurium eft fiacu.", '=GOOGLETRANSLATE(B3,"la","en")']]
+    assert rows[0] == ["id", "latin", "english", "worse1", "worse2", "worse3", "worse4"]
+    assert rows[2] == [
+        "2", "Prurium eft fiacu.", '=GOOGLETRANSLATE(B3,"la","en")',
+        '=GOOGLETRANSLATE(GOOGLETRANSLATE(C3,"en","ja"),"ja","en")',  # each level is the one before, round-tripped
+        '=GOOGLETRANSLATE(GOOGLETRANSLATE(D3,"en","zu"),"zu","en")',
+        '=GOOGLETRANSLATE(GOOGLETRANSLATE(E3,"en","fi"),"fi","en")',
+        '=GOOGLETRANSLATE(GOOGLETRANSLATE(F3,"en","ko"),"ko","en")']
 
 
 def test_merge_keeps_only_real_translations():
@@ -72,11 +77,22 @@ def test_merge_keeps_only_real_translations():
     downloaded = io.StringIO("id,latin,english\n1,x,With good luck it is time to go to the bathroom.\n2,x,#VALUE!\n"
                              "3,x,Loading...\n4,x,recens\n5,x,\n")
     assert build.merge(cells, list(csv.DictReader(downloaded))) == [
-        {"page": 34, "box": [1, 2, 3, 4], "latin": "Prurium eft fiacu.",
-         "english": "With good luck it is time to go to the bathroom."}]
+        {"id": 1, "page": 34, "box": [1, 2, 3, 4], "latin": "Prurium eft fiacu.",
+         "levels": ["With good luck it is time to go to the bathroom."]}]
 
 
-ENTRY = {"page": 82, "box": [492, 1230, 649, 1287], "latin": "Horiulanum album.", "english": "White *gardener*."}
+def test_merge_builds_the_dig():
+    cells = [build.Cell(1, 34, (1, 2, 3, 4), "Carnes arietinz"), build.Cell(2, 34, (1, 2, 3, 4), "Locus")]
+    downloaded = io.StringIO(
+        "id,latin,english,worse1,worse2,worse3,worse4\n"
+        "1,x,Ram meat,Ram meat,Meat of the ram,The meat of the male sheep,#VALUE!\n"  # a repeat and an error
+        "2,x,Place,Location,Loading...,The spot,A dot\n")  # stops at the first failure
+    levels = [entry["levels"] for entry in build.merge(cells, list(csv.DictReader(downloaded)))]
+    assert levels == [["Ram meat", "Meat of the ram", "The meat of the male sheep"], ["Place", "Location"]]
+
+
+ENTRY = {"id": 7, "page": 82, "box": [492, 1230, 649, 1287], "latin": "Horiulanum album.",
+         "levels": ["White *gardener*.", "A white gardener", "Gardener, who is white"]}
 
 
 def test_crop_and_page_links():
@@ -87,18 +103,82 @@ def test_crop_and_page_links():
     assert herbal.page_url(82) == "https://archive.org/details/bub_gb_9lIU1a_-ddAC/page/n82/mode/1up"
 
 
-def test_herbal_posts_a_random_box(monkeypatch):
-    monkeypatch.setattr(herbal, "entries", [ENTRY])
+@pytest.fixture
+def one_box(monkeypatch):
+    monkeypatch.setattr(herbal, "entries", {7: ENTRY})
+
+
+def test_herbal_posts_a_random_box(one_box):
     ctx = Ctx(SCOTT)
     run(herbal.herbal.callback(ctx))
-    embed = ctx.last.embed
-    assert embed.description == "## White \\*gardener\\*.\n-# The scanner read: Horiulanum album."
-    assert embed.author.name == "📜 Tacuini sanitatis (1531), page 83" and embed.author.url.endswith("/page/n82/mode/1up")
-    assert embed.image.url == herbal.crop_url(82, ENTRY["box"])
+    post = ctx.last
+    assert post.embed.description == "## White \\*gardener\\*.\n-# React ⛏️ to dig deeper."
+    assert post.embed.author.name == "📜 Tacuini sanitatis (1531), page 83"
+    assert post.embed.author.url.endswith("/page/n82/mode/1up")
+    assert post.embed.image.url == herbal.crop_url(82, ENTRY["box"])
+    assert post.reactions == ["⛏️"]  # the pickaxe's ready to click
+
+
+def dig(bot, post, user=SCOTT):
+    payload = types.SimpleNamespace(emoji="⛏️", user_id=user.id, channel_id=post_channel(bot).id, message_id=post.id)
+    run(herbal.dig(payload))
+
+
+def post_channel(bot):
+    return bot.channels[500]
+
+
+def test_digging_down_to_bedrock(one_box, bot):
+    channel = bot.add_channel(Channel(500, Guild()))
+    ctx = Ctx(SCOTT, channel=channel)
+    run(herbal.herbal.callback(ctx))
+    post = ctx.last
+    dig(bot, post)
+    assert post.embed.description == ("-# Best guess: White \\*gardener\\*.\n## A white gardener\n"
+                                      "-# ⛏️ 1 deep. React ⛏️ to dig deeper.")
+    assert post.removed_reactions == [("⛏️", SCOTT.id)]  # ready to dig again
+    dig(bot, post, User(2, "dave"))  # anyone can dig
+    assert "## Gardener, who is white" in post.embed.description and "⛏️ 2 deep" in post.embed.description
+    dig(bot, post)
+    assert post.embed.description == ("-# Best guess: White \\*gardener\\*.\n-# Worse: A white gardener\n"
+                                      "-# Worse still: Gardener, who is white\n"
+                                      "## 🪨 Bedrock\nThe scanner read: *Horiulanum album.*")
+    dig(bot, post)  # nothing below bedrock
+    assert len(post.embed_edits) == 3
+
+
+def test_digging_carries_on_after_a_restart(one_box, bot):
+    from ktdi import db
+    channel = bot.add_channel(Channel(500, Guild()))
+    ctx = Ctx(SCOTT, channel=channel)
+    run(herbal.herbal.callback(ctx))
+    dig(bot, ctx.last)
+    assert db.conn.execute("SELECT entry_id, depth FROM herbal_posts").fetchall() == [(7, 1)]  # it's in the database
+
+
+def test_other_reactions_and_messages_are_ignored(one_box, bot):
+    channel = bot.add_channel(Channel(500, Guild()))
+    ctx = Ctx(SCOTT, channel=channel)
+    run(herbal.herbal.callback(ctx))
+    post = ctx.last
+    run(herbal.dig(types.SimpleNamespace(emoji="😂", user_id=SCOTT.id, channel_id=500, message_id=post.id)))
+    run(herbal.dig(types.SimpleNamespace(emoji="⛏️", user_id=bot.user.id, channel_id=500, message_id=post.id)))
+    other = Ctx(SCOTT, channel=channel)
+    run(other.send("not a herbal post"))
+    run(herbal.dig(types.SimpleNamespace(emoji="⛏", user_id=SCOTT.id, channel_id=500, message_id=other.last.id)))
+    assert post.embed_edits == [] and other.last.embed_edits == []
+
+
+def test_older_data_with_one_translation_still_works(tmp_path, monkeypatch):
+    data = tmp_path / "herbal.json"
+    data.write_text('[{"page": 1, "box": [1, 2, 3, 4], "latin": "Ram", "english": "Ram meat"}]', encoding="utf-8")
+    monkeypatch.setattr(herbal, "DATA", data)
+    assert herbal.load_entries() == {1: {"page": 1, "box": [1, 2, 3, 4], "latin": "Ram", "english": "Ram meat",
+                                         "levels": ["Ram meat"]}}
 
 
 def test_herbal_before_the_translations_exist(monkeypatch):
-    monkeypatch.setattr(herbal, "entries", [])
+    monkeypatch.setattr(herbal, "entries", {})
     ctx = Ctx(SCOTT)
     run(herbal.herbal.callback(ctx))
     assert "hasn't been translated yet" in ctx.last.content and ctx.last.private

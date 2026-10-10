@@ -44,6 +44,8 @@ class Sent:
         self.id = id(self)
         self.reactions: list = []
         self.edits: list[str] = []  # each content it was edited to, in order
+        self.embed_edits: list = []  # each embed it was edited to, in order
+        self.removed_reactions: list[tuple[str, int]] = []  # (emoji, user id) the bot took off
         self.original = content
 
     @property
@@ -67,6 +69,12 @@ class Sent:
         if "content" in kwargs:
             self.content = kwargs["content"]
             self.edits.append(kwargs["content"])
+        if "embed" in kwargs:
+            self.embed = kwargs["embed"]
+            self.embed_edits.append(kwargs["embed"])
+
+    async def remove_reaction(self, emoji, member):
+        self.removed_reactions.append((str(emoji), member.id))
 
 
 class Channel:
@@ -84,6 +92,9 @@ class Channel:
         return message
 
     async def fetch_message(self, message_id):
+        return self.messages[message_id]
+
+    def get_partial_message(self, message_id):
         return self.messages[message_id]
 
 
