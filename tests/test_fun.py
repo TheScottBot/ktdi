@@ -242,12 +242,13 @@ def test_bad():
     run(fun.bad.callback(ctx, DAVE))
     target, gif = ctx.last.content.split(" ")
     assert target == "<@2>" and gif in fun.BAD_GIF_URLS
-    assert len(fun.BAD_GIF_URLS) == 6 and all(url.startswith("https://klipy.com/gifs/") for url in fun.BAD_GIF_URLS)
+    for gifs in (fun.BAD_GIF_URLS, fun.BADBONK_GIF_URLS):  # move GIFs between the lists as you like
+        assert gifs and all(url.startswith("https://klipy.com/gifs/") for url in gifs)
 
 
 def test_badbonk_is_the_violent_one():
-    assert fun.BADBONK_GIF_URLS == ["https://klipy.com/gifs/kanon-head-slap", "https://klipy.com/gifs/no-family-guy-2"]
-    assert not set(fun.BADBONK_GIF_URLS) & set(fun.BAD_GIF_URLS)  # the bonks moved out of /bad
+    assert "https://klipy.com/gifs/kanon-head-slap" in fun.BADBONK_GIF_URLS
+    assert not set(fun.BADBONK_GIF_URLS) & set(fun.BAD_GIF_URLS)  # each GIF is either violent or not
     ctx = Ctx(SCOTT)
     run(fun.badbonk.callback(ctx))
     assert ctx.last.content in fun.BADBONK_GIF_URLS
@@ -310,3 +311,20 @@ def test_toenoyoudidnt_still_appears_without_manage_messages():
     typed.message.delete = not_allowed
     run(fun.toenoyoudidnt.callback(typed))
     assert typed.last.content == fun.TOES_GIF_URL and typed.last.delete_after == 5
+
+
+def test_linux_asks_whoever_is_set_and_only_pings_them(monkeypatch):
+    from ktdi import config
+    monkeypatch.setattr(config, "LINUX_HATER_ID", 7)
+    ctx = Ctx(SCOTT)
+    run(fun.linux.callback(ctx))
+    assert any(line.format(user="<@7>") == ctx.last.content for line in fun.LINUX_LINES)
+    assert [u.id for u in ctx.last.allowed_mentions.users] == [7] and ctx.last.allowed_mentions.everyone is False
+
+
+def test_linux_without_anyone_set():
+    from ktdi import config
+    assert config.LINUX_HATER_ID is None  # no default: it only comes from .env
+    ctx = Ctx(SCOTT)
+    run(fun.linux.callback(ctx))
+    assert "LINUX_HATER_ID" in ctx.last.content and ctx.last.private

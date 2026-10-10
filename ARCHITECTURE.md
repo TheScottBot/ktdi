@@ -48,7 +48,7 @@ ktdi/
 ├── common.py          helpers shared by features (Reply, send_reply/respond, NO_PINGS, get_member, common.bot)
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
-│   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, toenoyoudidnt, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
+│   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
 │   ├── futures.py     /sprayfutures, /sprayrate: bets on someone being sprayed; settled by fun.after_spray or expiry_loop
 │   ├── committee.py   /committee: the committee's funds (bribes in, spending out)
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
@@ -143,8 +143,10 @@ changing:
   - `"configured": fn() -> bool` → not synced at all when the feature isn't set up on this bot (`KTDIBot.unavailable_commands`).
   - `"private": True` → never logged with who used it (see §9).
   - `"hidden": True` → a cryptid: left off the main `/help` list, though `/help <name>` still works. Make it a plain
-    `commands.command` (`!`-only) too, as `!toenoyoudidnt` is: Discord's slash menu shows every slash command, and a
-    bot can't hide one from it. `/help` titles `!`-only commands with `!`.
+    `commands.command` (`!`-only) too: Discord's slash menu shows every slash command, and a bot can't hide one from
+    it. `/help` titles `!`-only commands with `!`. **Cryptids are deliberately left out of the README and these docs**
+    (an exception to keeping the README complete): they're only meant to be found by seeing one used, or by reading
+    the code. Don't add them back.
 - If a prefix command's arguments are in a different order to its slash version, set `usage=` to the slash form
   (e.g. `quote add`).
 
@@ -292,6 +294,8 @@ python -m pytest            # ~3 seconds
 - Freeze time with the `clock` fixture: `clock.set(datetime(...), campaigns)` patches that module's `datetime.now()`.
 - `test_registration.py` loads every feature onto a real `KTDIBot` and checks the command list, listeners and that
   every `/help` page, including the main list, fits Discord's limits. Update its expected lists when you add commands.
+  It also checks the README mentions every command, subcommand and feature file (and no cryptids), and that
+  `.env.example` has every setting `config.py` reads.
 - `test_books.py` runs a fake Calibre-Web with aiohttp; `test_rpg.py` runs a fake Dropbox.
 
 ## Rules for changes

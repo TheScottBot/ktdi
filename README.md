@@ -31,10 +31,9 @@ Grouped the same way as `/help`.
 | Command | What it does |
 |---|---|
 | `loot` | Declares you're looting the body (posts the perception check GIF). |
-| `!toenoyoudidnt` | 👣 A cryptid, typed with `!` only, so it isn't in Discord's slash menu: your `!toenoyoudidnt` vanishes at once (if the bot has Manage Messages), and the toes GIF it posts deletes itself after 5 seconds. Left off the `/help` list too; `/help toenoyoudidnt` still works if you know. |
-| `bad [@user]` | Bad. Posts a random non-violent telling-off GIF (one of six, listed in `BAD_GIF_URLS` in `ktdi/features/fun.py`), optionally at someone, which goes on their rap sheet as "Has been bad N times" (separate from sprays). |
-| `badbonk [@user]` | The violent version of `bad`: a head slap or a bonk (`BADBONK_GIF_URLS`). Counts as being bad on the rap sheet, the same as `bad`. |
-| `linux` | Asks our resident Linux hater a random question about how much he hates Linux. Pings our Linux hater by default; set `LINUX_HATER_ID` in `.env` to change who. |
+| `bad [@user]` | Bad. Posts a random non-violent telling-off GIF (from `BAD_GIF_URLS` in `ktdi/features/fun.py`), optionally at someone, which goes on their rap sheet as "Has been bad N times" (separate from sprays). |
+| `badbonk [@user]` | The violent version of `bad`: a random GIF from `BADBONK_GIF_URLS`. Counts as being bad on the rap sheet, the same as `bad`. |
+| `linux` | Asks our resident Linux hater (`LINUX_HATER_ID` in `.env`) a random question about how much they hate Linux. Only they are pinged. |
 | `anime` | Asks our resident anime watcher (`ANIME_USER_ID` in `.env`) what they think of a random popular anime from [AniList](https://anilist.co), with a random question. Only they are pinged. If AniList is down it picks from a built-in list. |
 
 ### 🎬 Movie night
@@ -91,7 +90,7 @@ Grouped the same way as `/help`.
 
 ### Notes
 
-Spray counts are stored per server in `ktdi.db` (SQLite) next to `bot.py`; set `DB_PATH` to move it.
+Everything the bot remembers (rap sheets, quotes, campaigns, movie nights, the committee's funds…) is in `ktdi.db` (SQLite) next to `bot.py`; set `DB_PATH` to move it. Each row remembers which server it came from, so `/settings shared_state` can pool servers or keep them apart.
 
 Text commands need the **Message Content Intent** enabled on the bot's page in the Developer Portal.
 
@@ -144,7 +143,7 @@ The commands only work, and only appear, in the servers in `RPG_GUILD_IDS`, and 
 
 ### Logs
 
-The bot logs startup, every command used, 💦 sprays, bribes and role changes to `logs/ktdi.log` next to `bot.py` (and to the terminal/journal). The file rotates at 1 MB, keeping 5 old files (`ktdi.log.1` … `ktdi.log.5`). To follow it live:
+The bot logs startup, every command used (except `/books` and `/rpg`, which are never logged against anyone), 💦 sprays, bribes and role changes to `logs/ktdi.log` next to `bot.py` (and to the terminal/journal). The file rotates at 1 MB, keeping 5 old files (`ktdi.log.1` … `ktdi.log.5`). To follow it live:
 
 ```bash
 tail -f logs/ktdi.log
@@ -176,9 +175,10 @@ ktdi/
 ├── db.py              # database connection, tables, upgrades, and shared state (scope())
 ├── common.py          # small helpers shared by features
 ├── features/          # one file per feature, each a discord.py extension with a setup(bot)
-│   ├── fun.py         # spray, loot, bad, badbonk, toenoyoudidnt, linux, blame, bribe, rapsheet, 💦, Champion Briber
+│   ├── fun.py         # spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
 │   ├── futures.py     # sprayfutures
 │   ├── committee.py   # the committee's funds
+│   ├── anime.py       # anime
 │   ├── movie.py       # movie night: np, shhh, rate, predict, bingo
 │   ├── units.py       # abm, imperial
 │   ├── timezones.py   # timezone
@@ -188,7 +188,7 @@ ktdi/
 │   ├── books.py
 │   ├── rpg.py         # RPG rulebooks from Dropbox
 │   └── help.py        # asks each feature for its HELP_CATEGORY and help_extras(), so new features don't touch it
-├── lib/               # no Discord code: unit conversions, reminder schedules, Calibre-Web and Dropbox clients...
+├── lib/               # no Discord code: unit conversions, reminder schedules, timezones, and the Calibre-Web, Dropbox, Letterboxd and AniList clients
 └── tools/             # one-off helpers, e.g. python -m ktdi.tools.dropbox_login
 tests/                 # pytest
 ```
@@ -205,5 +205,5 @@ python -m pytest
 ```
 
 The tests use an in-memory database and fake Discord objects, never your real `.env`, database or token. They cover
-every feature, a fake Calibre-Web for `/books` (including that nothing is logged against a reader), and that every
-`/help` page fits Discord's limits.
+every feature, a fake Calibre-Web for `/books` and a fake Dropbox for `/rpg` (including that nothing is logged against a
+reader), and that every `/help` page fits Discord's limits.

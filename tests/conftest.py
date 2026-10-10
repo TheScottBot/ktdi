@@ -8,7 +8,7 @@ import os
 # Before importing ktdi: never read the real .env, and don't pick up library settings from the environment.
 os.environ["KTDI_NO_DOTENV"] = "1"
 for name in ("CALIBRE_URL", "BOOKS_GUILD_IDS", "GUILD_IDS", "COMMAND_PREFIX", "REMINDER_TIMEZONE", "BOT_TIMEZONE",
-             "ANIME_USER_ID", "WHOSPRAY_ADMIN_IDS", "DROPBOX_APP_KEY", "DROPBOX_APP_SECRET", "DROPBOX_REFRESH_TOKEN",
+             "ANIME_USER_ID", "LINUX_HATER_ID", "WHOSPRAY_ADMIN_IDS", "DROPBOX_APP_KEY", "DROPBOX_APP_SECRET", "DROPBOX_REFRESH_TOKEN",
              "RPG_DROPBOX_PATH", "RPG_GUILD_IDS", "SPRAY_RATE_TIME"):
     os.environ.pop(name, None)
 

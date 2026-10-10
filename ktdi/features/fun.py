@@ -510,10 +510,17 @@ async def bail(ctx: commands.Context, user: discord.Member, amount: commands.Ran
     await update_briber_role(ctx.guild)
 
 
-@commands.hybrid_command(name="linux", description="Ask our resident Linux hater how he's feeling about Linux.",
+@commands.hybrid_command(name="linux", description="Ask our resident Linux hater how they're feeling about Linux.",
                          extras=FUN)
 async def linux(ctx: commands.Context):
-    await ctx.send(random.choice(LINUX_LINES).format(user=f"<@{config.LINUX_HATER_ID}>"))
+    if not config.LINUX_HATER_ID:
+        await ctx.send("Nobody's set up to be asked yet. Add their user ID as `LINUX_HATER_ID` in the bot's `.env`.",
+                       ephemeral=True)
+        return
+    # Ping only the person being asked.
+    await ctx.send(random.choice(LINUX_LINES).format(user=f"<@{config.LINUX_HATER_ID}>"),
+                   allowed_mentions=discord.AllowedMentions(users=[discord.Object(id=config.LINUX_HATER_ID)],
+                                                            everyone=False, roles=False))
 
 
 # --- Listeners ---

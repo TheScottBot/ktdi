@@ -93,5 +93,5 @@ BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")
 WHOSPRAY_ADMIN_IDS = parse_ids("WHOSPRAY_ADMIN_IDS")
 # Who /anime asks about a random anime (a user ID). Unset = /anime says it isn't set up.
 ANIME_USER_ID = next(iter(parse_ids("ANIME_USER_ID")), None)
-# The /linux target (our Linux hater).
-LINUX_HATER_ID = os.getenv("LINUX_HATER_ID") or "000000000000000000"
+# Who /linux asks (a user ID). Unset = /linux says it isn't set up.
+LINUX_HATER_ID = next(iter(parse_ids("LINUX_HATER_ID")), None)

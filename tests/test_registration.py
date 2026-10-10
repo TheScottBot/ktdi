@@ -213,3 +213,34 @@ def test_one_unreachable_server_doesnt_stop_startup(monkeypatch, caplog):
     asyncio.run(bot.setup_hook())
     assert synced == [111, 333, "global"]  # the others still got their commands
     assert "Couldn't add slash commands to server 222" in caplog.text
+
+
+def test_readme_covers_every_command_and_feature(loaded_bot):
+    """The README lists every command, subcommand and feature file, and no cryptids (they're found, not documented)."""
+    import pathlib
+    import re
+    from ktdi.features import FEATURES
+    root = pathlib.Path(__file__).resolve().parent.parent
+    readme = (root / "README.md").read_text(encoding="utf-8")
+    for command in loaded_bot.walk_commands():
+        root_command = command.root_parent or command
+        if root_command.extras.get("hidden"):
+            assert command.name not in readme, f"cryptid {command.qualified_name} is in the README"
+            continue
+        assert f"`{root_command.name}" in readme or f"`!{root_command.name}" in readme, command.qualified_name
+        assert re.search(rf"\b{re.escape(command.name)}\b", readme), command.qualified_name
+    for feature in FEATURES:
+        assert f"{feature.rsplit('.', 1)[1]}.py" in readme, feature
+
+
+def test_env_example_covers_every_setting():
+    import pathlib
+    import re
+    root = pathlib.Path(__file__).resolve().parent.parent
+    config_source = (root / "ktdi" / "config.py").read_text(encoding="utf-8")
+    example = (root / ".env.example").read_text(encoding="utf-8")
+    settings = set(re.findall(r'(?:getenv|parse_ids|zone_setting|time_setting)\("([A-Z_]+)"', config_source))
+    assert settings, "found no settings"
+    internal = {"KTDI_NO_DOTENV"}  # for the tests, not for people
+    missing = sorted(name for name in settings - internal if name not in example)
+    assert not missing, f"not in .env.example: {missing}"
