@@ -1,4 +1,4 @@
-"""Movie night: /np, /shhh, /rate, /predict and /bingo (ktdi.features.movie)."""
+"""Movie night: /nowplaying, /shhh, /nowplaying rate, /nowplaying predict and /nowplaying bingo (ktdi.features.movie)."""
 
 import types
 from datetime import datetime, timedelta, timezone
@@ -36,7 +36,7 @@ def np(command, user=SCOTT, **kwargs):
 
 def test_set_doesnt_start_it(at, bot):
     reply = np("set", title="  Shrek 2 ")
-    assert reply.content.startswith("🎬 **Up next:** Shrek 2") and "`/np start`" in reply.content
+    assert reply.content.startswith("🎬 **Up next:** Shrek 2") and "`/nowplaying start`" in reply.content
     assert bot.activity is None
     assert np("show").content.startswith("🎬 **Up next:** Shrek 2")
     np("set", title="Shrek")  # changed our minds before starting
@@ -49,14 +49,14 @@ def test_start_pause_resume_end(at, bot):
     at(5)
     reply = np("start")
     assert reply.content.startswith("# ▶️ GO!\n🎬 **Starting: Shrek 2.** Phones down, lights off.\n"
-                                    f"-# ⏱️ Started {live(5)}. `/np pause`")
+                                    f"-# ⏱️ Started {live(5)}. `/nowplaying pause`")
     assert bot.activity.type == discord.ActivityType.watching and bot.activity.name == "Shrek 2"
     assert "already started" in np("start").content
 
     at(52)
     reply = np("pause", reason="snacks\nand drinks")
     assert reply.content == ("⏸️ **Paused** Shrek 2 at 0:47:00.\n> snacks and drinks\n"
-                             f"-# Paused {live(52)}. `/np resume` to carry on.")
+                             f"-# Paused {live(52)}. `/nowplaying resume` to carry on.")
     assert bot.activity.name == "Shrek 2 (paused)"
     assert "already paused" in np("pause").content
     at(60)
@@ -77,7 +77,7 @@ def test_start_pause_resume_end(at, bot):
     at(158)  # 153 minutes since the start, 12 of them paused
     reply = np("end")
     assert reply.content.startswith("🎬 **That's Shrek 2 done.** 2h 21m watched, plus 12m paused.")
-    assert "/rate" in reply.content and bot.activity is None
+    assert "/nowplaying rate" in reply.content and bot.activity is None
     assert movie.current_movie(111) is None
     assert "Nothing's lined up" in np("show").content
 
@@ -92,9 +92,9 @@ def test_short_pauses_get_no_comment(at):
 
 
 def test_elapsed_for_catching_up(at, sleeps):
-    assert "`/np set <title>` first" in np("elapsed").content
+    assert "`/nowplaying set <title>` first" in np("elapsed").content
     np("set", title="Shrek 2")
-    assert "`/np start` it first" in np("elapsed").content
+    assert "`/nowplaying start` it first" in np("elapsed").content
     at(5)
     np("start")
     at(52.5)  # 47m 30s in
@@ -148,7 +148,7 @@ def test_sct_corrects_a_playing_film(at, sleeps):
     at(30)  # the bot thinks 30 minutes in, but we restarted it and it's really 12:00 in
     reply = sct("12:00")
     assert reply.content == (f"⏱️ **Alien** is now at **0:12:00**.\n"
-                             f"-# ⏱️ Started {live(30 - 12)}. Out of sync? `/np elapsed` to catch up.")
+                             f"-# ⏱️ Started {live(30 - 12)}. Out of sync? `/nowplaying elapsed` to catch up.")
     assert not reply.private
     assert movie.watched_seconds(movie.current_movie(111)) == 12 * 60
     at(40)
@@ -219,16 +219,16 @@ def test_ending_something_never_started_saves_it_for_later(at):
     run(movie.predict.callback(Ctx(DAVE), guess="regret"))
     reply = np("end").content
     assert reply == ("🍿 It never started. Cats is on the watchlist (not yet watched) with its 1 sealed prediction. "
-                     "`/np set Cats` brings it back.")
+                     "`/nowplaying set Cats` brings it back.")
     assert movie.current_movie(111) is None and movie.movie_to_rate(111) is None
     assert [m.title for m in movie.watchlist(111)] == ["Cats"]
     assert db.conn.execute("SELECT COUNT(*) FROM movie_predictions").fetchone()[0] == 1  # nothing deleted
 
 
 def test_pause_needs_a_film_playing(at):
-    assert "`/np set <title>` first" in np("pause").content
+    assert "`/nowplaying set <title>` first" in np("pause").content
     np("set", title="Up")
-    assert "`/np start` it first" in np("pause").content
+    assert "`/nowplaying start` it first" in np("pause").content
 
 
 def test_shhh(at):
@@ -356,7 +356,7 @@ def test_bingo(at):
     assert f"`13` ~~{movie.BINGO_FREE_SPACE}~~" in embed.description
     assert len(embed) <= 6000 and len(embed.description) <= 4096
 
-    assert "Wait for `/np start`" in mark(SCOTT, 1).content
+    assert "Wait for `/nowplaying start`" in mark(SCOTT, 1).content
     np("start")
     card = movie.bingo_card(movie.current_movie(111).id, SCOTT.id)
     reply = mark(SCOTT, 3)
@@ -484,7 +484,7 @@ FILMS = [("Alien (1979)", "alien"), ("Halloween (1978)", "halloween-1978"), ("Ha
 
 @pytest.fixture
 def letterboxd_list(monkeypatch):
-    """/np watchlist import reads this instead of Letterboxd."""
+    """/nowplaying watchlist import reads this instead of Letterboxd."""
     from ktdi.lib import letterboxd
 
     async def fake_fetch(url):
@@ -502,7 +502,7 @@ def test_import_from_letterboxd(at, letterboxd_list):
     assert reply.content == (
         "🍿 Added **3 films** from [Halloween 2026](<https://letterboxd.com/jenny/list/halloween-2026/>) by jenny "
         "to the watchlist: Alien (1979), Halloween (1978), Halloween (2018).\n"
-        "-# 1 was already on it.\n-# `/np watchlist` to see them, `/np set <title>` to line one up.")
+        "-# 1 was already on it.\n-# `/nowplaying watchlist` to see them, `/nowplaying set <title>` to line one up.")
     # The list's own order, after what was there (newest first by when it was added).
     assert [m.title for m in movie.watchlist(111)] == ["Alien (1979)", "Halloween (1978)", "Halloween (2018)",
                                                        "Braindead (1992)"]
@@ -631,7 +631,7 @@ def test_sealed_predictions_stay_sealed(at):
 
 @pytest.fixture(autouse=True)
 def sleeps(monkeypatch):
-    """Countdowns (every /np start) don't really wait: the clock reads 1000.4 seconds, each sleep is recorded
+    """Countdowns (every /nowplaying start) don't really wait: the clock reads 1000.4 seconds, each sleep is recorded
     instead, and something can run mid-countdown."""
     record = types.SimpleNamespace(delays=[], during=None)
 
@@ -688,7 +688,7 @@ def test_countdown_called_off_if_the_film_changes(at, sleeps):
     assert not movie.counting_down
 
 
-# --- /np vote ---
+# --- /nowplaying vote ---
 HALLOWEEN = ["Alien (1979)", "Deadstream (2022)", "Braindead (1992)", "Nosferatu (2024)", "Tarantula (1955)",
              "Life (2017)"]
 
@@ -725,7 +725,7 @@ def test_vote_picks_random_films_from_the_watchlist(theatre):
     # Open until someone ends it: as long as Discord allows (32 days).
     assert poll.question == "🍿 What are we watching next?" and poll.duration.total_seconds() == 32 * 24 * 3600
     assert len(poll.answers) == 5 and {a.text for a in poll.answers} <= set(HALLOWEEN)
-    assert reply.content.startswith("-# Voting closes when someone runs `/np vote end`. The winner gets lined up.")
+    assert reply.content.startswith("-# Voting closes when someone runs `/nowplaying vote end`. The winner gets lined up.")
     assert "There's already a vote going" in vote(channel=theatre).content
 
 
@@ -733,7 +733,7 @@ def test_vote_on_chosen_films_then_end_it(theatre):
     reply = vote(channel=theatre, hours=3, films="alien, braindead (1992),  Deadstream")
     assert [a.text for a in reply.poll.answers] == ["Alien (1979)", "Braindead (1992)", "Deadstream (2022)"]
     assert reply.poll.duration.total_seconds() == 3 * 3600
-    assert reply.content.startswith("-# Voting closes in 3 hours, or when someone runs `/np vote end`.")
+    assert reply.content.startswith("-# Voting closes in 3 hours, or when someone runs `/nowplaying vote end`.")
     cast(reply, **{"Alien (1979)": 1, "Braindead (1992)": 3})
     result = end_vote(theatre)
     assert result.content.startswith("🗳️ **Braindead (1992)** wins with 3 votes.\n🎬 **Up next:** Braindead (1992)")
@@ -770,7 +770,7 @@ def test_the_winner_waits_if_something_is_playing(theatre):
     np("start")
     reply = vote(channel=theatre, films="Alien, Life")
     cast(reply, **{"Alien (1979)": 1})
-    assert "-# Jaws is still on: `/np set Alien (1979)` when it's done." in end_vote(theatre).content
+    assert "-# Jaws is still on: `/nowplaying set Alien (1979)` when it's done." in end_vote(theatre).content
     assert movie.current_movie(111).title == "Jaws"
 
 

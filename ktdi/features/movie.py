@@ -1,7 +1,7 @@
-"""Movie night: /np (set, start, pause, resume, end, history), /shhh, /rate, /predict and /bingo.
+"""Movie night: /nowplaying (set, start, pause, resume, end, history), /shhh, /nowplaying rate, /nowplaying predict and /nowplaying bingo.
 
-A server has at most one current movie: its newest row in `movies` with no ended_at. It's lined up with /np set,
-and nothing starts until /np start. Ending it reveals the predictions (people react ✅/❌ to judge them) and asks
+A server has at most one current movie: its newest row in `movies` with no ended_at. It's lined up with /nowplaying set,
+and nothing starts until /nowplaying start. Ending it reveals the predictions (people react ✅/❌ to judge them) and asks
 for ratings. Bingo cards aren't stored: each is shuffled from a seed of (movie, person), so it's the same every time.
 """
 
@@ -27,7 +27,7 @@ TEXT_MAX_LENGTH = 200
 HISTORY_SHOWN = 10
 LONG_PAUSE_SECONDS = 5 * 60
 COUNTDOWN_FROM = 5
-SYNC_LEAD_SECONDS = 10  # /np elapsed: time to skip to the spot before pressing play.
+SYNC_LEAD_SECONDS = 10  # /nowplaying elapsed: time to skip to the spot before pressing play.
 CALLED_IT, NOT_IT = "✅", "❌"
 
 SHHH_LINES = [
@@ -117,7 +117,7 @@ class Movie:
     paused_seconds: int
     ended_at: datetime | None
     archived_at: datetime | None  # Set aside before it started: on the watchlist, not yet watched.
-    watch_number: int | None  # 1 for the first time we watched this title, 2 for the second...; set by /np start.
+    watch_number: int | None  # 1 for the first time we watched this title, 2 for the second...; set by /nowplaying start.
     link: str | None  # Its Letterboxd page, if it was imported from a list.
     dropped_at: datetime | None  # Taken off the watchlist.
     struck_at: datetime | None  # Struck off the watchlist as watched: still listed (crossed out), left out of votes.
@@ -262,7 +262,7 @@ def archive(movie: Movie) -> str:
     _update(movie.id, archived_at=now())
     sealed = sealed_count(movie.id)
     kept = f" with its {plural(sealed, 'sealed prediction')}" if sealed else ""
-    return f"{movie.name} is on the watchlist (not yet watched){kept}. `/np set {movie.title}` brings it back."
+    return f"{movie.name} is on the watchlist (not yet watched){kept}. `/nowplaying set {movie.title}` brings it back."
 
 
 def line_up(guild_id: int, title: str, user_id: int) -> tuple[Movie, bool]:
@@ -345,13 +345,13 @@ def film_clock(movie: Movie) -> str:
 
 def status_text(movie: Movie | None) -> str:
     if movie is None:
-        return "🎬 Nothing's lined up. Pick something with `/np set <title>`."
+        return "🎬 Nothing's lined up. Pick something with `/nowplaying set <title>`."
     if movie.started_at is None:
         label = f"[{movie.label}](<{movie.link}>)" if movie.link else movie.label
-        return f"🎬 **Up next:** {label}\n-# Lined up by <@{movie.set_by}>. `/np start` when everyone's ready."
+        return f"🎬 **Up next:** {label}\n-# Lined up by <@{movie.set_by}>. `/nowplaying start` when everyone's ready."
     if movie.paused_at:
         return (f"⏸️ **Paused:** {movie.label} at {timecode(watched_seconds(movie))}\n"
-                f"-# Paused {live(movie.paused_at)}. `/np resume` to carry on.")
+                f"-# Paused {live(movie.paused_at)}. `/nowplaying resume` to carry on.")
     return f"▶️ **Now playing:** {movie.label}\n-# {film_clock(movie)}. Put on by <@{movie.set_by}>."
 
 
@@ -428,7 +428,7 @@ def _verdicts(where: str, params) -> list[Verdict]:
 
 
 def revealed_predictions(movie_id: int) -> list[Verdict]:
-    """Only revealed ones: a film's predictions stay sealed until its /np end."""
+    """Only revealed ones: a film's predictions stay sealed until its /nowplaying end."""
     return _verdicts("p.movie_id = ?", [movie_id])
 
 
@@ -552,13 +552,15 @@ def bingo_card_embed(movie: Movie, user_id: int) -> discord.Embed:
     embed = discord.Embed(title=f"🎯 Your bingo card: {plain_label(movie)}"[:256],
                           description="```\n" + "\n".join(rows) + "\n```\n" + "\n".join(legend),
                           color=discord.Color.green())
-    embed.set_footer(text="Mark a square with /bingo mark <number>. Five in a row (across, down or diagonal) wins.")
+    embed.set_footer(text="Mark a square with /nowplaying bingo mark <number>. Five in a row (across, down or diagonal) wins.")
     return embed
 
 
-# --- /np ---
-@commands.hybrid_group(name="np", description="Movie night: what's playing. Set it, start it, pause it, end it.",
-                       invoke_without_command=True)
+# --- /nowplaying ---
+# Everything for movie night bar /shhh lives under /nowplaying, so the rest of the slash menu stays short. Typed, it's
+# !nowplaying or !np (slash commands can't have aliases, so the slash one is just /nowplaying).
+@commands.hybrid_group(name="nowplaying", aliases=["np"], invoke_without_command=True,
+                       description="Movie night: what's on, the countdown, pauses, the watchlist, votes, bingo, ratings.")
 @commands.guild_only()
 async def np_group(ctx: commands.Context):
     await np_show.callback(ctx)
@@ -569,7 +571,7 @@ async def np_show(ctx: commands.Context):
     await ctx.send(status_text(current_movie(ctx.guild.id)), allowed_mentions=NO_PINGS)
 
 
-@np_group.command(name="set", description="Line up what's being watched. It doesn't start until /np start.")
+@np_group.command(name="set", description="Line up what's being watched. It doesn't start until /nowplaying start.")
 @app_commands.describe(title="What we're watching")
 async def np_set(ctx: commands.Context, *, title: str):
     title = one_line(title, TITLE_MAX_LENGTH)
@@ -578,7 +580,7 @@ async def np_set(ctx: commands.Context, *, title: str):
         return
     movie = current_movie(ctx.guild.id)
     if movie and movie.started_at:
-        await ctx.send(f"{movie.name} is still on. `/np end` it first.", ephemeral=True)
+        await ctx.send(f"{movie.name} is still on. `/nowplaying end` it first.", ephemeral=True)
         return
     log.info("[%s] %s lined up %r", ctx.guild.name, ctx.author, title)
     await ctx.send(set_up_next(ctx.guild.id, title, ctx.author.id), allowed_mentions=NO_PINGS)
@@ -599,7 +601,8 @@ def set_up_next(guild_id: int, title: str, user_id: int) -> str:
         if restored:
             notes.append("Back from the watchlist" + (f" with {plural(sealed, 'sealed prediction')}." if sealed else "."))
     if not notes:
-        notes.append("Get your `/predict`ions in and your `/bingo` card ready.")
+        notes.append("Get your predictions in (`/nowplaying predict`) and your bingo card ready "
+                     "(`/nowplaying bingo card`).")
     return "\n".join([status_text(movie), *(f"-# {note}" for note in notes)])
 
 
@@ -611,7 +614,7 @@ WATCHLIST_SHOWN = 30
 async def np_watchlist(ctx: commands.Context):
     saved = watchlist(ctx.guild.id)
     if not saved:
-        await ctx.send("🍿 The watchlist is empty. `/np watchlist add <title>`, `/np watchlist import <Letterboxd list>`, "
+        await ctx.send("🍿 The watchlist is empty. `/nowplaying watchlist add <title>`, `/nowplaying watchlist import <Letterboxd list>`, "
                        "or line something up and never start it.", ephemeral=True)
         return
     lines = []
@@ -627,7 +630,7 @@ async def np_watchlist(ctx: commands.Context):
     struck = sum(1 for m in saved if m.struck_at)
     embed = discord.Embed(title=f"🍿 To watch ({len(saved) - struck})", description="\n".join(lines),
                           color=discord.Color.dark_red())
-    footer = "Line one up with /np set <title> (it autocompletes); any predictions come with it."
+    footer = "Line one up with /nowplaying set <title> (it autocompletes); any predictions come with it."
     if struck:
         footer = f"{struck} struck off as watched. " + footer
     embed.set_footer(text=footer)
@@ -755,7 +758,7 @@ async def np_watchlist_import(ctx: commands.Context, url: str):
     text = f"🍿 Added **{plural(len(added), 'film')}** from {source} to the watchlist: {names}."
     if already:
         text += f"\n-# {already} {'was' if already == 1 else 'were'} already on it."
-    await ctx.send(text + "\n-# `/np watchlist` to see them, `/np set <title>` to line one up.")
+    await ctx.send(text + "\n-# `/nowplaying watchlist` to see them, `/nowplaying set <title>` to line one up.")
 
 
 def _watchlist_choices(guild_id: int, current: str, struck: bool | None = None) -> list[app_commands.Choice[str]]:
@@ -768,7 +771,7 @@ def _watchlist_choices(guild_id: int, current: str, struck: bool | None = None) 
 
 
 async def watchlist_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    """/np set suggests the watchlist, but any title can still be typed."""
+    """/nowplaying set suggests the watchlist, but any title can still be typed."""
     return _watchlist_choices(interaction.guild_id, current)
 
 
@@ -787,9 +790,9 @@ np_watchlist_unstrike.autocomplete("title")(struck_autocomplete)
 
 
 # --- Voting on what's next: a native Discord poll of watchlist films. Discord counts the votes; we remember which
-# answer is which film, and line up the winner when it closes (early with /np vote end, or when its time runs out).
+# answer is which film, and line up the winner when it closes (early with /nowplaying vote end, or when its time runs out).
 VOTE_QUESTION = "🍿 What are we watching next?"
-POLL_MAX_HOURS = 32 * 24  # Discord's longest poll. Votes default to it, so they're open until /np vote end.
+POLL_MAX_HOURS = 32 * 24  # Discord's longest poll. Votes default to it, so they're open until /nowplaying vote end.
 POLL_ANSWER_MAX = 55  # Discord's limit for an answer's text.
 
 
@@ -843,7 +846,7 @@ def finish_vote(vote: Vote, poll: discord.Poll | None, user_id: int) -> str:
     playing = current_movie(vote.guild_id)
     on_watchlist = any(m.id == winner.id for m in watchlist(vote.guild_id))
     if playing and playing.started_at:
-        text += f"\n-# {playing.name} is still on: `/np set {winner.title}` when it's done."
+        text += f"\n-# {playing.name} is still on: `/nowplaying set {winner.title}` when it's done."
     elif on_watchlist:
         text += "\n" + set_up_next(vote.guild_id, winner.title, user_id)
     else:
@@ -855,14 +858,14 @@ def finish_vote(vote: Vote, poll: discord.Poll | None, user_id: int) -> str:
 @np_group.group(name="vote", fallback="start", invoke_without_command=True,
                 description="Vote on what to watch next, from the watchlist (a Discord poll).")
 @app_commands.describe(count="How many random films from the watchlist (if you don't name them)",
-                       hours="Optional: close it after this many hours (otherwise it's open until /np vote end)",
+                       hours="Optional: close it after this many hours (otherwise it's open until /nowplaying vote end)",
                        include_watched="Also pick from films struck off as watched (named films are always allowed)",
                        films="Optional: which films, separated by commas")
 async def np_vote(ctx: commands.Context, count: commands.Range[int, 2, 10] = 5,
                   hours: commands.Range[int, 1, POLL_MAX_HOURS] | None = None, include_watched: bool = False, *,
                   films: str | None = None):
     if open_vote(ctx.guild.id):
-        await ctx.send("There's already a vote going. `/np vote end` closes it.", ephemeral=True)
+        await ctx.send("There's already a vote going. `/nowplaying vote end` closes it.", ephemeral=True)
         return
     if films:
         chosen, missing = [], []
@@ -874,7 +877,7 @@ async def np_vote(ctx: commands.Context, count: commands.Range[int, 2, 10] = 5,
                 elif found not in chosen:
                     chosen.append(found)
         if missing:
-            await ctx.send(f"Not on the watchlist: {', '.join(missing)}. `/np watchlist add` them first.",
+            await ctx.send(f"Not on the watchlist: {', '.join(missing)}. `/nowplaying watchlist add` them first.",
                            ephemeral=True)
             return
         if len(chosen) > 10:
@@ -884,7 +887,7 @@ async def np_vote(ctx: commands.Context, count: commands.Range[int, 2, 10] = 5,
         saved = [m for m in watchlist(ctx.guild.id) if include_watched or not m.struck_at]
         chosen = random.sample(saved, min(count, len(saved)))
     if len(chosen) < 2:
-        hint = ("`/np watchlist add` some, or `/np watchlist import` a Letterboxd list"
+        hint = ("`/nowplaying watchlist add` some, or `/nowplaying watchlist import` a Letterboxd list"
                 if films or include_watched or len(watchlist(ctx.guild.id)) < 2
                 else "the rest are struck off as watched; add `include_watched:True` to use them")
         await ctx.send(f"A vote needs at least two films: {hint}.", ephemeral=True)
@@ -894,7 +897,7 @@ async def np_vote(ctx: commands.Context, count: commands.Range[int, 2, 10] = 5,
         poll.add_answer(text=answer_text(movie.title))
     when = f"in {plural(hours, 'hour')}, or when someone runs" if hours else "when someone runs"
     try:
-        message = await ctx.send(f"-# Voting closes {when} `/np vote end`. The winner gets lined up.", poll=poll)
+        message = await ctx.send(f"-# Voting closes {when} `/nowplaying vote end`. The winner gets lined up.", poll=poll)
     except discord.Forbidden:
         await ctx.send("I need the **Send Polls** permission in this channel.", ephemeral=True)
         return
@@ -911,7 +914,7 @@ async def np_vote(ctx: commands.Context, count: commands.Range[int, 2, 10] = 5,
 async def np_vote_end(ctx: commands.Context):
     vote = open_vote(ctx.guild.id)
     if vote is None:
-        await ctx.send("There's no vote going. `/np vote` starts one.", ephemeral=True)
+        await ctx.send("There's no vote going. `/nowplaying vote` starts one.", ephemeral=True)
         return
     channel = ctx.bot.get_channel(vote.channel_id) or ctx.channel
     try:
@@ -930,7 +933,7 @@ async def vote_closed_by_itself(message: discord.Message):
         return
     vote = open_vote_by_message(message.reference.message_id)
     if vote is None:
-        return  # Not ours, or already closed with /np vote end.
+        return  # Not ours, or already closed with /nowplaying vote end.
     try:
         poll = (await message.channel.fetch_message(vote.message_id)).poll
     except discord.HTTPException:
@@ -941,7 +944,7 @@ async def vote_closed_by_itself(message: discord.Message):
 async def _ready_to_start(ctx: commands.Context) -> Movie | None:
     movie = current_movie(ctx.guild.id)
     if movie is None:
-        await ctx.send("Nothing's lined up. `/np set <title>` first.", ephemeral=True)
+        await ctx.send("Nothing's lined up. `/nowplaying set <title>` first.", ephemeral=True)
     elif movie.started_at:
         await ctx.send(f"{movie.name} has already started.", ephemeral=True)
     elif ctx.guild.id in counting_down:
@@ -958,7 +961,7 @@ async def start_movie(ctx: commands.Context, movie: Movie) -> str:
     log.info("[%s] %s started %r", ctx.guild.name, ctx.author, movie.title)
     await set_bot_status(ctx.bot, movie.title)
     return (f"🎬 **Starting: {movie.label}.** Phones down, lights off.\n"
-            f"-# {film_clock(movie)}. `/np pause` if you need to, `/shhh` if people won't be quiet.")
+            f"-# {film_clock(movie)}. `/nowplaying pause` if you need to, `/shhh` if people won't be quiet.")
 
 
 # Servers with a countdown running, so two can't start the film twice.
@@ -969,7 +972,7 @@ counting_down: set[int] = set()
                   description=f"Count down from {COUNTDOWN_FROM}, then start, so everyone presses play together.")
 async def np_start(ctx: commands.Context):
     """Always counts down: the whole point is everyone pressing play at once. (Already playing without the bot?
-    /np sct starts it at the right spot instead.)"""
+    /nowplaying sct starts it at the right spot instead.)"""
     movie = await _ready_to_start(ctx)
     if movie is None:
         return
@@ -1001,7 +1004,7 @@ async def _edit(message: discord.Message, content: str) -> None:
 async def _playing(ctx: commands.Context) -> Movie | None:
     movie = current_movie(ctx.guild.id)
     if movie is None or movie.started_at is None:
-        await ctx.send("Nothing's playing. " + ("`/np start` it first." if movie else "`/np set <title>` first."),
+        await ctx.send("Nothing's playing. " + ("`/nowplaying start` it first." if movie else "`/nowplaying set <title>` first."),
                        ephemeral=True)
         return None
     return movie
@@ -1014,7 +1017,7 @@ async def np_pause(ctx: commands.Context, *, reason: str | None = None):
     if movie is None:
         return
     if movie.paused_at:
-        await ctx.send("It's already paused. `/np resume` to carry on.", ephemeral=True)
+        await ctx.send("It's already paused. `/nowplaying resume` to carry on.", ephemeral=True)
         return
     _update(movie.id, paused_at=now())
     movie = current_movie(ctx.guild.id)
@@ -1022,7 +1025,7 @@ async def np_pause(ctx: commands.Context, *, reason: str | None = None):
     text = f"⏸️ **Paused** {movie.name} at {timecode(watched_seconds(movie))}."
     if reason:
         text += f"\n> {reason}"
-    await ctx.send(f"{text}\n-# Paused {live(movie.paused_at)}. `/np resume` to carry on.", allowed_mentions=NO_PINGS)
+    await ctx.send(f"{text}\n-# Paused {live(movie.paused_at)}. `/nowplaying resume` to carry on.", allowed_mentions=NO_PINGS)
     await set_bot_status(ctx.bot, f"{movie.title} (paused)")
 
 
@@ -1037,7 +1040,7 @@ async def np_sct(ctx: commands.Context, *, position: str):
         return
     movie = current_movie(ctx.guild.id)
     if movie is None:
-        await ctx.send("Nothing's lined up. `/np set <title>` first.", ephemeral=True)
+        await ctx.send("Nothing's lined up. `/nowplaying set <title>` first.", ephemeral=True)
         return
     note = ""
     if movie.started_at is None:  # Started without the bot: start it now, already that far in.
@@ -1055,9 +1058,9 @@ async def np_sct(ctx: commands.Context, *, position: str):
     log.info("[%s] %s set %r to %s", ctx.guild.name, ctx.author, movie.title, timecode(seconds))
     text = f"⏱️ **{movie.label}** is now at **{timecode(seconds)}**.{note}"
     if movie.paused_at:
-        text += "\n-# Still paused. `/np resume` to carry on."
+        text += "\n-# Still paused. `/nowplaying resume` to carry on."
     else:
-        text += f"\n-# {film_clock(movie)}. Out of sync? `/np elapsed` to catch up."
+        text += f"\n-# {film_clock(movie)}. Out of sync? `/nowplaying elapsed` to catch up."
     await ctx.send(text)
 
 
@@ -1068,7 +1071,7 @@ async def np_elapsed(ctx: commands.Context):
         return
     if movie.paused_at:
         text = (f"⏸️ **{movie.label}** is paused at **{timecode(watched_seconds(movie))}**.\n"
-                "-# Skip there, and press play when someone runs `/np resume`.")
+                "-# Skip there, and press play when someone runs `/nowplaying resume`.")
     else:
         # A moment a few seconds ahead, on a whole second (Discord timestamps are whole seconds): skip to where the
         # film will be then, and press play when the timestamp says so.
@@ -1123,7 +1126,7 @@ async def np_end(ctx: commands.Context):
     winners = bingo_winners(movie.id)
     if winners:
         text += "\n🎉 Bingo: " + ", ".join(f"<@{u}>" for u in winners)
-    text += "\n⭐ Rate it with `/rate <1-10>`."
+    text += "\n⭐ Rate it with `/nowplaying rate <1-10>`."
     if movie.from_watchlist:
         keep_on_watchlist_struck(movie)
         text += "\n-# Struck off the watchlist."
@@ -1148,7 +1151,7 @@ async def np_history(ctx: commands.Context):
             line += f", {sum(v.called for v in verdicts)}/{len(verdicts)} predictions called"
         lines.append(f"{line}, {movie.ended_at.strftime('%d %b %Y')}")
     embed = discord.Embed(title="🎬 What we've watched", description="\n".join(lines), color=discord.Color.dark_red())
-    embed.set_footer(text="See what was predicted for one with /np predictions <title> (add #2 for a second watch).")
+    embed.set_footer(text="See what was predicted for one with /nowplaying predictions <title> (add #2 for a second watch).")
     await ctx.send(embed=embed)
 
 
@@ -1162,7 +1165,7 @@ def verdict_line(verdict: Verdict) -> str:
 async def np_predictions(ctx: commands.Context, *, title: str | None = None):
     movie = find_watched(ctx.guild.id, title)
     if movie is None:
-        await ctx.send(f"No finished film called “{one_line(title, TITLE_MAX_LENGTH)}”. Try `/np history`."
+        await ctx.send(f"No finished film called “{one_line(title, TITLE_MAX_LENGTH)}”. Try `/nowplaying history`."
                        if title else "🎬 Nothing watched yet.", ephemeral=True)
         return
     verdicts = revealed_predictions(movie.id)
@@ -1192,7 +1195,7 @@ async def watched_title_autocomplete(interaction: discord.Interaction, current: 
 np_predictions.autocomplete("title")(watched_title_autocomplete)
 
 
-# --- /shhh, /rate, /predict ---
+# --- /shhh, /nowplaying rate, /nowplaying predict ---
 @commands.hybrid_command(name="shhh", description="Tell everyone to be quiet for this bit.")
 @commands.guild_only()
 @app_commands.describe(reason="Optional: why this bit matters")
@@ -1210,8 +1213,7 @@ async def shhh(ctx: commands.Context, *, reason: str | None = None):
     await ctx.send(f"{text}\n-# Requested by {ctx.author.mention}.", allowed_mentions=NO_PINGS)
 
 
-@commands.hybrid_command(name="rate", description="Rate the film out of 10, or see everyone's ratings.")
-@commands.guild_only()
+@np_group.command(name="rate", description="Rate the film out of 10, or see everyone's ratings.")
 @app_commands.describe(score="1 to 10 (leave empty to see the ratings)")
 async def rate(ctx: commands.Context, score: commands.Range[int, 1, 10] | None = None):
     movie = movie_to_rate(ctx.guild.id)
@@ -1232,14 +1234,13 @@ async def rate(ctx: commands.Context, score: commands.Range[int, 1, 10] | None =
                    allowed_mentions=NO_PINGS)
 
 
-@commands.hybrid_command(name="predict", description="Make a sealed prediction about the film. Revealed at the end.")
-@commands.guild_only()
+@np_group.command(name="predict", description="Make a sealed prediction about the film. Revealed at the end.")
 @app_commands.describe(guess="What you think will happen")
 async def predict(ctx: commands.Context, *, guess: str):
     movie = current_movie(ctx.guild.id)
     guess = one_line(guess)
     if movie is None:
-        await ctx.send("Nothing's lined up to predict. `/np set <title>` first.", ephemeral=True)
+        await ctx.send("Nothing's lined up to predict. `/nowplaying set <title>` first.", ephemeral=True)
         return
     if not guess:
         await ctx.send("Predict what?", ephemeral=True)
@@ -1248,31 +1249,30 @@ async def predict(ctx: commands.Context, *, guess: str):
     announcement = f"🔮 {ctx.author.mention} has made a sealed prediction about {movie.label}."
     if ctx.interaction:
         await ctx.send(announcement, allowed_mentions=NO_PINGS)
-        await ctx.send(f"🔮 Sealed: {guess}\n-# Revealed when someone runs `/np end`.", ephemeral=True,
+        await ctx.send(f"🔮 Sealed: {guess}\n-# Revealed when someone runs `/nowplaying end`.", ephemeral=True,
                        allowed_mentions=NO_PINGS)
         return
     try:
         await ctx.message.delete()  # Typed with !, so hide it until the reveal.
     except discord.HTTPException:
-        announcement += "\n-# I couldn't hide your message (I need Manage Messages). Use `/predict` to keep it secret."
+        announcement += "\n-# I couldn't hide your message (I need Manage Messages). Use `/nowplaying predict` to keep it secret."
     await ctx.send(announcement, allowed_mentions=NO_PINGS)
 
 
-# --- /bingo ---
+# --- /nowplaying bingo ---
 async def _bingo_movie(ctx: commands.Context, need_started: bool) -> Movie | None:
     movie = current_movie(ctx.guild.id)
     if movie is None:
-        await ctx.send("No film lined up. `/np set <title>` first.", ephemeral=True)
+        await ctx.send("No film lined up. `/nowplaying set <title>` first.", ephemeral=True)
     elif need_started and movie.started_at is None:
-        await ctx.send("No marking before it starts. Wait for `/np start`.", ephemeral=True)
+        await ctx.send("No marking before it starts. Wait for `/nowplaying start`.", ephemeral=True)
     else:
         return movie
     return None
 
 
-@commands.hybrid_group(name="bingo", description="Movie bingo: your card, and marking squares off.",
-                       invoke_without_command=True)
-@commands.guild_only()
+@np_group.group(name="bingo", description="Movie bingo: your card, and marking squares off.",
+                invoke_without_command=True)
 async def bingo_group(ctx: commands.Context):
     await bingo_show.callback(ctx)
 
@@ -1290,7 +1290,7 @@ async def bingo_show(ctx: commands.Context):
         await ctx.author.send(embed=embed)
         await ctx.send("🎯 Sent you your card.")
     except discord.HTTPException:
-        await ctx.send("I couldn't DM you. Use `/bingo card` instead.")
+        await ctx.send("I couldn't DM you. Use `/nowplaying bingo card` instead.")
 
 
 @bingo_group.command(name="mark", description="Mark off a square on your card.")
@@ -1345,37 +1345,36 @@ bingo_mark.autocomplete("square")(bingo_square_autocomplete)
 
 
 def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bool]]]:
-    root = (command.root_parent or command).name
-    if root not in ("np", "predict", "bingo", "rate"):
+    if (command.root_parent or command).name != "nowplaying":
         return "", []
-    text = ("1. `/np set <title>` lines it up. Nothing starts yet, so people can `/predict` and look at their "
-            "`/bingo` card.\n"
-            f"2. `/np start` counts down from {COUNTDOWN_FROM} and starts it on GO, so everyone presses play "
-            "together (the bot's status shows what's on). `/np pause [reason]` and `/np resume` "
+    text = ("1. `/nowplaying set <title>` lines it up. Nothing starts yet, so people can `/nowplaying predict` and look at their "
+            "`/nowplaying bingo` card.\n"
+            f"2. `/nowplaying start` counts down from {COUNTDOWN_FROM} and starts it on GO, so everyone presses play "
+            "together (the bot's status shows what's on). `/nowplaying pause [reason]` and `/nowplaying resume` "
             "for breaks, which don't count towards the time watched. `/shhh` when people won't be quiet. Fallen out "
-            "of sync? `/np elapsed` gives the exact spot and when to press play to catch up. Bot's clock wrong "
-            "(restarted the film, started it without the bot)? `/np sct 1:07:30` sets where it really is.\n"
-            "3. `/bingo mark <number>` as things happen. Five in a row wins.\n"
-            f"4. `/np end` reveals the predictions: react {CALLED_IT} if they called it, {NOT_IT} if not "
-            "(not on your own). Then everyone `/rate`s it.\n"
-            "• Anyone can run any of it. Called predictions and bingo wins go on the rap sheet; `/np history` "
-            "lists what you've watched with its ratings, and `/np predictions <title>` shows what was predicted "
+            "of sync? `/nowplaying elapsed` gives the exact spot and when to press play to catch up. Bot's clock wrong "
+            "(restarted the film, started it without the bot)? `/nowplaying sct 1:07:30` sets where it really is.\n"
+            "3. `/nowplaying bingo mark <number>` as things happen. Five in a row wins.\n"
+            f"4. `/nowplaying end` reveals the predictions: react {CALLED_IT} if they called it, {NOT_IT} if not "
+            "(not on your own). Then everyone `/nowplaying rate`s it.\n"
+            "• Anyone can run any of it. Called predictions and bingo wins go on the rap sheet; `/nowplaying history` "
+            "lists what you've watched with its ratings, and `/nowplaying predictions <title>` shows what was predicted "
             "for a film and who called it.\n"
-            "• `/np watchlist` is what's still to watch: `add` a film (by title, or by Letterboxd link to get its year "
+            "• `/nowplaying watchlist` is what's still to watch: `add` a film (by title, or by Letterboxd link to get its year "
             "and link), `import` a public Letterboxd list (with "
             "years and links), `remove` one, or `strike` one off as watched (it stays listed, crossed out, and "
-            "votes skip it; `unstrike` undoes it). Films watched from the list are struck off when they end. Films swapped out with `/np set` or ended before they started go "
-            "on it too, with their predictions. `/np set` autocompletes from it; `Alien` finds `Alien (1979)`.\n"
-            "• Can't decide? `/np vote` posts a poll of 5 random films from the watchlist (or name them: "
-            "`films:Alien, Deadstream`). It's open until `/np vote end` (or `hours:` for a timed one); then the "
+            "votes skip it; `unstrike` undoes it). Films watched from the list are struck off when they end. Films swapped out with `/nowplaying set` or ended before they started go "
+            "on it too, with their predictions. `/nowplaying set` autocompletes from it; `Alien` finds `Alien (1979)`.\n"
+            "• Can't decide? `/nowplaying vote` posts a poll of 5 random films from the watchlist (or name them: "
+            "`films:Alien, Deadstream`). It's open until `/nowplaying vote end` (or `hours:` for a timed one); then the "
             "winner's lined up.\n"
             "• Watching something again is a new watch (Alien (watch #2)), with fresh predictions, bingo cards and "
-            "ratings. `/np predictions Alien #1` looks up an earlier one.")
+            "ratings. `/nowplaying predictions Alien #1` looks up an earlier one.")
     return "", [("🎬 How movie night works", text, False)]
 
 
 async def setup(bot: commands.Bot):
-    for command in (np_group, shhh, rate, predict, bingo_group):
+    for command in (np_group, shhh):  # rate, predict and bingo are under np_group
         bot.add_command(command)
     bot.add_listener(prediction_vote, "on_raw_reaction_add")
     bot.add_listener(prediction_unvote, "on_raw_reaction_remove")

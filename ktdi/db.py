@@ -167,15 +167,15 @@ SCHEMA = [
         title_key      TEXT NOT NULL DEFAULT '',   -- the title casefolded, for matching rewatches
         set_by         INTEGER NOT NULL,
         created_at     TEXT NOT NULL,
-        started_at     TEXT,                       -- NULL until /np start
+        started_at     TEXT,                       -- NULL until /nowplaying start
         paused_at      TEXT,                       -- set while paused
         paused_seconds INTEGER NOT NULL DEFAULT 0, -- time spent paused, not counted as watched
         ended_at       TEXT,
         archived_at    TEXT,                       -- set aside before starting: on the watchlist, not yet watched
-        watch_number   INTEGER,                    -- 1st, 2nd... time we've watched this title; set at /np start
+        watch_number   INTEGER,                    -- 1st, 2nd... time we've watched this title; set at /nowplaying start
         link           TEXT,                       -- its Letterboxd page, if it came from an imported list
-        dropped_at     TEXT,                       -- taken off the watchlist (/np watchlist remove); kept, not deleted
-        struck_at      TEXT,                       -- struck off as watched (/np watchlist strike): still listed
+        dropped_at     TEXT,                       -- taken off the watchlist (/nowplaying watchlist remove); kept, not deleted
+        struck_at      TEXT,                       -- struck off as watched (/nowplaying watchlist strike): still listed
         from_watchlist INTEGER NOT NULL DEFAULT 0  -- lined up from the watchlist: goes back on it, struck, when it ends
     )
     """,
@@ -214,7 +214,7 @@ SCHEMA = [
         guild_id   INTEGER NOT NULL,
         user_id    INTEGER NOT NULL,
         text       TEXT NOT NULL,
-        message_id INTEGER  -- the reveal message people react ✅/❌ to; NULL until /np end
+        message_id INTEGER  -- the reveal message people react ✅/❌ to; NULL until /nowplaying end
     )
     """,
     """

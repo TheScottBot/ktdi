@@ -1,4 +1,4 @@
-"""Reading a public Letterboxd list (/np watchlist import) or film page (/np watchlist add). No Discord code.
+"""Reading a public Letterboxd list (/nowplaying watchlist import) or film page (/nowplaying watchlist add). No Discord code.
 
 Letterboxd has no open API, so this reads the list's web page, the same one anyone can open in a browser. Each film
 on it carries data-item-name="Alien (1979)" and data-item-link="/film/alien/"; long lists have a "next" page link.

@@ -10,17 +10,15 @@ from ktdi.bot import KTDIBot, describe_options
 from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
-SLASH_COMMANDS = ["abm", "anime", "bad", "badbonk", "bail", "bingo", "blame", "books", "bribe", "campaign",
-                  "committee", "expunge", "help", "imperial", "linux", "loot", "np", "predict", "quote", "rapsheet",
-                  "rate", "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone",
-                  "whospray"]
+SLASH_COMMANDS = ["abm", "anime", "bad", "badbonk", "bail", "blame", "books", "bribe", "campaign", "committee",
+                  "expunge", "help", "imperial", "linux", "loot", "nowplaying", "quote", "rapsheet", "rpg", "settings",
+                  "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone", "whospray"]
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
 HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
     "committee": ["funds", "ledger", "propose", "spend"],
-    "np": ["elapsed", "end", "history", "pause", "predictions", "resume", "sct", "set", "show", "start", "vote",
-           "watchlist"],
-    "bingo": ["card", "mark", "unmark"],
+    "nowplaying": ["bingo", "elapsed", "end", "history", "pause", "predict", "predictions", "rate", "resume", "sct",
+                   "set", "show", "start", "vote", "watchlist"],
     "timezone": ["clear", "convert", "set", "show"],
     "campaign": ["add", "edit", "list", "remind", "remove", "reschedule", "show", "skip", "unremind"],
     "quote": ["add", "claim", "delete", "dissociate", "last", "random", "search", "show"],
@@ -47,9 +45,18 @@ def test_slash_commands(loaded_bot):
     assert [c.name for c in tree.get_commands(type=discord.AppCommandType.message)] == ["Save quote"]
     for group, subs in SUBCOMMANDS.items():
         assert sorted(c.name for c in tree.get_command(group).commands) == subs
-    watchlist = tree.get_command("np").get_command("watchlist")
+    nowplaying = tree.get_command("nowplaying")
+    watchlist = nowplaying.get_command("watchlist")
     assert sorted(c.name for c in watchlist.commands) == ["add", "import", "remove", "show", "strike", "unstrike"]
-    assert sorted(c.name for c in tree.get_command("np").get_command("vote").commands) == ["end", "start"]
+    assert sorted(c.name for c in nowplaying.get_command("vote").commands) == ["end", "start"]
+    assert sorted(c.name for c in nowplaying.get_command("bingo").commands) == ["card", "mark", "unmark"]
+    assert tree.get_command("np") is None  # slash commands can't have aliases: /nowplaying only
+
+
+def test_np_still_works_typed(loaded_bot):
+    assert loaded_bot.get_command("np") is loaded_bot.get_command("nowplaying")
+    assert loaded_bot.get_command("np bingo card") is loaded_bot.get_command("nowplaying bingo card")
+    assert loaded_bot.get_command("np countdown") is loaded_bot.get_command("nowplaying start")
 
 
 def test_prefix_commands(loaded_bot):
