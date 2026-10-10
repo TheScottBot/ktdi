@@ -36,9 +36,11 @@ def ailment(names: str, culpeper: str) -> Ailment:
 AILMENTS = [
     # --- Colds, coughs and chests ---
     ailment("common cold | cold | colds | the cold | head cold | runny nose | blocked nose | stuffy nose | snotty nose |"
-            " sniffles | snot | congestion | catarrh | sneezing | sneezes | hay fever | hayfever | allergies | allergy |"
-            " pollen | snoring | blocked sinuses | sinusitis | sinuses",
-            r"rheums? | catarrh | defluxions? | distillations? | stuffing of the head | coryza | colds\b | sneez*"),
+            " sniffles | snot | congestion | catarrh | blocked sinuses | sinusitis | sinuses",
+            r"rheums? | catarrh | defluxions? | distillations? | stuffing of the head | coryza | colds\b"),
+    # Culpeper never met hay fever. His sneezing herbs cause it (to purge the brain), so it gets his running rheums.
+    ailment("hay fever | hayfever | allergies | allergy | pollen | sneezing | sneezes | sneezy",
+            r"rheums? | defluxions? | distillations? | rheum in the eyes | watering eyes"),
     ailment("flu | influenza | man flu | the flu | grippe | fluey | flu like | aches and fever | feeling rough |"
             " under the weather | coming down with something | lurgy | the lurgy",
             r"agues? | pestilent fevers? | malignant fevers? | burning fevers?"),
@@ -109,12 +111,20 @@ AILMENTS = [
 
     # --- Eyes, ears, nose and mouth ---
     ailment("sore eyes | eyes | red eyes | pink eye | conjunctivitis | itchy eyes | dry eyes | watery eyes |"
-            " bad eyesight | eyesight | blurry vision | blurred vision | short sighted | long sighted | can't see |"
-            " cant see | blind | blindness | stye | styes | cataracts | eye strain | screen eyes",
-            r"eyes | sight | dimness | pin and web | films? | blood-?shot | rheum in the eyes"),
-    ailment("earache | ear ache | ear infection | ears | deaf | deafness | ringing ears | ringing in my ears |"
-            " tinnitus | can't hear | cant hear | earwax | ear wax | blocked ears",
-            r"ears | deafness | noises? in the ears | singing in the ears | hearing"),
+            " bloodshot eyes | stye | styes | eye strain | screen eyes | tired eyes",
+            r"sore eyes | (?:red|hot|watering|weeping|blood-?shot|bleared) eyes | blood-?shot |"
+            r" (?:inflammations?|pains?|redness|heat|rheum) (?:of|in) the eyes | eyes"),
+    ailment("bad eyesight | eyesight | poor eyesight | blurry vision | blurred vision | short sighted | long sighted |"
+            " cataracts | cataract | need glasses | squinting | can't read | cant read",
+            r"dimness | dim sight | (?:clears?|clearing|quickens?|strengthens?) (?:the )?sight | sight |"
+            r" pin and web | films?"),
+    ailment("blindness | blind | going blind | can't see | cant see | lost my sight | lost my eyesight",
+            r"blindness | (?:been|are|were|is|grown) blind | restored? (?:the )?sight"),  # not "make them blind"
+    ailment("earache | ear ache | ear infection | ears | sore ears | earwax | ear wax | blocked ears",
+            r"(?:pains?|aches?|swellings?|ulcers?|imposthumes?) (?:in|of) the ears | ears"),
+    ailment("deafness | deaf | hard of hearing | can't hear | cant hear | going deaf | hearing loss | tinnitus |"
+            " ringing ears | ringing in my ears",
+            r"deaf* | noises? (?:in|of) the(?:m| ears) | singings?"),
     ailment("toothache | tooth ache | sore tooth | sore teeth | bad teeth | teeth | cavity | cavities |"
             " rotten teeth | tooth decay | gum disease | gums | bleeding gums | abscess tooth | teething | wisdom teeth",
             r"tooth-?ache | teeth | gums"),
@@ -157,9 +167,12 @@ AILMENTS = [
     ailment("jaundice | yellow skin | liver | hepatitis | liver damage | bad liver | cirrhosis",
             r"jaundice | liver"),
     ailment("spleen | splenic", r"spleen"),
-    ailment("kidney stones | kidney stone | gallstones | kidneys | kidney | bladder | uti | urinary infection |"
-            " cystitis | peeing a lot | can't pee | cant pee | painful peeing | burning pee | weak bladder",
-            r"stone | gravel | reins | kidneys | bladder | strangury | urine | making water"),
+    ailment("kidney stones | kidney stone | gallstones | kidneys | kidney",
+            r"stone | gravel | reins | kidneys"),
+    ailment("bladder problems | bladder | uti | urinary infection | cystitis | peeing a lot | can't pee | cant pee |"
+            " painful peeing | burning pee | weak bladder | incontinence",
+            r"bladder | strangury | (?:stopping|stoppage|heat|sharpness|scalding|difficulty) of urine |"
+            r" (?:provokes?|procures?|stays?) urine | making water | pissing"),
 
     # --- Skin and hair ---
     ailment("spots | acne | pimples | zits | blackheads | whiteheads | bad skin | breakouts | breaking out",
@@ -203,8 +216,9 @@ AILMENTS = [
     ailment("chilblains | cold hands | cold feet | frostbite | chapped hands | dry skin | cracked skin |"
             " cracked heels | rough skin",
             r"kibes | chilblains | chaps | chapped | roughness of the skin"),
-    ailment("blisters | blister | sore feet | aching feet | foot pain | feet",
-            r"blisters | feet | kibes"),
+    ailment("blisters | blister", r"blisters | blistered"),
+    ailment("sore feet | aching feet | foot pain | feet | tired feet",
+            r"feet"),
 
     # --- Aches, joints and backs ---
     ailment("gout | gouty", r"gout"),

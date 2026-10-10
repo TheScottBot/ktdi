@@ -22,7 +22,10 @@ from tests.fakes import Ctx, User, run
     ("being dead", "death"), ("werewolf", "cursed"), ("stubbed toe", "bruises"), ("athletes foot", "itch"),
     ("pain in the arse", "piles"), ("covid", "plague"), ("a nasty case of the plague", "plague"),
     ("erectile dysfunction", "low libido"), ("mondays", "tiredness"), ("ugly", "complexion"),
-    ("my back hurts", "back pain"), ("broken leg", "broken bones"), ("hay fever", "common cold"),
+    ("my back hurts", "back pain"), ("broken leg", "broken bones"), ("hay fever", "hay fever"),
+    ("blind", "blindness"), ("going blind", "blindness"), ("blurry vision", "bad eyesight"), ("red eyes", "sore eyes"),
+    ("deaf", "deafness"), ("can't hear", "deafness"), ("ringing in my ears", "deafness"), ("ear infection", "earache"),
+    ("cystitis", "bladder problems"), ("kidney stone", "kidney stones"), ("sore feet", "sore feet"),
 ])
 def test_finds_what_people_mean(typed, ailment):
     assert lookup.find(typed).ailment.name == ailment
@@ -59,8 +62,11 @@ def test_every_ailment_has_remedies_and_none_are_left_out_ones():
 def test_culpeper_terms_match_whole_words_unless_stems():
     insomnia = next(a for a in AILMENTS if a.name == "insomnia")
     assert insomnia.pattern.search("it procures sleep") and not insomnia.pattern.search("it restrains the flux")
-    cold = next(a for a in AILMENTS if a.name == "common cold")
-    assert cold.pattern.search("it stops sneezing")  # "sneez*" is a stem
+    deafness = next(a for a in AILMENTS if a.name == "deafness")
+    assert deafness.pattern.search("it helps the deaf") and deafness.pattern.search("cures deafness")  # "deaf*"
+    blindness = next(a for a in AILMENTS if a.name == "blindness")
+    assert blindness.pattern.search("restored sight to them that have been blind")
+    assert not blindness.pattern.search("it may dazzle the eyes, and make them blind")  # a warning, not a cure
 
 
 def test_suggestions():

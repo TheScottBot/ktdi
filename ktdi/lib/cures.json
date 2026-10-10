@@ -77,8 +77,8 @@
 "herb": "Clary, or more properly Clear-Eye",
 "text": "The powder of the dried root put into the nose, provokes sneezing, and thereby purges the head and brain of much rheum and corruption.",
 "match": [
-57,
-65
+113,
+118
 ]
 },
 {
@@ -155,14 +155,6 @@
 },
 {
 "herb": "Flower-De-Luce",
-"text": "It much eases pains in the head, and procures sleep; being put into the nostrils it procures sneezing, and thereby purges the head of phlegm.",
-"match": [
-93,
-101
-]
-},
-{
-"herb": "Flower-De-Luce",
 "text": "The head and temples anointed therewith, helps the catarrh or thin rheum distilled from thence; and used upon the breast or stomach, helps to extenuate the cold tough phlegm; it helps also the pains and noise in the ears, and the stench of the nostrils.",
 "match": [
 51,
@@ -175,14 +167,6 @@
 "match": [
 64,
 74
-]
-},
-{
-"herb": "Stinking Gladwin",
-"text": "The juice hereof put up, or snuffed up the nose, causes sneezing, and draws from the head much corruption; and the powder thereof doth the same.",
-"match": [
-56,
-64
 ]
 },
 {
@@ -298,14 +282,6 @@
 ]
 },
 {
-"herb": "Sweet Marjoram",
-"text": "The powder thereof snuffed up into the nose provokes sneezing, and thereby purges the brain; and chewed in the mouth, draws forth much phlegm.",
-"match": [
-53,
-61
-]
-},
-{
 "herb": "Masterwort",
 "text": "It is also used in a decoction with wine against all cold rheums, distillations upon the lungs, or shortness of breath, to be taken morning and evening.",
 "match": [
@@ -341,8 +317,8 @@
 "herb": "Mustard",
 "text": "…inwardly and outwardly, to rub the nostrils, forehead and temples, to warm and quicken the spirits; for by the fierce sharpness it purges the brain by sneezing, and drawing down rheum and other viscous humours, which by their distillations upon the lungs and chest, procure coughing, and therefore, with some, honey added thereto, doth much good…",
 "match": [
-152,
-160
+179,
+184
 ]
 },
 {
@@ -367,14 +343,6 @@
 "match": [
 244,
 253
-]
-},
-{
-"herb": "Pellitory of Spain",
-"text": "The powder of the herb or root being snuffed up the nostrils, procures sneezing, and eases the head-ache; being made into an ointment with hog’s grease, it takes away black and blue spots occasioned by blows or falls, and helps both the gout and sciatica.",
-"match": [
-71,
-79
 ]
 },
 {
@@ -559,6 +527,576 @@
 "match": [
 80,
 85
+]
+},
+{
+"herb": "Black Thorn, or Sloe-Bush",
+"text": "The leaves also are good to make lotions to gargle and wash the mouth and throat, wherein are swellings, sores, or kernels; and to stay the defluctions of rheum to the eyes, or other parts; as also to cool the heat and inflammations of them, and ease hot pains of the head, to bathe the forehead and temples therewith.",
+"match": [
+155,
+160
+]
+},
+{
+"herb": "Tormentil, or Septfoil",
+"text": "It is found also helpful to dry up any sharp rheum that distills from the head into the eyes, causing redness, pain, waterings, itching, or the like, if a little prepared tutia, or white amber, be used with the distilled water thereof.",
+"match": [
+45,
+50
+]
+},
+{
+"herb": "Garden Valerian",
+"text": "The green herb with the root taken fresh, being bruised and applied to the head, takes away the pains and prickings there, stays rheum and thin distillation, and being boiled in white wine, and a drop thereof put into the eyes, takes away the dimness of the sight, or any pin or web therein.",
+"match": [
+129,
+134
+]
+},
+{
+"herb": "Violets",
+"text": "The herb or flowers, while they are fresh, or the flowers when they are dry, are effectual in the pleurisy, and all diseases of the lungs, to lenify the sharpness in hot rheums, and the hoarseness of the throat, the heat also and sharpness of urine, and all the pains of the back or reins, and bladder.",
+"match": [
+170,
+176
+]
+},
+{
+"herb": "Willow Tree",
+"text": "It helps also to stay thin, hot, sharp, salt distillations from the head upon the lungs, causing a consumption.",
+"match": [
+45,
+58
+]
+},
+{
+"herb": "Willow Tree",
+"text": "Water that is gathered from the Willow, when it flowers, the bark being slit, and a vessel fitting to receive it, is very good for redness and dimness of sight, or films that grow over the eyes, and stay the rheums that fall into them; to provoke urine, being stopped, if it be drank; to clear the face and skin from spots and discolourings.",
+"match": [
+208,
+214
+]
+},
+{
+"herb": "Woad",
+"text": "Anthony’s fire, and stays defluxion of the blood to any part of the body.",
+"match": [
+26,
+35
+]
+}
+],
+"hay fever": [
+{
+"herb": "Bay Tree",
+"text": "They wonderfully help all cold and rheumatic distillations from the brain to the eyes, lungs or other parts; and being made into an electuary with honey, do help the consumption, old coughs, shortness of breath, and thin rheums; as also the megrim.",
+"match": [
+45,
+58
+]
+},
+{
+"herb": "Bay Tree",
+"text": "A decoction likewise of equal parts of Bay-berries, cummin seed, hyssop, origanum, and euphorbium, with some honey, and the head bathed therewith, wonderfully helps distillations and rheums, and settles the pallate of the mouth into its place.",
+"match": [
+165,
+178
+]
+},
+{
+"herb": "Water Betony",
+"text": "…cold; some virtues of the herb they may haply have (it were a strange thing else;) but this I am confident of, that being distilled in a pewter still, as the vulgar and apish fashion is, both chemical oil and salt is left behind unless you burn them, and then all is spoiled, water and all, which was good for as little as can be, by such a…",
+"match": [
+342,
+354
+]
+},
+{
+"herb": "Wood Betony",
+"text": "The powder mixed with pure honey is no less available for all sorts of coughs or colds, wheesing, or shortness of breath, distillations of thin rheum upon the lungs, which causes consumptions.",
+"match": [
+122,
+135
+]
+},
+{
+"herb": "Bistort, or Snakeweed",
+"text": "…thereof, with pelitory of Spain and burnt alum, of each a little quantity, beaten small and into paste with some honey, and a little piece thereof put into a hollow tooth, or held between the teeth, if there be no hollowness in them, stays the defluction of rheum upon them which causes pains, and helps to cleanse the head, and void much offensive…",
+"match": [
+259,
+264
+]
+},
+{
+"herb": "Borage and Bugloss",
+"text": "…dried is never used, but the green; yet the ashes thereof boiled in mead, or honied water, is available against the inflammations and ulcers in the mouth or throat, to gargle it therewith; the roots of Bugloss are effectual, being made into a licking electuary for the cough, and to condensate thick phlegm, and the rheumatic distillations upon the…",
+"match": [
+327,
+340
+]
+},
+{
+"herb": "Buck's-Horn Plantain",
+"text": "The herb boiled in ale and wine, and given for some mornings and evenings together, stays the distillation of hot and sharp rheums falling into the eyes from the head, and helps all sorts of sore eyes.",
+"match": [
+94,
+106
+]
+},
+{
+"herb": "Clary, or more properly Clear-Eye",
+"text": "The powder of the dried root put into the nose, provokes sneezing, and thereby purges the head and brain of much rheum and corruption.",
+"match": [
+113,
+118
+]
+},
+{
+"herb": "Coltsfoot",
+"text": "The dry leaves are best for those that have thin rheums and distillations upon their lungs, causing a cough, for which also the dried leaves taken as tobacco, or the root is very good.",
+"match": [
+49,
+55
+]
+},
+{
+"herb": "Comfrey",
+"text": "It helps the defluction of rheum from the head upon the lungs, the fluxes of blood or humours by the belly, women’s immoderate courses, as well the reds as the whites, and the running of the reins happening by what cause soever.",
+"match": [
+27,
+32
+]
+},
+{
+"herb": "Costmary, or Alcost, or Balsam Herb",
+"text": "Taken fasting in the morning, it is very profitable for pains in the head that are continual, and to stay, dry up, and consume all thin rheums or distillations from the head into the stomach, and helps much to digest raw humours that are gathered therein.",
+"match": [
+136,
+142
+]
+},
+{
+"herb": "Cudweed, or Cottonweed",
+"text": "The plants are all astringent, binding, or drying, and therefore profitable for defluctions of rheum from the head, and to stay fluxes of blood wheresoever, the decoction being made into red wine and drank, or the powder taken therein.",
+"match": [
+95,
+100
+]
+},
+{
+"herb": "Black Cresses",
+"text": "…little inferior to mustard seed, if at all; they are excellently good to stay those rheums which may fall down from the head upon the lungs; you may beat the seed into powder, if you please, and make it up into an electuary with honey; so you have an excellent remedy by you, not only for the premises, but also for the cough, yellow jaundice and…",
+"match": [
+85,
+91
+]
+},
+{
+"herb": "Sciatica Cresses",
+"text": "…afterwards bathed with wine and oil mixed together, and then wrapped with wool or skins, after they have sweat a little, will assuredly cure not only the same disease in hips, knuckle-bone, or other of the joints, as gout in the hands or feet, but all other old griefs of the head, (as inveterate rheums,) and other parts of the body that are hard…",
+"match": [
+298,
+304
+]
+},
+{
+"herb": "Crowfoot",
+"text": "This fiery and hot-spirited herb of Mars is no way fit to be given inwardly, but an ointment of the leaves or flowers will draw a blister, and may be so fitly applied to the nape of the neck to draw back rheum from the eyes.",
+"match": [
+204,
+209
+]
+},
+{
+"herb": "Cucumbers",
+"text": "The face being washed with their juice, cleanses the skin, and is excellently good for hot rheums in the eyes; the seed is excellently good to provoke urine, and cleanses the passages thereof when they are stopped: there is not a better remedy for ulcers in the bladder growing, than Cucumbers are;",
+"match": [
+91,
+97
+]
+},
+{
+"herb": "Yellow Water-Flag, or Flower-De-Luce",
+"text": "The distilled water of the whole herb, flowers and roots, is a sovereign good remedy for watering eyes, both to be dropped into them, and to have cloths or sponges wetted therein, and applied to the forehead:",
+"match": [
+89,
+102
+]
+},
+{
+"herb": "Flower-De-Luce",
+"text": "The head and temples anointed therewith, helps the catarrh or thin rheum distilled from thence; and used upon the breast or stomach, helps to extenuate the cold tough phlegm; it helps also the pains and noise in the ears, and the stench of the nostrils.",
+"match": [
+67,
+72
+]
+},
+{
+"herb": "Fluellin, or Lluellin",
+"text": "The leaves bruised and applied with barley meal to watering eyes that are hot and inflamed by defluxions from the head, do very much help them, as also the fluxes of blood or humours, as the lask, bloody flux, women’s courses, and stays all manner of bleeding at the nose, mouth, or any other place, or that comes by any bruise or hurt, or bursting…",
+"match": [
+51,
+64
+]
+},
+{
+"herb": "Groundsel",
+"text": "The distilled water of the herb performs well all the aforesaid cures, but especially for inflammations or watering of the eyes, by reason of the defluxion of rheum unto them.",
+"match": [
+146,
+155
+]
+},
+{
+"herb": "Hazel-Nut",
+"text": "The parted kernels made into an electuary, or the milk drawn from the kernels with mead or honeyed water, is very good to help an old cough; and being parched, and a little pepper put to them and drank, digests the distillations of rheum from the head.",
+"match": [
+215,
+228
+]
+},
+{
+"herb": "Hyssop",
+"text": "…those that are troubled with coughs, shortness of breath, wheezing and rheumatic distillation upon the lungs; taken also with oxymel, it purges gross humours by stool; and with honey, kills worms in the belly; and with fresh and new figs bruised, helps to loosen the belly, and more forcibly if the root of Flower-de-luce and cresses be added…",
+"match": [
+82,
+94
+]
+},
+{
+"herb": "Horehound",
+"text": "A decoction of the dried herb, with the seed, or the juice of the green herb taken with honey, is a remedy for those that are short-winded, have a cough, or are fallen into a consumption, either through long sickness, or thin distillations of rheum upon the lungs.",
+"match": [
+226,
+239
+]
+},
+{
+"herb": "Horehound",
+"text": "There is a syrup made of Horehound to be had at the apothecaries, very good for old coughs, to rid the tough phlegm; as also to void cold rheums from the lungs of old folks, and for those that are asthmatic or short-winded.",
+"match": [
+138,
+144
+]
+},
+{
+"herb": "Horsetail",
+"text": "The decoction thereof in wine being drank, provokes urine, and helps the stone and stranguary; and the distilled water thereof drank two or three times in a day, and a small quantity at a time, also eases the bowels, and is effectual against a cough that comes by distillations from the head.",
+"match": [
+264,
+277
+]
+},
+{
+"herb": "Houseleek or Sengreen",
+"text": "…heats as well as outward, and in the eyes or other parts of the body; a posset made with the juice of Houseleek, is singularly good in all hot agues, for it cools and tempers the blood and spirits, and quenches the thirst; and also good to stay all hot defluctions or sharp and salt rheums in the eyes, the juice being dropped into them, or into the…",
+"match": [
+284,
+290
+]
+},
+{
+"herb": "Hound's Tongue",
+"text": "The root is very effectually used in pills, as well as the decoction, or otherwise, to stay all sharp and thin defluxions of rheum from the head into the eyes or nose, or upon the stomach or lungs, as also for coughs and shortness of breath.",
+"match": [
+111,
+121
+]
+},
+{
+"herb": "Ivy",
+"text": "…snuffed up into the nose, purges the head and brain of thin rheum that makes defluxions into the eyes and nose, and curing the ulcers and stench therein; the same dropped into the ears helps the old and running sores of them, those that are troubled with the spleen, shall find much ease by continual drinking out of a cup made of Ivy, so as the…",
+"match": [
+61,
+66
+]
+},
+{
+"herb": "Knapweed",
+"text": "…or inward wounds, as also the fluxes of the belly; it stays distillation of thin and sharp humours from the head upon the stomach and lungs; it is good for those that are bruised by any fall, blows or otherwise, and is profitable for those that are bursten, and have ruptures, by drinking the decoction of the herb and roots in wine, and applying…",
+"match": [
+61,
+73
+]
+},
+{
+"herb": "Knotgrass",
+"text": "Being boiled in wine and drank, it is profitable to those that are stung or bitten by venemous creatures, and very effectual to stay all defluxions of rheumatic humours upon the stomach, and kills worms in the belly or stomach, quiets inward pains that arise from the heat, sharpness and corruption of blood and choler.",
+"match": [
+137,
+147
+]
+},
+{
+"herb": "Liquorice",
+"text": "Liquorice boiled in fair water, with some Maiden-hair and figs, makes a good drink for those that have a dry cough or hoarseness, wheezing or shortness of breath, and for all the griefs of the breast and lungs, phthisic or consumptions caused by the distillation of salt humours on them.",
+"match": [
+250,
+262
+]
+},
+{
+"herb": "Liquorice",
+"text": "The fine powder of Liquorice blown through a quill into the eyes that have a pin and web (as they call it) or rheumatic distillations in them, doth cleanse and help them.",
+"match": [
+120,
+133
+]
+},
+{
+"herb": "Mallows and Marshmallows",
+"text": "If the feet be bathed or washed with the decoction of the leaves, roots, and flowers, it helps much the defluxions of rheum from the head; if the head be washed therewith, it stays the falling and shedding of the hair.",
+"match": [
+104,
+114
+]
+},
+{
+"herb": "Masterwort",
+"text": "It is also used in a decoction with wine against all cold rheums, distillations upon the lungs, or shortness of breath, to be taken morning and evening.",
+"match": [
+58,
+64
+]
+},
+{
+"herb": "Medlar",
+"text": "The decoction of them is good to gargle and wash the mouth, throat and teeth, when there is any defluxions of blood to stay it, or of humours, which causes the pains and swellings.",
+"match": [
+96,
+106
+]
+},
+{
+"herb": "Dog Mercury",
+"text": "He used it also for sore and watering eyes, and for the deafness and pains in the ears, by dropping the juice thereof into them, and bathing them afterwards in white wine.",
+"match": [
+29,
+42
+]
+},
+{
+"herb": "Dog Mercury",
+"text": "The juice or distilled water snuffed up into the nostrils, purges the head and eyes of catarrhs and rheums.",
+"match": [
+100,
+106
+]
+},
+{
+"herb": "Mosses",
+"text": "The oil that has had fresh Moss steeped therein for a time, and afterwards boiled and applied to the temples and forehead, marvellously eases the head-ache coming of a hot cause; as also the distillations of hot rheums or humours in the eyes, or other parts.",
+"match": [
+191,
+204
+]
+},
+{
+"herb": "Mustard",
+"text": "…inwardly and outwardly, to rub the nostrils, forehead and temples, to warm and quicken the spirits; for by the fierce sharpness it purges the brain by sneezing, and drawing down rheum and other viscous humours, which by their distillations upon the lungs and chest, procure coughing, and therefore, with some, honey added thereto, doth much good…",
+"match": [
+179,
+184
+]
+},
+{
+"herb": "Nep, or Catmint",
+"text": "It is also used in pains of the head coming of any cold cause, catarrhs, rheums, and for swimming and giddiness thereof, and is of special use for the windiness of the stomach and belly.",
+"match": [
+73,
+79
+]
+},
+{
+"herb": "Nettles",
+"text": "…from the bones; the same applied to our wearied members, refresh them, or to place those that have been out of joint, being first set up again, strengthens, dries, and comforts them, as also those places troubled with aches and gouts, and the defluxion of humours upon the joints or sinews; it eases the pains, and dries or dissolves the…",
+"match": [
+244,
+253
+]
+},
+{
+"herb": "Ground Pine, or Chamepitys",
+"text": "It helps also all diseases of the brain, proceeding of cold and phlegmatic humours and distillations, as also for the falling sickness.",
+"match": [
+87,
+100
+]
+},
+{
+"herb": "Plantain",
+"text": "The juice of Plantain clarified and drank for divers days together, either of itself, or in other drink, prevails wonderfully against all torments or excoriations in the intestines or bowels, helps the distillations of rheum from the head, and stays all manner of fluxes, even women’s courses, when they flow too abundantly.",
+"match": [
+202,
+215
+]
+},
+{
+"herb": "Plums",
+"text": "Plum-tree leaves boiled in wine, are good to wash and gargle the mouth and throat, to dry the flux of rheum coming to the palate, gums, or almonds of the ear.",
+"match": [
+102,
+107
+]
+},
+{
+"herb": "Polypody of the Oak",
+"text": "…commended for the quartan ague, to be taken for many days together, as also against melancholy, or fearful and troublesome sleeps or dreams; and with some sugar-candy dissolved therein, is good against the cough, shortness of breath, and wheezings, and those distillations of thin rheum upon the lungs, which cause phthisicks, and oftentimes…",
+"match": [
+260,
+273
+]
+},
+{
+"herb": "Poppy",
+"text": "…frequently, and to good effect used to procure rest, and sleep, in the sick and weak, and to stay catarrhs and defluxions of thin rheums from the head into the stomach and lungs, causing a continual cough, the fore-runner of a consumption; it helps also hoarseness of the throat, and when one have lost their voice, which the oil of the seed doth…",
+"match": [
+112,
+122
+]
+},
+{
+"herb": "Poppy",
+"text": "It is also used to cool inflammations, agues, or frenzies, or to stay defluxions which cause a cough, or consumptions, and also other fluxes of the belly or women’s courses; it is also put into hollow teeth, to ease the pain, and hath been found by experience to ease the pains of the gout.",
+"match": [
+70,
+80
+]
+},
+{
+"herb": "Purslain",
+"text": "It stays hot and choleric fluxes of the belly, women’s courses, the whites, and gonorrhæa, or running of the reins, the distillation from the head, and pains therein proceeding from heat, want of sleep, or the frenzy.",
+"match": [
+120,
+132
+]
+},
+{
+"herb": "Privet",
+"text": "…distilled from the flowers, that is good for all those diseases that need cooling and drying, and therefore helps all fluxes of the belly or stomach, bloody-fluxes, and women’s courses, being either drank or applied; as all those that void blood at the mouth, or any other place, and for distillations of rheum in the eyes, especially if it be used…",
+"match": [
+289,
+302
+]
+},
+{
+"herb": "Ragwort",
+"text": "It helps to stay catarrhs, thin rheums, and defluxions from the head into the eyes, nose, or lungs.",
+"match": [
+32,
+38
+]
+},
+{
+"herb": "Rest Harrow, or Cammock",
+"text": "The decoction thereof made with some vinegar, gargled in the mouth, eases the tooth-ache, especially when it comes of rheum; and the said decoction is very powerful to open obstructions of the liver and spleen, and other parts.",
+"match": [
+118,
+123
+]
+},
+{
+"herb": "Roses",
+"text": "…erroneously called the Rose Seed) being powdered and drank in the distilled water of Quinces, stays the overflowing of women’s courses, and doth wonderfully stay the defluctions of rheum upon the gums and teeth, preserving them from corruption, and fastening them if they be loose, being washed and gargled therewith, and some vinegar of Squills…",
+"match": [
+182,
+187
+]
+},
+{
+"herb": "Roses",
+"text": "The husks of the Roses, with the beards and nails of the Roses, are binding and cooling, and the distilled water of either of them is good for the heat and redness in the eyes, and to stay and dry up the rheums and watering of them.",
+"match": [
+204,
+210
+]
+},
+{
+"herb": "Roses",
+"text": "…younger Conserve taken with mithridate mixed together, is good for those that are troubled with distillations of rheum from the brain to the nose, and defluctions of rheum into the eyes; as also for fluxes and lasks of the belly; and being mixed with the powder of mastich, is very good for the gonorrhea, and for the looseness of the humours in the…",
+"match": [
+97,
+110
+]
+},
+{
+"herb": "Rosa Solis, or Sun Dew",
+"text": "Rose Solis is accounted good to help those that have a salt rheum distilling on their lungs, which breeds a consumption, and therefore the distilled water thereof in wine is held fit and profitable for such to drink, which water will be of a good yellow colour.",
+"match": [
+60,
+65
+]
+},
+{
+"herb": "Rosemary",
+"text": "The decoction thereof in wine, helps the cold distillations of rheum into the eyes, and all other cold diseases of the head and brain, as the giddiness or swimmings therein, drowsiness or dullness of the mind and senses like a stupidness, the dumb palsy, or loss of speech, the lethargy, and fallen-sickness, to be both drank, and the temples bathed…",
+"match": [
+46,
+59
+]
+},
+{
+"herb": "Rosemary",
+"text": "It helps the pains in the gums and teeth, by rheum falling into them, not by putrefaction, causing an evil smell from them, or a stinking breath.",
+"match": [
+45,
+50
+]
+},
+{
+"herb": "Rosemary",
+"text": "The dried leaves shred small, and taken in a pipe, as tobacco is taken, helps those that have any cough, phthisic, or consumption, by warming and drying the thin distillations which cause those diseases.",
+"match": [
+162,
+175
+]
+},
+{
+"herb": "Rupture-Wort",
+"text": "Being outwardly applied, it conglutinates wounds notably, and helps much to stay defluctions of rheum from the head to the eyes, nose, and teeth, being bruised green and bound thereto; or the forehead, temples, or the nape of the neck behind, bathed with the decoction of the dried herb.",
+"match": [
+96,
+101
+]
+},
+{
+"herb": "Sage",
+"text": "…for all manner of pains in the head coming of cold and rheumatic humours: as also for all pains of the joints, whether inwardly or outwardly, and therefore helps the falling-sickness, the lethargy, such as are dull and heavy of spirit, the palsy; and is of much use in all defluctions of rheum from the head, and for the diseases of the chest or…",
+"match": [
+289,
+294
+]
+},
+{
+"herb": "Spignel, or Spikenard",
+"text": "If the powder of the root be mixed with honey, and the same taken as a licking medicine, it breaks tough phlegm, and dries up the rheum that falls on the lungs.",
+"match": [
+130,
+135
+]
+},
+{
+"herb": "Strawberries",
+"text": "It helps also to stay catarrhs, or defluctions of rheum in the mouth, throat, teeth, or eyes.",
+"match": [
+50,
+55
+]
+},
+{
+"herb": "English Tobacco",
+"text": "…distilled fæces of the herb, having been bruised before the distillation, and not distilled dry, be set in warm dung for fourteen days, and afterwards be hung in a bag in a wine cellar, the liquor that distills therefrom is singularly good to use in cramps, aches, the gout and sciatica, and to heal itches, scabs, and running ulcers, cankers, and…",
+"match": [
+61,
+73
+]
+},
+{
+"herb": "Tamarisk Tree",
+"text": "…boiled in wine, and drank, stays the bleeding of the hæmorrhodical veins, the spitting of blood, the too abounding of women’s courses, the jaundice, the cholic, and the biting of all venomous serpents, except the asp; and outwardly applied, is very powerful against the hardness of the spleen, and the tooth-ache, pains in the ears, red and watering…",
+"match": [
+342,
+355
 ]
 },
 {
@@ -8929,7 +9467,7 @@
 "herb": "Adder's Tongue or Serpent's Tongue",
 "text": "It helps sore eyes.",
 "match": [
-14,
+9,
 18
 ]
 },
@@ -8953,16 +9491,8 @@
 "herb": "Anemone",
 "text": "Being made into an ointment, and the eyelids anointed with it, it helps inflammations of the eyes, whereby it is palpable, that every stronger draws its weaker like.",
 "match": [
-93,
+72,
 97
-]
-},
-{
-"herb": "Prickly Asparagus, or Sperage",
-"text": "The decoction of the roots boiled in wine and taken, is good to clear the sight, and being held in the mouth easeth the toothache.",
-"match": [
-74,
-79
 ]
 },
 {
@@ -9001,7 +9531,7 @@
 "herb": "Beets",
 "text": "The juice of it opens obstructions both of the liver and spleen, and is good for the head-ache and swimmings therein, and turnings of the brain; and is effectual also against all venomous creatures; and applied to the temples, stays inflammations of the eyes; it helps burnings, being used with oil, and with a little alum put to it, is good for St.",
 "match": [
-254,
+233,
 258
 ]
 },
@@ -9023,10 +9553,10 @@
 },
 {
 "herb": "Borage and Bugloss",
-"text": "…purposes aforesaid, and helps the redness and inflammations of the eyes, being washed therewith; the herb dried is never used, but the green; yet the ashes thereof boiled in mead, or honied water, is available against the inflammations and ulcers in the mouth or throat, to gargle it therewith; the roots of Bugloss are effectual, being made into a…",
+"text": "…effectual to all the purposes aforesaid, and helps the redness and inflammations of the eyes, being washed therewith; the herb dried is never used, but the green; yet the ashes thereof boiled in mead, or honied water, is available against the inflammations and ulcers in the mouth or throat, to gargle it therewith; the roots of Bugloss are…",
 "match": [
 68,
-72
+93
 ]
 },
 {
@@ -9054,14 +9584,6 @@
 ]
 },
 {
-"herb": "Carraway",
-"text": "The seed is conducing to all cold griefs of the head and stomach, bowels, or mother, as also the wind in them, and helps to sharpen the eye-sight.",
-"match": [
-140,
-145
-]
-},
-{
 "herb": "Celandine",
 "text": "…under the Celestial Lion, and is one of the best cures for the eyes; for, all that know any thing in astrology, know that the eyes are subject to the luminaries; let it then be gathered when the Sun is in Leo, and the Moon in Aries, applying to this time; let Leo arise, then may you make into an oil or ointment, which you please, to anoint your…",
 "match": [
@@ -9073,16 +9595,8 @@
 "herb": "Celandine",
 "text": "I can prove it doth both my own experience, and the experience of those to whom I have taught it, that most desperate sore eyes have been cured by this only medicine; and then, I pray, is not this far better than endangering the eyes by the art of the needle?",
 "match": [
-123,
+118,
 127
-]
-},
-{
-"herb": "Celandine",
-"text": "For if this does not absolutely take away the film, it will so facilitate the work, that it might be done without danger.",
-"match": [
-46,
-50
 ]
 },
 {
@@ -9095,26 +9609,10 @@
 },
 {
 "herb": "Celandine",
-"text": "Another ill-favoured trick have physicians got to use to the eye, and that is worse than the needle; which is to take away the films by corroding or gnawing medicine.",
-"match": [
-127,
-132
-]
-},
-{
-"herb": "Celandine",
 "text": "Because the tunicles of the eyes are very thin, and therefore soon eaten asunder. 2.",
 "match": [
 28,
 32
-]
-},
-{
-"herb": "Celandine",
-"text": "The callus or film that they would eat away, is seldom of an equal thickness in every place, and then the tunicle may be eaten asunder in one place, before the film be consumed in another, and so be a readier way to extinguish the sight than to restore it.",
-"match": [
-14,
-18
 ]
 },
 {
@@ -9142,27 +9640,11 @@
 ]
 },
 {
-"herb": "Cherry-Tree",
-"text": "The gum of the Cherry-tree, desolved in wine is good for a cold, cough, and hoarseness of the throat; mends the colour in the face, sharpens the eye-sight, provokes appetite, and helps to break and expel the stone, and dissolved, the water thereof is much used to break the stone, and to expel gravel and wind.",
-"match": [
-149,
-154
-]
-},
-{
 "herb": "Chickweed",
 "text": "The juice, or distilled water, is of much good use for all heats and redness in the eyes, to drop some thereof into them; as also into the ears, to ease pains in them; and is of good effect to ease pains from the heat and sharpness of the blood in the piles, and generally all pains in the body that arise of heat.",
 "match": [
-84,
+69,
 88
-]
-},
-{
-"herb": "Cives",
-"text": "If they be eaten raw, (I do not mean raw, opposite to roasted or boiled, but raw, opposite to chymical preparation) they send up very hurtful vapours to the brain, causing troublesome sleep, and spoiling the eye-sight, yet of them prepared by the art of the alchymist, may be made an excellent remedy for the stoppage of the urine.",
-"match": [
-212,
-217
 ]
 },
 {
@@ -9183,10 +9665,10 @@
 },
 {
 "herb": "Wild Clary",
-"text": "It is a gallant remedy for dimness of sight, to take one of the seeds of it, and put into the eyes, and there let it remain till it drops out of itself, (the pain will be nothing to speak on,) it will cleanse the eyes of all filthy and putrified matter; and in often repeating it, will take off a film which covers the sight: a handsomer, safer, and…",
+"text": "…dimness of sight, to take one of the seeds of it, and put into the eyes, and there let it remain till it drops out of itself, (the pain will be nothing to speak on,) it will cleanse the eyes of all filthy and putrified matter; and in often repeating it, will take off a film which covers the sight: a handsomer, safer, and easier remedy by a great…",
 "match": [
-27,
-34
+68,
+72
 ]
 },
 {
@@ -9225,7 +9707,7 @@
 "herb": "Duck's Meat",
 "text": "The distilled water by some is highly esteemed against all inward inflammations and pestilent fevers; as also to help the redness of the eyes, and swellings of privities, and of the breasts before they be grown too much.",
 "match": [
-137,
+122,
 141
 ]
 },
@@ -9239,10 +9721,10 @@
 },
 {
 "herb": "Dwarf-Elder",
-"text": "…of the green leaves applied to the hot inflammations of the eyes, assuages them; the juice of the leaves snuffed up into the nostrils, purges the tunicles of the brain; the juice of the berries boiled with honey and dropped into the ears, helps the pains of them; the decoction of the berries in wine, being drank, provokes urine; the distilled…",
+"text": "The juice of the green leaves applied to the hot inflammations of the eyes, assuages them; the juice of the leaves snuffed up into the nostrils, purges the tunicles of the brain; the juice of the berries boiled with honey and dropped into the ears, helps the pains of them; the decoction of the berries in wine, being drank, provokes urine; the…",
 "match": [
-61,
-65
+49,
+74
 ]
 },
 {
@@ -9257,7 +9739,7 @@
 "herb": "Dwarf-Elder",
 "text": "…Elder in opening and purging choler, phlegm, and water; in helping the gout, piles, and women’s diseases, colours the hair black, helps the inflammations of the eyes, and pains in the ears, the biting of serpents, or mad dogs, burnings and scaldings, the wind cholic, cholic, and stone, the difficulty of urine, the cure of old sores and fistulous…",
 "match": [
-162,
+141,
 166
 ]
 },
@@ -9265,7 +9747,7 @@
 "herb": "Endive",
 "text": "Outwardly applied, they serve to temper the sharp humours of fretting ulcers, hot tumours, swellings, and pestilential sores; and wonderfully help not only the redness and inflammations of the eyes, but the dimness of the sight also; they are also used to allay the pains of the gout.",
 "match": [
-193,
+172,
 197
 ]
 },
@@ -9273,8 +9755,8 @@
 "herb": "Elecampane",
 "text": "The roots and herbs beaten and put into new ale or beer, and daily drank, clears, strengthens, and quickens the sight of the eyes wonderfully.",
 "match": [
-112,
-117
+125,
+129
 ]
 },
 {
@@ -9283,14 +9765,6 @@
 "match": [
 102,
 106
-]
-},
-{
-"herb": "Eyebright",
-"text": "…powder of the dried herb mixed with sugar, a little Mace, and Fennel seed, and drank, or eaten in broth; or the said powder made into an electuary with sugar, and taken, has the same powerful effect to help and restore the sight, decayed through age; and Arnoldus de Ville Nova saith, it hath restored sight to them that have been blind a long time…",
-"match": [
-224,
-229
 ]
 },
 {
@@ -9305,7 +9779,7 @@
 "herb": "Yellow Water-Flag, or Flower-De-Luce",
 "text": "The distilled water of the whole herb, flowers and roots, is a sovereign good remedy for watering eyes, both to be dropped into them, and to have cloths or sponges wetted therein, and applied to the forehead:",
 "match": [
-98,
+89,
 102
 ]
 },
@@ -9329,7 +9803,7 @@
 "herb": "Fluellin, or Lluellin",
 "text": "The leaves bruised and applied with barley meal to watering eyes that are hot and inflamed by defluxions from the head, do very much help them, as also the fluxes of blood or humours, as the lask, bloody flux, women’s courses, and stays all manner of bleeding at the nose, mouth, or any other place, or that comes by any bruise or hurt, or bursting…",
 "match": [
-60,
+51,
 64
 ]
 },
@@ -9377,7 +9851,7 @@
 "herb": "Henbane",
 "text": "The leaves of Henbane do cool all hot inflammations in the eyes, or any other part of the body; and are good to assuage all manner of swellings of the privities, or women’s breast, or elsewhere, if they be boiled in wine, and either applied themselves, or the fomentation warm; it also assuages the pain of the gout, the sciatica, and other pains in…",
 "match": [
-59,
+38,
 63
 ]
 },
@@ -9406,14 +9880,6 @@
 ]
 },
 {
-"herb": "Juniper Bush",
-"text": "They give safe and speedy delivery to women with child, they strengthen the brain exceedingly, help the memory, and fortify the sight by strengthening the optic nerves; are excellently good in all sorts of agues; help the gout and sciatica, and strengthen the limbs of the body.",
-"match": [
-128,
-133
-]
-},
-{
 "herb": "Lily of the Valley",
 "text": "The distilled water dropped into the eyes, helps inflammations there; as also that infirmity which they call a pin and web.",
 "match": [
@@ -9433,8 +9899,8 @@
 "herb": "Loosestrife, with Spiked Heads of Flowers",
 "text": "It is an herb of the Moon, and under the sign Cancer; neither do I know a better preserver of the sight when it is well, nor a better cure for sore eyes than Eyebright, taken inwardly, and this used outwardly; it is cold in quality.",
 "match": [
-98,
-103
+143,
+152
 ]
 },
 {
@@ -9497,7 +9963,7 @@
 "herb": "Dog Mercury",
 "text": "He used it also for sore and watering eyes, and for the deafness and pains in the ears, by dropping the juice thereof into them, and bathing them afterwards in white wine.",
 "match": [
-38,
+29,
 42
 ]
 },
@@ -9521,7 +9987,7 @@
 "herb": "Nightshade",
 "text": "But outwardly the juice of the herb or berries, with oil of roses and a little vinegar and ceruse laboured together in a leaden mortar, is very good to anoint all hot inflammations in the eyes.",
 "match": [
-188,
+167,
 192
 ]
 },
@@ -9547,14 +10013,6 @@
 "match": [
 123,
 127
-]
-},
-{
-"herb": "Pennyroyal",
-"text": "Matthiolus saith, The decoction thereof being drank, helps the jaundice and dropsy, all pains of the head and sinews that come of a cold cause, and clears the eye-sight.",
-"match": [
-163,
-168
 ]
 },
 {
@@ -9601,7 +10059,7 @@
 "herb": "Queen of the Meadows, Meadow Sweet, or Mead Sweet",
 "text": "The water thereof helps the heat and inflammation in the eyes.",
 "match": [
-57,
+37,
 61
 ]
 },
@@ -9617,8 +10075,8 @@
 "herb": "Rattle Grass",
 "text": "The yellow Rattle, or Cock’s Comb, is held to be good for those that are troubled with a cough, or dimness of sight, if the herb, being boiled with beans, and some honey put thereto, be drank or dropped into the eyes.",
 "match": [
-99,
-106
+212,
+216
 ]
 },
 {
@@ -9633,7 +10091,7 @@
 "herb": "Roses",
 "text": "The decoction of red Roses made with wine and used, is very good for the head-ache, and pains in the eyes, ears, throat, and gums; as also for the fundament, the lower part of the belly and the matrix, being bathed or put into them.",
 "match": [
-101,
+88,
 105
 ]
 },
@@ -9641,7 +10099,7 @@
 "herb": "Roses",
 "text": "The husks of the Roses, with the beards and nails of the Roses, are binding and cooling, and the distilled water of either of them is good for the heat and redness in the eyes, and to stay and dry up the rheums and watering of them.",
 "match": [
-171,
+156,
 175
 ]
 },
@@ -9649,7 +10107,7 @@
 "herb": "Roses",
 "text": "It purges choler without trouble, it is good in hot fevers, and pains of the head arising from hot choleric humours, and heat in the eyes, the jaundice also, and joint-aches proceeding of hot humours.",
 "match": [
-133,
+121,
 137
 ]
 },
@@ -9663,10 +10121,10 @@
 },
 {
 "herb": "Roses",
-"text": "…of much good use against the redness and inflammations of the eyes to bathe them therewith, and the temples of the head; as also against pain and ache, for which purpose also Vinegar of Roses is of much good use, and to procure rest and sleep, if some thereof, and Rose-water together, be used to smell unto, or the nose and temples moistened…",
+"text": "It is also of much good use against the redness and inflammations of the eyes to bathe them therewith, and the temples of the head; as also against pain and ache, for which purpose also Vinegar of Roses is of much good use, and to procure rest and sleep, if some thereof, and Rose-water together, be used to smell unto, or the nose and temples…",
 "match": [
-63,
-67
+52,
+77
 ]
 },
 {
@@ -9687,26 +10145,10 @@
 },
 {
 "herb": "Great Round-Leaved Dock, or Bastard Rhubarb",
-"text": "It helps them that are troubled with the stone, provokes urine, and helps the dimness of the sight.",
-"match": [
-78,
-85
-]
-},
-{
-"herb": "Great Round-Leaved Dock, or Bastard Rhubarb",
 "text": "It is used to heal those ulcers that happen in the eyes or eyelids, being steeped and strained; as also to assuage the swellings and inflammations; and applied with honey, boiled in wine, it takes away all blue spots or marks that happen therein.",
 "match": [
 51,
 55
-]
-},
-{
-"herb": "Garden-Rue",
-"text": "The juice of it and fennel, with a little honey, and the gall of a cock put thereunto, helps the dimness of the eye-sight.",
-"match": [
-97,
-104
 ]
 },
 {
@@ -9745,7 +10187,7 @@
 "herb": "Southern Wood",
 "text": "It takes away inflammations in the eyes, if it be put with some part of a roasted quince, and boiled with a few crumbs of bread, and applied.",
 "match": [
-35,
+14,
 39
 ]
 },
@@ -9777,7 +10219,7 @@
 "herb": "Succory, or Chicory",
 "text": "The said water is very effectual for sore eyes that are inflamed with redness, for nurses’ breasts that are pained by the abundance of milk.",
 "match": [
-42,
+37,
 46
 ]
 },
@@ -9793,7 +10235,7 @@
 "herb": "Tamarisk Tree",
 "text": "…boiled in wine, and drank, stays the bleeding of the hæmorrhodical veins, the spitting of blood, the too abounding of women’s courses, the jaundice, the cholic, and the biting of all venomous serpents, except the asp; and outwardly applied, is very powerful against the hardness of the spleen, and the tooth-ache, pains in the ears, red and watering…",
 "match": [
-351,
+342,
 355
 ]
 },
@@ -9822,14 +10264,6 @@
 ]
 },
 {
-"herb": "Thyme",
-"text": "An ointment made of it takes away hot swellings and warts, helps the sciatica and dullness of sight, and takes away pains and hardness of the spleen. ’Tis excellent for those that are troubled with the gout.",
-"match": [
-94,
-99
-]
-},
-{
 "herb": "Tormentil, or Septfoil",
 "text": "It is found also helpful to dry up any sharp rheum that distills from the head into the eyes, causing redness, pain, waterings, itching, or the like, if a little prepared tutia, or white amber, be used with the distilled water thereof.",
 "match": [
@@ -9849,8 +10283,8 @@
 "herb": "Pearl Trefoil",
 "text": "It is particularly under the dominion of the Moon, and its icon shews that it is of a singular virtue against the pearl, or pin and web in the eyes.",
 "match": [
-124,
-135
+143,
+147
 ]
 },
 {
@@ -9871,10 +10305,10 @@
 },
 {
 "herb": "Violets",
-"text": "…body, either inwardly or outwardly, as inflammations in the eyes, in the matrix or fundament, in imposthumes also, and hot swellings, to drink the decoction of the leaves and flowers made with water in wine, or to apply them poultice-wise to the grieved places: it likewise eases pains in the head, caused through want of sleep; or any other pains…",
+"text": "…distemperature of the body, either inwardly or outwardly, as inflammations in the eyes, in the matrix or fundament, in imposthumes also, and hot swellings, to drink the decoction of the leaves and flowers made with water in wine, or to apply them poultice-wise to the grieved places: it likewise eases pains in the head, caused through want of…",
 "match": [
-61,
-65
+62,
+87
 ]
 },
 {
@@ -9889,8 +10323,8 @@
 "herb": "Willow Tree",
 "text": "Water that is gathered from the Willow, when it flowers, the bark being slit, and a vessel fitting to receive it, is very good for redness and dimness of sight, or films that grow over the eyes, and stay the rheums that fall into them; to provoke urine, being stopped, if it be drank; to clear the face and skin from spots and discolourings.",
 "match": [
-143,
-150
+189,
+193
 ]
 },
 {
@@ -9899,6 +10333,400 @@
 "match": [
 4,
 8
+]
+}
+],
+"bad eyesight": [
+{
+"herb": "Alehoof, or Ground-Ivy",
+"text": "The juice of Celandine, Field-daisies, and Ground-ivy clarified, and a little fine sugar dissolved therein, and dropped into the eyes, is a sovereign remedy for all pains, redness, and watering of them; as also for the pin and web, skins and films growing over the sight, it helps beasts as well as men.",
+"match": [
+219,
+230
+]
+},
+{
+"herb": "Angelica",
+"text": "The juice or the water, being dropped into the eyes or ears, helps dimness of sight and deafness; the juice put into the hollow teeth, easeth their pains.",
+"match": [
+67,
+74
+]
+},
+{
+"herb": "Prickly Asparagus, or Sperage",
+"text": "The decoction of the roots boiled in wine and taken, is good to clear the sight, and being held in the mouth easeth the toothache.",
+"match": [
+64,
+79
+]
+},
+{
+"herb": "Wood Betony",
+"text": "…blood and humours, that by falling into the eyes, do hinder the sight; the decoction thereof made in wine and taken, kills the worms in the belly, opens obstructions both of the spleen and liver; cures stitches, and pains in the back and sides, the torments and griping pains in the bowels, and the wind cholic; and mixed with honey purges the…",
+"match": [
+65,
+70
+]
+},
+{
+"herb": "Cabbages and Coleworts",
+"text": "The juice boiled with honey, and dropped into the corner of the eyes, clears the sight, by consuming any film or clouds beginning to dim it; it also consumes the cankers growing therein.",
+"match": [
+70,
+86
+]
+},
+{
+"herb": "Carraway",
+"text": "The seed is conducing to all cold griefs of the head and stomach, bowels, or mother, as also the wind in them, and helps to sharpen the eye-sight.",
+"match": [
+140,
+145
+]
+},
+{
+"herb": "Celandine",
+"text": "For if this does not absolutely take away the film, it will so facilitate the work, that it might be done without danger.",
+"match": [
+46,
+50
+]
+},
+{
+"herb": "Celandine",
+"text": "The juice dropped into the eyes, cleanses them from films and cloudiness which darken the sight, but it is best to allay the sharpness of the juice with a little breast milk.",
+"match": [
+52,
+57
+]
+},
+{
+"herb": "Celandine",
+"text": "Another ill-favoured trick have physicians got to use to the eye, and that is worse than the needle; which is to take away the films by corroding or gnawing medicine.",
+"match": [
+127,
+132
+]
+},
+{
+"herb": "Celandine",
+"text": "The callus or film that they would eat away, is seldom of an equal thickness in every place, and then the tunicle may be eaten asunder in one place, before the film be consumed in another, and so be a readier way to extinguish the sight than to restore it.",
+"match": [
+14,
+18
+]
+},
+{
+"herb": "Ordinary Small Centaury",
+"text": "The juice of the herb with a little honey put to it, is good to clear the eyes from dimness, mists and clouds that offend or hinder sight.",
+"match": [
+84,
+91
+]
+},
+{
+"herb": "Cherry-Tree",
+"text": "The gum of the Cherry-tree, desolved in wine is good for a cold, cough, and hoarseness of the throat; mends the colour in the face, sharpens the eye-sight, provokes appetite, and helps to break and expel the stone, and dissolved, the water thereof is much used to break the stone, and to expel gravel and wind.",
+"match": [
+149,
+154
+]
+},
+{
+"herb": "Cives",
+"text": "If they be eaten raw, (I do not mean raw, opposite to roasted or boiled, but raw, opposite to chymical preparation) they send up very hurtful vapours to the brain, causing troublesome sleep, and spoiling the eye-sight, yet of them prepared by the art of the alchymist, may be made an excellent remedy for the stoppage of the urine.",
+"match": [
+212,
+217
+]
+},
+{
+"herb": "Wild Clary",
+"text": "It is a gallant remedy for dimness of sight, to take one of the seeds of it, and put into the eyes, and there let it remain till it drops out of itself, (the pain will be nothing to speak on,) it will cleanse the eyes of all filthy and putrified matter; and in often repeating it, will take off a film which covers the sight: a handsomer, safer, and…",
+"match": [
+27,
+34
+]
+},
+{
+"herb": "Cuckow-Point",
+"text": "The water wherein the root has been boiled, dropped into the eyes, cleanses them from any film or skin, cloud or mists, which begin to hinder the sight, and helps the watering and redness of them, or when, by some chance, they become black and blue.",
+"match": [
+90,
+94
+]
+},
+{
+"herb": "Dragons",
+"text": "Also the distilled water being dropped into the eyes, takes away spots there, or the pin and web, and mends the dimness of sight; it is excellently good against pestilence and poison.",
+"match": [
+85,
+96
+]
+},
+{
+"herb": "Endive",
+"text": "Outwardly applied, they serve to temper the sharp humours of fretting ulcers, hot tumours, swellings, and pestilential sores; and wonderfully help not only the redness and inflammations of the eyes, but the dimness of the sight also; they are also used to allay the pains of the gout.",
+"match": [
+207,
+214
+]
+},
+{
+"herb": "Elecampane",
+"text": "The roots and herbs beaten and put into new ale or beer, and daily drank, clears, strengthens, and quickens the sight of the eyes wonderfully.",
+"match": [
+99,
+117
+]
+},
+{
+"herb": "Eyebright",
+"text": "The juice or distilled water of Eyebright, taken inwardly in white wine or broth, or dropped into the eyes for divers days together, helps all infirmities of the eyes that cause dimness of sight.",
+"match": [
+178,
+185
+]
+},
+{
+"herb": "Eyebright",
+"text": "…powder of the dried herb mixed with sugar, a little Mace, and Fennel seed, and drank, or eaten in broth; or the said powder made into an electuary with sugar, and taken, has the same powerful effect to help and restore the sight, decayed through age; and Arnoldus de Ville Nova saith, it hath restored sight to them that have been blind a long time…",
+"match": [
+224,
+229
+]
+},
+{
+"herb": "Fennel",
+"text": "The distilled water of the whole herb, or the condensate juice dissolved, but especially the natural juice, that in some counties issues out hereof of its own accord, dropped into the eyes, cleanses them from mists and films that hinder the sight.",
+"match": [
+219,
+224
+]
+},
+{
+"herb": "Fumitory",
+"text": "The juice dropped into the eyes, clears the sight and takes away redness and other defects in them, although it procure some pain for the present, and cause tears.",
+"match": [
+33,
+49
+]
+},
+{
+"herb": "Germander",
+"text": "It is most effectual against the poison of all serpents, being drank in wine, and the bruised herb outwardly applied; used with honey, it cleanses old and foul ulcers; and made into an oil, and the eyes anointed therewith, takes away the dimness and moistness.",
+"match": [
+238,
+245
+]
+},
+{
+"herb": "Hemlock",
+"text": "Anthony’s fire, wheals, pushes, and creeping ulcers that arise of hot sharp humours, by cooling and repelling the heat; the leaves bruised and laid to the brow or forehead are good for their eyes that are red and swollen; as also to take away a pin and web growing in the eye; this is a tried medicine:",
+"match": [
+245,
+256
+]
+},
+{
+"herb": "Juniper Bush",
+"text": "They give safe and speedy delivery to women with child, they strengthen the brain exceedingly, help the memory, and fortify the sight by strengthening the optic nerves; are excellently good in all sorts of agues; help the gout and sciatica, and strengthen the limbs of the body.",
+"match": [
+128,
+133
+]
+},
+{
+"herb": "Lily of the Valley",
+"text": "The distilled water dropped into the eyes, helps inflammations there; as also that infirmity which they call a pin and web.",
+"match": [
+111,
+122
+]
+},
+{
+"herb": "Liquorice",
+"text": "The fine powder of Liquorice blown through a quill into the eyes that have a pin and web (as they call it) or rheumatic distillations in them, doth cleanse and help them.",
+"match": [
+77,
+88
+]
+},
+{
+"herb": "Loosestrife, with Spiked Heads of Flowers",
+"text": "It is an herb of the Moon, and under the sign Cancer; neither do I know a better preserver of the sight when it is well, nor a better cure for sore eyes than Eyebright, taken inwardly, and this used outwardly; it is cold in quality.",
+"match": [
+98,
+103
+]
+},
+{
+"herb": "Loosestrife, with Spiked Heads of Flowers",
+"text": "It clears the eyes of dust, or any thing gotten into them, and preserves the sight.",
+"match": [
+77,
+82
+]
+},
+{
+"herb": "Lovage",
+"text": "Being dropped into the eyes, it takes away the redness or dimness of them; it likewise takes away spots or freckles in the face.",
+"match": [
+58,
+65
+]
+},
+{
+"herb": "Mellilot, or King's Claver",
+"text": "The juice dropped into the eyes, is a singularly good medicine to take away the film or skin that clouds or dimns the eye-sight.",
+"match": [
+80,
+84
+]
+},
+{
+"herb": "Pennyroyal",
+"text": "Matthiolus saith, The decoction thereof being drank, helps the jaundice and dropsy, all pains of the head and sinews that come of a cold cause, and clears the eye-sight.",
+"match": [
+163,
+168
+]
+},
+{
+"herb": "Pimpernel",
+"text": "A little mixed with the juice, and dropped into the eyes, cleanses them from cloudy mists, or thick films which grow over them, and hinder the sight.",
+"match": [
+100,
+105
+]
+},
+{
+"herb": "Plantain",
+"text": "The clarified juice, or distilled water, dropped into the eyes, cools the inflammations in them, and takes away the pin and web; and dropped into the ears, eases the pains in them, and heals and removes the heat.",
+"match": [
+116,
+127
+]
+},
+{
+"herb": "Poplar Tree",
+"text": "The young clammy buds or eyes, before they break out into leaves, bruised, and a little honey put to them, is a good medicine for a dull sight.",
+"match": [
+137,
+142
+]
+},
+{
+"herb": "Rattle Grass",
+"text": "The yellow Rattle, or Cock’s Comb, is held to be good for those that are troubled with a cough, or dimness of sight, if the herb, being boiled with beans, and some honey put thereto, be drank or dropped into the eyes.",
+"match": [
+99,
+106
+]
+},
+{
+"herb": "Rattle Grass",
+"text": "The whole seed being put into the eyes, draws forth any skin, dimness or film, from the sight, without trouble, or pain.",
+"match": [
+62,
+69
+]
+},
+{
+"herb": "Rosemary",
+"text": "It helps dim eyes, and procures a clear sight, the flowers thereof being taken all the while it is flowering every morning fasting, with bread and salt.",
+"match": [
+34,
+45
+]
+},
+{
+"herb": "Great Round-Leaved Dock, or Bastard Rhubarb",
+"text": "It helps them that are troubled with the stone, provokes urine, and helps the dimness of the sight.",
+"match": [
+78,
+85
+]
+},
+{
+"herb": "Garden-Rue",
+"text": "The juice of it and fennel, with a little honey, and the gall of a cock put thereunto, helps the dimness of the eye-sight.",
+"match": [
+97,
+104
+]
+},
+{
+"herb": "Winter and Summer Savoury",
+"text": "The juice dropped into the eyes, clears a dull sight, if it proceed of thin cold humours distilled from the brain.",
+"match": [
+47,
+52
+]
+},
+{
+"herb": "Strawberries",
+"text": "It is an excellent water for hot inflamed eyes, and to take away a film or skin that begins to grow over them, and for such other defects in them as may be helped by any outward medicine.",
+"match": [
+67,
+71
+]
+},
+{
+"herb": "Fuller's Thistle, or Teasle",
+"text": "The distilled water of the leaves dropped into the eyes, takes away redness and mists in them that hinder the sight, and is often used by women to preserve their beauty, and to take away redness and inflammations, and all other heat or discolourings.",
+"match": [
+110,
+115
+]
+},
+{
+"herb": "Thyme",
+"text": "An ointment made of it takes away hot swellings and warts, helps the sciatica and dullness of sight, and takes away pains and hardness of the spleen. ’Tis excellent for those that are troubled with the gout.",
+"match": [
+94,
+99
+]
+},
+{
+"herb": "Meadow Trefoil, or Honeysuckles",
+"text": "The juice dropped in the eyes, is a familiar medicine, with many country people, to take away the pin and web (as they call it) in the eyes; it also allays the heat and blood shooting of them.",
+"match": [
+98,
+109
+]
+},
+{
+"herb": "Pearl Trefoil",
+"text": "It is particularly under the dominion of the Moon, and its icon shews that it is of a singular virtue against the pearl, or pin and web in the eyes.",
+"match": [
+124,
+135
+]
+},
+{
+"herb": "Garden Valerian",
+"text": "The green herb with the root taken fresh, being bruised and applied to the head, takes away the pains and prickings there, stays rheum and thin distillation, and being boiled in white wine, and a drop thereof put into the eyes, takes away the dimness of the sight, or any pin or web therein.",
+"match": [
+243,
+250
+]
+},
+{
+"herb": "Vervain",
+"text": "The distilled water of the herb when it is in full strength, dropped into the eyes, cleanses them from films, clouds, or mists, that darken the sight, and wonderfully strengthens the optic nerves.",
+"match": [
+103,
+108
+]
+},
+{
+"herb": "Willow Tree",
+"text": "Water that is gathered from the Willow, when it flowers, the bark being slit, and a vessel fitting to receive it, is very good for redness and dimness of sight, or films that grow over the eyes, and stay the rheums that fall into them; to provoke urine, being stopped, if it be drank; to clear the face and skin from spots and discolourings.",
+"match": [
+143,
+150
 ]
 },
 {
@@ -9910,15 +10738,25 @@
 ]
 }
 ],
-"earache": [
+"blindness": [
 {
-"herb": "Adder's Tongue or Serpent's Tongue",
-"text": "…nature in the body of man; as vital, animal, natural and procreative spirits of man; the apprehension, judgment, memory; the external senses, viz. seeing, hearing, smelling, tasting and feeling; the virtuous, attractive, retentive, digestive, expulsive, &c. under the dominion of what planets they are, may be found in my Ephemeris for the year…",
+"herb": "Eyebright",
+"text": "…powder of the dried herb mixed with sugar, a little Mace, and Fennel seed, and drank, or eaten in broth; or the said powder made into an electuary with sugar, and taken, has the same powerful effect to help and restore the sight, decayed through age; and Arnoldus de Ville Nova saith, it hath restored sight to them that have been blind a long time…",
 "match": [
-156,
-163
+212,
+229
 ]
 },
+{
+"herb": "Loosestrife, with Spiked Heads of Flowers",
+"text": "…but more peculiar virtues of its own, found out by experience; as, namely, The distilled water is a present remedy for hurts and blows on the eyes, and for blindness, so as the Christalline humours be not perished or hurt; and this hath been sufficiently proved true by the experience of a man of judgment, who kept it long to himself as a great…",
+"match": [
+157,
+166
+]
+}
+],
+"earache": [
 {
 "herb": "Agrimony",
 "text": "It helps to strengthen the members that be out of joint: and being bruised and applied, or the juice dropped in it, helps foul and imposthumed ears.",
@@ -9971,7 +10809,7 @@
 "herb": "Bay Tree",
 "text": "And pains in the ears are also cured by dropping in some of the oil, or by receiving into the ears the fume of the decoction of the berries through a funnel.",
 "match": [
-17,
+4,
 21
 ]
 },
@@ -9987,7 +10825,7 @@
 "herb": "Beets",
 "text": "…women’s courses, and the whites, and to help the yellow jaundice; the juice of the root put into the nostrils, purges the head, helps the noise in the ears, and the tooth-ache; the juice snuffed up the nose, helps a stinking breath, if the cause lie in the nose, as many times it does, if any bruise has been there: as also want of smell coming that…",
 "match": [
-139,
+152,
 156
 ]
 },
@@ -10013,14 +10851,6 @@
 "match": [
 323,
 327
-]
-},
-{
-"herb": "Carduus Benedictus",
-"text": "By antipathy to Venus, who governs it, it strengthens the memory, and cures deafness by antipathy to Saturn, who has his fall in Aries, which rules the head.",
-"match": [
-76,
-84
 ]
 },
 {
@@ -10075,7 +10905,7 @@
 "herb": "Dwarf-Elder",
 "text": "…Elder in opening and purging choler, phlegm, and water; in helping the gout, piles, and women’s diseases, colours the hair black, helps the inflammations of the eyes, and pains in the ears, the biting of serpents, or mad dogs, burnings and scaldings, the wind cholic, cholic, and stone, the difficulty of urine, the cure of old sores and fistulous…",
 "match": [
-185,
+172,
 189
 ]
 },
@@ -10091,7 +10921,7 @@
 "herb": "Fig-Tree",
 "text": "The juice being put into an hollow tooth, eases pain: as also pain and noise in the ears, being dropped into them; and deafness.",
 "match": [
-71,
+84,
 88
 ]
 },
@@ -10107,7 +10937,7 @@
 "herb": "Flower-De-Luce",
 "text": "The head and temples anointed therewith, helps the catarrh or thin rheum distilled from thence; and used upon the breast or stomach, helps to extenuate the cold tough phlegm; it helps also the pains and noise in the ears, and the stench of the nostrils.",
 "match": [
-203,
+216,
 220
 ]
 },
@@ -10115,7 +10945,7 @@
 "herb": "Garlick",
 "text": "…helps the biting of mad dogs and other venomous creatures, kills worms in children, cuts and voids tough phlegm, purges the head, helps the lethargy, is a good preservative against, and a remedy for any plague, sore, or foul ulcers; takes away spots and blemishes in the skin, eases pains in the ears, ripens and breaks imposthumes, or other…",
 "match": [
-297,
+284,
 301
 ]
 },
@@ -10139,8 +10969,8 @@
 "herb": "Henbane",
 "text": "The oil of the seed is helpful for deafness, noise, and worms in the ears, being dropped therein; the juice of the herb or root doth the same.",
 "match": [
-35,
-43
+69,
+73
 ]
 },
 {
@@ -10211,7 +11041,7 @@
 "herb": "Mellilot, or King's Claver",
 "text": "It helps the pains of the stomach, being applied fresh, or boiled with any of the aforenamed things; also, the pains of the ears, being dropped into them; and steeped in vinegar, or rose water, it mitigates the head-ache.",
 "match": [
-124,
+111,
 128
 ]
 },
@@ -10219,15 +11049,15 @@
 "herb": "Dog Mercury",
 "text": "He used it also for sore and watering eyes, and for the deafness and pains in the ears, by dropping the juice thereof into them, and bathing them afterwards in white wine.",
 "match": [
-56,
-64
+69,
+86
 ]
 },
 {
 "herb": "Mint",
 "text": "Applied with salt, it helps the biting of a mad dog; with mead and honeyed water, it eases the pains of the ears, and takes away the roughness of the tongue, being rubbed thereupon.",
 "match": [
-108,
+95,
 112
 ]
 },
@@ -10323,7 +11153,7 @@
 "herb": "Plums",
 "text": "Matthiolus saith, The oil preserved out of the kernels of the stones, as oil of almonds is made, is good against the inflamed piles, the tumours or swellings of ulcers, hoarseness of the voice, roughness of the tongue and throat, and likewise the pains in the ears.",
 "match": [
-260,
+247,
 264
 ]
 },
@@ -10403,7 +11233,7 @@
 "herb": "Tamarisk Tree",
 "text": "…boiled in wine, and drank, stays the bleeding of the hæmorrhodical veins, the spitting of blood, the too abounding of women’s courses, the jaundice, the cholic, and the biting of all venomous serpents, except the asp; and outwardly applied, is very powerful against the hardness of the spleen, and the tooth-ache, pains in the ears, red and watering…",
 "match": [
-328,
+315,
 332
 ]
 },
@@ -10421,6 +11251,120 @@
 "match": [
 118,
 122
+]
+},
+{
+"herb": "Wallnut Tree",
+"text": "The said water is very good against the quinsy, being gargled and bathed therewith, and wonderfully helps deafness, the noise, and other pains in the ears.",
+"match": [
+137,
+154
+]
+}
+],
+"deafness": [
+{
+"herb": "Alehoof, or Ground-Ivy",
+"text": "The juice dropped into the ears, wonderfully helps the noise and singing of them, and helps the hearing which is decayed.",
+"match": [
+65,
+72
+]
+},
+{
+"herb": "Angelica",
+"text": "The juice or the water, being dropped into the eyes or ears, helps dimness of sight and deafness; the juice put into the hollow teeth, easeth their pains.",
+"match": [
+88,
+96
+]
+},
+{
+"herb": "Carduus Benedictus",
+"text": "By antipathy to Venus, who governs it, it strengthens the memory, and cures deafness by antipathy to Saturn, who has his fall in Aries, which rules the head.",
+"match": [
+76,
+84
+]
+},
+{
+"herb": "Fig-Tree",
+"text": "The juice being put into an hollow tooth, eases pain: as also pain and noise in the ears, being dropped into them; and deafness.",
+"match": [
+119,
+127
+]
+},
+{
+"herb": "Henbane",
+"text": "The oil of the seed is helpful for deafness, noise, and worms in the ears, being dropped therein; the juice of the herb or root doth the same.",
+"match": [
+35,
+43
+]
+},
+{
+"herb": "Hyssop",
+"text": "The hot vapours of the decoction taken by a funnel in at the ears, eases the inflammations and singing noise of them.",
+"match": [
+95,
+102
+]
+},
+{
+"herb": "Wind Marjoram",
+"text": "The juice being dropped into the ears, helps deafness, pain and noise in the ears.",
+"match": [
+45,
+53
+]
+},
+{
+"herb": "Sweet Marjoram",
+"text": "The juice dropped into the ears eases the pains and singing noise in them.",
+"match": [
+52,
+59
+]
+},
+{
+"herb": "Dog Mercury",
+"text": "He used it also for sore and watering eyes, and for the deafness and pains in the ears, by dropping the juice thereof into them, and bathing them afterwards in white wine.",
+"match": [
+56,
+64
+]
+},
+{
+"herb": "Onions",
+"text": "The juice of Onions is good for either scalding or burning by fire, water, or gunpowder, and used with vinegar, takes away all blemishes, spots and marks in the skin: and dropped in the ears, eases the pains and noise of them.",
+"match": [
+212,
+225
+]
+},
+{
+"herb": "Pellitory of the Wall",
+"text": "The juice dropped into the ears, eases the noise in them, and takes away the pricking and shooting pains therein:",
+"match": [
+43,
+56
+]
+},
+{
+"herb": "Winter and Summer Savoury",
+"text": "The juice heated with the oil of Roses, and dropped into the ears, eases them of the noise and singing in them, and of deafness also.",
+"match": [
+95,
+102
+]
+},
+{
+"herb": "Sow Thistle",
+"text": "The juice boiled or thoroughly heated in a little oil of bitter almonds in the peel of a pomegranate, and dropped into the ears, is a sure remedy for deafness, singings, &c.",
+"match": [
+150,
+158
 ]
 },
 {
@@ -20443,14 +21387,6 @@
 "kidney stones": [
 {
 "herb": "All-Heal",
-"text": "It kills the worms, helps the gout, cramp, and convulsions, provokes urine, and helps all joint-aches.",
-"match": [
-69,
-74
-]
-},
-{
-"herb": "All-Heal",
 "text": "It helps all cold griefs of the head, the vertigo, falling-sickness, the lethargy, the wind cholic, obstructions of the liver and spleen, stone in the kidneys and bladder.",
 "match": [
 138,
@@ -20474,38 +21410,6 @@
 ]
 },
 {
-"herb": "Water Agrimony",
-"text": "It provokes urine and the terms; it kills worms, and cleanses the body of sharp humours, which are the cause of itch and scabs; the herb being burnt, the smoke thereof drives away flies, wasps, &c.",
-"match": [
-12,
-17
-]
-},
-{
-"herb": "Alehoof, or Ground-Ivy",
-"text": "…spleen; expels venom or poison, and also the plague; it provokes urine and women’s courses; the decoction of it in wine drank for some time together, procures ease to them that are troubled with the sciatica, or hip-gout: as also the gout in hands, knees or feet; if you put to the decoction some honey and a little burnt alum, it is excellently…",
-"match": [
-66,
-71
-]
-},
-{
-"herb": "Alexander",
-"text": "It is an herb of Jupiter, and therefore friendly to nature, for it warms a cold stomach, and opens a stoppage of the liver and spleen; it is good to move women’s courses, to expel the afterbirth, to break wind, to provoke urine, and helps the stranguary; and these things the seeds will do likewise.",
-"match": [
-222,
-227
-]
-},
-{
-"herb": "Angelica",
-"text": "It helps pains of the cholic, the stranguary and stoppage of the urine, procureth womens’ courses, and expelleth the after-birth, openeth the stoppings of the liver and spleen, and briefly easeth and discusseth all windiness and inward swellings.",
-"match": [
-65,
-70
-]
-},
-{
 "herb": "Amaranthus",
 "text": "There is also a sort of Amaranthus that bears a white flower, which stops the whites in women, and the running of the reins in men, and is a most gallant antivenereal, and a singular remedy for the French pox.",
 "match": [
@@ -20514,27 +21418,11 @@
 ]
 },
 {
-"herb": "Asarabacca",
-"text": "This herb being drank, not only provokes vomiting, but purges downwards, and by urine also, purges both choler and phlegm:",
-"match": [
-80,
-85
-]
-},
-{
-"herb": "Asarabacca",
-"text": "It will not abide any long boiling, for it loseth its chief strength thereby; nor much beating, for the finer powder provokes vomits and urine, and the coarser purgeth downwards.",
-"match": [
-137,
-142
-]
-},
-{
 "herb": "Prickly Asparagus, or Sperage",
 "text": "The young buds or branches boiled in ordinary broth, make the belly soluble and open, and boiled in white wine, provoke urine, being stopped, and is good against the stranguary or difficulty of making water; it expelleth the gravel and stone out of the kidneys, and helpeth pains in the reins.",
 "match": [
-120,
-125
+225,
+231
 ]
 },
 {
@@ -20570,22 +21458,6 @@
 ]
 },
 {
-"herb": "Bay Tree",
-"text": "They mightily expel the wind, and provoke urine; help the mother, and kill the worms.",
-"match": [
-42,
-47
-]
-},
-{
-"herb": "Bay Tree",
-"text": "A bath of the decoction of leaves and berries, is singularly good for women to sit in, that are troubled with the mother, or the diseases thereof, or the stoppings of their courses, or for the diseases of the bladder, pains in the bowels by wind and stoppage of the urine.",
-"match": [
-209,
-216
-]
-},
-{
 "herb": "Beans",
 "text": "The water distilled from the green husk, is held to be very effectual against the stone, and to provoke urine.",
 "match": [
@@ -20602,27 +21474,11 @@
 ]
 },
 {
-"herb": "French Beans",
-"text": "The ordinary French Beans are of an easy digestion; they move the belly, provoke urine, enlarge the breast that is straightened with shortness of breath, engender sperm, and incite to venery.",
-"match": [
-81,
-86
-]
-},
-{
 "herb": "Ladies Bed-Straw",
 "text": "The decoction of the former of those being drank, is good to fret and break the stone, provoke the urine, stays inward bleeding, and heals inward wounds.",
 "match": [
 80,
 85
-]
-},
-{
-"herb": "Beets",
-"text": "The white Beet much loosens the belly, and is of a cleansing, digesting quality, and provokes urine.",
-"match": [
-94,
-99
 ]
 },
 {
@@ -20658,14 +21514,6 @@
 ]
 },
 {
-"herb": "Bishop's-Weed",
-"text": "It digests humours, provokes urine and women’s courses, dissolves wind, and being taken in wine it eases pains and griping in the bowels, and is good against the biting of serpents; it is used to good effect in those medicines which are given to hinder the poisonous operation of Cantharides, upon the passage of the urine: being mixed with honey…",
-"match": [
-29,
-34
-]
-},
-{
 "herb": "Bistort, or Snakeweed",
 "text": "The leaves also kill the worms in children, and is a great help to them that cannot keep their water; if the juice of Plaintain be added thereto, and outwardly applied, much helps the ghonorrhea, or running of the reins.",
 "match": [
@@ -20685,16 +21533,16 @@
 "herb": "Briony, or Wild Vine",
 "text": "…phlegm and rheumatic humours that oppress the head, as also the joints and sinews; and is therefore good for palsies, convulsions, cramps, and stitches in the sides, and the dropsy, and for provoking urine; it cleanses the reins and kidneys from gravel and stone, by opening the obstructions of the spleen, and consume the hardness and swelling…",
 "match": [
-201,
-206
+224,
+229
 ]
 },
 {
 "herb": "Butcher's Broom",
 "text": "The decoction of the root made with wine opens obstructions, provokes urine, helps to expel gravel and the stone, the stranguary and women’s courses, also the yellow jaundice and the head-ache; and with same honey or sugar put thereunto, cleanses the breast of phlegm, and the chest of such clammy humours gathered therein.",
 "match": [
-70,
-75
+92,
+98
 ]
 },
 {
@@ -20722,30 +21570,6 @@
 ]
 },
 {
-"herb": "Buck's-Horn Plantain",
-"text": "It stays all bleeding both at mouth or nose; bloody urine or the bloody-flux, and stops the lask of the belly and bowels.",
-"match": [
-52,
-57
-]
-},
-{
-"herb": "Butter-Bur, or Petasitis",
-"text": "It provokes urine also, and women’s courses, and kills the flat and broad worms in the belly.",
-"match": [
-12,
-17
-]
-},
-{
-"herb": "Burdock",
-"text": "The juice of the leaves being drank with honey, provokes urine, and remedies the pain of the bladder.",
-"match": [
-57,
-62
-]
-},
-{
 "herb": "Burdock",
 "text": "The roots may be preserved with sugar, and taken fasting, or at other times, for the same purposes, and for consumptions, the stone, and the lask.",
 "match": [
@@ -20770,14 +21594,6 @@
 ]
 },
 {
-"herb": "Calamint, or Mountain-Mint",
-"text": "The decoction of the herb being drank, brings down women’s courses, and provokes urine.",
-"match": [
-81,
-86
-]
-},
-{
 "herb": "Camomile",
 "text": "It eases all pains of the cholic and stone, and all pains and torments of the belly, and gently provokes urine.",
 "match": [
@@ -20791,14 +21607,6 @@
 "match": [
 58,
 63
-]
-},
-{
-"herb": "Camomile",
-"text": "Some take it in syrup or decoction, others inject the juice of it into the bladder with a syringe.",
-"match": [
-75,
-82
 ]
 },
 {
@@ -20821,40 +21629,16 @@
 "herb": "Campion, Wild",
 "text": "They belong to Saturn, and it is found by experience, that the decoction of the herb, either in white or red wine being drank, doth stay inward bleedings, and applied outwardly it does the like; and being drank, helps to expel urine, being stopped, and gravel and stone in the reins and kidneys.",
 "match": [
-227,
-232
-]
-},
-{
-"herb": "Carduus Benedictus",
-"text": "Also provokes urine, the stopping of which is usually caused by Mars or the Moon.",
-"match": [
-14,
-19
+253,
+259
 ]
 },
 {
 "herb": "Carrots",
-"text": "…therefore break wind, and remove stitches in the sides, provoke urine and women’s courses, and helps to break and expel the stone; the seed also of the same works the like effect, and is good for the dropsy, and those whose bellies are swelling with wind; helps the cholic, the stone in the kidneys, and rising of the mother; being taken in wine, or…",
-"match": [
-65,
-70
-]
-},
-{
-"herb": "Carraway",
-"text": "Carraway seed has a moderate sharp quality, whereby it breaks wind and provokes urine, which also the herb doth.",
+"text": "…the sides, provoke urine and women’s courses, and helps to break and expel the stone; the seed also of the same works the like effect, and is good for the dropsy, and those whose bellies are swelling with wind; helps the cholic, the stone in the kidneys, and rising of the mother; being taken in wine, or boiled in wine and taken, it helps…",
 "match": [
 80,
 85
-]
-},
-{
-"herb": "Cherry-Tree",
-"text": "…the belly more speedily, but are of little nourishment; the tart or sour are more pleasing to an hot stomach, procure appetite to meat, to help and cut tough phlegm, and gross humours; but when these are dried, they are more binding to the belly than when they are fresh, being cooling in hot diseases, and welcome to the stomach, and provokes…",
-"match": [
-345,
-350
 ]
 },
 {
@@ -20867,66 +21651,42 @@
 },
 {
 "herb": "Winter-Cherries",
-"text": "…opening as the berries and fruit are; which by drawing down the urine provoke it to be voided plentifully when it is stopped or grown hot, sharp, and painful in the passage; it is good also to expel the stone and gravel out of the reins, kidneys and bladder, helping to dissolve the stone, and voiding it by grit or gravel sent forth in the urine…",
+"text": "…or grown hot, sharp, and painful in the passage; it is good also to expel the stone and gravel out of the reins, kidneys and bladder, helping to dissolve the stone, and voiding it by grit or gravel sent forth in the urine; it also helps much to cleanse inward imposthumes or ulcers in the reins of bladder, or in those that void a bloody or foul…",
 "match": [
-65,
-70
-]
-},
-{
-"herb": "Winter-Cherries",
-"text": "The distilled water of the fruit, or the leaves together with them, or the berries, green or dry, distilled with a little milk and drank morning and evening with a little sugar, is effectual to all the purposes before specified, and especially against the heat and sharpness of the urine.",
-"match": [
-282,
-287
+79,
+84
 ]
 },
 {
 "herb": "Winter-Cherries",
 "text": "I shall only mention one way, amongst many others, which might be used for ordering the berries, to be helpful for the urine and the stone; which is this:",
 "match": [
-119,
-124
+133,
+138
 ]
 },
 {
 "herb": "Winter-Cherries",
 "text": "This drink taken daily, has been found to do much good to many, both to ease the pains, and expel urine and the stone, and to cause the stone not to engender.",
 "match": [
-98,
-103
+112,
+117
 ]
 },
 {
 "herb": "Chervil",
 "text": "The juice or distilled water thereof being drank, and the bruised leaves laid to the place, being taken either in meat or drink, it is good to help to provoke urine, or expel the stone in the kidneys, to send down women’s courses, and to help the pleurisy and pricking of the sides.",
 "match": [
-159,
-164
-]
-},
-{
-"herb": "Earth Chesnuts",
-"text": "They are something hot and dry in quality, under the dominion of Venus, they provoke lust exceedingly, and stir up to those sports she is mistress of; the seed is excellent good to provoke urine; and so also is the root, but it doth not perform it so forcibly as the seed doth.",
-"match": [
-189,
-194
+179,
+184
 ]
 },
 {
 "herb": "Chick-Pease, or Cicers",
 "text": "They are less windy than beans, but nourish more; they provoke urine, and are thought to increase sperm; they have a cleansing faculty, whereby they break the stone in the kidneys.",
 "match": [
-63,
-68
-]
-},
-{
-"herb": "Chick-Pease, or Cicers",
-"text": "It moves the belly downwards, provokes women’s courses and urine, increases both milk and seed.",
-"match": [
-59,
-64
+159,
+164
 ]
 },
 {
@@ -20935,14 +21695,6 @@
 "match": [
 165,
 170
-]
-},
-{
-"herb": "Cives",
-"text": "If they be eaten raw, (I do not mean raw, opposite to roasted or boiled, but raw, opposite to chymical preparation) they send up very hurtful vapours to the brain, causing troublesome sleep, and spoiling the eye-sight, yet of them prepared by the art of the alchymist, may be made an excellent remedy for the stoppage of the urine.",
-"match": [
-325,
-330
 ]
 },
 {
@@ -20963,14 +21715,6 @@
 },
 {
 "herb": "Comfrey",
-"text": "The Great Comfrey helps those that spit blood, or make a bloody urine.",
-"match": [
-64,
-69
-]
-},
-{
-"herb": "Comfrey",
 "text": "It helps the defluction of rheum from the head upon the lungs, the fluxes of blood or humours by the belly, women’s immoderate courses, as well the reds as the whites, and the running of the reins happening by what cause soever.",
 "match": [
 191,
@@ -20981,24 +21725,8 @@
 "herb": "Coralwort",
 "text": "It cleanses the bladder, and provokes urine, expels gravel, and the stone; it eases pains in the sides and bowels, is excellently good for inward wounds, especially such as are made in the breast or lungs, by taking a dram of the powder of the root every morning in wine; the same is excellently good for ruptures, as also to stop fluxes; an…",
 "match": [
-16,
-23
-]
-},
-{
-"herb": "Costmary, or Alcost, or Balsam Herb",
-"text": "The ordinary Costmary, as well as Maudlin, provokes urine abundantly, and moistens the hardness of the mother; it gently purges choler and phlegm, extenuating that which is gross, and cutting that which is tough and glutinous, cleanses that which is foul, and hinders putrefaction and corruption; it dissolves without attraction, opens obstructions…",
-"match": [
 52,
-57
-]
-},
-{
-"herb": "Cowslips, or Peagles",
-"text": "…spots and wrinkles of the skin, sun-burning, and freckles, and adds beauty exceedingly; they remedy all infirmities of the head coming of heat and wind, as vertigo, ephialtes, false apparitions, phrensies, falling-sickness, palsies, convulsions, cramps, pains in the nerves; the roots ease pains in the back and bladder, and open the passages of…",
-"match": [
-313,
-320
+58
 ]
 },
 {
@@ -21026,54 +21754,6 @@
 ]
 },
 {
-"herb": "Crowfoot",
-"text": "The herb being bruised and mixed with a little mustard, draws a blister as well, and as perfectly as Cantharides, and with far less danger to the vessels of urine, which Cantharides naturally delight to wrong;",
-"match": [
-157,
-162
-]
-},
-{
-"herb": "Cuckow-Point",
-"text": "The said powder taken in wine or other drink, or the juice of the berries, or the powder of them, or the wine wherein they have been boiled, provokes urine, and brings down women’s courses and purges them effectually after child-bearing, to bring away the after-birth.",
-"match": [
-150,
-155
-]
-},
-{
-"herb": "Cucumbers",
-"text": "The face being washed with their juice, cleanses the skin, and is excellently good for hot rheums in the eyes; the seed is excellently good to provoke urine, and cleanses the passages thereof when they are stopped: there is not a better remedy for ulcers in the bladder growing, than Cucumbers are;",
-"match": [
-151,
-156
-]
-},
-{
-"herb": "Cucumbers",
-"text": "When the season of the year is, take the Cucumbers and bruise them well, and distil the water from them, and let such as are troubled with ulcers in the bladder drink no other drink.",
-"match": [
-153,
-160
-]
-},
-{
-"herb": "Dandelion, vulgarly called Piss-A-Beds",
-"text": "…the jaundice and hypocondriac; it opens the passages of the urine both in young and old; powerfully cleanses imposthumes and inward ulcers in the urinary passage, and by its drying and temperate quality doth afterwards heal them; for which purpose the decoction of the roots or leaves in white wine, or the leaves chopped as pot-herbs, with a few…",
-"match": [
-61,
-66
-]
-},
-{
-"herb": "Darnel",
-"text": "The red Darnel, boiled in red wine and taken, stays the lask and all other fluxes, and women’s bloody issues; and restrains urine that passes away too suddenly.",
-"match": [
-124,
-129
-]
-},
-{
 "herb": "Dodder of Thyme, Epithymum, and Other Dodders",
 "text": "It purges also the reins or kidneys by urine; it opens obstructions of the gall, whereby it profits them that have the jaundice; as also the leaves, the spleen:",
 "match": [
@@ -21082,27 +21762,11 @@
 ]
 },
 {
-"herb": "Dodder of Thyme, Epithymum, and Other Dodders",
-"text": "As that which hath been found growing upon nettles in the west-country, hath by experience been found very effectual to procure plenty of urine where it hath been stopped or hindered.",
-"match": [
-138,
-143
-]
-},
-{
 "herb": "Dog's-Grass, or Cough Grass",
 "text": "Being boiled and drank, it opens obstructions of the liver and gall, and the stopping of urine, and eases the griping pains of the belly and inflammations; wastes the matter of the stone in the bladder, and the ulcers thereof also.",
 "match": [
-89,
-94
-]
-},
-{
-"herb": "Dog's-Grass, or Cough Grass",
-"text": "The seed doth more powerfully expel urine, and stays the lask and vomiting.",
-"match": [
-36,
-41
+181,
+186
 ]
 },
 {
@@ -21115,14 +21779,6 @@
 },
 {
 "herb": "Dwarf-Elder",
-"text": "…the berries boiled with honey and dropped into the ears, helps the pains of them; the decoction of the berries in wine, being drank, provokes urine; the distilled water of the flowers is of much use to clean the skin from sun-burning, freckles, morphew, or the like; and takes away the head-ache, coming of a cold cause, the head being bathed…",
-"match": [
-143,
-148
-]
-},
-{
-"herb": "Dwarf-Elder",
 "text": "…Elder in opening and purging choler, phlegm, and water; in helping the gout, piles, and women’s diseases, colours the hair black, helps the inflammations of the eyes, and pains in the ears, the biting of serpents, or mad dogs, burnings and scaldings, the wind cholic, cholic, and stone, the difficulty of urine, the cure of old sores and fistulous…",
 "match": [
 281,
@@ -21130,43 +21786,27 @@
 ]
 },
 {
-"herb": "Endive",
-"text": "The decoction of the leaves, or the juice, or the distilled water of Endive, serve well to cool the excessive heat of the liver and stomach, and in the hot fits of agues, and all other inflammations in any part of the body; it cools the heat and sharpness of the urine, and excoriation in the urinary parts.",
-"match": [
-263,
-268
-]
-},
-{
 "herb": "Elecampane",
 "text": "…with sugar, and taken, serves to the same purpose, and is also profitable for those who have their urine stopped, or the stopping of women’s courses, the pains of the mother and the stone in the reins, kidneys, or bladder; it resists poison, and stays the spreading of the venom of serpents, as also putrid and pestilential fevers, and the plague…",
 "match": [
-100,
-105
+183,
+188
 ]
 },
 {
 "herb": "Eringo, or Sea-Holly",
 "text": "The decoction of the root hereof in wine, is very effectual to open obstructions of the spleen and liver, and helps yellow jaundice, dropsy, pains of the loins, and wind cholic, provokes urine, and expels the stone, procures women’s courses.",
 "match": [
-187,
-192
+209,
+214
 ]
 },
 {
 "herb": "Eringo, or Sea-Holly",
 "text": "The continued use of the decoction for fifteen days, taken fasting, and next to bedward, doth help the stranguary, the difficulty and stoppage of urine, and the stone, as well as all defects of the reins and kidneys; and if the said drink be continued longer, it is said that it cures the stone; it is found good against the French pox.",
 "match": [
-146,
-151
-]
-},
-{
-"herb": "Osmond Royal, or Water Fern",
-"text": "The decoction of the root in white wine, provokes urine exceedingly, and cleanses the bladder and passages of urine.",
-"match": [
-50,
-55
+161,
+166
 ]
 },
 {
@@ -21181,16 +21821,8 @@
 "herb": "Fennel",
 "text": "Fennel is good to break wind, to provoke urine, and ease the pains of the stone, and helps to break it.",
 "match": [
-41,
-46
-]
-},
-{
-"herb": "Fennel",
-"text": "The roots are of most use in physic drinks, and broth that are taken to cleanse the blood, to open obstructions of the liver, to provoke urine, and amend the ill colour in the face after sickness, and to cause a good habit through the body.",
-"match": [
-137,
-142
+74,
+79
 ]
 },
 {
@@ -21213,14 +21845,6 @@
 "herb": "Filipendula, or Drop-Wort",
 "text": "It effectually opens the passages of the urine, helps the stranguary; the stone in the kidneys or bladder, the gravel, and all other pains of the bladder and reins, by taking the roots in powder, or a decoction of them in white wine, with a little honey.",
 "match": [
-41,
-46
-]
-},
-{
-"herb": "Flax-Weed, or Toad-Flax",
-"text": "This is frequently used to spend the abundance of those watery humours by urine which cause the dropsy.",
-"match": [
 74,
 79
 ]
@@ -21234,35 +21858,11 @@
 ]
 },
 {
-"herb": "Fumitory",
-"text": "It is also good against the yellow-jaundice, and spends it by urine, which it procures in abundance.",
-"match": [
-62,
-67
-]
-},
-{
 "herb": "Furze Bush",
 "text": "A decoction made with the flowers thereof hath been found effectual against the jaundice, as also to provoke urine, and cleanse the kidneys from gravel or stone ingendered in them.",
 "match": [
-109,
-114
-]
-},
-{
-"herb": "Garlick",
-"text": "…diseases and hurts (except those which itself breed.) It provokes urine, and women’s courses, helps the biting of mad dogs and other venomous creatures, kills worms in children, cuts and voids tough phlegm, purges the head, helps the lethargy, is a good preservative against, and a remedy for any plague, sore, or foul ulcers; takes away spots and…",
-"match": [
-67,
-72
-]
-},
-{
-"herb": "Gentian, Felwort, or Baldmony",
-"text": "…steeped in wine, and the wine drank, refreshes such as be over-weary with traveling, and grow lame in their joints, either by cold or evil lodgings; it helps stitches, and griping pains in the sides; is an excellent remedy for such as are bruised by falls; it provokes urine and the terms exceedingly, therefore let it not be given to women with…",
-"match": [
-270,
-275
+132,
+139
 ]
 },
 {
@@ -21271,22 +21871,6 @@
 "match": [
 28,
 33
-]
-},
-{
-"herb": "Germander",
-"text": "This taken with honey (saith Dioscorides) is a remedy for coughs, hardness of the spleen and difficulty of urine, and helps those that are fallen into a dropsy, especially at the beginning of the disease, a decoction being made thereof when it is green, and drank.",
-"match": [
-107,
-112
-]
-},
-{
-"herb": "Germander",
-"text": "A dram of the seed taken in powder purges by urine, and is good against the yellow jaundice.",
-"match": [
-45,
-50
 ]
 },
 {
@@ -21331,34 +21915,10 @@
 },
 {
 "herb": "Groundsel",
-"text": "It is good against the jaundice and falling sickness, being taken in wine; as also against difficulty of making water.",
-"match": [
-105,
-117
-]
-},
-{
-"herb": "Groundsel",
 "text": "It provokes urine, expels gravel in the reins or kidneys; a dram thereof given in oxymel, after some walking or stirring of the body.",
 "match": [
-12,
-17
-]
-},
-{
-"herb": "Artichokes",
-"text": "But, to proceed; this is certain, that the decoction of the root boiled in wine, or the root bruised and distilled in wine in an alembic, and being drank, purges by urine exceedingly.",
-"match": [
-165,
-170
-]
-},
-{
-"herb": "Hawk-Weed",
-"text": "The juice thereof in wine, helps digestion, discusses wind, hinders crudities abiding in the stomach, and helps the difficulty of making water, the biting of venomous serpents, and stinging of the scorpion, if the herb be also outwardly applied to the place, and is very good against all other poisons.",
-"match": [
-130,
-142
+26,
+32
 ]
 },
 {
@@ -21402,27 +21962,11 @@
 ]
 },
 {
-"herb": "Hops",
-"text": "Half a dram of the seed in powder taken in drink, kills worms in the body, brings down women’s courses, and expels urine.",
-"match": [
-115,
-120
-]
-},
-{
-"herb": "Horsetail",
-"text": "It also stays all sorts of lasks and fluxes in man or woman, and bloody urine; and heals also not only the inward ulcers, and the excoriation of the entrails, bladder, &c. but all other sorts of foul, moist and running ulcers, and soon solders together the tops of green wounds.",
-"match": [
-72,
-77
-]
-},
-{
 "herb": "Horsetail",
 "text": "The decoction thereof in wine being drank, provokes urine, and helps the stone and stranguary; and the distilled water thereof drank two or three times in a day, and a small quantity at a time, also eases the bowels, and is effectual against a cough that comes by distillations from the head.",
 "match": [
-52,
-57
+73,
+78
 ]
 },
 {
@@ -21431,14 +21975,6 @@
 "match": [
 57,
 62
-]
-},
-{
-"herb": "Juniper Bush",
-"text": "The berries are hot in the third degree, and dry but in the first, being a most admirable counter-poison, and as great a resister of the pestilence, as any growing; they are excellent good against the biting of venomous beasts, they provoke urine exceedingly, and therefore are very available to dysuries and stranguaries.",
-"match": [
-241,
-246
 ]
 },
 {
@@ -21469,8 +22005,8 @@
 "herb": "Knotgrass",
 "text": "It is singularly good to provoke urine, help the stranguary, and allays the heat that comes thereby; and is powerful by urine to expel the gravel or stone in the kidneys and bladder, a dram of the powder of the herb being taken in wine for many days together.",
 "match": [
-33,
-38
+139,
+145
 ]
 },
 {
@@ -21485,8 +22021,8 @@
 "herb": "Ladies-Smock, or Cuckow-Flower",
 "text": "They are under the dominion of the Moon, and very little inferior to Water Cresses in all their operations; they are excellently good for the scurvy, they provoke urine, and break the stone, and excellently warm a cold and weak stomach, restoring lost appetite, and help digestion.",
 "match": [
-163,
-168
+184,
+189
 ]
 },
 {
@@ -21495,14 +22031,6 @@
 "match": [
 55,
 60
-]
-},
-{
-"herb": "Water Lily",
-"text": "The root is likewise very good for those whose urine is hot and sharp, to be boiled in wine and water, and the decoction drank.",
-"match": [
-47,
-52
 ]
 },
 {
@@ -21530,19 +22058,11 @@
 ]
 },
 {
-"herb": "Lovage",
-"text": "It opens, cures and digests humours, and mightily provokes women’s courses and urine.",
-"match": [
-79,
-84
-]
-},
-{
 "herb": "Wall Rue, or White Maiden-Hair",
-"text": "…breath, the yellow jaundice, diseases of the spleen, stopping of urine, and helps exceedingly to break the stone in the kidneys, (in all which diseases the Wall Rue is also very effectual.) It provokes women’s courses, and stays both bleedings and fluxes of the stomach and belly, especially when the herb is dry; for being green, it loosens the…",
+"text": "…spleen, stopping of urine, and helps exceedingly to break the stone in the kidneys, (in all which diseases the Wall Rue is also very effectual.) It provokes women’s courses, and stays both bleedings and fluxes of the stomach and belly, especially when the herb is dry; for being green, it loosens the belly, and voids choler and phlegm from the…",
 "match": [
-66,
-71
+63,
+68
 ]
 },
 {
@@ -21554,19 +22074,11 @@
 ]
 },
 {
-"herb": "Wind Marjoram",
-"text": "It provokes urine and the terms in women, helps the dropsy, and the scurvy, scabs, itch, and yellow jaundice.",
-"match": [
-12,
-17
-]
-},
-{
 "herb": "Masterwort",
 "text": "It also provokes urine, and helps to break the stone, and expel the gravel from the kidneys; provokes women’s courses, and expels the dead birth.",
 "match": [
-17,
-22
+47,
+52
 ]
 },
 {
@@ -21602,14 +22114,6 @@
 ]
 },
 {
-"herb": "Motherwort",
-"text": "It also provokes urine and women’s courses, cleanses the chest of cold phlegm, oppressing it, kills worms in the belly.",
-"match": [
-17,
-22
-]
-},
-{
 "herb": "Mouse-Ear",
 "text": "It is a special remedy against the stone, and the tormenting pains thereof: as also other tortures and griping pains of the bowels.",
 "match": [
@@ -21629,40 +22133,16 @@
 "herb": "Mullein",
 "text": "The same also opens obstructions of the bladder and reins.",
 "match": [
-40,
-47
-]
-},
-{
-"herb": "Mustard",
-"text": "The decoction of the seed made in wine, and drank, provokes urine, resists the force of poison, the malignity of mushrooms, and venom of scorpions, or other venomous creatures, if it be taken in time; and taken before the cold fits of agues, alters, lessens, and cures them.",
-"match": [
-60,
-65
+52,
+57
 ]
 },
 {
 "herb": "Nettles",
 "text": "The same also, or the seed provokes urine, and expels the gravel and stone in the reins or bladder, often proved to be effectual in many that have taken it.",
 "match": [
-36,
-41
-]
-},
-{
-"herb": "Oak",
-"text": "The acorn in powder taken in wine, provokes urine, and resists the poison of venomous creatures.",
-"match": [
-44,
-49
-]
-},
-{
-"herb": "Oak",
-"text": "The decoction of acorns and the bark made in milk and taken, resists the force of poisonous herbs and medicines, as also the virulency of cantharides, when one by eating them hath his bladder exulcerated, and voids bloody urine.",
-"match": [
-184,
-191
+58,
+64
 ]
 },
 {
@@ -21675,26 +22155,10 @@
 },
 {
 "herb": "Parsley",
-"text": "It is under the dominion of Mercury; is very comfortable to the stomach; helps to provoke urine and women’s courses, to break wind both in the stomach and bowels, and doth a little open the body, but the root much more.",
-"match": [
-90,
-95
-]
-},
-{
-"herb": "Parsley",
-"text": "Galen commended it against the falling sickness, and to provoke urine mightily; especially if the roots be boiled, and eaten like Parsnips.",
-"match": [
-64,
-69
-]
-},
-{
-"herb": "Parsley",
 "text": "The seed is effectual to provoke urine and women’s courses, to expel wind, to break the stone, and ease the pains and torments thereof; it is also effectual against the venom of any poisonous creature, and the danger that comes to them that have the lethargy, and is as good against the cough.",
 "match": [
-33,
-38
+88,
+93
 ]
 },
 {
@@ -21706,19 +22170,11 @@
 ]
 },
 {
-"herb": "Parsley",
-"text": "This opens obstructions of the liver and spleen, and expels the dropsy and jaundice by urine.",
-"match": [
-87,
-92
-]
-},
-{
 "herb": "Parsley Piert, or Parsley Break Stone",
 "text": "Its operation is very prevalent to provoke urine, and to break the stone.",
 "match": [
-43,
-48
+67,
+72
 ]
 },
 {
@@ -21738,14 +22194,6 @@
 ]
 },
 {
-"herb": "Parsnips",
-"text": "It resists and helps the bitings of serpents, eases the pains and stitches in the sides, and dissolves wind both in the stomach and bowels, which is the cholic, and provokes urine.",
-"match": [
-174,
-179
-]
-},
-{
 "herb": "Peach Tree",
 "text": "Two drams hereof given in the juice of lemons, or of radish, is good for them that are troubled with the stone, the kernels of the stones do wonderfully ease the pains and wringings of the belly through wind or sharp humours, and help to make an excellent medicine for the stone upon all occasions, in this manner:",
 "match": [
@@ -21757,8 +22205,8 @@
 "herb": "Pellitory of the Wall",
 "text": "Three ounces of the juice thereof taken at a time, doth wonderfully help stopping of the urine, and to expel the stone or gravel in the kidneys or bladder, and is therefore usually put among other herbs used in clysters to mitigate pains in the back, sides, or bowels, proceeding of wind, stopping of urine, the gravel or stone, as aforesaid.",
 "match": [
-89,
-94
+113,
+118
 ]
 },
 {
@@ -21781,8 +22229,8 @@
 "herb": "Pimpernel",
 "text": "It provokes urine, and helps to expel the stone and gravel out of the kidneys and bladder, and helps much in all inward pains and ulcers.",
 "match": [
-12,
-17
+42,
+47
 ]
 },
 {
@@ -21842,14 +22290,6 @@
 ]
 },
 {
-"herb": "Purslain",
-"text": "The seed is more effectual than the herb, and is of singular good use to cool the heat and sharpness of urine, venereous dreams, and the like; insomuch that the over frequent use hereof extinguishes the heat and virtue of natural procreation.",
-"match": [
-104,
-109
-]
-},
-{
 "herb": "Raddish, or Horse-Raddish",
 "text": "…physician as fast as you can; this is one cause which makes the owners of such nice palates so unhealthful; yet for such as are troubled with the gravel, stone, or stoppage of urine, they are good physic, if the body be strong that takes them; you may make the juice of the roots into a syrup if you please, for that use: they purge by urine…",
 "match": [
@@ -21861,24 +22301,16 @@
 "herb": "Rest Harrow, or Cammock",
 "text": "It is singularly good to provoke urine when it is stopped, and to break and drive forth the stone, which the powder of the bark of the root taken in wine performs effectually.",
 "match": [
-33,
-38
-]
-},
-{
-"herb": "Rocket",
-"text": "It serves also to help digestion, and provokes urine exceedingly.",
-"match": [
-47,
-52
+92,
+97
 ]
 },
 {
 "herb": "Winter-Rocket, or Cresses",
 "text": "This is profitable to provoke urine, to help stranguary, and expel gravel and stone.",
 "match": [
-30,
-35
+67,
+73
 ]
 },
 {
@@ -21923,14 +22355,6 @@
 },
 {
 "herb": "Garden-Rue",
-"text": "It provokes urine and women’s courses, being taken either in meat or drink.",
-"match": [
-12,
-17
-]
-},
-{
-"herb": "Garden-Rue",
 "text": "…in vinegar twenty four hours, and then dry it, or rather roast it in a hot fire-shovel, or in an oven) and is a remedy for the pains or griefs in the chest or stomach, of the spleen, belly, or sides, by wind or stitches; of the liver by obstructions; of the reins and bladder by the stopping of urine; and helps also to extenuate fat corpulent…",
 "match": [
 259,
@@ -21946,27 +22370,19 @@
 ]
 },
 {
-"herb": "Wood-Sage",
-"text": "The decoction of the Wood Sage provokes urine and women’s courses:",
-"match": [
-40,
-45
-]
-},
-{
 "herb": "Samphire",
 "text": "It is a safe herb, very pleasant both to taste and stomach, helps digestion, and in some sort opening obstructions of the liver and spleen: provokes urine, and helps thereby to wash away the gravel and stone engendered in the kidneys or bladder.",
 "match": [
-149,
-154
+191,
+197
 ]
 },
 {
 "herb": "Sanicle",
 "text": "It helps to stay women’s courses, and all other fluxes of blood, either by the mouth, urine, or stool, and lasks of the belly; the ulcerations of the kidneys also, and the pains in the bowels, and gonorrhea, being boiled in wine or water, and drank.",
 "match": [
-86,
-91
+150,
+157
 ]
 },
 {
@@ -21994,14 +22410,6 @@
 ]
 },
 {
-"herb": "Winter and Summer Savoury",
-"text": "They are both of them hot and dry, especially the Summer kind, which is both sharp and quick in taste, expelling wind in the stomach and bowels, and is a present help for the rising of the mother procured by wind; provokes urine and women’s courses, and is much commended for women with child to take inwardly, and to smell often unto.",
-"match": [
-223,
-228
-]
-},
-{
 "herb": "Common White Saxifrage",
 "text": "It is very effectual to cleanse the reins and bladder, and to dissolve the stone engendered in them, and to expel it and the gravel by urine; to help the stranguary; for which purpose the decoction of the herb or roots in white wine, is most usual, or the powder of the small kernelly root, which is called the seed, taken in white wine, or in the…",
 "match": [
@@ -22019,34 +22427,18 @@
 },
 {
 "herb": "Burnet Saxifrage",
-"text": "…have the same properties the parsleys have, but in provoking urine, and causing the pains thereof, and of the wind and colic, are much more effectual, the roots or seed being used either in powder, or in decoctions, or any other way; and likewise helps the windy pains of the mother, and to procure their courses, and to break and void the stone in…",
+"text": "…colic, are much more effectual, the roots or seed being used either in powder, or in decoctions, or any other way; and likewise helps the windy pains of the mother, and to procure their courses, and to break and void the stone in the kidneys, to digest cold, viscous, and tough phlegm in the stomach, and is an especial remedy against all kind of…",
 "match": [
-62,
-67
-]
-},
-{
-"herb": "Shepherd's Purse",
-"text": "It helps all fluxes of blood, either caused by inward or outward wounds; as also flux of the belly, and bloody flux, spitting blood, and bloody urine, stops the terms in women; being bound to the wrists of the hands, and the soles of the feet, it helps the yellow jaundice.",
-"match": [
-144,
-149
-]
-},
-{
-"herb": "Smallage",
-"text": "It provokes urine and women’s courses, and is singularly good against the yellow jaundice, tertian and quartan agues, if the juice thereof be taken, but especially made up into a syrup.",
-"match": [
-12,
-17
+222,
+227
 ]
 },
 {
 "herb": "Sopewort, or Bruisewort",
-"text": "Some make great boast thereof, that it is diuretical to provoke urine, and thereby to expel gravel and the stone in the reins or kidneys, and do also account it singularly good to void hydropical waters: and they no less extol it to perform an absolute cure in the French pox, more than either sarsaparilla, guiacum, or China can do; which, how true…",
+"text": "…that it is diuretical to provoke urine, and thereby to expel gravel and the stone in the reins or kidneys, and do also account it singularly good to void hydropical waters: and they no less extol it to perform an absolute cure in the French pox, more than either sarsaparilla, guiacum, or China can do; which, how true it is, I leave others to…",
 "match": [
-64,
-69
+62,
+68
 ]
 },
 {
@@ -22067,34 +22459,10 @@
 },
 {
 "herb": "Southern Wood",
-"text": "Dioscorides saith, That the seed bruised, heated in warm water, and drank, helps those that are bursten, or troubled with cramps or convulsions of the sinews, the sciatica, or difficulty in making water, and bringing down women’s courses.",
-"match": [
-190,
-202
-]
-},
-{
-"herb": "Southern Wood",
 "text": "The distilled water of the herb is said to help them much that are troubled with the stone, as also for the diseases of the spleen and mother.",
 "match": [
 85,
 90
-]
-},
-{
-"herb": "Spignel, or Spikenard",
-"text": "Galen saith, The roots of Spignel are available to provoke urine, and women’s courses; but if too much thereof be taken, it causes head-ache.",
-"match": [
-59,
-64
-]
-},
-{
-"herb": "Spignel, or Spikenard",
-"text": "The roots boiled in wine or water, and drank, helps the stranguary and stoppings of the urine, the wind, swellings and pains in the stomach, pains of the mother, and all joint-aches.",
-"match": [
-88,
-93
 ]
 },
 {
@@ -22117,8 +22485,8 @@
 "herb": "Star Thistle",
 "text": "The seed of this Star Thistle made into powder, and drank in wine, provokes urine, and helps to break the stone, and drives it forth.",
 "match": [
-76,
-81
+106,
+111
 ]
 },
 {
@@ -22149,8 +22517,8 @@
 "herb": "Garden Tansy",
 "text": "The decoction of the common Tansy, or the juice drank in wine, is a singular remedy for all the griefs that come by slopping of the urine, helps the stranguary and those that have weak reins and kidneys.",
 "match": [
-132,
-137
+185,
+190
 ]
 },
 {
@@ -22162,27 +22530,11 @@
 ]
 },
 {
-"herb": "Thistles",
-"text": "All these thistles are good to provoke urine, and to mend the stinking smell thereof; as also the rank smell of the arm-pits, or the whole body; being boiled in wine and drank, and are said to help a stinking breath, and to strengthen the stomach.",
-"match": [
-39,
-44
-]
-},
-{
 "herb": "Our Lady's Thistle",
 "text": "It provokes urine, breaks and expels the stone, and is good for the dropsy.",
 "match": [
-12,
-17
-]
-},
-{
-"herb": "Wild Thyme, or Mother of Thyme",
-"text": "It provokes urine and the terms, and eases the griping pain of the belly, cramps, ruptures, and inflamation of the liver.",
-"match": [
-12,
-17
+41,
+46
 ]
 },
 {
@@ -22199,14 +22551,6 @@
 "match": [
 177,
 182
-]
-},
-{
-"herb": "Garden Valerian",
-"text": "Dioscorides saith, That the Garden Valerian hath a warming faculty, and that being dried and given to drink it provokes urine, and helps the stranguary.",
-"match": [
-120,
-125
 ]
 },
 {
@@ -22229,8 +22573,8 @@
 "herb": "Violets",
 "text": "The herb or flowers, while they are fresh, or the flowers when they are dry, are effectual in the pleurisy, and all diseases of the lungs, to lenify the sharpness in hot rheums, and the hoarseness of the throat, the heat also and sharpness of urine, and all the pains of the back or reins, and bladder.",
 "match": [
-243,
-248
+283,
+288
 ]
 },
 {
@@ -22242,43 +22586,1029 @@
 ]
 },
 {
+"herb": "Wormwood",
+"text": "In this our herb, I shall give the pattern of a ruler, the sons of art rough cast, yet as near the truth as the men of Benjamin could throw a stone:",
+"match": [
+142,
+147
+]
+}
+],
+"bladder problems": [
+{
+"herb": "All-Heal",
+"text": "It kills the worms, helps the gout, cramp, and convulsions, provokes urine, and helps all joint-aches.",
+"match": [
+60,
+74
+]
+},
+{
+"herb": "All-Heal",
+"text": "It helps all cold griefs of the head, the vertigo, falling-sickness, the lethargy, the wind cholic, obstructions of the liver and spleen, stone in the kidneys and bladder.",
+"match": [
+163,
+170
+]
+},
+{
+"herb": "Water Agrimony",
+"text": "It provokes urine and the terms; it kills worms, and cleanses the body of sharp humours, which are the cause of itch and scabs; the herb being burnt, the smoke thereof drives away flies, wasps, &c.",
+"match": [
+3,
+17
+]
+},
+{
+"herb": "Alehoof, or Ground-Ivy",
+"text": "…the spleen; expels venom or poison, and also the plague; it provokes urine and women’s courses; the decoction of it in wine drank for some time together, procures ease to them that are troubled with the sciatica, or hip-gout: as also the gout in hands, knees or feet; if you put to the decoction some honey and a little burnt alum, it is excellently…",
+"match": [
+61,
+75
+]
+},
+{
+"herb": "Alexander",
+"text": "It is an herb of Jupiter, and therefore friendly to nature, for it warms a cold stomach, and opens a stoppage of the liver and spleen; it is good to move women’s courses, to expel the afterbirth, to break wind, to provoke urine, and helps the stranguary; and these things the seeds will do likewise.",
+"match": [
+214,
+227
+]
+},
+{
+"herb": "Prickly Asparagus, or Sperage",
+"text": "The young buds or branches boiled in ordinary broth, make the belly soluble and open, and boiled in white wine, provoke urine, being stopped, and is good against the stranguary or difficulty of making water; it expelleth the gravel and stone out of the kidneys, and helpeth pains in the reins.",
+"match": [
+112,
+125
+]
+},
+{
+"herb": "Prickly Asparagus, or Sperage",
+"text": "…down in the same, or sitting therein as a bath, has been found effectual against pains of the reins and bladder, pains of the mother and cholic, and generally against all pains that happen to the lower parts of the body, and no less effectual against stiff and benumbed sinews, or those that are shrunk by cramps and convulsions, and helps the…",
+"match": [
+105,
+112
+]
+},
+{
+"herb": "Bay Tree",
+"text": "They mightily expel the wind, and provoke urine; help the mother, and kill the worms.",
+"match": [
+34,
+47
+]
+},
+{
+"herb": "Bay Tree",
+"text": "A bath of the decoction of leaves and berries, is singularly good for women to sit in, that are troubled with the mother, or the diseases thereof, or the stoppings of their courses, or for the diseases of the bladder, pains in the bowels by wind and stoppage of the urine.",
+"match": [
+209,
+216
+]
+},
+{
+"herb": "Beans",
+"text": "The water distilled from the green husk, is held to be very effectual against the stone, and to provoke urine.",
+"match": [
+96,
+109
+]
+},
+{
+"herb": "French Beans",
+"text": "The ordinary French Beans are of an easy digestion; they move the belly, provoke urine, enlarge the breast that is straightened with shortness of breath, engender sperm, and incite to venery.",
+"match": [
+73,
+86
+]
+},
+{
+"herb": "Beets",
+"text": "The white Beet much loosens the belly, and is of a cleansing, digesting quality, and provokes urine.",
+"match": [
+85,
+99
+]
+},
+{
+"herb": "Wood Betony",
+"text": "It helps also to break and expel the stone, either in the bladder or kidneys.",
+"match": [
+58,
+65
+]
+},
+{
+"herb": "Birch Tree",
+"text": "It is a tree of Venus; the juice of the leaves, while they are young, or the distilled water of them, or the water that comes from the tree being bored with an auger, and distilled afterwards; any of these being drank for some days together, is available to break the stone in the kidneys and bladder, and is good also to wash sore mouths.",
+"match": [
+293,
+300
+]
+},
+{
+"herb": "Bishop's-Weed",
+"text": "It digests humours, provokes urine and women’s courses, dissolves wind, and being taken in wine it eases pains and griping in the bowels, and is good against the biting of serpents; it is used to good effect in those medicines which are given to hinder the poisonous operation of Cantharides, upon the passage of the urine: being mixed with honey…",
+"match": [
+20,
+34
+]
+},
+{
+"herb": "Butcher's Broom",
+"text": "The decoction of the root made with wine opens obstructions, provokes urine, helps to expel gravel and the stone, the stranguary and women’s courses, also the yellow jaundice and the head-ache; and with same honey or sugar put thereunto, cleanses the breast of phlegm, and the chest of such clammy humours gathered therein.",
+"match": [
+61,
+75
+]
+},
+{
+"herb": "Broom, and Broom-Rape",
+"text": "…and watery humours from the joints; whereby it helps the dropsy, gout, sciatica, and pains of the hips and joints; it also provokes strong vomits, and helps the pains of the sides, and swelling of the spleen, cleanses also the reins or kidneys and bladder of the stone, provokes urine abundantly, and hinders the growing again of the stone in the…",
+"match": [
+249,
+256
+]
+},
+{
+"herb": "Broom, and Broom-Rape",
+"text": "THE decoction thereof in wine, is thought to be as effectual to void the stone in the kidney or bladder, and to provoke urine, as the Broom itself.",
+"match": [
+96,
+103
+]
+},
+{
+"herb": "Butter-Bur, or Petasitis",
+"text": "It provokes urine also, and women’s courses, and kills the flat and broad worms in the belly.",
+"match": [
+3,
+17
+]
+},
+{
+"herb": "Burdock",
+"text": "The juice of the leaves being drank with honey, provokes urine, and remedies the pain of the bladder.",
+"match": [
+48,
+62
+]
+},
+{
+"herb": "Calamint, or Mountain-Mint",
+"text": "The decoction of the herb being drank, brings down women’s courses, and provokes urine.",
+"match": [
+72,
+86
+]
+},
+{
+"herb": "Camomile",
+"text": "It eases all pains of the cholic and stone, and all pains and torments of the belly, and gently provokes urine.",
+"match": [
+96,
+110
+]
+},
+{
+"herb": "Camomile",
+"text": "Some take it in syrup or decoction, others inject the juice of it into the bladder with a syringe.",
+"match": [
+75,
+82
+]
+},
+{
+"herb": "Carduus Benedictus",
+"text": "Also provokes urine, the stopping of which is usually caused by Mars or the Moon.",
+"match": [
+5,
+19
+]
+},
+{
+"herb": "Carrots",
+"text": "…and therefore break wind, and remove stitches in the sides, provoke urine and women’s courses, and helps to break and expel the stone; the seed also of the same works the like effect, and is good for the dropsy, and those whose bellies are swelling with wind; helps the cholic, the stone in the kidneys, and rising of the mother; being taken in…",
+"match": [
+61,
+74
+]
+},
+{
+"herb": "Carraway",
+"text": "Carraway seed has a moderate sharp quality, whereby it breaks wind and provokes urine, which also the herb doth.",
+"match": [
+71,
+85
+]
+},
+{
+"herb": "Cherry-Tree",
+"text": "…the belly more speedily, but are of little nourishment; the tart or sour are more pleasing to an hot stomach, procure appetite to meat, to help and cut tough phlegm, and gross humours; but when these are dried, they are more binding to the belly than when they are fresh, being cooling in hot diseases, and welcome to the stomach, and provokes…",
+"match": [
+336,
+350
+]
+},
+{
+"herb": "Winter-Cherries",
+"text": "…or grown hot, sharp, and painful in the passage; it is good also to expel the stone and gravel out of the reins, kidneys and bladder, helping to dissolve the stone, and voiding it by grit or gravel sent forth in the urine; it also helps much to cleanse inward imposthumes or ulcers in the reins of bladder, or in those that void a bloody or foul…",
+"match": [
+126,
+133
+]
+},
+{
+"herb": "Chervil",
+"text": "The juice or distilled water thereof being drank, and the bruised leaves laid to the place, being taken either in meat or drink, it is good to help to provoke urine, or expel the stone in the kidneys, to send down women’s courses, and to help the pleurisy and pricking of the sides.",
+"match": [
+151,
+164
+]
+},
+{
+"herb": "Earth Chesnuts",
+"text": "They are something hot and dry in quality, under the dominion of Venus, they provoke lust exceedingly, and stir up to those sports she is mistress of; the seed is excellent good to provoke urine; and so also is the root, but it doth not perform it so forcibly as the seed doth.",
+"match": [
+181,
+194
+]
+},
+{
+"herb": "Earth Chesnuts",
+"text": "The root being dried and beaten into powder, and the powder made into an electuary, is as singular a remedy for spitting and pissing of blood, as the former Chesnut was for coughs.",
+"match": [
+125,
+132
+]
+},
+{
+"herb": "Chick-Pease, or Cicers",
+"text": "They are less windy than beans, but nourish more; they provoke urine, and are thought to increase sperm; they have a cleansing faculty, whereby they break the stone in the kidneys.",
+"match": [
+55,
+68
+]
+},
+{
+"herb": "Coralwort",
+"text": "It cleanses the bladder, and provokes urine, expels gravel, and the stone; it eases pains in the sides and bowels, is excellently good for inward wounds, especially such as are made in the breast or lungs, by taking a dram of the powder of the root every morning in wine; the same is excellently good for ruptures, as also to stop fluxes; an…",
+"match": [
+16,
+23
+]
+},
+{
+"herb": "Costmary, or Alcost, or Balsam Herb",
+"text": "The ordinary Costmary, as well as Maudlin, provokes urine abundantly, and moistens the hardness of the mother; it gently purges choler and phlegm, extenuating that which is gross, and cutting that which is tough and glutinous, cleanses that which is foul, and hinders putrefaction and corruption; it dissolves without attraction, opens obstructions…",
+"match": [
+43,
+57
+]
+},
+{
+"herb": "Cowslips, or Peagles",
+"text": "…spots and wrinkles of the skin, sun-burning, and freckles, and adds beauty exceedingly; they remedy all infirmities of the head coming of heat and wind, as vertigo, ephialtes, false apparitions, phrensies, falling-sickness, palsies, convulsions, cramps, pains in the nerves; the roots ease pains in the back and bladder, and open the passages of…",
+"match": [
+313,
+320
+]
+},
+{
+"herb": "Water Cresses",
+"text": "They are more powerful against the scurvy, and to cleanse the blood and humours, than Brooklime is, and serve in all the other uses in which Brooklime is available, as to break the stone, and provoke urine and woman’s courses.",
+"match": [
+192,
+205
+]
+},
+{
+"herb": "Cuckow-Point",
+"text": "The said powder taken in wine or other drink, or the juice of the berries, or the powder of them, or the wine wherein they have been boiled, provokes urine, and brings down women’s courses and purges them effectually after child-bearing, to bring away the after-birth.",
+"match": [
+141,
+155
+]
+},
+{
+"herb": "Cucumbers",
+"text": "The face being washed with their juice, cleanses the skin, and is excellently good for hot rheums in the eyes; the seed is excellently good to provoke urine, and cleanses the passages thereof when they are stopped: there is not a better remedy for ulcers in the bladder growing, than Cucumbers are;",
+"match": [
+143,
+156
+]
+},
+{
+"herb": "Cucumbers",
+"text": "When the season of the year is, take the Cucumbers and bruise them well, and distil the water from them, and let such as are troubled with ulcers in the bladder drink no other drink.",
+"match": [
+153,
+160
+]
+},
+{
+"herb": "Dog's-Grass, or Cough Grass",
+"text": "Being boiled and drank, it opens obstructions of the liver and gall, and the stopping of urine, and eases the griping pains of the belly and inflammations; wastes the matter of the stone in the bladder, and the ulcers thereof also.",
+"match": [
+77,
+94
+]
+},
+{
+"herb": "Dwarf-Elder",
+"text": "…the berries boiled with honey and dropped into the ears, helps the pains of them; the decoction of the berries in wine, being drank, provokes urine; the distilled water of the flowers is of much use to clean the skin from sun-burning, freckles, morphew, or the like; and takes away the head-ache, coming of a cold cause, the head being bathed…",
+"match": [
+134,
+148
+]
+},
+{
+"herb": "Dwarf-Elder",
+"text": "…Elder in opening and purging choler, phlegm, and water; in helping the gout, piles, and women’s diseases, colours the hair black, helps the inflammations of the eyes, and pains in the ears, the biting of serpents, or mad dogs, burnings and scaldings, the wind cholic, cholic, and stone, the difficulty of urine, the cure of old sores and fistulous…",
+"match": [
+292,
+311
+]
+},
+{
+"herb": "Elecampane",
+"text": "…with sugar, and taken, serves to the same purpose, and is also profitable for those who have their urine stopped, or the stopping of women’s courses, the pains of the mother and the stone in the reins, kidneys, or bladder; it resists poison, and stays the spreading of the venom of serpents, as also putrid and pestilential fevers, and the plague…",
+"match": [
+215,
+222
+]
+},
+{
+"herb": "Eringo, or Sea-Holly",
+"text": "The decoction of the root hereof in wine, is very effectual to open obstructions of the spleen and liver, and helps yellow jaundice, dropsy, pains of the loins, and wind cholic, provokes urine, and expels the stone, procures women’s courses.",
+"match": [
+178,
+192
+]
+},
+{
+"herb": "Eringo, or Sea-Holly",
+"text": "The continued use of the decoction for fifteen days, taken fasting, and next to bedward, doth help the stranguary, the difficulty and stoppage of urine, and the stone, as well as all defects of the reins and kidneys; and if the said drink be continued longer, it is said that it cures the stone; it is found good against the French pox.",
+"match": [
+134,
+151
+]
+},
+{
+"herb": "Osmond Royal, or Water Fern",
+"text": "The decoction of the root in white wine, provokes urine exceedingly, and cleanses the bladder and passages of urine.",
+"match": [
+41,
+55
+]
+},
+{
+"herb": "Feverfew or Featherfew",
+"text": "The decoction thereof made with some sugar, or honey put thereto, is used by many with good success to help the cough and stuffing of the chest, by colds, as also to cleanse the reins and bladder, and helps to expel the stone in them.",
+"match": [
+188,
+195
+]
+},
+{
+"herb": "Fennel",
+"text": "Fennel is good to break wind, to provoke urine, and ease the pains of the stone, and helps to break it.",
+"match": [
+33,
+46
+]
+},
+{
+"herb": "Fennel",
+"text": "The roots are of most use in physic drinks, and broth that are taken to cleanse the blood, to open obstructions of the liver, to provoke urine, and amend the ill colour in the face after sickness, and to cause a good habit through the body.",
+"match": [
+129,
+142
+]
+},
+{
+"herb": "Sow-Fennel, or Hog's-Fennel",
+"text": "It purges the belly gently, expels the hardness of the spleen, gives ease to women that have sore travail in child-birth, and eases the pains of the reins and bladder, and also the womb.",
+"match": [
+159,
+166
+]
+},
+{
+"herb": "Filipendula, or Drop-Wort",
+"text": "It effectually opens the passages of the urine, helps the stranguary; the stone in the kidneys or bladder, the gravel, and all other pains of the bladder and reins, by taking the roots in powder, or a decoction of them in white wine, with a little honey.",
+"match": [
+98,
+105
+]
+},
+{
+"herb": "Furze Bush",
+"text": "A decoction made with the flowers thereof hath been found effectual against the jaundice, as also to provoke urine, and cleanse the kidneys from gravel or stone ingendered in them.",
+"match": [
+101,
+114
+]
+},
+{
+"herb": "Garlick",
+"text": "…all diseases and hurts (except those which itself breed.) It provokes urine, and women’s courses, helps the biting of mad dogs and other venomous creatures, kills worms in children, cuts and voids tough phlegm, purges the head, helps the lethargy, is a good preservative against, and a remedy for any plague, sore, or foul ulcers; takes away spots…",
+"match": [
+62,
+76
+]
+},
+{
+"herb": "Gentian, Felwort, or Baldmony",
+"text": "…steeped in wine, and the wine drank, refreshes such as be over-weary with traveling, and grow lame in their joints, either by cold or evil lodgings; it helps stitches, and griping pains in the sides; is an excellent remedy for such as are bruised by falls; it provokes urine and the terms exceedingly, therefore let it not be given to women with…",
+"match": [
+261,
+275
+]
+},
+{
+"herb": "Germander",
+"text": "This taken with honey (saith Dioscorides) is a remedy for coughs, hardness of the spleen and difficulty of urine, and helps those that are fallen into a dropsy, especially at the beginning of the disease, a decoction being made thereof when it is green, and drank.",
+"match": [
+93,
+112
+]
+},
+{
+"herb": "Golden Rod",
+"text": "Arnoldus de Villa Nova commends it much against the stone in the reins and kidneys, and to provoke urine in abundance, whereby also the gravel and stone may be voided.",
+"match": [
+91,
+104
+]
+},
+{
+"herb": "Gromel",
+"text": "These are accounted to be of as singular force as any herb or seed whatsoever, to break the stone and to void it, and the gravel either in the reins or bladder, as also to provoke urine being stopped, and to help stranguary.",
+"match": [
+152,
+159
+]
+},
+{
+"herb": "Gooseberry Bush",
+"text": "The young and tender leaves break the stone, and expel gravel both from the kidneys and bladder.",
+"match": [
+88,
+95
+]
+},
+{
+"herb": "Winter-Green",
+"text": "The herb boiled in wine and water, and given to drink to them that have any inward ulcers in their kidneys, or neck of the bladder, doth wonderfully help them.",
+"match": [
+123,
+130
+]
+},
+{
+"herb": "Groundsel",
+"text": "It is good against the jaundice and falling sickness, being taken in wine; as also against difficulty of making water.",
+"match": [
+105,
+117
+]
+},
+{
+"herb": "Groundsel",
+"text": "It provokes urine, expels gravel in the reins or kidneys; a dram thereof given in oxymel, after some walking or stirring of the body.",
+"match": [
+3,
+17
+]
+},
+{
+"herb": "Hawk-Weed",
+"text": "The juice thereof in wine, helps digestion, discusses wind, hinders crudities abiding in the stomach, and helps the difficulty of making water, the biting of venomous serpents, and stinging of the scorpion, if the herb be also outwardly applied to the place, and is very good against all other poisons.",
+"match": [
+130,
+142
+]
+},
+{
+"herb": "Hawk-Weed",
+"text": "The decoction thereof, and of wild Succory, made with wine, and taken, helps the wind cholic and hardness of the spleen; it procures rest and sleep, hinders venery and venerous dreams, cooling heats, purges the stomach, increases blood, and helps the diseases of the reins and bladder.",
+"match": [
+277,
+284
+]
+},
+{
+"herb": "Hops",
+"text": "This, in physical operations, is to open obstructions of the liver and spleen, to cleanse the blood, to loosen the belly, to cleanse the reins from gravel, and provoke urine.",
+"match": [
+160,
+173
+]
+},
+{
+"herb": "Horsetail",
+"text": "It also stays all sorts of lasks and fluxes in man or woman, and bloody urine; and heals also not only the inward ulcers, and the excoriation of the entrails, bladder, &c. but all other sorts of foul, moist and running ulcers, and soon solders together the tops of green wounds.",
+"match": [
+159,
+166
+]
+},
+{
+"herb": "Horsetail",
+"text": "The decoction thereof in wine being drank, provokes urine, and helps the stone and stranguary; and the distilled water thereof drank two or three times in a day, and a small quantity at a time, also eases the bowels, and is effectual against a cough that comes by distillations from the head.",
+"match": [
+43,
+57
+]
+},
+{
+"herb": "Ivy",
+"text": "They being taken in wine, do certainly help to break the stone, provoke urine, and women’s courses.",
+"match": [
+64,
+77
+]
+},
+{
+"herb": "Juniper Bush",
+"text": "The berries are hot in the third degree, and dry but in the first, being a most admirable counter-poison, and as great a resister of the pestilence, as any growing; they are excellent good against the biting of venomous beasts, they provoke urine exceedingly, and therefore are very available to dysuries and stranguaries.",
+"match": [
+233,
+246
+]
+},
+{
+"herb": "Kidneywort, or Wall Pennyroyal, or Wall Pennywort",
+"text": "The said juice or water helps to heal sore kidneys, torn or fretted by the stone, or exulcerated within; it also provokes urine, is available for the dropsy, and helps to break the stone.",
+"match": [
+113,
+127
+]
+},
+{
+"herb": "Knotgrass",
+"text": "It is singularly good to provoke urine, help the stranguary, and allays the heat that comes thereby; and is powerful by urine to expel the gravel or stone in the kidneys and bladder, a dram of the powder of the herb being taken in wine for many days together.",
+"match": [
+25,
+38
+]
+},
+{
+"herb": "Ladies-Smock, or Cuckow-Flower",
+"text": "They are under the dominion of the Moon, and very little inferior to Water Cresses in all their operations; they are excellently good for the scurvy, they provoke urine, and break the stone, and excellently warm a cold and weak stomach, restoring lost appetite, and help digestion.",
+"match": [
+155,
+168
+]
+},
+{
+"herb": "Lettuce",
+"text": "Applied outwardly to the region of the heart, liver or reins, or by bathing the said places with the juice of distilled water, wherein some white Sanders, or red Roses are put; not only represses the heat and inflammations therein, but comforts and strengthens those parts, and also tempers the heat of urine.",
+"match": [
+295,
+308
+]
+},
+{
+"herb": "Liquorice",
+"text": "It is also good in all pains of the reins, the stranguary, and heat of urine:",
+"match": [
+63,
+76
+]
+},
+{
+"herb": "Liquorice",
+"text": "The juice of Liquorice is as effectual in all the diseases of the breast and lungs, the reins and bladder, as the decoction.",
+"match": [
+98,
+105
+]
+},
+{
+"herb": "Wall Rue, or White Maiden-Hair",
+"text": "…shortness of breath, the yellow jaundice, diseases of the spleen, stopping of urine, and helps exceedingly to break the stone in the kidneys, (in all which diseases the Wall Rue is also very effectual.) It provokes women’s courses, and stays both bleedings and fluxes of the stomach and belly, especially when the herb is dry; for being green, it…",
+"match": [
+67,
+84
+]
+},
+{
+"herb": "Mallows and Marshmallows",
+"text": "The leaves are likewise used to loosen the belly gently, and in decoctions or clysters to ease all pains of the body, opening the strait passages, and making them slippery, whereby the stone may descend the more easily and without pain, out of the reins, kidneys, and bladder, and to ease the torturing pains thereof.",
+"match": [
+268,
+275
+]
+},
+{
+"herb": "Wind Marjoram",
+"text": "It provokes urine and the terms in women, helps the dropsy, and the scurvy, scabs, itch, and yellow jaundice.",
+"match": [
+3,
+17
+]
+},
+{
+"herb": "Masterwort",
+"text": "It also provokes urine, and helps to break the stone, and expel the gravel from the kidneys; provokes women’s courses, and expels the dead birth.",
+"match": [
+8,
+22
+]
+},
+{
+"herb": "Dog Mercury",
+"text": "…commended it wonderfully for women’s diseases, and applied to the secret parts, to ease the pains of the mother; and used the decoction of it, both to procure women’s courses, and to expel the after-birth; and gave the decoction thereof with myrrh or pepper, or used to apply the leaves outwardly against the stranguary and diseases of the reins and…",
+"match": [
+351,
+358
+]
+},
+{
+"herb": "Motherwort",
+"text": "It also provokes urine and women’s courses, cleanses the chest of cold phlegm, oppressing it, kills worms in the belly.",
+"match": [
+8,
+22
+]
+},
+{
+"herb": "Mullein",
+"text": "The same also opens obstructions of the bladder and reins.",
+"match": [
+40,
+47
+]
+},
+{
+"herb": "Mustard",
+"text": "The decoction of the seed made in wine, and drank, provokes urine, resists the force of poison, the malignity of mushrooms, and venom of scorpions, or other venomous creatures, if it be taken in time; and taken before the cold fits of agues, alters, lessens, and cures them.",
+"match": [
+51,
+65
+]
+},
+{
+"herb": "Nettles",
+"text": "The same also, or the seed provokes urine, and expels the gravel and stone in the reins or bladder, often proved to be effectual in many that have taken it.",
+"match": [
+27,
+41
+]
+},
+{
+"herb": "Oak",
+"text": "The acorn in powder taken in wine, provokes urine, and resists the poison of venomous creatures.",
+"match": [
+35,
+49
+]
+},
+{
+"herb": "Oak",
+"text": "The decoction of acorns and the bark made in milk and taken, resists the force of poisonous herbs and medicines, as also the virulency of cantharides, when one by eating them hath his bladder exulcerated, and voids bloody urine.",
+"match": [
+184,
+191
+]
+},
+{
+"herb": "Parsley",
+"text": "It is under the dominion of Mercury; is very comfortable to the stomach; helps to provoke urine and women’s courses, to break wind both in the stomach and bowels, and doth a little open the body, but the root much more.",
+"match": [
+82,
+95
+]
+},
+{
+"herb": "Parsley",
+"text": "Galen commended it against the falling sickness, and to provoke urine mightily; especially if the roots be boiled, and eaten like Parsnips.",
+"match": [
+56,
+69
+]
+},
+{
+"herb": "Parsley",
+"text": "The seed is effectual to provoke urine and women’s courses, to expel wind, to break the stone, and ease the pains and torments thereof; it is also effectual against the venom of any poisonous creature, and the danger that comes to them that have the lethargy, and is as good against the cough.",
+"match": [
+25,
+38
+]
+},
+{
+"herb": "Parsley Piert, or Parsley Break Stone",
+"text": "Its operation is very prevalent to provoke urine, and to break the stone.",
+"match": [
+35,
+48
+]
+},
+{
+"herb": "Parsnips",
+"text": "It is conducible to the stomach and reins, and provokes urine.",
+"match": [
+47,
+61
+]
+},
+{
+"herb": "Parsnips",
+"text": "It resists and helps the bitings of serpents, eases the pains and stitches in the sides, and dissolves wind both in the stomach and bowels, which is the cholic, and provokes urine.",
+"match": [
+165,
+179
+]
+},
+{
+"herb": "Pellitory of the Wall",
+"text": "Three ounces of the juice thereof taken at a time, doth wonderfully help stopping of the urine, and to expel the stone or gravel in the kidneys or bladder, and is therefore usually put among other herbs used in clysters to mitigate pains in the back, sides, or bowels, proceeding of wind, stopping of urine, the gravel or stone, as aforesaid.",
+"match": [
+147,
+154
+]
+},
+{
+"herb": "Pimpernel",
+"text": "It provokes urine, and helps to expel the stone and gravel out of the kidneys and bladder, and helps much in all inward pains and ulcers.",
+"match": [
+3,
+17
+]
+},
+{
+"herb": "Plantain",
+"text": "It is good to stay spitting of blood and other bleedings at the mouth, or the making of foul and bloody water, by reason of any ulcer in the reins or bladder, and also stays the too free bleeding of wounds.",
+"match": [
+150,
+157
+]
+},
+{
+"herb": "Purslain",
+"text": "The seed is more effectual than the herb, and is of singular good use to cool the heat and sharpness of urine, venereous dreams, and the like; insomuch that the over frequent use hereof extinguishes the heat and virtue of natural procreation.",
+"match": [
+91,
+109
+]
+},
+{
+"herb": "Raddish, or Horse-Raddish",
+"text": "…physician as fast as you can; this is one cause which makes the owners of such nice palates so unhealthful; yet for such as are troubled with the gravel, stone, or stoppage of urine, they are good physic, if the body be strong that takes them; you may make the juice of the roots into a syrup if you please, for that use: they purge by urine…",
+"match": [
+165,
+182
+]
+},
+{
+"herb": "Rest Harrow, or Cammock",
+"text": "It is singularly good to provoke urine when it is stopped, and to break and drive forth the stone, which the powder of the bark of the root taken in wine performs effectually.",
+"match": [
+25,
+38
+]
+},
+{
+"herb": "Rocket",
+"text": "It serves also to help digestion, and provokes urine exceedingly.",
+"match": [
+38,
+52
+]
+},
+{
+"herb": "Winter-Rocket, or Cresses",
+"text": "This is profitable to provoke urine, to help stranguary, and expel gravel and stone.",
+"match": [
+22,
+35
+]
+},
+{
+"herb": "Roses",
+"text": "The briar ball is often used, being made into powder and drank, to break the stone, to provoke urine when it is stopped, and to ease and help the cholic; some appoint it to be burnt, and then taken for the same purpose.",
+"match": [
+87,
+100
+]
+},
+{
+"herb": "Great Round-Leaved Dock, or Bastard Rhubarb",
+"text": "It helps them that are troubled with the stone, provokes urine, and helps the dimness of the sight.",
+"match": [
+48,
+62
+]
+},
+{
+"herb": "Garden-Rue",
+"text": "It provokes urine and women’s courses, being taken either in meat or drink.",
+"match": [
+3,
+17
+]
+},
+{
+"herb": "Garden-Rue",
+"text": "…in vinegar twenty four hours, and then dry it, or rather roast it in a hot fire-shovel, or in an oven) and is a remedy for the pains or griefs in the chest or stomach, of the spleen, belly, or sides, by wind or stitches; of the liver by obstructions; of the reins and bladder by the stopping of urine; and helps also to extenuate fat corpulent…",
+"match": [
+269,
+276
+]
+},
+{
+"herb": "Rupture-Wort",
+"text": "It doth also most assuredly help those that have the stranguary, or are troubled with the stone or gravel in the reins or bladder.",
+"match": [
+122,
+129
+]
+},
+{
+"herb": "Wood-Sage",
+"text": "The decoction of the Wood Sage provokes urine and women’s courses:",
+"match": [
+31,
+45
+]
+},
+{
+"herb": "Samphire",
+"text": "It is a safe herb, very pleasant both to taste and stomach, helps digestion, and in some sort opening obstructions of the liver and spleen: provokes urine, and helps thereby to wash away the gravel and stone engendered in the kidneys or bladder.",
+"match": [
+140,
+154
+]
+},
+{
+"herb": "Winter and Summer Savoury",
+"text": "They are both of them hot and dry, especially the Summer kind, which is both sharp and quick in taste, expelling wind in the stomach and bowels, and is a present help for the rising of the mother procured by wind; provokes urine and women’s courses, and is much commended for women with child to take inwardly, and to smell often unto.",
+"match": [
+214,
+228
+]
+},
+{
+"herb": "Common White Saxifrage",
+"text": "It is very effectual to cleanse the reins and bladder, and to dissolve the stone engendered in them, and to expel it and the gravel by urine; to help the stranguary; for which purpose the decoction of the herb or roots in white wine, is most usual, or the powder of the small kernelly root, which is called the seed, taken in white wine, or in the…",
+"match": [
+46,
+53
+]
+},
+{
+"herb": "Smallage",
+"text": "It provokes urine and women’s courses, and is singularly good against the yellow jaundice, tertian and quartan agues, if the juice thereof be taken, but especially made up into a syrup.",
+"match": [
+3,
+17
+]
+},
+{
+"herb": "Sopewort, or Bruisewort",
+"text": "Some make great boast thereof, that it is diuretical to provoke urine, and thereby to expel gravel and the stone in the reins or kidneys, and do also account it singularly good to void hydropical waters: and they no less extol it to perform an absolute cure in the French pox, more than either sarsaparilla, guiacum, or China can do; which, how true…",
+"match": [
+56,
+69
+]
+},
+{
+"herb": "Southern Wood",
+"text": "Dioscorides saith, That the seed bruised, heated in warm water, and drank, helps those that are bursten, or troubled with cramps or convulsions of the sinews, the sciatica, or difficulty in making water, and bringing down women’s courses.",
+"match": [
+190,
+202
+]
+},
+{
+"herb": "Spignel, or Spikenard",
+"text": "Galen saith, The roots of Spignel are available to provoke urine, and women’s courses; but if too much thereof be taken, it causes head-ache.",
+"match": [
+51,
+64
+]
+},
+{
+"herb": "Spleenwort, Ceterach, or Heart's Tongue",
+"text": "It helps the stranguary, and wasteth the stone in the bladder, and is good against the yellow jaundice and the hiccough; but the juice of it in women hinders conception.",
+"match": [
+54,
+61
+]
+},
+{
+"herb": "Spleenwort, Ceterach, or Heart's Tongue",
+"text": "Camerarius saith, That the distilled water thereof being drank, is very effectual against the stone in the reins and bladder; and that the lye that is made of the ashes thereof being drank for some time together, helps splenetic persons.",
+"match": [
+117,
+124
+]
+},
+{
+"herb": "Star Thistle",
+"text": "The seed of this Star Thistle made into powder, and drank in wine, provokes urine, and helps to break the stone, and drives it forth.",
+"match": [
+67,
+81
+]
+},
+{
+"herb": "Strawberries",
+"text": "The leaves and roots boiled in wine and water, and drank, do likewise cool the liver and blood, and assuage all inflammations in the reins and bladder, provoke urine, and allay the heat and sharpness thereof.",
+"match": [
+143,
+150
+]
+},
+{
+"herb": "Thistles",
+"text": "All these thistles are good to provoke urine, and to mend the stinking smell thereof; as also the rank smell of the arm-pits, or the whole body; being boiled in wine and drank, and are said to help a stinking breath, and to strengthen the stomach.",
+"match": [
+31,
+44
+]
+},
+{
+"herb": "Our Lady's Thistle",
+"text": "It provokes urine, breaks and expels the stone, and is good for the dropsy.",
+"match": [
+3,
+17
+]
+},
+{
+"herb": "Wild Thyme, or Mother of Thyme",
+"text": "It provokes urine and the terms, and eases the griping pain of the belly, cramps, ruptures, and inflamation of the liver.",
+"match": [
+3,
+17
+]
+},
+{
+"herb": "Turnsole, or Heliotropium",
+"text": "Dioscorides saith, That a good handful of this, which is called the Great Turnsole, boiled in water, and drank, purges both choler and phlegm; and boiled with cummin, helps the stone in the reins, kidneys, or bladder, provokes urine and women’s courses, and causes an easy and speedy delivery in child-birth.",
+"match": [
+209,
+216
+]
+},
+{
+"herb": "Garden Valerian",
+"text": "Dioscorides saith, That the Garden Valerian hath a warming faculty, and that being dried and given to drink it provokes urine, and helps the stranguary.",
+"match": [
+111,
+125
+]
+},
+{
+"herb": "Vervain",
+"text": "It helps the yellow jaundice, the dropsy and the gout; it kills and expels worms in the belly, and causes a good colour in the face and body, strengthens as well as corrects the diseases of the stomach, liver, and spleen; helps the cough, wheezings, and shortness of breath, and all the defects of the reins and bladder, expelling the gravel and…",
+"match": [
+312,
+319
+]
+},
+{
+"herb": "Vine",
+"text": "Also the tears of the Vine, drank two or three spoonfuls at a time, breaks the stone in the bladder.",
+"match": [
+92,
+99
+]
+},
+{
+"herb": "Violets",
+"text": "The herb or flowers, while they are fresh, or the flowers when they are dry, are effectual in the pleurisy, and all diseases of the lungs, to lenify the sharpness in hot rheums, and the hoarseness of the throat, the heat also and sharpness of urine, and all the pains of the back or reins, and bladder.",
+"match": [
+230,
+248
+]
+},
+{
 "herb": "Willow Tree",
 "text": "Water that is gathered from the Willow, when it flowers, the bark being slit, and a vessel fitting to receive it, is very good for redness and dimness of sight, or films that grow over the eyes, and stay the rheums that fall into them; to provoke urine, being stopped, if it be drank; to clear the face and skin from spots and discolourings.",
 "match": [
-247,
+239,
 252
 ]
 },
 {
-"herb": "Woad",
-"text": "However, if any bees be diseased thereby, the cure is, to set urine by them, but set it in a vessel, that they cannot drown themselves, which may be remedied, if you put pieces of cork in it.",
-"match": [
-62,
-67
-]
-},
-{
 "herb": "Woodbine, or Honey-Suckles",
-"text": "…this: besides, it takes away the evil of the spleen, provokes urine, procures speedy delivery of women in travail, helps cramps, convulsions, and palsies, and whatsoever griefs come of cold or stopping; if you please to make use of it as an ointment, it will clear your skin of morphew, freckles, and sun-burnings, or whatsoever else discolours it…",
+"text": "…asthma than this: besides, it takes away the evil of the spleen, provokes urine, procures speedy delivery of women in travail, helps cramps, convulsions, and palsies, and whatsoever griefs come of cold or stopping; if you please to make use of it as an ointment, it will clear your skin of morphew, freckles, and sun-burnings, or whatsoever else…",
 "match": [
-63,
-68
+66,
+80
 ]
 },
 {
 "herb": "Wormwood",
 "text": "It cleanses the body of choler (who dares say Mars doth no good?) It provokes urine, helps surfeits, or swellings in the belly; it causes appetite to meat, because Mars rules the attractive faculty in man:",
 "match": [
-78,
+69,
 83
-]
-},
-{
-"herb": "Wormwood",
-"text": "In this our herb, I shall give the pattern of a ruler, the sons of art rough cast, yet as near the truth as the men of Benjamin could throw a stone:",
-"match": [
-142,
-147
 ]
 }
 ],
@@ -31008,6 +32338,56 @@
 ],
 "blisters": [
 {
+"herb": "Beets",
+"text": "It is good for all wheals, pushes, blisters, and blains in the skin: the herb boiled, and laid upon chilblains or kibes, helps them.",
+"match": [
+35,
+43
+]
+},
+{
+"herb": "Hawk-Weed",
+"text": "The green leaves bruised, and with a little salt applied to any place burnt with fire, before blisters do rise, helps them; as also inflammations, St.",
+"match": [
+94,
+102
+]
+},
+{
+"herb": "Mustard",
+"text": "…application hereof upon the pained place of the sciatica, discusses the humours, and eases the pains, as also the gout, and other joint aches; and is much and often used to ease pains in the sides or loins, the shoulder, or other parts of the body, upon the plying thereof to raise blisters, and cures the disease by drawing it to the outward parts…",
+"match": [
+283,
+291
+]
+},
+{
+"herb": "Queen of the Meadows, Meadow Sweet, or Mead Sweet",
+"text": "The leaves when they are full grown, being laid on the skin, will, in a short time, raise blisters thereon, as Tragus saith.",
+"match": [
+90,
+98
+]
+},
+{
+"herb": "Rosa Solis, or Sun Dew",
+"text": "The leaves, outwardly applied to the skin will raise blisters, which has caused some to think it dangerous to be taken inwardly; but there are other things which will also draw blisters, yet nothing dangerous to be taken inwardly.",
+"match": [
+53,
+61
+]
+},
+{
+"herb": "Tamarisk Tree",
+"text": "Its ashes doth quickly heal blisters raised by burnings or scaldings.",
+"match": [
+28,
+36
+]
+}
+],
+"sore feet": [
+{
 "herb": "Alehoof, or Ground-Ivy",
 "text": "…them that are troubled with the sciatica, or hip-gout: as also the gout in hands, knees or feet; if you put to the decoction some honey and a little burnt alum, it is excellently good to gargle any sore mouth or throat, and to wash the sores and ulcers in the privy parts of man or woman; it speedily helps green wounds, being bruised and bound…",
 "match": [
@@ -31029,14 +32409,6 @@
 "match": [
 77,
 81
-]
-},
-{
-"herb": "Beets",
-"text": "It is good for all wheals, pushes, blisters, and blains in the skin: the herb boiled, and laid upon chilblains or kibes, helps them.",
-"match": [
-35,
-43
 ]
 },
 {
@@ -31072,27 +32444,11 @@
 ]
 },
 {
-"herb": "Fig-Tree",
-"text": "The ashes of the wood made into an ointment with hog’s grease, helps kibes and chilblains.",
-"match": [
-69,
-74
-]
-},
-{
-"herb": "Hawk-Weed",
-"text": "The green leaves bruised, and with a little salt applied to any place burnt with fire, before blisters do rise, helps them; as also inflammations, St.",
-"match": [
-94,
-102
-]
-},
-{
 "herb": "Henbane",
 "text": "The fume of the dried herb, stalks and seed, burned, quickly heals swellings, chilblains or kibes in the hands or feet, by holding them in the fume thereof.",
 "match": [
-92,
-97
+114,
+118
 ]
 },
 {
@@ -31112,14 +32468,6 @@
 ]
 },
 {
-"herb": "Kidneywort, or Wall Pennyroyal, or Wall Pennywort",
-"text": "…give ease to the pains of the gout, the sciatica, and helps the kernels or knots in the neck or throat, called the king’s evil: healing kibes and chilblains if they be bathed with the juice, or anointed with ointment made thereof, and some of the skin of the leaf upon them: it is also used in green wounds to stay the blood, and to heal them…",
-"match": [
-137,
-142
-]
-},
-{
 "herb": "Mallows and Marshmallows",
 "text": "If the feet be bathed or washed with the decoction of the leaves, roots, and flowers, it helps much the defluxions of rheum from the head; if the head be washed therewith, it stays the falling and shedding of the hair.",
 "match": [
@@ -31136,35 +32484,11 @@
 ]
 },
 {
-"herb": "Mustard",
-"text": "…application hereof upon the pained place of the sciatica, discusses the humours, and eases the pains, as also the gout, and other joint aches; and is much and often used to ease pains in the sides or loins, the shoulder, or other parts of the body, upon the plying thereof to raise blisters, and cures the disease by drawing it to the outward parts…",
-"match": [
-283,
-291
-]
-},
-{
 "herb": "Plantain",
 "text": "The same also is profitably applied to all hot gouts in the feet or hands, especially in the beginning.",
 "match": [
 60,
 64
-]
-},
-{
-"herb": "Queen of the Meadows, Meadow Sweet, or Mead Sweet",
-"text": "The leaves when they are full grown, being laid on the skin, will, in a short time, raise blisters thereon, as Tragus saith.",
-"match": [
-90,
-98
-]
-},
-{
-"herb": "Rosa Solis, or Sun Dew",
-"text": "The leaves, outwardly applied to the skin will raise blisters, which has caused some to think it dangerous to be taken inwardly; but there are other things which will also draw blisters, yet nothing dangerous to be taken inwardly.",
-"match": [
-53,
-61
 ]
 },
 {
@@ -31189,14 +32513,6 @@
 "match": [
 238,
 242
-]
-},
-{
-"herb": "Tamarisk Tree",
-"text": "Its ashes doth quickly heal blisters raised by burnings or scaldings.",
-"match": [
-28,
-36
 ]
 },
 {
@@ -43326,13 +44642,14 @@
 "latin": null,
 "planet": "Mars",
 "treats": [
-"kidney stones",
 "anger",
 "insect bites",
 "snake bite",
 "poisoning",
 "seizures",
+"bladder problems",
 "aches and pains",
+"kidney stones",
 "worms",
 "gout",
 "joint pain",
@@ -43404,8 +44721,7 @@
 "sore eyes",
 "ulcers",
 "aches and pains",
-"forgetfulness",
-"earache"
+"forgetfulness"
 ]
 },
 {
@@ -43454,7 +44770,7 @@
 "flu",
 "fever",
 "worms",
-"kidney stones",
+"bladder problems",
 "itch",
 "insect bites",
 "period pain",
@@ -43485,10 +44801,10 @@
 "stomach ache",
 "jaundice",
 "spleen",
-"kidney stones",
+"bladder problems",
 "bruises",
 "cuts",
-"blisters",
+"sore feet",
 "gout",
 "back pain",
 "poisoning",
@@ -43498,7 +44814,9 @@
 "itch",
 "cancer",
 "sore eyes",
-"earache"
+"bad eyesight",
+"earache",
+"deafness"
 ]
 },
 {
@@ -43516,7 +44834,7 @@
 "indigestion",
 "jaundice",
 "spleen",
-"kidney stones",
+"bladder problems",
 "period pain",
 "bruises",
 "insect bites",
@@ -43565,7 +44883,7 @@
 "cuts",
 "bruises",
 "water retention",
-"blisters",
+"sore feet",
 "dandruff"
 ]
 },
@@ -43588,7 +44906,6 @@
 "bad breath",
 "jaundice",
 "spleen",
-"kidney stones",
 "bruises",
 "water retention",
 "period pain",
@@ -43598,7 +44915,9 @@
 "hangover",
 "loss of appetite",
 "sore eyes",
+"bad eyesight",
 "earache",
+"deafness",
 "toothache",
 "insect bites",
 "dog bite",
@@ -43738,7 +45057,6 @@
 "constipation",
 "cough",
 "anger",
-"kidney stones",
 "weakness",
 "flu",
 "fever",
@@ -43768,10 +45086,11 @@
 "treats": [
 "stomach ache",
 "kidney stones",
+"bladder problems",
 "aches and pains",
 "back pain",
 "gout",
-"sore eyes",
+"bad eyesight",
 "toothache",
 "mouth ulcers",
 "seizures",
@@ -43937,13 +45256,15 @@
 "planet": "Saturn",
 "treats": [
 "aches and pains",
-"kidney stones",
 "indigestion",
 "common cold",
+"hay fever",
+"bladder problems",
 "stomach ache",
 "cursed",
 "jaundice",
 "spleen",
+"kidney stones",
 "water retention",
 "cough",
 "chest infection",
@@ -43977,6 +45298,7 @@
 "spots",
 "complexion",
 "kidney stones",
+"bladder problems",
 "sore eyes",
 "earache",
 "bruises",
@@ -44002,6 +45324,7 @@
 "bad breath",
 "stomach ache",
 "indigestion",
+"bladder problems",
 "low libido"
 ]
 },
@@ -44024,7 +45347,7 @@
 "cuts",
 "bruises",
 "burns",
-"blisters",
+"sore feet",
 "itch",
 "weakness"
 ]
@@ -44040,7 +45363,7 @@
 "constipation",
 "jaundice",
 "stomach ache",
-"kidney stones",
+"bladder problems",
 "headache",
 "sore eyes",
 "spleen",
@@ -44079,7 +45402,8 @@
 "ulcers",
 "complexion",
 "burns",
-"common cold"
+"common cold",
+"hay fever"
 ]
 },
 {
@@ -44106,6 +45430,7 @@
 "water retention",
 "cursed",
 "common cold",
+"hay fever",
 "cough",
 "chest infection",
 "tuberculosis",
@@ -44113,12 +45438,14 @@
 "flu",
 "fever",
 "sore eyes",
+"bad eyesight",
 "constipation",
 "spleen",
 "back pain",
 "period pain",
 "pregnancy",
 "kidney stones",
+"bladder problems",
 "toothache",
 "insect bites",
 "snake bite",
@@ -44193,7 +45520,8 @@
 "latin": "Betula",
 "planet": "Venus",
 "treats": [
-"kidney stones"
+"kidney stones",
+"bladder problems"
 ]
 },
 {
@@ -44222,7 +45550,7 @@
 "low libido",
 "stomach ache",
 "indigestion",
-"kidney stones",
+"bladder problems",
 "bruises",
 "aches and pains",
 "weakness",
@@ -44263,6 +45591,7 @@
 "cuts",
 "period pain",
 "common cold",
+"hay fever",
 "nosebleed",
 "sore throat"
 ]
@@ -44347,6 +45676,7 @@
 "heart problems",
 "weakness",
 "common cold",
+"hay fever",
 "cough",
 "sore throat",
 "chest infection",
@@ -44476,6 +45806,7 @@
 "headache",
 "jaundice",
 "kidney stones",
+"bladder problems",
 "period pain",
 "broken bones",
 "missing limb"
@@ -44492,6 +45823,7 @@
 "treats": [
 "spleen",
 "kidney stones",
+"bladder problems",
 "joint pain",
 "aches and pains",
 "jaundice",
@@ -44523,10 +45855,10 @@
 "latin": "Plantago coronopus",
 "planet": "Saturn",
 "treats": [
-"kidney stones",
 "insect bites",
 "snake bite",
 "tiredness",
+"kidney stones",
 "weakness",
 "mouth ulcers",
 "nosebleed",
@@ -44538,6 +45870,7 @@
 "seizures",
 "bruises",
 "common cold",
+"hay fever",
 "sore eyes"
 ]
 },
@@ -44628,7 +45961,7 @@
 "chest infection",
 "stomach ache",
 "worms",
-"kidney stones",
+"bladder problems",
 "period pain",
 "spots",
 "ulcers"
@@ -44644,10 +45977,10 @@
 "latin": "Arctium lappa",
 "planet": "Venus",
 "treats": [
-"kidney stones",
 "bruises",
+"kidney stones",
 "seizures",
-"blisters",
+"sore feet",
 "ulcers",
 "cough",
 "cancer",
@@ -44656,6 +45989,7 @@
 "insect bites",
 "snake bite",
 "dog bite",
+"bladder problems",
 "back pain",
 "burns",
 "mouth ulcers",
@@ -44683,6 +46017,7 @@
 "spleen",
 "kidney stones",
 "sore eyes",
+"bad eyesight",
 "mouth ulcers",
 "hangover",
 "spots",
@@ -44719,7 +46054,7 @@
 "jaundice",
 "worms",
 "spleen",
-"kidney stones",
+"bladder problems",
 "period pain",
 "chest infection",
 "anger",
@@ -44752,15 +46087,16 @@
 "planet": "the Sun",
 "treats": [
 "aches and pains",
-"kidney stones",
 "flu",
 "fever",
 "water retention",
+"kidney stones",
 "body odour",
 "jaundice",
 "spleen",
 "bruises",
 "stomach ache",
+"bladder problems",
 "joint pain",
 "cough",
 "melancholy",
@@ -44844,11 +46180,11 @@
 "poisoning",
 "plague",
 "forgetfulness",
-"earache",
+"deafness",
 "flu",
 "fever",
 "melancholy",
-"kidney stones"
+"bladder problems"
 ]
 },
 {
@@ -44862,6 +46198,7 @@
 "indigestion",
 "stomach ache",
 "kidney stones",
+"bladder problems",
 "water retention",
 "period pain",
 "infertility",
@@ -44879,8 +46216,8 @@
 "indigestion",
 "stomach ache",
 "bruises",
-"kidney stones",
-"sore eyes",
+"bladder problems",
+"bad eyesight",
 "spots",
 "aches and pains",
 "tiredness",
@@ -44896,6 +46233,7 @@
 "planet": "the Sun",
 "treats": [
 "sore eyes",
+"bad eyesight",
 "itch",
 "ulcers",
 "jaundice",
@@ -44962,6 +46300,7 @@
 "snake bite",
 "poisoning",
 "sore eyes",
+"bad eyesight",
 "bruises",
 "cuts",
 "earache",
@@ -44981,11 +46320,12 @@
 "treats": [
 "cough",
 "loss of appetite",
-"kidney stones",
 "stomach ache",
+"bladder problems",
 "sore throat",
-"sore eyes",
+"bad eyesight",
 "indigestion",
+"kidney stones",
 "complexion"
 ]
 },
@@ -44998,6 +46338,7 @@
 "planet": "Venus",
 "treats": [
 "kidney stones",
+"bladder problems",
 "ulcers",
 "bruises",
 "aches and pains"
@@ -45020,6 +46361,7 @@
 "stomach ache",
 "chest infection",
 "kidney stones",
+"bladder problems",
 "period pain",
 "water retention"
 ]
@@ -45073,7 +46415,7 @@
 "latin": "Conopodium majus",
 "planet": "Venus",
 "treats": [
-"kidney stones",
+"bladder problems",
 "low libido",
 "cough"
 ]
@@ -45101,7 +46443,7 @@
 "earache",
 "piles",
 "burns",
-"blisters"
+"sore feet"
 ]
 },
 {
@@ -45114,6 +46456,7 @@
 "planet": "Venus",
 "treats": [
 "kidney stones",
+"bladder problems",
 "stomach ache",
 "period pain",
 "breastfeeding"
@@ -45146,7 +46489,7 @@
 "water retention",
 "itch",
 "burns",
-"blisters",
+"sore feet",
 "gout",
 "back pain",
 "cuts",
@@ -45163,8 +46506,7 @@
 "planet": "Mars",
 "treats": [
 "insomnia",
-"sore eyes",
-"kidney stones"
+"bad eyesight"
 ]
 },
 {
@@ -45186,6 +46528,7 @@
 "ulcers",
 "aches and pains",
 "common cold",
+"hay fever",
 "nosebleed",
 "constipation",
 "low libido",
@@ -45208,7 +46551,8 @@
 "low libido",
 "stomach ache",
 "cancer",
-"indigestion"
+"indigestion",
+"bad eyesight"
 ]
 },
 {
@@ -45298,6 +46642,7 @@
 "chest infection",
 "bad breath",
 "common cold",
+"hay fever",
 "flu",
 "fever",
 "stomach ache",
@@ -45317,15 +46662,16 @@
 "planet": "Saturn",
 "treats": [
 "cuts",
-"kidney stones",
 "chest infection",
 "bruises",
 "ulcers",
 "aches and pains",
 "cough",
 "common cold",
+"hay fever",
 "stomach ache",
 "diarrhoea",
+"kidney stones",
 "period pain",
 "flu",
 "fever",
@@ -45355,6 +46701,7 @@
 "chest infection",
 "diarrhoea",
 "kidney stones",
+"bladder problems",
 "cuts",
 "ulcers",
 "aches and pains",
@@ -45377,10 +46724,11 @@
 "cough",
 "anger",
 "constipation",
-"kidney stones",
+"bladder problems",
 "tiredness",
 "jaundice",
 "common cold",
+"hay fever",
 "headache",
 "aches and pains",
 "weakness",
@@ -45403,6 +46751,7 @@
 "bruises",
 "cuts",
 "common cold",
+"hay fever",
 "worms",
 "hernia",
 "period pain",
@@ -45425,7 +46774,7 @@
 "dizziness",
 "seizures",
 "indigestion",
-"kidney stones",
+"bladder problems",
 "burns",
 "back pain",
 "cramp",
@@ -45461,6 +46810,7 @@
 "chest infection",
 "insect bites",
 "common cold",
+"hay fever",
 "cough",
 "tiredness",
 "jaundice",
@@ -45476,8 +46826,9 @@
 "planet": null,
 "treats": [
 "common cold",
+"hay fever",
 "body odour",
-"blisters",
+"sore feet",
 "gout",
 "joint pain",
 "back pain",
@@ -45496,6 +46847,7 @@
 "planet": "the Moon",
 "treats": [
 "kidney stones",
+"bladder problems",
 "scurvy",
 "period pain",
 "ulcers",
@@ -45535,8 +46887,8 @@
 "planet": "Mars",
 "treats": [
 "common cold",
+"hay fever",
 "sore eyes",
-"kidney stones",
 "bruises",
 "plague",
 "death"
@@ -45569,13 +46921,14 @@
 "chest infection",
 "stomach ache",
 "constipation",
-"kidney stones",
+"bladder problems",
 "period pain",
 "pregnancy",
 "hernia",
 "nosebleed",
 "body odour",
 "sore eyes",
+"bad eyesight",
 "sore throat",
 "earache",
 "gout",
@@ -45593,13 +46946,14 @@
 "latin": "Cucumis sativus",
 "planet": "the Moon",
 "treats": [
-"kidney stones",
+"bladder problems",
 "complexion",
 "ulcers",
 "poisoning",
 "stomach ache",
 "jaundice",
 "common cold",
+"hay fever",
 "sore eyes",
 "burns"
 ]
@@ -45643,7 +46997,6 @@
 "fever",
 "jaundice",
 "spleen",
-"kidney stones",
 "tuberculosis",
 "flu",
 "seizures",
@@ -45669,8 +47022,7 @@
 "back pain",
 "cuts",
 "broken bones",
-"diarrhoea",
-"kidney stones"
+"diarrhoea"
 ]
 },
 {
@@ -45759,7 +47111,6 @@
 "anger",
 "constipation",
 "spleen",
-"kidney stones",
 "headache",
 "dizziness",
 "stroke",
@@ -45767,6 +47118,7 @@
 "heart problems",
 "indigestion",
 "jaundice",
+"kidney stones",
 "flu",
 "fever",
 "tiredness"
@@ -45781,9 +47133,10 @@
 "latin": "Elymus repens",
 "planet": "Jupiter",
 "treats": [
-"kidney stones",
 "stomach ache",
 "jaundice",
+"kidney stones",
+"bladder problems",
 "ulcers",
 "aches and pains",
 "bruises",
@@ -45863,6 +47216,7 @@
 "cuts",
 "ulcers",
 "sore eyes",
+"bad eyesight",
 "spots",
 "poisoning",
 "plague",
@@ -45887,7 +47241,7 @@
 "dog bite",
 "hair loss",
 "earache",
-"kidney stones",
+"bladder problems",
 "burns",
 "aches and pains",
 "ulcers",
@@ -45899,6 +47253,7 @@
 "stomach ache",
 "indigestion",
 "piles",
+"kidney stones",
 "gout",
 "nausea"
 ]
@@ -45941,12 +47296,12 @@
 "seizures",
 "stomach ache",
 "jaundice",
-"kidney stones",
 "dizziness",
 "anxiety",
 "heartbreak",
 "heart problems",
 "sore eyes",
+"bad eyesight",
 "bruises",
 "ulcers",
 "gout",
@@ -45973,12 +47328,14 @@
 "spleen",
 "fever",
 "kidney stones",
+"bladder problems",
 "snake bite",
 "poisoning",
 "plague",
 "period pain",
 "tiredness",
 "sore eyes",
+"bad eyesight",
 "seizures",
 "toothache",
 "worms",
@@ -46002,6 +47359,7 @@
 "planet": null,
 "treats": [
 "kidney stones",
+"bladder problems",
 "bruises",
 "tiredness",
 "syphilis",
@@ -46034,9 +47392,11 @@
 "latin": "Euphrasia officinalis",
 "planet": null,
 "treats": [
+"bad eyesight",
 "sore eyes",
 "forgetfulness",
-"weakness"
+"weakness",
+"blindness"
 ]
 },
 {
@@ -46074,7 +47434,7 @@
 "stomach ache",
 "broken bones",
 "hernia",
-"kidney stones"
+"bladder problems"
 ]
 },
 {
@@ -46092,6 +47452,7 @@
 "period pain",
 "common cold",
 "kidney stones",
+"bladder problems",
 "melancholy",
 "tiredness",
 "anger",
@@ -46118,6 +47479,7 @@
 "planet": "Mercury",
 "treats": [
 "kidney stones",
+"bladder problems",
 "jaundice",
 "indigestion",
 "aches and pains",
@@ -46135,7 +47497,8 @@
 "pregnancy",
 "complexion",
 "weight loss",
-"sore eyes"
+"sore eyes",
+"bad eyesight"
 ]
 },
 {
@@ -46169,6 +47532,7 @@
 "constipation",
 "spleen",
 "kidney stones",
+"bladder problems",
 "pregnancy",
 "earache",
 "cuts",
@@ -46208,6 +47572,7 @@
 "planet": "Venus",
 "treats": [
 "kidney stones",
+"bladder problems",
 "aches and pains",
 "cough",
 "sore throat",
@@ -46233,8 +47598,8 @@
 "diarrhoea",
 "bruises",
 "chilblains",
-"blisters",
 "earache",
+"deafness",
 "insect bites",
 "snake bite",
 "dog bite",
@@ -46263,6 +47628,7 @@
 "diarrhoea",
 "heavy bleeding",
 "period pain",
+"hay fever",
 "spots",
 "bruises",
 "water retention",
@@ -46279,7 +47645,6 @@
 "planet": "Mars",
 "treats": [
 "water retention",
-"kidney stones",
 "sore eyes",
 "ulcers",
 "spots",
@@ -46353,7 +47718,6 @@
 "water retention",
 "seizures",
 "cramp",
-"common cold",
 "mouth ulcers",
 "anger",
 "flu",
@@ -46375,6 +47739,8 @@
 "joint pain",
 "back pain",
 "cancer",
+"common cold",
+"hay fever",
 "chest infection",
 "earache",
 "cuts",
@@ -46393,6 +47759,7 @@
 "treats": [
 "ulcers",
 "common cold",
+"hay fever",
 "sore eyes",
 "mouth ulcers",
 "nosebleed",
@@ -46440,13 +47807,13 @@
 "spleen",
 "weakness",
 "leprosy",
-"kidney stones",
 "melancholy",
 "plague",
 "sore throat",
 "mouth ulcers",
 "ulcers",
 "sore eyes",
+"bad eyesight",
 "spots",
 "complexion"
 ]
@@ -46461,7 +47828,8 @@
 "treats": [
 "jaundice",
 "spleen",
-"kidney stones"
+"kidney stones",
+"bladder problems"
 ]
 },
 {
@@ -46477,7 +47845,7 @@
 "earache",
 "constipation",
 "worms",
-"kidney stones",
+"bladder problems",
 "spots",
 "bruises",
 "cuts",
@@ -46514,7 +47882,6 @@
 "stomach ache",
 "jaundice",
 "insect bites",
-"kidney stones",
 "dizziness",
 "tiredness",
 "indigestion",
@@ -46522,6 +47889,7 @@
 "loss of appetite",
 "snake bite",
 "dog bite",
+"bladder problems",
 "bruises",
 "joint pain",
 "aches and pains",
@@ -46530,6 +47898,7 @@
 "cramp",
 "cough",
 "worms",
+"kidney stones",
 "itch",
 "ulcers",
 "scrofula",
@@ -46562,14 +47931,15 @@
 "planet": "Mercury",
 "treats": [
 "tiredness",
-"kidney stones",
 "cramp",
 "worms",
 "weakness",
 "cough",
 "spleen",
+"bladder problems",
 "water retention",
 "sore eyes",
+"bad eyesight",
 "bruises",
 "ulcers",
 "snake bite",
@@ -46603,7 +47973,6 @@
 "cough",
 "anger",
 "constipation",
-"common cold",
 "nosebleed",
 "seizures",
 "gout",
@@ -46631,6 +48000,7 @@
 "cuts",
 "ulcers",
 "kidney stones",
+"bladder problems",
 "diarrhoea",
 "bruises",
 "heavy bleeding",
@@ -46666,6 +48036,7 @@
 "treats": [
 "kidney stones",
 "stomach ache",
+"bladder problems",
 "bruises",
 "chest infection",
 "aches and pains",
@@ -46686,6 +48057,7 @@
 "stomach ache",
 "jaundice",
 "kidney stones",
+"bladder problems",
 "worms"
 ]
 },
@@ -46701,6 +48073,7 @@
 "ulcers",
 "bruises",
 "kidney stones",
+"bladder problems",
 "mouth ulcers",
 "diarrhoea",
 "aches and pains",
@@ -46721,10 +48094,11 @@
 "aches and pains",
 "nausea",
 "jaundice",
-"kidney stones",
+"bladder problems",
 "constipation",
 "anger",
 "seizures",
+"kidney stones",
 "back pain",
 "period pain",
 "piles",
@@ -46732,6 +48106,7 @@
 "cancer",
 "cuts",
 "common cold",
+"hay fever",
 "sore eyes"
 ]
 },
@@ -46763,7 +48138,6 @@
 "melancholy",
 "anger",
 "constipation",
-"kidney stones",
 "bruises"
 ]
 },
@@ -46805,6 +48179,7 @@
 "chest infection",
 "bad breath",
 "common cold",
+"hay fever",
 "cough",
 "diarrhoea",
 "period pain",
@@ -46822,7 +48197,7 @@
 "stomach ache",
 "seizures",
 "indigestion",
-"kidney stones",
+"bladder problems",
 "cough",
 "burns",
 "spots",
@@ -46837,6 +48212,7 @@
 "nightmares",
 "constipation",
 "spleen",
+"kidney stones",
 "low libido",
 "sore eyes",
 "ulcers",
@@ -46876,6 +48252,7 @@
 "water retention",
 "cancer",
 "sore eyes",
+"bad eyesight",
 "spots",
 "burns",
 "ulcers",
@@ -46934,10 +48311,11 @@
 "headache",
 "insomnia",
 "earache",
+"deafness",
 "worms",
 "dandruff",
 "chilblains",
-"blisters",
+"sore feet",
 "cancer",
 "toothache",
 "kidney stones"
@@ -47042,6 +48420,7 @@
 "water retention",
 "tiredness",
 "common cold",
+"hay fever",
 "bad breath",
 "stomach ache",
 "constipation",
@@ -47052,6 +48431,7 @@
 "sore throat",
 "toothache",
 "earache",
+"deafness",
 "snake bite",
 "dandruff",
 "seizures",
@@ -47068,9 +48448,10 @@
 "treats": [
 "stomach ache",
 "jaundice",
-"kidney stones",
 "constipation",
 "spleen",
+"kidney stones",
+"bladder problems",
 "complexion",
 "itch",
 "ulcers",
@@ -47097,6 +48478,7 @@
 "constipation",
 "aches and pains",
 "common cold",
+"hay fever",
 "jaundice",
 "itch",
 "tuberculosis",
@@ -47122,14 +48504,16 @@
 "latin": "Equisetum",
 "planet": "Saturn",
 "treats": [
-"kidney stones",
+"bladder problems",
 "heavy bleeding",
 "diarrhoea",
 "cuts",
 "ulcers",
 "hernia",
 "common cold",
+"hay fever",
 "cough",
+"kidney stones",
 "spots"
 ]
 },
@@ -47144,6 +48528,7 @@
 "treats": [
 "burns",
 "common cold",
+"hay fever",
 "flu",
 "fever",
 "sore eyes",
@@ -47156,7 +48541,7 @@
 "gout",
 "aches and pains",
 "warts",
-"blisters",
+"sore feet",
 "headache",
 "madness",
 "insomnia",
@@ -47179,6 +48564,7 @@
 "insect bites",
 "dog bite",
 "common cold",
+"hay fever",
 "cough",
 "chest infection",
 "sore eyes",
@@ -47189,7 +48575,7 @@
 "hair loss",
 "cuts",
 "ulcers",
-"blisters",
+"sore feet",
 "mouth ulcers"
 ]
 },
@@ -47256,12 +48642,14 @@
 "jaundice",
 "plague",
 "kidney stones",
+"bladder problems",
 "period pain",
 "headache",
 "cough",
 "burns",
 "cuts",
 "common cold",
+"hay fever",
 "sore eyes",
 "earache",
 "nosebleed",
@@ -47280,9 +48668,9 @@
 "treats": [
 "seizures",
 "stomach ache",
-"kidney stones",
 "tiredness",
 "indigestion",
+"bladder problems",
 "insect bites",
 "snake bite",
 "poisoning",
@@ -47299,7 +48687,7 @@
 "flu",
 "fever",
 "forgetfulness",
-"sore eyes",
+"bad eyesight",
 "gout",
 "back pain",
 "weakness",
@@ -47312,7 +48700,8 @@
 "itch",
 "leprosy",
 "stroke",
-"loss of appetite"
+"loss of appetite",
+"kidney stones"
 ]
 },
 {
@@ -47331,12 +48720,12 @@
 "spots",
 "burns",
 "kidney stones",
+"bladder problems",
 "water retention",
 "piles",
 "sore throat",
 "cuts",
 "chilblains",
-"blisters",
 "gout",
 "back pain",
 "aches and pains",
@@ -47354,6 +48743,7 @@
 "treats": [
 "cuts",
 "common cold",
+"hay fever",
 "chest infection",
 "mouth ulcers",
 "nosebleed",
@@ -47383,7 +48773,9 @@
 "heavy bleeding",
 "diarrhoea",
 "period pain",
+"bladder problems",
 "common cold",
+"hay fever",
 "anger",
 "worms",
 "aches and pains",
@@ -47466,6 +48858,7 @@
 "indigestion",
 "loss of appetite",
 "kidney stones",
+"bladder problems",
 "weakness",
 "scurvy"
 ]
@@ -47490,6 +48883,7 @@
 "tiredness",
 "jaundice",
 "kidney stones",
+"bladder problems",
 "chest infection"
 ]
 },
@@ -47508,7 +48902,6 @@
 "stomach ache",
 "diarrhoea",
 "cuts",
-"kidney stones",
 "spots",
 "complexion",
 "ulcers",
@@ -47528,6 +48921,7 @@
 "forgetfulness",
 "weakness",
 "sore eyes",
+"bad eyesight",
 "stroke",
 "heart problems",
 "gout"
@@ -47563,14 +48957,17 @@
 "treats": [
 "chest infection",
 "common cold",
+"hay fever",
 "sore throat",
 "kidney stones",
+"bladder problems",
 "cough",
 "tuberculosis",
 "bad breath",
 "hair loss",
 "aches and pains",
-"sore eyes"
+"sore eyes",
+"bad eyesight"
 ]
 },
 {
@@ -47620,8 +49017,10 @@
 "planet": "the Moon",
 "treats": [
 "sore eyes",
+"bad eyesight",
 "cuts",
 "cancer",
+"blindness",
 "bruises",
 "ulcers",
 "sore throat",
@@ -47641,7 +49040,6 @@
 "treats": [
 "sore throat",
 "aches and pains",
-"kidney stones",
 "period pain",
 "stomach ache",
 "indigestion",
@@ -47651,6 +49049,7 @@
 "chest infection",
 "mouth ulcers",
 "sore eyes",
+"bad eyesight",
 "spots",
 "complexion",
 "bruises"
@@ -47713,6 +49112,7 @@
 "jaundice",
 "spleen",
 "kidney stones",
+"bladder problems",
 "cuts",
 "period pain",
 "bruises",
@@ -47765,8 +49165,10 @@
 "chilblains",
 "mouth ulcers",
 "common cold",
-"blisters",
+"hay fever",
+"sore feet",
 "kidney stones",
+"bladder problems",
 "bad breath",
 "earache",
 "cramp",
@@ -47812,12 +49214,13 @@
 "insect bites",
 "poisoning",
 "jaundice",
-"kidney stones",
+"bladder problems",
 "itch",
 "water retention",
 "scurvy",
 "period pain",
-"earache"
+"earache",
+"deafness"
 ]
 },
 {
@@ -47840,8 +49243,8 @@
 "period pain",
 "sore eyes",
 "earache",
+"deafness",
 "water retention",
-"common cold",
 "cough",
 "nosebleed",
 "constipation"
@@ -47873,9 +49276,11 @@
 "treats": [
 "stomach ache",
 "common cold",
+"hay fever",
 "chest infection",
 "bad breath",
 "kidney stones",
+"bladder problems",
 "period pain",
 "pregnancy",
 "cough",
@@ -47911,6 +49316,7 @@
 "weakness",
 "diarrhoea",
 "common cold",
+"hay fever",
 "sore throat",
 "toothache",
 "mouth ulcers",
@@ -47944,6 +49350,7 @@
 "stomach ache",
 "indigestion",
 "spleen",
+"bad eyesight",
 "stroke",
 "forgetfulness",
 "tiredness",
@@ -47961,14 +49368,17 @@
 "treats": [
 "constipation",
 "aches and pains",
+"hay fever",
 "sore eyes",
 "stomach ache",
 "melancholy",
 "anger",
 "kidney stones",
+"bladder problems",
 "period pain",
 "pregnancy",
 "earache",
+"deafness",
 "flu",
 "fever",
 "seizures",
@@ -48087,7 +49497,7 @@
 "broken bones",
 "missing limb",
 "hernia",
-"blisters"
+"sore feet"
 ]
 },
 {
@@ -48110,6 +49520,7 @@
 "hiccups",
 "water retention",
 "common cold",
+"hay fever",
 "headache",
 "sore eyes",
 "tiredness",
@@ -48135,7 +49546,7 @@
 "cough",
 "stomach ache",
 "worms",
-"kidney stones",
+"bladder problems",
 "period pain",
 "seizures",
 "joint pain",
@@ -48234,6 +49645,7 @@
 "flu",
 "fever",
 "kidney stones",
+"bladder problems",
 "joint pain",
 "gout",
 "warts",
@@ -48265,12 +49677,13 @@
 "cuts",
 "broken bones",
 "common cold",
+"hay fever",
 "chest infection",
 "constipation",
 "period pain",
 "flu",
 "fever",
-"kidney stones",
+"bladder problems",
 "insect bites",
 "spleen",
 "water retention",
@@ -48338,6 +49751,7 @@
 "bruises",
 "period pain",
 "infertility",
+"hay fever",
 "headache",
 "dizziness",
 "stomach ache",
@@ -48372,6 +49786,7 @@
 "bad breath",
 "period pain",
 "kidney stones",
+"bladder problems",
 "indigestion",
 "worms",
 "spleen",
@@ -48382,6 +49797,7 @@
 "complexion",
 "leprosy",
 "common cold",
+"hay fever",
 "itch",
 "broken bones",
 "body odour",
@@ -48417,8 +49833,8 @@
 "planet": "Jupiter",
 "treats": [
 "diarrhoea",
-"kidney stones",
 "heavy bleeding",
+"bladder problems",
 "mouth ulcers",
 "insect bites",
 "poisoning",
@@ -48429,6 +49845,7 @@
 "burns",
 "plague",
 "jaundice",
+"kidney stones",
 "period pain",
 "itch",
 "indigestion"
@@ -48505,6 +49922,7 @@
 "tiredness",
 "constipation",
 "earache",
+"deafness",
 "spots",
 "burns",
 "ulcers",
@@ -48541,13 +49959,14 @@
 "latin": "Petroselinum crispum",
 "planet": "Mercury",
 "treats": [
-"kidney stones",
 "indigestion",
+"bladder problems",
 "jaundice",
 "stomach ache",
 "period pain",
 "spleen",
 "seizures",
+"kidney stones",
 "aches and pains",
 "bruises",
 "water retention",
@@ -48568,7 +49987,8 @@
 "latin": "Aphanes arvensis",
 "planet": null,
 "treats": [
-"kidney stones"
+"kidney stones",
+"bladder problems"
 ]
 },
 {
@@ -48580,8 +50000,9 @@
 "planet": "Venus",
 "treats": [
 "stomach ache",
-"kidney stones",
+"bladder problems",
 "low libido",
+"kidney stones",
 "indigestion",
 "aches and pains",
 "insect bites",
@@ -48681,7 +50102,6 @@
 "constipation",
 "aches and pains",
 "tiredness",
-"common cold",
 "spots",
 "bruises",
 "gout",
@@ -48705,6 +50125,7 @@
 "chest infection",
 "bad breath",
 "indigestion",
+"bladder problems",
 "back pain",
 "stomach ache",
 "period pain",
@@ -48715,6 +50136,7 @@
 "spots",
 "complexion",
 "earache",
+"deafness",
 "burns",
 "cancer",
 "itch",
@@ -48740,7 +50162,6 @@
 "tiredness",
 "toothache",
 "complexion",
-"sore eyes",
 "burns",
 "joint pain",
 "melancholy",
@@ -48751,6 +50172,7 @@
 "spots",
 "gout",
 "itch",
+"sore eyes",
 "bruises",
 "ulcers",
 "leprosy",
@@ -48759,6 +50181,7 @@
 "stomach ache",
 "cramp",
 "headache",
+"bad eyesight",
 "jaundice",
 "water retention",
 "earache"
@@ -48855,7 +50278,9 @@
 "dog bite",
 "poisoning",
 "jaundice",
+"bladder problems",
 "sore eyes",
+"bad eyesight",
 "toothache",
 "piles"
 ]
@@ -48881,6 +50306,7 @@
 "cramp",
 "stomach ache",
 "common cold",
+"hay fever",
 "seizures",
 "insect bites",
 "poisoning",
@@ -48910,8 +50336,10 @@
 "cuts",
 "water retention",
 "common cold",
+"hay fever",
 "diarrhoea",
 "period pain",
+"bladder problems",
 "heavy bleeding",
 "cough",
 "chest infection",
@@ -48923,6 +50351,7 @@
 "jaundice",
 "toothache",
 "sore eyes",
+"bad eyesight",
 "earache",
 "burns",
 "piles",
@@ -48930,7 +50359,7 @@
 "insect bites",
 "snake bite",
 "dog bite",
-"blisters",
+"sore feet",
 "bruises",
 "stomach ache",
 "worms",
@@ -48953,6 +50382,7 @@
 "constipation",
 "loss of appetite",
 "common cold",
+"hay fever",
 "toothache",
 "diarrhoea",
 "itch",
@@ -48984,6 +50414,7 @@
 "joint pain",
 "spleen",
 "common cold",
+"hay fever",
 "chest infection",
 "tuberculosis",
 "nightmares",
@@ -49003,6 +50434,7 @@
 "earache",
 "aches and pains",
 "sore eyes",
+"bad eyesight",
 "gout",
 "seizures",
 "spots",
@@ -49024,6 +50456,7 @@
 "insomnia",
 "stomach ache",
 "common cold",
+"hay fever",
 "cough",
 "chest infection",
 "tuberculosis",
@@ -49052,9 +50485,9 @@
 "latin": "Portulaca oleracea",
 "planet": "the Moon",
 "treats": [
-"kidney stones",
 "aches and pains",
 "stomach ache",
+"kidney stones",
 "insomnia",
 "bruises",
 "ulcers",
@@ -49064,11 +50497,13 @@
 "fever",
 "jaundice",
 "common cold",
+"hay fever",
 "madness",
 "anger",
 "diarrhoea",
 "period pain",
 "nightmares",
+"bladder problems",
 "worms",
 "cough",
 "chest infection",
@@ -49104,6 +50539,7 @@
 "headache",
 "cuts",
 "common cold",
+"hay fever",
 "sore eyes",
 "mouth ulcers",
 "stomach ache",
@@ -49182,7 +50618,8 @@
 "water retention",
 "cancer",
 "constipation",
-"kidney stones"
+"kidney stones",
+"bladder problems"
 ]
 },
 {
@@ -49204,6 +50641,7 @@
 "water retention",
 "scrofula",
 "common cold",
+"hay fever",
 "chest infection",
 "sore eyes",
 "nosebleed",
@@ -49222,6 +50660,7 @@
 "planet": "the Moon",
 "treats": [
 "sore eyes",
+"bad eyesight",
 "diarrhoea",
 "ulcers",
 "period pain",
@@ -49238,9 +50677,11 @@
 "planet": "Mars",
 "treats": [
 "kidney stones",
+"bladder problems",
 "burns",
 "hernia",
 "common cold",
+"hay fever",
 "toothache",
 "mouth ulcers",
 "jaundice",
@@ -49262,7 +50703,7 @@
 "joint pain",
 "aches and pains",
 "indigestion",
-"kidney stones",
+"bladder problems",
 "stomach ache",
 "worms",
 "insect bites",
@@ -49287,6 +50728,7 @@
 "planet": null,
 "treats": [
 "kidney stones",
+"bladder problems",
 "cuts",
 "ulcers",
 "scurvy"
@@ -49312,6 +50754,7 @@
 "insomnia",
 "aches and pains",
 "common cold",
+"hay fever",
 "kidney stones",
 "nosebleed",
 "indigestion",
@@ -49340,6 +50783,7 @@
 "melancholy",
 "itch",
 "leprosy",
+"bladder problems",
 "worms"
 ]
 },
@@ -49357,6 +50801,7 @@
 "chest infection",
 "cancer",
 "common cold",
+"hay fever",
 "tuberculosis",
 "cough",
 "dizziness",
@@ -49379,6 +50824,7 @@
 "stomach ache",
 "jaundice",
 "common cold",
+"hay fever",
 "headache",
 "forgetfulness",
 "sore eyes",
@@ -49392,6 +50838,7 @@
 "body odour",
 "weakness",
 "spleen",
+"bad eyesight",
 "anxiety",
 "heartbreak",
 "cowardice",
@@ -49422,7 +50869,6 @@
 "constipation",
 "ulcers",
 "earache",
-"sore eyes",
 "kidney stones",
 "diarrhoea",
 "itch",
@@ -49430,6 +50876,8 @@
 "sore throat",
 "scrofula",
 "cancer",
+"bad eyesight",
+"bladder problems",
 "weakness",
 "flu",
 "fever",
@@ -49441,6 +50889,7 @@
 "back pain",
 "cramp",
 "hernia",
+"sore eyes",
 "spots"
 ]
 },
@@ -49470,7 +50919,7 @@
 "aches and pains",
 "poisoning",
 "stomach ache",
-"kidney stones",
+"bladder problems",
 "joint pain",
 "indigestion",
 "bruises",
@@ -49487,7 +50936,7 @@
 "stroke",
 "back pain",
 "worms",
-"blisters",
+"sore feet",
 "gout",
 "water retention",
 "cuts",
@@ -49497,13 +50946,14 @@
 "itch",
 "warts",
 "earache",
-"sore eyes",
+"bad eyesight",
 "nosebleed",
 "ulcers",
 "body odour",
 "weight loss",
 "jaundice",
 "spleen",
+"kidney stones",
 "cursed"
 ]
 },
@@ -49518,11 +50968,13 @@
 "hernia",
 "diarrhoea",
 "kidney stones",
+"bladder problems",
 "stomach ache",
 "worms",
 "jaundice",
 "aches and pains",
 "common cold",
+"hay fever",
 "sore eyes",
 "toothache",
 "nosebleed",
@@ -49560,7 +51012,7 @@
 "water retention",
 "headache",
 "aches and pains",
-"blisters"
+"sore feet"
 ]
 },
 {
@@ -49603,6 +51055,7 @@
 "nausea",
 "burns",
 "common cold",
+"hay fever",
 "chest infection",
 "headache",
 "seizures",
@@ -49632,7 +51085,7 @@
 "planet": "Venus",
 "treats": [
 "bruises",
-"kidney stones",
+"bladder problems",
 "period pain",
 "body odour",
 "water retention",
@@ -49676,7 +51129,8 @@
 "indigestion",
 "jaundice",
 "spleen",
-"kidney stones"
+"kidney stones",
+"bladder problems"
 ]
 },
 {
@@ -49756,13 +51210,15 @@
 "treats": [
 "stomach ache",
 "indigestion",
-"kidney stones",
+"bladder problems",
 "period pain",
 "cough",
 "chest infection",
 "tiredness",
 "sore eyes",
+"bad eyesight",
 "earache",
+"deafness",
 "back pain",
 "aches and pains",
 "insect bites"
@@ -49796,6 +51252,7 @@
 "planet": null,
 "treats": [
 "kidney stones",
+"bladder problems",
 "cough",
 "chest infection",
 "stomach ache",
@@ -49921,8 +51378,7 @@
 "stomach ache",
 "diarrhoea",
 "jaundice",
-"kidney stones",
-"blisters",
+"sore feet",
 "period pain",
 "earache",
 "aches and pains"
@@ -49943,7 +51399,7 @@
 "ulcers",
 "cough",
 "spleen",
-"kidney stones",
+"bladder problems",
 "period pain",
 "sore throat",
 "bad breath",
@@ -49961,7 +51417,8 @@
 "latin": "Saponaria officinalis",
 "planet": "Venus",
 "treats": [
-"kidney stones"
+"kidney stones",
+"bladder problems"
 ]
 },
 {
@@ -50034,6 +51491,7 @@
 "breastfeeding",
 "spots",
 "earache",
+"deafness",
 "pregnancy"
 ]
 },
@@ -50046,10 +51504,10 @@
 "planet": null,
 "treats": [
 "seizures",
-"kidney stones",
 "bruises",
 "back pain",
 "aches and pains",
+"bladder problems",
 "cramp",
 "period pain",
 "insect bites",
@@ -50066,6 +51524,7 @@
 "hair loss",
 "dandruff",
 "spleen",
+"kidney stones",
 "stomach ache"
 ]
 },
@@ -50078,9 +51537,9 @@
 "latin": "Meum athamanticum",
 "planet": "Venus",
 "treats": [
-"kidney stones",
 "bruises",
 "headache",
+"bladder problems",
 "period pain",
 "stomach ache",
 "indigestion",
@@ -50088,6 +51547,7 @@
 "aches and pains",
 "water retention",
 "common cold",
+"hay fever",
 "cough",
 "chest infection",
 "insect bites",
@@ -50105,6 +51565,7 @@
 "planet": "Saturn",
 "treats": [
 "kidney stones",
+"bladder problems",
 "spleen",
 "hiccups",
 "jaundice",
@@ -50121,6 +51582,7 @@
 "planet": "Mars",
 "treats": [
 "kidney stones",
+"bladder problems",
 "ulcers",
 "plague",
 "flu",
@@ -50147,14 +51609,17 @@
 "fever",
 "seizures",
 "kidney stones",
+"bladder problems",
 "diarrhoea",
 "period pain",
 "heart problems",
 "common cold",
+"hay fever",
 "sore throat",
 "mouth ulcers",
 "spots",
-"complexion"
+"complexion",
+"bad eyesight"
 ]
 },
 {
@@ -50240,6 +51705,7 @@
 "flu",
 "fever",
 "common cold",
+"hay fever",
 "mouth ulcers",
 "itch",
 "gout",
@@ -50263,6 +51729,7 @@
 "jaundice",
 "spleen",
 "ulcers",
+"hay fever",
 "sore eyes",
 "earache",
 "toothache",
@@ -50329,7 +51796,7 @@
 "fever",
 "seizures",
 "bruises",
-"blisters",
+"sore feet",
 "sore eyes",
 "spots",
 "complexion",
@@ -50347,7 +51814,7 @@
 "tiredness",
 "bad breath",
 "stomach ache",
-"kidney stones",
+"bladder problems",
 "body odour",
 "weakness",
 "hair loss"
@@ -50380,6 +51847,7 @@
 "spleen",
 "plague",
 "kidney stones",
+"bladder problems",
 "water retention",
 "stomach ache",
 "aches and pains",
@@ -50415,7 +51883,8 @@
 "ulcers",
 "earache",
 "worms",
-"sore eyes"
+"sore eyes",
+"bad eyesight"
 ]
 },
 {
@@ -50452,6 +51921,7 @@
 "heavy bleeding",
 "period pain",
 "common cold",
+"hay fever",
 "sore throat",
 "headache",
 "sore eyes",
@@ -50498,7 +51968,7 @@
 "cowardice",
 "forgetfulness",
 "tiredness",
-"sore eyes",
+"bad eyesight",
 "spleen",
 "warts",
 "bruises",
@@ -50517,15 +51987,16 @@
 "planet": "Venus",
 "treats": [
 "stomach ache",
-"kidney stones",
 "tiredness",
 "jaundice",
+"bladder problems",
 "cramp",
 "hernia",
 "period pain",
 "aches and pains",
 "indigestion",
-"nausea"
+"nausea",
+"kidney stones"
 ]
 },
 {
@@ -50559,6 +52030,7 @@
 "scrofula",
 "piles",
 "common cold",
+"hay fever",
 "sore eyes"
 ]
 },
@@ -50575,6 +52047,7 @@
 "anger",
 "constipation",
 "kidney stones",
+"bladder problems",
 "period pain",
 "pregnancy",
 "complexion",
@@ -50599,6 +52072,7 @@
 "gout",
 "aches and pains",
 "sore eyes",
+"bad eyesight",
 "snake bite",
 "poisoning",
 "cuts",
@@ -50631,7 +52105,8 @@
 "latin": null,
 "planet": "the Moon",
 "treats": [
-"sore eyes"
+"sore eyes",
+"bad eyesight"
 ]
 },
 {
@@ -50662,7 +52137,7 @@
 "planet": "Mercury",
 "treats": [
 "aches and pains",
-"kidney stones",
+"bladder problems",
 "period pain",
 "cough",
 "chest infection",
@@ -50672,7 +52147,9 @@
 "stomach ache",
 "indigestion",
 "common cold",
+"hay fever",
 "sore eyes",
+"bad eyesight",
 "bruises",
 "cuts",
 "ulcers"
@@ -50701,6 +52178,7 @@
 "jaundice",
 "spleen",
 "kidney stones",
+"bladder problems",
 "gout",
 "flu",
 "fever",
@@ -50713,7 +52191,8 @@
 "piles",
 "missing limb",
 "aches and pains",
-"sore eyes"
+"sore eyes",
+"bad eyesight"
 ]
 },
 {
@@ -50726,6 +52205,7 @@
 "treats": [
 "cuts",
 "kidney stones",
+"bladder problems",
 "toothache",
 "heart problems"
 ]
@@ -50751,8 +52231,10 @@
 "anger",
 "constipation",
 "common cold",
+"hay fever",
 "chest infection",
 "kidney stones",
+"bladder problems",
 "back pain",
 "flu",
 "fever",
@@ -50827,7 +52309,8 @@
 "weakness",
 "flu",
 "fever",
-"plague"
+"plague",
+"deafness"
 ]
 },
 {
@@ -50865,7 +52348,7 @@
 "hernia",
 "stomach ache",
 "ulcers",
-"blisters",
+"sore feet",
 "sore eyes",
 "dog bite",
 "scrofula",
@@ -50892,6 +52375,7 @@
 "planet": null,
 "treats": [
 "common cold",
+"hay fever",
 "bruises",
 "mouth ulcers",
 "nosebleed",
@@ -50905,7 +52389,8 @@
 "indigestion",
 "low libido",
 "sore eyes",
-"kidney stones",
+"bad eyesight",
+"bladder problems",
 "spots",
 "complexion",
 "hangover",
@@ -50924,13 +52409,13 @@
 "treats": [
 "insect bites",
 "diarrhoea",
-"kidney stones",
 "cuts",
 "heavy bleeding",
 "spleen",
 "aches and pains",
 "ulcers",
 "common cold",
+"hay fever",
 "burns"
 ]
 },
@@ -50949,7 +52434,7 @@
 "seizures",
 "stroke",
 "spleen",
-"kidney stones",
+"bladder problems",
 "complexion",
 "burns",
 "cramp",
@@ -50971,17 +52456,18 @@
 "hangover",
 "stomach ache",
 "loss of appetite",
-"kidney stones",
 "bruises",
 "cancer",
 "sore throat",
-"sore eyes",
 "weakness",
+"bladder problems",
 "water retention",
 "jaundice",
 "period pain",
+"kidney stones",
 "insect bites",
 "spots",
+"sore eyes",
 "itch",
 "melancholy",
 "spleen",
@@ -50992,6 +52478,7 @@
 "chest infection",
 "bad breath",
 "body odour",
+"bad eyesight",
 "mouth ulcers"
 ]
 },
