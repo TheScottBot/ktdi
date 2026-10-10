@@ -355,14 +355,19 @@ async def loot(ctx: commands.Context):
 
 
 async def tell_off(ctx: commands.Context, user: discord.Member | None, gifs: list[str]) -> None:
-    """A random GIF from the list, at someone if named (which goes on their rap sheet as being bad)."""
+    """A random GIF from the list, at someone if named (which goes on their rap sheet as being bad, unless their
+    /insurance covers it)."""
     gif = random.choice(gifs)
     if user is None:
         await ctx.send(gif)
         return
+    note = ""
     if ctx.guild:
-        record_bad(ctx.guild.id, user.id)
-    await ctx.send(f"{user.mention} {gif}")
+        from ktdi.features import insurance  # Here, not at the top: insurance needs this module first.
+        covered, note = insurance.adjudicate(ctx.guild.id, user.id, ctx.author.id, kind="bad")
+        if not covered:
+            record_bad(ctx.guild.id, user.id)
+    await ctx.send(f"{user.mention} {gif}" + (f"\n{note}" if note else ""))
 
 
 @commands.hybrid_command(name="bad", description="Bad. Posts a random (non-violent) telling-off GIF.", extras=FUN)
@@ -421,9 +426,9 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     if bails_given:
         lines.append(f"🤝 Bailed others out {plural(bails_given, 'time')}.")
     from ktdi.features import insurance  # Here, not at the top: insurance needs this module first.
-    claims = insurance.claim_count(ctx.guild.id, user.id)
+    claims = insurance.claims_text(ctx.guild.id, user.id)
     if claims:
-        lines.append(f"🛡️ Insurance covered {plural(claims, 'spray')}.")
+        lines.append(f"🛡️ Insurance covered {claims}.")
     don_orders = get_don_order_count(ctx.guild.id, user.id)
     if don_orders:
         lines.append(f"🤌 Sprayed themselves on the Don's orders {plural(don_orders, 'time')}.")

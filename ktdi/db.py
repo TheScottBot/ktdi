@@ -157,9 +157,10 @@ SCHEMA = [
         id         INTEGER PRIMARY KEY AUTOINCREMENT,
         guild_id   INTEGER NOT NULL,
         policy_id  INTEGER NOT NULL,
-        user_id    INTEGER NOT NULL,  -- who was sprayed (and not punished for it)
-        sprayed_by INTEGER NOT NULL,
-        claimed_at TEXT NOT NULL
+        user_id    INTEGER NOT NULL,  -- who was sprayed or told off (and not punished for it)
+        sprayed_by INTEGER NOT NULL,  -- who did it
+        claimed_at TEXT NOT NULL,
+        kind       TEXT NOT NULL DEFAULT 'spray'  -- 'spray', or 'bad' (/bad, /badbonk)
     )
     """,
     # One spray interest rate a day for the whole bot (so no guild_id), picked when it's first needed.
@@ -309,6 +310,9 @@ def _upgrade() -> None:
         if column not in future_columns:
             conn.execute(f"ALTER TABLE spray_futures ADD COLUMN {column} {definition}")
     conn.execute("UPDATE spray_futures SET amount = stake WHERE amount IS NULL")
+    # Insurance covers being bad (/bad, /badbonk) as well as sprays.
+    if "kind" not in _columns("insurance_claims"):
+        conn.execute("ALTER TABLE insurance_claims ADD COLUMN kind TEXT NOT NULL DEFAULT 'spray'")
 
 
 def init(path: str) -> None:

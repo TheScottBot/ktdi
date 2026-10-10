@@ -173,6 +173,27 @@ def test_the_spray_reaction_and_tdoi_are_covered_too(at, bot):
     assert fun.get_spray_count(111, user.id) == 0 and insurance.claim_count(111, user.id) == 2
 
 
+def test_bad_and_badbonk_are_covered_too(at):
+    user = someone(car_slower=True)
+    microwave, car = clocks.clocks(user.id, 0)
+    buy(user)
+    ctx = Ctx(SCOTT)
+    run(fun.bad.callback(ctx, user))
+    assert "Claim approved" in ctx.last.content
+    run(fun.badbonk.callback(ctx, user))
+    assert "Claim approved" in ctx.last.content
+    spray(user)
+    assert fun.get_bad_count(111, user.id) == 0
+    assert insurance.claim_count(111, user.id, "bad") == 2 and insurance.claim_count(111, user.id, "spray") == 1
+    at(microwave)  # Run out, whatever the countdown says.
+    run(fun.bad.callback(ctx, user))
+    assert "goes by the microwave" in ctx.last.content and fun.get_bad_count(111, user.id) == 1
+    run(fun.rapsheet.callback(ctx, user))
+    assert "🛡️ Insurance covered 1 spray and being bad 2 times." in ctx.last.content
+    run(insurance.insurance_status.callback(ctx, user))
+    assert ctx.last.content.endswith("-# Covered so far: 1 spray and being bad 2 times.")
+
+
 def test_status(at):
     ctx = Ctx(SCOTT)
     run(insurance.insurance_status.callback(ctx, DAVE))

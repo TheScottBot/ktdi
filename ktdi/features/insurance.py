@@ -1,12 +1,13 @@
 """/insurance: spray insurance, sold by the committee. Corrupt, but it genuinely works.
 
-$1,000 buys a policy (the premium goes to the committee, like a bribe) that forgives every spray while it's in force:
-the spray still happens, and still pays out spray futures, but it doesn't go on your rap sheet. A policy lasts
+$1,000 buys a policy (the premium goes to the committee, like a bribe) that forgives every spray, /bad and /badbonk
+while it's in force: they still happen, and sprays still pay out spray futures, but nothing goes on your rap sheet. A policy lasts
 2:00-9:59, set by the committee's two clocks (ktdi/lib/insurance.py): the microwave decides claims, the car clock is
 the countdown customers see, and they disagree by up to 20%. Nobody announces when the real cover runs out. The clocks
 are deliberately predictable from your ID and the minute you buy; working out a good minute is the game.
 
-Sprays reach here through fun.take_spray (/spray, 💦, /tdoi). Policies and claims are in the database.
+Sprays reach here through fun.take_spray (/spray, 💦, /tdoi), and /bad and /badbonk through fun.tell_off. Policies
+and claims are in the database.
 """
 
 import random
@@ -79,18 +80,19 @@ def buy(guild_id: int, user_id: int, moment: datetime) -> tuple[datetime, bool]:
     return car_expires, replaced
 
 
-def adjudicate(guild_id: int, user_id: int, sprayer_id: int) -> tuple[bool, str]:
-    """Is this spray covered? If so the claim's recorded. Returns (covered, a line to add to the spray's message)."""
+def adjudicate(guild_id: int, user_id: int, by_id: int, kind: str = "spray") -> tuple[bool, str]:
+    """Is this spray (kind "spray") or telling-off (kind "bad": /bad, /badbonk) covered? If so the claim's recorded.
+    Returns (covered, a line to add to the message)."""
     policy = latest_policy(guild_id, user_id)
     moment = now()
     if policy is None:
         return False, ""
     policy_id, microwave_expires, car_expires = policy
     if moment < microwave_expires:
-        db.conn.execute("INSERT INTO insurance_claims (guild_id, policy_id, user_id, sprayed_by, claimed_at) "
-                        "VALUES (?, ?, ?, ?, ?)", (guild_id, policy_id, user_id, sprayer_id, moment.isoformat()))
+        db.conn.execute("INSERT INTO insurance_claims (guild_id, policy_id, user_id, sprayed_by, claimed_at, kind) "
+                        "VALUES (?, ?, ?, ?, ?, ?)", (guild_id, policy_id, user_id, by_id, moment.isoformat(), kind))
         db.conn.commit()
-        log.info("Insurance claim on policy %d approved", policy_id)
+        log.info("Insurance claim (%s) on policy %d approved", kind, policy_id)
         return True, f"-# 🛡️ <@{user_id}> is insured. Claim approved: this one's not going on their record."
     if moment < car_expires:  # The countdown says they're covered. The microwave says otherwise.
         when = int(car_expires.timestamp())
@@ -99,14 +101,24 @@ def adjudicate(guild_id: int, user_id: int, sprayer_id: int) -> tuple[bool, str]
     return False, ""
 
 
-def claim_count(guild_id: int, user_id: int) -> int:
+def claim_count(guild_id: int, user_id: int, kind: str | None = None) -> int:
+    """Claims paid out on someone: of one kind ("spray" or "bad"), or all of them."""
     where, params = db.scope(guild_id)
+    if kind:
+        where, params = f"{where} AND kind = ?", [*params, kind]
     return db.conn.execute(f"SELECT COUNT(*) FROM insurance_claims WHERE {where} AND user_id = ?",
                            (*params, user_id)).fetchone()[0]
 
 
+def claims_text(guild_id: int, user_id: int) -> str:
+    """"2 sprays and being bad 1 time": what insurance has covered for someone ("" if nothing)."""
+    sprays, bad = claim_count(guild_id, user_id, "spray"), claim_count(guild_id, user_id, "bad")
+    parts = ([plural(sprays, "spray")] if sprays else []) + ([f"being bad {plural(bad, 'time')}"] if bad else [])
+    return " and ".join(parts)
+
+
 # --- Commands ---
-@commands.hybrid_group(name="insurance", description="$1,000 to the committee and sprays don't count. For a while.",
+@commands.hybrid_group(name="insurance", description="$1,000 and sprays (or being bad) don't count. For a while.",
                        invoke_without_command=True)
 @commands.guild_only()
 async def insurance_group(ctx: commands.Context):
@@ -131,8 +143,8 @@ async def insurance_buy(ctx: commands.Context):
 async def insurance_status(ctx: commands.Context, user: discord.Member | None = None):
     user = user or ctx.author
     policy = latest_policy(ctx.guild.id, user.id)
-    covered = claim_count(ctx.guild.id, user.id)
-    claims = f"\n-# {plural(covered, 'spray')} covered so far." if covered else ""
+    covered = claims_text(ctx.guild.id, user.id)
+    claims = f"\n-# Covered so far: {covered}." if covered else ""
     if policy is None:
         await ctx.send(f"🛡️ {user.display_name} has never bought spray insurance. `/insurance buy` is "
                        f"{money(PREMIUM)}.{claims}")
@@ -155,8 +167,8 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
         return "", []
     text = (f"• `/insurance buy`: {money(PREMIUM)} to the committee (it counts as a bribe) for 2:00 to 9:59 of cover. "
             "Buying again replaces your policy, with no refund.\n"
-            "• While you're covered, sprays still happen (and still pay out spray futures) but don't go on your rap "
-            "sheet.\n"
+            "• While you're covered, sprays (and `/bad`, `/badbonk`) still happen, and sprays still pay out spray "
+            "futures, but none of it goes on your rap sheet.\n"
             "• The countdown you're shown is the car clock. Claims go by the microwave. They're up to 20% apart, "
             "either can run out first, and nobody tells you when the real cover ends.\n"
             "• Neither clock is random: they come from your user ID and the minute (UTC) you buy. The sums are in "

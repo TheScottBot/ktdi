@@ -68,3 +68,19 @@ def test_upgrades_spray_futures_from_before_hours_and_interest(tmp_path):
     assert db.conn.execute("SELECT hours, rate, amount FROM spray_futures").fetchone() == (1, 0, 3)
     assert fun.get_spray_count(111, 1) == 3  # an old lost bet still counts its stake
     db.conn.close()
+
+
+def test_upgrades_insurance_claims_from_before_bad_was_covered(tmp_path):
+    path = str(tmp_path / "old.db")
+    old = sqlite3.connect(path)
+    old.execute("CREATE TABLE insurance_claims (id INTEGER PRIMARY KEY AUTOINCREMENT, guild_id INTEGER NOT NULL,"
+                " policy_id INTEGER NOT NULL, user_id INTEGER NOT NULL, sprayed_by INTEGER NOT NULL,"
+                " claimed_at TEXT NOT NULL)")
+    old.execute("INSERT INTO insurance_claims (guild_id, policy_id, user_id, sprayed_by, claimed_at)"
+                " VALUES (111, 1, 2, 3, 'x')")
+    old.commit()
+    old.close()
+
+    db.init(path)
+    assert db.conn.execute("SELECT kind FROM insurance_claims").fetchone() == ("spray",)  # they were all sprays
+    db.conn.close()
