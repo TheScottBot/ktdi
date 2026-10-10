@@ -61,6 +61,9 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
     if isinstance(command, commands.Group):
         embed.title = f"/{command.name}"
         embed.description = f"{command.description}\n\nAlso works as `{p}{command.name} <subcommand>`."
+    elif not isinstance(command, commands.HybridCommand):  # !-only (e.g. !quote anon): there's no slash version.
+        embed.title = f"{p}{command.qualified_name} {command.signature}".strip()
+        embed.description = f"{command.description}\n\nOnly works typed with `{p}`."
     extra_fields = []
     for module in feature_modules():
         if hasattr(module, "help_extras"):
@@ -96,7 +99,8 @@ def main_help_lines(ctx: commands.Context) -> dict[str, list[str]]:
     """The main list's lines, grouped by category and in display order."""
     lines: dict[str, list[str]] = {}
     for cmd in sorted(ctx.bot.commands, key=lambda c: c.name):
-        if can_use(cmd, ctx):  # e.g. /books is left out away from the library servers.
+        # Left out: /books away from the library servers, and cryptids (extras["hidden"]), which you have to know about.
+        if can_use(cmd, ctx) and not cmd.extras.get("hidden"):
             lines.setdefault(command_category(cmd), []).append(command_line(cmd))
     for module in feature_modules():
         for category, line in getattr(module, "main_help_lines", lambda: [])():

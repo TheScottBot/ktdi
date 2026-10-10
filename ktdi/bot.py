@@ -78,7 +78,14 @@ class KTDIBot(commands.Bot):
                 self.tree.copy_global_to(guild=guild)
                 for name in self.unavailable_commands(guild):  # e.g. /books outside the library servers
                     self.tree.remove_command(name, guild=guild)
-                synced = await self.tree.sync(guild=guild)
+                try:
+                    synced = await self.tree.sync(guild=guild)
+                except discord.Forbidden:
+                    # One wrong server shouldn't stop the bot: say which, and carry on with the rest.
+                    log.warning("Couldn't add slash commands to server %s (Discord said Missing Access). Either the "
+                                "bot isn't in that server (check GUILD_IDS), or it was invited without the "
+                                "applications.commands scope (re-invite it with that ticked). Skipping it.", guild_id)
+                    continue
                 log.info("Synced %d slash commands to server %s", len(synced), guild_id)
             # Remove any old global copies so commands don't show up twice.
             self.tree.clear_commands(guild=None)

@@ -20,6 +20,18 @@ from ktdi.features import committee, movie
 SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
 LOOT_GIF_URL = "https://klipy.com/gifs/perception-check-tom-cardy"
+BAD_GIF_URLS = [
+    "https://klipy.com/gifs/asian-guy-saying-no",
+    "https://klipy.com/gifs/theoffice-michael-2",
+    "https://klipy.com/gifs/kanon-head-slap",
+    "https://klipy.com/gifs/knock-it-off-knock-it-out",
+    "https://klipy.com/gifs/regular-show-benson-8",
+    "https://klipy.com/gifs/daddys-home2-daddys-home2gifs-23",
+    "https://klipy.com/gifs/no-family-guy-2",
+    "https://klipy.com/gifs/bad-kitty",
+]
+TOES_GIF_URL = "https://klipy.com/gifs/toes-test-water"
+TOES_SECONDS = 5  # How long the cryptid is visible before it's gone.
 NOSE_IMAGE = Path(__file__).resolve().parent.parent / "assets" / "nose.png"  # Attached, not linked, so it can't vanish.
 
 HELP_CATEGORY = "💦 Rap sheet"  # loot and linux say otherwise.
@@ -202,6 +214,22 @@ def record_don_order(guild_id: int, user_id: int) -> int:
     return get_don_order_count(guild_id, user_id)
 
 
+def record_bad(guild_id: int, user_id: int) -> int:
+    db.conn.execute(
+        """
+        INSERT INTO bad_counts (guild_id, user_id, count) VALUES (?, ?, 1)
+        ON CONFLICT (guild_id, user_id) DO UPDATE SET count = count + 1
+        """,
+        (guild_id, user_id),
+    )
+    db.conn.commit()
+    return get_bad_count(guild_id, user_id)
+
+
+def get_bad_count(guild_id: int, user_id: int) -> int:
+    return _scoped_sum("bad_counts", guild_id, user_id)
+
+
 def get_don_order_count(guild_id: int, user_id: int) -> int:
     return _scoped_sum("don_orders", guild_id, user_id)
 
@@ -313,6 +341,29 @@ async def loot(ctx: commands.Context):
     await ctx.send(LOOT_GIF_URL)
 
 
+@commands.hybrid_command(name="bad", description="Bad. Posts a random telling-off GIF.", extras=FUN)
+@app_commands.describe(user="Optional: who's being bad (it goes on their rap sheet)")
+async def bad(ctx: commands.Context, user: discord.Member | None = None):
+    gif = random.choice(BAD_GIF_URLS)
+    if user is None:
+        await ctx.send(gif)
+        return
+    if ctx.guild:
+        record_bad(ctx.guild.id, user.id)
+    await ctx.send(f"{user.mention} {gif}")
+
+
+# A cryptid: !-only, so it's not in Discord's slash menu; left off the /help list (extras["hidden"]); and gone again
+# after a few seconds, along with the message that summoned it. Did you see it? No you didn't.
+@commands.command(name="toenoyoudidnt", description="👣", extras={**FUN, "hidden": True})
+async def toenoyoudidnt(ctx: commands.Context):
+    try:
+        await ctx.message.delete()  # The summoning goes at once (if the bot has Manage Messages)...
+    except discord.HTTPException:
+        pass
+    await ctx.send(TOES_GIF_URL, delete_after=TOES_SECONDS)  # ...and the cryptid after a few seconds.
+
+
 @commands.hybrid_command(name="nose", description="The nose. You know the one.", extras=FUN)
 @app_commands.describe(user="Optional: who it's for")
 async def nose(ctx: commands.Context, user: discord.Member | None = None):
@@ -332,6 +383,9 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     lines = []
     if sprays:
         lines.append(f"Sprayed {plural(sprays, 'time')}.")
+    times_bad = get_bad_count(ctx.guild.id, user.id)
+    if times_bad:
+        lines.append(f"🙅 Has been bad {plural(times_bad, 'time')}.")
     expunged = get_expunge_count(ctx.guild.id, user.id)
     if expunged:
         lines.append(f"🧽 Paid to have {plural(expunged, 'spray')} expunged.")
@@ -482,7 +536,7 @@ def main_help_lines() -> list[tuple[str, str]]:
 async def setup(bot: commands.Bot):
     # `nose` is written but not registered: Discord's sensitive-media filter blurs its image (and asks UK users for ID).
     # Add it back here to bring it back.
-    for command in (spray, whospray, tdoi, loot, rapsheet, blame, bribe, expunge, bail, linux):
+    for command in (spray, whospray, tdoi, loot, bad, toenoyoudidnt, rapsheet, blame, bribe, expunge, bail, linux):
         bot.add_command(command)
     bot.add_listener(remember_speaker, "on_message")
     bot.add_listener(spray_reaction, "on_raw_reaction_add")

@@ -10,9 +10,11 @@ from ktdi.bot import KTDIBot, describe_options
 from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
-SLASH_COMMANDS = ["abm", "anime", "bail", "bingo", "blame", "books", "bribe", "campaign", "committee", "expunge",
-                  "help", "imperial", "linux", "loot", "np", "predict", "quote", "rapsheet", "rate", "rpg", "settings",
-                  "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone", "whospray"]
+SLASH_COMMANDS = ["abm", "anime", "bad", "bail", "bingo", "blame", "books", "bribe", "campaign", "committee",
+                  "expunge", "help", "imperial", "linux", "loot", "np", "predict", "quote", "rapsheet", "rate", "rpg",
+                  "settings", "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone", "whospray"]
+PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
+HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
     "committee": ["funds", "ledger", "propose", "spend"],
     "np": ["elapsed", "end", "history", "pause", "predictions", "resume", "sct", "set", "show", "start", "vote",
@@ -50,7 +52,7 @@ def test_slash_commands(loaded_bot):
 
 
 def test_prefix_commands(loaded_bot):
-    assert sorted(c.name for c in loaded_bot.commands) == SLASH_COMMANDS
+    assert sorted(c.name for c in loaded_bot.commands) == sorted(SLASH_COMMANDS + PREFIX_ONLY_COMMANDS)
     assert "anon" in [c.name for c in loaded_bot.get_command("quote").commands]  # !quote anon is prefix-only
 
 
@@ -111,7 +113,16 @@ def test_every_command_has_a_category_and_is_listed(loaded_bot, monkeypatch):
     ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
     text = "\n".join(f.value for page in help_feature.main_help_pages(ctx) for f in page.fields)
     for name in SLASH_COMMANDS:
-        assert f"`/{name}" in text, name
+        assert (f"`/{name}" in text) == (name not in HIDDEN_COMMANDS), name
+
+
+def test_cryptids_are_unlisted_but_real(loaded_bot):
+    assert sorted(c.name for c in loaded_bot.commands if c.extras.get("hidden")) == HIDDEN_COMMANDS
+    ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
+    asyncio.run(help_feature.help_command.callback(ctx, command="toenoyoudidnt"))
+    assert ctx.last.embed.title == "!toenoyoudidnt"  # if you know, you know
+    assert "Only works typed with `!`" in ctx.last.embed.description
+    assert loaded_bot.tree.get_command("toenoyoudidnt") is None  # not in Discord's slash menu
 
 
 def assert_fits(embed):
@@ -180,3 +191,24 @@ def test_help_unknown_command(loaded_bot):
 def test_command_logging_flattens_subcommands():
     options = [{"name": "search", "type": 1, "options": [{"name": "query", "value": "romance"}]}]
     assert describe_options(options) == "query=romance"
+
+
+def test_one_unreachable_server_doesnt_stop_startup(monkeypatch, caplog):
+    import types
+    from ktdi import config
+    monkeypatch.setattr(campaigns.reminder_loop, "start", lambda: None)
+    monkeypatch.setattr(config, "GUILD_IDS", [111, 222, 333])
+    bot = KTDIBot()
+    synced = []
+
+    async def sync(guild=None):
+        if guild is not None and guild.id == 222:  # the bot isn't in this one
+            raise discord.Forbidden(types.SimpleNamespace(status=403, reason="Forbidden"),
+                                    {"code": 50001, "message": "Missing Access"})
+        synced.append(guild.id if guild else "global")
+        return []
+    monkeypatch.setattr(bot.tree, "sync", sync)
+    caplog.set_level("WARNING", logger="ktdi")
+    asyncio.run(bot.setup_hook())
+    assert synced == [111, 333, "global"]  # the others still got their commands
+    assert "Couldn't add slash commands to server 222" in caplog.text

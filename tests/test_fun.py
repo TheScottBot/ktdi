@@ -233,3 +233,67 @@ def test_nose_missing(monkeypatch, tmp_path):
     ctx = Ctx(SCOTT)
     run(fun.nose.callback(ctx))
     assert "gone missing" in ctx.last.content and ctx.last.private
+
+
+def test_bad():
+    ctx = Ctx(SCOTT)
+    run(fun.bad.callback(ctx))
+    assert ctx.last.content in fun.BAD_GIF_URLS
+    run(fun.bad.callback(ctx, DAVE))
+    target, gif = ctx.last.content.split(" ")
+    assert target == "<@2>" and gif in fun.BAD_GIF_URLS
+    assert len(fun.BAD_GIF_URLS) == 8 and all(url.startswith("https://klipy.com/gifs/") for url in fun.BAD_GIF_URLS)
+
+
+def test_bad_picks_from_all_of_them(monkeypatch):
+    picked = []
+    monkeypatch.setattr(fun.random, "choice", lambda options: picked.append(options) or options[0])
+    run(fun.bad.callback(Ctx(SCOTT)))
+    assert picked == [fun.BAD_GIF_URLS]
+
+
+def test_bad_goes_on_the_rap_sheet():
+    ctx = Ctx(SCOTT)
+    run(fun.bad.callback(ctx))  # nobody named: nothing to count
+    run(fun.bad.callback(ctx, DAVE))
+    run(fun.bad.callback(Ctx(User(3, "pat")), DAVE))
+    assert fun.get_bad_count(111, DAVE.id) == 2 and fun.get_bad_count(111, SCOTT.id) == 0
+    run(fun.rapsheet.callback(ctx, DAVE))
+    assert ctx.last.content == "📋 **Rap sheet: dave**\n🙅 Has been bad 2 times."  # its own line, not a spray
+    assert fun.get_spray_count(111, DAVE.id) == 0
+    run(fun.bad.callback(ctx, SCOTT))
+    run(fun.rapsheet.callback(ctx, SCOTT))
+    assert "🙅 Has been bad 1 time." in ctx.last.content
+
+
+def test_bad_follows_shared_state():
+    from ktdi import db
+    run(fun.bad.callback(Ctx(SCOTT, Guild(111)), DAVE))
+    run(fun.bad.callback(Ctx(SCOTT, Guild(222)), DAVE))
+    assert fun.get_bad_count(111, DAVE.id) == 2
+    db.set_shared(222, False)
+    assert fun.get_bad_count(111, DAVE.id) == 1 and fun.get_bad_count(222, DAVE.id) == 1
+
+
+def test_toenoyoudidnt_vanishes():
+    typed = Ctx(SCOTT, slash=False)
+    run(fun.toenoyoudidnt.callback(typed))
+    assert typed.last.content == fun.TOES_GIF_URL and typed.last.delete_after == 5  # the GIF goes after 5 seconds
+    assert typed.message.deleted and typed.message.deleted_after is None  # your !toenoyoudidnt goes at once
+
+
+def test_toenoyoudidnt_is_typed_only():
+    from discord.ext import commands
+    assert not isinstance(fun.toenoyoudidnt, commands.HybridCommand)  # no slash version to show up in Discord's menu
+
+
+def test_toenoyoudidnt_still_appears_without_manage_messages():
+    import discord
+    import types as _types
+    typed = Ctx(SCOTT, slash=False)
+
+    async def not_allowed(delay=None):
+        raise discord.Forbidden(_types.SimpleNamespace(status=403, reason="Forbidden"), "Missing Permissions")
+    typed.message.delete = not_allowed
+    run(fun.toenoyoudidnt.callback(typed))
+    assert typed.last.content == fun.TOES_GIF_URL and typed.last.delete_after == 5

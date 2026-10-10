@@ -89,6 +89,14 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS bad_counts (
+        guild_id INTEGER NOT NULL,
+        user_id  INTEGER NOT NULL,
+        count    INTEGER NOT NULL DEFAULT 0,  -- times someone told them off with /bad @them
+        PRIMARY KEY (guild_id, user_id)
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS spray_expunges (
         guild_id INTEGER NOT NULL,
         user_id  INTEGER NOT NULL,

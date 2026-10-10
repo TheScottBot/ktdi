@@ -13,7 +13,7 @@ Grouped the same way as `/help`.
 |---|---|
 | `spray [@user]` | Posts a spray bottle GIF. Target someone to add to their rap sheet. |
 | React 💦 | Reacting 💦 to any message sprays whoever sent it and adds to their rap sheet. |
-| `rapsheet [@user]` | Shows someone's sprays, expunges, bails, Don orders, bribes, committee spending, called predictions, bingo wins and spray futures (defaults to you). |
+| `rapsheet [@user]` | Shows someone's sprays, times they've been bad, expunges, bails, Don orders, bribes, committee spending, called predictions, bingo wins and spray futures (defaults to you). |
 | `whospray` | Asks the server's Don (set with `/settings whospray_user`) who should be sprayed, with a random phrase. Only the Don is pinged. |
 | `tdoi` | The Don Ordered It: sprays yourself, on the Don's orders. Counts as a spray, and as a separate "sprayed themselves on the Don's orders" count on your rap sheet. |
 | `blame [reason]` | Blames a random person who's spoken recently in the channel. |
@@ -31,6 +31,8 @@ Grouped the same way as `/help`.
 | Command | What it does |
 |---|---|
 | `loot` | Declares you're looting the body (posts the perception check GIF). |
+| `!toenoyoudidnt` | 👣 A cryptid, typed with `!` only, so it isn't in Discord's slash menu: your `!toenoyoudidnt` vanishes at once (if the bot has Manage Messages), and the toes GIF it posts deletes itself after 5 seconds. Left off the `/help` list too; `/help toenoyoudidnt` still works if you know. |
+| `bad [@user]` | Bad. Posts a random telling-off GIF (one of eight, listed in `BAD_GIF_URLS` in `ktdi/features/fun.py`), optionally at someone, which goes on their rap sheet as "Has been bad N times" (separate from sprays). |
 | `linux` | Asks our resident Linux hater a random question about how much he hates Linux. Pings our Linux hater by default; set `LINUX_HATER_ID` in `.env` to change who. |
 | `anime` | Asks our resident anime watcher (`ANIME_USER_ID` in `.env`) what they think of a random popular anime from [AniList](https://anilist.co), with a random question. Only they are pinged. If AniList is down it picks from a built-in list. |
 
@@ -157,6 +159,8 @@ python bot.py --dev
 
 This loads `.env.dev` instead of `.env`. Give the dev bot a different `COMMAND_PREFIX`, only the test server in `GUILD_IDS`, and its own `DB_PATH`.
 
+If the log says "Couldn't add slash commands to server …" (Discord's *Missing Access*), that server in `GUILD_IDS` either doesn't have the bot in it, or the bot was invited without the `applications.commands` scope. The bot skips it and starts anyway.
+
 Slash commands can take a while to appear or update when registered globally. Set `GUILD_IDS` in `.env` to a comma-separated list of server IDs to register them to those servers only, which updates instantly.
 
 ## Project layout
@@ -171,7 +175,7 @@ ktdi/
 ├── db.py              # database connection, tables, upgrades, and shared state (scope())
 ├── common.py          # small helpers shared by features
 ├── features/          # one file per feature, each a discord.py extension with a setup(bot)
-│   ├── fun.py         # spray, loot, linux, blame, bribe, rapsheet, 💦, Champion Briber
+│   ├── fun.py         # spray, loot, bad, toenoyoudidnt, linux, blame, bribe, rapsheet, 💦, Champion Briber
 │   ├── futures.py     # sprayfutures
 │   ├── committee.py   # the committee's funds
 │   ├── movie.py       # movie night: np, shhh, rate, predict, bingo

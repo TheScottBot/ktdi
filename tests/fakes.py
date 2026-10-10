@@ -112,14 +112,16 @@ class Ctx:
         self.message = types.SimpleNamespace(content=content, reference=reference, mentions=list(mentions),
                                              deleted=False)
 
-        async def delete():
+        async def delete(delay=None):
             self.message.deleted = True
+            self.message.deleted_after = delay
         self.message.delete = delete
         self.sent: list[Sent] = []
 
     async def send(self, content=None, embed=None, view=None, file=None, ephemeral=False, allowed_mentions=None,
-                   poll=None, **kwargs):
+                   poll=None, delete_after=None, **kwargs):
         message = Sent(content, embed, view, file, ephemeral, allowed_mentions, poll)
+        message.delete_after = delete_after  # seconds until Discord deletes it, if set
         self.sent.append(message)
         self.channel.messages[message.id] = message  # so it can be fetched again, like a real one
         return message

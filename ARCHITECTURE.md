@@ -48,7 +48,7 @@ ktdi/
 ├── common.py          helpers shared by features (Reply, send_reply/respond, NO_PINGS, get_member, common.bot)
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
-│   ├── fun.py         spray, whospray, tdoi, loot, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
+│   ├── fun.py         spray, whospray, tdoi, loot, bad, toenoyoudidnt, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
 │   ├── futures.py     /sprayfutures, /sprayrate: bets on someone being sprayed; settled by fun.after_spray or expiry_loop
 │   ├── committee.py   /committee: the committee's funds (bribes in, spending out)
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
@@ -142,6 +142,9 @@ changing:
     used (`/books`, `/rpg`).
   - `"configured": fn() -> bool` → not synced at all when the feature isn't set up on this bot (`KTDIBot.unavailable_commands`).
   - `"private": True` → never logged with who used it (see §9).
+  - `"hidden": True` → a cryptid: left off the main `/help` list, though `/help <name>` still works. Make it a plain
+    `commands.command` (`!`-only) too, as `!toenoyoudidnt` is: Discord's slash menu shows every slash command, and a
+    bot can't hide one from it. `/help` titles `!`-only commands with `!`.
 - If a prefix command's arguments are in a different order to its slash version, set `usage=` to the slash form
   (e.g. `quote add`).
 
@@ -170,6 +173,7 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `campaign_reminder_subscribers` | who reacted 🔔 to a reminder |
 | `guild_settings` | per-server settings: shared state, and the Don (`whospray_user_id`: who `/whospray` asks and `/tdoi` obeys). Never shared between servers. |
 | `don_orders` | times each person sprayed themselves on the Don's orders (`/tdoi`), per (server, person) |
+| `bad_counts` | times each person was told off with `/bad @them`, per (server, person). Its own rap sheet line; not a spray. |
 | `spray_expunges` | sprays each person paid to remove (`/expunge`), per (server, person). Subtracted from sprays on read; sprays are never deleted. |
 | `spray_bails` | sprays removed from someone's record by someone else (`/bail`), per (server, person, payer). Also subtracted on read. |
 | `movies` | one row per **watch** of a film: title (and `title_key`, casefolded, to match rewatches), who set it, started/paused/ended times, seconds paused, `watch_number` (fixed at `/np start`, counting earlier watches through `scope()`), `archived_at` for the watchlist (the to-watch list: added, imported from Letterboxd, or set aside unstarted), `link` (its Letterboxd page), `dropped_at` (taken off the watchlist; kept) and `struck_at` (struck off as watched: still listed, crossed out, left out of random votes) and `from_watchlist` (lined up from the watchlist: when that watch ends, `keep_on_watchlist_struck()` adds a fresh struck entry, since the watch's own row keeps its ratings and predictions). A server's current film is its row that's neither ended nor archived; that and the watchlist are per server, never shared. `/np history` and `/np predictions` read through `scope()`. Nothing is deleted: a film swapped or ended before it starts is archived, predictions and all, and `/np set` of the same title restores it. |
