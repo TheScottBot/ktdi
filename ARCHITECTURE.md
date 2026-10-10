@@ -52,6 +52,7 @@ ktdi/
 │   ├── futures.py     /sprayfutures, /sprayrate: bets on someone being sprayed; settled by fun.after_spray or expiry_loop
 │   ├── committee.py   /committee: the committee's funds (bribes in, spending out)
 │   ├── herbal.py      /herbal (a random box from a 1531 herbal, from lib/herbal.json; ⛏️ digs to worse translations)
+│   ├── malleus.py     /hammeredofwitches (a hand-picked witch-finding tip from the 1928 Malleus, lib/malleus.json)
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
 │   ├── units.py       /abm, /imperial
@@ -64,6 +65,8 @@ ktdi/
 │   └── help.py        /help
 └── lib/               plain Python, no Discord imports
     ├── abm.py         unit parsing and conversion (+ abm_units.json dataset)
+    ├── malleus.json   /hammeredofwitches's tips: hand-picked from the 1928 translation, OCR fixed against the scans; no torture
+    │                  or execution passages (tests/test_malleus.py checks)
     ├── herbal.json    /herbal's data: built by tools/herbal_build.py (archive.org OCR -> Google Sheets' GOOGLETRANSLATE)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths
     ├── library.py     Calibre-Web OPDS client

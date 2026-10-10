@@ -35,6 +35,7 @@ Grouped the same way as `/help`.
 | `badbonk [@user]` | The violent version of `bad`: a random GIF from `BADBONK_GIF_URLS`. Counts as being bad on the rap sheet, the same as `bad`. |
 | `linux` | Asks our resident Linux hater (`LINUX_HATER_ID` in `.env`) a random question about how much they hate Linux. Only they are pinged. |
 | `herbal` | Wisdom from a 1531 herbal, the *Tacuini sanitatis*: a random box from its grids, as badly OCR'd by archive.org and translated by Google Translate, with the original cell cropped from the scan. React ⛏️ to dig: each dig is one translation worse (round-tripped through Japanese, Zulu, Finnish, then Korean), down to 🪨 bedrock, the Latin as the scanner read it. The bot takes your ⛏️ back off so you can dig again (needs Manage Messages; otherwise un-react and react). Needs `ktdi/lib/herbal.json` (see Herbal below). |
+| `hammeredofwitches` | A witch-finding tip from the *Malleus Maleficarum* (1486), "the Hammer of Witches", which reads like someone hammered wrote it, in Montague Summers' 1928 translation (public domain): how to spot a witch, and the book's wilder lore, linked to its page on archive.org. 45 tips picked by hand into `ktdi/lib/malleus.json`; the book's torture, execution and child-harm passages are left out, and a test keeps it that way. |
 | `anime` | Asks our resident anime watcher (`ANIME_USER_ID` in `.env`) what they think of a random popular anime from [AniList](https://anilist.co), with a random question. Only they are pinged. If AniList is down it picks from a built-in list. |
 
 ### 🎬 Movie night
@@ -191,6 +192,7 @@ ktdi/
 │   ├── committee.py   # the committee's funds
 │   ├── anime.py       # anime
 │   ├── herbal.py      # herbal
+│   ├── malleus.py     # hammeredofwitches
 │   ├── movie.py       # movie night: nowplaying (np), shhh
 │   ├── units.py       # abm, imperial
 │   ├── timezones.py   # timezone

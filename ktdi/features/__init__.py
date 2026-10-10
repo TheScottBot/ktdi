@@ -13,6 +13,7 @@ FEATURES = [
     "ktdi.features.committee",
     "ktdi.features.anime",
     "ktdi.features.herbal",
+    "ktdi.features.malleus",
     "ktdi.features.movie",
     "ktdi.features.units",
     "ktdi.features.timezones",
