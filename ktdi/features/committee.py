@@ -1,4 +1,5 @@
-"""/committee: the committee's funds. Every bribe, expunge and bail pays the committee, and people can spend it.
+"""/committee: the committee's funds. Every bribe, expunge, bail and insurance premium pays the committee, and people
+can spend it.
 
 Money in is the bribes table (so bribes from before this existed count too); money out is committee_spending.
 Both are read through db.scope, so shared servers share one committee.
@@ -132,7 +133,7 @@ def proposal_text(guild_id: int, rng: random.Random = random) -> str:
 
 
 # --- Commands ---
-@commands.hybrid_group(name="committee", description="The committee's funds: every bribe, expunge and bail pays in.",
+@commands.hybrid_group(name="committee", description="The committee's money: what's paid in, and what it's spent.",
                        invoke_without_command=True)
 @commands.guild_only()
 async def committee_group(ctx: commands.Context):
@@ -185,8 +186,8 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
     if command.name != "committee":
         return "", []
     p = config.COMMAND_PREFIX
-    text = ("• Every `/bribe`, `/expunge` and `/bail` pays the committee, including ones from before the committee "
-            "kept accounts.\n"
+    text = ("• Every `/bribe`, `/expunge`, `/bail` and `/insurance buy` pays the committee, including ones from "
+            "before the committee kept accounts.\n"
             "• Anyone can `/committee spend <amount> <item>`, but it can't spend more than it has, and every purchase "
             "goes on the ledger with who signed it off. Spending shows on your rap sheet too.\n"
             "• `/committee propose` suggests something to argue about.\n"

@@ -124,6 +124,16 @@ def record_spray(guild_id: int, user_id: int) -> int:
     return get_spray_count(guild_id, user_id)
 
 
+def take_spray(guild_id: int, user_id: int, sprayer_id: int) -> str:
+    """Every spray lands here: it goes on their record unless their /insurance covers it.
+    Returns a line to add to the spray's message ("" if there's nothing to say)."""
+    from ktdi.features import insurance  # Here, not at the top: insurance needs this module first.
+    covered, note = insurance.adjudicate(guild_id, user_id, sprayer_id)
+    if not covered:
+        record_spray(guild_id, user_id)
+    return f"\n{note}" if note else ""
+
+
 def _scoped_sum(table: str, guild_id: int, user_id: int, column: str = "user_id") -> int:
     where, params = db.scope(guild_id)
     row = db.conn.execute(f"SELECT COALESCE(SUM(count), 0) FROM {table} WHERE {where} AND {column} = ?",
@@ -306,8 +316,8 @@ async def spray(ctx: commands.Context, target: discord.Member | None = None):
     if target is None:
         await ctx.send(SPRAY_GIF_URL)
         return
-    record_spray(ctx.guild.id, target.id)
-    await ctx.send(f"{target.mention} {SPRAY_GIF_URL}")
+    note = take_spray(ctx.guild.id, target.id, ctx.author.id)
+    await ctx.send(f"{target.mention} {SPRAY_GIF_URL}{note}")
     await after_spray(ctx.guild.id, target.id, ctx.author.id)
 
 
@@ -330,11 +340,11 @@ async def tdoi(ctx: commands.Context):
     if db.whospray_user(ctx.guild.id) is None:
         await ctx.send(NO_DON, ephemeral=True)
         return
-    record_spray(ctx.guild.id, ctx.author.id)  # It's still a spray...
+    note = take_spray(ctx.guild.id, ctx.author.id, ctx.author.id)  # It's still a spray...
     times = record_don_order(ctx.guild.id, ctx.author.id)  # ...and one more the Don made them do.
     log.info("[%s] %s sprayed themselves on the Don's orders", ctx.guild.name, ctx.author)
     await ctx.send(f"🤌 The Don ordered it. {ctx.author.mention} sprays themselves.\n{SPRAY_GIF_URL}\n"
-                   f"-# That's {plural(times, 'time')} the Don has made them do it.",
+                   f"-# That's {plural(times, 'time')} the Don has made them do it.{note}",
                    allowed_mentions=discord.AllowedMentions.none())
     await after_spray(ctx.guild.id, ctx.author.id, ctx.author.id)  # Sprayed by themselves, for anyone betting on it.
 
@@ -410,6 +420,10 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     bails_given = get_bails_given(ctx.guild.id, user.id)
     if bails_given:
         lines.append(f"🤝 Bailed others out {plural(bails_given, 'time')}.")
+    from ktdi.features import insurance  # Here, not at the top: insurance needs this module first.
+    claims = insurance.claim_count(ctx.guild.id, user.id)
+    if claims:
+        lines.append(f"🛡️ Insurance covered {plural(claims, 'spray')}.")
     don_orders = get_don_order_count(ctx.guild.id, user.id)
     if don_orders:
         lines.append(f"🤌 Sprayed themselves on the Don's orders {plural(don_orders, 'time')}.")
@@ -537,15 +551,15 @@ async def spray_reaction(payload: discord.RawReactionActionEvent):
     channel = bot.get_channel(payload.channel_id)
     if channel is None:
         return
-    target = ""
+    target, note = "", ""
     if payload.message_author_id:
         target = f"<@{payload.message_author_id}> "
         if payload.guild_id:
-            record_spray(payload.guild_id, payload.message_author_id)
+            note = take_spray(payload.guild_id, payload.message_author_id, payload.user_id)
     reactor = payload.member or f"user {payload.user_id}"
     log.info("[%s] %s reacted %s, spraying user %s", channel.guild if payload.guild_id else "DM",
              reactor, SPRAY_EMOJI, payload.message_author_id)
-    await channel.send(f"{target}{SPRAY_GIF_URL}")
+    await channel.send(f"{target}{SPRAY_GIF_URL}{note}")
     if payload.message_author_id and payload.guild_id:
         await after_spray(payload.guild_id, payload.message_author_id, payload.user_id)
 

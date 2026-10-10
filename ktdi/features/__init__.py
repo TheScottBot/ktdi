@@ -10,6 +10,7 @@ Optional hooks a feature module can define, used by /help:
 FEATURES = [
     "ktdi.features.fun",
     "ktdi.features.futures",
+    "ktdi.features.insurance",
     "ktdi.features.committee",
     "ktdi.features.anime",
     "ktdi.features.herbal",

@@ -12,3 +12,6 @@ logs/
 
 # /herbal build files (python -m ktdi.tools.herbal_build); only ktdi/lib/herbal.json is kept
 herbal-build/
+
+# Private notes, kept locally (e.g. insurance golden minutes)
+private/

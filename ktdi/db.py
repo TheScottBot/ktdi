@@ -140,6 +140,28 @@ SCHEMA = [
         depth      INTEGER NOT NULL DEFAULT 0  -- 0 is the best guess; one past the last level is bedrock
     )
     """,
+    # Spray insurance (/insurance). A person's latest policy is the one in force; buying again replaces it.
+    """
+    CREATE TABLE IF NOT EXISTS insurance_policies (
+        id                   INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id             INTEGER NOT NULL,
+        user_id              INTEGER NOT NULL,
+        premium              INTEGER NOT NULL,  -- dollars, paid to the committee (also in bribes)
+        bought_at            TEXT NOT NULL,     -- ISO 8601, UTC; its minute sets both clocks
+        microwave_expires_at TEXT NOT NULL,     -- the real cover: decides every claim
+        car_expires_at       TEXT NOT NULL      -- the countdown customers are shown; not to be relied on
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS insurance_claims (
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id   INTEGER NOT NULL,
+        policy_id  INTEGER NOT NULL,
+        user_id    INTEGER NOT NULL,  -- who was sprayed (and not punished for it)
+        sprayed_by INTEGER NOT NULL,
+        claimed_at TEXT NOT NULL
+    )
+    """,
     # One spray interest rate a day for the whole bot (so no guild_id), picked when it's first needed.
     """
     CREATE TABLE IF NOT EXISTS spray_rates (

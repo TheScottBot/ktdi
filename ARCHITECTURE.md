@@ -50,6 +50,7 @@ ktdi/
 │   ├── __init__.py    FEATURES: the load order
 │   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
 │   ├── futures.py     /sprayfutures, /sprayrate: bets on someone being sprayed; settled by fun.after_spray or expiry_loop
+│   ├── insurance.py   /insurance: $1,000 of spray immunity; fun.take_spray asks it whether each spray is covered
 │   ├── committee.py   /committee: the committee's funds (bribes in, spending out)
 │   ├── herbal.py      /herbal (a random box from a 1531 herbal, from lib/herbal.json; ⛏️ digs to worse translations)
 │   ├── malleus.py     /hammeredofwitches (a hand-picked witch-finding tip from the 1928 Malleus, lib/malleus.json)
@@ -74,6 +75,7 @@ ktdi/
     ├── cures.json     /cure's remedies and /plant's herbs, built by tools/cure_build.py from Culpeper's Complete
     │                  Herbal (Gutenberg)
     ├── herb_latin.json  /plant's Latin names, checked by hand, keyed by the start of Culpeper's herb names
+    ├── insurance.py   /insurance's two clocks (microwave: real cover; car: the countdown shown), from ID + minute
     ├── herbal.json    /herbal's data: built by tools/herbal_build.py (archive.org OCR -> Google Sheets' GOOGLETRANSLATE)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths
     ├── library.py     Calibre-Web OPDS client
@@ -197,9 +199,11 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `movie_bingo_marks` / `movie_bingo_wins` | squares marked and wins. Cards aren't stored: `movie.bingo_card()` shuffles the squares with a seed of (movie, person). |
 | `user_timezones` | each person's own timezone (`/timezone set`), per person, not per server: an IANA name or a fixed offset like `UTC+5:30`. Logged as "set their timezone", never which one. |
 | `spray_futures` | `/sprayfutures` bets: who bet on whom, the stake, `hours`, the day's `rate` and the `amount` on the line (stake × hours plus interest, fixed when placed), when it expires, and how it settled (`outcome` won/lost, `paid` on a win, capped so a record never goes below zero, and `sprayed_by`, never the bettor). Lost amounts and paid winnings are part of `fun.get_spray_count`. Every spray goes through `fun.after_spray`, which pays out open bets on the target; `futures.expiry_loop` settles the rest as lost. |
+| `insurance_policies` | `/insurance buy`: who, the premium, when it was bought, and both clocks' expiries. `microwave_expires_at` is the real cover; `car_expires_at` is only ever shown. A person's newest policy is the one in force. Durations come from `lib/insurance.py` (user ID + UTC minute, no randomness, on purpose). |
+| `insurance_claims` | sprays a policy covered: who was sprayed, by whom, on which policy. Every spray goes through `fun.take_spray`, which records either a spray or a claim (never both); claims still go on to `fun.after_spray`, so spray futures pay out. |
 | `spray_rates` | the daily spray interest rate (1-20%), one row per day: picked at random the first time it's needed after `SPRAY_RATE_TIME` (in `BOT_TIMEZONE`). Bot-wide, so no `guild_id`. |
 | `herbal_posts` | each `/herbal` post: which box from `herbal.json` and how deep it's been dug with ⛏️, so a dig carries on after a restart. |
-| `committee_spending` | what the committee's money was spent on (`/committee spend`): amount, item, who. Money in isn't stored separately: it's the `bribes` totals (bribe, expunge and bail all record a bribe), so the balance is bribes minus spending, both read through `scope()`. |
+| `committee_spending` | what the committee's money was spent on (`/committee spend`): amount, item, who. Money in isn't stored separately: it's the `bribes` totals (bribe, expunge, bail and insurance premiums all record a bribe), so the balance is bribes minus spending, both read through `scope()`. |
 
 ### Rules
 
