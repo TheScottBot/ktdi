@@ -12,6 +12,7 @@ FEATURES = [
     "ktdi.features.futures",
     "ktdi.features.committee",
     "ktdi.features.anime",
+    "ktdi.features.herbal",
     "ktdi.features.movie",
     "ktdi.features.units",
     "ktdi.features.timezones",

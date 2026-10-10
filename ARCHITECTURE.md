@@ -51,6 +51,7 @@ ktdi/
 │   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
 │   ├── futures.py     /sprayfutures, /sprayrate: bets on someone being sprayed; settled by fun.after_spray or expiry_loop
 │   ├── committee.py   /committee: the committee's funds (bribes in, spending out)
+│   ├── herbal.py      /herbal (a random box from a 1531 herbal, from lib/herbal.json)
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
 │   ├── units.py       /abm, /imperial
@@ -63,6 +64,7 @@ ktdi/
 │   └── help.py        /help
 └── lib/               plain Python, no Discord imports
     ├── abm.py         unit parsing and conversion (+ abm_units.json dataset)
+    ├── herbal.json    /herbal's data: built by tools/herbal_build.py (archive.org OCR -> Google Sheets' GOOGLETRANSLATE)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths
     ├── library.py     Calibre-Web OPDS client
     ├── dropbox.py     Dropbox API client for /rpg: refresh-token login, folder listing, temporary links

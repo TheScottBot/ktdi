@@ -11,8 +11,8 @@ from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "anime", "bad", "badbonk", "bail", "blame", "books", "bribe", "campaign", "committee",
-                  "expunge", "help", "imperial", "linux", "loot", "nowplaying", "quote", "rapsheet", "rpg", "settings",
-                  "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone", "whospray"]
+                  "expunge", "help", "herbal", "imperial", "linux", "loot", "nowplaying", "quote", "rapsheet", "rpg",
+                  "settings", "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone", "whospray"]
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
 HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
