@@ -17,6 +17,7 @@ FEATURES = [
     "ktdi.features.herbal",
     "ktdi.features.malleus",
     "ktdi.features.cure",
+    "ktdi.features.slang",
     "ktdi.features.movie",
     "ktdi.features.units",
     "ktdi.features.timezones",

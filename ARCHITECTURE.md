@@ -58,6 +58,7 @@ ktdi/
 │   ├── malleus.py     /hammeredofwitches (a hand-picked witch-finding tip from the 1928 Malleus, lib/malleus.json)
 │   ├── cure.py        /cure (Culpeper's 1653 remedy for an ailment) and /plant (what a herb treats, by any name or
 │   │                  its Latin one); lookups in lib/cure.py, data in lib/cures.json
+│   ├── slang.py       /vulgartongue lookup (1811 slang, or the slang for a plain word) and insult @someone
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
 │   ├── units.py       /abm, /imperial
@@ -77,6 +78,10 @@ ktdi/
     ├── cures.json     /cure's remedies and /plant's herbs, built by tools/cure_build.py from Culpeper's Complete
     │                  Herbal (Gutenberg)
     ├── herb_latin.json  /plant's Latin names, checked by hand, keyed by the start of Culpeper's herb names
+    ├── slang.json     /vulgartongue's dictionary (Grose, 1811), built by tools/slang_build.py from an allowlist
+    │                  (slang_curation.json: entries kept, and the insults). Slurs and anything that punches down
+    │                  were reviewed out once; the repo only records what was kept, never what was removed
+    │                  (tests/slang_left_out.sha256.json fingerprints it so a test can check it stays out)
     ├── insurance.py   /insurance's two clocks (microwave: real cover; car: the countdown shown), from ID + minute
     ├── herbal.json    /herbal's data: built by tools/herbal_build.py (archive.org OCR -> Google Sheets' GOOGLETRANSLATE)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths
