@@ -242,7 +242,20 @@ def test_bad():
     run(fun.bad.callback(ctx, DAVE))
     target, gif = ctx.last.content.split(" ")
     assert target == "<@2>" and gif in fun.BAD_GIF_URLS
-    assert len(fun.BAD_GIF_URLS) == 8 and all(url.startswith("https://klipy.com/gifs/") for url in fun.BAD_GIF_URLS)
+    assert len(fun.BAD_GIF_URLS) == 6 and all(url.startswith("https://klipy.com/gifs/") for url in fun.BAD_GIF_URLS)
+
+
+def test_badbonk_is_the_violent_one():
+    assert fun.BADBONK_GIF_URLS == ["https://klipy.com/gifs/kanon-head-slap", "https://klipy.com/gifs/no-family-guy-2"]
+    assert not set(fun.BADBONK_GIF_URLS) & set(fun.BAD_GIF_URLS)  # the bonks moved out of /bad
+    ctx = Ctx(SCOTT)
+    run(fun.badbonk.callback(ctx))
+    assert ctx.last.content in fun.BADBONK_GIF_URLS
+    run(fun.badbonk.callback(ctx, DAVE))
+    target, gif = ctx.last.content.split(" ")
+    assert target == "<@2>" and gif in fun.BADBONK_GIF_URLS
+    run(fun.bad.callback(ctx, DAVE))
+    assert fun.get_bad_count(111, DAVE.id) == 2  # a bonk counts as being bad too
 
 
 def test_bad_picks_from_all_of_them(monkeypatch):

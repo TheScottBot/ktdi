@@ -20,15 +20,18 @@ from ktdi.features import committee, movie
 SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
 LOOT_GIF_URL = "https://klipy.com/gifs/perception-check-tom-cardy"
+# /bad is the non-violent telling-off; /badbonk is the violent one. Both put "Has been bad" on the rap sheet.
 BAD_GIF_URLS = [
     "https://klipy.com/gifs/asian-guy-saying-no",
     "https://klipy.com/gifs/theoffice-michael-2",
-    "https://klipy.com/gifs/kanon-head-slap",
     "https://klipy.com/gifs/knock-it-off-knock-it-out",
     "https://klipy.com/gifs/regular-show-benson-8",
     "https://klipy.com/gifs/daddys-home2-daddys-home2gifs-23",
-    "https://klipy.com/gifs/no-family-guy-2",
     "https://klipy.com/gifs/bad-kitty",
+]
+BADBONK_GIF_URLS = [
+    "https://klipy.com/gifs/kanon-head-slap",
+    "https://klipy.com/gifs/no-family-guy-2",
 ]
 TOES_GIF_URL = "https://klipy.com/gifs/toes-test-water"
 TOES_SECONDS = 5  # How long the cryptid is visible before it's gone.
@@ -341,16 +344,28 @@ async def loot(ctx: commands.Context):
     await ctx.send(LOOT_GIF_URL)
 
 
-@commands.hybrid_command(name="bad", description="Bad. Posts a random telling-off GIF.", extras=FUN)
-@app_commands.describe(user="Optional: who's being bad (it goes on their rap sheet)")
-async def bad(ctx: commands.Context, user: discord.Member | None = None):
-    gif = random.choice(BAD_GIF_URLS)
+async def tell_off(ctx: commands.Context, user: discord.Member | None, gifs: list[str]) -> None:
+    """A random GIF from the list, at someone if named (which goes on their rap sheet as being bad)."""
+    gif = random.choice(gifs)
     if user is None:
         await ctx.send(gif)
         return
     if ctx.guild:
         record_bad(ctx.guild.id, user.id)
     await ctx.send(f"{user.mention} {gif}")
+
+
+@commands.hybrid_command(name="bad", description="Bad. Posts a random (non-violent) telling-off GIF.", extras=FUN)
+@app_commands.describe(user="Optional: who's being bad (it goes on their rap sheet)")
+async def bad(ctx: commands.Context, user: discord.Member | None = None):
+    await tell_off(ctx, user, BAD_GIF_URLS)
+
+
+@commands.hybrid_command(name="badbonk", description="Bad, with a bonk. Posts a random (violent) telling-off GIF.",
+                         extras=FUN)
+@app_commands.describe(user="Optional: who's getting bonked (it goes on their rap sheet as being bad)")
+async def badbonk(ctx: commands.Context, user: discord.Member | None = None):
+    await tell_off(ctx, user, BADBONK_GIF_URLS)
 
 
 # A cryptid: !-only, so it's not in Discord's slash menu; left off the /help list (extras["hidden"]); and gone again
@@ -536,7 +551,7 @@ def main_help_lines() -> list[tuple[str, str]]:
 async def setup(bot: commands.Bot):
     # `nose` is written but not registered: Discord's sensitive-media filter blurs its image (and asks UK users for ID).
     # Add it back here to bring it back.
-    for command in (spray, whospray, tdoi, loot, bad, toenoyoudidnt, rapsheet, blame, bribe, expunge, bail, linux):
+    for command in (spray, whospray, tdoi, loot, bad, badbonk, toenoyoudidnt, rapsheet, blame, bribe, expunge, bail, linux):
         bot.add_command(command)
     bot.add_listener(remember_speaker, "on_message")
     bot.add_listener(spray_reaction, "on_raw_reaction_add")
