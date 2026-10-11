@@ -19,6 +19,8 @@ FEATURES = [
     "ktdi.features.cure",
     "ktdi.features.slang",
     "ktdi.features.deadword",
+    "ktdi.features.devils",
+    "ktdi.features.dream",
     "ktdi.features.etiquette",
     "ktdi.features.movie",
     "ktdi.features.units",

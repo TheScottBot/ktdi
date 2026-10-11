@@ -16,7 +16,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from ktdi.common import choices
+from ktdi import oldbooks
 from ktdi.lib import fuzzy, links
 
 HELP_CATEGORY = "📜 Old books"
@@ -24,8 +24,7 @@ DATA = Path(__file__).resolve().parent.parent / "lib" / "slang.json"
 SOURCE = "Grose's Dictionary of the Vulgar Tongue (1811)"
 BOOK = 5402  # On Project Gutenberg
 SOURCE_URL = links.gutenberg(BOOK)
-SHOWN = 8  # Entries listed when a word turns up in several definitions.
-LINE_LENGTH = 140
+COLOUR = discord.Color.dark_teal()
 
 ENTRIES: list[dict] = json.loads(DATA.read_text(encoding="utf-8"))["entries"]
 INSULTS = [entry for entry in ENTRIES if entry["insult"]]
@@ -43,31 +42,19 @@ def headwords(entry: dict) -> list[str]:
     return [part.strip(" ,") for part in re.split(r",? or ", entry["word"], flags=re.IGNORECASE) if part.strip(" ,")]
 
 
-INDEX = fuzzy.index((entry, name) for entry in ENTRIES for name in headwords(entry))
-ALL_WORDS = sorted({display_word(name) for _, name, _ in INDEX})
-
-
-def in_definitions(query: str, leave_out: dict | None = None) -> list[dict]:
-    """Entries whose definitions use every word typed ("drunk": BOSKY, CUT, FOXED...). Ones that mean it (it's in
-    the first part of the definition) come first; ones that only mention it in passing only if nothing means it."""
-    return fuzzy.containing(query, [e for e in ENTRIES if e is not leave_out], lambda e: e["text"])
-
-
-def clip(text: str, limit: int) -> str:
-    return text if len(text) <= limit else text[:text.rfind(" ", 0, limit - 1)].rstrip(",;:") + "…"
+DICTIONARY = oldbooks.Dictionary(ENTRIES, names=headwords, text=lambda entry: entry["text"], shown_name=display_word)
 
 
 def entry_embed(entry: dict, query: str | None = None) -> discord.Embed:
     # Its headword leads, as in the book, so even a two-word entry ("BENE. Good.") can be found and highlighted.
     url = links.gutenberg(BOOK, f"{entry['word']}. {entry['text']}", least=2)
     embed = discord.Embed(title=f"📖 {display_word(entry['word'])}"[:256], url=url,
-                          description=discord.utils.escape_markdown(entry["text"])[:4096],
-                          color=discord.Color.dark_teal())
-    others = in_definitions(query, leave_out=entry) if query else []
+                          description=discord.utils.escape_markdown(entry["text"])[:4096], color=COLOUR)
+    others = DICTIONARY.uses(query, leave_out=entry) if query else []
     if others:  # "drunk" is a word in the dictionary, and there are plenty of other ways to say it.
         names = " · ".join(display_word(e["word"]) for e in random.sample(others, min(12, len(others))))
-        typed = discord.utils.escape_markdown(" ".join(query.split())[:60])
-        embed.add_field(name=f"Other ways to say “{typed}”", value=clip(names, 1024), inline=False)
+        embed.add_field(name=f"Other ways to say “{oldbooks.shown_typed(query)}”", value=oldbooks.clip(names, 1024),
+                        inline=False)
     embed.set_footer(text=SOURCE)
     return embed
 
@@ -76,24 +63,16 @@ def slang_embed(query: str | None) -> discord.Embed:
     """A word looked up, the entries that use it, or (nothing typed) a random phrase that isn't an insult."""
     if not query or not fuzzy.words(query):
         return entry_embed(random.choice(PHRASES))
-    match = fuzzy.best_match(query, INDEX, spelling=fuzzy.STRICT_SPELLING)
-    if match and match.exact:  # It's a word in the dictionary.
-        return entry_embed(match.thing, query)
-    found = in_definitions(query)
-    if found:
-        shown = random.sample(found, min(SHOWN, len(found)))
-        lines = [clip(f"**{display_word(e['word'])}**: {discord.utils.escape_markdown(e['text'])}", LINE_LENGTH)
-                 for e in shown]
-        typed = discord.utils.escape_markdown(" ".join(query.split())[:60])
-        embed = discord.Embed(title=f"📖 “{typed}”, in 1811"[:256], url=SOURCE_URL, description="\n".join(lines),
-                              color=discord.Color.dark_teal())
-        more = f". Showing {len(shown)} of {len(found)}: ask again for others." if len(found) > len(shown) else ""
-        embed.set_footer(text=f"{SOURCE}{more}")
-        return embed
-    if match:  # Nothing uses it, but a word in the dictionary looks like it.
-        return entry_embed(match.thing)
-    typed = discord.utils.escape_markdown(" ".join(query.split())[:60])
-    return discord.Embed(title=f"📖 {typed}", color=discord.Color.dark_teal(),
+    found = DICTIONARY.look_up(query)
+    if found and found.kind == "exact":  # It's a word in the dictionary.
+        return entry_embed(found.entries[0], query)
+    if found and found.kind == "uses":
+        return oldbooks.uses_embed(
+            found.entries, title=f"📖 “{oldbooks.shown_typed(query)}”, in 1811", source=SOURCE, url=SOURCE_URL,
+            line=lambda e: f"**{display_word(e['word'])}**: {discord.utils.escape_markdown(e['text'])}", colour=COLOUR)
+    if found:  # Nothing uses it, but a word in the dictionary looks like it.
+        return entry_embed(found.entries[0])
+    return discord.Embed(title=f"📖 {oldbooks.shown_typed(query)}", color=COLOUR,
                          description="Grose never wrote that down. Try a plainer word (drunk, fool, money, run away).")
 
 
@@ -131,7 +110,7 @@ async def slang_insult(ctx: commands.Context, person: discord.Member):
 
 @slang.autocomplete("word")
 async def word_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return choices(fuzzy.starting_first(current, ALL_WORDS) if current.strip() else random.sample(ALL_WORDS, 25))
+    return DICTIONARY.autocomplete(current)
 
 
 async def setup(bot: commands.Bot):

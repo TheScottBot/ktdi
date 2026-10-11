@@ -21,12 +21,12 @@ from discord import app_commands
 from discord.ext import commands
 
 from ktdi import config
-from ktdi.lib import openmeteo
+from ktdi.lib import links, openmeteo
 
 HELP_CATEGORY = "🔧 Utilities"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "weather_lore.json"
 LORE_SOURCE = "Inwards' Weather Lore (1893)"
-LORE_URL = "https://archive.org/details/cu31924002969099"
+LORE_BOOK = "cu31924002969099"  # The archive.org scan
 WET = {"rain", "snow", "hail", "thunder", "storm"}
 FAIR = {"clear", "dry"}
 
@@ -90,7 +90,9 @@ def forecast_lines(forecast: openmeteo.Forecast) -> str:
 def saying_text(saying: dict) -> str:
     text = "\n".join(f"> {discord.utils.escape_markdown(line.strip())}" for line in saying["text"].split(" / "))
     source = f" ({discord.utils.escape_markdown(saying['source'])})" if saying.get("source") else ""
-    return f"{text}\n-# Folk wisdom{source}"
+    # "Folk wisdom" links to the saying's page in the book (never anything about the forecast or where anyone is).
+    url = links.archive_page(LORE_BOOK, saying.get("page"), saying.get("highlight"))
+    return f"{text}\n-# [Folk wisdom](<{url}>){source}"
 
 
 def weather_embed(forecast: openmeteo.Forecast | None, title: str, today: date) -> discord.Embed:

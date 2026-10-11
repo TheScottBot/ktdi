@@ -91,3 +91,17 @@ def test_starting_first_with_any_kind_of_item():
     films = [{"title": "Dial M for Murder"}, {"title": "Alien"}, {"title": "Aliens"}, {"title": "Shrek"}]
     found = fuzzy.starting_first("al", films, key=lambda film: film["title"])
     assert [film["title"] for film in found] == ["Alien", "Aliens", "Dial M for Murder"]
+
+
+def test_look_up_tries_the_headword_then_uses_then_spelling():
+    index = fuzzy.index((e, e["w"]) for e in ENTRIES)
+    text = lambda e: e["text"]  # noqa: E731
+
+    def look(typed):
+        found = fuzzy.look_up(typed, index, ENTRIES, text)
+        return found and (found.kind, [e["w"] for e in found.entries])
+
+    assert look("bosky") == ("exact", ["Bosky"])  # Its own entry, even though "Bosky" isn't in any text
+    assert look("drunk") == ("uses", ["Bosky", "Fuddle"])  # Not a headword: the entries that mean it
+    assert look("fudle") == ("close", ["Fuddle"])  # Nothing uses it, but it's spelt like one
+    assert look("xyzzy") is None

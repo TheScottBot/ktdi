@@ -5,6 +5,7 @@ import json
 import types
 from pathlib import Path
 
+from ktdi import oldbooks
 from ktdi.features import slang
 from ktdi.tools import slang_build as build
 from tests.fakes import Ctx, User, run
@@ -106,9 +107,9 @@ def test_a_word_in_the_dictionary_also_lists_other_ways_to_say_it():
 
 def test_lots_of_matches_are_sampled():
     embed = slang.slang_embed("money")
-    assert embed.description.count("\n") == slang.SHOWN - 1
+    assert embed.description.count("\n") == oldbooks.SHOWN - 1
     assert "ask again for others" in embed.footer.text
-    assert all(len(line) <= slang.LINE_LENGTH for line in embed.description.split("\n"))
+    assert all(len(line) <= oldbooks.LINE_LENGTH for line in embed.description.split("\n"))
 
 
 def test_nothing_found():

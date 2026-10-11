@@ -19,7 +19,7 @@ SWITHIN = {"text": "St. Swithin's day if thou dost rain, / For forty days it wil
 CAT = {"text": "When the cat washes her face over her ear, / The weather will be fine and clear", "source": None,
        "months": [], "date": None, "weather": ["clear"]}
 FEBRUARY = {"text": "February fill dyke, / Be it black or be it white", "source": None, "months": [2], "date": None,
-            "weather": ["rain", "snow"]}
+            "weather": ["rain", "snow"], "page": 37, "highlight": "dyke"}
 OCTOBER = {"text": "October, cold and drab.", "source": "Spanish", "months": [10], "date": None, "weather": []}
 
 FORECAST_RESPONSE = {
@@ -144,8 +144,11 @@ def test_weather_command(open_meteo, monkeypatch):
 
 
 def test_a_verse_is_quoted_line_by_line():
-    assert weather.saying_text(FEBRUARY) == "> February fill dyke,\n> Be it black or be it white\n-# Folk wisdom"
-    assert weather.saying_text(OCTOBER).endswith("-# Folk wisdom (Spanish)")
+    assert weather.saying_text(FEBRUARY) == (
+        "> February fill dyke,\n> Be it black or be it white\n"
+        "-# [Folk wisdom](<https://archive.org/details/cu31924002969099/page/n37/mode/2up?q=dyke>)")  # Its page
+    assert weather.saying_text(OCTOBER).endswith(
+        "-# [Folk wisdom](<https://archive.org/details/cu31924002969099>) (Spanish)")  # No page: the book
 
 
 def test_unknown_place(open_meteo):
@@ -269,6 +272,7 @@ def test_the_real_lore_file_is_well_formed():
     for saying in lore:
         assert saying["text"].strip() and set(saying["weather"]) <= tags, saying
         assert all(1 <= m <= 12 for m in saying["months"]), saying
+        assert saying["page"] is not None and saying["highlight"], saying  # Every saying links to its page
         if saying["date"]:
             month, day = map(int, saying["date"].split("-"))
             assert month in saying["months"] and date(2024, month, day), saying

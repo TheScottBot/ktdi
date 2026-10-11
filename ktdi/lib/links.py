@@ -1,4 +1,5 @@
-"""Links into old books at the exact spot, for /cure, /plant, /vulgartongue, /etiquette and /deadword.
+"""Links into old books at the exact spot, for /cure, /plant, /vulgartongue, /etiquette, /deadword,
+/devilsdictionary, /dream and /weather.
 
 Project Gutenberg books: a link to the book's web page with a text fragment (#:~:text=...), so the browser scrolls to
 the passage and highlights it (Chrome, Edge, Safari, and Firefox since 131; any other browser just opens the book).
@@ -13,9 +14,10 @@ from urllib.parse import quote
 
 FRAGMENT_WORDS = 10  # Enough to be unique (Culpeper repeats his phrases); few enough to keep matching
 MIN_FRAGMENT_WORDS = 4  # Fewer than this ("But", "If at a") matches all over the book
-# A word goes in the fragment only if it's plain letters, digits, single hyphens and simple punctuation: no quotes or
-# apostrophes (curly on the page, straight in our text), double dashes ("--" in the text, "—" on the page) or brackets.
-PLAIN_WORD = re.compile(r"^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*[,;:.!?]?$")
+# A word goes in the fragment only if it's plain letters, digits, single hyphens or dots ("ill-dressed", "v.i.") and
+# simple punctuation: no quotes or apostrophes (curly on the page, straight in our text), double dashes ("--" in the
+# text, "—" on the page) or brackets.
+PLAIN_WORD = re.compile(r"^[A-Za-z0-9]+(?:[-.][A-Za-z0-9]+)*[,;:.!?]?$")
 
 
 def fragment_text(passage: str, words: int = FRAGMENT_WORDS, least: int = MIN_FRAGMENT_WORDS) -> str:

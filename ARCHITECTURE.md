@@ -46,6 +46,9 @@ ktdi/
 ├── config.py          every setting from .env, in one place
 ├── db.py              SQLite connection, schema, upgrades, shared state (scope())
 ├── common.py          helpers shared by features (Reply, send_reply/respond, NO_PINGS, get_member, common.bot)
+├── oldbooks.py        what the 📜 Old books dictionaries (/vulgartongue, /deadword, /devilsdictionary, /dream) share:
+│                      Dictionary (look_up, named_in, uses, same_name, autocomplete), uses_embed, fit, clip. A new
+│                      dictionary command should be a Dictionary plus how its entries look, nothing more
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
 │   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
@@ -60,6 +63,8 @@ ktdi/
 │   │                  its Latin one); lookups in lib/cure.py, data in lib/cures.json
 │   ├── slang.py       /vulgartongue lookup (1811 slang, or the slang for a plain word) and insult @someone
 │   ├── deadword.py    /deadword: words English stopped using (Mackay, 1874), looked up or at random
+│   ├── devils.py      /devilsdictionary: Bierce's cynical definitions (1911), looked up or at random
+│   ├── dream.py       /dream: what a dream foretells (Miller, 1901), by thing or whole dream, or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
@@ -80,7 +85,8 @@ ktdi/
     ├── ailments.py    /cure's dictionary: ~90 ailments, each with the names people use and Culpeper's 1653 terms
     ├── fuzzy.py       loose matching, no AI: any word order, small typos, filler ignored (best_match), autocomplete
     │                  (starting_first) and "which entries use this word" (containing). Used by /cure, /plant,
-    │                  /vulgartongue, /deadword and /etiquette: use it for any new lookup rather than writing another
+    │                  /vulgartongue, /deadword, /devilsdictionary and /etiquette: use it for any new lookup rather
+    │                  than writing another (look_up does a whole dictionary lookup: headword, then uses, then close)
     ├── cure.py        /cure's and /plant's lookups: ailments and herbs, matched with fuzzy.py
     ├── links.py       links into old books at the exact spot: Gutenberg text fragments (#:~:text=, scrolls to and
     │                  highlights the passage) and archive.org pages (with the word highlighted)
@@ -88,7 +94,8 @@ ktdi/
     │                  Herbal (Gutenberg)
     ├── herb_latin.json  /plant's Latin names, checked by hand, keyed by the start of Culpeper's herb names
     ├── weather_lore.json  /weather's sayings: hand-picked and tidied from Inwards' Weather Lore (1893,
-    │                  archive.org scan), each tagged with its weather and any months or day
+    │                  archive.org scan), each tagged with its weather and any months or day, and its page in the
+    │                  scan with a word to highlight (tools/weather_lore_pages.py)
     ├── openmeteo.py   Open-Meteo forecast and place lookup (free, no key); None when it's down
     ├── etiquette.py   /etiquette's situations: today's words (texting, D&D) filed under the manuals' topics
     ├── etiquette.json /etiquette's rules: hand-picked, word for word, from Routledge's and Hartley's manuals
@@ -100,6 +107,11 @@ ktdi/
     │                  (slang_curation.json: entries kept, and the insults). Slurs and anything that punches down
     │                  were reviewed out once; the repo only records what was kept, never what was removed
     │                  (tests/slang_left_out.sha256.json fingerprints it so a test can check it stays out)
+    ├── devils.json    /devilsdictionary's entries (Bierce, 1911, Gutenberg), built by tools/devils_build.py from an
+    │                  allowlist (devils_curation.json), the same way as slang.json (tests/devils_left_out.sha256.json)
+    ├── dream.json     /dream's entries (Miller, 1901, Gutenberg), built by tools/dream_build.py the same way
+    │                  (dream_curation.json, tests/dream_left_out.sha256.json). All three allowlist builds share
+    │                  tools/gutenberg.py: downloading (falling back to Gutenberg's mirror) and the build run itself
     ├── insurance.py   /insurance's two clocks (microwave: real cover; car: the countdown shown), from ID + minute
     ├── herbal.json    /herbal's data: built by tools/herbal_build.py (archive.org OCR -> Google Sheets' GOOGLETRANSLATE)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths

@@ -74,3 +74,15 @@ def test_add_pages_checks_the_text():
     assert pages.add_pages(words, posts, texts) == 4
     assert [w["page"] for w in words] == [1, 1, 2, 3]
     assert pages.add_pages([{"word": "Zebra"}], posts, texts) == 0  # Never in the text: placed, but not sure of
+
+
+# --- Finding a weather saying's page ---
+def test_weather_sayings_are_found_by_their_word_pairs():
+    from ktdi.tools import weather_lore_pages as lore
+    book = djvu(["Contents and so on"], ["A winter fog / Will freeze a dog.", "Rain before seven, fine by eleven."],
+                ["A second fog page with a dog", "Red sky at night, shepherd's delight."])
+    pages_text = lore.page_words(book)
+    sayings = [{"text": "A winter fog / Will freeze a dog."}, {"text": "Red sky at night, / Shepherd's delight."}]
+    assert lore.add_pages(sayings, pages_text) == 2
+    assert [s["page"] for s in sayings] == [1, 2]
+    assert sayings[0]["highlight"] == "winter"  # Its rarest plain word (ties: the longest)

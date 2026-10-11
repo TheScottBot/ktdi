@@ -1,5 +1,5 @@
 """Finding what someone means, however they type it: the loose matching behind /cure, /plant, /vulgartongue,
-/deadword and /etiquette. No AI.
+/deadword, /devilsdictionary, /dream and /etiquette. No AI.
 
 A name matches what was typed word by word, in any order, with small typos allowed ("my throat is tickly" finds
 "tickly throat", "diarhea" finds "diarrhoea"), or failing that as a whole phrase spelt nearly the same. Filler words
@@ -97,6 +97,28 @@ def starting_first(typed: str, items: list[T], limit: int = 25, key: Callable[[T
     starts = [item for item in items if key(item).casefold().startswith(typed)]
     contains = [item for item in items if typed in key(item).casefold() and not key(item).casefold().startswith(typed)]
     return (starts + contains)[:limit]
+
+
+@dataclass
+class LookUp(Generic[T]):
+    """What look_up found: the entry for the word ("exact"), the entries that use it ("uses"), or an entry spelt
+    like it ("close")."""
+    kind: str
+    entries: list[T]
+
+
+def look_up(query: str, entries: Index, items: list[T], text: Callable[[T], str], meaning_first: bool = True,
+            spelling: float = STRICT_SPELLING) -> LookUp | None:
+    """A dictionary lookup, as /vulgartongue, /deadword and /devilsdictionary do it: the word's own entry if it's a
+    headword; otherwise the entries whose text uses it ("drunk" finds every word for drunk); otherwise an entry spelt
+    like it; otherwise None."""
+    match = best_match(query, entries, spelling=spelling)
+    if match and match.exact:
+        return LookUp("exact", [match.thing])
+    found = containing(query, items, text, meaning_first)
+    if found:
+        return LookUp("uses", found)
+    return LookUp("close", [match.thing]) if match else None
 
 
 def containing(query: str, items: list[T], text: Callable[[T], str], meaning_first: bool = True) -> list[T]:

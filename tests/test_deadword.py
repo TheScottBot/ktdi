@@ -5,8 +5,8 @@ import types
 
 import pytest
 
+from ktdi import oldbooks
 from ktdi.features import deadword
-from ktdi.lib import fuzzy
 from tests.fakes import Ctx, User, run
 
 SCOTT = User(1, "scott")
@@ -20,10 +20,8 @@ BELL_PENNY = {"word": "Bell-penny", "meaning": "money laid up by any one to pay 
 
 @pytest.fixture(autouse=True)
 def words(monkeypatch):
-    test_words = [BEVER, BICKER, BELL_PENNY]
-    monkeypatch.setattr(deadword, "WORDS", test_words)
-    monkeypatch.setattr(deadword, "INDEX", fuzzy.index((e, e["word"]) for e in test_words))
-    monkeypatch.setattr(deadword, "ALL_WORDS", ["Bell-penny", "Bever", "Bicker"])
+    monkeypatch.setattr(deadword, "DICTIONARY", oldbooks.Dictionary(
+        [BEVER, BICKER, BELL_PENNY], names=lambda e: [e["word"]], text=lambda e: e["meaning"], meaning_first=False))
     monkeypatch.setattr(deadword.random, "choice", lambda options: options[0])
 
 

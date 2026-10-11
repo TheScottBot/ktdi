@@ -10,18 +10,13 @@ downloaded each time (about 500 KB).
 To add an entry, read it in the book first, then add its headword to "keep" (and "insults", if it is one).
 """
 
-import json
 import re
-import sys
-import urllib.request
-from pathlib import Path
 
-SOURCE_URL = "https://www.gutenberg.org/cache/epub/5402/pg5402.txt"
-LIB = Path(__file__).resolve().parent.parent / "lib"
-OUTPUT = LIB / "slang.json"
-CURATION = LIB / "slang_curation.json"
+from ktdi.tools import gutenberg
+
+BOOK = 5402
+CURATION = gutenberg.curation_file("slang")
 START = "DICTIONARY OF THE VULGAR TONGUE.\n\n\n"  # The dictionary proper, after the prefaces.
-END = "*** END OF THE PROJECT GUTENBERG"
 WORD = r"[A-Z][A-Z0-9'’\-&]*(?: [A-Z0-9'’\-&()]+)*"
 HEAD_RE = re.compile(rf"^((?:To |TO |A |AN )?{WORD}(?:,? (?:or|OR) (?:TO |To )?{WORD})*)\s*[.,;:]\s+(.+)$", re.S)
 
@@ -30,7 +25,7 @@ def entries(book: str) -> list[dict]:
     """Every entry: {"word": "ADDLE PATE", "text": "An inconsiderate foolish fellow."}. Lines that don't start an
     entry (verses, lists) belong to the one before."""
     book = book.replace("\r\n", "\n")
-    body = book[book.index(START):book.index(END)].split("\n", 1)[1]
+    body = book[book.index(START):book.index(gutenberg.END)].split("\n", 1)[1]
     found = []
     for paragraph in re.split(r"\n\s*\n", body):
         paragraph = " ".join(paragraph.split())
@@ -59,19 +54,8 @@ def build(book: str, curation: dict) -> dict:
 
 
 def main() -> None:
-    print(f"Downloading {SOURCE_URL} ...")
-    with urllib.request.urlopen(SOURCE_URL, timeout=60) as response:
-        book = response.read().decode("utf-8")
-    curation = json.loads(CURATION.read_text(encoding="utf-8"))
-    data = build(book, curation)
-    OUTPUT.write_text(json.dumps(data, ensure_ascii=False, indent=0), encoding="utf-8")
-    kept = data["entries"]
-    print(f"{len(kept)} entries kept of {len(entries(book))}, {sum(e['insult'] for e in kept)} of them insults.")
-    found = {e["word"] for e in kept}
-    missing = [key for key in curation["keep"] if key.split(" :: ")[0] not in found]
-    if missing:  # The book's been re-transcribed and a headword's changed.
-        print("In the curation but not found in the book:", ", ".join(missing))
-        sys.exit(1)
+    gutenberg.build_from_allowlist(BOOK, "slang", entries, build=build, headword=lambda key: key.split(" :: ")[0],
+                                   report=lambda data: f" {sum(e['insult'] for e in data['entries'])} are insults.")
 
 
 if __name__ == "__main__":
