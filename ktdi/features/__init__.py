@@ -18,6 +18,7 @@ FEATURES = [
     "ktdi.features.malleus",
     "ktdi.features.cure",
     "ktdi.features.slang",
+    "ktdi.features.etiquette",
     "ktdi.features.movie",
     "ktdi.features.units",
     "ktdi.features.timezones",

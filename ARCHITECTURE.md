@@ -59,6 +59,7 @@ ktdi/
 │   ├── cure.py        /cure (Culpeper's 1653 remedy for an ailment) and /plant (what a herb treats, by any name or
 │   │                  its Latin one); lookups in lib/cure.py, data in lib/cures.json
 │   ├── slang.py       /vulgartongue lookup (1811 slang, or the slang for a plain word) and insult @someone
+│   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
 │   ├── units.py       /abm, /imperial
@@ -83,6 +84,9 @@ ktdi/
     ├── weather_lore.json  /weather's sayings: hand-picked and tidied from Inwards' Weather Lore (1893,
     │                  archive.org scan), each tagged with its weather and any months or day
     ├── openmeteo.py   Open-Meteo forecast and place lookup (free, no key); None when it's down
+    ├── etiquette.py   /etiquette's situations: today's words (texting, D&D) filed under the manuals' topics
+    ├── etiquette.json /etiquette's rules: hand-picked, word for word, from Routledge's and Hartley's manuals
+    │                  (1860s, Gutenberg), each tagged with its topics
     ├── slang.json     /vulgartongue's dictionary (Grose, 1811), built by tools/slang_build.py from an allowlist
     │                  (slang_curation.json: entries kept, and the insults). Slurs and anything that punches down
     │                  were reviewed out once; the repo only records what was kept, never what was removed
