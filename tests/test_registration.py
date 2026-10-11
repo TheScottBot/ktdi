@@ -17,7 +17,7 @@ SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton",
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
 HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
-    "beeton": ["advice", "recipe"],
+    "beeton": ["advice", "menu", "recipe"],
     "committee": ["funds", "ledger", "propose", "spend"],
     "etiquette": ["gentleman", "gentlethem", "gentlewoman", "remind"],
     "vulgartongue": ["insult", "lookup", "random"],
@@ -194,7 +194,7 @@ def test_every_help_page_fits_discord_even_with_everything(loaded_bot, monkeypat
 def test_a_group_lists_its_own_slash_subcommand(loaded_bot):
     beeton = help_feature.command_help_embed(loaded_bot.get_command("beeton"))
     assert [f.name for f in beeton.fields if f.name.startswith("/")] == [
-        "/beeton advice [topic]", "/beeton recipe [dish]"]  # "recipe" is /beeton itself, typed or not
+        "/beeton advice [topic]", "/beeton menu [day]", "/beeton recipe [dish]"]  # "recipe" is /beeton itself
 
 
 def test_help_unknown_command(loaded_bot):

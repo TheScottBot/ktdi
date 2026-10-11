@@ -1,6 +1,7 @@
 """/beeton: Mrs Beeton's recipes and household advice (ktdi.features.beeton, ktdi.tools.beeton_build)."""
 
 import json
+from datetime import date
 import types
 
 import pytest
@@ -92,6 +93,26 @@ _Mode_.--Put the flour into a basin with the salt, and stir gradually to this en
 _Time_.--1-1/2 hour. _Average cost_, 7d.
 
 
+CHAPTER XL.
+
+DINNERS AND DINING.
+
+1879. Man, it has been said, is a dining animal, and dinner the great event of the day.
+
+DESSERT.
+
+PLAIN FAMILY DINNERS FOR OCTOBER.
+
+2081. _Sunday_.--1. Roast sucking-pig, tomata sauce and brain sauce;
+small boiled leg of mutton, caper sauce. 2. Damson tart, boiled batter pudding.
+
+2088. _Sunday_.--1. Crimped cod and oyster sauce. 2. Roast haunch of
+mutton. 3. Bullace pudding, baked custards in cups.
+
+2089. _Monday_.--1. The remains of codfish, flaked. 2. Cold mutton and salad. 3. Arrowroot blancmange and stewed
+damsons. 2090. _Tuesday_.--1. Roast hare, gravy, and red-currant jelly. 2. Currant dumplings.
+
+
 CHAPTER XLIII.
 
 THE DOCTOR.
@@ -107,6 +128,8 @@ def entries(monkeypatch):
     found = build.entries(BOOK)
     monkeypatch.setattr(beeton, "RECIPES", beeton.recipes(found))
     monkeypatch.setattr(beeton, "ADVICE", beeton.advice(found))
+    monkeypatch.setattr(beeton, "MENUS", [e for e in found if e["kind"] == "menu"])
+    monkeypatch.setattr(beeton, "today", lambda: date(2026, 10, 11))  # A Sunday in October
     monkeypatch.setattr(beeton.random, "choice", lambda options: options[0])
     monkeypatch.setattr(beeton.random, "sample", lambda options, n: list(options)[:n])
 
@@ -124,7 +147,7 @@ def test_numbered_sections_take_their_headings_from_the_lines_above():
 def test_recipes_and_advice_are_read_from_the_book():
     found = {e["number"]: e for e in build.entries(BOOK)}
     # Advice from the house chapters only (not the doctor's), and nothing too short to be worth reading.
-    assert sorted(found) == [1, 3, 110, 133, 134, 135, 1384]
+    assert sorted(found) == [1, 3, 110, 133, 134, 135, 1384, 1879, 2081, 2088, 2089, 2090]
     soup = found[110]
     assert soup["name"] == "Almond Soup" and soup["subtitle"] is None
     assert soup["ingredients"] == ("4 lbs. of lean beef or veal, 1/2 lb. of sweet almonds, the yolks of 6 eggs, rather "
@@ -153,8 +176,13 @@ def test_the_real_data_is_exactly_whats_on_the_allowlist():
     assert set(curation) == {"_about", "keep", "no_aside"}  # Numbers only: nothing records what was said
     real = json.loads(beeton.DATA.read_text(encoding="utf-8"))["entries"]
     assert [e["number"] for e in real] == curation["keep"]
-    assert sum(e["kind"] == "recipe" for e in real) >= 1000 and sum(e["kind"] == "advice" for e in real) >= 400
+    assert sum(e["kind"] == "recipe" for e in real) >= 1000 and sum(e["kind"] == "advice" for e in real) >= 300
+    dinners = [(e["month"], e["day"]) for e in real if e["kind"] == "menu"]
+    assert len(dinners) == 168 and all(dinners.count(d) == 2 for d in dinners)  # A fortnight a month: two per weekday
     for entry in real:
+        if entry["kind"] == "menu":
+            assert 1 <= len(entry["courses"]) <= 4 and all(c.strip() for c in entry["courses"]), entry["number"]
+            continue
         assert entry["name"].strip(), entry["number"]
         if entry["number"] in curation["no_aside"]:
             assert entry["aside"] is None, entry["number"]
@@ -207,3 +235,45 @@ def test_commands():
     assert ctx.last.embed.title.startswith("🏠 Early rising")
     choices = run(beeton.dish_autocomplete(types.SimpleNamespace(), "leek"))
     assert [c.value for c in choices] == ["Leek Soup I", "Cock-a-Leekie II"]
+
+
+# --- Menus ---
+def test_family_dinners_are_read_from_the_book():
+    found = {e["number"]: e for e in build.entries(BOOK)}
+    sunday = found[2081]
+    assert (sunday["kind"], sunday["month"], sunday["day"]) == ("menu", 10, "Sunday")
+    assert sunday["courses"] == ["Roast sucking-pig, tomata sauce and brain sauce; small boiled leg of mutton, caper "
+                                 "sauce.", "Damson tart, boiled batter pudding."]
+    # Tuesday runs on in Monday's paragraph in the book; it's split off with its own number.
+    assert found[2089]["courses"][-1] == "Arrowroot blancmange and stewed damsons."
+    assert (found[2090]["day"], found[2090]["courses"]) == (
+        "Tuesday", ["Roast hare, gravy, and red-currant jelly.", "Currant dumplings."])
+    assert found[1879]["kind"] == "advice"  # The chapter's other paragraphs are still advice
+
+
+def test_which_day_to_dine_on():
+    sunday = date(2026, 10, 11)
+    assert beeton.menu_day(None, sunday) == (10, 6)  # Today: October, a Sunday
+    assert beeton.menu_day("friday", sunday) == (10, 4)  # That weekday, this month
+    assert beeton.menu_day("Tues", sunday) == (10, 1) and beeton.menu_day("mondays", sunday) == (10, 0)
+    assert beeton.menu_day("25/12", sunday) == (12, 4)  # Christmas 2026 is a Friday
+    assert beeton.menu_day("tomorrow", sunday) == (10, 0)
+
+
+def test_the_menu():
+    embed = beeton.menu(None)
+    assert embed.title == "🍽️ Dinner for a Sunday in October"
+    assert embed.description == ("**1.** Roast sucking-pig, tomata sauce and brain sauce; small boiled leg of "
+                                 "mutton, caper sauce.\n**2.** Damson tart, boiled batter pudding.")
+    assert embed.footer.text == f"Plain family dinners, {beeton.SOURCE}. Ask again for her other one."
+    assert beeton.menu("tuesday").title == "🍽️ Dinner for a Tuesday in October"
+    assert beeton.menu("tuesday").footer.text == f"Plain family dinners, {beeton.SOURCE}."  # Only the one here
+    assert "needs a weekday (friday) or a date" in beeton.menu("blah").description
+    assert "no 29 February this year" in beeton.menu("29 feb").description
+
+
+def test_menu_command():
+    ctx = Ctx(SCOTT)
+    run(beeton.beeton_menu.callback(ctx, day="monday"))
+    assert ctx.last.embed.title == "🍽️ Dinner for a Monday in October"
+    assert beeton.beeton_menu.aliases == ["dinner"]

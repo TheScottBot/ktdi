@@ -67,7 +67,8 @@ ktdi/
 │   ├── devils.py      /devils: Bierce's cynical definitions (1911), looked up or at random
 │   ├── dream.py       /dream: what a dream foretells (Miller, 1901), by thing or whole dream, or at random
 │   ├── phrase.py      /phrase: where an idiom comes from (Brewer, 1898), the nearest idiom however it's worded
-│   ├── beeton.py      /beeton recipe and advice: Mrs Beeton (1861), recipes by dish or ingredient, household advice
+│   ├── beeton.py      /beeton recipe, menu and advice: Mrs Beeton (1861), recipes by dish or ingredient, the
+│   │                  day's family dinner, household advice
 │   ├── enquire.py     /enquire: a hint on anything from Enquire Within Upon Everything (1856)
 │   ├── almanac.py     /almanac: a day from Hone's Every-Day Book (1826-27): saints, folklore, flower, temperature.
 │   │                  Dates are read by lib/reminders.py's parse_day (shared with campaign reminders)
@@ -119,7 +120,7 @@ ktdi/
     ├── dream.json     /dream's entries (Miller, 1901, Gutenberg), built by tools/dream_build.py the same way
     │                  (dream_curation.json, tests/dream_left_out.sha256.json). All three allowlist builds share
     │                  tools/gutenberg.py: downloading (falling back to Gutenberg's mirror) and the build run itself
-    ├── beeton.json    /beeton's recipes and advice (Gutenberg), built by tools/beeton_build.py from an allowlist of
+    ├── beeton.json    /beeton's recipes, advice and family dinners (Gutenberg), built by tools/beeton_build.py from an allowlist of
     │                  paragraph numbers (beeton_curation.json, with "no_aside" for recipes whose aside is hidden).
     │                  Numbered-paragraph books split with gutenberg.numbered_sections, shared with Enquire Within
     ├── almanac.json   /almanac's days (both volumes of Hone, Gutenberg), built by tools/almanac_build.py: every

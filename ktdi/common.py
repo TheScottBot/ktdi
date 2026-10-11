@@ -2,10 +2,13 @@
 
 import logging
 from dataclasses import dataclass
+from datetime import date, datetime
 
 import discord
 from discord import app_commands
 from discord.ext import commands
+
+from ktdi import config
 
 log = logging.getLogger("ktdi")
 
@@ -34,6 +37,11 @@ async def respond(interaction: discord.Interaction, reply: Reply) -> None:
 def choices(names: list[str]) -> list[app_commands.Choice[str]]:
     """Autocomplete options for these names, within Discord's limits (25 of them, 100 characters each)."""
     return [app_commands.Choice(name=name[:100], value=name[:100]) for name in names[:25]]
+
+
+def today() -> date:
+    """Today's date where the bot is (BOT_TIMEZONE)."""
+    return datetime.now(config.BOT_TIMEZONE).date()
 
 
 def plural(count: int, word: str) -> str:

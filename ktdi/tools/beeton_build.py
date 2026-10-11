@@ -5,7 +5,8 @@ Every paragraph in the book is numbered. A recipe is one that starts "INGREDIENT
 with its _Mode_, _Time_, _Average cost_, _Seasonable_ and _Sufficient_ (and often an aside on where the food comes
 from, set in smaller type). Advice is the numbered paragraphs of the chapters on running a house: the mistress, the
 housekeeper, the kitchen, dinners and dining, servants, and legal memoranda (not the nursery or the doctor: /cure
-has that). Only the paragraphs in ktdi/lib/beeton_curation.json are kept (their numbers): the book was read once,
+has that). In the dinners chapter, her plain family dinners ("PLAIN FAMILY DINNERS FOR OCTOBER.", then a
+fortnight of days: "_Sunday_.--1. Roast sucking-pig... 2. Damson tart...") are menus, in courses. Only the paragraphs in ktdi/lib/beeton_curation.json are kept (their numbers): the book was read once,
 and anything racist or cruel left out, so it's never in the repo. Writes ktdi/lib/beeton.json. The book is public
 domain; it's downloaded each time (about 3 MB).
 
@@ -15,6 +16,7 @@ shouldn't be shown has its number in "no_aside" too.
 
 import re
 
+from ktdi.lib.reminders import DAY_NAMES
 from ktdi.tools import gutenberg
 
 BOOK = 10136
@@ -104,15 +106,44 @@ def advice(section: dict) -> dict | None:
     return {"kind": "advice", "number": section["number"], "name": topic, "text": text}
 
 
+MONTHS = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER",
+          "NOVEMBER", "DECEMBER"]
+FAMILY_DINNERS = re.compile(r"^PLAIN FAMILY DINNERS FOR (\w+)\.$")
+WEEKDAYS = DAY_NAMES
+DINNER = re.compile(rf"^_({'|'.join(WEEKDAYS)})\.?_\.?\s*--\s*(.+)$", re.S)  # "_Sunday._--1. Boiled turbot..."
+
+
+def dinners(section: dict, month: int) -> list[dict]:
+    """Her plain family dinners in a section: "_Sunday._--1, Boiled turbot and oyster sauce, potatoes. 2. Roast leg
+    or griskin of pork..." is a Sunday's, in courses. Usually one, but once the next day runs on in the same paragraph
+    ("...stewed damsons. 2090. _Tuesday_.--1. Roast hare..."), so that's split off with its own number."""
+    days = re.split(rf"\s(\d+)\.\s+(?=_(?:{'|'.join(WEEKDAYS)}))", section["text"])
+    found = []
+    for number, text in zip([section["number"], *map(int, days[1::2])], days[0::2]):
+        match = DINNER.match(text)
+        if match:
+            courses = [tidy(course).rstrip(" .") + "." for course in re.split(r"(?:^|\s)\d[.,]\s+", match.group(2))
+                       if course.strip()]
+            found.append({"kind": "menu", "number": number, "month": month, "day": match.group(1), "courses": courses})
+    return found
+
+
 def entries(book: str) -> list[dict]:
     """Every recipe ({"kind": "recipe", "number", "name", "ingredients", "method", "time", "cost", "seasonable",
-    "serves", "aside"}) and paragraph of household advice ({"kind": "advice", "number", "name", "text"})."""
+    "serves", "aside"}), paragraph of household advice ({"kind": "advice", "number", "name", "text"}), and plain
+    family dinner ({"kind": "menu", "number", "month": 1-12, "day": "Sunday", "courses": [...]})."""
     book = book.replace("\r\n", "\n")
     body = book[book.index("\nCHAPTER I.\n"):book.index(gutenberg.END)]
     parts = CHAPTER.split(body)
-    found, previous = [], None
+    found, previous, month = [], None, None
     for chapter, text in zip(parts[1::2], parts[2::2]):
         for section in gutenberg.numbered_sections(text):
+            for heading in section["headings"]:  # "PLAIN FAMILY DINNERS FOR OCTOBER." starts a month's dinners
+                if (match := FAMILY_DINNERS.match(heading)) and match.group(1) in MONTHS:
+                    month = MONTHS.index(match.group(1)) + 1
+            if month and (menus := dinners(section, month)):
+                found += menus
+                continue
             if section["text"].startswith("INGREDIENTS"):
                 entry = recipe(section, previous)
                 previous = entry["name"] if entry else previous

@@ -8,14 +8,15 @@ The data is ktdi/lib/almanac.json, built by ktdi/tools/almanac_build.py from pas
 
 import json
 import random
-from datetime import date, datetime
+from datetime import date
 from pathlib import Path
 
 import discord
 from discord import app_commands
 from discord.ext import commands
 
-from ktdi import config, oldbooks
+from ktdi import oldbooks
+from ktdi.common import today
 from ktdi.lib import links
 from ktdi.lib.reminders import ScheduleError, parse_day
 from ktdi.tools.almanac_build import VOLUMES
@@ -28,10 +29,6 @@ MONTHS = ["January", "February", "March", "April", "May", "June", "July", "Augus
           "November", "December"]
 
 DAYS: dict[str, dict] = json.loads(DATA.read_text(encoding="utf-8"))["days"]
-
-
-def today() -> date:
-    return datetime.now(config.BOT_TIMEZONE).date()
 
 
 def heading(month: int, day: int) -> str:

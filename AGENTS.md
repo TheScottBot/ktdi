@@ -5,8 +5,19 @@ conventions; this file is only the working rules. (CLAUDE.md imports this file, 
 
 - **Never commit or push.** Make and verify changes; the maintainer commits.
 - **Run the tests** (`python -m pytest`, ~3 s) before and after changes, and add tests for new behaviour.
-- **Keep /help and the README accurate** after every change. Help pages must fit Discord's limits (field ≤ 1024,
-  embed ≤ 6000); `tests/test_registration.py` checks this.
+- **Keep /help and the README accurate** after every change. `/help` is a short front page, then sections, then one
+  page per command (ARCHITECTURE.md §6), and people rely on the command pages for the detail, so every new or changed
+  command needs all of:
+  - a one-line `description=` (≤ 100 characters: Discord's slash limit), shown in its section's list;
+  - its feature's `HELP_CATEGORY` (one of `help.CATEGORIES`), or `extras={"category": ...}` for one command;
+  - a **docstring** on the command's function, written for the people using it: what it does beyond the one-liner,
+    how to word things, examples, who gets pinged. It's the `/help <command>` page (aliases are added by themselves).
+    A group's docstring covers its subcommands; each subcommand keeps its own `description=`;
+  - `@app_commands.describe(...)` for each slash option;
+  - a row in the README's table for its section (and in ARCHITECTURE.md's layout, for a new file).
+  Help pages must fit Discord's limits (field ≤ 1024, embed ≤ 6000). `tests/test_registration.py` checks the limits,
+  that every command has a section, and that no command's page only repeats its one-liner; add the command to its
+  `SLASH_COMMANDS` / `SUBCOMMANDS` lists.
 - **Privacy:** never log who used `/books` or `/rpg` or what they searched for or downloaded.
 - **Tone:** never mock America, imperial units or Fahrenheit.
 - **Don't run the bot with the live token** from `.env`; the homelab is running it. Use `.env.dev` (a separate dev
