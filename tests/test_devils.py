@@ -1,4 +1,4 @@
-"""/devilsdictionary: Ambrose Bierce's The Devil's Dictionary (ktdi.features.devils, ktdi.tools.devils_build)."""
+"""/devils: Ambrose Bierce's The Devil's Dictionary (ktdi.features.devils, ktdi.tools.devils_build)."""
 
 import hashlib
 import json
@@ -173,10 +173,10 @@ def test_random():
 
 def test_command_and_autocomplete():
     ctx = Ctx(SCOTT)
-    run(devils.devilsdictionary.callback(ctx))
+    run(devils.devils.callback(ctx))
     assert ctx.last.embed.title == "😈 ABRACADABRA"
-    run(devils.devilsdictionary.callback(ctx, word="bore"))
+    run(devils.devils.callback(ctx, word="bore"))
     assert ctx.last.embed.title == "😈 BORE"
     choices = run(devils.word_autocomplete(types.SimpleNamespace(), "re"))
     assert [c.value for c in choices] == ["REASON", "BORE"]  # Starting with it first, then containing it
-    assert devils.devilsdictionary.aliases == ["devil", "devils"]
+    assert devils.devils.aliases == ["devil", "devilsdictionary"]

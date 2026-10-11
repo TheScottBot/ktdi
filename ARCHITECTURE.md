@@ -46,7 +46,7 @@ ktdi/
 ├── config.py          every setting from .env, in one place
 ├── db.py              SQLite connection, schema, upgrades, shared state (scope())
 ├── common.py          helpers shared by features (Reply, send_reply/respond, NO_PINGS, get_member, common.bot)
-├── oldbooks.py        what the 📜 Old books lookups (/vulgartongue, /deadword, /devilsdictionary, /dream, /phrase,
+├── oldbooks.py        what the 📜 Old books lookups (/vulgartongue, /deadword, /devils, /dream, /phrase,
 │                      /beeton, /enquire) share: Dictionary (look_up, named_in, uses, one_of, same_name,
 │                      autocomplete), uses_embed, fit, clip, escape. A new old-book command should be a Dictionary
 │                      plus how its entries look, nothing more
@@ -64,7 +64,7 @@ ktdi/
 │   │                  its Latin one); lookups in lib/cure.py, data in lib/cures.json
 │   ├── slang.py       /vulgartongue lookup (1811 slang, or the slang for a plain word) and insult @someone
 │   ├── deadword.py    /deadword: words English stopped using (Mackay, 1874), looked up or at random
-│   ├── devils.py      /devilsdictionary: Bierce's cynical definitions (1911), looked up or at random
+│   ├── devils.py      /devils: Bierce's cynical definitions (1911), looked up or at random
 │   ├── dream.py       /dream: what a dream foretells (Miller, 1901), by thing or whole dream, or at random
 │   ├── phrase.py      /phrase: where an idiom comes from (Brewer, 1898), the nearest idiom however it's worded
 │   ├── beeton.py      /beeton recipe and advice: Mrs Beeton (1861), recipes by dish or ingredient, household advice
@@ -89,7 +89,7 @@ ktdi/
     ├── ailments.py    /cure's dictionary: ~90 ailments, each with the names people use and Culpeper's 1653 terms
     ├── fuzzy.py       loose matching, no AI: any word order, small typos, filler ignored (best_match), autocomplete
     │                  (starting_first) and "which entries use this word" (containing). Used by /cure, /plant,
-    │                  /vulgartongue, /deadword, /devilsdictionary and /etiquette: use it for any new lookup rather
+    │                  /vulgartongue, /deadword, /devils and /etiquette: use it for any new lookup rather
     │                  than writing another (look_up does a whole dictionary lookup: headword, then uses, then close)
     ├── cure.py        /cure's and /plant's lookups: ailments and herbs, matched with fuzzy.py
     ├── links.py       links into old books at the exact spot: Gutenberg text fragments (#:~:text=, scrolls to and
@@ -111,7 +111,7 @@ ktdi/
     │                  (slang_curation.json: entries kept, and the insults). Slurs and anything that punches down
     │                  were reviewed out once; the repo only records what was kept, never what was removed
     │                  (tests/slang_left_out.sha256.json fingerprints it so a test can check it stays out)
-    ├── devils.json    /devilsdictionary's entries (Bierce, 1911, Gutenberg), built by tools/devils_build.py from an
+    ├── devils.json    /devils's entries (Bierce, 1911, Gutenberg), built by tools/devils_build.py from an
     │                  allowlist (devils_curation.json), the same way as slang.json (tests/devils_left_out.sha256.json)
     ├── dream.json     /dream's entries (Miller, 1901, Gutenberg), built by tools/dream_build.py the same way
     │                  (dream_curation.json, tests/dream_left_out.sha256.json). All three allowlist builds share

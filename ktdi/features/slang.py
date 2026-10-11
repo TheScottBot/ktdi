@@ -71,7 +71,7 @@ def slang_embed(query: str | None) -> discord.Embed:
     if found and found.kind == "uses":
         return oldbooks.uses_embed(
             found.entries, title=f"📖 “{oldbooks.shown_typed(query)}”, in 1811", name=lambda e: display_word(e["word"]),
-            summary=lambda e: discord.utils.escape_markdown(e["text"]), link=url, source=SOURCE, colour=COLOUR)
+            query=query, text=lambda e: e["text"], link=url, source=SOURCE, colour=COLOUR)
     if found:  # Nothing uses it, but a word in the dictionary looks like it.
         return entry_embed(found.entries[0])
     return discord.Embed(title=f"📖 {oldbooks.shown_typed(query)}", color=COLOUR,

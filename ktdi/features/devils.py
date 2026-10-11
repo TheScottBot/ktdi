@@ -1,8 +1,8 @@
-"""/devilsdictionary [word]: Ambrose Bierce's definition of it, from The Devil's Dictionary (1911, public domain).
+"""/devils [word]: Ambrose Bierce's definition of it, from The Devil's Dictionary (1911, public domain).
 
 Bierce (of Carcosa fame) defines everyday words as a cynic would: "BORE, n. A person who talks when you wish him to
 listen." The entries are in ktdi/lib/devils.json, built by ktdi/tools/devils_build.py, which keeps only the entries
-on a hand-read allowlist. /devilsdictionary on its own is a random entry; /devilsdictionary <word> looks one up (any
+on a hand-read allowlist. /devils on its own is a random entry; /devils <word> looks one up (any
 word order, small typos), or failing that finds the entries that use the word ("money" gets every definition that
 mentions it). Each links to its place in the book.
 """
@@ -93,7 +93,7 @@ def devils_embed(query: str | None) -> discord.Embed:
     found = DICTIONARY.look_up(query)
     if found and found.kind == "uses":
         return oldbooks.uses_embed(found.entries, title=f"😈 Bierce on “{oldbooks.shown_typed(query)}”",
-                                   name=lambda e: escape(e["word"]), summary=lambda e: escape(e["text"].split("\n")[0]),
+                                   name=lambda e: escape(e["word"]), query=query, text=lambda e: e["text"],
                                    link=url, source=SOURCE, colour=COLOUR)
     if found:  # The word itself (all its entries), or one spelt like it
         return entry_embed(found.entries if found.kind == "exact" else DICTIONARY.same_name(found.entries[0]))
@@ -102,17 +102,17 @@ def devils_embed(query: str | None) -> discord.Embed:
                                      "Try a plain word (money, love, lawyer) to see what he made of it.")
 
 
-@commands.hybrid_command(name="devilsdictionary", aliases=["devil", "devils"],
+@commands.hybrid_command(name="devils", aliases=["devil", "devilsdictionary"],
                          description="Ambrose Bierce's cynical definition of a word, or a random one.")
 @app_commands.describe(word="A word to look up (bore, lawyer, love...). Empty: random")
-async def devilsdictionary(ctx: commands.Context, *, word: str | None = None):
+async def devils(ctx: commands.Context, *, word: str | None = None):
     await ctx.send(embed=devils_embed(word))
 
 
-@devilsdictionary.autocomplete("word")
+@devils.autocomplete("word")
 async def word_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
     return DICTIONARY.autocomplete(current)
 
 
 async def setup(bot: commands.Bot):
-    bot.add_command(devilsdictionary)
+    bot.add_command(devils)

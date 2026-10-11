@@ -70,7 +70,7 @@ def deadword_embed(query: str | None) -> discord.Embed:
     found = DICTIONARY.look_up(query)
     if found and found.kind == "uses":  # Not one of the dead words, but some of them meant it
         return oldbooks.uses_embed(found.entries, title=f"📜 Dead words for “{oldbooks.shown_typed(query)}”",
-                                   name=lambda e: escape(e["word"]), summary=lambda e: escape(e["meaning"]),
+                                   name=lambda e: escape(e["word"]), query=query, text=lambda e: e["meaning"],
                                    link=url, source=SOURCE, colour=COLOUR)
     if found:  # One of the dead words, or (nothing meant it) one that looks like it
         return word_embed(found.entries[0])

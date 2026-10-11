@@ -1,4 +1,4 @@
-"""Build /devilsdictionary's entries from Ambrose Bierce's The Devil's Dictionary (1911), from Project Gutenberg:
+"""Build /devils's entries from Ambrose Bierce's The Devil's Dictionary (1911), from Project Gutenberg:
 python -m ktdi.tools.devils_build
 
 Parses every entry ("BORE, n. A person who talks when you wish him to listen.") with its verse and asides, and keeps

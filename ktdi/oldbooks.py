@@ -1,4 +1,4 @@
-"""Shared by the 📜 Old books commands (/vulgartongue, /deadword, /devilsdictionary, /dream, /phrase, /beeton,
+"""Shared by the 📜 Old books commands (/vulgartongue, /deadword, /devils, /dream, /phrase, /beeton,
 /enquire): a book of entries looked up by headword, and the replies they have in common.
 
 A command makes a Dictionary of its entries, then asks it to look things up (the headword's entry, else the entries
@@ -113,13 +113,29 @@ class Dictionary(Generic[T]):
         return choices(random.sample(self.names, min(25, len(self.names))))
 
 
-def uses_embed(found: list[T], *, title: str, name: Callable[[T], str], summary: Callable[[T], str],
+def mention(text: str, query: str) -> str:
+    """Where a text mentions what was typed: from the start if it does early on, otherwise from the sentence (or
+    line of verse) that does, after an ellipsis. "bright" in ABRACADABRA's long verse is "…And his eyes uncommonly
+    bright."."""
+    patterns = [re.compile(rf"\b{re.escape(word)}\w*", re.IGNORECASE) for word in fuzzy.words(query)]
+    starts = [match.start() for pattern in patterns if (match := pattern.search(text))]
+    if not starts or min(starts) < LINE_LENGTH // 2:
+        return " ".join(text.split())
+    at = min(starts)
+    sentence = max(text.rfind(end, 0, at) + len(end) for end in (". ", "! ", "? ", "; ", "\n"))
+    if at - sentence > LINE_LENGTH // 2:  # A long sentence: start a few words before the word
+        sentence = text.rfind(" ", 0, at - LINE_LENGTH // 3) + 1
+    return "…" + " ".join(text[sentence:].split())
+
+
+def uses_embed(found: list[T], *, query: str, title: str, name: Callable[[T], str], text: Callable[[T], str],
                link: Callable[[T], str], source: str, colour: discord.Color) -> discord.Embed:
-    """A few of the entries that use a word, one line each ("**Name**: summary", clipped), each name linking to its
-    own place in the book, with a footer saying if there are more. Names and summaries come escaped for Discord."""
+    """A few of the entries that use a word, one line each ("**Name**: where it's mentioned", clipped), each name
+    linking to its own place in the book, with a footer saying if there are more. Names come escaped for Discord;
+    `text` is an entry's own text, as the book has it."""
     shown = random.sample(found, min(SHOWN, len(found)))
-    lines = [f"**[{name(e)}]({link(e)})**: {clip(summary(e), max(LINE_LENGTH - len(name(e)) - 2, 20))}"
-             for e in shown]
+    lines = [f"**[{name(e)}]({link(e)})**: "
+             f"{escape(clip(mention(text(e), query), max(LINE_LENGTH - len(name(e)) - 2, 20)))}" for e in shown]
     embed = discord.Embed(title=title[:256], description="\n".join(lines)[:4096], color=colour)
     more = f". Showing {len(shown)} of {len(found)}: ask again for others." if len(found) > len(shown) else ""
     embed.set_footer(text=f"{source}{more}")

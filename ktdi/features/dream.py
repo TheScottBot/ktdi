@@ -65,10 +65,6 @@ def dream_embed(entry: dict) -> discord.Embed:
     return embed
 
 
-def first_sentence(text: str) -> str:
-    return re.split(r"(?<=[.!?])\s", text, maxsplit=1)[0]
-
-
 def interpret(query: str | None) -> discord.Embed:
     """A dream looked up: the thing (or the thing in a whole dream), the dreams that mention it, or a random one."""
     if not query or not query.strip():
@@ -81,7 +77,7 @@ def interpret(query: str | None) -> discord.Embed:
         return dream_embed(named[0])
     if found and found.kind == "uses":
         return oldbooks.uses_embed(found.entries, title=f"🔮 Dreams that mention “{oldbooks.shown_typed(query)}”",
-                                   name=lambda e: escape(e["word"]), summary=lambda e: escape(first_sentence(e["text"])),
+                                   name=lambda e: escape(e["word"]), query=query, text=lambda e: e["text"],
                                    link=url, source=SOURCE, colour=COLOUR)
     if found:  # Spelt like something Miller covered
         return dream_embed(found.entries[0])

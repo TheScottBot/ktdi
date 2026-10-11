@@ -62,7 +62,7 @@ def test_fit_keeps_whole_paragraphs():
 def test_uses_embed_links_each_entry(monkeypatch):
     monkeypatch.setattr(oldbooks.random, "sample", lambda options, n: list(options)[:n])
     found = [{"word": f"W{n}", "text": "x " * 100} for n in range(10)]
-    embed = oldbooks.uses_embed(found, title="Uses", name=lambda e: e["word"], summary=lambda e: e["text"],
+    embed = oldbooks.uses_embed(found, query="x", title="Uses", name=lambda e: e["word"], text=lambda e: e["text"],
                                 link=lambda e: f"https://book.example/{e['word']}", source="Book",
                                 colour=oldbooks.discord.Color.purple())
     lines = embed.description.split("\n")
@@ -70,9 +70,19 @@ def test_uses_embed_links_each_entry(monkeypatch):
     assert all(len(line) - len("(https://book.example/W0)") <= oldbooks.LINE_LENGTH + 6 for line in lines)
     assert embed.url is None  # The list isn't one place in the book: each entry links to its own
     assert embed.footer.text == "Book. Showing 8 of 10: ask again for others."
-    assert oldbooks.uses_embed(found[:2], title="Uses", name=lambda e: e["word"], summary=lambda e: "x",
+    assert oldbooks.uses_embed(found[:2], query="x", title="Uses", name=lambda e: e["word"], text=lambda e: "x",
                                link=lambda e: "https://book.example", source="Book",
                                colour=oldbooks.discord.Color.purple()).footer.text == "Book"
+
+
+def test_a_list_shows_where_each_entry_mentions_the_word():
+    verse = "By Abracadabra we signify\nAn infinite number of things.\n" + "A line of verse.\n" * 8 + \
+            "His beard was long and white\nAnd his eyes uncommonly bright.\nMore verse after."
+    assert oldbooks.mention(verse, "bright") == "…And his eyes uncommonly bright. More verse after."
+    assert oldbooks.mention("Bright and early. Then more.", "bright") == "Bright and early. Then more."  # Early on
+    assert oldbooks.mention("No word here at all.", "bright") == "No word here at all."
+    long = "word " * 60 + "bright end"  # No sentence break near it: a few words before
+    assert oldbooks.mention(long, "bright").startswith("…word") and oldbooks.mention(long, "bright").endswith("end")
 
 
 def test_shown_typed():

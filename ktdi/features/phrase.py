@@ -69,7 +69,7 @@ def explain(query: str | None) -> discord.Embed:
     found = DICTIONARY.look_up(query)
     if found and found.kind == "uses":
         return oldbooks.uses_embed(found.entries, title=f"🗣️ Idioms that mention “{oldbooks.shown_typed(query)}”",
-                                   name=lambda e: escape(e["phrase"]), summary=lambda e: escape(e["text"]),
+                                   name=lambda e: escape(e["phrase"]), query=query, text=lambda e: e["text"],
                                    link=url, source=SOURCE, colour=COLOUR)
     if found:
         return phrase_embed(found.entries[0])
