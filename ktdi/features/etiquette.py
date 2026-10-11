@@ -19,6 +19,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+from ktdi.common import choices
 from ktdi.lib import etiquette as situations
 
 HELP_CATEGORY = "📜 Old books"
@@ -142,7 +143,7 @@ async def etiquette_remind(ctx: commands.Context, person: discord.Member):
 
 
 async def situation_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return [app_commands.Choice(name=name[:100], value=name[:100]) for name in situations.suggestions(current)]
+    return choices(situations.suggestions(current))
 
 
 for _command in (etiquette_gentleman, etiquette_gentlewoman, etiquette_gentlethem):

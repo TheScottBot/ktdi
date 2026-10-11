@@ -8,6 +8,7 @@ import pytest
 
 from ktdi.features import cure
 from ktdi.lib import cure as lookup
+from ktdi.lib import fuzzy
 from ktdi.lib.ailments import AILMENTS
 from ktdi.tools import cure_build as build
 from tests.fakes import Ctx, User, run
@@ -44,7 +45,7 @@ def test_no_name_belongs_to_two_ailments():
     owners = {}
     for a in AILMENTS:
         for name in a.names:
-            owners.setdefault(" ".join(lookup.words(name)), set()).add(a.name)
+            owners.setdefault(" ".join(fuzzy.words(name)), set()).add(a.name)
     assert {name: found for name, found in owners.items() if len(found) > 1} == {}
 
 

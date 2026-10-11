@@ -1,9 +1,9 @@
 """The /etiquette dictionary: the situations people ask about, in today's words, filed under the 1860s manuals'
 topics, so "texting" finds the rules for letters and "D&D" finds the rules for cards. No AI: matched with the same
-loose word matching as /cure (ktdi/lib/cure.py: any word order, small typos).
+loose matching as /cure (ktdi/lib/fuzzy.py: any word order, small typos).
 """
 
-from ktdi.lib import cure as lookup
+from ktdi.lib import fuzzy
 
 # topic: what people might type. The topic names are the tags in ktdi/lib/etiquette.json.
 SITUATIONS = {
@@ -57,17 +57,16 @@ def _names(topic: str) -> list[str]:
     return [name.strip() for name in SITUATIONS[topic].split("|") if name.strip()]
 
 
-INDEX = [(topic, name, tuple(lookup.words(name))) for topic in SITUATIONS for name in _names(topic)
-         if lookup.words(name)]
+INDEX = fuzzy.index((topic, name) for topic in SITUATIONS for name in _names(topic))
 
 
 def find_topic(situation: str) -> tuple[str, bool] | None:
     """The topic a situation's filed under, and whether it was asked for by one of its exact names. None if the
     manuals have nothing that fits."""
-    found = lookup.best_match(situation, INDEX, spelling=0.85)  # Short names: "dave" isn't "dance"
-    return (found[0], found[2]) if found else None
+    found = fuzzy.best_match(situation, INDEX, spelling=fuzzy.STRICT_SPELLING)  # Short names: "dave" isn't "dance"
+    return (found.thing, found.exact) if found else None
 
 
 def suggestions(typed: str, limit: int = 25) -> list[str]:
     names = [name for _, name, _ in INDEX]
-    return lookup.starting_first(typed, names, limit) if typed.strip() else names[:limit]
+    return fuzzy.starting_first(typed, names, limit) if typed.strip() else names[:limit]

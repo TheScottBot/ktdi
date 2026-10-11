@@ -16,7 +16,9 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+from ktdi.common import choices
 from ktdi.lib import cure as lookup
+from ktdi.lib import fuzzy
 
 HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "cures.json"
@@ -55,7 +57,7 @@ def cure_embed(query: str) -> discord.Embed:
     else:
         remedy = random.choice(data["remedies"][match.ailment.name])
         embed.description = f"**{remedy['herb']}**: {remedy_text(remedy)}"
-        if lookup.words(query) != lookup.words(match.ailment.name):
+        if fuzzy.words(query) != fuzzy.words(match.ailment.name):
             embed.description += f"\n-# Filed under: {match.ailment.name}"
     embed.set_footer(text=SOURCE)
     return embed
@@ -69,7 +71,7 @@ async def cure(ctx: commands.Context, *, ailment: str):
 
 @cure.autocomplete("ailment")
 async def ailment_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return [app_commands.Choice(name=name[:100], value=name[:100]) for name in lookup.suggestions(current)]
+    return choices(lookup.suggestions(current))
 
 
 def plant_embed(query: str) -> discord.Embed:
@@ -82,8 +84,8 @@ def plant_embed(query: str) -> discord.Embed:
     lines = [f"*{herb['latin']}*"] if herb["latin"] else []
     if herb["planet"]:
         lines.append(f"{PLANETS[herb['planet']]} Governed by {herb['planet']}")
-    in_title = " ".join(lookup.words(herb["name"]))
-    others = [a for a in herb["aliases"] if " ".join(lookup.words(a)) not in in_title]
+    in_title = " ".join(fuzzy.words(herb["name"]))
+    others = [a for a in herb["aliases"] if " ".join(fuzzy.words(a)) not in in_title]
     if others:
         lines.append(f"Also called {', '.join(others)}")
     if herb["treats"]:
@@ -105,8 +107,7 @@ async def plant(ctx: commands.Context, *, name: str):
 
 @plant.autocomplete("name")
 async def plant_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    names = lookup.starting_first(current, all_herb_names) if current.strip() else herb_titles[:25]
-    return [app_commands.Choice(name=name[:100], value=name[:100]) for name in names]
+    return choices(fuzzy.starting_first(current, all_herb_names) if current.strip() else herb_titles)
 
 
 async def setup(bot: commands.Bot):

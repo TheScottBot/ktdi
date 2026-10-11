@@ -6,7 +6,7 @@ import types
 import pytest
 
 from ktdi.features import etiquette
-from ktdi.lib import cure as lookup
+from ktdi.lib import fuzzy
 from ktdi.lib import etiquette as situations
 from tests.fakes import Ctx, User, run
 
@@ -49,7 +49,7 @@ def test_nothing_fits(typed):
 def test_no_name_is_filed_twice():
     owners = {}
     for topic, name, _ in situations.INDEX:
-        owners.setdefault(" ".join(lookup.words(name)), set()).add(topic)
+        owners.setdefault(" ".join(fuzzy.words(name)), set()).add(topic)
     assert {name: found for name, found in owners.items() if len(found) > 1} == {}
 
 

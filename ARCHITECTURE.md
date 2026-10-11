@@ -78,7 +78,10 @@ ktdi/
     ├── malleus.json   /hammeredofwitches's tips: hand-picked from the 1928 translation, OCR fixed against the scans; no torture
     │                  or execution passages (tests/test_malleus.py checks)
     ├── ailments.py    /cure's dictionary: ~90 ailments, each with the names people use and Culpeper's 1653 terms
-    ├── cure.py        /cure's and /plant's no-AI lookup: synonyms, any word order, typo-tolerant matching
+    ├── fuzzy.py       loose matching, no AI: any word order, small typos, filler ignored (best_match), autocomplete
+    │                  (starting_first) and "which entries use this word" (containing). Used by /cure, /plant,
+    │                  /vulgartongue, /deadword and /etiquette: use it for any new lookup rather than writing another
+    ├── cure.py        /cure's and /plant's lookups: ailments and herbs, matched with fuzzy.py
     ├── cures.json     /cure's remedies and /plant's herbs, built by tools/cure_build.py from Culpeper's Complete
     │                  Herbal (Gutenberg)
     ├── herb_latin.json  /plant's Latin names, checked by hand, keyed by the start of Culpeper's herb names

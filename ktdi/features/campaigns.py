@@ -10,8 +10,8 @@ from discord import app_commands
 from discord.ext import commands, tasks
 
 from ktdi import common, config, db
-from ktdi.common import NO_PINGS, log
-from ktdi.lib import reminders
+from ktdi.common import NO_PINGS, choices, log
+from ktdi.lib import fuzzy, reminders
 
 HELP_CATEGORY = "🗓️ Campaigns"
 CAMPAIGN_ALIAS_MAX = 50
@@ -618,9 +618,8 @@ async def campaign_skip(ctx: commands.Context, *, alias: str):
 
 
 async def campaign_alias_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    typed = current.casefold()
-    matches = [c.alias for c in list_campaigns(interaction.guild_id) if typed in c.alias.casefold()]
-    return [app_commands.Choice(name=alias, value=alias) for alias in matches[:25]]
+    aliases = [c.alias for c in list_campaigns(interaction.guild_id)]
+    return choices(fuzzy.starting_first(current, aliases))
 
 
 for _command in (campaign_show, campaign_edit, campaign_remove, campaign_remind, campaign_unremind,

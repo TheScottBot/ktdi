@@ -9,14 +9,14 @@ small typos), or failing that finds the dead words that meant it ("drink" gets b
 
 import json
 import random
-import re
 from pathlib import Path
 
 import discord
 from discord import app_commands
 from discord.ext import commands
 
-from ktdi.lib import cure as lookup
+from ktdi.common import choices
+from ktdi.lib import fuzzy
 
 HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "deadwords.json"
@@ -26,7 +26,7 @@ SHOWN = 8  # Dead words listed when a word turns up in several meanings.
 LINE_LENGTH = 140
 
 WORDS: list[dict] = json.loads(DATA.read_text(encoding="utf-8"))
-INDEX = [(entry, entry["word"], tuple(lookup.words(entry["word"]))) for entry in WORDS if lookup.words(entry["word"])]
+INDEX = fuzzy.index((entry, entry["word"]) for entry in WORDS)
 ALL_WORDS = sorted({entry["word"] for entry in WORDS}, key=str.casefold)
 
 EPITAPHS = [
@@ -65,20 +65,16 @@ def word_embed(entry: dict) -> discord.Embed:
 
 def in_meanings(query: str) -> list[dict]:
     """Dead words whose meanings use every word typed ("drink": bever, bicker...)."""
-    typed = lookup.words(query)
-    if not typed:
-        return []
-    patterns = [re.compile(rf"\b{re.escape(word)}\w*", re.IGNORECASE) for word in typed]
-    return [entry for entry in WORDS if all(p.search(entry["meaning"]) for p in patterns)]
+    return fuzzy.containing(query, WORDS, lambda entry: entry["meaning"], meaning_first=False)
 
 
 def deadword_embed(query: str | None) -> discord.Embed:
     """A word looked up, the dead words that meant it, or (nothing typed) a random one."""
-    if not query or not lookup.words(query):
+    if not query or not fuzzy.words(query):
         return word_embed(random.choice(WORDS))
-    match = lookup.best_match(query, INDEX, spelling=0.85)
-    if match and match[2]:  # It's one of the dead words.
-        return word_embed(match[0])
+    match = fuzzy.best_match(query, INDEX, spelling=fuzzy.STRICT_SPELLING)
+    if match and match.exact:  # It's one of the dead words.
+        return word_embed(match.thing)
     found = in_meanings(query)
     if found:
         shown = random.sample(found, min(SHOWN, len(found)))
@@ -90,7 +86,7 @@ def deadword_embed(query: str | None) -> discord.Embed:
         embed.set_footer(text=f"{SOURCE}{more}")
         return embed
     if match:  # Nothing meant it, but a dead word looks like it.
-        return word_embed(match[0])
+        return word_embed(match.thing)
     typed = escape(" ".join(query.split())[:60])
     return discord.Embed(title=f"📜 {typed}", color=discord.Color.dark_grey(),
                          description="Mackay never mourned that one. It may still be alive. Try a plain word "
@@ -106,8 +102,7 @@ async def deadword(ctx: commands.Context, *, word: str | None = None):
 
 @deadword.autocomplete("word")
 async def word_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    names = lookup.starting_first(current, ALL_WORDS) if current.strip() else random.sample(ALL_WORDS, 25)
-    return [app_commands.Choice(name=name[:100], value=name[:100]) for name in names]
+    return choices(fuzzy.starting_first(current, ALL_WORDS) if current.strip() else random.sample(ALL_WORDS, 25))
 
 
 async def setup(bot: commands.Bot):

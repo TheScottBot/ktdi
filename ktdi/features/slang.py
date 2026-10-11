@@ -16,7 +16,8 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from ktdi.lib import cure as lookup
+from ktdi.common import choices
+from ktdi.lib import fuzzy
 
 HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "slang.json"
@@ -41,21 +42,14 @@ def headwords(entry: dict) -> list[str]:
     return [part.strip(" ,") for part in re.split(r",? or ", entry["word"], flags=re.IGNORECASE) if part.strip(" ,")]
 
 
-INDEX = [(entry, name, tuple(lookup.words(name))) for entry in ENTRIES for name in headwords(entry)
-         if lookup.words(name)]
+INDEX = fuzzy.index((entry, name) for entry in ENTRIES for name in headwords(entry))
 ALL_WORDS = sorted({display_word(name) for _, name, _ in INDEX})
 
 
 def in_definitions(query: str, leave_out: dict | None = None) -> list[dict]:
     """Entries whose definitions use every word typed ("drunk": BOSKY, CUT, FOXED...). Ones that mean it (it's in
     the first part of the definition) come first; ones that only mention it in passing only if nothing means it."""
-    typed = lookup.words(query)
-    if not typed:
-        return []
-    patterns = [re.compile(rf"\b{re.escape(word)}\w*", re.IGNORECASE) for word in typed]
-    found = [e for e in ENTRIES if e is not leave_out and all(p.search(e["text"]) for p in patterns)]
-    meaning = [e for e in found if all(p.search(re.split(r"[.;]", e["text"], maxsplit=1)[0]) for p in patterns)]
-    return meaning or found
+    return fuzzy.containing(query, [e for e in ENTRIES if e is not leave_out], lambda e: e["text"])
 
 
 def clip(text: str, limit: int) -> str:
@@ -77,11 +71,11 @@ def entry_embed(entry: dict, query: str | None = None) -> discord.Embed:
 
 def slang_embed(query: str | None) -> discord.Embed:
     """A word looked up, the entries that use it, or (nothing typed) a random phrase that isn't an insult."""
-    if not query or not lookup.words(query):
+    if not query or not fuzzy.words(query):
         return entry_embed(random.choice(PHRASES))
-    match = lookup.best_match(query, INDEX, spelling=0.85)
-    if match and match[2]:  # It's a word in the dictionary.
-        return entry_embed(match[0], query)
+    match = fuzzy.best_match(query, INDEX, spelling=fuzzy.STRICT_SPELLING)
+    if match and match.exact:  # It's a word in the dictionary.
+        return entry_embed(match.thing, query)
     found = in_definitions(query)
     if found:
         shown = random.sample(found, min(SHOWN, len(found)))
@@ -94,7 +88,7 @@ def slang_embed(query: str | None) -> discord.Embed:
         embed.set_footer(text=f"{SOURCE}{more}")
         return embed
     if match:  # Nothing uses it, but a word in the dictionary looks like it.
-        return entry_embed(match[0])
+        return entry_embed(match.thing)
     typed = discord.utils.escape_markdown(" ".join(query.split())[:60])
     return discord.Embed(title=f"📖 {typed}", color=discord.Color.dark_teal(),
                          description="Grose never wrote that down. Try a plainer word (drunk, fool, money, run away).")
@@ -134,8 +128,7 @@ async def slang_insult(ctx: commands.Context, person: discord.Member):
 
 @slang.autocomplete("word")
 async def word_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    names = lookup.starting_first(current, ALL_WORDS) if current.strip() else random.sample(ALL_WORDS, 25)
-    return [app_commands.Choice(name=name[:100], value=name[:100]) for name in names]
+    return choices(fuzzy.starting_first(current, ALL_WORDS) if current.strip() else random.sample(ALL_WORDS, 25))
 
 
 async def setup(bot: commands.Bot):

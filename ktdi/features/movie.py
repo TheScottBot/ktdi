@@ -23,7 +23,7 @@ from discord.ext import commands
 
 from ktdi import common, db
 from ktdi.common import NO_PINGS, log, plural
-from ktdi.lib import letterboxd
+from ktdi.lib import fuzzy, letterboxd
 
 HELP_CATEGORY = "🎬 Movie night"
 TITLE_MAX_LENGTH = 100
@@ -936,11 +936,10 @@ async def np_watchlist_import(ctx: commands.Context, url: str):
 
 def _watchlist_choices(guild_id: int, current: str, struck: bool | None = None) -> list[app_commands.Choice[str]]:
     """Watchlist films matching what's typed: all of them, or only struck-off (True) or not (False) ones."""
-    typed = current.casefold()
+    films = [m for m in watchlist(guild_id) if struck is None or bool(m.struck_at) == struck]
     return [app_commands.Choice(name=f"{m.title} ({'watched' if m.struck_at else 'watchlist'})"[:100],
                                 value=m.title[:100])
-            for m in watchlist(guild_id)
-            if typed in m.title.casefold() and (struck is None or bool(m.struck_at) == struck)][:25]
+            for m in fuzzy.starting_first(current, films, key=lambda m: m.title)]
 
 
 async def watchlist_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
@@ -1363,10 +1362,9 @@ async def np_predictions(ctx: commands.Context, *, title: str | None = None):
 
 
 async def watched_title_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    typed = current.casefold()
+    films = fuzzy.starting_first(current, watched_movies(interaction.guild_id), key=lambda m: m.title)
     return [app_commands.Choice(name=f"{m.title} (watch #{m.watch_number or 1}, {m.ended_at.strftime('%d %b %Y')})"[:100],
-                                value=f"id:{m.id}")
-            for m in watched_movies(interaction.guild_id) if typed in m.title.casefold()][:25]
+                                value=f"id:{m.id}") for m in films]
 
 
 np_predictions.autocomplete("title")(watched_title_autocomplete)
@@ -1580,10 +1578,12 @@ async def bingo_square_autocomplete(interaction: discord.Interaction, current: s
     if movie is None:
         return []
     card, marks = bingo_card(movie.id, interaction.user.id), bingo_marks(movie.id, interaction.user.id)
-    typed = current.casefold()
-    choices = [app_commands.Choice(name=f"{n}. {square}"[:100], value=n) for n, square in enumerate(card, 1)
-               if n not in marks and (typed in square.casefold() or typed == str(n))]
-    return choices[:25]
+    unmarked = [(n, square) for n, square in enumerate(card, 1) if n not in marks]
+    typed = current.strip()
+    # A number picks that square; anything else is looked for in the squares' wording.
+    found = [(n, s) for n, s in unmarked if str(n) == typed] if typed.isdigit() else \
+        fuzzy.starting_first(typed, unmarked, key=lambda pair: pair[1])
+    return [app_commands.Choice(name=f"{n}. {square}"[:100], value=n) for n, square in found]
 
 
 bingo_mark.autocomplete("square")(bingo_square_autocomplete)
