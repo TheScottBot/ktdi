@@ -1,5 +1,5 @@
 """Shared by the 📜 Old books commands (/vulgartongue, /deadword, /devils, /dream, /phrase, /beeton, /enquire,
-/almanac, /melancholy): a book of entries looked up by headword, and the replies they have in common.
+/almanac, /melancholy, /pliny): a book of entries looked up by headword, and the replies they have in common.
 
 A command makes a Dictionary of its entries, then asks it to look things up (the headword's entry, else the entries
 that use the word, else one spelt like it: fuzzy.look_up), for a random entry, or for autocomplete. How an entry looks

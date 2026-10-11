@@ -1,5 +1,5 @@
 """Finding what someone means, however they type it: the loose matching behind /cure, /plant, /vulgartongue,
-/deadword, /devils, /dream, /phrase and /etiquette. No AI.
+/deadword, /devils, /dream, /phrase, /pliny and /etiquette. No AI.
 
 A name matches what was typed word by word, in any order, with small typos allowed ("my throat is tickly" finds
 "tickly throat", "diarhea" finds "diarrhoea"), or failing that as a whole phrase spelt nearly the same. Filler words
@@ -10,6 +10,7 @@ for autocomplete, and containing() for "which entries use this word" ("drunk" fi
 """
 
 import re
+import unicodedata
 from dataclasses import dataclass
 from difflib import SequenceMatcher
 from typing import Callable, Generic, Iterable, TypeVar
@@ -41,9 +42,19 @@ class Found(Generic[T]):
 Index = list[tuple[T, str, tuple[str, ...]]]  # (thing, name, the name's words)
 
 
+LIGATURES = str.maketrans({"æ": "ae", "œ": "oe", "ß": "ss"})
+
+
+def plain(text: str) -> str:
+    """Lower case, in plain letters: old books write "Æthiopia" and "phœnix", and "Châteaux"; people type "aethiopia",
+    "phoenix" and "chateaux"."""
+    text = unicodedata.normalize("NFKD", text.casefold().translate(LIGATURES))
+    return "".join(c for c in text if not unicodedata.combining(c))
+
+
 def words(text: str) -> list[str]:
     """The words that matter: lower case, no punctuation, no filler. "I've got a TICKLY throat!" -> tickly, throat."""
-    text = text.lower().replace("’", "'").replace("'", "")
+    text = plain(text).replace("’", "'").replace("'", "")
     return [w for w in re.sub(r"[^a-z0-9]+", " ", text).split() if w not in FILLER]
 
 
@@ -106,9 +117,9 @@ def best_match(query: str, entries: Index, spelling: float = SPELLING) -> Found 
 def starting_first(typed: str, items: list[T], limit: int = 25, key: Callable[[T], str] = str) -> list[T]:
     """For autocomplete: the items whose name starts with what's typed, then the ones whose name contains it, in
     their own order within each. `key` gets an item's name (items are names already, by default)."""
-    typed = typed.strip().casefold()
-    starts = [item for item in items if key(item).casefold().startswith(typed)]
-    contains = [item for item in items if typed in key(item).casefold() and not key(item).casefold().startswith(typed)]
+    typed = plain(typed.strip())
+    starts = [item for item in items if plain(key(item)).startswith(typed)]
+    contains = [item for item in items if typed in plain(key(item)) and not plain(key(item)).startswith(typed)]
     return (starts + contains)[:limit]
 
 
@@ -145,8 +156,9 @@ def containing(query: str, items: list[T], text: Callable[[T], str], meaning_fir
     if not typed:
         return []
     patterns = [re.compile(rf"\b{re.escape(word)}\w*", re.IGNORECASE) for word in typed]
-    found = [item for item in items if all(p.search(text(item)) for p in patterns)]
+    found = [item for item in items if all(p.search(plain(text(item))) for p in patterns)]
     if not meaning_first:
         return found
-    meaning = [item for item in found if all(p.search(re.split(r"[.;]", text(item), maxsplit=1)[0]) for p in patterns)]
+    meaning = [item for item in found
+               if all(p.search(re.split(r"[.;]", plain(text(item)), maxsplit=1)[0]) for p in patterns)]
     return meaning or found

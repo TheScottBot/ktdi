@@ -73,6 +73,7 @@ ktdi/
 │   ├── almanac.py     /almanac: a day from Hone's Every-Day Book (1826-27): saints, folklore, flower, temperature.
 │   │                  Dates are read by lib/reminders.py's parse_day (shared with campaign reminders)
 │   ├── melancholy.py  /melancholy: a passage of Burton's Anatomy of Melancholy (1621) on a topic, or at random
+│   ├── pliny.py       /pliny: a chapter of Pliny's Natural History (AD 77) on a topic, or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
@@ -126,6 +127,9 @@ ktdi/
     ├── almanac.json   /almanac's days (both volumes of Hone, Gutenberg), built by tools/almanac_build.py: every
     │                  day's saints, flower and temperature, and the passages on almanac_curation.json (picked by hand,
     │                  keyed "volume:MM-DD:passage")
+    ├── pliny.json     /pliny's chapters (all six Gutenberg volumes of Bostock and Riley), built by
+    │                  tools/pliny_build.py from pliny_curation.json (keys like VIII.3); each keeps its volume and
+    │                  the words to link to it by, taken from the page's text so they never span a footnote mark
     ├── melancholy.json  /melancholy's excerpts (Burton, Gutenberg), built by tools/melancholy_build.py from
     │                  melancholy_curation.json, which lists them word for word; the build checks each is in the book
     │                  (footnote marks, escaped Greek and Unicode forms aside) and works out the words a link can find

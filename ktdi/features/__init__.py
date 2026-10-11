@@ -26,6 +26,7 @@ FEATURES = [
     "ktdi.features.enquire",
     "ktdi.features.almanac",
     "ktdi.features.melancholy",
+    "ktdi.features.pliny",
     "ktdi.features.etiquette",
     "ktdi.features.movie",
     "ktdi.features.units",

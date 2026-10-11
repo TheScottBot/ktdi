@@ -133,3 +133,13 @@ def test_a_typo_keeps_its_first_letter():
     names = fuzzy.index([("fingers", "Fingers"), ("death", "Death"), ("teeth", "Teeth")])
     assert fuzzy.best_match("ginger", names, spelling=fuzzy.STRICT_SPELLING) is None  # Not "fingers"
     assert fuzzy.best_match("teath", names, spelling=fuzzy.STRICT_SPELLING).thing == "teeth"  # Not "death"
+
+
+def test_old_spellings_match_plain_typing():
+    assert fuzzy.plain("Æthiopia, the phœnix, Châteaux en Espagne") == "aethiopia, the phoenix, chateaux en espagne"
+    names = fuzzy.index([("phoenix", "The phœnix"), ("chateaux", "Châteaux en Espagne")])
+    assert fuzzy.best_match("phoenix", names).thing == "phoenix"
+    assert fuzzy.best_match("chateaux en espagne", names).exact
+    assert fuzzy.starting_first("phoe", ["The phœnix"]) == ["The phœnix"]  # Autocomplete too
+    assert fuzzy.containing("aethiopia", [{"t": "Æthiopia produces dragons."}], lambda e: e["t"]) == [
+        {"t": "Æthiopia produces dragons."}]
