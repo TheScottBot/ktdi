@@ -1,5 +1,5 @@
 """Shared by the 📜 Old books commands (/vulgartongue, /deadword, /devils, /dream, /phrase, /beeton, /enquire,
-/almanac, /melancholy, /pliny): a book of entries looked up by headword, and the replies they have in common.
+/almanac, /melancholy, /pliny, /pseudodoxia): a book of entries looked up by headword, and the replies they have in common.
 
 A command makes a Dictionary of its entries, then asks it to look things up (the headword's entry, else the entries
 that use the word, else one spelt like it: fuzzy.look_up), for a random entry, or for autocomplete. How an entry looks
@@ -126,6 +126,32 @@ def mention(text: str, query: str) -> str:
     if at - sentence > LINE_LENGTH // 2:  # A long sentence: start a few words before the word
         sentence = text.rfind(" ", 0, at - LINE_LENGTH // 3) + 1
     return "…" + " ".join(text[sentence:].split())
+
+
+def titled(passages: list[dict]) -> "Dictionary":
+    """A book of titled passages ({"title", "text"}: Pliny's chapters, Browne's, Burton's), looked up by title, and
+    then by what the passages say; the title counts as the passage's opening, so passages about a topic come before
+    ones that only mention it."""
+    return Dictionary(passages, names=lambda p: [p["title"]], text=lambda p: f"{p['title']}. {p['text']}")
+
+
+def passage_embed(passage: dict, others: int, *, emoji: str, colour: discord.Color, link: str | None, footer: str,
+                  more: str) -> discord.Embed:
+    """A titled passage, as much as fits, with where it's from in the footer, and (if there are `others` on the same
+    topic) `more`, formatted with how many in all: "He has more on that: ask again ({n} chapters)."."""
+    text = fit([escape(paragraph) for paragraph in passage["text"].split("\n\n")], LONGEST)
+    embed = discord.Embed(title=f"{emoji} {escape(passage['title'])}"[:256], url=link, description=text, color=colour)
+    embed.set_footer(text=footer.rstrip(".") + "." + (f" {more.format(n=others + 1)}" if others else ""))
+    return embed
+
+
+def one_passage(book: "Dictionary", topic: str | None, show: Callable[[dict, int], discord.Embed], *, emoji: str,
+                colour: discord.Color, nothing: str) -> discord.Embed:
+    """A passage on the topic (or any, with none), shown by `show(passage, others)`; or `nothing`, if there's none."""
+    found = book.one_of(topic)
+    if not found:
+        return discord.Embed(title=f"{emoji} {shown_typed(topic)}", description=nothing, color=colour)
+    return show(*found)
 
 
 def uses_embed(found: list[T], *, query: str, title: str, name: Callable[[T], str], text: Callable[[T], str],

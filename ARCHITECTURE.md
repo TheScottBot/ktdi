@@ -74,6 +74,7 @@ ktdi/
 │   │                  Dates are read by lib/reminders.py's parse_day (shared with campaign reminders)
 │   ├── melancholy.py  /melancholy: a passage of Burton's Anatomy of Melancholy (1621) on a topic, or at random
 │   ├── pliny.py       /pliny: a chapter of Pliny's Natural History (AD 77) on a topic, or at random
+│   ├── pseudodoxia.py /pseudodoxia: a chapter of Browne's Pseudodoxia Epidemica (1646) on a topic, or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
@@ -130,6 +131,10 @@ ktdi/
     ├── pliny.json     /pliny's chapters (all six Gutenberg volumes of Bostock and Riley), built by
     │                  tools/pliny_build.py from pliny_curation.json (keys like VIII.3); each keeps its volume and
     │                  the words to link to it by, taken from the page's text so they never span a footnote mark
+    ├── pseudodoxia.json  /pseudodoxia's chapters (Browne, in Sayle's three-volume Works, Gutenberg), built by
+    │                  tools/pseudodoxia_build.py from pseudodoxia_curation.json (keys like 3.5: book, chapter);
+    │                  side-notes and footnotes taken out
+    ├── roman.py       Roman numerals to numbers (/pliny's books, /pseudodoxia's chapters)
     ├── melancholy.json  /melancholy's excerpts (Burton, Gutenberg), built by tools/melancholy_build.py from
     │                  melancholy_curation.json, which lists them word for word; the build checks each is in the book
     │                  (footnote marks, escaped Greek and Unicode forms aside) and works out the words a link can find

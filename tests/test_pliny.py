@@ -114,7 +114,8 @@ def test_old_spellings():
 def test_random_nothing_and_numbers():
     assert pliny.pliny_embed(None).title == "🏛️ Elephants; their capacity"
     assert "Pliny never heard anything about that" in pliny.pliny_embed("zzqx").description
-    assert [pliny.arabic(r) for r in ("II", "VIII", "IX", "XXXVII", "XL")] == [2, 8, 9, 37, 40]
+    from ktdi.lib import roman
+    assert [roman.to_int(r) for r in ("II", "VIII", "IX", "XIX", "XXXVII", "XL")] == [2, 8, 9, 19, 37, 40]
 
 
 def test_command_and_autocomplete():

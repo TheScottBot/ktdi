@@ -44,7 +44,7 @@ def chapters(volume: str, number: int = 0) -> list[dict]:
     the web page has it, footnote marks and all ("the moon.[1570] It is said"), so a link never spans one. The
     footnotes at the end of the volume are left out."""
     volume = volume.replace("\r\n", "\n")
-    body = volume[:volume.index("FOOTNOTES:")] if "FOOTNOTES:" in volume else volume[:volume.index(gutenberg.END)]
+    body = volume[:volume.index("FOOTNOTES:")] if "FOOTNOTES:" in volume else volume[:gutenberg.end_of(volume)]
     parts = BOOK.split(body)
     found = []
     for book, text in zip(parts[1::2], parts[2::2]):

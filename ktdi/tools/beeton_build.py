@@ -133,7 +133,7 @@ def entries(book: str) -> list[dict]:
     "serves", "aside"}), paragraph of household advice ({"kind": "advice", "number", "name", "text"}), and plain
     family dinner ({"kind": "menu", "number", "month": 1-12, "day": "Sunday", "courses": [...]})."""
     book = book.replace("\r\n", "\n")
-    body = book[book.index("\nCHAPTER I.\n"):book.index(gutenberg.END)]
+    body = book[book.index("\nCHAPTER I.\n"):gutenberg.end_of(book)]
     parts = CHAPTER.split(body)
     found, previous, month = [], None, None
     for chapter, text in zip(parts[1::2], parts[2::2]):

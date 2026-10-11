@@ -92,7 +92,7 @@ def days(book: str, volume: int) -> list[dict]:
     """Every day in a volume, in order: {"volume": 1, "date": "01-22", "saints", "passages", "chronology",
     "flower"}."""
     book = book.replace("\r\n", "\n")
-    body = book[:book.index(gutenberg.END)]
+    body = book[:gutenberg.end_of(book)]
     marks = list(DAY.finditer(body))
     found = []
     for i, mark in enumerate(marks):

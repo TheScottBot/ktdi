@@ -15,6 +15,12 @@ from typing import Callable
 
 LIB = Path(__file__).resolve().parent.parent / "lib"
 END = "*** END OF THE PROJECT GUTENBERG"
+OLD_END = "*** END OF THIS PROJECT GUTENBERG"  # How older ebooks (and some of the mirror's copies) end
+
+
+def end_of(book: str) -> int:
+    """Where the book itself ends and Project Gutenberg's licence begins, however this copy marks it."""
+    return next(book.index(marker) for marker in (END, OLD_END) if marker in book)
 # Where a book's plain text is. gutenberg.org is first; its main mirror is there for when it's down (503s happen).
 SOURCES = [
     "https://www.gutenberg.org/cache/epub/{book}/pg{book}.txt",

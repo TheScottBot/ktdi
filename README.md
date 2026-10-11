@@ -66,6 +66,7 @@ Dreams, almanacs, herbs, witches and Mrs Beeton, from the same kind of books, li
 | `cure <ailment>` | Nicholas Culpeper's remedy from his *Complete Herbal* (1653, public domain, via Project Gutenberg) for whatever ails you: about 90 ailments from a cold to a missing arm, being cursed and death. It understands how people actually say things ("tickly throat", "my throat is tickly", "the runs", "can't get it up", typos like "diarhea") with a hand-built synonym list, no AI (`ktdi/lib/ailments.py`), and says what it filed yours under. Anything it can't place gets All-heal. The slash version autocompletes. To change which of Culpeper's words count for an ailment, edit its `culpeper` terms there and run `python -m ktdi.tools.cure_build`. |
 | `plant <name>` | The other way round: look up one of Culpeper's 320 herbs by any name he gives it ("ground ivy", "piss-a-beds") or its Latin name ("Glechoma hederacea"), and see its Latin name, the planet he puts it under, everything on `/cure`'s list he says it's good for, and one of his remedies. Typos are fine and the slash version autocompletes. The Latin names were checked by hand (`ktdi/lib/herb_latin.json`), and a few herbs Culpeper doesn't pin down are left without one. After editing that file, run `python -m ktdi.tools.cure_build` again. |
 | `pliny [topic]` | Pliny the Elder's *Natural History* (AD 77, in Bostock and Riley's 1855 translation, public domain, via Project Gutenberg), in which a Roman admiral wrote down everything anyone ever told him: elephants that worship the moon and write Greek, the basilisk that kills with a look, dragons, the phoenix, showers of milk and baked tiles, mares impregnated by the wind. Give a topic (`pliny elephants`, `pliny amber`) for a chapter about it, by his own chapter titles (which autocomplete) or anything that mentions it; ask again for another. On its own: any chapter. Typed, `!naturalhistory` works too. About 440 chapters from the books on the world, man, animals, remedies, metals and stones, read by hand and picked for being gloriously wrong (nothing racist about real peoples, and no remedy anyone might try); only their keys are recorded (`ktdi/lib/pliny_curation.json`). To add one, read it in the book, add its key (`VIII.3`: book, chapter) to that file and run `python -m ktdi.tools.pliny_build`. |
+| `pseudodoxia [topic]` | Sir Thomas Browne's *Pseudodoxia Epidemica*, or "Vulgar Errors" (1646, public domain, via Project Gutenberg): a whole book of what everyone wrongly believed (that a badger's legs are shorter on one side, that elephants have no joints, that a kingfisher hung by its beak shows which way the wind blows), each one stated and then solemnly taken apart. Give a topic (`pseudodoxia badgers`, `pseudodoxia unicorns`) for a chapter about it, by his own chapter titles (which autocomplete) or anything that mentions it; ask again for another. On its own: any chapter. Typed, `!vulgarerrors` and `!browne` work too. About 60 chapters, read by hand and picked for the creatures, marvels and beliefs (not the chapters on Jews, on "the blackness of Negroes" or on Gypsies, and not the dense theology); only their keys are recorded (`ktdi/lib/pseudodoxia_curation.json`). To add one, read it in the book, add its key (`3.5`: book, chapter) to that file and run `python -m ktdi.tools.pseudodoxia_build`. |
 
 ### 🎬 Movie night
 
@@ -240,6 +241,7 @@ ktdi/
 │   ├── almanac.py     # almanac
 │   ├── melancholy.py  # melancholy
 │   ├── pliny.py       # pliny
+│   ├── pseudodoxia.py # pseudodoxia
 │   ├── etiquette.py   # etiquette
 │   ├── movie.py       # movie night: nowplaying (np), shhh
 │   ├── units.py       # abm, imperial
@@ -252,7 +254,7 @@ ktdi/
 │   ├── rpg.py         # RPG rulebooks from Dropbox
 │   └── help.py        # asks each feature for its HELP_CATEGORY and help_extras(), so new features don't touch it
 ├── lib/               # no Discord code: unit conversions, reminder schedules, timezones, and the Calibre-Web, Dropbox, Letterboxd and AniList clients
-└── tools/             # one-off helpers: dropbox_login, herbal_build, cure_build, slang_build, devils_build, dream_build, beeton_build, enquire_build, almanac_build, melancholy_build, pliny_build, deadword_pages, weather_lore_pages (python -m ktdi.tools.<name>); gutenberg.py is what the Gutenberg builds share
+└── tools/             # one-off helpers: dropbox_login, herbal_build, cure_build, slang_build, devils_build, dream_build, beeton_build, enquire_build, almanac_build, melancholy_build, pliny_build, pseudodoxia_build, deadword_pages, weather_lore_pages (python -m ktdi.tools.<name>); gutenberg.py is what the Gutenberg builds share
 tests/                 # pytest
 ```
 

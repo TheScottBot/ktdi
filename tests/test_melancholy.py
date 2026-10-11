@@ -87,7 +87,7 @@ def test_a_topic():
     embed = melancholy.melancholy_embed("bad air")
     assert embed.title == "🖤 Bad Air, a cause of Melancholy"
     assert embed.description == "If it be impure and foggy, it dejects the spirits."
-    assert embed.footer.text == melancholy.SOURCE
+    assert embed.footer.text == f"{melancholy.SOURCE}."
     # The page keeps the footnote mark ("[1505] “If it be..."), so the link finds it from the words after it.
     assert embed.url == ("https://www.gutenberg.org/cache/epub/10800/pg10800-images.html#:~:text="
                          "it%20be%20impure%20and%20foggy%2C%20it%20dejects%20the%20spirits.")

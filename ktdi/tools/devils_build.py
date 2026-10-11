@@ -44,7 +44,7 @@ def entries(book: str) -> list[dict]:
     starts in the book (for links to it). Prose paragraphs are joined up; verse (indented in the book) keeps its lines.
     Paragraphs are separated by a blank line."""
     book = book.replace("\r\n", "\n")
-    body = book[:book.index(gutenberg.END)]
+    body = book[:gutenberg.end_of(book)]
     found, paragraphs, lines = [], [], []
 
     def close_paragraph():

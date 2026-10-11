@@ -15,29 +15,21 @@ from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
-from ktdi.lib import links
+from ktdi.lib import links, roman
 
 HELP_CATEGORY = "🔮 Old oddities"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "pliny.json"
 SOURCE = "Pliny the Elder, Natural History (AD 77)"
 COLOUR = discord.Color.from_rgb(165, 42, 42)  # Imperial purple-ish red
-ROMAN = {"I": 1, "V": 5, "X": 10, "L": 50}
 
 CHAPTERS: list[dict] = json.loads(DATA.read_text(encoding="utf-8"))["chapters"]
 
 
 def dictionary(chapters: list[dict]) -> oldbooks.Dictionary:
-    # A chapter's title comes first, so chapters about the topic come before ones that mention it.
-    return oldbooks.Dictionary(chapters, names=lambda c: [c["title"]], text=lambda c: f"{c['title']}. {c['text']}")
+    return oldbooks.titled(chapters)
 
 
 DICTIONARY = dictionary(CHAPTERS)
-
-
-def arabic(roman: str) -> int:
-    """"VIII" is 8, "XXXVII" is 37."""
-    values = [ROMAN[letter] for letter in roman]
-    return sum(-v if i + 1 < len(values) and v < values[i + 1] else v for i, v in enumerate(values))
 
 
 def url(chapter: dict) -> str:
@@ -46,23 +38,16 @@ def url(chapter: dict) -> str:
 
 
 def chapter_embed(chapter: dict, others: int = 0) -> discord.Embed:
-    text = oldbooks.fit([oldbooks.escape(p) for p in chapter["text"].split("\n\n")], oldbooks.LONGEST)
-    embed = discord.Embed(title=f"🏛️ {oldbooks.escape(chapter['title'])}"[:256], url=url(chapter), description=text,
-                          color=COLOUR)
-    where = f"book {arabic(chapter['book'])}, chapter {chapter['chapter']}"
-    more = f" He has more on that: ask again ({others + 1} chapters)." if others else ""
-    embed.set_footer(text=f"{SOURCE}, {where}.{more}")
-    return embed
+    where = f"book {roman.to_int(chapter['book'])}, chapter {chapter['chapter']}"
+    return oldbooks.passage_embed(chapter, others, emoji="🏛️", colour=COLOUR, link=url(chapter),
+                                  footer=f"{SOURCE}, {where}", more="He has more on that: ask again ({n} chapters).")
 
 
 def pliny_embed(topic: str | None) -> discord.Embed:
     """A chapter on the topic, or (no topic) any."""
-    found = DICTIONARY.one_of(topic)
-    if not found:
-        return discord.Embed(title=f"🏛️ {oldbooks.shown_typed(topic)}", color=COLOUR,
-                             description="Astonishingly, Pliny never heard anything about that. Try elephants, "
-                                         "dragons, the phoenix, amber, lightning, or the basilisk.")
-    return chapter_embed(*found)
+    return oldbooks.one_passage(DICTIONARY, topic, chapter_embed, emoji="🏛️", colour=COLOUR,
+                                nothing="Astonishingly, Pliny never heard anything about that. Try elephants, "
+                                        "dragons, the phoenix, amber, lightning, or the basilisk.")
 
 
 @commands.hybrid_command(name="pliny", aliases=["naturalhistory"],

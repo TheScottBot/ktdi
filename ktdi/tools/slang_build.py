@@ -25,7 +25,7 @@ def entries(book: str) -> list[dict]:
     """Every entry: {"word": "ADDLE PATE", "text": "An inconsiderate foolish fellow."}. Lines that don't start an
     entry (verses, lists) belong to the one before."""
     book = book.replace("\r\n", "\n")
-    body = book[book.index(START):book.index(gutenberg.END)].split("\n", 1)[1]
+    body = book[book.index(START):gutenberg.end_of(book)].split("\n", 1)[1]
     found = []
     for paragraph in re.split(r"\n\s*\n", body):
         paragraph = " ".join(paragraph.split())

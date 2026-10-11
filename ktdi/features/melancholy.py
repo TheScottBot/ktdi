@@ -27,8 +27,7 @@ PASSAGES: list[dict] = json.loads(DATA.read_text(encoding="utf-8"))["passages"]
 
 
 def dictionary(passages: list[dict]) -> oldbooks.Dictionary:
-    # A passage's subsection title comes first, so ones in a part about the topic come before ones mentioning it.
-    return oldbooks.Dictionary(passages, names=lambda p: [p["title"]], text=lambda p: f"{p['title']}. {p['text']}")
+    return oldbooks.titled(passages)
 
 
 DICTIONARY = dictionary(PASSAGES)
@@ -40,22 +39,15 @@ def url(passage: dict) -> str:
 
 
 def passage_embed(passage: dict, others: int = 0) -> discord.Embed:
-    text = oldbooks.fit([oldbooks.escape(passage["text"])], oldbooks.LONGEST)
-    embed = discord.Embed(title=f"🖤 {oldbooks.escape(passage['title'])}"[:256], url=url(passage), description=text,
-                          color=COLOUR)
-    more = f". He has more to say on that: ask again ({others + 1} passages)." if others else ""
-    embed.set_footer(text=f"{SOURCE}{more}")
-    return embed
+    return oldbooks.passage_embed(passage, others, emoji="🖤", colour=COLOUR, link=url(passage), footer=SOURCE,
+                                  more="He has more to say on that: ask again ({n} passages).")
 
 
 def melancholy_embed(topic: str | None) -> discord.Embed:
     """A passage on the topic, or (no topic) any."""
-    found = DICTIONARY.one_of(topic)
-    if not found:
-        return discord.Embed(title=f"🖤 {oldbooks.shown_typed(topic)}", color=COLOUR,
-                             description="Remarkably, Burton found nothing to be melancholy about there. Try love, "
-                                         "study, sleep, idleness, jealousy, poverty or bad air.")
-    return passage_embed(*found)
+    return oldbooks.one_passage(DICTIONARY, topic, passage_embed, emoji="🖤", colour=COLOUR,
+                                nothing="Remarkably, Burton found nothing to be melancholy about there. Try "
+                                        "love, study, sleep, idleness, jealousy, poverty or bad air.")
 
 
 @commands.hybrid_command(name="melancholy", aliases=["burton", "gloom"],
