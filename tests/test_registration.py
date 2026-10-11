@@ -280,3 +280,30 @@ def test_every_command_has_more_help_than_its_one_line(loaded_bot):
 def test_help_text_reads_as_paragraphs(loaded_bot):
     spray = help_feature.command_help_embed(loaded_bot.get_command("spray"))
     assert "goes on their rap sheet, unless their spray insurance covers it" in spray.description  # Not broken up
+
+
+def test_help_autocompletes_sections_and_commands(loaded_bot):
+    from tests.fakes import Interaction
+    interaction = Interaction(User(1, "scott"), Guild(111))
+    interaction.client = loaded_bot
+
+    def suggest(typed):
+        return [(c.name, c.value) for c in asyncio.run(help_feature.command_autocomplete(interaction, typed))]
+
+    assert [value for _, value in suggest("")[:9]] == [
+        "Rap sheet", "Fun", "Words & wisdom", "Old oddities", "Movie night", "Measurements", "Quotes", "Campaigns",
+        "Utilities"]  # The sections first
+    assert [value for _, value in suggest("bee")] == ["beeton", "beeton advice", "beeton menu"]
+    assert ("nowplaying (also np)", "nowplaying") in suggest("np")  # Found by the name people type
+    assert ("devils (also devil, devilsdictionary)", "devils") in suggest("devil")
+    assert ("nowplaying vote show (also where, link)", "nowplaying vote show") in suggest("vote show")
+    assert suggest("odd")[0] == ("Old oddities", "Old oddities")
+    assert not any("toenoyoudidnt" in value for _, value in suggest("toe"))  # Cryptids stay secret
+    assert not any(value.startswith(("books", "rpg")) for _, value in suggest(""))  # Not set up on this server
+    assert len(suggest("")) == 25 and all(len(n) <= 100 and len(v) <= 100 for n, v in suggest("e"))  # Discord's limits
+
+    # Every suggestion works when picked.
+    ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
+    for _, topic in help_feature.help_topics(loaded_bot, interaction):
+        asyncio.run(help_feature.help_command.callback(ctx, command=topic))
+        assert ctx.last.embed is not None, topic

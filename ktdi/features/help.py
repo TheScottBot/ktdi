@@ -47,8 +47,9 @@ def feature_modules():
     return [importlib.import_module(name) for name in FEATURES if name != __name__]
 
 
-def can_use(command: commands.Command, ctx: commands.Context) -> bool:
-    """Whether to show a command in /help here. A command can opt out with extras["available"](guild)."""
+def can_use(command: commands.Command, ctx: commands.Context | discord.Interaction) -> bool:
+    """Whether to show a command in /help here (ctx is anything with a .guild: a command's context, or an
+    autocomplete's interaction). A command can opt out with extras["available"](guild)."""
     available = (command.root_parent or command).extras.get("available")
     return available(ctx.guild) if available else True
 
@@ -212,7 +213,7 @@ class HelpMenu(discord.ui.View):
 async def help_command(ctx: commands.Context, *, command: str | None = None):
     """On its own: where to start, and the sections; pick one from the menu to see its commands (just for you). `/help
     old oddities` (or any section, loosely) opens a section; `/help spray` (or any command) shows it in detail, like
-    this."""
+    this. Start typing and it suggests sections and commands, by any name (`np` finds nowplaying)."""
     lines = main_help_lines(ctx)
     if command:
         found = ctx.bot.get_command(command.lstrip("/" + config.COMMAND_PREFIX).lower())
@@ -226,6 +227,24 @@ async def help_command(ctx: commands.Context, *, command: str | None = None):
         return
     view = HelpMenu(lines)
     view.message = await ctx.send(embed=front_page(ctx, lines), view=view)
+
+
+def help_topics(bot: commands.Bot, where: commands.Context | discord.Interaction) -> list[tuple[str, str]]:
+    """Everything /help can be asked about here, as (what to show, what to look up): the sections, then every command
+    and subcommand ("quote add"), leaving out ones not set up on this server and cryptids. A command typed by another
+    name shows it too ("nowplaying (also np)"), so typing "np" finds it."""
+    found = [command for command in bot.walk_commands()
+             if can_use(command, where) and not (command.root_parent or command).extras.get("hidden")]
+    commands_ = [(f"{c.qualified_name} (also {', '.join(c.aliases)})" if c.aliases else c.qualified_name,
+                  c.qualified_name) for c in sorted(found, key=lambda c: c.qualified_name)]
+    return [(section_name(category),) * 2 for category in CATEGORIES] + commands_
+
+
+@help_command.autocomplete("command")
+async def command_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
+    """The sections and commands that start with (then contain) what's typed; the sections before anything's typed."""
+    topics = fuzzy.starting_first(current, help_topics(interaction.client, interaction), key=lambda topic: topic[0])
+    return [app_commands.Choice(name=shown[:100], value=value[:100]) for shown, value in topics]
 
 
 async def setup(bot: commands.Bot):
