@@ -1058,3 +1058,32 @@ def test_committees_views(at, bot, monkeypatch):
                                              ([4, 5], "Questionable"), ([1, 2], "Low")])
 def test_morale(scores, verdict):
     assert movie.morale(scores).startswith(verdict)
+
+
+def show_vote(channel, user=DAVE):
+    ctx = Ctx(user, channel=channel)
+    run(movie.np_vote_show.callback(ctx))
+    return ctx.last
+
+
+def test_the_vote_can_be_found_again(theatre):
+    assert "There's no vote going" in show_vote(theatre).content
+    poll_message = vote(channel=theatre, films="Alien, Braindead, Deadstream")
+    assert poll_message.content.endswith("`/nowplaying vote show` finds this again.")
+    link = f"https://discord.com/channels/111/{theatre.id}/{poll_message.id}"
+    cast(poll_message, **{"Alien (1979)": 2, "Deadstream (2022)": 1})
+    found = show_vote(theatre)
+    assert found.content.split("\n") == [
+        f"🗳️ **What are we watching next?** [Vote here]({link})",
+        "Alien (1979) · Braindead (1992) · Deadstream (2022)",  # The films, not the tally: no swaying
+        "-# 3 votes so far · open until `/nowplaying vote end`"]
+    assert f"[here]({link})" in vote(channel=theatre).content  # "There's already a vote going" links to it too
+    assert movie.np_vote_show.aliases == ["where", "link"]
+
+
+def test_a_timed_vote_says_when_it_closes(theatre):
+    from datetime import datetime, timezone
+    poll_message = vote(channel=theatre, films="Alien, Braindead", hours=3)
+    poll_message.poll._expiry = datetime(2026, 10, 12, 20, 0, tzinfo=timezone.utc)  # As Discord's own polls have
+    closes = int(poll_message.poll._expiry.timestamp())
+    assert show_vote(theatre).content.endswith(f"-# 0 votes so far · closes <t:{closes}:R>, or `/nowplaying vote end`")

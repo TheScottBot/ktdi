@@ -1036,8 +1036,9 @@ def finish_vote(vote: Vote, poll: discord.Poll | None, user_id: int) -> str:
 async def np_vote(ctx: commands.Context, count: commands.Range[int, 2, 10] = 5,
                   hours: commands.Range[int, 1, POLL_MAX_HOURS] | None = None, include_watched: bool = False, *,
                   films: str | None = None):
-    if open_vote(ctx.guild.id):
-        await ctx.send("There's already a vote going. `/nowplaying vote end` closes it.", ephemeral=True)
+    if going := open_vote(ctx.guild.id):
+        await ctx.send(f"There's already a vote going: [here]({vote_link(going)}). `/nowplaying vote end` closes it.",
+                       ephemeral=True)
         return
     if films:
         chosen, missing = [], []
@@ -1069,7 +1070,8 @@ async def np_vote(ctx: commands.Context, count: commands.Range[int, 2, 10] = 5,
         poll.add_answer(text=answer_text(movie.title))
     when = f"in {plural(hours, 'hour')}, or when someone runs" if hours else "when someone runs"
     try:
-        message = await ctx.send(f"-# Voting closes {when} `/nowplaying vote end`. The winner gets lined up.", poll=poll)
+        message = await ctx.send(f"-# Voting closes {when} `/nowplaying vote end`. The winner gets lined up. "
+                                 f"`/nowplaying vote show` finds this again.", poll=poll)
     except discord.Forbidden:
         await ctx.send("I need the **Send Polls** permission in this channel.", ephemeral=True)
         return
@@ -1097,6 +1099,35 @@ async def np_vote_end(ctx: commands.Context):
     except discord.HTTPException:
         poll = None  # The poll's gone (deleted?): close the vote without a winner.
     await ctx.send(finish_vote(vote, poll, ctx.author.id), allowed_mentions=NO_PINGS)
+
+
+def vote_link(vote: Vote) -> str:
+    """A link that jumps straight to the vote's poll, however far up the channel it's scrolled."""
+    return f"https://discord.com/channels/{vote.guild_id}/{vote.channel_id}/{vote.message_id}"
+
+
+@np_vote.command(name="show", aliases=["where", "link"],
+                 description="Where the vote is: a link to the poll, its films, and how long it's open.")
+async def np_vote_show(ctx: commands.Context):
+    """Votes stay open for days and soon scroll out of sight: this posts a link that jumps straight to the poll,
+    with its films, how many votes so far, and when it closes. (Discord shows each film's votes once you've voted,
+    so nobody's swayed before they do.)"""
+    vote = open_vote(ctx.guild.id)
+    if vote is None:
+        await ctx.send("There's no vote going. `/nowplaying vote` starts one.", ephemeral=True)
+        return
+    channel = ctx.bot.get_channel(vote.channel_id) or ctx.channel
+    try:
+        poll = (await channel.fetch_message(vote.message_id)).poll
+    except discord.HTTPException:
+        poll = None  # Can't see it (deleted?): the link's all there is
+    lines = [f"🗳️ **{VOTE_QUESTION.removeprefix('🍿 ')}** [Vote here]({vote_link(vote)})"]
+    if poll:
+        lines.append(" · ".join(answer.text for answer in poll.answers))
+        votes = sum(answer.vote_count for answer in poll.answers)
+        closes = f"closes <t:{int(poll.expires_at.timestamp())}:R>, or" if poll.expires_at else "open until"
+        lines.append(f"-# {plural(votes, 'vote')} so far · {closes} `/nowplaying vote end`")
+    await ctx.send("\n".join(lines), allowed_mentions=NO_PINGS)
 
 
 async def vote_closed_by_itself(message: discord.Message):
@@ -1618,7 +1649,7 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
             "on it too, with their predictions. `/nowplaying set` autocompletes from it; `Alien` finds `Alien (1979)`.\n"
             "• Can't decide? `/nowplaying vote` posts a poll of 5 random films from the watchlist (or name them: "
             "`films:Alien, Deadstream`). It's open until `/nowplaying vote end` (or `hours:` for a timed one); then the "
-            "winner's lined up.\n"
+            "winner's lined up. Lost it up the channel? `/nowplaying vote show` links to it.\n"
             "• Watching something again is a new watch (Alien (watch #2)), with fresh predictions, bingo cards and "
             "ratings. `/nowplaying predictions Alien #1` looks up an earlier one.")
     return "", [("🎬 How movie night works", text, False)]

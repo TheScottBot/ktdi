@@ -54,7 +54,7 @@ def test_slash_commands(loaded_bot):
     nowplaying = tree.get_command("nowplaying")
     watchlist = nowplaying.get_command("watchlist")
     assert sorted(c.name for c in watchlist.commands) == ["add", "import", "remove", "show", "strike", "unstrike"]
-    assert sorted(c.name for c in nowplaying.get_command("vote").commands) == ["end", "start"]
+    assert sorted(c.name for c in nowplaying.get_command("vote").commands) == ["end", "show", "start"]
     assert sorted(c.name for c in nowplaying.get_command("bingo").commands) == ["card", "mark", "unmark"]
     assert tree.get_command("np") is None  # slash commands can't have aliases: /nowplaying only
 
