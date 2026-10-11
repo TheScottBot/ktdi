@@ -90,6 +90,10 @@ def insult_text(insulter: discord.abc.User, person: discord.abc.User, entry: dic
                        description="1811 slang: look a word up, find the slang for one, or get a random one.")
 @app_commands.describe(word="A word to look up, or a plain one (drunk, fool...) to find the slang for. Empty: random")
 async def slang(ctx: commands.Context, *, word: str | None = None):
+    """Regency slang from Grose's Dictionary of the Vulgar Tongue (1811). `/vulgartongue lookup <word>` looks a word up,
+    or for a plain word (drunk, coward) finds the slang for it. `/vulgartongue random`: a random phrase.
+    `/vulgartongue insult @someone` insults them in the words of 1811 (enough insults flying and it's a diplomatic
+    incident: `/wars`)."""
     await ctx.send(embed=slang_embed(word))
 
 

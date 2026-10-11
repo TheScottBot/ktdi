@@ -68,6 +68,9 @@ def cure_embed(query: str) -> discord.Embed:
 @commands.hybrid_command(name="cure", description="Nicholas Culpeper's 1653 remedy for whatever ails you.")
 @app_commands.describe(ailment="What's wrong with you (anything: a cold, a broken heart, a missing arm...)")
 async def cure(ctx: commands.Context, *, ailment: str):
+    """Nicholas Culpeper's 1653 remedy for an ailment, however you put it (tickly throat, my throat is tickly, the runs;
+    typos are fine), and it says what it filed yours under. About 90 ailments, from a cold to a missing arm, being
+    cursed and death. Anything it can't place gets All-heal. It's 1653: don't actually take any of it."""
     await ctx.send(embed=cure_embed(ailment))
 
 
@@ -107,6 +110,8 @@ def plant_embed(query: str) -> discord.Embed:
 @commands.hybrid_command(name="plant", description="What Culpeper's 1653 herbal says a plant cures.")
 @app_commands.describe(name="A plant: any common name (ground ivy, piss-a-beds) or its Latin one (Glechoma hederacea)")
 async def plant(ctx: commands.Context, *, name: str):
+    """One of Culpeper's 320 herbs by any name he gives it (ground ivy, piss-a-beds) or its Latin name: the planet he
+    puts it under, everything on `/cure`'s list he says it's good for, and one of his remedies. Typos are fine."""
     await ctx.send(embed=plant_embed(name))
 
 

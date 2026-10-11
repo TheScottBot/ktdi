@@ -83,6 +83,9 @@ def deadword_embed(query: str | None) -> discord.Embed:
 @app_commands.describe(word="A dead word to look up, or a plain one (drink, fool...) to find dead words for. "
                             "Empty: random")
 async def deadword(ctx: commands.Context, *, word: str | None = None):
+    """A word English stopped using, from Mackay's Lost Beauties of the English Language (1874): bever (a drink between
+    meals), bell-penny (money laid up for your own funeral). Give a dead word to look it up, or a plain one (drink,
+    fool) to find the dead words for it. On its own: a random one."""
     await ctx.send(embed=deadword_embed(word))
 
 

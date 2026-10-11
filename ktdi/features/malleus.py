@@ -36,6 +36,8 @@ def tip_embed(tip: dict) -> discord.Embed:
 @commands.hybrid_command(name="hammeredofwitches",
                          description="A witch-finding tip from the Hammer of Witches (Malleus Maleficarum, 1486).")
 async def hammeredofwitches(ctx: commands.Context):
+    """A witch-finding tip from the Malleus Maleficarum (1486), the Hammer of Witches, in its 1928 translation: how to
+    spot a witch, and the book's wilder lore, linked to its page."""
     await ctx.send(embed=tip_embed(random.choice(tips)))
 
 

@@ -89,6 +89,9 @@ def interpret(query: str | None) -> discord.Embed:
 @commands.hybrid_command(name="dream", description="What your dream foretells, according to 1901. Or a random one.")
 @app_commands.describe(thing="What you dreamt of (eels, teeth...) or the whole dream. Empty: random")
 async def dream(ctx: commands.Context, *, thing: str | None = None):
+    """What dreaming of something foretells, according to Miller's Ten Thousand Dreams Interpreted (1901). Give the
+    thing (eels) or the whole dream (I dreamt my teeth fell out); for something Miller didn't cover, you get the
+    dreams that mention it. On its own: a random dream."""
     await ctx.send(embed=interpret(thing))
 
 

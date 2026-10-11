@@ -62,6 +62,9 @@ def melancholy_embed(topic: str | None) -> discord.Embed:
                          description="Burton's gloomy wisdom (1621) on love, study, sleep, poverty... Or a random bit.")
 @app_commands.describe(topic="What to be melancholy about (love, study, sleep, jealousy...). Empty: anything")
 async def melancholy(ctx: commands.Context, *, topic: str | None = None):
+    """A passage of Robert Burton's The Anatomy of Melancholy (1621) on whatever's getting you down: love, study, sleep,
+    jealousy, poverty, tobacco. It comes from a part of the book about it (his own titles autocomplete), or one that
+    mentions it; ask again for another. On its own: anything."""
     await ctx.send(embed=melancholy_embed(topic))
 
 

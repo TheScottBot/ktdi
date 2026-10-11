@@ -35,6 +35,8 @@ def anime_text(anime: anilist.Anime) -> str:
 
 @commands.hybrid_command(name="anime", description="Ask our resident anime watcher what they think of a random anime.")
 async def anime(ctx: commands.Context):
+    """Asks our resident anime watcher what they think of a random popular anime (from AniList), with a random question.
+    Only they're pinged."""
     if not config.ANIME_USER_ID:
         await ctx.send("Nobody's set up to be asked yet. Add their user ID as `ANIME_USER_ID` in the bot's `.env`.",
                        ephemeral=True)

@@ -113,6 +113,9 @@ def reminder_text(reminder: discord.abc.User, person: discord.abc.User) -> str:
 @commands.hybrid_group(name="etiquette", invoke_without_command=True,
                        description="What an 1860s etiquette manual says to do, for any situation.")
 async def etiquette_group(ctx: commands.Context, *, situation: str | None = None):
+    """What an 1860s etiquette manual says to do, word for word: `/etiquette gentleman`, `gentlewoman` or `gentlethem`
+    (rules for anyone), about any situation, today's included (texting, D&D, the pub, splitting the bill). No
+    situation: any rule. `/etiquette remind @someone` reminds them of the rules, publicly."""
     await ctx.send(embed=advice_embed(situation, "gentlethem"))
 
 

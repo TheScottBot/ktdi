@@ -106,6 +106,8 @@ def devils_embed(query: str | None) -> discord.Embed:
                          description="Ambrose Bierce's Devil's Dictionary, a cynical definition of a word, or a random one.")
 @app_commands.describe(word="A word to look up (bore, lawyer, love...). Empty: random")
 async def devils(ctx: commands.Context, *, word: str | None = None):
+    """Give a word (bore, lawyer, love) for Bierce's definition (1911), with his verse and asides. For a word he didn't
+    define, you get the entries that use it. On its own: a random entry."""
     await ctx.send(embed=devils_embed(word))
 
 

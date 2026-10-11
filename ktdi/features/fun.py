@@ -316,6 +316,9 @@ async def update_briber_role(guild: discord.Guild) -> None:
 @commands.hybrid_command(name="spray", description="Spray the degenerate.")
 @commands.guild_only()
 async def spray(ctx: commands.Context, target: discord.Member | None = None):
+    """Posts the spray bottle. Name someone (`/spray @dave`) and it goes on their rap sheet, unless their spray
+    insurance covers it (`/insurance`). Reacting 💦 to a message does the same to whoever sent it. Enough sprays, bads
+    and bonks in one channel in a few minutes and the committee writes it up as a war (`/wars`)."""
     if target is None:
         await ctx.send(SPRAY_GIF_URL)
         return
@@ -327,6 +330,7 @@ async def spray(ctx: commands.Context, target: discord.Member | None = None):
 @commands.hybrid_command(name="whospray", description="Ask the server's chosen sprayer who should get sprayed.")
 @commands.guild_only()
 async def whospray(ctx: commands.Context):
+    """Asks the server's Don (chosen with `/settings whospray_user`) who should be sprayed. Only the Don is pinged."""
     asked = db.whospray_user(ctx.guild.id)  # The Don: only ever the person chosen in /settings whospray_user.
     if asked is None:
         await ctx.send(NO_DON, ephemeral=True)
@@ -340,6 +344,8 @@ async def whospray(ctx: commands.Context):
 @commands.hybrid_command(name="tdoi", description="The Don Ordered It: spray yourself, on the Don's orders.")
 @commands.guild_only()
 async def tdoi(ctx: commands.Context):
+    """The Don Ordered It: spray yourself, on the Don's orders. It counts as a spray, and your rap sheet also counts how
+    many times the Don made you do it. Needs a Don (`/settings whospray_user`)."""
     if db.whospray_user(ctx.guild.id) is None:
         await ctx.send(NO_DON, ephemeral=True)
         return
@@ -354,6 +360,7 @@ async def tdoi(ctx: commands.Context):
 
 @commands.hybrid_command(name="loot", description="Declare that you're looting the body.", extras=FUN)
 async def loot(ctx: commands.Context):
+    """Announces that you're looting the body, with the perception-check GIF."""
     await ctx.send(LOOT_GIF_URL)
 
 
@@ -379,12 +386,15 @@ async def tell_off(ctx: commands.Context, user: discord.Member | None, gifs: lis
 @commands.hybrid_command(name="bad", description="Bad. Posts a random (non-violent) telling-off GIF.")
 @app_commands.describe(user="Optional: who's being bad (it goes on their rap sheet)")
 async def bad(ctx: commands.Context, user: discord.Member | None = None):
+    """Posts a telling-off GIF. Name someone (`/bad @dave`) and it goes on their rap sheet as being bad (counted apart
+    from sprays), unless their insurance covers it. Bads count towards wars (`/wars`)."""
     await tell_off(ctx, user, BAD_GIF_URLS, "bad")
 
 
 @commands.hybrid_command(name="badbonk", description="Bad, with a bonk. Posts a random (violent) telling-off GIF.")
 @app_commands.describe(user="Optional: who's getting bonked (it goes on their rap sheet as being bad)")
 async def badbonk(ctx: commands.Context, user: discord.Member | None = None):
+    """The violent version of `/bad`: a bonk. It counts as being bad on the rap sheet, just like `/bad`."""
     await tell_off(ctx, user, BADBONK_GIF_URLS, "badbonk")
 
 
@@ -412,6 +422,8 @@ async def nose(ctx: commands.Context, user: discord.Member | None = None):
 @commands.hybrid_command(name="rapsheet", description="See someone's sprays, bribes, expunges and bails.")
 @commands.guild_only()
 async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
+    """Someone's record (yours, if you don't name anyone): sprays, times they've been bad, expunges and bails, the Don's
+    orders, sprays insurance covered, bribes, committee spending, called predictions, bingo wins and spray futures."""
     user = user or ctx.author
     sprays = get_spray_count(ctx.guild.id, user.id)
     bribes, bribe_total = get_bribe_stats(ctx.guild.id, user.id)
@@ -464,6 +476,8 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
 @commands.hybrid_command(name="blame", description="Blame someone who's been talking recently.")
 @commands.guild_only()
 async def blame(ctx: commands.Context, *, reason: str | None = None):
+    """Blames someone random who's spoken recently in this channel (you, if nobody has), with your reason if you give
+    one. Whoever's blamed can pay to pass it back with `/bribe`."""
     candidates = set(recent_speakers[ctx.channel.id]) or {ctx.author.id}
     blamed_id = random.choice(list(candidates))
     last_blame[ctx.channel.id] = (ctx.author.id, blamed_id)
@@ -477,6 +491,8 @@ async def blame(ctx: commands.Context, *, reason: str | None = None):
 @commands.hybrid_command(name="bribe", description="Blamed? Pay to put the blame back on whoever blamed you.")
 @commands.guild_only()
 async def bribe(ctx: commands.Context, amount: commands.Range[int, 1, 1_000_000_000_000]):
+    """Only for whoever was last blamed in the channel: pay the committee, and the blame goes back to whoever blamed you
+    (who can bribe it back). It all goes on the rap sheet, and the biggest briber wears the 👑."""
     blame_record = last_blame.get(ctx.channel.id)
     if blame_record is None:
         await ctx.send("Nobody's been blamed here. Save your money.", ephemeral=True)
@@ -501,6 +517,8 @@ async def bribe(ctx: commands.Context, amount: commands.Range[int, 1, 1_000_000_
 @commands.hybrid_command(name="expunge", description="Pay the committee to remove a spray from your own rap sheet.")
 @commands.guild_only()
 async def expunge(ctx: commands.Context, amount: commands.Range[int, 1, 1_000_000_000_000]):
+    """Pay the committee to take one spray off your own rap sheet (if you've got one). It counts as a bribe, and your
+    rap sheet shows how many you've had expunged."""
     if get_spray_count(ctx.guild.id, ctx.author.id) == 0:
         await ctx.send("Your record has no sprays on it. Keep your money.", ephemeral=True)
         return
@@ -518,6 +536,8 @@ async def expunge(ctx: commands.Context, amount: commands.Range[int, 1, 1_000_00
 @commands.guild_only()
 @app_commands.describe(user="Whose spray to remove", amount="How much bail to post")
 async def bail(ctx: commands.Context, user: discord.Member, amount: commands.Range[int, 1, 1_000_000_000_000]):
+    """Pay the committee to take one spray off someone else's rap sheet, if you think it was unfair. It counts as your
+    bribe, and both rap sheets remember it."""
     if user.id == ctx.author.id:
         await ctx.send("You can't bail yourself out. Use `/expunge` for your own record.", ephemeral=True)
         return
@@ -537,6 +557,7 @@ async def bail(ctx: commands.Context, user: discord.Member, amount: commands.Ran
 @commands.hybrid_command(name="linux", description="Ask our resident Linux hater how they're feeling about Linux.",
                          extras=FUN)
 async def linux(ctx: commands.Context):
+    """Asks our resident Linux hater a random question about how they're feeling about Linux. Only they're pinged."""
     if not config.LINUX_HATER_ID:
         await ctx.send("Nobody's set up to be asked yet. Add their user ID as `LINUX_HATER_ID` in the bot's `.env`.",
                        ephemeral=True)

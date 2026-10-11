@@ -82,6 +82,9 @@ def explain(query: str | None) -> discord.Embed:
                          description="Where an idiom comes from, according to Brewer (1898). Or a random one.")
 @app_commands.describe(idiom="An idiom or saying (raining cats and dogs, mad as a hatter...). Empty: random")
 async def phrase(ctx: commands.Context, *, idiom: str | None = None):
+    """Where an idiom comes from, according to Brewer's Dictionary of Phrase and Fable (1898). Word it however you like
+    (raining cats and dogs finds To rain cats and dogs); for a word that isn't an idiom, you get the idioms that
+    mention it. On its own: a random one."""
     await ctx.send(embed=explain(idiom))
 
 

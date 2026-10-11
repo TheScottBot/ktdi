@@ -97,7 +97,7 @@ def test_help_details(loaded_bot):
     assert [f.name for f in campaign.fields if not f.name.startswith("/")] == [
         "📋 Setting up", "⏰ Reminders", "🗓️ When the game moves", "🔐 Who can change what", "⌨️ Typing it with !"]
     remind = help_feature.command_help_embed(loaded_bot.get_command("campaign remind"))
-    assert "Also works as `!campaign remind`" in remind.description
+    assert "Also works typed as `!campaign remind`." in remind.description
     quote = help_feature.command_help_embed(loaded_bot.get_command("quote"))
     assert any(f.name == "!quote anon [text]" for f in quote.fields)
     assert any(f.name == "/quote add <text> [user] [context]" for f in quote.fields)
@@ -258,3 +258,25 @@ def test_env_example_covers_every_setting():
     internal = {"KTDI_NO_DOTENV"}  # for the tests, not for people
     missing = sorted(name for name in settings - internal if name not in example)
     assert not missing, f"not in .env.example: {missing}"
+
+
+def test_help_shows_every_way_to_type_a_command(loaded_bot):
+    devils = help_feature.command_help_embed(loaded_bot.get_command("devils"))
+    assert "Also works typed as `!devils`, `!devil`, `!devilsdictionary`." in devils.description
+    slang = help_feature.command_help_embed(loaded_bot.get_command("vulgartongue"))
+    assert "`!vulgartongue <subcommand>`, `!vt <subcommand>`, `!slang <subcommand>`" in slang.description
+
+
+def test_every_command_has_more_help_than_its_one_line(loaded_bot):
+    # The section pages show each command's one-line description; /help <command> has to say more.
+    for command in loaded_bot.commands:
+        if command.extras.get("hidden"):
+            continue
+        embed = help_feature.command_help_embed(command)
+        extra_fields = [f for f in embed.fields if not f.name.startswith(("/", "!"))]
+        assert command.help or extra_fields, f"/help {command.name} only repeats its one-line description"
+
+
+def test_help_text_reads_as_paragraphs(loaded_bot):
+    spray = help_feature.command_help_embed(loaded_bot.get_command("spray"))
+    assert "goes on their rap sheet, unless their spray insurance covers it" in spray.description  # Not broken up

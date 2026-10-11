@@ -8,6 +8,7 @@ never means editing this file; adding a section does (CATEGORIES).
 """
 
 import importlib
+import re
 import sys
 
 import discord
@@ -71,17 +72,24 @@ def fit_embed(embed: discord.Embed) -> discord.Embed:
 def command_help_embed(command: commands.Command) -> discord.Embed:
     """Detailed help for one command or subcommand, e.g. /help abm or /help campaign remind."""
     p = config.COMMAND_PREFIX
+    # Every way to type it: "!devils", "!devil", "!devilsdictionary"; for a group, "!quote <subcommand>".
+    parent = f"{command.full_parent_name} " if command.full_parent_name else ""
+    after = " <subcommand>" if isinstance(command, commands.Group) else ""
+    typed = ", ".join(f"`{p}{parent}{name}{after}`" for name in [command.name, *command.aliases])
+    # The one-line description, then the command's own help (its docstring) if it has any, its lines joined back up
+    # (the docstring's are wrapped for the code; Discord wraps its own).
+    details = re.sub(r"(?<!\n)\n(?!\n)", " ", command.help) if command.help else ""
+    about = "\n\n".join(part for part in (command.description, details) if part)
     embed = discord.Embed(
         title=f"/{command.qualified_name} {command.signature}".strip(),
-        description=f"{command.description}\n\nAlso works as `{p}{command.qualified_name}`.",
+        description=f"{about}\n\nAlso works typed as {typed}.",
         color=discord.Color.blurple(),
     )
     if isinstance(command, commands.Group):
         embed.title = f"/{command.name}"
-        embed.description = f"{command.description}\n\nAlso works as `{p}{command.name} <subcommand>`."
     elif not isinstance(command, commands.HybridCommand):  # !-only (e.g. !quote anon): there's no slash version.
         embed.title = f"{p}{command.qualified_name} {command.signature}".strip()
-        embed.description = f"{command.description}\n\nOnly works typed with `{p}`."
+        embed.description = f"{about}\n\nOnly works typed with `{p}`."
     extra_fields = []
     for module in feature_modules():
         if hasattr(module, "help_extras"):
@@ -202,6 +210,9 @@ class HelpMenu(discord.ui.View):
 @commands.hybrid_command(name="help", description="Where to start, the sections, or details for one command.")
 @app_commands.describe(command="A command (spray, quote add) or a section (old oddities, rap sheet). Empty: the list")
 async def help_command(ctx: commands.Context, *, command: str | None = None):
+    """On its own: where to start, and the sections; pick one from the menu to see its commands (just for you). `/help
+    old oddities` (or any section, loosely) opens a section; `/help spray` (or any command) shows it in detail, like
+    this."""
     lines = main_help_lines(ctx)
     if command:
         found = ctx.bot.get_command(command.lstrip("/" + config.COMMAND_PREFIX).lower())

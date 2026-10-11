@@ -96,6 +96,10 @@ def almanac_embed(when: str | None) -> discord.Embed:
                          description="Today (or any day) in Hone's Every-Day Book (1826): saints, flower, folklore.")
 @app_commands.describe(date="A day (5 november, nov 5, 5/11, tomorrow). Empty: today")
 async def almanac(ctx: commands.Context, *, date: str | None = None):
+    """Today, or any day (`5 november`, `nov 5`, `25/12`, `tomorrow`), as William Hone's Every-Day Book (1826) has it:
+    the day's saints, a passage on its customs, folklore or history, its flower, and London's average temperature for
+    it in 1797-1816. Ask again for another passage: most days have two or three. 29 February has nothing (neither
+    1825 nor 1826 had one)."""
     await ctx.send(embed=almanac_embed(date))
 
 

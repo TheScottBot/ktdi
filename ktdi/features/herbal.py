@@ -70,6 +70,9 @@ def herbal_embed(entry: dict, depth: int = 0) -> discord.Embed:
 
 @commands.hybrid_command(name="herbal", description="Wisdom from a 1531 herbal, as translated by a machine. ⛏️ to dig.")
 async def herbal(ctx: commands.Context):
+    """A box of wisdom from a 1531 herbal, as badly read by a scanner and translated by Google Translate, with the
+    original picture. React ⛏️ to dig: each dig is one translation worse, down to 🪨 bedrock, the Latin as the scanner
+    read it."""
     if not entries:
         await ctx.send("The herbal hasn't been translated yet. See the README: Herbal.", ephemeral=True)
         return

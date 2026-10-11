@@ -1443,6 +1443,8 @@ async def np_objection(ctx: commands.Context, *, reason: str | None = None):
 @commands.guild_only()
 @app_commands.describe(reason="Optional: why this bit matters")
 async def shhh(ctx: commands.Context, *, reason: str | None = None):
+    """A big 🤫 SHHHH for everyone, naming the film if one's on (`/nowplaying`), with your reason if you give one. Pings
+    nobody."""
     movie = current_movie(ctx.guild.id)
     if movie and movie.started_at:
         line = random.choice(SHHH_DURING_LINES).format(title=movie.name)

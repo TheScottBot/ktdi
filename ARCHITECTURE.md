@@ -203,8 +203,13 @@ one intimidating wall: the front page (`help.START_HERE`'s picks, then one line 
 section privately for whoever picks it), a section's page (`/help old oddities`: each command once, a group as
 `/quote …`), and one command in detail (`/help quote`). Features extend it without `help.py` changing:
 
-- `help_extras(command) -> (extra description, [(field name, text, inline), ...])`: detail for `/help <command>`
-  and `/help <group> <subcommand>`. Return `("", [])` for commands that aren't yours.
+- A command's docstring is its `/help <command>` detail, written for the people using it (discord.py reads it as the
+  command's `help`): what it does beyond its one-line `description`, how to word things, examples. Every listed
+  command needs it (or `help_extras` fields): a test fails on a help page that only repeats the one-liner. The page
+  adds every way to type it, aliases included, by itself.
+- `help_extras(command) -> (extra description, [(field name, text, inline), ...])`: more detail for
+  `/help <command>` and `/help <group> <subcommand>` (fields, like `/abm`'s units). Return `("", [])` for commands
+  that aren't yours.
 - `HELP_CATEGORY = "🎲 Fun"`: the section the feature's commands are in. One command can differ with
   `extras={"category": ...}` (`/loot` and `/linux` are 🎲 Fun, the rest of `fun.py` is 💦 Rap sheet). Sections are
   `help.CATEGORIES` (in order, each with its front-page line); a new one goes after those; a command with no section
@@ -385,7 +390,7 @@ python -m pytest            # ~3 seconds
 2. **New feature** → new `ktdi/features/<name>.py` with `setup(bot)`, add it to `FEATURES`, optionally `help_extras`.
    New settings go in `config.py` and `.env.example`.
 3. **Help and README stay accurate.** Command descriptions appear in `/help` automatically; anything that isn't a
-   command (reactions, extra tips) needs `help_extras` / `main_help_lines`. Give new features a `HELP_CATEGORY`. Update the README command table.
+   command (reactions, extra tips) needs `help_extras` / `main_help_lines`. Give new features a `HELP_CATEGORY`, and each command a docstring for its `/help` page. Update the README command table.
 4. **Data:** reads through `db.scope()`, writes record the current server, edits target the row's own server,
    schema changes are additive upgrades in `db._upgrade()`.
 5. **Privacy:** nothing about `/books` or `/rpg` use may be logged against a person, and where someone is

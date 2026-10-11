@@ -73,6 +73,9 @@ def enquire_embed(query: str | None) -> discord.Embed:
                          description="The Victorian answer to anything, from Enquire Within (1856). Or a random hint.")
 @app_commands.describe(anything="What you want to know (candles, mackerel, whist, ink stains...). Empty: random")
 async def enquire(ctx: commands.Context, *, anything: str | None = None):
+    """The Victorian answer to anything, from Enquire Within Upon Everything (1856): how to light a candle, choose a
+    mackerel, play whist or fold a nightcap. If the book has several hints on it, you get one and it says how many
+    more. On its own: a random hint."""
     await ctx.send(embed=enquire_embed(anything))
 
 

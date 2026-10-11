@@ -122,6 +122,10 @@ def household(query: str | None) -> discord.Embed:
                        description="Mrs Beeton (1861): recipes by dish or ingredient, and her advice on running a house.")
 @app_commands.describe(dish="A dish or ingredient (almond soup, eels, pudding...). Empty: random")
 async def beeton(ctx: commands.Context, *, dish: str | None = None):
+    """`/beeton recipe <dish>` finds a recipe by name (almond soup) or by ingredient (eels: one recipe, with the others
+    named), with her ingredients, method, time, cost in 1861 money, season and servings, and often her aside on where
+    the food comes from. No dish: a random one. `/beeton advice <topic>` is her advice on running a house (servants,
+    dinner, early rising, a will). Typed, `!beeton toad in the hole` is a recipe."""
     await ctx.send(embed=recipe(dish))
 
 
