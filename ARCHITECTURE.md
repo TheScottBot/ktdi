@@ -46,9 +46,10 @@ ktdi/
 ├── config.py          every setting from .env, in one place
 ├── db.py              SQLite connection, schema, upgrades, shared state (scope())
 ├── common.py          helpers shared by features (Reply, send_reply/respond, NO_PINGS, get_member, common.bot)
-├── oldbooks.py        what the 📜 Old books dictionaries (/vulgartongue, /deadword, /devilsdictionary, /dream) share:
-│                      Dictionary (look_up, named_in, uses, same_name, autocomplete), uses_embed, fit, clip. A new
-│                      dictionary command should be a Dictionary plus how its entries look, nothing more
+├── oldbooks.py        what the 📜 Old books lookups (/vulgartongue, /deadword, /devilsdictionary, /dream, /phrase,
+│                      /beeton, /enquire) share: Dictionary (look_up, named_in, uses, one_of, same_name,
+│                      autocomplete), uses_embed, fit, clip, escape. A new old-book command should be a Dictionary
+│                      plus how its entries look, nothing more
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
 │   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
@@ -65,6 +66,9 @@ ktdi/
 │   ├── deadword.py    /deadword: words English stopped using (Mackay, 1874), looked up or at random
 │   ├── devils.py      /devilsdictionary: Bierce's cynical definitions (1911), looked up or at random
 │   ├── dream.py       /dream: what a dream foretells (Miller, 1901), by thing or whole dream, or at random
+│   ├── phrase.py      /phrase: where an idiom comes from (Brewer, 1898), the nearest idiom however it's worded
+│   ├── beeton.py      /beeton recipe and advice: Mrs Beeton (1861), recipes by dish or ingredient, household advice
+│   ├── enquire.py     /enquire: a hint on anything from Enquire Within Upon Everything (1856)
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
@@ -112,6 +116,13 @@ ktdi/
     ├── dream.json     /dream's entries (Miller, 1901, Gutenberg), built by tools/dream_build.py the same way
     │                  (dream_curation.json, tests/dream_left_out.sha256.json). All three allowlist builds share
     │                  tools/gutenberg.py: downloading (falling back to Gutenberg's mirror) and the build run itself
+    ├── beeton.json    /beeton's recipes and advice (Gutenberg), built by tools/beeton_build.py from an allowlist of
+    │                  paragraph numbers (beeton_curation.json, with "no_aside" for recipes whose aside is hidden).
+    │                  Numbered-paragraph books split with gutenberg.numbered_sections, shared with Enquire Within
+    ├── enquire.json   /enquire's hints (Gutenberg), built by tools/enquire_build.py: risky topics left out whole, the
+    │                  rest from an allowlist keyed "number. title" (enquire_curation.json; the book reuses two numbers)
+    ├── phrases.json   /phrase's idioms: hand-picked from Brewer's Dictionary of Phrase and Fable (1898, archive.org
+    │                  scan; not on Gutenberg), OCR mended against the page, each with its page in the scan
     ├── insurance.py   /insurance's two clocks (microwave: real cover; car: the countdown shown), from ID + minute
     ├── herbal.json    /herbal's data: built by tools/herbal_build.py (archive.org OCR -> Google Sheets' GOOGLETRANSLATE)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths

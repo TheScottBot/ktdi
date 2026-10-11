@@ -105,3 +105,13 @@ def test_look_up_tries_the_headword_then_uses_then_spelling():
     assert look("drunk") == ("uses", ["Bosky", "Fuddle"])  # Not a headword: the entries that mean it
     assert look("fudle") == ("close", ["Fuddle"])  # Nothing uses it, but it's spelt like one
     assert look("xyzzy") is None
+
+
+def test_look_up_close_first_prefers_the_nearest_entry_to_its_uses():
+    idioms = [{"w": "To rain cats and dogs", "text": "Very heavily."},
+              {"w": "Cat and dog life", "text": "Always quarrelling, as cats and dogs do; raining blows."}]
+    index = fuzzy.index((e, e["w"]) for e in idioms)
+    plain = fuzzy.look_up("raining cats and dogs", index, idioms, lambda e: e["text"])
+    assert plain.kind == "uses"  # By default, the entries whose text uses the words
+    found = fuzzy.look_up("raining cats and dogs", index, idioms, lambda e: e["text"], close_first=True)
+    assert (found.kind, found.entries) == ("close", [idioms[0]])

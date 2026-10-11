@@ -1,5 +1,5 @@
 """Finding what someone means, however they type it: the loose matching behind /cure, /plant, /vulgartongue,
-/deadword, /devilsdictionary, /dream and /etiquette. No AI.
+/deadword, /devilsdictionary, /dream, /phrase and /etiquette. No AI.
 
 A name matches what was typed word by word, in any order, with small typos allowed ("my throat is tickly" finds
 "tickly throat", "diarhea" finds "diarrhoea"), or failing that as a whole phrase spelt nearly the same. Filler words
@@ -108,13 +108,16 @@ class LookUp(Generic[T]):
 
 
 def look_up(query: str, entries: Index, items: list[T], text: Callable[[T], str], meaning_first: bool = True,
-            spelling: float = STRICT_SPELLING) -> LookUp | None:
-    """A dictionary lookup, as /vulgartongue, /deadword and /devilsdictionary do it: the word's own entry if it's a
-    headword; otherwise the entries whose text uses it ("drunk" finds every word for drunk); otherwise an entry spelt
-    like it; otherwise None."""
+            spelling: float = STRICT_SPELLING, close_first: bool = False) -> LookUp | None:
+    """A dictionary lookup, as the 📜 Old books commands do it: the word's own entry if it's a headword; otherwise the
+    entries whose text uses it ("drunk" finds every word for drunk); otherwise an entry spelt like it; otherwise None.
+    With close_first, an entry close to what was typed comes before the ones that use it: for idioms, where "raining
+    cats and dogs" means the entry "To rain cats and dogs", not every entry that mentions cats."""
     match = best_match(query, entries, spelling=spelling)
     if match and match.exact:
         return LookUp("exact", [match.thing])
+    if match and close_first:
+        return LookUp("close", [match.thing])
     found = containing(query, items, text, meaning_first)
     if found:
         return LookUp("uses", found)

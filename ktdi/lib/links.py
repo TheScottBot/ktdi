@@ -1,5 +1,5 @@
 """Links into old books at the exact spot, for /cure, /plant, /vulgartongue, /etiquette, /deadword,
-/devilsdictionary, /dream and /weather.
+/devilsdictionary, /dream, /phrase and /weather.
 
 Project Gutenberg books: a link to the book's web page with a text fragment (#:~:text=...), so the browser scrolls to
 the passage and highlights it (Chrome, Edge, Safari, and Firefox since 131; any other browser just opens the book).

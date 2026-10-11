@@ -44,10 +44,7 @@ def dictionary(entries: list[dict]) -> oldbooks.Dictionary:
 DICTIONARY = dictionary(ENTRIES)
 
 
-def escape(text: str) -> str:
-    """Escaped for Discord, with the book's _italics_ kept as italics and its -- as dashes."""
-    text = re.sub(r"\s*--\s*", "—", text)
-    return re.sub(r"\\_(.+?)\\_", r"*\1*", discord.utils.escape_markdown(text))
+escape = oldbooks.escape
 
 
 def url(entry: dict) -> str:

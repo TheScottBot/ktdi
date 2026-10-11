@@ -116,3 +116,15 @@ def test_download_tries_each_source(monkeypatch):
 def test_kept_is_the_allowlist_in_book_order():
     entries = [{"word": "A"}, {"word": "B"}, {"word": "A"}, {"word": "C"}]
     assert gutenberg.kept(entries, ["C", "A"]) == [{"word": "A"}, {"word": "A"}, {"word": "C"}]
+
+
+def test_one_of_picks_a_passage_and_counts_the_rest(book, monkeypatch):
+    monkeypatch.setattr(oldbooks.random, "choice", lambda options: options[0])
+    assert book.one_of("reason") == (REASON_V, 1)  # Two entries with the name: the first, and one more
+    assert book.one_of("eel") == (EEL, 0)
+    assert book.one_of(None) == (EEL, 0)  # Nothing asked: any
+    assert book.one_of("zzqx") is None
+
+
+def test_escape_keeps_the_books_italics_and_dashes():
+    assert oldbooks.escape("A _very_ fine*thing -- truly") == r"A *very* fine\*thing—truly"

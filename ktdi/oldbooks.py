@@ -1,5 +1,5 @@
-"""Shared by the 📜 Old books dictionary commands (/vulgartongue, /deadword, /devilsdictionary, /dream): a book of
-entries looked up by headword, and the replies they have in common.
+"""Shared by the 📜 Old books commands (/vulgartongue, /deadword, /devilsdictionary, /dream, /phrase, /beeton,
+/enquire): a book of entries looked up by headword, and the replies they have in common.
 
 A command makes a Dictionary of its entries, then asks it to look things up (the headword's entry, else the entries
 that use the word, else one spelt like it: fuzzy.look_up), for a random entry, or for autocomplete. How an entry looks
@@ -42,6 +42,12 @@ def fit(paragraphs: list[str], limit: int) -> str:
     return text
 
 
+def escape(text: str) -> str:
+    """A Gutenberg book's text made safe for Discord, with its _italics_ kept as italics and its -- as dashes."""
+    text = re.sub(r"\s*--\s*", "—", text)
+    return re.sub(r"\\_(.+?)\\_", r"*\1*", discord.utils.escape_markdown(text))
+
+
 def shown_typed(query: str) -> str:
     """What someone typed, tidied and made safe to show back."""
     return discord.utils.escape_markdown(" ".join(query.split())[:TYPED_LENGTH])
@@ -49,11 +55,12 @@ def shown_typed(query: str) -> str:
 
 class Dictionary(Generic[T]):
     """A book's entries, looked up by any of their names (`names`: "BABE or BABY" is both), with `text` the part to
-    search for a word's uses. `meaning_first`: see fuzzy.containing. `shown_name` is a name as autocomplete offers it."""
+    search for a word's uses. `meaning_first`: see fuzzy.containing; `close_first`: see fuzzy.look_up. `shown_name` is
+    a name as autocomplete offers it."""
 
     def __init__(self, entries: list[T], names: Callable[[T], Iterable[str]], text: Callable[[T], str],
-                 meaning_first: bool = True, shown_name: Callable[[str], str] = str):
-        self.entries, self.text, self.meaning_first = entries, text, meaning_first
+                 meaning_first: bool = True, shown_name: Callable[[str], str] = str, close_first: bool = False):
+        self.entries, self.text, self.meaning_first, self.close_first = entries, text, meaning_first, close_first
         self.index = fuzzy.index((entry, name) for entry in entries for name in names(entry))
         self.names = sorted({shown_name(name) for entry in entries for name in names(entry)}, key=str.casefold)
         self._by_name: dict[str, list[T]] = {}
@@ -67,7 +74,17 @@ class Dictionary(Generic[T]):
         exact = self._by_name.get(" ".join(query.split()).casefold())
         if exact:
             return fuzzy.LookUp("exact", exact)
-        return fuzzy.look_up(query, self.index, self.entries, self.text, self.meaning_first)
+        return fuzzy.look_up(query, self.index, self.entries, self.text, self.meaning_first,
+                             close_first=self.close_first)
+
+    def one_of(self, query: str | None) -> tuple[T, int] | None:
+        """For books of passages rather than definitions (Beeton's advice, Enquire Within): one passage on what was
+        typed, picked at random from all that are (see look_up), and how many others there are; or (nothing typed)
+        any passage. None if nothing's about it."""
+        if not query or not fuzzy.words(query):
+            return random.choice(self.entries), 0
+        found = self.look_up(query)
+        return (random.choice(found.entries), len(found.entries) - 1) if found else None
 
     def named_in(self, query: str) -> list[T]:
         """The entries for a name somewhere in what was typed, the longest name first: "I dreamt about baby carriages

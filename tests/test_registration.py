@@ -10,13 +10,14 @@ from ktdi.bot import KTDIBot, describe_options
 from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
-SLASH_COMMANDS = ["abm", "anime", "bad", "badbonk", "bail", "blame", "books", "bribe", "campaign", "committee",
-                  "cure", "deadword", "devilsdictionary", "dream", "etiquette", "expunge", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot",
-                  "nowplaying", "plant", "quote", "rapsheet", "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
+SLASH_COMMANDS = ["abm", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books", "bribe", "campaign", "committee",
+                  "cure", "deadword", "devilsdictionary", "dream", "enquire", "etiquette", "expunge", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot",
+                  "nowplaying", "phrase", "plant", "quote", "rapsheet", "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
                   "tdoi", "timezone", "vulgartongue", "wars", "weather", "whospray"]
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
 HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
+    "beeton": ["advice", "recipe"],
     "committee": ["funds", "ledger", "propose", "spend"],
     "etiquette": ["gentleman", "gentlethem", "gentlewoman", "remind"],
     "vulgartongue": ["insult", "lookup", "random"],
@@ -109,7 +110,9 @@ def test_main_help_list(loaded_bot):
     asyncio.run(help_feature.help_command.callback(ctx))
     embed = ctx.last.embed
     assert ctx.last.view is None  # fits on one page, so no buttons
-    assert [f.name for f in embed.fields] == [
+    # In order; a category too long for one field carries on in the next ("📜 Old books (cont.)").
+    categories = list(dict.fromkeys(f.name.removesuffix(" (cont.)") for f in embed.fields))
+    assert categories == [
         "💦 Rap sheet", "🎲 Fun", "📜 Old books", "🎬 Movie night", "📏 Measurements", "💬 Quotes", "🗓️ Campaigns",
         "🔧 Utilities"]
     fields = {f.name: f.value for f in embed.fields}
@@ -181,7 +184,8 @@ def test_help_buttons_flip_pages(loaded_bot, monkeypatch):
         await help_feature.help_command.callback(ctx)
         view = ctx.last.view
         assert isinstance(view, help_feature.HelpPages)
-        assert len(view.pages) == -(-len(help_feature.CATEGORY_ORDER) // 2)  # two categories a page, rounded up
+        fields = help_feature.category_fields(help_feature.main_help_lines(ctx))
+        assert len(view.pages) == -(-len(fields) // 2)  # two fields a page, rounded up
         assert view.previous_page.disabled and not view.next_page.disabled
         interaction = Interaction(scott)
         await view.next_page.callback(interaction)

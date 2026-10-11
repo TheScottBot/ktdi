@@ -6,6 +6,7 @@ ktdi/lib/<name>_curation.json, as {"keep": [...]}), so nothing taken out (slurs 
 """
 
 import json
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -41,30 +42,72 @@ def download(book: int, timeout: int = 60) -> str:
     raise SystemExit("Couldn't download the book:\n  " + "\n  ".join(problems))
 
 
+# A paragraph starting with its number: "110. INGREDIENTS.--...", "1000. Lighting Candles." (not "stock No.\n105.")
+NUMBERED = re.compile(r"(?:\A|\n[ \t]*\n)(\d+)\.\s+")
+CAPITALS = re.compile(r"^[^a-z]*[A-Z][^a-z]*$")
+ILLUSTRATION = re.compile(r"^\[Illustration.*\]$")
+
+
+def is_heading(line: str) -> bool:
+    """A line in capitals ("ALMOND SOUP.", "II.", "CUCUMBER SOUP (French Recipe).", brackets and "&c." aside), one
+    that starts in capitals and goes on in small letters ("YORKSHIRE PUDDING, to serve with hot Roast Beef."), or a
+    subtitle in brackets on its own ("(_Economical_.)", "_(More Economical.)_")."""
+    line = line.replace("_", "")
+    return bool(re.fullmatch(r"\(.*\)\.?", line) or CAPITALS.match(re.sub(r"\([^)]*\)|&c", "", line))
+                or (len(line) < 80 and re.match(r"[A-Z][A-Z'’ -]{3,}, [a-z]", line)))
+
+
+def numbered_sections(text: str) -> list[dict]:
+    """A book of numbered paragraphs (Beeton, Enquire Within) as {"number": 110, "headings": [...], "text": ...}.
+    A section runs to the next number. Lines in capitals just before a number ("ALMOND SOUP.", "I.") are that
+    section's headings, not the end of the one before; the text is the section's own lines, number taken off."""
+    def split_headings(lines: list[str]) -> list[str]:
+        """Take the lines in capitals off the end (they head the next section)."""
+        headings = []
+        while lines and (not lines[-1].strip() or is_heading(lines[-1].strip())
+                         or ILLUSTRATION.match(lines[-1].strip())):
+            line = lines.pop().strip()
+            if line and not ILLUSTRATION.match(line):  # Pictures between a title and its number aren't headings
+                headings.insert(0, line)
+        return headings
+
+    starts = list(NUMBERED.finditer(text))
+    headings = split_headings(text[:starts[0].start()].rstrip().split("\n")) if starts else []
+    sections = []
+    for i, match in enumerate(starts):
+        end = starts[i + 1].start() if i + 1 < len(starts) else len(text)
+        lines = text[match.end():end].rstrip().split("\n")
+        next_headings = split_headings(lines)
+        sections.append({"number": int(match.group(1)), "headings": headings, "text": "\n".join(lines).strip()})
+        headings = next_headings
+    return sections
+
+
 def curation_file(name: str) -> Path:
     return LIB / f"{name}_curation.json"
 
 
-def kept(entries: list[dict], keep: list[str]) -> list[dict]:
-    """The entries whose headword is on the allowlist, in book order."""
+def kept(entries: list[dict], keep: list, key: Callable[[dict], object] = lambda entry: entry["word"]) -> list[dict]:
+    """The entries on the allowlist (by headword, or whatever `key` says identifies one), in book order."""
     wanted = set(keep)
-    return [entry for entry in entries if entry["word"] in wanted]
+    return [entry for entry in entries if key(entry) in wanted]
 
 
 def build_from_allowlist(book: int, name: str, entries: Callable[[str], list[dict]],
                          build: Callable[[str, dict], dict] | None = None,
-                         headword: Callable[[str], str] = lambda key: key, report: Callable[[dict], str] = lambda d: ""):
+                         headword: Callable[[str], object] = lambda key: key, report: Callable[[dict], str] = lambda d: "",
+                         key: Callable[[dict], object] = lambda entry: entry["word"]):
     """The whole of an allowlist build tool: download the book, keep what lib/<name>_curation.json lists (or whatever
     `build` makes of it), write lib/<name>.json, and stop with an error if anything listed wasn't found (the book's
-    been re-transcribed and a headword's changed). `headword` gets the headword from a "keep" key; `report` adds to
-    the summary."""
+    been re-transcribed and a headword's changed). `key` is what identifies an entry on the allowlist (its headword,
+    or its paragraph number); `headword` gets that from a "keep" item; `report` adds to the summary."""
     text = download(book)
     curation = json.loads(curation_file(name).read_text(encoding="utf-8"))
-    data = build(text, curation) if build else {"entries": kept(entries(text), curation["keep"])}
+    data = build(text, curation) if build else {"entries": kept(entries(text), curation["keep"], key)}
     (LIB / f"{name}.json").write_text(json.dumps(data, ensure_ascii=False, indent=0), encoding="utf-8")
     print(f"{len(data['entries'])} entries kept of {len(entries(text))}.{report(data)}")
-    found = {entry["word"] for entry in data["entries"]}
-    missing = [key for key in curation["keep"] if headword(key) not in found]
+    found = {key(entry) for entry in data["entries"]}
+    missing = [str(item) for item in curation["keep"] if headword(item) not in found]
     if missing:
         print("In the curation but not found in the book:", ", ".join(missing))
         sys.exit(1)
