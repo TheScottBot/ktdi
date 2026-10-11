@@ -11,7 +11,7 @@ from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "anime", "bad", "badbonk", "bail", "blame", "books", "bribe", "campaign", "committee",
-                  "cure", "etiquette", "expunge", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot",
+                  "cure", "deadword", "etiquette", "expunge", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot",
                   "nowplaying", "plant", "quote", "rapsheet", "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
                   "tdoi", "timezone", "vulgartongue", "wars", "weather", "whospray"]
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
@@ -110,7 +110,7 @@ def test_main_help_list(loaded_bot):
     embed = ctx.last.embed
     assert ctx.last.view is None  # fits on one page, so no buttons
     assert [f.name for f in embed.fields] == [
-        "💦 Rap sheet", "🎲 Fun", "🎬 Movie night", "📏 Measurements", "💬 Quotes", "🗓️ Campaigns",
+        "💦 Rap sheet", "🎲 Fun", "📜 Old books", "🎬 Movie night", "📏 Measurements", "💬 Quotes", "🗓️ Campaigns",
         "🔧 Utilities"]
     fields = {f.name: f.value for f in embed.fields}
     assert "`/quote add | claim | delete | dissociate | last | random | search | show`: " in fields["💬 Quotes"]

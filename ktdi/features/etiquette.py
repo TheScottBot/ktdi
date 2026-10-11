@@ -21,7 +21,7 @@ from discord.ext import commands
 
 from ktdi.lib import etiquette as situations
 
-HELP_CATEGORY = "🎲 Fun"
+HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "etiquette.json"
 BOOKS = {
     "routledge": ("Routledge's Manual of Etiquette (1860s)", "https://www.gutenberg.org/ebooks/12426"),

@@ -280,10 +280,11 @@ SCHEMA = [
         channel_id INTEGER NOT NULL,
         actor_id   INTEGER NOT NULL,
         target_id  INTEGER NOT NULL,
-        weapon     TEXT NOT NULL,  -- 'spray', 'bad' or 'badbonk'
+        weapon     TEXT NOT NULL,  -- 'spray', 'bad', 'badbonk' or 'insult'
         at         TEXT NOT NULL,  -- ISO 8601, UTC
         war_id     INTEGER,        -- the war it was part of, if any
-        covered    INTEGER NOT NULL DEFAULT 0  -- insurance paid out on it (so it's not a casualty)
+        covered    INTEGER NOT NULL DEFAULT 0,  -- insurance paid out on it (so it's not a casualty)
+        detail     TEXT             -- for an insult (/vulgartongue insult), which one
     )
     """,
     """
@@ -371,6 +372,8 @@ def _upgrade() -> None:
     conn.execute("UPDATE spray_futures SET amount = stake WHERE amount IS NULL")
     if "covered" not in _columns("hostilities"):
         conn.execute("ALTER TABLE hostilities ADD COLUMN covered INTEGER NOT NULL DEFAULT 0")
+    if "detail" not in _columns("hostilities"):
+        conn.execute("ALTER TABLE hostilities ADD COLUMN detail TEXT")
     # Insurance covers being bad (/bad, /badbonk) as well as sprays.
     if "kind" not in _columns("insurance_claims"):
         conn.execute("ALTER TABLE insurance_claims ADD COLUMN kind TEXT NOT NULL DEFAULT 'spray'")

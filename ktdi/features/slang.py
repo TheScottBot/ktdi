@@ -18,7 +18,7 @@ from discord.ext import commands
 
 from ktdi.lib import cure as lookup
 
-HELP_CATEGORY = "🎲 Fun"
+HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "slang.json"
 SOURCE = "Grose's Dictionary of the Vulgar Tongue (1811)"
 SOURCE_URL = "https://www.gutenberg.org/ebooks/5402"
@@ -100,8 +100,7 @@ def slang_embed(query: str | None) -> discord.Embed:
                          description="Grose never wrote that down. Try a plainer word (drunk, fool, money, run away).")
 
 
-def insult_text(insulter: discord.abc.User, person: discord.abc.User) -> str:
-    entry = random.choice(INSULTS)
+def insult_text(insulter: discord.abc.User, person: discord.abc.User, entry: dict) -> str:
     return (f"🎩 {insulter.mention} has insulted {person.mention}, in the words of 1811:\n"
             f"# {display_word(entry['word'])}!\n> {discord.utils.escape_markdown(entry['text'])}\n-# {SOURCE}")
 
@@ -124,8 +123,13 @@ async def slang_random(ctx: commands.Context):
 @slang.command(name="insult", description="Insult someone, in the words of 1811.")
 @app_commands.describe(person="Who's getting it")
 async def slang_insult(ctx: commands.Context, person: discord.Member):
-    await ctx.send(insult_text(ctx.author, person),
+    entry = random.choice(INSULTS)
+    await ctx.send(insult_text(ctx.author, person, entry),
                    allowed_mentions=discord.AllowedMentions(users=[person], everyone=False, roles=False))
+    if ctx.guild:  # Insults are hostile acts: enough of them is a diplomatic incident (/wars).
+        from ktdi.features import wars
+        await wars.hostility(ctx.guild.id, ctx.channel.id, ctx.author.id, person.id, "insult",
+                             detail=display_word(entry["word"]))
 
 
 @slang.autocomplete("word")

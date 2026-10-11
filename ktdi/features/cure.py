@@ -18,7 +18,7 @@ from discord.ext import commands
 
 from ktdi.lib import cure as lookup
 
-HELP_CATEGORY = "🎲 Fun"
+HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "cures.json"
 SOURCE = "Culpeper's Complete Herbal (1653)"
 SOURCE_URL = "https://www.gutenberg.org/ebooks/49513"

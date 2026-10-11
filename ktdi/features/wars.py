@@ -5,9 +5,11 @@ Every act of hostility (spraying or telling off someone else; spraying yourself 
 `hostilities`. When CONFLICT_ACTS of them land in one channel within CONFLICT_WINDOW, a conflict has started; nothing's
 said. Each act in that channel after that joins it, until nobody's done anything for CEASEFIRE. Then ceasefire_loop
 ends it and classifies it: a war if WAR_ATTACKERS or more people attacked, or a special military operation if it was
-one person on a spree (someone firing back turns an operation into a war). It's named from what happened (how long,
-when, which weapon, who suffered) and the report is posted there. Conflicts stay in their channel: separate stupidity
-in two places is two wars, even on servers that share state. Acts reach here through fun.after_spray and fun.tell_off.
+one person on a spree (someone firing back turns an operation into a war). Insults (/vulgartongue insult) are hostile
+too, but only words: a burst with fewer than CONFLICT_ACTS sprays and bads in it is a diplomatic incident, its status
+set by how many insults flew ("Diplomatic relations are tense" up to "A cold war has been declared"). It's named from
+what happened (how long, when, which weapon or insult, who suffered) and the report is posted there. Conflicts stay in their channel: separate stupidity
+in two places is two wars, even on servers that share state. Acts reach here through fun.after_spray, fun.tell_off and slang.slang_insult.
 Sprays weren't timestamped before this, so the archives only go back to when it was added.
 """
 
@@ -30,7 +32,11 @@ WAR_ATTACKERS = 2  # A war if this many people attacked; one person alone is a s
 CEASEFIRE = timedelta(minutes=10)  # It's over once nobody's done anything for this long.
 DOMINANT_SHARE = 0.6  # A war fought mostly with one weapon is named after it.
 HISTORY_SHOWN = 10
-WEAPONS = ["spray", "bad", "badbonk"]
+WEAPONS = ["spray", "bad", "badbonk", "insult"]
+PHYSICAL = {"spray", "bad", "badbonk"}  # Insults are only words: they make a diplomatic incident, not a war.
+# A diplomatic incident's status, by how many insults flew: (at least this many, status).
+STATUSES = [(13, "A cold war has been declared."), (9, "Diplomatic relations have broken down."),
+            (6, "Ambassadors have been recalled."), (0, "Diplomatic relations are tense.")]
 
 ORDINALS = ["First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth", "Tenth", "Eleventh",
             "Twelfth", "Thirteenth", "Fourteenth", "Fifteenth", "Sixteenth", "Seventeenth", "Eighteenth", "Nineteenth",
@@ -113,7 +119,31 @@ OPERATION_OUTCOMES = [
     "The targets did not fire back. The committee is unsure whether that's dignity or fear.",
     "The commander withdrew to \"regroup\", and hasn't been seen since.",
 ]
+# Diplomatic incidents: insults, but no (real) shots fired. Named after the insults that flew, and when.
+INSULT_TITLES = ["The {insult} Affair", "The {insult} Incident", "The {insult} Communiqué"]
+DIPLOMATIC_TITLES = [
+    "The {weekday} Exchange of Notes",
+    "The Frosty Exchange at {time}",
+    "The {ordinal} Diplomatic Incident",
+    "The Recall of the Ambassadors",
+    "The {weekday} Frostiness",
+    "The Strongly Worded Letter of {year}",
+]
+DIPLOMATIC_CAUSES = [
+    "{first} said something. Accounts differ on what.",
+    "Remarks by {first}, which {first} says were taken out of context.",
+    "A breakdown in communications, beginning with {first}.",
+    "{first}'s choice of words, which the committee has noted.",
+]
+DIPLOMATIC_OUTCOMES = [
+    "Both parties issued statements. Nobody read them.",
+    "The ambassadors were recalled, then sent back because nobody else would have them.",
+    "Talks are ongoing. Nobody is talking.",
+    "Relations remain frosty but technically cordial.",
+    "Everyone agreed to never speak of it again, then spoke of it again.",
+]
 FOOTER = "Officially recognised as a war by the committee. No objections will be entertained."
+DIPLOMATIC_FOOTER = "Officially recorded as a diplomatic incident by the committee. It is not a war. Yet."
 OPERATION_FOOTER = ("Officially recognised as a special military operation by the committee. It is not a war, and "
                     "must not be called one.")
 
@@ -158,17 +188,20 @@ def open_war(channel_id: int):
     return (row[0], _time(row[1])) if row else None
 
 
-def record(guild_id: int, channel_id: int, actor_id: int, target_id: int, weapon: str, covered: bool = False) -> None:
-    """Log an act of hostility, quietly starting a conflict if it's tipped this channel into one."""
+def record(guild_id: int, channel_id: int, actor_id: int, target_id: int, weapon: str, covered: bool = False,
+           detail: str | None = None) -> None:
+    """Log an act of hostility, quietly starting a conflict if it's tipped this channel into one. `detail` is the
+    insult used, for an insult."""
     if actor_id == target_id:
         return  # Spraying yourself (/tdoi) is a cry for help, not an act of war.
     moment = now()
     war = open_war(channel_id)
     if war and moment - war[1] > CEASEFIRE:  # Over, but the loop hasn't got to it yet: this is separate.
         war = None
-    db.conn.execute("INSERT INTO hostilities (guild_id, channel_id, actor_id, target_id, weapon, at, war_id, covered) "
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)", (guild_id, channel_id, actor_id, target_id, weapon,
-                                                        moment.isoformat(), war[0] if war else None, int(covered)))
+    db.conn.execute("INSERT INTO hostilities (guild_id, channel_id, actor_id, target_id, weapon, at, war_id, covered, "
+                    "detail) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    (guild_id, channel_id, actor_id, target_id, weapon, moment.isoformat(), war[0] if war else None,
+                     int(covered), detail))
     if war:
         db.conn.execute("UPDATE wars SET last_act_at = ? WHERE id = ?", (moment.isoformat(), war[0]))
         db.conn.commit()
@@ -188,9 +221,10 @@ def record(guild_id: int, channel_id: int, actor_id: int, target_id: int, weapon
 
 
 async def hostility(guild_id: int, channel_id: int, actor_id: int, target_id: int, weapon: str,
-                    covered: bool = False) -> None:
-    """Every spray, /bad and /badbonk at someone comes here (from fun). Nothing's said: it's all reported after."""
-    record(guild_id, channel_id, actor_id, target_id, weapon, covered)
+                    covered: bool = False, detail: str | None = None) -> None:
+    """Every spray, /bad, /badbonk and insult at someone comes here (from fun and slang). Nothing's said: it's all
+    reported after."""
+    record(guild_id, channel_id, actor_id, target_id, weapon, covered, detail)
 
 
 # --- The record ---
@@ -202,16 +236,42 @@ class War:
     title: str
     started: datetime
     ended: datetime
-    acts: list[tuple[int, int, str, bool]]  # (actor, target, weapon, covered by insurance), in order
+    acts: list[tuple[int, int, str, bool, str | None]]  # (actor, target, weapon, covered, insult), in order
+
+    @property
+    def physical(self) -> list[tuple]:
+        """The sprays and bads: what makes it more than words."""
+        return [act for act in self.acts if act[2] in PHYSICAL]
+
+    @property
+    def is_diplomatic(self) -> bool:
+        """Mostly words: not enough sprays and bads for a war."""
+        return len(self.physical) < CONFLICT_ACTS
 
     @property
     def is_war(self) -> bool:
-        """Otherwise it's a special military operation: one person, on their own."""
-        return len(self.attackers) >= WAR_ATTACKERS
+        """Otherwise it's a special military operation (one person, on their own) or a diplomatic incident."""
+        return not self.is_diplomatic and len(self.attackers) >= WAR_ATTACKERS
+
+    @property
+    def category(self) -> str:
+        return "diplomatic" if self.is_diplomatic else "war" if self.is_war else "operation"
 
     @property
     def kind(self) -> str:
-        return "war" if self.is_war else "special military operation"
+        return {"diplomatic": "diplomatic incident", "war": "war", "operation": "special military operation"}[
+            self.category]
+
+    @property
+    def insults(self) -> Counter:
+        """The insults that flew, and how often each."""
+        return Counter(act[4] for act in self.acts if act[2] == "insult" and act[4])
+
+    @property
+    def status(self) -> str:
+        """For a diplomatic incident: how bad things got."""
+        flung = sum(act[2] == "insult" for act in self.acts)
+        return next(status for least, status in STATUSES if flung >= least)
 
     @property
     def attackers(self) -> Counter:
@@ -223,7 +283,7 @@ class War:
 
     @property
     def weapons(self) -> Counter:
-        return Counter(weapon for _, _, weapon, _ in self.acts)
+        return Counter(act[2] for act in self.acts)
 
     @property
     def belligerents(self) -> set[int]:
@@ -232,7 +292,7 @@ class War:
     @property
     def casualties(self) -> int:
         """Hits that went on someone's record (insurance paid out on the rest)."""
-        return sum(not covered for *_, covered in self.acts)
+        return sum(not act[3] for act in self.physical)
 
     @property
     def minutes(self) -> int:
@@ -256,9 +316,9 @@ def get_war(war_id: int) -> War | None:
                           "FROM wars WHERE id = ?", (war_id,)).fetchone()
     if row is None:
         return None
-    acts = db.conn.execute("SELECT actor_id, target_id, weapon, covered FROM hostilities WHERE war_id = ? "
+    acts = db.conn.execute("SELECT actor_id, target_id, weapon, covered, detail FROM hostilities WHERE war_id = ? "
                            "ORDER BY at, id", (war_id,)).fetchall()
-    return War(*row[:4], _time(row[4]), _time(row[5]), [(a, t, w, bool(c)) for a, t, w, c in acts])
+    return War(*row[:4], _time(row[4]), _time(row[5]), [(a, t, w, bool(c), d) for a, t, w, c, d in acts])
 
 
 def war_title(war: War, number: int, names: dict[str, str]) -> str:
@@ -272,10 +332,16 @@ def title_options(war: War, number: int, names: dict[str, str]) -> list[tuple[st
     operation) of its kind it is here; `names` has the "persecuted" and "aggressor" names."""
     start = war.started.astimezone(config.BOT_TIMEZONE)
     persecuted_id, _ = war.persecuted
+    insult = war.insults.most_common(1)[0][0] if war.insults else None
     facts = {"ordinal": ordinal(number), "year": start.year, "minutes_words": number_words(war.minutes),
              "time": start.strftime("%H:%M"), "weekday": start.strftime("%A"),
-             "acts_words": number_words(len(war.acts)), **names}
-    weapon, used = war.weapons.most_common(1)[0]
+             "acts_words": number_words(len(war.acts)), "insult": insult, **names}
+    if war.is_diplomatic:
+        weighted = [(title, 2) for title in DIPLOMATIC_TITLES]
+        if insult:
+            weighted += [(title, 4) for title in INSULT_TITLES]
+        return [(title.format(**facts), weight) for title, weight in weighted]
+    weapon, used = Counter(act[2] for act in war.physical).most_common(1)[0]  # Named after the weapons, not the words
     dominant = used / len(war.acts) >= DOMINANT_SHARE
     evening = start.hour >= 18 or start.hour < 4
     if war.is_war:
@@ -297,12 +363,46 @@ def title_options(war: War, number: int, names: dict[str, str]) -> list[tuple[st
     return [(title.format(**facts), weight) for title, weight in weighted]
 
 
-def report(war: War, number: int) -> discord.Embed:
-    """The committee's official historical record of a war or special military operation. `number` is its place in
-    the archives."""
+def when_text(war: War) -> str:
     start, end = war.started.astimezone(config.BOT_TIMEZONE), war.ended.astimezone(config.BOT_TIMEZONE)
-    when = (f"{start.day} {start.strftime('%B %Y')} · {start.strftime('%H:%M')}–{end.strftime('%H:%M')} · "
+    return (f"{start.day} {start.strftime('%B %Y')} · {start.strftime('%H:%M')}–{end.strftime('%H:%M')} · "
             f"{plural(war.minutes, 'minute')}")
+
+
+def diplomatic_report(war: War, number: int) -> discord.Embed:
+    """The record of a diplomatic incident: words, mostly."""
+    embed = discord.Embed(title=war.title[:256], color=discord.Color.light_grey(),
+                          description=f"{when_text(war)}\nClassified as: **diplomatic incident**\n"
+                                      f"**Status:** {war.status}")
+    embed.set_author(name="KTDI Historical Records Office")
+    flung = sum(act[2] == "insult" for act in war.acts)
+    embed.add_field(name="Notes exchanged", value=str(flung))
+    embed.add_field(name="Parties", value=str(len(war.belligerents)))
+    embed.add_field(name="Casualties", value="None (feelings aside)" if not war.physical else str(war.casualties))
+    envoy, sent = Counter(act[0] for act in war.acts if act[2] == "insult").most_common(1)[0]
+    insulted, received = Counter(act[1] for act in war.acts if act[2] == "insult").most_common(1)[0]
+    words = ", ".join(f"{word} ×{count}" if count > 1 else word for word, count in war.insults.most_common(6))
+    lines = [f"**Cause:** {war.rng('cause').choice(DIPLOMATIC_CAUSES).format(first=f'<@{war.acts[0][0]}>')}",
+             f"**Most offensive envoy:** <@{envoy}> — {plural(sent, 'insult')}",
+             f"**Most insulted:** <@{insulted}> — {plural(received, 'insult')}"]
+    if words:
+        lines.append(f"**Words exchanged:** {words}")
+    if war.physical:
+        shots = ", ".join(plural(war.weapons[w], w) for w in WEAPONS if w in PHYSICAL and war.weapons[w])
+        lines.append(f"**Shots fired:** {shots}. The committee is treating them as accidental.")
+    lines += [f"**Outcome:** {war.rng('outcome').choice(DIPLOMATIC_OUTCOMES)}",
+              f"**Historical significance:** {war.rng('significance').choice(SIGNIFICANCE)}"]
+    embed.add_field(name="\u200b", value="\n".join(lines)[:1024], inline=False)
+    embed.set_footer(text=f"{DIPLOMATIC_FOOTER}\nNumber {number} in the archives.")
+    return embed
+
+
+def report(war: War, number: int) -> discord.Embed:
+    """The committee's official historical record of a war, special military operation or diplomatic incident.
+    `number` is its place in the archives."""
+    if war.is_diplomatic:
+        return diplomatic_report(war, number)
+    when = when_text(war)
     embed = discord.Embed(title=war.title[:256], description=f"{when}\nClassified as: **{war.kind}**",
                           color=discord.Color.dark_gold() if war.is_war else discord.Color.dark_grey())
     embed.set_author(name="KTDI Historical Records Office")
@@ -344,7 +444,7 @@ async def ceasefires(moment: datetime) -> list[tuple[int, discord.Embed]]:
         db.conn.execute("UPDATE wars SET ended_at = last_act_at WHERE id = ?", (war_id,))
         war = get_war(war_id)
         earlier = archived(war.guild_id)
-        of_its_kind = sum(get_war(other).is_war == war.is_war for other in earlier if other <= war_id)
+        of_its_kind = sum(get_war(other).category == war.category for other in earlier if other <= war_id)
         names = {"persecuted": await member_name(war.guild_id, war.persecuted[0]),
                  "aggressor": await member_name(war.guild_id, war.aggressor[0])}
         war.title = war_title(war, of_its_kind, names)
@@ -382,7 +482,9 @@ def ensure_ceasefire_loop() -> None:
 
 
 # --- /wars ---
-@commands.hybrid_command(name="wars", description="The KTDI War Archives: every war and operation here, or one in full.")
+ICONS = {"war": "⚔️", "operation": "🪖", "diplomatic": "📨"}
+
+@commands.hybrid_command(name="wars", description="The KTDI War Archives: every war, operation and incident here.")
 @commands.guild_only()
 @app_commands.describe(number="Which one, in order (leave empty for the list)")
 async def wars(ctx: commands.Context, number: int | None = None):
@@ -396,12 +498,13 @@ async def wars(ctx: commands.Context, number: int | None = None):
             war = get_war(war_ids[n - 1])
             start = war.started.astimezone(config.BOT_TIMEZONE)
             acts = len(war.acts)
-            lines.append(f"`{n}.` {'⚔️' if war.is_war else '🪖'} **{war.title}**, "
+            lines.append(f"`{n}.` {ICONS[war.category]} **{war.title}**, "
                          f"{start.day} {start.strftime('%b %Y')} "
                          f"({acts} {'hostility' if acts == 1 else 'hostilities'})")
         embed = discord.Embed(title="📜 The KTDI War Archives", description="\n".join(lines),
                               color=discord.Color.dark_gold())
-        embed.set_footer(text="⚔️ war · 🪖 special military operation. /wars <number> for the full record.")
+        embed.set_footer(text="⚔️ war · 🪖 special military operation · 📨 diplomatic incident. "
+                              "/wars <number> for the full record.")
         await ctx.send(embed=embed)
         return
     if not 1 <= number <= len(war_ids):
@@ -420,6 +523,8 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
             "while it's going on.\n"
             f"• Once nobody's done anything for {int(CEASEFIRE.total_seconds() // 60)} minutes it's over: the "
             "committee names it after what happened and publishes the official report in that channel.\n"
+            "• Insults (`/vulgartongue insult`) count too, but they're only words: without enough sprays and bads "
+            "it's a diplomatic incident, from \"relations are tense\" to \"a cold war\".\n"
             "• Each channel's wars are its own. Spraying yourself doesn't count.")
     return "", [("Rules of engagement", text, False)]
 

@@ -84,3 +84,19 @@ def test_upgrades_insurance_claims_from_before_bad_was_covered(tmp_path):
     db.init(path)
     assert db.conn.execute("SELECT kind FROM insurance_claims").fetchone() == ("spray",)  # they were all sprays
     db.conn.close()
+
+
+def test_upgrades_hostilities_from_before_insults(tmp_path):
+    path = str(tmp_path / "old.db")
+    old = sqlite3.connect(path)
+    old.execute("CREATE TABLE hostilities (id INTEGER PRIMARY KEY AUTOINCREMENT, guild_id INTEGER NOT NULL,"
+                " channel_id INTEGER NOT NULL, actor_id INTEGER NOT NULL, target_id INTEGER NOT NULL,"
+                " weapon TEXT NOT NULL, at TEXT NOT NULL, war_id INTEGER)")
+    old.execute("INSERT INTO hostilities (guild_id, channel_id, actor_id, target_id, weapon, at)"
+                " VALUES (111, 600, 1, 2, 'spray', 'x')")
+    old.commit()
+    old.close()
+
+    db.init(path)
+    assert db.conn.execute("SELECT covered, detail FROM hostilities").fetchone() == (0, None)
+    db.conn.close()

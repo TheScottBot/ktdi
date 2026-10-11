@@ -257,3 +257,80 @@ def test_names_come_from_discord_when_not_cached(monkeypatch):
     assert run(REAL_MEMBER_NAME(111, 2)) == "Dave"
     monkeypatch.setattr(wars.common.bot, "get_guild", lambda guild_id: None, raising=False)
     assert run(REAL_MEMBER_NAME(111, 2)) == "Someone"
+
+
+# --- Diplomatic incidents: insults (/vulgartongue insult) ---
+def insult(user, target, channel, word="Captain Queernabs"):
+    from ktdi.features import slang
+    entry = next(e for e in slang.INSULTS if slang.display_word(e["word"]) == word)
+    original = slang.random.choice
+    slang.random.choice = lambda options: entry
+    try:
+        run(slang.slang_insult.callback(Ctx(user, channel=channel), target))
+    finally:
+        slang.random.choice = original
+
+
+def test_insults_alone_are_a_diplomatic_incident(at, front):
+    for i, word in enumerate(["Captain Queernabs", "Grinagog", "Captain Queernabs", "Grinagog", "Captain Queernabs"]):
+        at(10 * i)
+        insult(SCOTT if i % 2 else DAVE, DAVE if i % 2 else SCOTT, front, word)
+    war = current(front)
+    assert war.is_diplomatic and war.kind == "diplomatic incident" and war.category == "diplomatic"
+    assert war.status == "Diplomatic relations are tense." and war.casualties == 0
+    assert war.insults == {"Captain Queernabs": 3, "Grinagog": 2}
+    options = dict(wars.title_options(war, 1, {"persecuted": "Scott", "aggressor": "Dave"}))
+    assert options["The Captain Queernabs Affair"] == 4 and options["The First Diplomatic Incident"] == 2
+    assert not any("War" in title for title in options)
+    [(_, report)] = finish(at, 3600)
+    assert report.description.endswith("Classified as: **diplomatic incident**\n**Status:** Diplomatic relations are "
+                                       "tense.")
+    assert [(f.name, f.value) for f in report.fields[:3]] == [("Notes exchanged", "5"), ("Parties", "2"),
+                                                              ("Casualties", "None (feelings aside)")]
+    story = report.fields[3].value
+    assert "**Most offensive envoy:** <@2> — 3 insults" in story and "**Most insulted:** <@1> — 3 insults" in story
+    assert "**Words exchanged:** Captain Queernabs ×3, Grinagog ×2" in story and "Shots fired" not in story
+    assert report.footer.text.startswith(wars.DIPLOMATIC_FOOTER)
+
+
+@pytest.mark.parametrize("flung, status", [(4, "Diplomatic relations are tense."), (6, "Ambassadors have been recalled."),
+                                           (9, "Diplomatic relations have broken down."),
+                                           (13, "A cold war has been declared.")])
+def test_how_bad_relations_get(flung, status):
+    war = wars.War(1, 111, 600, "", wars.now(), wars.now(), [(1, 2, "insult", False, "Grinagog")] * flung)
+    assert war.status == status
+
+
+def test_a_few_shots_among_the_insults_is_still_diplomatic(at, front):
+    for i in range(4):
+        at(10 * i)
+        insult(SCOTT, DAVE, front)
+    at(50)
+    spray(DAVE, SCOTT, front)
+    war = current(front)
+    assert war.is_diplomatic and war.casualties == 1
+    [(_, report)] = finish(at, 3600)
+    assert "**Shots fired:** 1 spray. The committee is treating them as accidental." in report.fields[3].value
+    assert report.fields[2].value == "1"
+
+
+def test_enough_shots_and_its_a_war_with_insults_in_the_arsenal(at, front):
+    skirmish(at, front)  # 8 sprays and bads
+    at(170)
+    insult(SCOTT, DAVE, front)
+    war = current(front)
+    assert war.is_war and not war.is_diplomatic and war.casualties == 8  # Insults aren't casualties
+    options = dict(wars.title_options(war, 1, {"persecuted": "Scott", "aggressor": "Scott"}))
+    assert not any("Affair" in title for title in options)
+    [(_, report)] = finish(at, 3600)
+    assert "**Arsenal:** 4 sprays, 2 bads, 2 badbonks, 1 insult" in report.fields[3].value
+
+
+def test_the_archives_mark_diplomatic_incidents(at, front):
+    for i in range(4):
+        at(10 * i)
+        insult(SCOTT, DAVE, front)
+    finish(at, 3600)
+    ctx = Ctx(SCOTT)
+    run(wars.wars.callback(ctx))
+    assert ctx.last.embed.description.startswith("`1.` 📨 ")
