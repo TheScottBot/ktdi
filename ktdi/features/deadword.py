@@ -16,12 +16,13 @@ from discord import app_commands
 from discord.ext import commands
 
 from ktdi.common import choices
-from ktdi.lib import fuzzy
+from ktdi.lib import fuzzy, links
 
 HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "deadwords.json"
 SOURCE = "Mackay, Lost Beauties of the English Language (1874)"
-SOURCE_URL = "https://archive.org/details/cu31924096224880"
+BOOK = "cu31924096224880"  # The archive.org scan
+SOURCE_URL = links.archive_page(BOOK, None)
 SHOWN = 8  # Dead words listed when a word turns up in several meanings.
 LINE_LENGTH = 140
 
@@ -57,7 +58,8 @@ def word_embed(entry: dict) -> discord.Embed:
         source = f"\n-# {escape(entry['quote_source'])}" if entry.get("quote_source") else ""
         description += f"\n\n{quote}{source}"
     description += f"\n\n🪦 {random.choice(EPITAPHS)}"
-    embed = discord.Embed(title=f"📜 {escape(entry['word'])}"[:256], url=SOURCE_URL, description=description[:4096],
+    url = links.archive_page(BOOK, entry.get("page"), entry["word"])  # Open at its page, highlighted
+    embed = discord.Embed(title=f"📜 {escape(entry['word'])}"[:256], url=url, description=description[:4096],
                           color=discord.Color.dark_grey())
     embed.set_footer(text=SOURCE)
     return embed

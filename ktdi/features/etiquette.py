@@ -21,12 +21,13 @@ from discord.ext import commands
 
 from ktdi.common import choices
 from ktdi.lib import etiquette as situations
+from ktdi.lib import links
 
 HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "etiquette.json"
-BOOKS = {
-    "routledge": ("Routledge's Manual of Etiquette (1860s)", "https://www.gutenberg.org/ebooks/12426"),
-    "hartley": ("Hartley, The Gentlemen's Book of Etiquette (1860)", "https://www.gutenberg.org/ebooks/39293"),
+BOOKS = {  # (title, Project Gutenberg number)
+    "routledge": ("Routledge's Manual of Etiquette (1860s)", 12426),
+    "hartley": ("Hartley, The Gentlemen's Book of Etiquette (1860)", 39293),
 }
 FOR = {"ladies": "For ladies", "gentlemen": "For gentlemen"}
 # Words that make a rule about a gentleman or a lady, whatever it was tagged: gentlethem only gets rules without them.
@@ -87,7 +88,8 @@ WHO = {"gentleman": ("gentlemen", "🎩", "Gentleman"), "gentlewoman": ("ladies"
 def advice_embed(situation: str | None, who: str) -> discord.Embed:
     rules_for, emoji, word = WHO[who]
     rule, topic, found = rule_for(situation, pool(rules_for))
-    title, url = BOOKS[rule["book"]]
+    title, book = BOOKS[rule["book"]]
+    url = links.gutenberg(book, rule["text"])  # Open at the rule, highlighted
     shown = discord.utils.escape_markdown(" ".join((situation or "").split())[:80])
     heading = f"{emoji} {word}'s etiquette: {shown}" if shown else f"{emoji} {word}'s etiquette"
     intro = "" if found else random.choice(SILENT).format(situation=shown) + "\n"

@@ -82,6 +82,8 @@ ktdi/
     │                  (starting_first) and "which entries use this word" (containing). Used by /cure, /plant,
     │                  /vulgartongue, /deadword and /etiquette: use it for any new lookup rather than writing another
     ├── cure.py        /cure's and /plant's lookups: ailments and herbs, matched with fuzzy.py
+    ├── links.py       links into old books at the exact spot: Gutenberg text fragments (#:~:text=, scrolls to and
+    │                  highlights the passage) and archive.org pages (with the word highlighted)
     ├── cures.json     /cure's remedies and /plant's herbs, built by tools/cure_build.py from Culpeper's Complete
     │                  Herbal (Gutenberg)
     ├── herb_latin.json  /plant's Latin names, checked by hand, keyed by the start of Culpeper's herb names
@@ -92,7 +94,8 @@ ktdi/
     ├── etiquette.json /etiquette's rules: hand-picked, word for word, from Routledge's and Hartley's manuals
     │                  (1860s, Gutenberg), each tagged with its topics
     ├── deadwords.json /deadword's words: hand-picked from Mackay's Lost Beauties of the English Language
-    │                  (1874, archive.org scan), only ones really dead now, each with his definition and a quote
+    │                  (1874, archive.org scan), only ones really dead now, each with his definition and a quote,
+    │                  and its page in the scan (tools/deadword_pages.py)
     ├── slang.json     /vulgartongue's dictionary (Grose, 1811), built by tools/slang_build.py from an allowlist
     │                  (slang_curation.json: entries kept, and the insults). Slurs and anything that punches down
     │                  were reviewed out once; the repo only records what was kept, never what was removed

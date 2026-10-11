@@ -10,7 +10,7 @@ from ktdi.lib import fuzzy
 from tests.fakes import Ctx, User, run
 
 SCOTT = User(1, "scott")
-BEVER = {"word": "Bever", "meaning": "a drink between meals.",
+BEVER = {"word": "Bever", "meaning": "a drink between meals.", "page": 42,
          "quote": "Thirty meals a day, and ten bevers, a small trifle to suffice nature.",
          "quote_source": "Marlowe: Dr. Faustus"}
 BICKER = {"word": "Bicker", "meaning": "a drinking cup, a beaker.", "quote": None, "quote_source": None}
@@ -34,7 +34,19 @@ def test_a_dead_word_by_name_with_typos():
     assert embed.description == ("*A drink between meals.*\n\n"
                                  "> Thirty meals a day, and ten bevers, a small trifle to suffice nature.\n"
                                  "-# Marlowe: Dr. Faustus\n\n🪦 Here lies a perfectly good word.")
-    assert embed.footer.text == deadword.SOURCE and embed.url == deadword.SOURCE_URL
+    assert embed.footer.text == deadword.SOURCE
+    assert embed.url == "https://archive.org/details/cu31924096224880/page/n42/mode/2up?q=Bever"  # its page
+
+
+def test_a_word_without_a_page_opens_the_book():
+    assert deadword.deadword_embed("bicker").url == "https://archive.org/details/cu31924096224880?q=Bicker"
+
+
+def test_every_real_word_has_a_page_in_the_dictionary():
+    words = json.loads(deadword.DATA.read_text(encoding="utf-8"))
+    assert all(32 <= entry["page"] <= 329 for entry in words)  # Abear to Yule
+    pages = [entry["page"] for entry in words]
+    assert sum(b < a for a, b in zip(pages, pages[1:])) < 30  # In book order, give or take Mackay's own
 
 
 def test_a_verse_quote_is_quoted_line_by_line():

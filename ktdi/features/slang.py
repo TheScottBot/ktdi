@@ -17,12 +17,13 @@ from discord import app_commands
 from discord.ext import commands
 
 from ktdi.common import choices
-from ktdi.lib import fuzzy
+from ktdi.lib import fuzzy, links
 
 HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "slang.json"
 SOURCE = "Grose's Dictionary of the Vulgar Tongue (1811)"
-SOURCE_URL = "https://www.gutenberg.org/ebooks/5402"
+BOOK = 5402  # On Project Gutenberg
+SOURCE_URL = links.gutenberg(BOOK)
 SHOWN = 8  # Entries listed when a word turns up in several definitions.
 LINE_LENGTH = 140
 
@@ -57,7 +58,9 @@ def clip(text: str, limit: int) -> str:
 
 
 def entry_embed(entry: dict, query: str | None = None) -> discord.Embed:
-    embed = discord.Embed(title=f"📖 {display_word(entry['word'])}"[:256], url=SOURCE_URL,
+    # Its headword leads, as in the book, so even a two-word entry ("BENE. Good.") can be found and highlighted.
+    url = links.gutenberg(BOOK, f"{entry['word']}. {entry['text']}", least=2)
+    embed = discord.Embed(title=f"📖 {display_word(entry['word'])}"[:256], url=url,
                           description=discord.utils.escape_markdown(entry["text"])[:4096],
                           color=discord.Color.dark_teal())
     others = in_definitions(query, leave_out=entry) if query else []

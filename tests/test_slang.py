@@ -85,6 +85,9 @@ def test_a_word_by_name_with_typos():
         assert embed.title == "📖 Captain Queernabs" and embed.description == "A shabby ill-dressed fellow."
     assert slang.slang_embed("addlepate").title == "📖 Addle Pate"
     assert slang.slang_embed("cakey").title == "📖 Cake, or Cakey"  # either name
+    assert slang.slang_embed("captain queernabs").url == (
+        "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html"
+        "#:~:text=CAPTAIN%20QUEERNABS.%20A%20shabby%20ill%2Ddressed%20fellow.")  # Open at the entry
 
 
 def test_a_plain_word_finds_the_slang_for_it():

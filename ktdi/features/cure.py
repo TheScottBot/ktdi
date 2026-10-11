@@ -18,12 +18,13 @@ from discord.ext import commands
 
 from ktdi.common import choices
 from ktdi.lib import cure as lookup
-from ktdi.lib import fuzzy
+from ktdi.lib import fuzzy, links
 
 HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "cures.json"
 SOURCE = "Culpeper's Complete Herbal (1653)"
-SOURCE_URL = "https://www.gutenberg.org/ebooks/49513"
+BOOK = 49513  # On Project Gutenberg
+SOURCE_URL = links.gutenberg(BOOK)
 
 PLANETS = {"Saturn": "♄", "Jupiter": "♃", "Mars": "♂", "Venus": "♀", "Mercury": "☿", "the Sun": "☉", "the Moon": "☽"}
 
@@ -49,7 +50,7 @@ def remedy_text(remedy: dict) -> str:
 def cure_embed(query: str) -> discord.Embed:
     match = lookup.find(query)
     shown = discord.utils.escape_markdown(" ".join(query.split())[:80])
-    embed = discord.Embed(title=f"🌿 A cure for {shown}"[:256], url=SOURCE_URL, color=discord.Color.dark_green())
+    embed = discord.Embed(title=f"🌿 A cure for {shown}"[:256], color=discord.Color.dark_green())
     if match is None:
         remedy = random.choice(data["allheal"])
         embed.description = (f"Culpeper has never heard of *{shown}*, but swears by **{remedy['herb']}**:\n"
@@ -59,6 +60,7 @@ def cure_embed(query: str) -> discord.Embed:
         embed.description = f"**{remedy['herb']}**: {remedy_text(remedy)}"
         if fuzzy.words(query) != fuzzy.words(match.ailment.name):
             embed.description += f"\n-# Filed under: {match.ailment.name}"
+    embed.url = links.gutenberg(BOOK, remedy["text"])  # Open at the remedy, highlighted
     embed.set_footer(text=SOURCE)
     return embed
 
@@ -88,12 +90,15 @@ def plant_embed(query: str) -> discord.Embed:
     others = [a for a in herb["aliases"] if " ".join(fuzzy.words(a)) not in in_title]
     if others:
         lines.append(f"Also called {', '.join(others)}")
+    url = SOURCE_URL
     if herb["treats"]:
+        remedy = random.choice(herb_remedies[herb["name"]])
         lines.append(f"\n**Good for:** {', '.join(herb['treats'])}")
-        lines.append(f"> {remedy_text(random.choice(herb_remedies[herb['name']]))}")
+        lines.append(f"> {remedy_text(remedy)}")
+        url = links.gutenberg(BOOK, remedy["text"])  # Open at the remedy shown, highlighted
     else:
         lines.append("\nNothing on /cure's list, it turns out.")
-    embed = discord.Embed(title=f"🌿 {herb['name']}"[:256], url=SOURCE_URL, color=discord.Color.dark_green(),
+    embed = discord.Embed(title=f"🌿 {herb['name']}"[:256], url=url, color=discord.Color.dark_green(),
                           description="\n".join(lines)[:4096])
     embed.set_footer(text=SOURCE)
     return embed

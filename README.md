@@ -40,7 +40,7 @@ Grouped the same way as `/help`.
 
 ### 📜 Old books
 
-Advice, wisdom and words from books old enough to be out of copyright, and sometimes out of their minds.
+Advice, wisdom and words from books old enough to be out of copyright, and sometimes out of their minds. Each reply's title links to the exact spot in the book: Project Gutenberg pages scroll to the passage and highlight it (in most browsers), and archive.org scans open at the page with the word highlighted.
 
 | Command | What it does |
 |---|---|
@@ -228,7 +228,7 @@ ktdi/
 │   ├── rpg.py         # RPG rulebooks from Dropbox
 │   └── help.py        # asks each feature for its HELP_CATEGORY and help_extras(), so new features don't touch it
 ├── lib/               # no Discord code: unit conversions, reminder schedules, timezones, and the Calibre-Web, Dropbox, Letterboxd and AniList clients
-└── tools/             # one-off helpers: dropbox_login, herbal_build, cure_build, slang_build (python -m ktdi.tools.<name>)
+└── tools/             # one-off helpers: dropbox_login, herbal_build, cure_build, slang_build, deadword_pages (python -m ktdi.tools.<name>)
 tests/                 # pytest
 ```
 

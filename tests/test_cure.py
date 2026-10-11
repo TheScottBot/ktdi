@@ -202,6 +202,8 @@ def test_cure_embed(monkeypatch):
     assert embed.title == "🌿 A cure for my throat is tickly"
     assert embed.description == "**Sage**: It helps the **quinsy** \\*wonderfully\\*.\n-# Filed under: sore throat"
     assert embed.footer.text == "Culpeper's Complete Herbal (1653)"
+    assert embed.url == ("https://www.gutenberg.org/cache/epub/49513/pg49513-images.html"
+                         "#:~:text=It%20helps%20the%20quinsy")  # Open at the remedy; "*wonderfully*." isn't plain
     assert "Filed under" not in cure.cure_embed("sore throat").description  # asked for it by name
 
 
