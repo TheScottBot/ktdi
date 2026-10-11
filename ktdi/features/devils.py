@@ -103,7 +103,7 @@ def devils_embed(query: str | None) -> discord.Embed:
 
 
 @commands.hybrid_command(name="devils", aliases=["devil", "devilsdictionary"],
-                         description="Ambrose Bierce's cynical definition of a word, or a random one.")
+                         description="Ambrose Bierce's Devil's Dictionary, a cynical definition of a word, or a random one.")
 @app_commands.describe(word="A word to look up (bore, lawyer, love...). Empty: random")
 async def devils(ctx: commands.Context, *, word: str | None = None):
     await ctx.send(embed=devils_embed(word))

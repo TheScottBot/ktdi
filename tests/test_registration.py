@@ -143,7 +143,8 @@ def test_section_pages(loaded_bot):
     quotes = help_feature.section_page("💬 Quotes", lines["💬 Quotes"])
     assert "`/quote …`: Save and replay" in quotes.description  # Subcommands are on /help quote, not here
     rap = help_feature.section_page("💦 Rap sheet", lines["💦 Rap sheet"]).description
-    assert rap.startswith("Sprays, blame, bribes and the committee\n\n")
+    assert rap.startswith("Sprays, telling-offs, blame, bribes and the committee\n\n")
+    assert "`/bad [user]`: " in rap and "`/badbonk [user]`: " in rap  # Telling-offs go on the rap sheet
     assert "`/bail <user> <amount>`: " in rap and "React 💦: " in rap
     fun = help_feature.section_page("🎲 Fun", lines["🎲 Fun"]).description
     assert "`/loot`: " in fun and "`/anime`: " in fun

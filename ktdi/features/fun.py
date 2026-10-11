@@ -376,14 +376,13 @@ async def tell_off(ctx: commands.Context, user: discord.Member | None, gifs: lis
         await wars.hostility(ctx.guild.id, ctx.channel.id, ctx.author.id, user.id, weapon, covered)  # A war?
 
 
-@commands.hybrid_command(name="bad", description="Bad. Posts a random (non-violent) telling-off GIF.", extras=FUN)
+@commands.hybrid_command(name="bad", description="Bad. Posts a random (non-violent) telling-off GIF.")
 @app_commands.describe(user="Optional: who's being bad (it goes on their rap sheet)")
 async def bad(ctx: commands.Context, user: discord.Member | None = None):
     await tell_off(ctx, user, BAD_GIF_URLS, "bad")
 
 
-@commands.hybrid_command(name="badbonk", description="Bad, with a bonk. Posts a random (violent) telling-off GIF.",
-                         extras=FUN)
+@commands.hybrid_command(name="badbonk", description="Bad, with a bonk. Posts a random (violent) telling-off GIF.")
 @app_commands.describe(user="Optional: who's getting bonked (it goes on their rap sheet as being bad)")
 async def badbonk(ctx: commands.Context, user: discord.Member | None = None):
     await tell_off(ctx, user, BADBONK_GIF_URLS, "badbonk")

@@ -27,8 +27,8 @@ EMBED_FIELD_COUNT_LIMIT = 25
 # The sections, in this order, each with what's in it for the front page. A section a feature names that isn't here
 # goes after these, alphabetically (with no description).
 CATEGORIES = {
-    "💦 Rap sheet": "Sprays, blame, bribes and the committee",
-    "🎲 Fun": "Telling-offs, looting and the war archives",
+    "💦 Rap sheet": "Sprays, telling-offs, blame, bribes and the committee",
+    "🎲 Fun": "Looting, Linux, anime and the war archives",
     "📚 Words & wisdom": "Old dictionaries, idioms, slang, manners and gloom",
     "🔮 Old oddities": "Dreams, almanacs, herbs, witches and Mrs Beeton",
     "🎬 Movie night": "Countdowns, bingo, votes and ratings",
