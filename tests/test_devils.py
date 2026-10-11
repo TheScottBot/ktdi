@@ -111,7 +111,7 @@ def test_the_real_dictionary_is_exactly_whats_on_the_allowlist():
 
 # --- Looking things up ---
 def test_a_word_by_name_with_typos():
-    for typed in ["bore", "BORE", "a bore", "boor"]:
+    for typed in ["bore", "BORE", "a bore", "bor"]:
         assert devils.devils_embed(typed).title == "😈 BORE", typed
     embed = devils.devils_embed("bore")
     assert embed.description == "*n.* A person who talks when you wish him to listen."

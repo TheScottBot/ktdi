@@ -27,6 +27,8 @@ FILLER = {
 GOOD_ENOUGH = 0.6  # The lowest score that counts as a match.
 SPELLING = 0.95  # How much a whole-phrase spelling match counts, against a word-by-word one...
 STRICT_SPELLING = 0.85  # ...or for short names that look alike ("dave" is nearly "avens" and "dance").
+SPELT_ALIKE = 0.75  # How alike a whole phrase's spelling must be to count ("candel"/"candles" 0.77; "pegasus"/"peas" 0.73)
+TYPO = 0.75  # How much a word a small typo away counts, against the word itself
 
 
 @dataclass
@@ -50,16 +52,25 @@ def singular(word: str) -> str:
 
 
 def same_word(a: str, b: str) -> bool:
-    """The same word, a plural of it, or (four letters or more) a small typo away."""
+    """The same word, a plural of it, or (four letters or more, starting the same) a small typo away. People rarely
+    mistype a word's first letter, so "ginger" isn't a typo of "finger", nor "teath" of "death"."""
     if a == b or singular(a) == singular(b):
         return True
-    return min(len(a), len(b)) >= 4 and SequenceMatcher(None, a, b).ratio() >= 0.8
+    return min(len(a), len(b)) >= 4 and a[0] == b[0] and SequenceMatcher(None, a, b).ratio() >= 0.8
+
+
+def word_match(a: str, b: str) -> float:
+    """1 for the same word (or its plural), TYPO for one a small typo away, 0 otherwise. A typo counts for less, so
+    "ginger" (one letter off "finger") can't win "finger nails" on its own."""
+    if a == b or singular(a) == singular(b):
+        return 1.0
+    return TYPO if same_word(a, b) else 0.0
 
 
 def score(query: list[str], name: list[str]) -> float:
     """How well the words typed cover a name (and how few typed words go unused), allowing typos."""
-    found_in_name = sum(any(same_word(w, n) for w in query) for n in name)
-    used_from_query = sum(any(same_word(w, n) for n in name) for w in query)
+    found_in_name = sum(max(word_match(w, n) for w in query) for n in name)
+    used_from_query = sum(max(word_match(w, n) for n in name) for w in query)
     coverage, precision = found_in_name / len(name), used_from_query / len(query)
     if coverage < 0.5:
         return 0.0
@@ -82,7 +93,9 @@ def best_match(query: str, entries: Index, spelling: float = SPELLING) -> Found 
         if list(name_words) == typed:
             return Found(thing, name, True)
         by_words = score(typed, list(name_words))
-        by_spelling = SequenceMatcher(None, " ".join(typed), " ".join(name_words)).ratio() * spelling
+        spelt, name_spelt = " ".join(typed), " ".join(name_words)
+        alike = SequenceMatcher(None, spelt, name_spelt).ratio() if spelt[0] == name_spelt[0] else 0.0
+        by_spelling = alike * spelling if alike >= SPELT_ALIKE else 0.0  # "pegasus" is only 73% "peas": no
         if max(by_words, by_spelling) > best_score:
             best, best_score = (thing, name), max(by_words, by_spelling)
     if best is None or best_score < GOOD_ENOUGH:

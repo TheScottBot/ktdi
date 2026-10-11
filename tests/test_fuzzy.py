@@ -60,9 +60,15 @@ def test_nothing_close():
         assert fuzzy.best_match(typed, THINGS) is None
 
 
-def test_strict_spelling_for_short_look_alike_names():
-    assert fuzzy.best_match("dave", THINGS) is not None  # Nearly "dance"...
-    assert fuzzy.best_match("dave", THINGS, spelling=fuzzy.STRICT_SPELLING) is None  # ...but not near enough
+def test_look_alikes_are_not_matches():
+    assert fuzzy.best_match("dave", THINGS) is None  # Only 67% "dance"
+    assert fuzzy.best_match("danse", THINGS).thing == "dance"  # A real typo still finds it
+    names = fuzzy.index([("finger-nails", "Finger-nails"), ("peas", "Peas"), ("diarrhoea", "diarrhoea")])
+    assert fuzzy.best_match("ginger", names, spelling=fuzzy.STRICT_SPELLING) is None  # One typo'd word of two
+    assert fuzzy.best_match("pegasus", names, spelling=fuzzy.STRICT_SPELLING) is None  # 73% "peas"
+    assert fuzzy.best_match("fingernails", names, spelling=fuzzy.STRICT_SPELLING).thing == "finger-nails"
+    assert fuzzy.best_match("diarhea", names, spelling=fuzzy.STRICT_SPELLING).thing == "diarrhoea"
+    assert fuzzy.best_match("finger nail", names, spelling=fuzzy.STRICT_SPELLING).thing == "finger-nails"
 
 
 # --- Autocomplete and searching ---
@@ -115,3 +121,15 @@ def test_look_up_close_first_prefers_the_nearest_entry_to_its_uses():
     assert plain.kind == "uses"  # By default, the entries whose text uses the words
     found = fuzzy.look_up("raining cats and dogs", index, idioms, lambda e: e["text"], close_first=True)
     assert (found.kind, found.entries) == ("close", [idioms[0]])
+
+
+def test_swapped_letters_in_a_short_word_still_count():
+    names = fuzzy.index([("candles", "Candles"), ("peas", "Peas")])
+    assert fuzzy.best_match("candel", names, spelling=fuzzy.STRICT_SPELLING).thing == "candles"  # 77% alike
+    assert fuzzy.best_match("pegasus", names, spelling=fuzzy.STRICT_SPELLING) is None  # 73%: not a typo
+
+
+def test_a_typo_keeps_its_first_letter():
+    names = fuzzy.index([("fingers", "Fingers"), ("death", "Death"), ("teeth", "Teeth")])
+    assert fuzzy.best_match("ginger", names, spelling=fuzzy.STRICT_SPELLING) is None  # Not "fingers"
+    assert fuzzy.best_match("teath", names, spelling=fuzzy.STRICT_SPELLING).thing == "teeth"  # Not "death"
