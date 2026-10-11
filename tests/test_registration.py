@@ -18,7 +18,7 @@ PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's 
 HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
     "committee": ["funds", "ledger", "propose", "spend"],
-    "vulgartongue": ["insult", "lookup"],
+    "vulgartongue": ["insult", "lookup", "random"],
     "weather": ["here", "in"],
     "insurance": ["buy", "complain", "status"],
     "nowplaying": ["bingo", "canon", "committeesviews", "elapsed", "end", "history", "objection", "pause", "predict",

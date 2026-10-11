@@ -113,9 +113,17 @@ def test_nothing_found():
     assert "Grose never wrote that down" in embed.description
 
 
-def test_random_entry():
+def test_random_entry_is_never_an_insult(monkeypatch):
     embed = slang.slang_embed(None)
     assert embed.title.startswith("📖 ") and embed.footer.text == slang.SOURCE
+    picked_from = []
+    monkeypatch.setattr(slang.random, "choice", lambda options: picked_from.append(options) or options[0])
+    slang.slang_embed(None)
+    slang.slang_embed("   ")
+    run(slang.slang_random.callback(Ctx(SCOTT)))
+    assert all(options is slang.PHRASES for options in picked_from) and len(picked_from) == 3
+    assert slang.PHRASES and not any(e["insult"] for e in slang.PHRASES)
+    assert len(slang.PHRASES) + len(slang.INSULTS) == len(slang.ENTRIES)
 
 
 # --- The command ---

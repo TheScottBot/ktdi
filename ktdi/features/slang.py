@@ -27,6 +27,7 @@ LINE_LENGTH = 140
 
 ENTRIES: list[dict] = json.loads(DATA.read_text(encoding="utf-8"))["entries"]
 INSULTS = [entry for entry in ENTRIES if entry["insult"]]
+PHRASES = [entry for entry in ENTRIES if not entry["insult"]]  # What a random one comes from: never an insult
 
 
 def display_word(word: str) -> str:
@@ -75,9 +76,9 @@ def entry_embed(entry: dict, query: str | None = None) -> discord.Embed:
 
 
 def slang_embed(query: str | None) -> discord.Embed:
-    """A word looked up, the entries that use it, or (nothing typed) a random one."""
+    """A word looked up, the entries that use it, or (nothing typed) a random phrase that isn't an insult."""
     if not query or not lookup.words(query):
-        return entry_embed(random.choice(ENTRIES))
+        return entry_embed(random.choice(PHRASES))
     match = lookup.best_match(query, INDEX, spelling=0.85)
     if match and match[2]:  # It's a word in the dictionary.
         return entry_embed(match[0], query)
@@ -105,13 +106,19 @@ def insult_text(insulter: discord.abc.User, person: discord.abc.User) -> str:
             f"# {display_word(entry['word'])}!\n> {discord.utils.escape_markdown(entry['text'])}\n-# {SOURCE}")
 
 
-# /vulgartongue lookup [word] and /vulgartongue insult <person>. Typed, !vulgartongue <word> (or !vt, or !slang)
-# looks it up, and on its own it's random.
+# /vulgartongue lookup [word], /vulgartongue random and /vulgartongue insult <person>. Typed, !vulgartongue <word> (or
+# !vt, or !slang) looks it up, and on its own it's a random phrase. (Discord won't run a bare /vulgartongue once it has
+# subcommands, hence /vulgartongue random.)
 @commands.hybrid_group(name="vulgartongue", aliases=["vt", "slang"], fallback="lookup", invoke_without_command=True,
                        description="1811 slang: look a word up, find the slang for one, or get a random one.")
 @app_commands.describe(word="A word to look up, or a plain one (drunk, fool...) to find the slang for. Empty: random")
 async def slang(ctx: commands.Context, *, word: str | None = None):
     await ctx.send(embed=slang_embed(word))
+
+
+@slang.command(name="random", description="A random phrase from 1811 (never an insult).")
+async def slang_random(ctx: commands.Context):
+    await ctx.send(embed=slang_embed(None))
 
 
 @slang.command(name="insult", description="Insult someone, in the words of 1811.")
