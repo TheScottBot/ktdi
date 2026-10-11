@@ -1,0 +1,7451 @@
+[
+ {
+  "text": "The weather rules the field.",
+  "source": "Spanish",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "'Tis not the husbandman, but the good weather, that makes the corn grow.",
+  "source": "T. Fuller",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Better it is to rise betimes / And make hay while the sun shines, / Than to believe in tales and lies / Which idle people do devise.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "There are many weathers in five days, and more in a month.",
+  "source": "Norway",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Those that are weather wise / Are rarely otherwise.",
+  "source": "Cornwall",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Whether the weather be fine or wet, / Always water when you set.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "If the weather is fine, put on your cloak. If it is wet, do as you please.",
+  "source": "French",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "\"Well, Duncombe, how will be the weather?\" / \"Sir, it looks cloudy altogether; / And coming across our Houghton Green, / I stopped and talked with old Frank Beane / While we stood there, sir, old Jan Swain / Went by, and said he knowed 'twould rain; / The next that came was Master Hunt, / And he declared he knew it wouldn't; / And then I met with Farmer Blow — / He plainly said he didn't know. / So, sir, when doctors disagree, / Who's to decide it — you or me?\"",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cloud",
+   "rain"
+  ]
+ },
+ {
+  "text": "Do not abuse the year till it has passed.",
+  "source": "Spain",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "If the old year goes out like a lion, the new year will come in like a lamb.",
+  "source": null,
+  "months": [
+   1,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "A dry year never beggars the master.",
+  "source": "French",
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "Whoso hath but a mouth / Will ne'er in England suffer drought.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "A bad year comes in swimming.",
+  "source": "French",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Wet and dry years come in triads.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "Year of snow, / Fruit will grow.",
+  "source": "Milan",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "A year of snow, a year of plenty.",
+  "source": "Spanish and French",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "Fig year, worse year.",
+  "source": "Spanish",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A cherry year, / A merry year.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A plum year, / A dumb year.",
+  "source": "Kent",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Year of gooseberries, year of bottles [good vintage].",
+  "source": "France",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A haw year, / A snaw year.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "Year of mushrooms, / Year of poverty.",
+  "source": "France (Hautes Pyrenees)",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Year of radishes, / Year of health.",
+  "source": "Ardeche",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A cow year, a sad year; / A bull year, a glad year.",
+  "source": "Dutch",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Leap year was ne'er a good sheep year.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A serene autumn denotes a windy winter; a windy winter, a rainy spring; a rainy spring, a serene summer; a serene summer, a windy autumn, so that the air on a balance is seldom debtor to itself.",
+  "source": "Lord Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "Slippy, drippy, nippy. / Showery, flowery, bowery. / Hoppy, croppy, poppy. / Wheezy, sneezy, breezy.",
+  "source": "Sydney Smith",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A late spring / Is a great blessing.",
+  "source": null,
+  "months": [
+   3,
+   4,
+   5
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Better late spring and bear, than early blossom and blast.",
+  "source": null,
+  "months": [
+   3,
+   4,
+   5
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "When the cuckoo comes to the bare thorn, / Sell your cow and buy your corn; / But when she comes to the full bit, / Sell your corn and buy your sheep.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A wet spring, a dry harvest.",
+  "source": null,
+  "months": [
+   3,
+   4,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "In spring a tub of rain makes a spoonful of mud. / In autumn a spoonful of rain makes a tub of mud.",
+  "source": null,
+  "months": [
+   3,
+   4,
+   5,
+   9,
+   10,
+   11
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Thunder in spring / Cold will bring.",
+  "source": null,
+  "months": [
+   3,
+   4,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "thunder",
+   "cold"
+  ]
+ },
+ {
+  "text": "As the days grow longer, / The storms grow stronger.",
+  "source": null,
+  "months": [
+   1,
+   2,
+   3
+  ],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "If there's spring in winter, and winter in spring, / The year won't be good for anything.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "There are a hundred days of easterly wind in the first half of the year.",
+  "source": "West of England",
+  "months": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6
+  ],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "An unseasonably fine day in spring or winter is called a pet day, in Scotland. The fate of pets, they say, awaits it, and they look for spoilt weather on the morrow.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "An English summer, two hot days and a thunderstorm.",
+  "source": null,
+  "months": [
+   6,
+   7,
+   8
+  ],
+  "date": null,
+  "weather": [
+   "hot",
+   "thunder"
+  ]
+ },
+ {
+  "text": "A dry summer never begs its bread.",
+  "source": "Somerset",
+  "months": [
+   6,
+   7,
+   8
+  ],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "When the sand doth feed the clay, / England woe and well a day; / But when the clay doth feed the sand, / Then 'tis well for Angle-land.",
+  "source": null,
+  "months": [
+   6,
+   7,
+   8
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "After a famine in the stall, / Comes a famine in the hall.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A famine in England begins in the horse manger.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "One swallow does not make a summer.",
+  "source": null,
+  "months": [
+   4,
+   5
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Midsummer rain / Spoils hay and grain.",
+  "source": null,
+  "months": [
+   6
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "There can never be too much rain before midsummer.",
+  "source": "Sweden",
+  "months": [
+   4,
+   5,
+   6
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A summer fog is for fair weather.",
+  "source": null,
+  "months": [
+   6,
+   7,
+   8
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "clear"
+  ]
+ },
+ {
+  "text": "Summer comes with a bound; winter comes yawning.",
+  "source": "Finland",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "As the days begin to shorten, / The heat begins to scorch them.",
+  "source": null,
+  "months": [
+   6,
+   7
+  ],
+  "date": null,
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "Clear autumn, windy winter; / Warm autumn, long winter.",
+  "source": null,
+  "months": [
+   9,
+   10,
+   11
+  ],
+  "date": null,
+  "weather": [
+   "clear",
+   "wind"
+  ]
+ },
+ {
+  "text": "Much fog in autumn, much snow in winter.",
+  "source": null,
+  "months": [
+   9,
+   10,
+   11
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "snow"
+  ]
+ },
+ {
+  "text": "Short harvests make short addlings [earnings].",
+  "source": "Yorkshire",
+  "months": [
+   8,
+   9
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "If you would fruit have, / You must bring the leaf to the grave.",
+  "source": null,
+  "months": [
+   10,
+   11
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Winter never rots in the sky.",
+  "source": "Italian",
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "Winter finds out what summer lays up.",
+  "source": null,
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "A green winter makes a fat churchyard.",
+  "source": null,
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Summer in winter, and summer's flood, / Never boded an Englishman good.",
+  "source": null,
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Whae doffs his coat on winter's day / Will gladly put it on in May.",
+  "source": "Scottish",
+  "months": [
+   1,
+   2,
+   5,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "An early winter, / A surly winter.",
+  "source": null,
+  "months": [
+   10,
+   11,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "An air' winter, / A sair winter.",
+  "source": "Scotland",
+  "months": [
+   10,
+   11,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "If the ice will bear a goose before Christmas, it will not bear a duck after.",
+  "source": null,
+  "months": [
+   1,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "Neither give credit to a clear winter nor a cloudy spring.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "cloud"
+  ]
+ },
+ {
+  "text": "An unusually fine day in winter is known locally as a \"Borrowed Day,\" to be repaid with interest later in the season, known also as a \"Weather Breeder,\" and by sailors as a \"Fox.\"",
+  "source": "Roper",
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Winter thunder, / A summer's wonder.",
+  "source": null,
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "Winter thunder, / Rich man's good and poor man's hunger.",
+  "source": null,
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "A winter fog / Will freeze a dog.",
+  "source": null,
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "cold"
+  ]
+ },
+ {
+  "text": "Mony a frost and mony a thowe [thaw] / Soon maks mony a rotten yowe [ewe].",
+  "source": null,
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "Dearth under water; / Bread under snow.",
+  "source": "Italian",
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "snow",
+   "rain"
+  ]
+ },
+ {
+  "text": "Froze Janiveer, / Leader of the year; / Minced pies in van, / Calf's head in rear.",
+  "source": "Churchill",
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": [
+   "frost",
+   "cold"
+  ]
+ },
+ {
+  "text": "The blackest month in all the year / Is the month of Janiveer.",
+  "source": null,
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "The month of January is like a gentleman (as he begins, so he goes on).",
+  "source": "Spanish",
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "January warm, the Lord have mercy!",
+  "source": null,
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "If you see grass in January, / Lock your grain in your granary.",
+  "source": null,
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "When gnats swarm in January, the peasant becomes a beggar.",
+  "source": "Dutch",
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A January spring is worth naething.",
+  "source": "Scottish",
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "January wet, no wine you get.",
+  "source": null,
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Fog in January brings a wet spring.",
+  "source": null,
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "rain"
+  ]
+ },
+ {
+  "text": "As the day lengthens, / So the cold strengthens.",
+  "source": null,
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "A kindly, good Janiveer / Freezeth the pot by the fire.",
+  "source": "Tusser",
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": [
+   "frost",
+   "cold"
+  ]
+ },
+ {
+  "text": "Jack Frost in Janiveer / Nips the nose of the nascent year.",
+  "source": null,
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "If January could, he would be a summer month.",
+  "source": "Greek",
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A January chicken is sold dearly or dies.",
+  "source": "Spanish",
+  "months": [
+   1
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "January and February eat more than Madrid and Toledo.",
+  "source": "Spanish",
+  "months": [
+   1,
+   2
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "Generals January and February will fight for us.",
+  "source": "Czar Nicholas I",
+  "months": [
+   1,
+   2
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "A cold January, a feverish February, a dusty March, a weeping April, and a windy May presage a good year and gay.",
+  "source": "French",
+  "months": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "cold",
+   "dry",
+   "rain",
+   "wind"
+  ]
+ },
+ {
+  "text": "March in Janiveer, / Janiveer in March I fear.",
+  "source": null,
+  "months": [
+   1,
+   3
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Who in January sows oats / Gets gold and groats; / Who sows in May / Gets little that way.",
+  "source": null,
+  "months": [
+   1,
+   5
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "January commits the fault and May bears the blame.",
+  "source": null,
+  "months": [
+   1,
+   5
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "At twelfth day, the days are lengthened a cock's stride.",
+  "source": "Italian",
+  "months": [
+   1
+  ],
+  "date": "01-06",
+  "weather": []
+ },
+ {
+  "text": "January 14th, St. Hilary, / The coldest day of the year.",
+  "source": "Yorkshire",
+  "months": [
+   1
+  ],
+  "date": "01-14",
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "If the sun shine brightly on Vincent's Day, we shall have more wine than water.",
+  "source": "French",
+  "months": [
+   1
+  ],
+  "date": "01-22",
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "On St. Vincent's Day the vine sap rises to the branch, but retires frightened if it find frost.",
+  "source": "French",
+  "months": [
+   1
+  ],
+  "date": "01-22",
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "If St. Paul's Day be faire and cleare, / It doth betide a happy yeare; / But if by chance it then should rain, / It will make deare all kinds of graine; / And if ye clouds make dark ye skie, / Then neate and fowles this yeare shall die; / If blustering winds do blow aloft, / Then wars shall trouble ye realm full oft.",
+  "source": null,
+  "months": [
+   1
+  ],
+  "date": "01-25",
+  "weather": [
+   "clear",
+   "rain",
+   "cloud",
+   "wind"
+  ]
+ },
+ {
+  "text": "Mad February takes his father into the sunshine and beats him.",
+  "source": "Spanish",
+  "months": [
+   2
+  ],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "All the months in the year / Curse a fair Februeer.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "February, an ye be fair, / The hoggs'll mend, and naething pair [lessen]. / February, an ye be foul, / The hoggs'll die in ilka pool.",
+  "source": "Tweedside",
+  "months": [
+   2
+  ],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "February singing, / Never stints stinging.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "A February spring is not worth a pin.",
+  "source": "Cornwall",
+  "months": [
+   2
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "February rain is only good to fill ditches.",
+  "source": "French",
+  "months": [
+   2
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "February fill dyke, be it black or be it white; / But if it be white, it's better to like.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "snow"
+  ]
+ },
+ {
+  "text": "February fill dyke; / March lick it out.",
+  "source": null,
+  "months": [
+   2,
+   3
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "Fogs in February mean frosts in May.",
+  "source": null,
+  "months": [
+   2,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "frost"
+  ]
+ },
+ {
+  "text": "In February if thou hearest thunder, / Thou wilt see a summer's wonder.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "When the cat in February lies in the sun, she will creep behind the stove in March.",
+  "source": null,
+  "months": [
+   2,
+   3
+  ],
+  "date": null,
+  "weather": [
+   "clear",
+   "cold"
+  ]
+ },
+ {
+  "text": "February makes a bridge, and March breaks it.",
+  "source": "T. Fuller",
+  "months": [
+   2,
+   3
+  ],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "Candlemas Day! Candlemas Day! / Half our fire and half our hay!",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": []
+ },
+ {
+  "text": "If Candlemas Day be fair and clear, / There'll be twa winters in the year.",
+  "source": "Scottish",
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "clear",
+   "cold"
+  ]
+ },
+ {
+  "text": "You should on Candlemas Day / Throw candle and candlestick away.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": []
+ },
+ {
+  "text": "As far as the sun shines in on Candlemas Day, / So far will the snow blow in afore old May.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "clear",
+   "snow"
+  ]
+ },
+ {
+  "text": "The shepherd would rather see the wolf enter his fold on Candlemas Day than the sun.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "If Candlemas Day be fair and bright, / Winter will have another flight. / But if Candlemas Day bring clouds and rain, / Winter is gone and won't come again.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "clear",
+   "cloud",
+   "rain",
+   "cold"
+  ]
+ },
+ {
+  "text": "If Candlemas Day be dry and fair, / The half of the winter's to come and mair; / If Candlemas Day be wet and foul, / The half of the winter is gone at Yule.",
+  "source": "Scottish",
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "dry",
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "On Candlemas Day the bear, badger, or woodchuck comes out to see his shadow at noon: if he does not see it, he remains out; but if he does see it, he goes back to his hole for six weeks, and cold weather continues for six weeks longer.",
+  "source": "United States",
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "clear",
+   "cold"
+  ]
+ },
+ {
+  "text": "At the day of Candlemas, / Cold in air and snow on grass; / If the sun then entice the bear from his den, / He turns round thrice and gets back again.",
+  "source": "French",
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "cold",
+   "snow",
+   "clear"
+  ]
+ },
+ {
+  "text": "Gif the lavrock sings afore Candelmas, / She'll mourn as lang after it.",
+  "source": "Scottish",
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "On Candlemas Day, if the thorns hang a drop, / Then you are sure of a good pea crop.",
+  "source": "Sussex",
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "If it snows on February 2nd, only so much as may be seen on a black ox, then summer will come soon.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "When drops hang on the fence on February 2nd, icicles will hang there on March 25th.",
+  "source": null,
+  "months": [
+   2,
+   3
+  ],
+  "date": "02-02",
+  "weather": [
+   "rain",
+   "frost"
+  ]
+ },
+ {
+  "text": "When the wind's in the east on Candlemas Day, / There it will stick till the 2nd of May.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "When Candlemas Day is come and gone, / The snow lies on a hot stone.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-02",
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "St. Dorothea gives the most snow.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-06",
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "If the sun smile on St. Eulalie's Day, / It is good for apples and cider, they say.",
+  "source": "French",
+  "months": [
+   2
+  ],
+  "date": "02-12",
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "To St. Valentine the spring is a neighbour.",
+  "source": "French",
+  "months": [
+   2
+  ],
+  "date": "02-14",
+  "weather": []
+ },
+ {
+  "text": "The nights of this part of February are called in Sweden \"steel nights,\" on account of their cutting severity.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "St. Matthias breaks the ice; if he finds none, he will make it.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-24",
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "The fair of Auld Deer [third Thursday in February] / Is the warst day in a' the year.",
+  "source": "Aberdeen",
+  "months": [
+   2
+  ],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Romanus bright and clear / Indicates a goodly year.",
+  "source": null,
+  "months": [
+   2
+  ],
+  "date": "02-28",
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "March many weathers rained and blowed, / But March grass never did good.",
+  "source": "T. Fuller",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "wind"
+  ]
+ },
+ {
+  "text": "March yeans the lammie / And buds the thorn, / And blows through the flint / Of an ox's horn.",
+  "source": "Northumberland",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "wind",
+   "cold"
+  ]
+ },
+ {
+  "text": "A peck of March dust and a shower in May / Make the corn green and the fields gay.",
+  "source": null,
+  "months": [
+   3,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "dry",
+   "rain"
+  ]
+ },
+ {
+  "text": "A bushel of March dust is a thing / Worth the ransom of a king.",
+  "source": null,
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "A March without water / Dowers the hind's daughter.",
+  "source": "French",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "March sun / Lets snow stand on a stone.",
+  "source": null,
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "clear",
+   "snow"
+  ]
+ },
+ {
+  "text": "March sun strikes like a hammer.",
+  "source": "Spanish",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "A March sun sticks like a lock of wool.",
+  "source": null,
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "March wet and windy / Makes the barn full and finnie.",
+  "source": "Scottish",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "wind"
+  ]
+ },
+ {
+  "text": "March wind / Wakes the ether [adder] and blooms the whin.",
+  "source": "Scotland",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "March mist, / Water in fist.",
+  "source": "Spanish",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "rain"
+  ]
+ },
+ {
+  "text": "As many mistises in March, / So many frostises in May.",
+  "source": "Wiltshire",
+  "months": [
+   3,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "frost"
+  ]
+ },
+ {
+  "text": "When March thunders, tools and arms get rusty.",
+  "source": "Portuguese",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "When it thunders in March, we may cry \"Alas!\"",
+  "source": "French",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "March comes in with adders' heads and goes out with peacocks' tails.",
+  "source": "Scottish",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "storm",
+   "clear"
+  ]
+ },
+ {
+  "text": "The cuckoo comes in mid March, and cucks in mid April; / And goes away at Lammas-tide, when the corn begins to fill.",
+  "source": null,
+  "months": [
+   3,
+   4,
+   8
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "When March has April weather, April will have March weather.",
+  "source": "French",
+  "months": [
+   3,
+   4
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "March flings [kicks], April fleyes [warms].",
+  "source": "Scottish",
+  "months": [
+   3,
+   4
+  ],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "March wind and May sun / Make clothes white and maids dun.",
+  "source": null,
+  "months": [
+   3,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "wind",
+   "clear"
+  ]
+ },
+ {
+  "text": "March search, April try; / May will prove if you live or die.",
+  "source": null,
+  "months": [
+   3,
+   4,
+   5
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "March winds and April showers / Bring forth May flowers.",
+  "source": null,
+  "months": [
+   3,
+   4,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "wind",
+   "rain"
+  ]
+ },
+ {
+  "text": "A frosty winter and a dusty March, and a rain about Averil, / Another about the Lammas time, when the corn begins to fill, / Is weel worth a pleuch [plough] o' gowd, and a' her pins theretill.",
+  "source": "G. Buchanan",
+  "months": [
+   3,
+   4,
+   8
+  ],
+  "date": null,
+  "weather": [
+   "frost",
+   "dry",
+   "rain"
+  ]
+ },
+ {
+  "text": "Upon St. David's Day / Put oats and barley in the clay.",
+  "source": null,
+  "months": [
+   3
+  ],
+  "date": "03-01",
+  "weather": []
+ },
+ {
+  "text": "First comes David, then comes Chad, / And then comes Winneral as though he was mad. / White or black, / Or old house thack.",
+  "source": null,
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "snow",
+   "rain",
+   "wind"
+  ]
+ },
+ {
+  "text": "On March 15th come sun and swallow.",
+  "source": "Spanish",
+  "months": [
+   3
+  ],
+  "date": "03-15",
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "St. Patrick's Day, the warm side of a stone turns up, and the broad-back goose begins to lay.",
+  "source": null,
+  "months": [
+   3
+  ],
+  "date": "03-17",
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "March borrowit from April / Three days, and they were ill: / The first was frost, the second was snaw, / The third was cauld as ever't could blaw.",
+  "source": "Scottish",
+  "months": [
+   3,
+   4
+  ],
+  "date": null,
+  "weather": [
+   "frost",
+   "snow",
+   "cold",
+   "wind"
+  ]
+ },
+ {
+  "text": "March borrows of April / Three days, and they are ill; / April borrows of March again / Three days of wind and rain.",
+  "source": null,
+  "months": [
+   3,
+   4
+  ],
+  "date": null,
+  "weather": [
+   "wind",
+   "rain"
+  ]
+ },
+ {
+  "text": "March borrowed of April, April borrowed of May, / Three days, they say: / One rained, and one snew, / And the other was the worst day that ever blew.",
+  "source": "Staffordshire",
+  "months": [
+   3,
+   4,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "snow",
+   "wind"
+  ]
+ },
+ {
+  "text": "March said to Averil, / I see three hoggs on yonder hill; / An' if ye'll lend me dayis three, / I'll find a way to gar them dee.",
+  "source": "Scotland and North England",
+  "months": [
+   3,
+   4
+  ],
+  "date": null,
+  "weather": [
+   "cold",
+   "storm"
+  ]
+ },
+ {
+  "text": "The third of them is a peel-a-bane, / And freezes the wee bird's neb to the stane.",
+  "source": null,
+  "months": [
+   3,
+   4
+  ],
+  "date": null,
+  "weather": [
+   "frost",
+   "cold"
+  ]
+ },
+ {
+  "text": "A dry April / Not the farmer's will. / April wet / Is what he would get.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "In April each drop counts for a thousand.",
+  "source": "Spanish",
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "April showers bring summer flowers.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "An April flood carries away the frog and his brood.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A cold April / The barn will fill.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "A sharp April kills the pig.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "April snow breeds grass.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "Till April's dead / Change not a thread.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "It is not April without a frosty crown.",
+  "source": "French",
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "April wears a white hat.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "Changeable as an April day.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "April weather / Rain and sunshine, both together.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "Fogs in April foretell a failure of the wheat crop next year.",
+  "source": "Alabama",
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "fog"
+  ]
+ },
+ {
+  "text": "Plant your taturs when you will, / They won't come up before April.",
+  "source": "Wiltshire",
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Snow in April is manure; snow in March devours.",
+  "source": null,
+  "months": [
+   3,
+   4
+  ],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "A swarm of bees in April for me, and one in May for my brother.",
+  "source": "Spain",
+  "months": [
+   4,
+   5
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Betwixt April and May if there be rain, / 'Tis worth more than oxen and wain.",
+  "source": null,
+  "months": [
+   4,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Who ploughs in April ought not to have been born; who ploughs in May ought neither to have been born nor nursed.",
+  "source": "Spanish",
+  "months": [
+   4,
+   5
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Cloudy April, dewy May.",
+  "source": "French",
+  "months": [
+   4,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "cloud"
+  ]
+ },
+ {
+  "text": "Let it rain in April and May for me, / And all the rest of the year for thee.",
+  "source": "Spain",
+  "months": [
+   4,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "The dews of April and May / Make August and September gay.",
+  "source": "French",
+  "months": [
+   4,
+   5,
+   8,
+   9
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "When April blows his horn, / It's good for hay and corn.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "If it thunders on All Fools' Day / It brings good crops of corn and hay.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": "04-01",
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "If the first three days of April be foggy, there will be a flood in June.",
+  "source": "Huntingdon",
+  "months": [
+   4,
+   6
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "rain"
+  ]
+ },
+ {
+  "text": "In April, come he will; / In May, he sings all day; / In June, he alters his tune; / In July, he prepares to fly; / In August, go he must. / If he stay till September, / 'Tis as much as the oldest man can ever remember.",
+  "source": null,
+  "months": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "The cuckoo in April, / He opens his bill; / The cuckoo in May, / He sings the whole day; / The cuckoo in June, / He changeth his tune; / The cuckoo in July, / Away he must fly.",
+  "source": "North Yorkshire",
+  "months": [
+   4,
+   5,
+   6,
+   7
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "St. George cries \"Goe!\" / St. Mark cries \"Hoe!\"",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "As long before St. Mark's Day as the frogs are heard croaking, so long will they keep quiet afterwards.",
+  "source": null,
+  "months": [
+   4
+  ],
+  "date": "04-25",
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "A hot May makes a fat churchyard.",
+  "source": null,
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "Dry May brings nothing gay.",
+  "source": null,
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "The haddocks are good / When dipped in May flood.",
+  "source": null,
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Rainy May marries peasants.",
+  "source": "French",
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A May flood / Never did good.",
+  "source": null,
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A wet May / Makes a big load of hay.",
+  "source": "West Shropshire",
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "May showers bring milk and meal.",
+  "source": "Scottish",
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A wet May and a winnie / Makes a fou stackyard and a finnie.",
+  "source": "Scottish",
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "wind"
+  ]
+ },
+ {
+  "text": "A cold May and a windy, a full barn will find ye.",
+  "source": null,
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "cold",
+   "wind"
+  ]
+ },
+ {
+  "text": "Till May be out / Leave not off a clout.",
+  "source": null,
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "May, come she early or come she late, / She'll make the cow to quake.",
+  "source": "French",
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "In the middle of May comes the tail of the winter.",
+  "source": "French",
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "For an east wind in May 'tis your duty to pray.",
+  "source": null,
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "wind",
+   "dry"
+  ]
+ },
+ {
+  "text": "A snowstorm in May / Is worth a waggon-load of hay.",
+  "source": null,
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "snow",
+   "storm"
+  ]
+ },
+ {
+  "text": "Many thunderstorms in May, / And the farmer sings \"Hey! hey!\"",
+  "source": null,
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "thunder",
+   "storm"
+  ]
+ },
+ {
+  "text": "Look at your corn in May, / And you will come weeping away; / Look at the same in June, / And you'll come home in another tune.",
+  "source": null,
+  "months": [
+   5,
+   6
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "A dry May and a leaking June / Make the farmer whistle a merry tune.",
+  "source": null,
+  "months": [
+   5,
+   6
+  ],
+  "date": null,
+  "weather": [
+   "dry",
+   "rain"
+  ]
+ },
+ {
+  "text": "They who bathe in May / Will soon be laid in clay; / They who bathe in June / Will sing a merry tune; / They who bathe in July / Will dance like a fly.",
+  "source": null,
+  "months": [
+   5,
+   6,
+   7
+  ],
+  "date": null,
+  "weather": [
+   "cold",
+   "hot"
+  ]
+ },
+ {
+  "text": "Mist in May, heat in June, / Make the harvest come right soon.",
+  "source": null,
+  "months": [
+   5,
+   6
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "hot"
+  ]
+ },
+ {
+  "text": "A swarm of bees in May / Is worth a load of hay; / A swarm of bees in June / Is worth a silver spoon; / But a swarm in July / Is not worth a fly.",
+  "source": null,
+  "months": [
+   5,
+   6,
+   7
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Wet May, dry July.",
+  "source": "German",
+  "months": [
+   5,
+   7
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "Hoar-frost on May 1st indicates a good harvest.",
+  "source": null,
+  "months": [
+   5
+  ],
+  "date": "05-01",
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "If on the 8th of May it rain, / It foretells a wet harvest, men sain.",
+  "source": "T. Fuller",
+  "months": [
+   5
+  ],
+  "date": "05-08",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "St. Mamertius, St. Pancras, and St. Gervais do not pass without a frost.",
+  "source": "France",
+  "months": [
+   5
+  ],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "It never clouds up in a June night for a rain.",
+  "source": "United States",
+  "months": [
+   6
+  ],
+  "date": null,
+  "weather": [
+   "cloud",
+   "rain"
+  ]
+ },
+ {
+  "text": "When it is hottest in June, it will be coldest in the corresponding days of the next February.",
+  "source": null,
+  "months": [
+   2,
+   6
+  ],
+  "date": null,
+  "weather": [
+   "hot",
+   "cold"
+  ]
+ },
+ {
+  "text": "A wet June makes a dry September.",
+  "source": "Cornwall",
+  "months": [
+   6,
+   9
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "If it rain on June 8th (St. Medard), it will rain forty days later; but if it rain on June 19th (St. Protais), it rains for forty days after.",
+  "source": "French",
+  "months": [
+   6
+  ],
+  "date": "06-08",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Barnaby bright, / The longest day and shortest night.",
+  "source": null,
+  "months": [
+   6
+  ],
+  "date": "06-11",
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "If St. Vitus's Day be rainy weather, / It will rain for thirty days together.",
+  "source": null,
+  "months": [
+   6
+  ],
+  "date": "06-15",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Before St. John's Day we pray for rain; after that we get it anyhow.",
+  "source": null,
+  "months": [
+   6
+  ],
+  "date": "06-24",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Cut your thistles before St. John, / You will have two instead of one.",
+  "source": null,
+  "months": [
+   6
+  ],
+  "date": "06-24",
+  "weather": []
+ },
+ {
+  "text": "Never rued the man / That laid in his fuel before St. John.",
+  "source": "T. Fuller",
+  "months": [
+   6
+  ],
+  "date": "06-24",
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "If it rains on June 27th, it will rain seven weeks.",
+  "source": null,
+  "months": [
+   6
+  ],
+  "date": "06-27",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "If it rains on St. Peter's Day, the bakers will have to carry double flour and single water; if dry, they will carry single flour and double water.",
+  "source": null,
+  "months": [
+   6
+  ],
+  "date": "06-29",
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "No tempest, good July, / Lest the corn look ruely.",
+  "source": null,
+  "months": [
+   7
+  ],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "July, to whom, the dog-star in her train, / St. James gives oysters and St. Swithin rain.",
+  "source": "Churchill",
+  "months": [
+   7
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "hot"
+  ]
+ },
+ {
+  "text": "Ne'er trust a July sky.",
+  "source": "Shetland",
+  "months": [
+   7
+  ],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Whatever July and August do not boil, September cannot fry.",
+  "source": null,
+  "months": [
+   7,
+   8,
+   9
+  ],
+  "date": null,
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "If the 1st of July it be rainy weather, / It will rain more or less for four weeks together.",
+  "source": null,
+  "months": [
+   7
+  ],
+  "date": "07-01",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Dog days bright and clear / Indicate a happy year; / But when accompanied by rain, / For better times our hopes are vain.",
+  "source": null,
+  "months": [
+   7,
+   8
+  ],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain",
+   "hot"
+  ]
+ },
+ {
+  "text": "Bullion's Day, gif ye be fair, / For forty days 'twill rain nae mair.",
+  "source": "Scottish",
+  "months": [
+   7
+  ],
+  "date": "07-04",
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "Let not such vulgar tales debase thy mind, / Nor Paul nor Swithin rule the clouds and wind.",
+  "source": "Gay",
+  "months": [
+   7
+  ],
+  "date": "07-15",
+  "weather": [
+   "cloud",
+   "wind"
+  ]
+ },
+ {
+  "text": "If St. Swithin greets, the proverb says, / The weather will be foul for forty days.",
+  "source": "Scottish",
+  "months": [
+   7
+  ],
+  "date": "07-15",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "St. Swithin is christening the apples.",
+  "source": null,
+  "months": [
+   7
+  ],
+  "date": "07-15",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "St. Swithin's Day, if ye do rain, / For forty days it will remain; / St. Swithin's Day, an' ye be fair, / For forty days 'twill rain nae mair.",
+  "source": "Scottish",
+  "months": [
+   7
+  ],
+  "date": "07-15",
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "All the tears that St. Swithin can cry / St. Bartlemy's dusty mantle wipes dry.",
+  "source": null,
+  "months": [
+   7,
+   8
+  ],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "St. Mary Magdalene is washing her handkerchief to go to her cousin St. James's fair.",
+  "source": "Folk-Lore Journal",
+  "months": [
+   7
+  ],
+  "date": "07-22",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Dry August and warm / Doth harvest no harm.",
+  "source": null,
+  "months": [
+   8
+  ],
+  "date": null,
+  "weather": [
+   "dry",
+   "hot"
+  ]
+ },
+ {
+  "text": "When it rains in August, it rains honey and wine.",
+  "source": "French and Spanish",
+  "months": [
+   8
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Observe on what day in August the first heavy fog occurs, and expect a hard frost on the same day in October.",
+  "source": "United States",
+  "months": [
+   8,
+   10
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "frost"
+  ]
+ },
+ {
+  "text": "If the first week in August is unusually warm, the winter will be white and long.",
+  "source": null,
+  "months": [
+   8
+  ],
+  "date": null,
+  "weather": [
+   "hot",
+   "snow"
+  ]
+ },
+ {
+  "text": "If the 24th of August be fair and clear, / Then hope for a prosperous autumn that year.",
+  "source": null,
+  "months": [
+   8
+  ],
+  "date": "08-24",
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Thunderstorms after Bartholomew's Day are generally violent.",
+  "source": null,
+  "months": [
+   8
+  ],
+  "date": null,
+  "weather": [
+   "thunder",
+   "storm"
+  ]
+ },
+ {
+  "text": "September dries up wells or breaks down bridges.",
+  "source": "Portuguese",
+  "months": [
+   9
+  ],
+  "date": null,
+  "weather": [
+   "dry",
+   "rain"
+  ]
+ },
+ {
+  "text": "'Tis September's sun which causes the black list upon the antelope's back.",
+  "source": "Bombay",
+  "months": [
+   9
+  ],
+  "date": null,
+  "weather": [
+   "clear",
+   "hot"
+  ]
+ },
+ {
+  "text": "September blow soft till the fruit's in the loft.",
+  "source": null,
+  "months": [
+   9
+  ],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "If dry be the buck's horn / On Holyrood morn, / 'Tis worth a kist of gold; / But if wet it be seen / Ere Holyrood e'en, / Bad harvest is foretold.",
+  "source": "Yorkshire",
+  "months": [
+   9
+  ],
+  "date": "09-14",
+  "weather": [
+   "dry",
+   "rain"
+  ]
+ },
+ {
+  "text": "St. Matthee, / Shut up the bee.",
+  "source": null,
+  "months": [
+   9
+  ],
+  "date": "09-21",
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "St. Matthew's rain fattens pigs and goats.",
+  "source": "Spain",
+  "months": [
+   9
+  ],
+  "date": "09-21",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "So many days old the moon is on Michaelmas Day, so many floods after.",
+  "source": "Howell",
+  "months": [
+   9
+  ],
+  "date": "09-29",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "On Michaelmas Day the devil puts his foot on the blackberries.",
+  "source": "North of Ireland",
+  "months": [
+   9
+  ],
+  "date": "09-29",
+  "weather": []
+ },
+ {
+  "text": "St. Michael's rain does not stay long in the sky.",
+  "source": "French",
+  "months": [
+   9
+  ],
+  "date": "09-29",
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Dry your barley in October, / Or you'll always be sober.",
+  "source": null,
+  "months": [
+   10
+  ],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "There are always nineteen fine days in October.",
+  "source": "Kent",
+  "months": [
+   10
+  ],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "For every fog in October a snow in the winter, heavy or light according as the fog is heavy or light.",
+  "source": null,
+  "months": [
+   10
+  ],
+  "date": null,
+  "weather": [
+   "fog",
+   "snow"
+  ]
+ },
+ {
+  "text": "Warm October, cold February.",
+  "source": null,
+  "months": [
+   2,
+   10
+  ],
+  "date": null,
+  "weather": [
+   "hot",
+   "cold"
+  ]
+ },
+ {
+  "text": "When birds and badgers are fat in October, expect a cold winter.",
+  "source": "United States",
+  "months": [
+   10
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "St. Luke's little summer.",
+  "source": null,
+  "months": [
+   10
+  ],
+  "date": "10-18",
+  "weather": [
+   "clear",
+   "dry"
+  ]
+ },
+ {
+  "text": "November take flail, / Let ships no more sail.",
+  "source": "Tusser",
+  "months": [
+   11
+  ],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "No warmth, no cheerfulness, no healthful ease, / No comfortable feel in any member, / No shade, no shine, no butterflies, no bees, / No fruits, no flowers, no leaves, no birds — / No-vember.",
+  "source": "T. Hood",
+  "months": [
+   11
+  ],
+  "date": null,
+  "weather": [
+   "cloud",
+   "cold"
+  ]
+ },
+ {
+  "text": "If there's ice in November that will bear a duck, / There'll be nothing after but sludge and muck.",
+  "source": null,
+  "months": [
+   11
+  ],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "A heavy November snow will last till April.",
+  "source": "New England",
+  "months": [
+   11
+  ],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "If ducks do slide at Hollantide, / At Christmas they will swim; / If ducks do swim at Hollantide, / At Christmas they will slide.",
+  "source": null,
+  "months": [
+   11,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "frost",
+   "rain"
+  ]
+ },
+ {
+  "text": "If the geese at Martin's Day stand on ice, they will walk in mud at Christmas.",
+  "source": null,
+  "months": [
+   11,
+   12
+  ],
+  "date": "11-11",
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "At St. Martin's Day / Winter is on his way.",
+  "source": "French",
+  "months": [
+   11
+  ],
+  "date": "11-11",
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "Where the wind is on Martinmas Eve, there it will be the rest of the winter.",
+  "source": null,
+  "months": [
+   11
+  ],
+  "date": "11-10",
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "'Tween Martinmas and Yule / Water's wine in every pool.",
+  "source": "Scotland",
+  "months": [
+   11,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Thunder in December presages fine weather.",
+  "source": null,
+  "months": [
+   12
+  ],
+  "date": null,
+  "weather": [
+   "thunder",
+   "clear"
+  ]
+ },
+ {
+  "text": "Look at the weathercock on St. Thomas's Day at twelve o'clock, and see which way the wind is, for there it will stick for the next (lunar) quarter.",
+  "source": null,
+  "months": [
+   12
+  ],
+  "date": "12-21",
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "A green Christmas makes a fat churchyard.",
+  "source": null,
+  "months": [
+   12
+  ],
+  "date": "12-25",
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "A warm Christmas, a cold Easter; / A green Christmas, a white Easter.",
+  "source": "German",
+  "months": [
+   12
+  ],
+  "date": "12-25",
+  "weather": [
+   "hot",
+   "cold",
+   "snow"
+  ]
+ },
+ {
+  "text": "Easter in snow, Christmas in mud; / Christmas in snow, Easter in mud.",
+  "source": null,
+  "months": [
+   12
+  ],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "If Christmas finds a bridge, he'll break it; if he finds none he'll make one.",
+  "source": null,
+  "months": [
+   12
+  ],
+  "date": "12-25",
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "So far as the sun shines on Christmas Day, / So far will the snow blow in May.",
+  "source": "Germany",
+  "months": [
+   5,
+   12
+  ],
+  "date": "12-25",
+  "weather": [
+   "clear",
+   "snow"
+  ]
+ },
+ {
+  "text": "If ice will bear a man before Christmas, it will not bear a mouse afterwards.",
+  "source": null,
+  "months": [
+   12
+  ],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "When the blackbird sings before Christmas, she will cry before Candlemas.",
+  "source": "Meath",
+  "months": [
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "A windy Christmas and a calm Candlemas are signs of a good year.",
+  "source": null,
+  "months": [
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "If New Year's Eve night wind blow south, / It betokeneth warmth and growth; / If west, much milk and fish in the sea; / If north, much cold and storms there will be; / If east, the trees will bear much fruit; / If north-east, flee it man and brute.",
+  "source": null,
+  "months": [
+   12
+  ],
+  "date": "12-31",
+  "weather": [
+   "wind",
+   "cold",
+   "storm"
+  ]
+ },
+ {
+  "text": "So much as the sun shineth on Pancake Tuesday, the like will shine every day in Lent.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "A wet Good Friday and a wet Easter Day / Make plenty of grass, but very little hay.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Past Easter frost, / Fruit not lost.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "Fine on Holy Thursday, wet on Whit-Monday; fine on Whit-Monday, wet on Holy Thursday.",
+  "source": "Huntingdonshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "Whitsunday wet, Christmas fat.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Dirty days hath September, / April, June, and November; / From January up to May, / The rain it raineth every day. / All the rest have thirty-one, / Without a blessed gleam of sun; / And if any of them had two-and-thirty, / They'd be just as wet and twice as dirty.",
+  "source": "Maine, U.S.",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Wednesday clearing, clear till Sunday.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "On Thursday at three / Look out, and you'll see / What Friday will be.",
+  "source": "South Devon",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Friday's a day as'll have his trick, / The fairest or foulest day o' the wik.",
+  "source": "Shropshire",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "If on Friday it rain, / 'Twill on Sunday again; / If Friday be clear, / Have for Sunday no fear.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "There is never a Saturday without some sunshine.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "If sunset on Sunday is cloudy, it will rain before Wednesday.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cloud",
+   "rain"
+  ]
+ },
+ {
+  "text": "A misty morning may have a fine day.",
+  "source": "T. Fuller",
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "clear"
+  ]
+ },
+ {
+  "text": "Too bright a morning breeds a lowering day.",
+  "source": "Play of \"Edward III.\"",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When there are three days cold, expect three days colder.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "Frosty nights and hot sunny days / Set the corn fields all in a blaze.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "hot",
+   "clear"
+  ]
+ },
+ {
+  "text": "Between the hours of ten and two / Will show you what the day will do.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Rain at seven, fine at eleven; / Rain at eight, not fine till eight.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "A red sun has water in his eye.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When the sun's rays are visible, the seamen say, \"The sun is getting up his back stays, and it is time to look out for bad weather.\"",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "The sun breaking out suddenly into bright sunshine through an otherwise stormy sky is said to be making holes for the wind to blow through.",
+  "source": "Roper's Weather Sayings",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "The morning sun never lasts the day.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cloud"
+  ]
+ },
+ {
+  "text": "A grey sky in the morning presages fine weather.",
+  "source": "Fitzroy",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Above the rest, the sun who never lies, / Foretells the change of weather in the skies; / For if he rise unwilling to his race, / Clouds on his brow and spots upon his face, / Or if through mists he shoot his sullen beams, / Frugal of light in loose and straggling streams, / Suspect a drizzling day and southern rain, / Fatal to fruits, and flocks, and promised grain.",
+  "source": "Virgil's Georgics",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A high dawn indicates wind. A low dawn indicates fair weather.",
+  "source": "Fitzroy",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "clear"
+  ]
+ },
+ {
+  "text": "A glaring, sunny morning never comes to a good end.",
+  "source": "French",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A gaudy morning bodes a wet afternoon.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A red morn, that ever yet betokened / Wreck to the seaman, tempest to the field, / Sorrow to shepherds, woe unto the birds, / Gust and foul flaws to herdmen and to herds.",
+  "source": "Shakespeare",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "If red the sun begin his race, / Be sure the rain will fall apace.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Sun set in a clear, / Easterly wind's near; / Sun set in a bank, / Westerly will not lack.",
+  "source": "St. Andrews, Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "When the sun sets bright and clear, / An easterly wind you need not fear.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "wind"
+  ]
+ },
+ {
+  "text": "When Tottenham Wood is all on fire, / Then Tottenham Street is nought but mire.",
+  "source": "Middlesex",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "The weary sun hath made a golden set, / And by the bright track of his fiery car / Gives token of a goodly day to-morrow.",
+  "source": "Shakespeare's Richard III",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "If the sun goes pale to bed, / 'Twill rain to-morrow, it is said.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When the sun sets sadly, the morning will be angry.",
+  "source": "Zuni Indians",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "The sun sets weeping in the lowly west, / Witnessing storms to come, woe and unrest.",
+  "source": "Shakespeare's Richard II",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "The skie being red at evening, / Foreshewes a faire and cleare morning; / But if the morning riseth red, / Of wind and raine we shall be sped.",
+  "source": "A. Fleming",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "wind",
+   "rain"
+  ]
+ },
+ {
+  "text": "If by black cloud eclipsed his orb is found / Shooting his scattered rays at random round, / Send not the traveller from thy roof away — / To-morrow shines no brighter than to-day.",
+  "source": "J. Lamb's Aratus",
+  "months": [],
+  "date": null,
+  "weather": [
+   "cloud",
+   "rain"
+  ]
+ },
+ {
+  "text": "When it is evening, ye say, It will be fair weather: for the sky is red. And in the morning, It will be foul weather to-day: for the sky is red and lowring.",
+  "source": "Matthew xvi. 2, 3",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "An evening grey and a morning red / Will send the shepherd wet to bed.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Evening red and morning grey, / Two sure signs of one fine day.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "If the evening is red and the morning grey, / It is the sign of a bonnie day; / If the evening's grey and the morning red, / The lamb and the ewe will go wet to bed.",
+  "source": "Yarrow",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "Sky red in the morning / Is a sailor's sure warning; / Sky red at night / Is the sailor's delight.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "A red evening and a grey morning set the pilgrim a-walking.",
+  "source": "Italy",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "An evening red and morning grey make the pilgrim sing.",
+  "source": "France",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Evening red and morning grey / Help the traveller on his way; / Evening grey and morning red / Bring down rain upon his head.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "The evening red and the morning grey / Is the sign of a bright and cheery day; / The evening grey and the morning red, / Put on your hat, or you'll wet your head.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "When the sun is in his house [halo], it will rain soon.",
+  "source": "Zuni Indians",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "The circle of the moon never filled a pond; the circle of the sun wets a shepherd.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "The bigger the ring, the nearer the wet.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Dog before, / You'll have no more; / Dog behind, / Soon you'll find.",
+  "source": "Shetland and Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A halo oft fair Cynthia's face surrounds, / With single, double, or with triple bounds: / If with one ring, and broken it appear, / Sailors, beware! the driving gale is near. / Unbroken if it vanisheth away — / Serene the air, and smooth the tranquil sea. / The double halo boisterous weather brings, / And furious tempests follow triple rings.",
+  "source": "J. Lamb's Aratus",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "storm"
+  ]
+ },
+ {
+  "text": "Far burr, near rain.",
+  "source": "Nautical",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Circle near, water far; / Circle far, water near.",
+  "source": "Italy",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A far brugh, a near storm.",
+  "source": "Scottish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "When round the moon there is a brugh [halo], / The weather will be cold and rough.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold",
+   "storm"
+  ]
+ },
+ {
+  "text": "When the wheel is far, the storm is n'ar; / When the wheel is near, the storm is far.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "The moon with a circle brings water in her beak.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "For I fear a hurricane; / Last night the moon had a golden ring, / And to-night no moon we see.",
+  "source": "Longfellow's Wreck of the Hesperus",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Moonlight nights have the hardest frosts.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "Clear moon, / Frost soon.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "If on her cheeks you see the maiden's blush, / The ruddy moon foreshows that winds will rush.",
+  "source": "Virgil",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "The moon, her face if red be, / Of water speaks she.",
+  "source": "Zuni Indians",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Pale moon doth rain, / Red moon doth blow, / White moon doth neither rain nor snow.",
+  "source": "Latin proverb (Clarke, 1639)",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "wind",
+   "clear"
+  ]
+ },
+ {
+  "text": "The moon, methinks, looks with a watery eye.",
+  "source": "Shakespeare's Midsummer Night's Dream",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "The labourer who believes in the influence of the moon will not fill his granary.",
+  "source": "Haute Loire",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "The moon and the weather / May change together; / But change of the moon / Does not change the weather. / If we'd no moon at all, / And that may seem strange, / We still should have weather / That's subject to change.",
+  "source": "Notes and Queries, 1882",
+  "months": [],
+  "date": null,
+  "weather": []
+ },
+ {
+  "text": "Moon changed, keeps closet three days as a queen / Ere she in her prime will of any be seen: / If great she appeareth, it showereth out; / If small she appeareth, it signifies drought.",
+  "source": "Tusser",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "A fog and a small moon / Bring an easterly wind soon.",
+  "source": "Cornwall",
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "wind"
+  ]
+ },
+ {
+  "text": "If the moon change on a Sunday, there will be a flood before the month is out.",
+  "source": "Worcestershire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A Saturday moon, / If it comes once in seven years, comes once too soon.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Saturday's moon and Sunday's prime / Ance is aneugh in seven years' time.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Saturday's change and Sunday's full / Never brought good and never wull.",
+  "source": "Norfolk",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "In the decay of the moon / A cloudy morning bodes a fair afternoon.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "If the new moon appear with the points of the crescent turned up, the month will be dry. If the points are turned down, it will be wet.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry",
+   "rain"
+  ]
+ },
+ {
+  "text": "The bonnie moon is on her back; / Mend your shoes and sort your thack [thatch].",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When the moon lies on her back, / Then the sou'-west wind will crack; / When she rises up and nods, / Then north-easters dry the sods.",
+  "source": "Symons' Meteorological Magazine, 1867",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "dry"
+  ]
+ },
+ {
+  "text": "When the new moon lies on her back, / She sucks the wet into her lap.",
+  "source": "Ellesmere",
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "It is sure to be a dry moon if it lies on its back, so that you can hang your hat on its horns.",
+  "source": "Welsh Border",
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "If mists in the new moon, rain in the old; / If mists in the old moon, rain in the new.",
+  "source": "Shepherd of Banbury",
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "rain"
+  ]
+ },
+ {
+  "text": "Late, late yestreen I saw the new moon / With the old moon in her arms; / And I fear, I fear, my master dear, / We shall have a deadly storm.",
+  "source": "Ballad of Sir Patrick Spens",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Two full moons in a calendar month bring on a flood.",
+  "source": "Bedfordshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "The full moon eats clouds.",
+  "source": "Nautical",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "The moon grows fat on clouds.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Near full moon, a misty sunrise / Bodes fair weather and cloudless skies.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "If the moon show a silver shield, / Be not afraid to reap your field; / But if she rises haloed round, / Soon we'll tread on deluged ground.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "Auld moon mist / Ne'er died of thirst.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "rain"
+  ]
+ },
+ {
+  "text": "An old moon in a mist / Is worth gold in a kist [chest]; / But a new moon's mist / Will ne'er lack thirst.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "dry"
+  ]
+ },
+ {
+  "text": "When the stars begin to huddle, / The earth will soon become a puddle.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "The stars twinkle; we cry \"Wind.\"",
+  "source": "Malta",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "One star ahead of the moon, towing her, and another astern, chasing her, is a sure sign of a storm.",
+  "source": "Lancashire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "If the Pleiades rise fine they set rainy, and if they rise wet they set fine.",
+  "source": "Swahili",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "No grateful sight to husbandmen appear / One or more comets, with their blazing hair — / Forerunners of a parched and barren year.",
+  "source": "J. Lamb's Aratus",
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "If many meteors in summer, expect thunder.",
+  "source": null,
+  "months": [
+   6,
+   7,
+   8
+  ],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "Numerous falling stars presage wind next day.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "Last night I saw St. Elmo's stars, / With their glimmering lanterns all at play, / On the tops of the masts and the tips of the spars, / And I knew we should have foul weather that day.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Every wind has its weather.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "Weel, it dries the yird [soil], it slockens [refreshes] the ewes, and it's God's wull.",
+  "source": "A shepherd on the Pentland Hills, of a keen wind",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "No weather is ill, / If the wind be still.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Blow the wind never so fast, / It will fall at last.",
+  "source": "T. Fuller",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "The winds of the daytime wrestle and fight / Longer and stronger than those of the night.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "As soon as Hodnet sends the wind, / A rainy day will Drayton find.",
+  "source": "Shropshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A storm will go three miles out of its way to come by Habberley to Churton [Church Pulverbatch].",
+  "source": "Georgina Jackson's Shropshire Folk-Lore",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Winds at night are always bright; / But winds in the morning, sailors take warning.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "clear"
+  ]
+ },
+ {
+  "text": "For raging winds blow up incessant showers; / And when the rage allays, the rain begins.",
+  "source": "Shakespeare's Henry VI",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "rain"
+  ]
+ },
+ {
+  "text": "When rain comes before wind, / Halyards, sheets, and braces mind; / But when wind comes before rain, / Soon you may make sail again.",
+  "source": "Fitzroy",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "rain"
+  ]
+ },
+ {
+  "text": "Much wind brings rain.",
+  "source": "French",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "rain"
+  ]
+ },
+ {
+  "text": "When the wind backs and the weather glass falls, / Then be on your guard against gales and squalls.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "storm"
+  ]
+ },
+ {
+  "text": "A veering wind, fair weather. / A backing wind, foul weather.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "June — too soon; / July — stand by; / August — look out you must; / September — remember; / October — all over.",
+  "source": "Captain Nares",
+  "months": [
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "A storm moderates, to storm again.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Untimely storms make men expect a dearth.",
+  "source": "Shakespeare's Richard III",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "The sharper the blast / The sooner 'tis past.",
+  "source": "Charles Wesley",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "storm"
+  ]
+ },
+ {
+  "text": "And more inconstant than the wind, who woos / Even now the frozen bosom of the north; / And being angered, puffs away from thence, / Turning his face to the dew-dropping south.",
+  "source": "Shakespeare's Romeo and Juliet",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "Always a calm before a storm.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "After a storm comes a calm.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Lang foul, / Lang fair.",
+  "source": "Buchanan's Almanack (Scotland)",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "The whispering grove tells of a storm to come.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "A high wind prevents frost.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "frost"
+  ]
+ },
+ {
+  "text": "It is always windy in barley harvest; it blows off the heads for the poor.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "North winds send hail, south winds bring rain, / East winds we bewail, west winds blow amain; / North-east is too cold, south-east not too warm, / North-west is too bold, south-west doth no harm.",
+  "source": "Tusser",
+  "months": [],
+  "date": null,
+  "weather": [
+   "hail",
+   "rain",
+   "wind",
+   "cold"
+  ]
+ },
+ {
+  "text": "Winds from the lands of cold bring fruit of ice.",
+  "source": "Indian Proverbs, U.S.",
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold",
+   "frost"
+  ]
+ },
+ {
+  "text": "When the wind is in the north, / Hail comes forth. / When the wind is in the wast, / Look for a weet blast. / When the wind is in the soud, / The weather will be gude. / When the wind is in the east, / Cold and snaw come neist.",
+  "source": "Scottish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "hail",
+   "rain",
+   "clear",
+   "cold",
+   "snow"
+  ]
+ },
+ {
+  "text": "Wind east or west / Is a sign of a blast; / Wind north or south / Is a sign of a drought.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "dry"
+  ]
+ },
+ {
+  "text": "The south wind always brings wet weather, / The north wind wet and cold together; / The west wind always brings us rain, / The east wind blows it back again; / If the sun in red should set, / The next day surely will be wet; / If the sun should set in grey, / The next will be a rainy day.",
+  "source": "Satire on the Humid Climate of the British Isles",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Fishermen in anger froth / When the wind is in the north; / For fish bite the best / When the wind is in the west.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "When the wind's in the north, / You mustn't go forth.",
+  "source": "Denham",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "cold"
+  ]
+ },
+ {
+  "text": "A northern air / Brings weather fair.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Fair weather cometh out of the north.",
+  "source": "Job xxxvii. 22",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "A north wind is a broom for the Channel.",
+  "source": "Cornwall",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "wind"
+  ]
+ },
+ {
+  "text": "The north wind doth blow, / And we shall have snow.",
+  "source": "Denham",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "A north wind has no corn.",
+  "source": "Spanish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "With a north wind it seldom thunders.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "Cream makes most freely with a north wind.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "Do business with men when the wind is in the north-west.",
+  "source": "Yorkshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "A nor'-wester is not long in debt to a sou'-wester.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "When the wind is in the north-west, / The weather is at its best; / But if the rain comes out of the east, / 'Twill rain twenty-four hours at least.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "An honest man and a north-west wind generally go to sleep together.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "When the wind is in the east, / It is neither good for man nor beast.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "cold"
+  ]
+ },
+ {
+  "text": "The east wind brought the locusts.",
+  "source": "Exodus x. 13",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "A dry east wind raises the spring.",
+  "source": "Cornwall",
+  "months": [
+   3,
+   4,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "dry",
+   "wind"
+  ]
+ },
+ {
+  "text": "Everything looks large in the east wind.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "An easterly wind's rain / Makes fools fain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Thou breakest the ships of Tarshish with an east wind.",
+  "source": "Psalm xlviii. 7",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "When the wind is in the east, / The fisher likes it least; / When the wind is in the west, / The fisher likes it best.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "When the smoke goes west, / Gude weather is past; / When the smoke goes east, / Gude weather comes neist.",
+  "source": "Scottish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "When ye see the south wind blow, ye say, There will be heat; and it cometh to pass.",
+  "source": "Luke xii. 55",
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "Like foggy south, puffing with wind and rain.",
+  "source": "Shakespeare's As You Like It",
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "wind",
+   "rain"
+  ]
+ },
+ {
+  "text": "A southerly wind with a fog / Brings an easterly wind in snog [with certainty].",
+  "source": "Cornwall",
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "wind"
+  ]
+ },
+ {
+  "text": "A southerly wind and a cloudy sky / Proclaim it a hunting morning.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cloud"
+  ]
+ },
+ {
+  "text": "As when the south wind o'er the mountain tops / Spreads a thick veil of mist, the shepherd's bane, / But friendlier to the thief than shades of night.",
+  "source": "Homer's Iliad",
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog"
+  ]
+ },
+ {
+  "text": "The south wind warms the aged.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "The south wind is the father of the poor.",
+  "source": "Ragusa",
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "When the wind's in the south, / The rain's in its mouth.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "The rain comes scouth [plentifully] / When the rain is in the south.",
+  "source": "Scottish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When the wind is in the south, / It blows the bait in the fishes' mouth.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "The southern wind / Doth play the trumpet to his purposes, / And by his hollow whistling in the leaves / Foretells a tempest and a blustering day.",
+  "source": "Shakespeare's Henry IV",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm",
+   "wind"
+  ]
+ },
+ {
+  "text": "A south-west blow on ye, / And blister ye all over.",
+  "source": "Shakespeare's Tempest",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "Three south-westers, then one heavy rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "If the wind is south-west at Martinmas, / It keeps there till after Christmas.",
+  "source": null,
+  "months": [
+   11
+  ],
+  "date": "11-11",
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "When the wind is in the west, / The weather is always best.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "The west wind is a gentleman, and goes to bed.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "Wind west, / Rain's nest.",
+  "source": "Devonshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A western wind carrieth water in his hand.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "The higher the clouds, the finer the weather.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "cloud"
+  ]
+ },
+ {
+  "text": "After clouds calm weather.",
+  "source": "T. Fuller",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "When the clouds of the morn to the west fly away, / You may conclude on a settled, fair day.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "At sunset with a cloud so black, / A westerly wind you shall not lack.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When a heavy cloud comes up in the south-west, and seems to settle back again, look out for a storm.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm",
+   "cloud"
+  ]
+ },
+ {
+  "text": "If on the ocean's bosom clouds appear, / While the blue vault above is bright and clear, / These signs by shepherds and by sailors seen, / Give pleasing hope of days and nights serene.",
+  "source": "J. Lamb's \"Aratus\"",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "When the carry gaes west, / Gude weather is past; / When the carry gaes east, / Gude weather comes neist.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When ye see a cloud rise out of the west, straightway ye say, There cometh a shower; and so it is.",
+  "source": "Luke xii. 54",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "If in the north-west before daylight end there appear a company of small black clouds like flocks of sheep, it is a sure and certain sign of rain.",
+  "source": "Wing, 1649",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Red clouds at sunrise foretell wind; at sunset, a fine day for the morrow.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "clear"
+  ]
+ },
+ {
+  "text": "After black clouds clear weather.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Clouds before sunset of an amber or a gold colour, and with gilt fringes, after the sun has sunk lower, foretell fine weather.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "If clouds be bright, / 'Twill clear to-night; / If clouds be dark, / 'Twill rain, — do you hark?",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Clouds above — water below.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Behold, there ariseth a little cloud out of the sea, like a man's hand. Prepare thy chariot, and get thee down, that the rain stop thee not.",
+  "source": "1 Kings xviii. 44",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "A small, fast-growing black cloud in violent motion, seen in the tropics, is called the \"bull's eye,\" and precedes the most terrible hurricanes.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm",
+   "wind"
+  ]
+ },
+ {
+  "text": "Sometimes we see a cloud that's dragonish, / A vapour sometimes like a bear or lion, / A towered citadel, a pendent rock, / A forked mountain, a blue promontory / With trees upon't that nod unto the world / And mock our eyes with air.",
+  "source": "Shakespeare, \"Antony and Cleopatra\"",
+  "months": [],
+  "date": null,
+  "weather": [
+   "cloud"
+  ]
+ },
+ {
+  "text": "When streamers point upward, the clouds are falling, and rain is at hand; when streamers point downwards, the clouds are ascending, and drought is at hand.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry",
+   "cloud"
+  ]
+ },
+ {
+  "text": "In Shetland the name of \"weather-head\" is given to a band of cirrus passing through the zenith; and they say if it lies north-east to south-west, good weather comes; but if south-east to north-west, a gale is looked for.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "clear",
+   "cloud"
+  ]
+ },
+ {
+  "text": "If clouds look as if scratched by a hen, / Get ready to reef your topsails then.",
+  "source": "Nautical",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Hen's scarts and filly tails / Make lofty ships carry low sails.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Trace in the sky the painter's brush, / Then winds around you soon will rush.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "cloud"
+  ]
+ },
+ {
+  "text": "The fish (hake) shaped cloud, if pointing east and west, indicates rain; if north and south, more fine weather.",
+  "source": "Bedfordshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear",
+   "cloud"
+  ]
+ },
+ {
+  "text": "North and south, the sign of drought; / East and west, the sign of blast.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry",
+   "wind",
+   "cloud"
+  ]
+ },
+ {
+  "text": "The waved cirro-stratus indicates heat and thunder.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot",
+   "thunder",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Mackerel sky and mares' tails / Make lofty ships carry low sails.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Mackerel sky, mackerel sky, / Never long wet and never long dry.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Mackerel scales, / Furl your sails.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "cloud"
+  ]
+ },
+ {
+  "text": "A mackerel sky, / Not twenty-four hours dry.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "A curdly sky / Will not leave the earth long dry.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "These clouds are called in Buckinghamshire \"packet boys,\" and are said to be packets of rain soon to be opened.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Fleecy clouds scattered over the sky denote storms; but clouds which rest upon one another like scales or tiles portend dry and fine weather.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm",
+   "dry",
+   "clear",
+   "cloud"
+  ]
+ },
+ {
+  "text": "If woolly fleeces spread the heavenly way, / Be sure no rain disturbs the summer day.",
+  "source": null,
+  "months": [
+   6,
+   7,
+   8
+  ],
+  "date": null,
+  "weather": [
+   "clear",
+   "dry",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Sometimes the clouds appear to be piled in several tiers: two stories, if thick, portend instant rain; many tiers denote a three days' rain.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Refreshing showers or heavier rains are near / When piled in fleecy heaps the clouds appear.",
+  "source": "J. Lamb's \"Aratus\"",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "A round-topped cloud, with flattened base, / Carries rainfall in its face.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When clouds appear like rocks and towers, / The earth's refreshed by frequent showers.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When mountains and cliffs in the clouds appear, / Some sudden and violent showers are near.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When the clouds rise in terraces of white, soon will the country of the corn priests be pierced with the arrows of rain.",
+  "source": "Zuni Indians",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "If on a fair day in winter a white bank of clouds arise in the south, expect snow.",
+  "source": null,
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "snow",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Yond' same black cloud, yond' huge one, looks like a foul bumbard that would shed his liquor. Yond' same cloud cannot chuse but fall by pailfuls.",
+  "source": "Shakespeare's \"Tempest\"",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "storm",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When the wind has been south for two or three days, and it grows very hot, and you see clouds rise with great white tops like towers, there will be thunder and rain suddenly. If two such clouds arise, one on either hand, it is time to make haste to shelter.",
+  "source": "Shepherd of Banbury",
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "rain",
+   "hot"
+  ]
+ },
+ {
+  "text": "There are few finer days in the year than when the morning breaks out through a disappearing stratus cloud.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When the mist comes from the hill, / Then good weather it doth spill; / When the mist comes from the sea, / Then good weather it will be.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "When the mist creeps up the hill, / Fisher, out and try your skill; / When the mist begins to nod, / Fisher, then put past your rod.",
+  "source": "Kirkcudbright",
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "When it gangs up i' fops, / It'll fa' down i' drops.",
+  "source": "North Country",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When the clouds go up the hill, / They'll send down water to turn a mill.",
+  "source": "Hampshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When Wolsonbury has a cap, / Hurstpierpoint will have a drap.",
+  "source": "Sussex",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Sailors say it is a sign of bad weather when the \"tablecloth\" is spread on Table Mountain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm",
+   "cloud"
+  ]
+ },
+ {
+  "text": "If Skiddaw hath a hat, / Scruffel wots full well of that.",
+  "source": "Cumberland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When Moncayo and Guara have their white caps on, / It is good for Castile and better for Aragon.",
+  "source": "Spanish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When Ruberslaw puts on his cowl, / The Dunion on his hood, / Then a' the wives of Teviotside / Ken there will be a flood.",
+  "source": "Roxburghshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When Falkland Hill puts on his cap, / The Howe o' Fife will get a drap; / And when the Bishop draws his cowl, / Look out for wind and weather foul.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "wind",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When Cheviot ye see put on his cap, / Of rain ye'll have a wee bit drap.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When Largo Law puts on his hat, / Let Kellie Law beware of that; / When Kellie Law gets on his cap, / Largo Law may laugh at that.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "There is a high wooded hill above Lochnaw Castle; / Take care when Lady Craighill puts on her mantle. / The Lady looks high and knows what is coming; / Delay not one moment to get under covering.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "If Riving Pike do wear a hood, / Be sure the day will ne'er be good.",
+  "source": "Lancashire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "If Roseberry Topping wears a cap, / Let Cleveland then beware of a rap.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "storm",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When Bredon Hill puts on his hat, / Ye men of the vale, beware of that.",
+  "source": "Worcestershire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Mists above, water below.",
+  "source": "Spanish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "rain"
+  ]
+ },
+ {
+  "text": "Mists dispersing on the plain, / Scatter away the clouds and rain; / But when they rise to the mountain tops, / They'll soon descend in copious drops.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "Hazy weather is thought to prognosticate frost in winter, snow in spring, fair weather in summer, and rain in autumn.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "snow",
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "The dews of the evening industriously shun; / They're the tears of the sky for the loss of the sun.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "With dew before midnight, / The next day will sure be bright.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "If nights three dewless there be, / 'Twill rain you're sure to see.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When the fog goes up the mountain, you may go hunting; when it comes down the mountain, you may go fishing. In the former case it will be fair, in the latter it will rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "A fog from the sea / Brings honey to the bee; / A fog from the hills / Brings corn to the mills.",
+  "source": "Pembrokeshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "So foul a sky clears not without a storm.",
+  "source": "Shakespeare's \"King John\"",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "The Carle sky / Keeps not the head dry.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Much undulation in the air on a hot day in May or June foretells cold.",
+  "source": "Scotland",
+  "months": [
+   5,
+   6
+  ],
+  "date": null,
+  "weather": [
+   "hot",
+   "cold"
+  ]
+ },
+ {
+  "text": "The farther the sight the nearer the rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When the Lizard is clear, / Rain is near.",
+  "source": "Cornwall",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A good hearing day is a sign of wet.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A sound in air presaged approaching rain, / And beast to covert scud across the plain.",
+  "source": "Thomas Parnell",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When Pons-an-dane calls to Larrigan river, / There will be fine weather; / But when Larrigan calls to Pons-an-dane, / There will be rain.",
+  "source": "Cornwall",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "Sound travelling far and wide, / A stormy day will betide.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Sounds are heard with unusual clearness before a storm. The railway whistle, for instance, seems remarkably shrill.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "If it raineth at tide's flow, / You may safely go and mow; / But if it raineth at the ebb, / Then, if you like, go off to bed.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Just before a storm the sea heaves and sighs.",
+  "source": "Fitzroy",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "A river flood, / Fishers' good.",
+  "source": "Spanish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Fine warm days are called \"weather breeders.\"",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot",
+   "clear"
+  ]
+ },
+ {
+  "text": "No one so surely pays his debt / As wet to dry and dry to wet.",
+  "source": "Wiltshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "With the rain of the north-east comes the ice fruit.",
+  "source": "Zuni Indians",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "hail"
+  ]
+ },
+ {
+  "text": "The faster the rain, the quicker the hold up.",
+  "source": "Norfolk",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Rain long foretold, long last; / Short notice, soon past.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Small showers last long, but sudden storms are short.",
+  "source": "Shakespeare's \"Richard II\"",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "storm"
+  ]
+ },
+ {
+  "text": "Rain before seven, / Lift before eleven.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "Morning rains are soon past.",
+  "source": "France",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Small rain abates high wind.",
+  "source": "France",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "wind"
+  ]
+ },
+ {
+  "text": "Marry the rain to the wind, and you have a calm.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "wind"
+  ]
+ },
+ {
+  "text": "A small rain may allay a great storm.",
+  "source": "T. Fuller",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "storm"
+  ]
+ },
+ {
+  "text": "To talk of the weather, it's nothing but folly; / For when it's rain on the hill, it may be sun in the valley.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "If it rains while the sun is shining, the devil is beating his grandmother. He is laughing, and she is crying.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "A sunshiny shower / Never lasts half an hour.",
+  "source": "Bedfordshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "Sunshiny rain / Will soon go again.",
+  "source": "Devonshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "If short showers come during dry weather, they are said to \"harden the drought\" and indicate no change.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "dry"
+  ]
+ },
+ {
+  "text": "A foot deep of rain / Will kill hay and grain; / But three feet of snow / Will make them come mo.",
+  "source": "Devonshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "snow"
+  ]
+ },
+ {
+  "text": "\"Agree between yourselves,\" quoth Arlotto, \"and I will make it rain.\"",
+  "source": "Italian",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Who soweth in rain, he shall reap it with tears.",
+  "source": "Tusser",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When it rains, they say in Amorgos, \"God is emptying His bowl.\"",
+  "source": "T. Bent (Greece)",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Though it rains, do not neglect to water.",
+  "source": "Spanish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "After great droughts come great rains.",
+  "source": "Dutch",
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry",
+   "rain"
+  ]
+ },
+ {
+  "text": "The old Norsemen called the rainbow \"The bridge of the gods.\"",
+  "source": "C. Swainson",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Rainbow to windward, foul fall the day; / Rainbow to leeward, damp runs away.",
+  "source": "Nautical",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "The weather's taking up now, / For yonder's the weather gaw; / How bonny is the east now! / Now the colours fade awa!",
+  "source": "Galloway",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "A dog in the morning, / Sailor, take warning; / A dog in the night / Is the sailor's delight.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "If there be a rainbow in the eve, / It will rain and leave; / But if there be a rainbow in the morrow, / It will neither lend nor borrow.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A rainbow in the morning / Is the shepherd's warning; / A rainbow at night / Is the shepherd's delight.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "The rainbow in the marnin' / Gives the shepherd warnin' / To car' his gurt cwoat on his back; / The rainbow at night is the shepherd's delight, / For then no gurt cwoat will he lack.",
+  "source": "Wiltshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "If hoar-frost come on mornings twain, / The third day surely will have rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "rain"
+  ]
+ },
+ {
+  "text": "Hoar-frost is good for vines, but bad for corn.",
+  "source": "France",
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "Bearded frost, forerunner of snow.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "snow"
+  ]
+ },
+ {
+  "text": "Three white frosts and then a storm.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "storm"
+  ]
+ },
+ {
+  "text": "A black frost is a long frost.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "cold",
+   "dry"
+  ]
+ },
+ {
+  "text": "He that would have a bad day maun gang out in a fog after a frost.",
+  "source": "Scottish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "fog",
+   "frost"
+  ]
+ },
+ {
+  "text": "Quick thaw, long frost.",
+  "source": "Old Anglo-Saxon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "In frosty weather the stars appear clearest and most sparkling.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "clear",
+   "cold"
+  ]
+ },
+ {
+  "text": "Hail brings frost in the tail.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "hail",
+   "frost"
+  ]
+ },
+ {
+  "text": "A hailstorm by day denotes a frost at night.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "hail",
+   "frost"
+  ]
+ },
+ {
+  "text": "Corn is as comfortable under the snow as an old man is under his fur cloak.",
+  "source": "Russia",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "Much snow, much hay.",
+  "source": "Sweden",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "Nae hurry wi' your corns, / Nae hurry wi' your harrows; / Snaw lies ahint the dyke; / Mair may come and fill the furrows.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "It takes three cloudy days to bring a heavy snow.",
+  "source": "New England",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow",
+   "cloud"
+  ]
+ },
+ {
+  "text": "If the snow remains on the trees in November, they will bring out but few buds in the spring.",
+  "source": "German",
+  "months": [
+   11
+  ],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "When the snow falls dry, it means to lie; / But flakes light and soft bring rain oft.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow",
+   "rain"
+  ]
+ },
+ {
+  "text": "When now in the ditch the snow doth lie, / 'Tis waiting for more by-and-bye.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "If the first thunder in spring be in the north, the Zuni say that the bear in his cave has stretched out his left leg; if in the east, that he has stretched out his right arm, and that the winter is over.",
+  "source": "Major Dunwoody",
+  "months": [
+   3,
+   4,
+   5
+  ],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "The first thunder of the year awakes / All the frogs and all the snakes.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "Thunder and lightning in the summer show / The point from which the freshening breeze will blow.",
+  "source": "J. Lamb's \"Aratus\"",
+  "months": [
+   6,
+   7,
+   8
+  ],
+  "date": null,
+  "weather": [
+   "thunder",
+   "wind"
+  ]
+ },
+ {
+  "text": "Winter thunder, / To old folks death, to young folks plunder.",
+  "source": null,
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "Winter's thunder, / Summer's wonder.",
+  "source": null,
+  "months": [
+   1,
+   2,
+   12
+  ],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "A thunderstorm comes up against the wind.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "wind"
+  ]
+ },
+ {
+  "text": "The air useth to be extreme hot before thunders.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "hot"
+  ]
+ },
+ {
+  "text": "We often see, against some storm, / A silence in the heavens, the rack stand still, / The bold wind speechless, and the orb below / As hush as death: anon the dreadful thunder / Doth rend the region.",
+  "source": "Shakespeare's \"Hamlet\"",
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "storm"
+  ]
+ },
+ {
+  "text": "Thunder in ye morning signifies wynde, about noone rayne, in ye evening great tempest.",
+  "source": "Digges",
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "wind",
+   "rain",
+   "storm"
+  ]
+ },
+ {
+  "text": "Forked lightning at night, / The next day clear and bright.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "clear"
+  ]
+ },
+ {
+  "text": "If it sinks from the north, / It will double its wrath. / If it sinks from the south, / It will open its mouth. / If it sinks from the west, / It is never at rest. / If it sinks from the east, / It will leave us in peace.",
+  "source": "Kent",
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "storm"
+  ]
+ },
+ {
+  "text": "When it thunders, they say the prophet Elias is driving in his chariot in pursuit of demons.",
+  "source": "T. Bent (Greece)",
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "As when two black clouds, / With heaven's artillery fraught, come rattling on / Over the Caspian; then stand, front to front / Hovering a while, till winds the signal blow / To join their dark encounter in mid air.",
+  "source": "Milton",
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "storm",
+   "cloud"
+  ]
+ },
+ {
+  "text": "The sound of bells is supposed to dissipate thunder and lightning.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder"
+  ]
+ },
+ {
+  "text": "Rolling thunder which seems to be passing on foretells wind; but sharp and interrupted cracks denote storms both of wind and rain.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "wind",
+   "rain",
+   "storm"
+  ]
+ },
+ {
+  "text": "Sign, too, of rain: his outstretched feet the hound / Extends, and curves his belly to the ground.",
+  "source": "J. Lamb's Aratus",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Cats are observed to scratch the wall or a post before wind, and to wash their faces before a thaw; they sit with their backs to the fire before snow.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "snow"
+  ]
+ },
+ {
+  "text": "Cats with their tails up and hair apparently electrified indicate approaching wind, — or a dog.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "The old woman promised him a fine day to-morrow because the cat's skin looked bright.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Sailors dislike to see the cat on board ship unusually playful or quarrelsome, and they say the cat has a gale of wind in her tail.",
+  "source": "Brand",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "storm"
+  ]
+ },
+ {
+  "text": "While rain depends, the pensive cat gives o'er / Her frolics, and pursues her tail no more.",
+  "source": "Broome",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Hark! I hear the asses bray; / We shall have some rain to day.",
+  "source": "Rutland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "It is time to stack your hay and corn / When the old donkey blows his horn.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When a cow tries to scratch its ear, / It means a shower is very near; / When it thumps its ribs with its tail, / Look out for thunder, lightning, hail.",
+  "source": "New Jersey, U.S.",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "thunder",
+   "hail"
+  ]
+ },
+ {
+  "text": "If the bull lead the van in going to pasture, rain must be expected; but if he is careless, and allow the cows to precede him, the weather will be uncertain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "\"When that white stirk o' ours turns her tail to the wind, you're sure to ha'e rain in half an hour.\"",
+  "source": "Cowboy to \"Old Moore,\" the Almanack Maker",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "He taught us erst the heifer's tail to view; / When stuck aloft, that showers would straight ensue.",
+  "source": "Gay",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "All shepherds agree in saying that before a storm comes sheep become frisky, leap, and butt or \"box\" each other.",
+  "source": "Folk-Lore Journal",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Swine are so terrified and disturbed and discomposed when the wind is getting up, that countrymen say that this animal alone sees the wind, and that it must be frightful to look at.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "Grumphie smells the weather, / An' grumphie sees the wun'; / He kens when clouds will gather, / An' smoor the blinkin' sun; / Wi' his mou' fu' o' strae / He to his den will gae; / Grumphie is a prophet, / Wat weather we will hae.",
+  "source": "Galloway",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "When pigs carry sticks, / The clouds will play tricks; / When they lie in the mud, / No fears of a flood.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm",
+   "clear"
+  ]
+ },
+ {
+  "text": "Pigs can see the wind.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "When through the dismal night the lone wolf howls, / Or when at eve around the house he prowls, / And, grown familiar, seeks to make his bed, / Careless of man, in some outlying shed, — / Then mark: ere thrice Aurora shall arise, / A horrid storm will sweep the blackened skies.",
+  "source": "J. Lamb's Aratus",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "E'en mice ofttimes prophetic are of rain, / Nor did our sires their auguries disdain, / When loudly piping with their voices shrill, / They frolicked, dancing on the downy hill.",
+  "source": "J. Lamb's Aratus",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Hares take to the open country before a snowstorm.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow",
+   "storm"
+  ]
+ },
+ {
+  "text": "When squirrels lay in a large supply of nuts, expect a cold winter; but — When he eats them on the tree, / Weather as warm as warm can be.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold",
+   "hot"
+  ]
+ },
+ {
+  "text": "Observe which way the hedgehog builds her nest, / To front the north or south, or east or west; / For if 'tis true that common people say, / The wind will blow the quite contrary way. / If by some secret art the hedgehog knows, / So long before, which way the winds will blow, / She has an art which many a person lacks / That thinks himself fit to make our almanacks.",
+  "source": "Poor Robin's Almanack, 1733",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "If birds that dwell in trees return eagerly to their nests, and leave their feeding-ground early, it is a sign of storms; but when a heron stands melancholy on the sand, or a raven stalks about, it only denotes rain.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm",
+   "rain"
+  ]
+ },
+ {
+  "text": "When summer birds take their flight, summer goes with them.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "Fowls will run to shelter and stay there if they think the weather will clear; but if they see it is to be wet all day, they come out and face it.",
+  "source": "United States",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "If the cock moult before the hen, / We shall have weather thick and thin; / But if the hen moult before the cock, / We shall have weather hard as a block.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold",
+   "frost"
+  ]
+ },
+ {
+  "text": "If the cock goes crowing to bed, / He'll certainly rise with a watery head.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Divers and ducks prune their feathers before a wind; but geese seem to call down the rain with their importunate cackling.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "rain"
+  ]
+ },
+ {
+  "text": "Wild geese, wild geese, ganging to the sea, / Good weather it will be; / Wild geese, wild geese, ganging to the hill, / The weather it will spill.",
+  "source": "Morayshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "When wild geese fly to the south-east in the fall, in Kansas, expect a blizzard.",
+  "source": "United States",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow",
+   "storm"
+  ]
+ },
+ {
+  "text": "It is said that the flight of wild geese is always either in the form of letters or of figures, and that the figures denote the number of weeks of frost that would follow their appearance.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "If the November goose-bone be thick, / So will the winter weather be; / If the November goose-bone be thin, / So will the winter weather be.",
+  "source": null,
+  "months": [
+   11
+  ],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "If the swan flies against the wind, it is a certain indication of a hurricane within twenty-four hours, generally within twelve.",
+  "source": "Correspondent in the \"Athenaeum\"",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm",
+   "wind"
+  ]
+ },
+ {
+  "text": "The feathers of the blue macaw turn a greenish hue before rain.",
+  "source": "Dr. Thornton",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When the peacock loudly bawls, / Soon we'll have both rain and squalls.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "wind"
+  ]
+ },
+ {
+  "text": "When the peacock's distant voice you hear, / Are you in want of rain? Rejoice, 'tis almost here.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "If the partridge sings when the rainbow spans the sky, / There is no better sign of wet than when it isn't dry.",
+  "source": "Spanish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When rooks fly sporting high in air, / It shows that windy storms are near.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "storm"
+  ]
+ },
+ {
+  "text": "If rooks stay at home, or return in the middle of the day, it will rain; if they go far abroad, it will be fine.",
+  "source": "Devonshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "When crows go to the water, if they beat it with their wings, throw it over them, and scream, it foreshows storms.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "The missel-thrush (in Hampshire called the \"storm-cock\") sings particularly loud and long before rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When the cuckoo is heard in low lands, it indicates rain; on high lands, fair weather.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "Spring gales about the equinox have been called \"gowk storms,\" because they follow the cuckoo.",
+  "source": null,
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "wind",
+   "storm"
+  ]
+ },
+ {
+  "text": "The yaffel, or green woodpecker (called also the \"rain-bird\"), cries at the approach of rain, and is described as \"laughing in the sun, because the rain is coming.\"",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When three daws are seen on St. Peter's vane together, / Then we're sure to have bad weather.",
+  "source": "Norwich",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "The titmouse foretells cold, if crying, \"Pincher.\"",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "Ravens, when they croak continuously, denote wind; but if the croaking is interrupted or stifled, or at longer intervals, they show rain.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "rain"
+  ]
+ },
+ {
+  "text": "If the robin sings in the bush, / Then the weather will be coarse; / If the robin sings on the barn, / Then the weather will be warm.",
+  "source": "East Anglia",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "hot"
+  ]
+ },
+ {
+  "text": "When swallows fleet, soar high, and sport in air, / He told us that the welkin would be clear.",
+  "source": "Gay",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "When there are many more swifts than swallows in the spring, expect a hot and dry summer.",
+  "source": "C. L. Prince",
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot",
+   "dry"
+  ]
+ },
+ {
+  "text": "No killing frost after martins.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "The plaintive note of the \"shilfa\" or \"sheely\" (chaffinch) is interpreted as a sign of rain. When, therefore, the boys hear it, they first imitate it, and then rhymingly refer to the expected consequences: Weet-weet! / Dreep-dreep!",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A heron, when it soars high, so as sometimes to fly above a low cloud, shows wind; but kites flying high show fair weather.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "clear"
+  ]
+ },
+ {
+  "text": "Cranes soaring aloft and quietly in the air foreshows fair weather; but if they make much noise, as consulting which way to go, it foreshows a storm that's near at hand.",
+  "source": "Thomas Willsford",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "storm"
+  ]
+ },
+ {
+  "text": "When men-of-war hawks fly high, it is a sign of a clear sky; / When they fly low, prepare for a blow.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "wind"
+  ]
+ },
+ {
+  "text": "The peaceful kingfishers are met together / About the decks, and prophesy calm weather.",
+  "source": "Wild",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "When dotterel do fast appear, / It shows that frost is very near; / But when the dotterel do go, / Then you may look for heavy snow.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "snow"
+  ]
+ },
+ {
+  "text": "Sea-gull, sea-gull, sit on the sand; / It's never good weather while you're on the land.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Sea-mews early in the morning making a gaggling more than ordinary foretoken stormy and blustering weather.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm",
+   "wind"
+  ]
+ },
+ {
+  "text": "The stormy petrel is found to be a sure token of stormy weather. When these birds gather in numbers in the wake of a ship, the sailors feel sure of an impending tempest.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Fish bite the least / With wind in the east.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "As dolphins heave their backs above the wave, / Prognosticating angry tempests black.",
+  "source": "Dante's Inferno",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "The cod is said to take in ballast before a storm.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "When trout refuse bait or fly, / There ever is a storm a-nigh.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "On Lake Ontario black bass leave shoal water before a thunderstorm.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "storm"
+  ]
+ },
+ {
+  "text": "Cockles, it is said, have more gravel sticking to their shells before a tempest.",
+  "source": "Thomas Willsford",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "The sea-anemone closes before rain, and opens for fine, clear weather.",
+  "source": "J. W. G. Gutch",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "Dr. Merryweather, of Whitby, has gone the length of contriving an apparatus by which one at least of twelve leeches confined in bottles of water rang a little bell when a tempest was expected. He showed this at the Great Exhibition of 1851, and advised the Government to establish leech-warning stations along the coast. Nothing came of it, except his book.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "When black snails cross your path, / Black cloud much moisture hath.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cloud"
+  ]
+ },
+ {
+  "text": "Snailie, snailie, shoot out your horn, / And tell us if it will be a bonnie day the morn.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "When black snails on the road you see, / Then on the morrow rain will be.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Croaking frogs in spring will be three times frozen in.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "cold"
+  ]
+ },
+ {
+  "text": "The louder the frog, the more the rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "If frogs make a noise in the time of cold rain, warm, dry weather will follow.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot",
+   "dry"
+  ]
+ },
+ {
+  "text": "When frogs spawn in the middle of the water, it is a sign of drought; and when at the side, it foretells a wet summer.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry",
+   "rain"
+  ]
+ },
+ {
+  "text": "A salamander, kept in a bottle in the south of Spain, changed his position every day, and took up the most uncouth and extraordinary attitudes before a storm.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Bees will not swarm / Before a near storm.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "When bees to distance wing their flight, / Days are warm and skies are bright; / But when their flight ends near their home, / Stormy weather is sure to come.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot",
+   "clear",
+   "storm"
+  ]
+ },
+ {
+  "text": "If bees stay at home, / Rain will soon come; / If they fly away, / Fine will be the day.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "A bee was never caught in a shower.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Ants sometimes get down fifteen inches from the surface before very hot weather.",
+  "source": "Communicated by G. W. D. Hannay",
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "Expect stormy weather when ants travel in lines, and fair weather when they scatter.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm",
+   "clear"
+  ]
+ },
+ {
+  "text": "An open ant-hole indicates clear weather; a closed one, an approaching storm.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "storm"
+  ]
+ },
+ {
+  "text": "Hornets build nests high before warm summers, and low before cold and early winters.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot",
+   "cold"
+  ]
+ },
+ {
+  "text": "Spiders work hard and spin their webs a little before wind, as if desiring to anticipate it, for they cannot spin when the wind begins to blow.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "Spiders creep out of their holes against wind and rain, Minerva having made them sensible of an approaching storm.",
+  "source": "Thomas Willsford",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "rain",
+   "storm"
+  ]
+ },
+ {
+  "text": "When spiders' webs in air do fly, / The spell will soon be very dry.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "Spiders' webs floating at autumn sunset / Bring a night frost — this you may bet.",
+  "source": "United States",
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "When you see gossamer flying, / Be sure the air is drying.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry"
+  ]
+ },
+ {
+  "text": "When harvest flies hum, / Warm weather to come.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "A fly on your nose, you slap, and it goes; / If it comes back again, it will bring a good rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Fall bugs begin to chirp six weeks before a frost in the fall.",
+  "source": "United States",
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "When fleas do very many grow / Then 'twill surely rain or snow.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "snow"
+  ]
+ },
+ {
+  "text": "When eager bites the thirsty flea, / Clouds and rain you sure shall see.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cloud",
+   "rain"
+  ]
+ },
+ {
+  "text": "When the butterfly comes, comes also the summer.",
+  "source": "Zuñi Indians",
+  "months": [],
+  "date": null,
+  "weather": [
+   "hot"
+  ]
+ },
+ {
+  "text": "If little flies or gnats be seen to hover together about the beams of the sun before it set, and fly together, making, as it were, the form of a pillar, it is a sure token of fair weather.",
+  "source": "Husbandman's Practice",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Gnats in October are a sign of long fair weather.",
+  "source": null,
+  "months": [
+   10
+  ],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "When locusts are heard, dry weather will follow, and frost will occur in six weeks.",
+  "source": "United States",
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry",
+   "frost"
+  ]
+ },
+ {
+  "text": "It is easy to foretell what sort of summer it will be by the position in which the larva of Cicada (Aphrophora spumaria) is found to lie in the froth (cuckoo spit) in which it is enveloped. If the insect lie with its head upwards, it infallibly denotes a dry summer; if downwards, a wet one.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry",
+   "rain"
+  ]
+ },
+ {
+  "text": "A certain long-bodied beetle is called in Bedfordshire the \"rain beetle,\" on account of its always appearing before rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When the leaves show their under sides, / Be very sure that rain betides.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "If on the trees the leaves still hold, / The coming winter will be cold.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "Leaves and straws playing in the air when no breeze is felt, the down of plants flying about, and feathers floating and playing on the water, show that winds are at hand.",
+  "source": "Bacon",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "The ash before the oak, / Choke, choke, choke; / The oak before the ash, / Splash, splash, splash.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "dry",
+   "rain"
+  ]
+ },
+ {
+  "text": "If the oak's before the ash, / Then you'll only get a splash; / But if the ash precedes the oak, / Then you may expect a soak.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "If the oak is out before the ash, / 'Twill be a summer of wet and splash; / But if the ash is before the oak, / 'Twill be a summer of fire and smoke.",
+  "source": "Hampshire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "hot",
+   "dry"
+  ]
+ },
+ {
+  "text": "When beech mast thrives well, and oak trees hang full, a hard winter will follow, with much snow.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold",
+   "snow"
+  ]
+ },
+ {
+  "text": "Pine cones hung up in the house will close themselves against wet and cold weather, and open against hot and dry times.",
+  "source": "Thomas Willsford",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "cold",
+   "hot",
+   "dry"
+  ]
+ },
+ {
+  "text": "When the mulberry has shown green leaf, there will be no more frost.",
+  "source": "Gloucestershire",
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost"
+  ]
+ },
+ {
+  "text": "When the blooms of the dogwood tree are full, expect a cold winter; when the blooms of the same are light, expect a warm winter.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold",
+   "hot"
+  ]
+ },
+ {
+  "text": "Witches were thought to produce bad weather by stirring water with branches of elder.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "It's always cold when the hawthorn blossoms.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "Make hay while the sun shines.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Daffodils / That come before the swallow dares, and take / The winds of March with beauty.",
+  "source": "Shakespeare",
+  "months": [
+   3
+  ],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "If the down flyeth off colt's-foot, dandelyon, and thistles, when there is no winde, it is a signe of rain.",
+  "source": "Coles",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "The wood anemone never opens its petals but when the wind blows, whence its name.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "When clover grass looks rough, and its leaves stand staring up, it is a sign of a tempest.",
+  "source": "Pliny",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "Onion's skin very thin, / Mild winter coming in; / Onion's skin thick and tough, / Coming winter cold and rough.",
+  "source": "Gardener's Rhyme",
+  "months": [],
+  "date": null,
+  "weather": [
+   "cold"
+  ]
+ },
+ {
+  "text": "Mony haws, / Mony snaws; / Mony slaes, / Mony cold taes.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow",
+   "cold"
+  ]
+ },
+ {
+  "text": "Mony hips and haws, / Mony frosts and snaws.",
+  "source": "Scotland",
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "snow"
+  ]
+ },
+ {
+  "text": "It was anciently supposed that the burning of fern drew down the rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Chickweed expands its leaves boldly and fully when fine weather is to follow; but if it should shut up, then the traveller is to put on his great coat.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "Pimpernel, pimpernel, tell me true / Whether the weather be fine or no; / No heart can think, no tongue can tell / The virtues of the pimpernel.",
+  "source": "Folk-Lore Journal, 1889",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "Now, look! Our weather glass is spread — / The pimpernel, whose flower / Closes its leaves of spotted red / Against a rainy hour.",
+  "source": "Professor Wilson",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Teasel or Fuller's thistle hung up will open for fine weather, and close for wet.",
+  "source": "Thomas Willsford",
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "When rheumatic people complain of more than ordinary pains in the joints, it will rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "A coming storm your shooting corns presage, / And aches will throb, your hollow tooth will rage.",
+  "source": "Broome",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "When everything at the table is eaten, it indicates continued clear weather.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Cream and milk, when they turn sour in the night, often indicate thereby that thunderstorms are about.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "storm"
+  ]
+ },
+ {
+  "text": "The presence of a dead body on ship or boat is supposed to cause contrary winds. Eggs are credited with the same power. So is whistling.",
+  "source": "Folk-Lore Journal",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind"
+  ]
+ },
+ {
+  "text": "When chairs and tables creak and crack, it will rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "Stringed instruments giving forth clear, ringing sounds indicate fair weather.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "In Midlothian the miners think that approaching changes of the weather are preceded by an increased flow of water and the issue of gases and foul air from the crevices; and when very bad weather is at hand, these last escape with a characteristic sound like the buzz of insects.",
+  "source": "Sir A. Mitchell",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "If any one sits on a stone (one of the Stiper Stones) called the Devil's Chair, a thunderstorm immediately arises.",
+  "source": "Shropshire Superstition",
+  "months": [],
+  "date": null,
+  "weather": [
+   "thunder",
+   "storm"
+  ]
+ },
+ {
+  "text": "A farmer's wife says, when her cheese salt is soft, it will rain; when getting dry, fair weather may be expected.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain",
+   "clear"
+  ]
+ },
+ {
+  "text": "There is a pillar of salt in the mines of Cracow which is called \"Lot's Wife,\" and which becomes damp at the approach of rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "If the smoke of a morning pipe hangs a long while in the air a good hunting day always follows.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear"
+  ]
+ },
+ {
+  "text": "Pig's bladder, when stretched, fine; when flaccid, wet.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "When the sparks stick to the poker, it is a sign of rain.",
+  "source": "Spanish",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "If the burning coals stick to the bottom of the pot, it is a sign of a tempest.",
+  "source": "Pliny",
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "If the fire burns unusually fiercely and brightly in winter, there will be frost and clear weather; if the fire burns dull, expect damp and rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "frost",
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "Blacksmiths select a stormy day in which to perform work requiring extra heat.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "storm"
+  ]
+ },
+ {
+  "text": "When the fire crackles lightly, it is said to be treading snow.",
+  "source": "Old Woman",
+  "months": [],
+  "date": null,
+  "weather": [
+   "snow"
+  ]
+ },
+ {
+  "text": "Drains, ditches, and dunghills are more offensive before rain.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ },
+ {
+  "text": "When the bubbles of coffee collect in the centre of the cup, expect fair weather. When they adhere to the cup, forming a ring, expect rain. If they separate without assuming any fixed position, expect changeable weather.",
+  "source": null,
+  "months": [],
+  "date": null,
+  "weather": [
+   "clear",
+   "rain"
+  ]
+ },
+ {
+  "text": "The hollow winds begin to blow, / The clouds look black, the glass is low, / The soot falls down, the spaniels sleep, / And spiders from their cobwebs creep.",
+  "source": "Dr. E. Darwin",
+  "months": [],
+  "date": null,
+  "weather": [
+   "wind",
+   "cloud",
+   "rain"
+  ]
+ },
+ {
+  "text": "Wet weather seldom hurts the most unwise; / So plain the signs, such prophets are the skies.",
+  "source": "Virgil's Georgics, Dryden's Translation",
+  "months": [],
+  "date": null,
+  "weather": [
+   "rain"
+  ]
+ }
+]

@@ -84,6 +84,9 @@ def time_setting(name: str, default: str) -> dt_time:
         return dt_time.fromisoformat(default)
 
 
+# Where /weather is for when nobody names a place: a town or city, as you'd type it. Defaults to London.
+WEATHER_PLACE = os.getenv("WEATHER_PLACE") or "London"
+
 # When each day's spray interest rate (/sprayfutures, /sprayrate) is set, in BOT_TIMEZONE. Defaults to midnight.
 SPRAY_RATE_TIME = time_setting("SPRAY_RATE_TIME", "00:00")
 

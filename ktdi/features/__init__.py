@@ -21,6 +21,7 @@ FEATURES = [
     "ktdi.features.movie",
     "ktdi.features.units",
     "ktdi.features.timezones",
+    "ktdi.features.weather",
     "ktdi.features.quotes",
     "ktdi.features.campaigns",
     "ktdi.features.settings",

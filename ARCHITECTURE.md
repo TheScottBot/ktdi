@@ -63,6 +63,8 @@ ktdi/
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
 │   ├── units.py       /abm, /imperial
 │   ├── timezones.py   /timezone (convert, set, show, clear); parsing lives in lib/timezones.py
+│   ├── weather.py     /weather: Open-Meteo's forecast (lib/openmeteo.py) next to 1893 weather lore; /weather here
+│   │                  <place> for where you are, posted without naming it (never stored, cached or logged)
 │   ├── quotes.py      quotes (prefix group, slash group, right-click form)
 │   ├── campaigns.py   campaigns, reminders, the reminder loop
 │   ├── settings.py    /settings (shared state, whospray user)
@@ -78,6 +80,9 @@ ktdi/
     ├── cures.json     /cure's remedies and /plant's herbs, built by tools/cure_build.py from Culpeper's Complete
     │                  Herbal (Gutenberg)
     ├── herb_latin.json  /plant's Latin names, checked by hand, keyed by the start of Culpeper's herb names
+    ├── weather_lore.json  /weather's sayings: hand-picked and tidied from Inwards' Weather Lore (1893,
+    │                  archive.org scan), each tagged with its weather and any months or day
+    ├── openmeteo.py   Open-Meteo forecast and place lookup (free, no key); None when it's down
     ├── slang.json     /vulgartongue's dictionary (Grose, 1811), built by tools/slang_build.py from an allowlist
     │                  (slang_curation.json: entries kept, and the insults). Slurs and anything that punches down
     │                  were reviewed out once; the repo only records what was kept, never what was removed
@@ -335,7 +340,9 @@ python -m pytest            # ~3 seconds
    command (reactions, extra tips) needs `help_extras` / `main_help_lines`. Give new features a `HELP_CATEGORY`. Update the README command table.
 4. **Data:** reads through `db.scope()`, writes record the current server, edits target the row's own server,
    schema changes are additive upgrades in `db._upgrade()`.
-5. **Privacy:** nothing about `/books` or `/rpg` use may be logged against a person. Don't add logging that reveals what a
+5. **Privacy:** nothing about `/books` or `/rpg` use may be logged against a person, and where someone is
+   (`/weather here <place>`) is never shown, stored or logged: not in the database, not in the place cache, not in the
+   log (all three are marked `extras["private"]`). Don't add logging that reveals what a
    dissociated/anonymous action was meant to hide.
 6. **Discord limits:** slash command and option descriptions ≤ 100 characters, ≤ 25 options/choices/autocomplete
    results, embed fields ≤ 1024, embeds ≤ 6000, uploads 10 MB on unboosted servers, and a reply to a slash command
