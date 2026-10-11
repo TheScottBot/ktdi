@@ -149,13 +149,15 @@ def split_start(text: str) -> tuple[str, str | None]:
     return (text[:match.start()], match.group(1)) if match else (text, None)
 
 
-def parse_date(text: str, today: date) -> date:
-    """UK-style dates. A date without a year means the next time that date comes round."""
+def read_date(text: str, today: date) -> tuple[int | None, int, int]:
+    """A UK-style date as (year or None, month, day), not yet checked: "19 oct", "oct 19", "19/10", "2026-10-19",
+    "today", "tomorrow"."""
     cleaned = re.sub(r"(\d)(st|nd|rd|th)\b", r"\1", text.strip().lower().replace(",", " "))
     if cleaned in ("today", "tonight"):
-        return today
+        return today.year, today.month, today.day
     if cleaned == "tomorrow":
-        return today + timedelta(days=1)
+        tomorrow = today + timedelta(days=1)
+        return tomorrow.year, tomorrow.month, tomorrow.day
 
     year = None
     if match := re.fullmatch(r"(\d{4})-(\d{1,2})-(\d{1,2})", cleaned):
@@ -175,6 +177,23 @@ def parse_date(text: str, today: date) -> date:
         raise ScheduleError(f"I couldn't read the date `{text}`. Try {DATE_EXAMPLES}.")
     if year is not None and year < 100:
         year += 2000
+    return year, month, day
+
+
+def parse_day(text: str, today: date) -> tuple[int, int]:
+    """A day of the year, as (month, day), from a UK-style date ("5 november", "nov 5", "5/11", "tomorrow"); any
+    year is ignored. 29 February counts."""
+    _, month, day = read_date(text, today)
+    try:
+        date(2000, month, day)  # A leap year, so 29 February is a real day
+    except ValueError:
+        raise ScheduleError(f"`{text}` isn't a real date.") from None
+    return month, day
+
+
+def parse_date(text: str, today: date) -> date:
+    """UK-style dates. A date without a year means the next time that date comes round."""
+    year, month, day = read_date(text, today)
     try:
         result = date(year or today.year, month, day)
     except ValueError:

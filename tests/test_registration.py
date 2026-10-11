@@ -10,8 +10,8 @@ from ktdi.bot import KTDIBot, describe_options
 from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
-SLASH_COMMANDS = ["abm", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books", "bribe", "campaign", "committee",
-                  "cure", "deadword", "devils", "dream", "enquire", "etiquette", "expunge", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot",
+SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books", "bribe", "campaign", "committee",
+                  "cure", "deadword", "devils", "dream", "enquire", "etiquette", "expunge", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot", "melancholy",
                   "nowplaying", "phrase", "plant", "quote", "rapsheet", "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
                   "tdoi", "timezone", "vulgartongue", "wars", "weather", "whospray"]
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
@@ -105,29 +105,68 @@ def test_help_details(loaded_bot):
     assert "Type a number and a metric unit" in abm.description and len(abm.fields) == 12
 
 
-def test_main_help_list(loaded_bot):
+def test_help_front_page(loaded_bot):
     ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
     asyncio.run(help_feature.help_command.callback(ctx))
     embed = ctx.last.embed
-    assert ctx.last.view is None  # fits on one page, so no buttons
-    # In order; a category too long for one field carries on in the next ("📜 Old books (cont.)").
-    categories = list(dict.fromkeys(f.name.removesuffix(" (cont.)") for f in embed.fields))
-    assert categories == [
-        "💦 Rap sheet", "🎲 Fun", "📜 Old books", "🎬 Movie night", "📏 Measurements", "💬 Quotes", "🗓️ Campaigns",
-        "🔧 Utilities"]
-    fields = {f.name: f.value for f in embed.fields}
-    assert "`/quote add | claim | delete | dissociate | last | random | search | show`: " in fields["💬 Quotes"]
-    assert "`/bail <user> <amount>`: " in fields["💦 Rap sheet"] and "React 💦: " in fields["💦 Rap sheet"]
-    assert "`/loot`: " in fields["🎲 Fun"] and "`/anime`: " in fields["🎲 Fun"]
-    assert "/books" not in ctx.last.text and "/rpg" not in ctx.last.text  # library and rulebooks not set up here
+    assert not ctx.last.private  # In the channel, so others see where to start too
+    lines = embed.description.split("\n")
+    assert lines[0] == "**Start here:** `/spray` · `/rapsheet` · `/bad` · `/quote random` · `/nowplaying`"
+    sections = [line for line in lines[2:]]
+    assert [line.split(" **")[1].split("**")[0] for line in sections] == [
+        "Rap sheet", "Fun", "Words & wisdom", "Old oddities", "Movie night", "Measurements", "Quotes", "Campaigns",
+        "Utilities"]
+    assert sections[3].startswith("🔮 **Old oddities**: Dreams, almanacs, herbs, witches and Mrs Beeton (")
+    assert not embed.fields and len(embed) < 1500  # Short: one line a section
+    assert isinstance(ctx.last.view, help_feature.HelpMenu)
+    assert [o.label for o in ctx.last.view.sections.options][:3] == ["Rap sheet", "Fun", "Words & wisdom"]
 
 
-def test_every_command_has_a_category_and_is_listed(loaded_bot, monkeypatch):
+def test_the_menu_opens_a_section_privately(loaded_bot):
+    from tests.fakes import Interaction
+    ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
+
+    async def go():
+        await help_feature.help_command.callback(ctx)
+        view = ctx.last.view
+        view.sections._values = ["🔮 Old oddities"]
+        dave = Interaction(User(2, "dave"))  # Anyone can use it: the section is shown just to them
+        await view.sections.callback(dave)
+        assert dave.last.embed.title == "🔮 Old oddities" and dave.last.private
+        assert "`/dream [thing]`: " in dave.last.embed.description
+    asyncio.run(go())
+
+
+def test_section_pages(loaded_bot):
+    ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
+    lines = help_feature.main_help_lines(ctx)
+    quotes = help_feature.section_page("💬 Quotes", lines["💬 Quotes"])
+    assert "`/quote …`: Save and replay" in quotes.description  # Subcommands are on /help quote, not here
+    rap = help_feature.section_page("💦 Rap sheet", lines["💦 Rap sheet"]).description
+    assert rap.startswith("Sprays, blame, bribes and the committee\n\n")
+    assert "`/bail <user> <amount>`: " in rap and "React 💦: " in rap
+    fun = help_feature.section_page("🎲 Fun", lines["🎲 Fun"]).description
+    assert "`/loot`: " in fun and "`/anime`: " in fun
+    assert "/books" not in str(lines) and "/rpg" not in str(lines)  # Library and rulebooks not set up here
+
+
+def test_help_for_a_section_by_name(loaded_bot):
+    ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
+    for typed, section in [("old oddities", "🔮 Old oddities"), ("Old Oddities", "🔮 Old oddities"),
+                           ("oddities", "🔮 Old oddities"), ("rap sheet", "💦 Rap sheet"), ("movie", "🎬 Movie night"),
+                           ("words and wisdom", "📚 Words & wisdom")]:
+        asyncio.run(help_feature.help_command.callback(ctx, command=typed))
+        assert ctx.last.private and ctx.last.embed.title == section, typed
+    asyncio.run(help_feature.help_command.callback(ctx, command="spray"))
+    assert ctx.last.embed.title.startswith("/spray")  # A command's own name wins
+
+
+def test_every_command_has_a_section_and_is_listed(loaded_bot, monkeypatch):
     monkeypatch.setattr(help_feature, "can_use", lambda command, ctx: True)  # include /books
     for command in loaded_bot.commands:
-        assert help_feature.command_category(command) in help_feature.CATEGORY_ORDER, command.name
+        assert help_feature.command_category(command) in help_feature.CATEGORIES, command.name
     ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
-    text = "\n".join(f.value for page in help_feature.main_help_pages(ctx) for f in page.fields)
+    text = "\n".join(line for lines in help_feature.main_help_lines(ctx).values() for line in lines)
     for name in SLASH_COMMANDS:
         assert (f"`/{name}" in text) == (name not in HIDDEN_COMMANDS), name
 
@@ -141,68 +180,26 @@ def test_cryptids_are_unlisted_but_real(loaded_bot):
     assert loaded_bot.tree.get_command("toenoyoudidnt") is None  # not in Discord's slash menu
 
 
-def assert_fits(embed):
-    assert len(embed) <= help_feature.EMBED_TOTAL_LIMIT
-    assert len(embed.fields) <= help_feature.EMBED_FIELD_COUNT_LIMIT
-    assert all(len(f.value) <= help_feature.EMBED_FIELD_LIMIT for f in embed.fields)
-
-
-def test_main_help_list_fits_discord(loaded_bot, monkeypatch):
+def test_every_help_page_fits_discord_even_with_everything(loaded_bot, monkeypatch):
     monkeypatch.setattr(help_feature, "can_use", lambda command, ctx: True)
-    pages = help_feature.main_help_pages(Ctx(User(1, "scott"), Guild(111), bot=loaded_bot))
-    assert len(pages) == 1
-    assert_fits(pages[0])
+    ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
+    lines = help_feature.main_help_lines(ctx)
+    pages = [help_feature.front_page(ctx, lines)] + [help_feature.section_page(c, ls) for c, ls in lines.items()]
+    for page in pages:
+        assert len(page) <= help_feature.EMBED_TOTAL_LIMIT and len(page.description) <= 4096, page.title
+    assert len(lines) <= 25  # The menu holds 25 sections
 
 
-def test_long_categories_continue_in_another_field():
-    lines = {"🎲 Fun": [f"`/cmd{i}`: " + "x" * 90 for i in range(30)], "💬 Quotes": ["`/quote`: q"]}
-    fields = help_feature.category_fields(lines)
-    assert [name for name, _ in fields] == ["🎲 Fun", "🎲 Fun (cont.)", "🎲 Fun (cont.)", "💬 Quotes"]
-    assert all(len(value) <= help_feature.EMBED_FIELD_LIMIT for _, value in fields)
-    assert "\n".join(value for _, value in fields[:3]).count("`/cmd") == 30  # nothing lost
-
-
-def test_pagination_when_it_no_longer_fits():
-    fields = [(f"Category {i}", "y" * 1000) for i in range(40)]
-    pages = help_feature.paginate("Title", "Description", "Footer.", fields)
-    assert len(pages) > 1
-    for number, page in enumerate(pages, 1):
-        assert_fits(page)
-        assert page.footer.text == f"Page {number} of {len(pages)}. Footer."
-    assert sum(len(page.fields) for page in pages) == 40  # nothing dropped
-    many_small = help_feature.paginate("T", "D", "F", [(f"C{i}", "z") for i in range(60)])
-    assert [len(page.fields) for page in many_small] == [25, 25, 10]
-
-
-def test_help_buttons_flip_pages(loaded_bot, monkeypatch):
-    from tests.fakes import Interaction
-    monkeypatch.setattr(help_feature, "EMBED_FIELD_COUNT_LIMIT", 2)  # force several pages
-    scott = User(1, "scott")
-    ctx = Ctx(scott, Guild(111), bot=loaded_bot)
-
-    async def go():
-        await help_feature.help_command.callback(ctx)
-        view = ctx.last.view
-        assert isinstance(view, help_feature.HelpPages)
-        fields = help_feature.category_fields(help_feature.main_help_lines(ctx))
-        assert len(view.pages) == -(-len(fields) // 2)  # two fields a page, rounded up
-        assert view.previous_page.disabled and not view.next_page.disabled
-        interaction = Interaction(scott)
-        await view.next_page.callback(interaction)
-        assert view.page == 1 and interaction.last.embed is view.pages[1]
-        stranger = Interaction(User(2, "dave"))
-        assert not await view.interaction_check(stranger)
-        assert "Run your own `/help`" in stranger.last.content
-        for _ in view.pages:
-            await view.next_page.callback(interaction)
-        assert view.page == len(view.pages) - 1 and view.next_page.disabled  # stops at the last page
-    asyncio.run(go())
+def test_a_group_lists_its_own_slash_subcommand(loaded_bot):
+    beeton = help_feature.command_help_embed(loaded_bot.get_command("beeton"))
+    assert [f.name for f in beeton.fields if f.name.startswith("/")] == [
+        "/beeton advice [topic]", "/beeton recipe [dish]"]  # "recipe" is /beeton itself, typed or not
 
 
 def test_help_unknown_command(loaded_bot):
     ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
-    asyncio.run(help_feature.help_command.callback(ctx, command="nope"))
-    assert ctx.last.content == "There's no `nope` command. Try `/help` for the list." and ctx.last.private
+    asyncio.run(help_feature.help_command.callback(ctx, command="zzqx"))
+    assert ctx.last.content == "There's no `zzqx` command or section. Try `/help` for the list." and ctx.last.private
 
 
 def test_command_logging_flattens_subcommands():

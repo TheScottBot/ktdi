@@ -19,7 +19,7 @@ from discord.ext import commands
 from ktdi import oldbooks
 from ktdi.lib import fuzzy, links
 
-HELP_CATEGORY = "📜 Old books"
+HELP_CATEGORY = "📚 Words & wisdom"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "slang.json"
 SOURCE = "Grose's Dictionary of the Vulgar Tongue (1811)"
 BOOK = 5402  # On Project Gutenberg

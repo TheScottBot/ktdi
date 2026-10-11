@@ -69,6 +69,9 @@ ktdi/
 │   ├── phrase.py      /phrase: where an idiom comes from (Brewer, 1898), the nearest idiom however it's worded
 │   ├── beeton.py      /beeton recipe and advice: Mrs Beeton (1861), recipes by dish or ingredient, household advice
 │   ├── enquire.py     /enquire: a hint on anything from Enquire Within Upon Everything (1856)
+│   ├── almanac.py     /almanac: a day from Hone's Every-Day Book (1826-27): saints, folklore, flower, temperature.
+│   │                  Dates are read by lib/reminders.py's parse_day (shared with campaign reminders)
+│   ├── melancholy.py  /melancholy: a passage of Burton's Anatomy of Melancholy (1621) on a topic, or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
@@ -119,6 +122,13 @@ ktdi/
     ├── beeton.json    /beeton's recipes and advice (Gutenberg), built by tools/beeton_build.py from an allowlist of
     │                  paragraph numbers (beeton_curation.json, with "no_aside" for recipes whose aside is hidden).
     │                  Numbered-paragraph books split with gutenberg.numbered_sections, shared with Enquire Within
+    ├── almanac.json   /almanac's days (both volumes of Hone, Gutenberg), built by tools/almanac_build.py: every
+    │                  day's saints, flower and temperature, and the passages on almanac_curation.json (picked by hand,
+    │                  keyed "volume:MM-DD:passage")
+    ├── melancholy.json  /melancholy's excerpts (Burton, Gutenberg), built by tools/melancholy_build.py from
+    │                  melancholy_curation.json, which lists them word for word; the build checks each is in the book
+    │                  (footnote marks, escaped Greek and Unicode forms aside) and works out the words a link can find
+    │                  it by on the web page, where the footnote marks are still in the text
     ├── enquire.json   /enquire's hints (Gutenberg), built by tools/enquire_build.py: risky topics left out whole, the
     │                  rest from an allowlist keyed "number. title" (enquire_curation.json; the book reuses two numbers)
     ├── phrases.json   /phrase's idioms: hand-picked from Brewer's Dictionary of Phrase and Fable (1898, archive.org
@@ -188,16 +198,18 @@ formats and sizes).
 
 ## 6. /help
 
-`/help` is built from the registered prefix commands and printed with a `/`. Features extend it without `help.py`
-changing:
+`/help` is built from the registered prefix commands and printed with a `/`. It's three levels, so it never becomes
+one intimidating wall: the front page (`help.START_HERE`'s picks, then one line per section, with a menu that opens a
+section privately for whoever picks it), a section's page (`/help old oddities`: each command once, a group as
+`/quote …`), and one command in detail (`/help quote`). Features extend it without `help.py` changing:
 
 - `help_extras(command) -> (extra description, [(field name, text, inline), ...])`: detail for `/help <command>`
   and `/help <group> <subcommand>`. Return `("", [])` for commands that aren't yours.
-- `HELP_CATEGORY = "🎲 Fun"`: where the feature's commands sit on the main `/help` list. One command can differ with
-  `extras={"category": ...}` (`/loot` and `/linux` are 🎲 Fun, the rest of `fun.py` is 💦 Rap sheet). Categories are
-  shown in `help.CATEGORY_ORDER`, and a new one goes after those; a command with no category lands in 🧩 Other, which
-  a test refuses.
-- `main_help_lines() -> [(category, line)]`: extra lines on the main list for things that aren't commands (e.g. 💦).
+- `HELP_CATEGORY = "🎲 Fun"`: the section the feature's commands are in. One command can differ with
+  `extras={"category": ...}` (`/loot` and `/linux` are 🎲 Fun, the rest of `fun.py` is 💦 Rap sheet). Sections are
+  `help.CATEGORIES` (in order, each with its front-page line); a new one goes after those; a command with no section
+  lands in 🧩 Other, which a test refuses.
+- `main_help_lines() -> [(category, line)]`: extra lines in a section for things that aren't commands (e.g. 💦).
 - Command `extras`:
   - `"prefix_only": True` → shown as `!quote anon`, left out of the `/…` summary.
   - `"available": fn(guild) -> bool` → hidden from `/help`, and not synced as a slash command, where it can't be

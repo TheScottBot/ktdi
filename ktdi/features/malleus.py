@@ -12,7 +12,7 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 
-HELP_CATEGORY = "📜 Old books"
+HELP_CATEGORY = "🔮 Old oddities"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "malleus.json"
 BOOK = "bf-1569-a-2-i-5-1928"
 SOURCE = "Malleus Maleficarum (1486), tr. Montague Summers (1928)"

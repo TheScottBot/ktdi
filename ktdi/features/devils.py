@@ -19,7 +19,7 @@ from discord.ext import commands
 from ktdi import oldbooks
 from ktdi.lib import links
 
-HELP_CATEGORY = "📜 Old books"
+HELP_CATEGORY = "📚 Words & wisdom"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "devils.json"
 SOURCE = "Ambrose Bierce, The Devil's Dictionary (1911)"
 BOOK = 972  # Project Gutenberg

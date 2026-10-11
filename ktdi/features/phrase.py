@@ -19,7 +19,7 @@ from discord.ext import commands
 from ktdi import oldbooks
 from ktdi.lib import fuzzy, links
 
-HELP_CATEGORY = "📜 Old books"
+HELP_CATEGORY = "📚 Words & wisdom"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "phrases.json"
 SOURCE = "Brewer, Dictionary of Phrase and Fable (1898)"
 BOOK = "dictionaryofphra0000ecob"  # The archive.org scan

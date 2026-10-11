@@ -20,7 +20,7 @@ from discord.ext import commands
 from ktdi import oldbooks
 from ktdi.lib import fuzzy, links
 
-HELP_CATEGORY = "📜 Old books"
+HELP_CATEGORY = "🔮 Old oddities"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "beeton.json"
 SOURCE = "Mrs Beeton's Book of Household Management (1861)"
 BOOK = 10136  # Project Gutenberg
@@ -119,7 +119,7 @@ def household(query: str | None) -> discord.Embed:
 # /beeton recipe [dish] and /beeton advice [topic]. Typed, !beeton <dish> is a recipe, and !beeton on its own a random
 # one. (Discord won't run a bare /beeton once it has subcommands, hence /beeton recipe with no dish.)
 @commands.hybrid_group(name="beeton", aliases=["mrsbeeton"], fallback="recipe", invoke_without_command=True,
-                       description="Mrs Beeton (1861): a recipe by dish or ingredient, or a random one.")
+                       description="Mrs Beeton (1861): recipes by dish or ingredient, and her advice on running a house.")
 @app_commands.describe(dish="A dish or ingredient (almond soup, eels, pudding...). Empty: random")
 async def beeton(ctx: commands.Context, *, dish: str | None = None):
     await ctx.send(embed=recipe(dish))

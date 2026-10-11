@@ -17,7 +17,7 @@ from discord.ext import commands
 from ktdi import oldbooks
 from ktdi.lib import links
 
-HELP_CATEGORY = "📜 Old books"
+HELP_CATEGORY = "📚 Words & wisdom"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "enquire.json"
 SOURCE = "Enquire Within Upon Everything (1856)"
 BOOK = 10766  # Project Gutenberg

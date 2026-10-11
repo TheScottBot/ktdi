@@ -19,7 +19,7 @@ from discord.ext import commands
 from ktdi import oldbooks
 from ktdi.lib import links
 
-HELP_CATEGORY = "📜 Old books"
+HELP_CATEGORY = "🔮 Old oddities"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "dream.json"
 SOURCE = "Miller, Ten Thousand Dreams Interpreted (1901)"
 BOOK = 926  # Project Gutenberg

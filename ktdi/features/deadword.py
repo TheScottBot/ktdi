@@ -18,7 +18,7 @@ from discord.ext import commands
 from ktdi import oldbooks
 from ktdi.lib import fuzzy, links
 
-HELP_CATEGORY = "📜 Old books"
+HELP_CATEGORY = "📚 Words & wisdom"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "deadwords.json"
 SOURCE = "Mackay, Lost Beauties of the English Language (1874)"
 BOOK = "cu31924096224880"  # The archive.org scan
