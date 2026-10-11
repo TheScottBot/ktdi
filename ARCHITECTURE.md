@@ -134,6 +134,8 @@ ktdi/
     │                  rest from an allowlist keyed "number. title" (enquire_curation.json; the book reuses two numbers)
     ├── phrases.json   /phrase's idioms: hand-picked from Brewer's Dictionary of Phrase and Fable (1898, archive.org
     │                  scan; not on Gutenberg), OCR mended against the page, each with its page in the scan
+    ├── oldmoney.py    old money (£ s. d.) in today's: /beeton's "2s. 3d." is "about £17 now" (£1 in 1861 is about
+    │                  £155; SINCE_1861 to update)
     ├── insurance.py   /insurance's two clocks (microwave: real cover; car: the countdown shown), from ID + minute
     ├── herbal.json    /herbal's data: built by tools/herbal_build.py (archive.org OCR -> Google Sheets' GOOGLETRANSLATE)
     ├── reminders.py   schedule parsing, dates, warnings, next-occurrence maths

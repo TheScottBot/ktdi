@@ -194,7 +194,8 @@ def test_a_recipe_by_name():
     embed = beeton.recipe("almond soup")
     assert embed.title == "🍽️ Almond Soup"
     assert embed.description.startswith("Boil the beef, or veal, gently in water")
-    assert "⏱️ 3 hours · 💷 per quart, 2s. 3d · 🍽️ for 8 persons · 📅 all the year" in embed.description
+    assert ("⏱️ 3 hours · 💷 per quart, 2s. 3d (about £17 now) · 🍽️ for 8 persons · 📅 all the year"
+            in embed.description)  # Her cost, and what it'd be now
     assert "-# 📖 THE ALMOND-TREE.—This tree is indigenous" in embed.description
     assert embed.fields[0].name == "Ingredients" and embed.fields[0].value.startswith("4 lbs. of lean beef")
     assert embed.footer.text == beeton.SOURCE

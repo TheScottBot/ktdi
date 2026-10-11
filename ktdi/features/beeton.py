@@ -21,7 +21,7 @@ from discord.ext import commands
 
 from ktdi import oldbooks
 from ktdi.common import today
-from ktdi.lib import fuzzy, links
+from ktdi.lib import fuzzy, links, oldmoney
 from ktdi.lib.reminders import DAY_NAMES, DAY_WORDS, ScheduleError, parse_day
 
 HELP_CATEGORY = "🔮 Old oddities"
@@ -63,9 +63,9 @@ def url(entry: dict) -> str:
 
 
 def particulars(entry: dict) -> str:
-    """"⏱️ 3 hours · 💷 2s. 3d. per quart · 🍽️ for 8 persons · 📅 all the year"."""
-    parts = [("⏱️", entry.get("time")), ("💷", entry.get("cost")), ("🍽️", entry.get("serves")),
-             ("📅", entry.get("seasonable"))]
+    """"⏱️ 3 hours · 💷 2s. 3d. per quart (about £17 now) · 🍽️ for 8 persons · 📅 all the year"."""
+    cost = oldmoney.in_todays_money(entry["cost"]) if entry.get("cost") else None
+    parts = [("⏱️", entry.get("time")), ("💷", cost), ("🍽️", entry.get("serves")), ("📅", entry.get("seasonable"))]
     return " · ".join(f"{icon} {escape(text)}" for icon, text in parts if text)
 
 
@@ -167,7 +167,7 @@ def household(query: str | None) -> discord.Embed:
 @app_commands.describe(dish="A dish or ingredient (almond soup, eels, pudding...). Empty: random")
 async def beeton(ctx: commands.Context, *, dish: str | None = None):
     """`/beeton recipe <dish>` finds a recipe by name (almond soup) or by ingredient (eels: one recipe, with the others
-    named), with her ingredients, method, time, cost in 1861 money, season and servings, and often her aside on where
+    named), with her ingredients, method, time, cost in 1861 money (and about what that is now), season and servings, and often her aside on where
     the food comes from. No dish: a random one. `/beeton menu` is her dinner for today (or `/beeton menu friday`, or
     `25/12`), and `/beeton advice <topic>` is her advice on running a house (servants, dinner, early rising, a will).
     Typed, `!beeton toad in the hole` is a recipe."""
