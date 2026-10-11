@@ -23,7 +23,6 @@ HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "dream.json"
 SOURCE = "Miller, Ten Thousand Dreams Interpreted (1901)"
 BOOK = 926  # Project Gutenberg
-SOURCE_URL = links.gutenberg(BOOK)
 COLOUR = discord.Color.purple()
 DISCLAIMERS = [
     "The committee accepts no liability for prophecies.",
@@ -84,8 +83,8 @@ def interpret(query: str | None) -> discord.Embed:
         return dream_embed(named[0])
     if found and found.kind == "uses":
         return oldbooks.uses_embed(found.entries, title=f"🔮 Dreams that mention “{oldbooks.shown_typed(query)}”",
-                                   line=lambda e: f"**{escape(e['word'])}**: {escape(first_sentence(e['text']))}",
-                                   source=SOURCE, url=SOURCE_URL, colour=COLOUR)
+                                   name=lambda e: escape(e["word"]), summary=lambda e: escape(first_sentence(e["text"])),
+                                   link=url, source=SOURCE, colour=COLOUR)
     if found:  # Spelt like something Miller covered
         return dream_embed(found.entries[0])
     return discord.Embed(title=f"🔮 {oldbooks.shown_typed(query)}", color=COLOUR,

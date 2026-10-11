@@ -59,15 +59,19 @@ def test_fit_keeps_whole_paragraphs():
     assert long.startswith("Word Word") and long.endswith("…" + oldbooks.MORE) and len(long) < 40 + len(oldbooks.MORE)
 
 
-def test_uses_embed(monkeypatch):
+def test_uses_embed_links_each_entry(monkeypatch):
     monkeypatch.setattr(oldbooks.random, "sample", lambda options, n: list(options)[:n])
     found = [{"word": f"W{n}", "text": "x " * 100} for n in range(10)]
-    embed = oldbooks.uses_embed(found, title="Uses", line=lambda e: f"**{e['word']}**: {e['text']}", source="Book",
-                                url=None, colour=oldbooks.discord.Color.purple())
+    embed = oldbooks.uses_embed(found, title="Uses", name=lambda e: e["word"], summary=lambda e: e["text"],
+                                link=lambda e: f"https://book.example/{e['word']}", source="Book",
+                                colour=oldbooks.discord.Color.purple())
     lines = embed.description.split("\n")
-    assert len(lines) == oldbooks.SHOWN and all(len(line) <= oldbooks.LINE_LENGTH for line in lines)
+    assert len(lines) == oldbooks.SHOWN and lines[0].startswith("**[W0](https://book.example/W0)**: x x")
+    assert all(len(line) - len("(https://book.example/W0)") <= oldbooks.LINE_LENGTH + 6 for line in lines)
+    assert embed.url is None  # The list isn't one place in the book: each entry links to its own
     assert embed.footer.text == "Book. Showing 8 of 10: ask again for others."
-    assert oldbooks.uses_embed(found[:2], title="Uses", line=lambda e: e["word"], source="Book", url=None,
+    assert oldbooks.uses_embed(found[:2], title="Uses", name=lambda e: e["word"], summary=lambda e: "x",
+                               link=lambda e: "https://book.example", source="Book",
                                colour=oldbooks.discord.Color.purple()).footer.text == "Book"
 
 

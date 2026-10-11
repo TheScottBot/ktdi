@@ -54,8 +54,10 @@ def test_a_verse_quote_is_quoted_line_by_line():
 def test_a_plain_word_finds_the_dead_words_for_it():
     embed = deadword.deadword_embed("drink")
     assert embed.title == "📜 Dead words for “drink”"
-    assert "**Bever**: a drink between meals." in embed.description
-    assert "**Bicker**: a drinking cup, a beaker." in embed.description
+    assert ("**[Bever](https://archive.org/details/cu31924096224880/page/n42/mode/2up?q=Bever)**: "
+            "a drink between meals.") in embed.description  # Each links to its own page
+    assert "**[Bicker](https://archive.org/details/cu31924096224880?q=Bicker)**: a drinking cup, a beaker." \
+        in embed.description
     assert "Bell-penny" not in embed.description
 
 

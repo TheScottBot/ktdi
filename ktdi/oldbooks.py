@@ -18,7 +18,7 @@ from ktdi.lib import fuzzy
 
 T = TypeVar("T")
 SHOWN = 8  # Entries listed when a word turns up in several
-LINE_LENGTH = 140  # Each listed entry, clipped
+LINE_LENGTH = 140  # Each listed entry's name and summary (not counting its link), clipped
 TYPED_LENGTH = 60  # What was typed, when it's shown back
 LONGEST = 1500  # An entry longer than this is cut short, with the rest a click away
 MORE = "\n\n*…the rest is in the book.*"
@@ -96,12 +96,14 @@ class Dictionary(Generic[T]):
         return choices(random.sample(self.names, min(25, len(self.names))))
 
 
-def uses_embed(found: list[T], *, title: str, line: Callable[[T], str], source: str, url: str | None,
-               colour: discord.Color) -> discord.Embed:
-    """A few of the entries that use a word, one line each, with a footer saying if there are more."""
+def uses_embed(found: list[T], *, title: str, name: Callable[[T], str], summary: Callable[[T], str],
+               link: Callable[[T], str], source: str, colour: discord.Color) -> discord.Embed:
+    """A few of the entries that use a word, one line each ("**Name**: summary", clipped), each name linking to its
+    own place in the book, with a footer saying if there are more. Names and summaries come escaped for Discord."""
     shown = random.sample(found, min(SHOWN, len(found)))
-    embed = discord.Embed(title=title[:256], url=url, description="\n".join(clip(line(e), LINE_LENGTH) for e in shown),
-                          color=colour)
+    lines = [f"**[{name(e)}]({link(e)})**: {clip(summary(e), max(LINE_LENGTH - len(name(e)) - 2, 20))}"
+             for e in shown]
+    embed = discord.Embed(title=title[:256], description="\n".join(lines)[:4096], color=colour)
     more = f". Showing {len(shown)} of {len(found)}: ask again for others." if len(found) > len(shown) else ""
     embed.set_footer(text=f"{source}{more}")
     return embed

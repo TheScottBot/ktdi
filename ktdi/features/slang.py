@@ -23,7 +23,6 @@ HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "slang.json"
 SOURCE = "Grose's Dictionary of the Vulgar Tongue (1811)"
 BOOK = 5402  # On Project Gutenberg
-SOURCE_URL = links.gutenberg(BOOK)
 COLOUR = discord.Color.dark_teal()
 
 ENTRIES: list[dict] = json.loads(DATA.read_text(encoding="utf-8"))["entries"]
@@ -45,10 +44,13 @@ def headwords(entry: dict) -> list[str]:
 DICTIONARY = oldbooks.Dictionary(ENTRIES, names=headwords, text=lambda entry: entry["text"], shown_name=display_word)
 
 
-def entry_embed(entry: dict, query: str | None = None) -> discord.Embed:
+def url(entry: dict) -> str:
     # Its headword leads, as in the book, so even a two-word entry ("BENE. Good.") can be found and highlighted.
-    url = links.gutenberg(BOOK, f"{entry['word']}. {entry['text']}", least=2)
-    embed = discord.Embed(title=f"📖 {display_word(entry['word'])}"[:256], url=url,
+    return links.gutenberg(BOOK, f"{entry['word']}. {entry['text']}", least=2)
+
+
+def entry_embed(entry: dict, query: str | None = None) -> discord.Embed:
+    embed = discord.Embed(title=f"📖 {display_word(entry['word'])}"[:256], url=url(entry),
                           description=discord.utils.escape_markdown(entry["text"])[:4096], color=COLOUR)
     others = DICTIONARY.uses(query, leave_out=entry) if query else []
     if others:  # "drunk" is a word in the dictionary, and there are plenty of other ways to say it.
@@ -68,8 +70,8 @@ def slang_embed(query: str | None) -> discord.Embed:
         return entry_embed(found.entries[0], query)
     if found and found.kind == "uses":
         return oldbooks.uses_embed(
-            found.entries, title=f"📖 “{oldbooks.shown_typed(query)}”, in 1811", source=SOURCE, url=SOURCE_URL,
-            line=lambda e: f"**{display_word(e['word'])}**: {discord.utils.escape_markdown(e['text'])}", colour=COLOUR)
+            found.entries, title=f"📖 “{oldbooks.shown_typed(query)}”, in 1811", name=lambda e: display_word(e["word"]),
+            summary=lambda e: discord.utils.escape_markdown(e["text"]), link=url, source=SOURCE, colour=COLOUR)
     if found:  # Nothing uses it, but a word in the dictionary looks like it.
         return entry_embed(found.entries[0])
     return discord.Embed(title=f"📖 {oldbooks.shown_typed(query)}", color=COLOUR,

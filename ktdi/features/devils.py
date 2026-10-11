@@ -23,7 +23,6 @@ HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "devils.json"
 SOURCE = "Ambrose Bierce, The Devil's Dictionary (1911)"
 BOOK = 972  # Project Gutenberg
-SOURCE_URL = links.gutenberg(BOOK)
 ATTRIBUTION = 60  # A line this short after a verse is who "wrote" it (usually one of Bierce's made-up poets)
 COLOUR = discord.Color.dark_red()
 
@@ -97,8 +96,8 @@ def devils_embed(query: str | None) -> discord.Embed:
     found = DICTIONARY.look_up(query)
     if found and found.kind == "uses":
         return oldbooks.uses_embed(found.entries, title=f"😈 Bierce on “{oldbooks.shown_typed(query)}”",
-                                   line=lambda e: f"**{escape(e['word'])}**: {escape(e['text'].split(chr(10))[0])}",
-                                   source=SOURCE, url=SOURCE_URL, colour=COLOUR)
+                                   name=lambda e: escape(e["word"]), summary=lambda e: escape(e["text"].split("\n")[0]),
+                                   link=url, source=SOURCE, colour=COLOUR)
     if found:  # The word itself (all its entries), or one spelt like it
         return entry_embed(found.entries if found.kind == "exact" else DICTIONARY.same_name(found.entries[0]))
     return discord.Embed(title=f"😈 {oldbooks.shown_typed(query)}", color=COLOUR,

@@ -152,8 +152,11 @@ def test_the_whole_dream():
 def test_dreams_that_mention_it():
     embed = dream.interpret("business trouble")
     assert embed.title == "🔮 Dreams that mention “business trouble”"
-    assert embed.description == "**Landlord's Cat**: For a landlord to see a cat in a dream, denotes he will have " \
-                                "business trouble."
+    assert embed.description == (
+        "**[Landlord's Cat](https://www.gutenberg.org/cache/epub/926/pg926-images.html#:~:text="
+        "For%20a%20landlord%20to%20see%20a%20cat%20in%20a%20dream)**: "
+        "For a landlord to see a cat in a dream, denotes he will have business trouble.")
+    assert embed.url is None  # Not the book's front page: each dream links to its own place
 
 
 def test_nothing_found():

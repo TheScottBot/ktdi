@@ -40,7 +40,7 @@ Grouped the same way as `/help`.
 
 ### 📜 Old books
 
-Advice, wisdom and words from books old enough to be out of copyright, and sometimes out of their minds. Each reply's title links to the exact spot in the book: Project Gutenberg pages scroll to the passage and highlight it (in most browsers), and archive.org scans open at the page with the word highlighted.
+Advice, wisdom and words from books old enough to be out of copyright, and sometimes out of their minds. Each reply's title links to the exact spot in the book (and in a list of entries, each entry's name links to its own): Project Gutenberg pages scroll to the passage and highlight it (in most browsers), and archive.org scans open at the page with the word highlighted.
 
 | Command | What it does |
 |---|---|

@@ -156,7 +156,10 @@ def test_long_entries_are_cut_short():
 def test_a_plain_word_finds_the_entries_that_use_it():
     embed = devils.devils_embed("prejudice")
     assert embed.title == "😈 Bierce on “prejudice”"
-    assert embed.description == "**REASON**: Propensitate of prejudice."
+    reason = devils.DICTIONARY.entries[-2]
+    assert reason["text"] == "Propensitate of prejudice."
+    assert embed.description == f"**[REASON]({devils.url(reason)})**: Propensitate of prejudice."
+    assert embed.url is None  # Each entry links to its own place, not the list to the book's front
 
 
 def test_nothing_found():

@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import re
 import types
 from pathlib import Path
 
@@ -94,8 +95,9 @@ def test_a_word_by_name_with_typos():
 def test_a_plain_word_finds_the_slang_for_it():
     embed = slang.slang_embed("coward")
     assert embed.title == "📖 “coward”, in 1811"
-    assert "**Chicken-Hearted**: Fearful, cowardly." in embed.description
-    assert "**White-Livered**: Cowardly, malicious." in embed.description
+    hearted = next(e for e in slang.ENTRIES if e["word"] == "CHICKEN-HEARTED")
+    assert f"**[Chicken-Hearted]({slang.url(hearted)})**: Fearful, cowardly." in embed.description  # Linked to it
+    assert "**: Cowardly, malicious." in embed.description and "[White-Livered]" in embed.description
 
 
 def test_a_word_in_the_dictionary_also_lists_other_ways_to_say_it():
@@ -109,7 +111,10 @@ def test_lots_of_matches_are_sampled():
     embed = slang.slang_embed("money")
     assert embed.description.count("\n") == oldbooks.SHOWN - 1
     assert "ask again for others" in embed.footer.text
-    assert all(len(line) <= oldbooks.LINE_LENGTH for line in embed.description.split("\n"))
+    lines = embed.description.split("\n")
+    assert all("](https://www.gutenberg.org/cache/epub/5402/" in line for line in lines)  # Each links to its entry
+    shown = [re.sub(r"\]\(https://[^)]+\)", "]", line) for line in lines]  # As read, links aside
+    assert all(len(line) <= oldbooks.LINE_LENGTH + len("**[]**") for line in shown)
 
 
 def test_nothing_found():

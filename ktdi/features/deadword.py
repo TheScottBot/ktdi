@@ -22,7 +22,6 @@ HELP_CATEGORY = "📜 Old books"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "deadwords.json"
 SOURCE = "Mackay, Lost Beauties of the English Language (1874)"
 BOOK = "cu31924096224880"  # The archive.org scan
-SOURCE_URL = links.archive_page(BOOK, None)
 COLOUR = discord.Color.dark_grey()
 
 WORDS: list[dict] = json.loads(DATA.read_text(encoding="utf-8"))
@@ -45,6 +44,11 @@ def escape(text: str) -> str:
     return discord.utils.escape_markdown(text)
 
 
+def url(entry: dict) -> str:
+    """The scan, open at the word's page, with the word highlighted."""
+    return links.archive_page(BOOK, entry.get("page"), entry["word"])
+
+
 def word_embed(entry: dict) -> discord.Embed:
     meaning = entry["meaning"].strip()
     description = f"*{escape(meaning[0].upper() + meaning[1:])}*"
@@ -53,8 +57,7 @@ def word_embed(entry: dict) -> discord.Embed:
         source = f"\n-# {escape(entry['quote_source'])}" if entry.get("quote_source") else ""
         description += f"\n\n{quote}{source}"
     description += f"\n\n🪦 {random.choice(EPITAPHS)}"
-    url = links.archive_page(BOOK, entry.get("page"), entry["word"])  # Open at its page, highlighted
-    embed = discord.Embed(title=f"📜 {escape(entry['word'])}"[:256], url=url, description=description[:4096],
+    embed = discord.Embed(title=f"📜 {escape(entry['word'])}"[:256], url=url(entry), description=description[:4096],
                           color=COLOUR)
     embed.set_footer(text=SOURCE)
     return embed
@@ -67,8 +70,8 @@ def deadword_embed(query: str | None) -> discord.Embed:
     found = DICTIONARY.look_up(query)
     if found and found.kind == "uses":  # Not one of the dead words, but some of them meant it
         return oldbooks.uses_embed(found.entries, title=f"📜 Dead words for “{oldbooks.shown_typed(query)}”",
-                                   line=lambda e: f"**{escape(e['word'])}**: {escape(e['meaning'])}",
-                                   source=SOURCE, url=SOURCE_URL, colour=COLOUR)
+                                   name=lambda e: escape(e["word"]), summary=lambda e: escape(e["meaning"]),
+                                   link=url, source=SOURCE, colour=COLOUR)
     if found:  # One of the dead words, or (nothing meant it) one that looks like it
         return word_embed(found.entries[0])
     return discord.Embed(title=f"📜 {oldbooks.shown_typed(query)}", color=COLOUR,
