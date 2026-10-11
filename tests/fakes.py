@@ -169,6 +169,14 @@ class Interaction:
     async def edit_message(self, embed=None, view=None):
         self.sent.append(Sent(embed=embed, view=view))
 
+    async def defer(self, thinking=False, ephemeral=False):
+        self.deferred = {"thinking": thinking, "ephemeral": ephemeral}
+
+    @property
+    def followup(self):
+        """Messages sent after a defer: here, the same list."""
+        return types.SimpleNamespace(send=self.send_message)
+
     @property
     def last(self) -> Sent:
         return self.sent[-1]

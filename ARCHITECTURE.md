@@ -64,7 +64,7 @@ ktdi/
 │   ├── units.py       /abm, /imperial
 │   ├── timezones.py   /timezone (convert, set, show, clear); parsing lives in lib/timezones.py
 │   ├── weather.py     /weather: Open-Meteo's forecast (lib/openmeteo.py) next to 1893 weather lore; /weather here
-│   │                  <place> for where you are, posted without naming it (never stored, cached or logged)
+│   │                  (a private form) for where you are, posted without naming it (never stored, cached or logged)
 │   ├── quotes.py      quotes (prefix group, slash group, right-click form)
 │   ├── campaigns.py   campaigns, reminders, the reminder loop
 │   ├── settings.py    /settings (shared state, whospray user)
@@ -341,7 +341,7 @@ python -m pytest            # ~3 seconds
 4. **Data:** reads through `db.scope()`, writes record the current server, edits target the row's own server,
    schema changes are additive upgrades in `db._upgrade()`.
 5. **Privacy:** nothing about `/books` or `/rpg` use may be logged against a person, and where someone is
-   (`/weather here <place>`) is never shown, stored or logged: not in the database, not in the place cache, not in the
+   (`/weather here`, asked in a form so it's not a visible command option) is never shown, stored or logged: not in the database, not in the place cache, not in the
    log (all three are marked `extras["private"]`). Don't add logging that reveals what a
    dissociated/anonymous action was meant to hide.
 6. **Discord limits:** slash command and option descriptions ≤ 100 characters, ≤ 25 options/choices/autocomplete

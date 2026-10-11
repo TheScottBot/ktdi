@@ -9,7 +9,7 @@ import pytest
 from ktdi import config
 from ktdi.features import weather
 from ktdi.lib import openmeteo
-from tests.fakes import Ctx, User, run
+from tests.fakes import Ctx, Interaction, User, run
 
 SCOTT = User(1, "scott")
 LONDON = openmeteo.Place("London, England, United Kingdom", 51.5, -0.13)
@@ -173,16 +173,45 @@ def everything_public(ctx) -> str:
     return "\n".join(parts)
 
 
+def ask_where(user=SCOTT):
+    """Run /weather here as a slash command: it answers with a form."""
+    ctx = Ctx(user)
+    ctx.interaction = Interaction(user)
+    run(weather.weather_here.callback(ctx))
+    return ctx
+
+
+def test_slash_here_asks_in_a_form_not_an_option(open_meteo):
+    # Discord shows a slash command's options to anyone hovering over "used /weather here": so it has none.
+    assert [p.name for p in weather.weather_here.app_command.parameters] == []
+    ctx = ask_where()
+    form = ctx.interaction.modal
+    assert isinstance(form, weather.WhereAreYou) and ctx.sent == []  # Nothing posted yet
+    assert lookups == []
+
+
 def test_your_weather_without_saying_where(open_meteo, caplog):
     caplog.set_level("DEBUG")
-    ctx = Ctx(SCOTT)
-    run(weather.weather_here.callback(ctx, place="Highbridge"))
-    embed = ctx.last.embed
+    form = ask_where().interaction.modal
+    submitted = Interaction(SCOTT)
+    form.place._value = "Highbridge"
+    run(form.on_submit(submitted))
+    assert submitted.deferred == {"thinking": True, "ephemeral": False}
+    embed = submitted.last.embed
     assert embed.title == "🌦️ scott checked the weather where they are"
     assert embed.description.startswith("🌦️ Now: 13°C (55°F)") and embed.fields[0].name == "Meanwhile, in 1893"
-    assert "Highbridge" not in everything_public(ctx) and "Somerset" not in everything_public(ctx)
+    posted = "\n".join(sent.text for sent in submitted.sent)
+    assert "Highbridge" not in posted and "Somerset" not in posted
     assert "Highbridge" not in caplog.text  # Never logged
     assert lookups == [("Highbridge", False)]  # Looked up without being remembered
+
+
+def test_the_form_somewhere_that_isnt_on_the_map(open_meteo):
+    form = ask_where().interaction.modal
+    submitted = Interaction(SCOTT)
+    form.place._value = "Xyzzy"
+    run(form.on_submit(submitted))
+    assert "couldn't find that" in submitted.last.content and "Xyzzy" not in submitted.last.content
 
 
 def test_where_you_are_isnt_kept_anywhere(monkeypatch):
@@ -204,18 +233,26 @@ def test_nothing_about_places_is_stored():
     assert not any("weather" in table or "place" in table for table in tables)
 
 
+def typed_here(content):
+    ctx = Ctx(SCOTT, slash=False, content=content)
+    ctx.invoked_with = "here"
+    run(weather.weather_here.callback(ctx))
+    return ctx
+
+
 def test_typed_here_deletes_the_message(open_meteo):
-    ctx = Ctx(SCOTT, slash=False, content="!weather here Highbridge")
-    run(weather.weather_here.callback(ctx, place="Highbridge"))
+    ctx = typed_here("!weather here Highbridge")
     assert ctx.message.deleted
     assert ctx.last.embed.title == "🌦️ scott checked the weather where they are"
     assert "Highbridge" not in everything_public(ctx)
+    assert lookups == [("Highbridge", False)]
 
 
-def test_here_somewhere_that_isnt_on_the_map(open_meteo):
-    ctx = Ctx(SCOTT)
-    run(weather.weather_here.callback(ctx, place="Xyzzy"))
-    assert ctx.last.private and "couldn't find that" in ctx.last.content and "Xyzzy" not in ctx.last.content
+def test_typed_here_without_a_place_or_somewhere_not_on_the_map(open_meteo):
+    ctx = typed_here("!weather here")
+    assert "Where?" in ctx.last.content and lookups == []
+    ctx = typed_here("!weather here Xyzzy")
+    assert ctx.message.deleted and "couldn't find that" in ctx.last.content and "Xyzzy" not in ctx.last.content
 
 
 def test_weather_is_never_logged():

@@ -1,12 +1,13 @@
-"""/weather [place]: today's real forecast (Open-Meteo, ktdi/lib/openmeteo.py) next to what 19th-century folk wisdom
+"""/weather: today's real forecast (Open-Meteo, ktdi/lib/openmeteo.py) next to what 19th-century folk wisdom
 has to say about it, from Richard Inwards' Weather Lore (1893, public domain), and the committee's view on who's right.
 
 The sayings are hand-picked and tidied from the archive.org scan into ktdi/lib/weather_lore.json, each tagged with the
 weather it's about and any months or day it belongs to. The saying shown is one for today's date if there is one (St
 Swithin's on 15 July), else one about today's weather this time of year, else one for the month. /weather in [place] is
-for anywhere (no place: WEATHER_PLACE from .env). /weather here <place> posts someone's own weather as "X checked the
-weather where they are" without naming it. Where someone is is never stored: not in the database, not in memory (the
-lookup skips the place cache), not in the log (/weather is never logged), and a typed !weather here is deleted. If
+for anywhere (no place: WEATHER_PLACE from .env). /weather here posts someone's own weather as "X checked the weather
+where they are" without naming it. It asks where in a form, because Discord shows a slash command's options to anyone
+who hovers over it. Where someone is is never shown or stored: not in the database, not in memory (the lookup skips
+the place cache), not in the log (/weather is never logged), and a typed !weather here <place> is deleted. If
 Open-Meteo is down, folk wisdom carries on alone.
 """
 
@@ -108,7 +109,7 @@ def weather_embed(forecast: openmeteo.Forecast | None, title: str, today: date) 
 
 
 # --- /weather ---
-# /weather in [place] (typed: !weather [place]) and /weather here <place>.
+# /weather in [place] (typed: !weather [place]) and /weather here (a private form; typed: !weather here <place>).
 # "private": the bot never logs /weather (see bot.is_private_command), so nobody's place ends up in the log file.
 @commands.hybrid_group(name="weather", fallback="in", invoke_without_command=True, extras={"private": True},
                        description="Today's forecast, and what 1890s folk wisdom makes of it.")
@@ -126,27 +127,61 @@ async def weather_group(ctx: commands.Context, *, place: str | None = None):
     await ctx.send(embed=weather_embed(forecast, found.name if found else name, now().date()))
 
 
-@weather_group.command(name="here", description="Your weather, posted without saying where you are.")
-@app_commands.describe(place="Where you are. Never shown, saved or logged")
-async def weather_here(ctx: commands.Context, *, place: str):
-    if ctx.interaction:
-        await ctx.defer()
-    else:  # Typed with !, the place is in their message for everyone to see: take it down first.
-        try:
-            await ctx.message.delete()
-        except discord.HTTPException:
-            await ctx.send("I couldn't delete your message (I need Manage Messages), so where you are is showing. "
-                           "Delete it yourself, and use `/weather here` next time.")
-    # Looked up and forgotten: not cached, not stored, not logged.
+NOT_FOUND = "I couldn't find that on the map. Try a town or city, or add the county: `Highbridge, Somerset`."
+
+
+async def weather_where_they_are(person: discord.abc.User, place: str) -> discord.Embed | None:
+    """Their weather, titled without the place. The place is looked up and forgotten: not cached, stored or logged.
+    None if it isn't on the map."""
     found = await openmeteo.geocode(" ".join(place.split())[:100], remember=False)
     if found is None:
-        await ctx.send("I couldn't find that on the map. Try a town or city, or add the county: "
-                       "`Highbridge, Somerset`.", ephemeral=True)
-        return
+        return None
     forecast = await openmeteo.forecast(found)
-    # Never the place's name: just that it's theirs.
-    title = f"{ctx.author.display_name} checked the weather where they are"
-    await ctx.send(embed=weather_embed(forecast, title, now().date()))
+    return weather_embed(forecast, f"{person.display_name} checked the weather where they are", now().date())
+
+
+class WhereAreYou(discord.ui.Modal, title="Where are you?"):
+    """/weather here asks in a form, not an option: Discord shows a slash command's options to anyone who hovers
+    over "used /weather here", but never what was typed into a form."""
+
+    def __init__(self):
+        super().__init__()
+        self.place = discord.ui.TextInput(max_length=100, placeholder="Highbridge (add the county if there are "
+                                                                      "several: Highbridge, Somerset)")
+        self.add_item(discord.ui.Label(text="Your town or city", component=self.place,
+                                       description="Only used to look up the weather. Never shown, saved or logged."))
+
+    async def on_submit(self, interaction: discord.Interaction):
+        await interaction.response.defer(thinking=True)  # Open-Meteo can take a moment.
+        embed = await weather_where_they_are(interaction.user, self.place.value)
+        if embed is None:
+            await interaction.followup.send(NOT_FOUND)  # Doesn't repeat what they typed.
+            return
+        await interaction.followup.send(embed=embed)
+
+
+# No options: as a slash command it asks in a form (WhereAreYou). Typed, it's !weather here <place>, and the message
+# is deleted first.
+@weather_group.command(name="here", description="Your weather, posted without saying where you are.")
+async def weather_here(ctx: commands.Context):
+    if ctx.interaction:
+        await ctx.interaction.response.send_modal(WhereAreYou())
+        return
+    place = ctx.message.content.split(ctx.invoked_with, 1)[-1].strip() if ctx.invoked_with else ""
+    try:  # The place is in their message for everyone to see: take it down first.
+        await ctx.message.delete()
+    except discord.HTTPException:
+        await ctx.send("I couldn't delete your message (I need Manage Messages), so where you are is showing. "
+                       "Delete it yourself, and use `/weather here` next time: it asks privately.")
+    if not place:
+        await ctx.send(f"Where? `{config.COMMAND_PREFIX}weather here <your town>` (I'll delete it straight away), or "
+                       "`/weather here`, which asks you privately.")
+        return
+    embed = await weather_where_they_are(ctx.author, place)
+    if embed is None:
+        await ctx.send(NOT_FOUND)
+        return
+    await ctx.send(embed=embed)
 
 
 def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bool]]]:
@@ -155,8 +190,8 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
     text = ("• Today's forecast (from Open-Meteo), next to a saying from Inwards' *Weather Lore* (1893): one for "
             "today's date if there is one, otherwise one about today's weather at this time of year.\n"
             f"• `/weather in <place>` for anywhere; with no place, the bot's home ({config.WEATHER_PLACE}).\n"
-            "• `/weather here <place>` posts your weather as \"X checked the weather where they are\": the place "
-            "is never shown, saved or logged.")
+            "• `/weather here` asks where you are in a private form, then posts your weather as \"X checked the "
+            "weather where they are\": the place is never shown, saved or logged.")
     return "", [("How it works", text, False)]
 
 
