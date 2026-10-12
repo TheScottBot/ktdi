@@ -7,13 +7,13 @@ import pytest
 from discord.ext import commands
 
 from ktdi.bot import KTDIBot, describe_options
-from ktdi.features import campaigns, help as help_feature
+from ktdi.features import campaigns, help as help_feature, wisdom
 from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "bestiary", "blame", "books", "bribe", "campaign", "committee",
                   "cure", "deadword", "devils", "dream", "enquire", "etiquette", "expunge", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot", "lore", "melancholy",
                   "nowplaying", "phrase", "plant", "pliny", "pseudodoxia", "quote", "rapsheet", "rpg", "secrets", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
-                  "tdoi", "timezone", "vulgartongue", "wars", "weather", "whospray"]
+                  "tdoi", "timezone", "vulgartongue", "wars", "weather", "whospray", "wisdom"]
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
 HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
@@ -22,6 +22,7 @@ SUBCOMMANDS = {
     "etiquette": ["gentleman", "gentlethem", "gentlewoman", "remind"],
     "vulgartongue": ["insult", "lookup", "random"],
     "weather": ["here", "in"],
+    "wisdom": ["now", "setup"],
     "insurance": ["buy", "complain", "status"],
     "nowplaying": ["bingo", "canon", "committeesviews", "elapsed", "end", "history", "objection", "pause", "predict",
                    "predictions", "rate", "resume", "sct", "set", "show", "start", "vote", "watchlist"],
@@ -36,7 +37,8 @@ SUBCOMMANDS = {
 
 @pytest.fixture
 def loaded_bot(monkeypatch):
-    monkeypatch.setattr(campaigns.reminder_loop, "start", lambda: None)  # no background loop in tests
+    monkeypatch.setattr(campaigns.reminder_loop, "start", lambda: None)  # no background loops in tests
+    monkeypatch.setattr(wisdom.wisdom_loop, "start", lambda: None)
     bot = KTDIBot()
 
     async def load():
@@ -56,6 +58,7 @@ def test_slash_commands(loaded_bot):
     assert sorted(c.name for c in watchlist.commands) == ["add", "import", "remove", "show", "strike", "unstrike"]
     assert sorted(c.name for c in nowplaying.get_command("vote").commands) == ["end", "show", "start"]
     assert sorted(c.name for c in nowplaying.get_command("bingo").commands) == ["card", "mark", "unmark"]
+    assert sorted(c.name for c in tree.get_command("wisdom").get_command("setup").commands) == ["here", "show", "stop"]
     assert tree.get_command("np") is None  # slash commands can't have aliases: /nowplaying only
 
 
@@ -212,6 +215,7 @@ def test_one_unreachable_server_doesnt_stop_startup(monkeypatch, caplog):
     import types
     from ktdi import config
     monkeypatch.setattr(campaigns.reminder_loop, "start", lambda: None)
+    monkeypatch.setattr(wisdom.wisdom_loop, "start", lambda: None)
     monkeypatch.setattr(config, "GUILD_IDS", [111, 222, 333])
     bot = KTDIBot()
     synced = []

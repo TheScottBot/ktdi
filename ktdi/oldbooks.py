@@ -10,10 +10,11 @@ Every old book also declares itself as OLD_BOOK (an OldBook, or a list of them):
 others, and how Old Wisdom of the Day gets a random entry from it. A new old book isn't finished without one.
 """
 
+import importlib
 import random
 import re
 from dataclasses import dataclass
-from typing import Any, Callable, Generic, Iterable, TypeVar
+from typing import Any, Awaitable, Callable, Generic, Iterable, TypeVar
 
 import discord
 from discord import app_commands
@@ -195,7 +196,8 @@ class OldBook:
     """An old book as /lore and Old Wisdom of the Day see it. `random` is any entry, as its own command shows it.
     `find` (for /lore) is what it has on a topic, as Dictionary.look_up finds it; None for a book that can't be
     searched by topic (/almanac goes by date). `title`, `link` and `text` are an entry's name, its place in the book,
-    and the text /lore quotes from (plain text, as the book has it: /lore escapes it)."""
+    and the text /lore quotes from (plain text, as the book has it: /lore escapes it). `send`, for a book whose post
+    is more than an embed (/herbal's, which people dig into), posts a random one itself: send(where, content)."""
     book: str  # Who wrote what: "Pliny the Elder, Natural History (AD 77)"
     emoji: str
     command: str  # The command with more: "pliny", or "beeton recipe"
@@ -204,3 +206,21 @@ class OldBook:
     title: Callable[[Any], str] = lambda entry: entry["title"]
     link: Callable[[Any], str | None] = lambda entry: None
     text: Callable[[Any], str] = lambda entry: entry["text"]
+    send: Callable[[discord.abc.Messageable, str | None], Awaitable[discord.Message]] | None = None
+
+    async def post(self, where: discord.abc.Messageable, content: str | None = None) -> discord.Message:
+        """A random entry, posted (with `content` above it)."""
+        if self.send:
+            return await self.send(where, content)
+        return await where.send(content, embed=self.random(), allowed_mentions=discord.AllowedMentions.none())
+
+
+def every_book() -> list[OldBook]:
+    """Every old book, in the order the features load, from each feature's OLD_BOOK (one, or a list)."""
+    from ktdi.features import FEATURES  # Here, not at the top: the features import this module
+
+    found = []
+    for name in FEATURES:
+        books = getattr(importlib.import_module(name), "OLD_BOOK", None)
+        found.extend(books if isinstance(books, list) else [books] if books else [])
+    return found

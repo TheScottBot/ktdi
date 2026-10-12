@@ -63,6 +63,27 @@ class Schedule:
         return cls(tuple(int(d) for d in days.split(",")), hour, minute, every_weeks)
 
 
+def _clock(match: re.Match) -> tuple[int, int]:
+    """The hour and minute a TIME_RE match means ("6pm" is 18:00)."""
+    hour, minute, meridiem = int(match.group(1)), int(match.group(2) or 0), match.group(3)
+    if meridiem:
+        if not 1 <= hour <= 12:
+            raise ScheduleError(f"{hour}{meridiem} isn't a time.")
+        hour = hour % 12 + (12 if meridiem == "pm" else 0)
+    if hour > 23 or minute > 59:
+        raise ScheduleError(f"{hour:02d}:{minute:02d} isn't a valid time. Use 24-hour time like 1800, or 6pm.")
+    return hour, minute
+
+
+def parse_clock(text: str) -> tuple[int, int]:
+    """A time of day on its own: "9am", "0900", "18:30", "at 7pm"."""
+    lowered = " ".join(text.lower().split())
+    match = TIME_RE.search(lowered)
+    if not match or lowered[:match.start()].strip():
+        raise ScheduleError("That isn't a time of day. Try `9am`, `0900` or `18:30`.")
+    return _clock(match)
+
+
 def parse_schedule(text: str) -> Schedule:
     lowered = " ".join(text.lower().replace(",", " ").split())
     every_weeks = 2 if FORTNIGHTLY_RE.search(lowered) else 1
@@ -71,13 +92,7 @@ def parse_schedule(text: str) -> Schedule:
     match = TIME_RE.search(lowered)
     if not match:
         raise ScheduleError(f"Add a time at the end, e.g. {EXAMPLES}.")
-    hour, minute, meridiem = int(match.group(1)), int(match.group(2) or 0), match.group(3)
-    if meridiem:
-        if not 1 <= hour <= 12:
-            raise ScheduleError(f"{hour}{meridiem} isn't a time.")
-        hour = hour % 12 + (12 if meridiem == "pm" else 0)
-    if hour > 23 or minute > 59:
-        raise ScheduleError(f"{hour:02d}:{minute:02d} isn't a valid time. Use 24-hour time like 1800, or 6pm.")
+    hour, minute = _clock(match)
 
     days: set[int] = set()
     for word in re.findall(r"[a-z]+", lowered[:match.start()]):

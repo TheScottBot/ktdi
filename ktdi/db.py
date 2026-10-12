@@ -140,6 +140,17 @@ SCHEMA = [
         depth      INTEGER NOT NULL DEFAULT 0  -- 0 is the best guess; one past the last level is bedrock
     )
     """,
+    # Old Wisdom of the Day (/wisdom setup): where each server gets it, and when.
+    """
+    CREATE TABLE IF NOT EXISTS wisdom_channels (
+        guild_id   INTEGER PRIMARY KEY,
+        channel_id INTEGER NOT NULL,
+        clock      TEXT NOT NULL,     -- "09:00", in BOT_TIMEZONE
+        next_run   TEXT NOT NULL,     -- UTC, ISO
+        last_book  TEXT,              -- the command of the book it last came from, so it's not the same two days running
+        set_by     INTEGER NOT NULL
+    )
+    """,
     # Spray insurance (/insurance). A person's latest policy is the one in force; buying again replaces it.
     """
     CREATE TABLE IF NOT EXISTS insurance_policies (

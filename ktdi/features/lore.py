@@ -7,7 +7,6 @@ that book for the rest. Books with an entry for the thing itself come first, the
 only has something spelt like it is only asked about when none has the thing itself (a typo: "dragn").
 """
 
-import importlib
 import random
 
 import discord
@@ -15,7 +14,6 @@ from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
-from ktdi.features import FEATURES
 
 HELP_CATEGORY = "🔮 Old oddities"
 COLOUR = discord.Color.from_rgb(120, 94, 60)  # Parchment
@@ -25,13 +23,7 @@ NOTHING = ("None of the old books has a word to say about that, which is a first
            "cheese, or the plague.")
 
 
-def old_books() -> list[oldbooks.OldBook]:
-    """Every old book, in the order the features load, from each feature's OLD_BOOK (one, or a list)."""
-    found = []
-    for name in FEATURES:
-        books = getattr(importlib.import_module(name), "OLD_BOOK", None)
-        found.extend(books if isinstance(books, list) else [books] if books else [])
-    return found
+old_books = oldbooks.every_book
 
 
 def searched(thing: str) -> list[tuple[oldbooks.OldBook, list]]:

@@ -76,15 +76,21 @@ async def herbal(ctx: commands.Context):
     if not entries:
         await ctx.send("The herbal hasn't been translated yet. See the README: Herbal.", ephemeral=True)
         return
+    await post_box(ctx)
+
+
+async def post_box(where: discord.abc.Messageable, content: str | None = None) -> discord.Message:
+    """A random box, posted where it's asked for (or as Old Wisdom of the Day), ready to be dug into."""
     entry_id = random.choice(list(entries))
-    message = await ctx.send(embed=herbal_embed(entries[entry_id]), allowed_mentions=NO_PINGS)
+    message = await where.send(content, embed=herbal_embed(entries[entry_id]), allowed_mentions=NO_PINGS)
     db.conn.execute("INSERT OR REPLACE INTO herbal_posts (message_id, guild_id, entry_id, depth) VALUES (?, ?, ?, 0)",
-                    (message.id, ctx.guild.id if ctx.guild else None, entry_id))
+                    (message.id, where.guild.id if getattr(where, "guild", None) else None, entry_id))
     db.conn.commit()
     try:
         await message.add_reaction(DIG)  # So the pickaxe is right there to click.
     except discord.HTTPException:
         pass  # No Add Reactions permission: people can still add it themselves.
+    return message
 
 
 def _is_dig(emoji) -> bool:
@@ -114,7 +120,8 @@ async def dig(payload: discord.RawReactionActionEvent):
         pass  # Needs Manage Messages; without it, un-react and react again to dig.
 
 
-OLD_BOOK = [oldbooks.OldBook(TITLE, "🌱", "herbal", random=lambda: herbal_embed(random.choice(list(entries.values()))))
+OLD_BOOK = [oldbooks.OldBook(TITLE, "🌱", "herbal", random=lambda: herbal_embed(random.choice(list(entries.values()))),
+                             send=post_box)
             ] if entries else []  # Only once it's been translated (see the README: Herbal)
 
 

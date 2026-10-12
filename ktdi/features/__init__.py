@@ -31,6 +31,7 @@ FEATURES = [
     "ktdi.features.bestiary",
     "ktdi.features.secrets",
     "ktdi.features.lore",
+    "ktdi.features.wisdom",
     "ktdi.features.etiquette",
     "ktdi.features.movie",
     "ktdi.features.units",
