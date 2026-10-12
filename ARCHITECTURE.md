@@ -75,6 +75,8 @@ ktdi/
 │   ├── melancholy.py  /melancholy: a passage of Burton's Anatomy of Melancholy (1621) on a topic, or at random
 │   ├── pliny.py       /pliny: a chapter of Pliny's Natural History (AD 77) on a topic, or at random
 │   ├── pseudodoxia.py /pseudodoxia: a chapter of Browne's Pseudodoxia Epidemica (1646) on a topic, or at random
+│   ├── bestiary.py    /bestiary: a passage of Topsell's beasts (1607) and serpents (1608) on a beast, or at random
+│   ├── secrets.py     /secrets: a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
@@ -134,6 +136,15 @@ ktdi/
     ├── pseudodoxia.json  /pseudodoxia's chapters (Browne, in Sayle's three-volume Works, Gutenberg), built by
     │                  tools/pseudodoxia_build.py from pseudodoxia_curation.json (keys like 3.5: book, chapter);
     │                  side-notes and footnotes taken out
+    ├── bestiary.json  /bestiary's passages (Topsell, from EEBO-TCP's hand-keyed transcriptions, CC0), built by
+    │                  tools/bestiary_build.py from bestiary_curation.json: single paragraphs, keyed by section
+    │                  ("beasts:483", with its heading as a check) and paragraph, each filed under a modern name
+    │                  ("Unicorn" for OF THE VNICORNE); each keeps its image in the archive.org scan of the printed
+    │                  book and a word the scan's OCR has on that page, to highlight. Read by tools/tcp.py, which
+    │                  every EEBO-TCP build shares (the long s, the strokes for m and n, "yᵉ", page images)
+    ├── secrets.json   /secrets's magic (the Boke of Secretes, 1560, EEBO-TCP), built by tools/secrets_build.py the
+    │                  same way from secrets_curation.json: only harmless magic, each tagged with what it's for
+    │                  ("Enemies", "Fart") so modern words find it
     ├── roman.py       Roman numerals to numbers (/pliny's books, /pseudodoxia's chapters)
     ├── melancholy.json  /melancholy's excerpts (Burton, Gutenberg), built by tools/melancholy_build.py from
     │                  melancholy_curation.json, which lists them word for word; the build checks each is in the book

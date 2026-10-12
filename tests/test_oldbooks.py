@@ -136,5 +136,20 @@ def test_one_of_picks_a_passage_and_counts_the_rest(book, monkeypatch):
     assert book.one_of("zzqx") is None
 
 
+def test_one_of_a_name_spelt_nearly_brings_all_filed_under_it(book, monkeypatch):
+    monkeypatch.setattr(oldbooks.random, "choice", lambda options: options[0])
+    assert book.one_of("reasn") == (REASON_V, 1)  # Close to REASON: both REASON entries, not just the one matched
+    lamps = [{"name": "Lamp", "also": [], "text": "A lamp of dog's faces."},
+             {"name": "Lamp", "also": ["Fart"], "text": "A lamp that makes you fart."}]
+    secrets = oldbooks.Dictionary(lamps, names=lambda s: [s["name"], *s["also"]], text=lambda s: s["text"])
+    assert secrets.one_of("fart") == (lamps[1], 0)  # Found by another name: only what's filed under that one
+
+
+def test_modern_spelling_is_for_searching_old_spelling():
+    assert oldbooks.modern_spelling("If thy wyfe loue the Vnicorne, inuisible vnder the fyre, haue a seruant") == \
+        "If thy wife love the Unicorne, invisible under the fire, have a servant"
+    assert oldbooks.modern_spelling("they eye any true blue vertue") == "they eye any true blue vertue"  # Left be
+
+
 def test_escape_keeps_the_books_italics_and_dashes():
     assert oldbooks.escape("A _very_ fine*thing -- truly") == r"A *very* fine\*thing—truly"

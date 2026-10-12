@@ -1,5 +1,6 @@
 """Shared by the 📜 Old books commands (/vulgartongue, /deadword, /devils, /dream, /phrase, /beeton, /enquire,
-/almanac, /melancholy, /pliny, /pseudodoxia): a book of entries looked up by headword, and the replies they have in common.
+/almanac, /melancholy, /pliny, /pseudodoxia,
+/bestiary, /secrets): a book of entries looked up by headword, and the replies they have in common.
 
 A command makes a Dictionary of its entries, then asks it to look things up (the headword's entry, else the entries
 that use the word, else one spelt like it: fuzzy.look_up), for a random entry, or for autocomplete. How an entry looks
@@ -80,11 +81,18 @@ class Dictionary(Generic[T]):
     def one_of(self, query: str | None) -> tuple[T, int] | None:
         """For books of passages rather than definitions (Beeton's advice, Enquire Within): one passage on what was
         typed, picked at random from all that are (see look_up), and how many others there are; or (nothing typed)
-        any passage. None if nothing's about it."""
+        any passage. None if nothing's about it. A passage found by a name brings the others filed under that name
+        with it ("unicorns" is any of the Unicorn passages, not just the first)."""
         if not query or not fuzzy.words(query):
             return random.choice(self.entries), 0
         found = self.look_up(query)
-        return (random.choice(found.entries), len(found.entries) - 1) if found else None
+        if not found:
+            return None
+        entries = found.entries
+        if found.kind != "uses":
+            match = fuzzy.best_match(query, self.index, spelling=fuzzy.STRICT_SPELLING)
+            entries = self._by_name.get(match.name.casefold(), entries) if match else entries
+        return random.choice(entries), len(entries) - 1
 
     def named_in(self, query: str) -> list[T]:
         """The entries for a name somewhere in what was typed, the longest name first: "I dreamt about baby carriages
@@ -126,6 +134,16 @@ def mention(text: str, query: str) -> str:
     if at - sentence > LINE_LENGTH // 2:  # A long sentence: start a few words before the word
         sentence = text.rfind(" ", 0, at - LINE_LENGTH // 3) + 1
     return "…" + " ".join(text[sentence:].split())
+
+
+def modern_spelling(text: str) -> str:
+    """Old spelling made modern enough to search ("wyfe", "loue", "vnicorne", "inuisible" are "wife", "love",
+    "unicorne", "invisible"): v at a word's start before a consonant is u; u between vowels, or after n, r or l
+    and before a vowel and a consonant ("seruant", not "true"), is v; and y after a consonant and inside a word is
+    i. Only for finding things: what's shown keeps the book's spelling."""
+    text = re.sub(r"\b([Vv])(?=[^aeiouAEIOU\W])", lambda m: "U" if m[1] == "V" else "u", text)
+    text = re.sub(r"(?<=[aeiouAEIOU])u(?=[aeiou])|(?<=[nrl])u(?=[aeiou][b-df-hj-np-tv-z])", "v", text)
+    return re.sub(r"(?<=[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z])y(?=\w)", "i", text)
 
 
 def titled(passages: list[dict]) -> "Dictionary":
