@@ -11,7 +11,7 @@ from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "bestiary", "blame", "books", "bribe", "campaign", "committee",
-                  "cure", "deadword", "devils", "dream", "enquire", "etiquette", "expunge", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot", "melancholy",
+                  "cure", "deadword", "devils", "dream", "enquire", "etiquette", "expunge", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot", "lore", "melancholy",
                   "nowplaying", "phrase", "plant", "pliny", "pseudodoxia", "quote", "rapsheet", "rpg", "secrets", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
                   "tdoi", "timezone", "vulgartongue", "wars", "weather", "whospray"]
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu

@@ -14,7 +14,7 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 
-from ktdi import common, db
+from ktdi import common, db, oldbooks
 from ktdi.common import NO_PINGS
 
 HELP_CATEGORY = "🔮 Old oddities"
@@ -112,6 +112,11 @@ async def dig(payload: discord.RawReactionActionEvent):
         await message.remove_reaction(payload.emoji, discord.Object(id=payload.user_id))  # Ready to dig again.
     except discord.HTTPException:
         pass  # Needs Manage Messages; without it, un-react and react again to dig.
+
+
+OLD_BOOK = [oldbooks.OldBook(TITLE, "🌱", "herbal", random=lambda: herbal_embed(random.choice(list(entries.values()))))
+            ] if entries else []  # Only once it's been translated (see the README: Herbal)
+
 
 
 async def setup(bot: commands.Bot):

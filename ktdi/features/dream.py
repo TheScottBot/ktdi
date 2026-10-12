@@ -100,5 +100,10 @@ async def thing_autocomplete(interaction: discord.Interaction, current: str) -> 
     return DICTIONARY.autocomplete(current)
 
 
+OLD_BOOK = oldbooks.OldBook(SOURCE, "🔮", "dream", random=lambda: interpret(None),
+                            find=lambda topic: DICTIONARY.look_up(topic), title=lambda e: e["word"], link=url)
+
+
+
 async def setup(bot: commands.Bot):
     bot.add_command(dream)

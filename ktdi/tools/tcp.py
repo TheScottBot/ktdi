@@ -94,7 +94,7 @@ def opening(text: str) -> str:
     """A paragraph's big first letters (a drop capital and the letters set beside it) as a word: "AMong", and "WE
     are", are "Among" and "We are". A paragraph mark ("¶ ", "☞ ") at the start goes."""
     text = text.lstrip("¶☞❧ ")
-    return re.sub(r"^([A-Z])([A-Z]+)(?=[a-z]|\s+[a-z])", lambda m: m[1] + m[2].lower(), text)
+    return re.sub(r"^(_?[A-Z])([A-Z]+)(?=[a-z]|\s+[a-z])", lambda m: m[1] + m[2].lower(), text)  # "_HEraclides"
 
 
 def heading(element: ET.Element) -> str:

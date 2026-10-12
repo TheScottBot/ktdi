@@ -76,3 +76,8 @@ def test_a_paragraph_can_have_its_own_name():
                                                               "paragraphs": [0, {"number": 1, "name": "Horn",
                                                                                  "also": ["Alicorn"]}]}}})
     assert [(p["name"], p["also"]) for p in found["passages"]] == [("Unicorn", []), ("Horn", ["Alicorn"])]
+
+
+def test_a_drop_capital_in_italics():
+    assert tcp.opening("_HEraclides_ saith") == "_Heraclides_ saith"
+    assert tcp.opening("¶ WE are") == "We are"  # The paragraph mark goes too

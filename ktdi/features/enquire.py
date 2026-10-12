@@ -84,5 +84,10 @@ async def anything_autocomplete(interaction: discord.Interaction, current: str) 
     return DICTIONARY.autocomplete(current)
 
 
+OLD_BOOK = oldbooks.OldBook(SOURCE, "🔎", "enquire", random=lambda: enquire_embed(None),
+                            find=lambda topic: DICTIONARY.look_up(topic), link=url)
+
+
+
 async def setup(bot: commands.Bot):
     bot.add_command(enquire)

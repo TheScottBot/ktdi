@@ -94,5 +94,11 @@ async def word_autocomplete(interaction: discord.Interaction, current: str) -> l
     return DICTIONARY.autocomplete(current)
 
 
+OLD_BOOK = oldbooks.OldBook(SOURCE, "📜", "deadword", random=lambda: deadword_embed(None),
+                            find=lambda topic: DICTIONARY.look_up(topic), title=lambda e: e["word"], link=url,
+                            text=lambda e: e["meaning"])
+
+
+
 async def setup(bot: commands.Bot):
     bot.add_command(deadword)

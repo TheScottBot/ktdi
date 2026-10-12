@@ -30,10 +30,15 @@ INSULTS = [entry for entry in ENTRIES if entry["insult"]]
 PHRASES = [entry for entry in ENTRIES if not entry["insult"]]  # What a random one comes from: never an insult
 
 
-def display_word(word: str) -> str:
+def shown_word(word: str) -> str:
     """"CAPTAIN QUEERNABS" -> "Captain Queernabs"; "ADDLE PATE, or ADDLE PLOT" keeps its "or"."""
     shown = re.sub(r"\b(Or|To|A|An|Of|The|And|In)\b", lambda m: m.group(1).lower(), word.title())
-    return discord.utils.escape_markdown(shown[0].upper() + shown[1:].replace("'S", "'s").replace("’S", "’s"))
+    return shown[0].upper() + shown[1:].replace("'S", "'s").replace("’S", "’s")
+
+
+def display_word(word: str) -> str:
+    """shown_word, made safe for Discord."""
+    return discord.utils.escape_markdown(shown_word(word))
 
 
 def headwords(entry: dict) -> list[str]:
@@ -117,6 +122,12 @@ async def slang_insult(ctx: commands.Context, person: discord.Member):
 @slang.autocomplete("word")
 async def word_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
     return DICTIONARY.autocomplete(current)
+
+
+OLD_BOOK = oldbooks.OldBook(SOURCE, "📖", "vulgartongue", random=lambda: slang_embed(None),
+                            find=lambda topic: DICTIONARY.look_up(topic), title=lambda e: shown_word(e["word"]),
+                            link=url)
+
 
 
 async def setup(bot: commands.Bot):

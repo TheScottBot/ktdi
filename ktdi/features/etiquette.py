@@ -19,6 +19,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+from ktdi import oldbooks
 from ktdi.common import choices
 from ktdi.lib import etiquette as situations
 from ktdi.lib import links
@@ -153,6 +154,11 @@ async def situation_autocomplete(interaction: discord.Interaction, current: str)
 
 for _command in (etiquette_gentleman, etiquette_gentlewoman, etiquette_gentlethem):
     _command.autocomplete("situation")(situation_autocomplete)
+
+
+OLD_BOOK = oldbooks.OldBook("Routledge's and Hartley's etiquette manuals (1860s)", "🎩", "etiquette",
+                            random=lambda: advice_embed(None, random.choice(list(WHO))))
+
 
 
 async def setup(bot: commands.Bot):

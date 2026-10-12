@@ -93,5 +93,10 @@ async def idiom_autocomplete(interaction: discord.Interaction, current: str) -> 
     return DICTIONARY.autocomplete(current)
 
 
+OLD_BOOK = oldbooks.OldBook(SOURCE, "🗣️", "phrase", random=lambda: explain(None),
+                            find=lambda topic: DICTIONARY.look_up(topic), title=lambda e: e["phrase"], link=url)
+
+
+
 async def setup(bot: commands.Bot):
     bot.add_command(phrase)

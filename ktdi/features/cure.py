@@ -16,6 +16,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
+from ktdi import oldbooks
 from ktdi.common import choices
 from ktdi.lib import cure as lookup
 from ktdi.lib import fuzzy, links
@@ -118,6 +119,34 @@ async def plant(ctx: commands.Context, *, name: str):
 @plant.autocomplete("name")
 async def plant_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
     return choices(fuzzy.starting_first(current, all_herb_names) if current.strip() else herb_titles)
+
+
+def remedy_for(ailment: str) -> fuzzy.LookUp | None:
+    """For /lore: Culpeper's remedies for an ailment called by one of its own names (his matching is too loose to
+    trust with anything else)."""
+    match = lookup.find(ailment)
+    if not match or not match.exact:
+        return None
+    return fuzzy.LookUp("exact", [{**r, "ailment": match.ailment.name} for r in data["remedies"][match.ailment.name]])
+
+
+def herb_called(name: str) -> fuzzy.LookUp | None:
+    """For /lore: the herb called that."""
+    match = lookup.find_herb(name, herb_entries)
+    return fuzzy.LookUp("exact", [match.herb]) if match and match.exact else None
+
+
+def treats(herb: dict) -> str:
+    return f"Good for {', '.join(herb['treats'])}." if herb["treats"] else "Good for nothing on /cure's list."
+
+
+OLD_BOOK = [
+    oldbooks.OldBook(SOURCE, "🌿", "cure", random=lambda: cure_embed(random.choice(list(data["remedies"]))),
+                     find=remedy_for, title=lambda r: f"For {r['ailment']}: {r['herb']}",
+                     link=lambda r: links.gutenberg(BOOK, r["text"])),
+    oldbooks.OldBook(SOURCE, "🌱", "plant", random=lambda: plant_embed(random.choice(herb_titles)), find=herb_called,
+                     title=lambda h: h["name"], link=lambda h: SOURCE_URL, text=treats),
+]
 
 
 async def setup(bot: commands.Bot):

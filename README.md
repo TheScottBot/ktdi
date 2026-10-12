@@ -58,6 +58,7 @@ Dreams, almanacs, herbs, witches and Mrs Beeton, from the same kind of books, li
 
 | Command | What it does |
 |---|---|
+| `lore <thing>` | What all the old books have to say about something, side by side: `lore dragon` is Pliny's, Browne's and Topsell's dragons, Albertus's dragon stone, Miller's dream of one, Brewer's idioms and whatever else turns up, one entry from each with where it mentions the thing and a link to the page, then the command that has the rest (`/pliny dragon`). Books with an entry for the thing itself come first, then ones that mention it; old spelling is found too ("love" finds "loue"). Typed, `!oldbooks` works too. It searches every old book that declares itself (see Adding an old book, below); the almanac, weather sayings and a few others go by date or chance, so they only turn up in Old Wisdom of the Day. |
 | `dream [thing]` | What your dream foretells, from Gustavus Hindman Miller's *Ten Thousand Dreams Interpreted* (1901, public domain, via Project Gutenberg): "To dream of an eel is good if you can maintain your grip on him." Give it the thing (`dream eels`) or the whole dream (`dream I dreamt all my teeth fell out` finds teeth; `dream I was lost in a cave` finds caves); typos are fine and the slash version autocompletes. For something Miller didn't cover, it lists the dreams that mention it (`dream landlord`). On its own it's a random dream. Very long entries are cut short, with the rest a click away. About 2,200 dreams; the committee accepts no liability. Entries that are racist, about sex, cruel about disability or about violence against women were read and taken out ("for a young woman to dream of..." stays: that's the joke). Only what was kept is recorded (`ktdi/lib/dream_curation.json`), and a test checks the rest stays out using fingerprints. To add an entry, read it in the book, add its headword to that file and run `python -m ktdi.tools.dream_build`. |
 | `almanac [date]` | Today (or any day: `almanac 5 november`, `almanac 25/12`, `almanac tomorrow`) as William Hone's *Every-Day Book* (1826-27, public domain, via Project Gutenberg) has it: the day's saints, a passage on its customs, folklore or history (Hertfordshire's "ganging-day", April Fools' tricks with shoe buckles and "pigeon's milk", the druids' mistletoe), its flower ("Holly. *Ilex aquifolium*", dedicated to its saint), and London's average temperature for it in 1797-1816, in °F and °C. Ask again for another passage: most days have two or three. 29 February has nothing, as neither 1825 nor 1826 had one. Typed, `!onthisday` and `!hone` work too. About 620 passages, picked by hand as the best for their day (and nothing gruesome, racist or cruel); only their keys are recorded (`ktdi/lib/almanac_curation.json`). To add one, read it in the book, add its key to that file and run `python -m ktdi.tools.almanac_build`. |
 | `herbal` | Wisdom from a 1531 herbal, the *Tacuini sanitatis*: a random box from its grids, as badly OCR'd by archive.org and translated by Google Translate, with the original cell cropped from the scan. React ⛏️ to dig: each dig is one translation worse (round-tripped through Japanese, Zulu, Finnish, then Korean), down to 🪨 bedrock, the Latin as the scanner read it. The bot takes your ⛏️ back off so you can dig again (needs Manage Messages; otherwise un-react and react). Needs `ktdi/lib/herbal.json` (see Herbal below). |
@@ -211,6 +212,14 @@ If the log says "Couldn't add slash commands to server …" (Discord's *Missing 
 
 Slash commands can take a while to appear or update when registered globally. Set `GUILD_IDS` in `.env` to a comma-separated list of server IDs to register them to those servers only, which updates instantly.
 
+### Adding an old book
+
+Every old book (a dictionary, bestiary or almanac in 📚 Words & wisdom or 🔮 Old oddities) is also a source for
+`/lore` and Old Wisdom of the Day, so adding one comes with declaring it: its feature sets
+`OLD_BOOK = oldbooks.OldBook(...)` (see `ktdi/oldbooks.py`) with a `random` entry (what Old Wisdom of the Day posts),
+and, if it can be searched by topic, `find`, `title`, `link` and `text` (what `/lore` asks and quotes). A test fails
+until it does. Then the usual: a `/help` page, a row in this README, and the curation rules in `ARCHITECTURE.md`.
+
 ## Project layout
 
 For how it all fits together, conventions, and rules for changes, see [ARCHITECTURE.md](ARCHITECTURE.md).
@@ -222,7 +231,7 @@ ktdi/
 ├── config.py          # settings from .env
 ├── db.py              # database connection, tables, upgrades, and shared state (scope())
 ├── common.py          # small helpers shared by features
-├── oldbooks.py        # what the 📜 Old books dictionaries share (lookups, autocomplete, the "uses" list)
+├── oldbooks.py        # what the 📜 Old books dictionaries share (lookups, autocomplete, the "uses" list), and OldBook: how /lore and Old Wisdom of the Day see each book
 ├── features/          # one file per feature, each a discord.py extension with a setup(bot)
 │   ├── fun.py         # spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
 │   ├── futures.py     # sprayfutures
@@ -246,6 +255,7 @@ ktdi/
 │   ├── pseudodoxia.py # pseudodoxia
 │   ├── bestiary.py    # bestiary
 │   ├── secrets.py     # secrets
+│   ├── lore.py        # lore: all the old books at once
 │   ├── etiquette.py   # etiquette
 │   ├── movie.py       # movie night: nowplaying (np), shhh
 │   ├── units.py       # abm, imperial

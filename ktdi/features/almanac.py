@@ -100,5 +100,9 @@ async def almanac(ctx: commands.Context, *, date: str | None = None):
     await ctx.send(embed=almanac_embed(date))
 
 
+OLD_BOOK = oldbooks.OldBook(SOURCE, "📅", "almanac", random=lambda: almanac_embed(None))  # Today's: by date, not topic
+
+
+
 async def setup(bot: commands.Bot):
     bot.add_command(almanac)

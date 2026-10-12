@@ -20,7 +20,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from ktdi import config
+from ktdi import config, oldbooks
 from ktdi.lib import links, openmeteo
 
 HELP_CATEGORY = "🔧 Utilities"
@@ -195,6 +195,16 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
             "• `/weather here` asks where you are in a private form, then posts your weather as \"X checked the "
             "weather where they are\": the place is never shown, saved or logged.")
     return "", [("How it works", text, False)]
+
+
+def saying_embed() -> discord.Embed:
+    """A saying on its own, with no forecast (for Old Wisdom of the Day)."""
+    embed = discord.Embed(title="🌦️ Weather lore", description=saying_text(random.choice(LORE)), color=discord.Color.blue())
+    embed.set_footer(text=LORE_SOURCE)
+    return embed
+
+
+OLD_BOOK = oldbooks.OldBook(LORE_SOURCE, "🌦️", "weather", random=saying_embed)
 
 
 async def setup(bot: commands.Bot):

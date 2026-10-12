@@ -49,7 +49,8 @@ ktdi/
 ├── oldbooks.py        what the 📜 Old books lookups (/vulgartongue, /deadword, /devils, /dream, /phrase,
 │                      /beeton, /enquire) share: Dictionary (look_up, named_in, uses, one_of, same_name,
 │                      autocomplete), uses_embed, fit, clip, escape. A new old-book command should be a Dictionary
-│                      plus how its entries look, nothing more
+│                      plus how its entries look, nothing more. Each old book also declares OLD_BOOK (an OldBook):
+│                      its random entry for Old Wisdom of the Day, and how /lore searches it
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
 │   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
@@ -76,6 +77,7 @@ ktdi/
 │   ├── pliny.py       /pliny: a chapter of Pliny's Natural History (AD 77) on a topic, or at random
 │   ├── pseudodoxia.py /pseudodoxia: a chapter of Browne's Pseudodoxia Epidemica (1646) on a topic, or at random
 │   ├── bestiary.py    /bestiary: a passage of Topsell's beasts (1607) and serpents (1608) on a beast, or at random
+│   ├── lore.py        /lore: one search across every old book's OLD_BOOK, an entry from each, side by side
 │   ├── secrets.py     /secrets: a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)

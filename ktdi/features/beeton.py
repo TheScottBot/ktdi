@@ -194,5 +194,15 @@ async def dish_autocomplete(interaction: discord.Interaction, current: str) -> l
     return RECIPES.autocomplete(current)
 
 
+OLD_BOOK = [  # Her recipes and her advice, searched apart (and either can be the wisdom of the day)
+    oldbooks.OldBook(SOURCE, "🍽️", "beeton recipe", random=lambda: recipe(None),
+                     find=lambda topic: RECIPES.look_up(topic), title=lambda e: e["name"], link=url,
+                     text=lambda e: e["method"]),
+    oldbooks.OldBook(SOURCE, "🏠", "beeton advice", random=lambda: household(None),
+                     find=lambda topic: ADVICE.look_up(topic), title=lambda e: e["name"], link=url),
+]
+
+
+
 async def setup(bot: commands.Bot):
     bot.add_command(beeton)

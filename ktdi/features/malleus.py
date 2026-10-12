@@ -12,6 +12,8 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 
+from ktdi import oldbooks
+
 HELP_CATEGORY = "🔮 Old oddities"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "malleus.json"
 BOOK = "bf-1569-a-2-i-5-1928"
@@ -39,6 +41,10 @@ async def hammeredofwitches(ctx: commands.Context):
     """A witch-finding tip from the Malleus Maleficarum (1486), the Hammer of Witches, in its 1928 translation: how to
     spot a witch, and the book's wilder lore, linked to its page."""
     await ctx.send(embed=tip_embed(random.choice(tips)))
+
+
+OLD_BOOK = oldbooks.OldBook(SOURCE, "🧹", "hammeredofwitches", random=lambda: tip_embed(random.choice(tips)))
+
 
 
 async def setup(bot: commands.Bot):

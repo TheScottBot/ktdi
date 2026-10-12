@@ -30,6 +30,7 @@ FEATURES = [
     "ktdi.features.pseudodoxia",
     "ktdi.features.bestiary",
     "ktdi.features.secrets",
+    "ktdi.features.lore",
     "ktdi.features.etiquette",
     "ktdi.features.movie",
     "ktdi.features.units",

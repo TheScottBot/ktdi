@@ -1,15 +1,19 @@
-"""Shared by the 📜 Old books commands (/vulgartongue, /deadword, /devils, /dream, /phrase, /beeton, /enquire,
-/almanac, /melancholy, /pliny, /pseudodoxia,
-/bestiary, /secrets): a book of entries looked up by headword, and the replies they have in common.
+"""Shared by the old-book commands (/vulgartongue, /deadword, /devils, /dream, /phrase, /beeton, /enquire, /almanac,
+/melancholy, /pliny, /pseudodoxia, /bestiary, /secrets and the rest): a book of entries looked up by headword, and the
+replies they have in common.
 
 A command makes a Dictionary of its entries, then asks it to look things up (the headword's entry, else the entries
 that use the word, else one spelt like it: fuzzy.look_up), for a random entry, or for autocomplete. How an entry looks
 is the command's own business; the list of entries that use a word looks the same everywhere (uses_embed).
+
+Every old book also declares itself as OLD_BOOK (an OldBook, or a list of them): how /lore searches it alongside the
+others, and how Old Wisdom of the Day gets a random entry from it. A new old book isn't finished without one.
 """
 
 import random
 import re
-from typing import Callable, Generic, Iterable, TypeVar
+from dataclasses import dataclass
+from typing import Any, Callable, Generic, Iterable, TypeVar
 
 import discord
 from discord import app_commands
@@ -184,3 +188,19 @@ def uses_embed(found: list[T], *, query: str, title: str, name: Callable[[T], st
     more = f". Showing {len(shown)} of {len(found)}: ask again for others." if len(found) > len(shown) else ""
     embed.set_footer(text=f"{source}{more}")
     return embed
+
+
+@dataclass(frozen=True)
+class OldBook:
+    """An old book as /lore and Old Wisdom of the Day see it. `random` is any entry, as its own command shows it.
+    `find` (for /lore) is what it has on a topic, as Dictionary.look_up finds it; None for a book that can't be
+    searched by topic (/almanac goes by date). `title`, `link` and `text` are an entry's name, its place in the book,
+    and the text /lore quotes from (plain text, as the book has it: /lore escapes it)."""
+    book: str  # Who wrote what: "Pliny the Elder, Natural History (AD 77)"
+    emoji: str
+    command: str  # The command with more: "pliny", or "beeton recipe"
+    random: Callable[[], discord.Embed]
+    find: Callable[[str], fuzzy.LookUp | None] | None = None
+    title: Callable[[Any], str] = lambda entry: entry["title"]
+    link: Callable[[Any], str | None] = lambda entry: None
+    text: Callable[[Any], str] = lambda entry: entry["text"]

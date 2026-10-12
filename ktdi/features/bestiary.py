@@ -81,5 +81,11 @@ async def beast_autocomplete(interaction: discord.Interaction, current: str) -> 
     return DICTIONARY.autocomplete(current)
 
 
+OLD_BOOK = oldbooks.OldBook("Edward Topsell's bestiary (1607-08)", EMOJI, "bestiary",
+                            random=lambda: bestiary_embed(None), find=lambda topic: DICTIONARY.look_up(topic),
+                            title=lambda e: e["name"], link=url)
+
+
+
 async def setup(bot: commands.Bot):
     bot.add_command(bestiary)
