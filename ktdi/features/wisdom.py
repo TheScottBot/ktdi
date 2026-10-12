@@ -21,7 +21,7 @@ from ktdi import common, config, db, oldbooks
 from ktdi.common import NO_PINGS, log
 from ktdi.lib import reminders
 
-HELP_CATEGORY = "🔮 Old oddities"
+HELP_CATEGORY = "📚 Words & wisdom"
 DEFAULT_TIME = "9am"
 GRACE = timedelta(hours=6)  # Later than this (the bot was down), a day's is skipped rather than posted late
 EVERY_DAY = tuple(range(7))

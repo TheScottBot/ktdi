@@ -19,7 +19,7 @@ conventions; this file is only the working rules. (CLAUDE.md imports this file, 
   that every command has a section, and that no command's page only repeats its one-liner; add the command to its
   `SLASH_COMMANDS` / `SUBCOMMANDS` lists.
 - **Every old book is a source for `/lore` and Old Wisdom of the Day.** A new old-book feature (a book, dictionary
-  or almanac in 📚 Words & wisdom or 🔮 Old oddities) isn't finished until it declares `OLD_BOOK =
+  or almanac in 📚 Words & wisdom, 🐉 Beasts & magic or 🌿 Hearth & herbs) isn't finished until it declares `OLD_BOOK =
   oldbooks.OldBook(...)` (or a list of them): its `random` entry, for Old Wisdom of the Day, and, if it can be
   searched by topic, `find`, `title`, `link` and `text`, so `/lore` asks it too. `tests/test_lore.py` fails without it.
 - **Privacy:** never log who used `/books` or `/rpg` or what they searched for or downloaded.

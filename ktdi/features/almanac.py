@@ -21,7 +21,7 @@ from ktdi.lib import links
 from ktdi.lib.reminders import ScheduleError, parse_day
 from ktdi.tools.almanac_build import VOLUMES
 
-HELP_CATEGORY = "🔮 Old oddities"
+HELP_CATEGORY = "🌿 Hearth & herbs"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "almanac.json"
 SOURCE = "Hone's Every-Day Book (1826-27)"
 COLOUR = discord.Color.dark_green()

@@ -15,7 +15,7 @@ from discord.ext import commands
 
 from ktdi import oldbooks
 
-HELP_CATEGORY = "🔮 Old oddities"
+HELP_CATEGORY = "📚 Words & wisdom"
 COLOUR = discord.Color.from_rgb(120, 94, 60)  # Parchment
 SNIPPET = 200  # How much of each book's entry is quoted
 EMBED_LIMIT = 6000  # Discord's, for a whole embed

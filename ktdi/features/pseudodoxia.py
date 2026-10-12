@@ -17,7 +17,7 @@ from discord.ext import commands
 from ktdi import oldbooks
 from ktdi.lib import links
 
-HELP_CATEGORY = "🔮 Old oddities"
+HELP_CATEGORY = "🐉 Beasts & magic"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "pseudodoxia.json"
 SOURCE = "Sir Thomas Browne, Pseudodoxia Epidemica (1646)"
 COLOUR = discord.Color.from_rgb(112, 84, 62)  # Old leather

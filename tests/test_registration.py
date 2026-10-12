@@ -117,9 +117,9 @@ def test_help_front_page(loaded_bot):
     assert lines[0] == "**Start here:** `/spray` · `/rapsheet` · `/bad` · `/quote random` · `/nowplaying`"
     sections = [line for line in lines[2:]]
     assert [line.split(" **")[1].split("**")[0] for line in sections] == [
-        "Rap sheet", "Fun", "Words & wisdom", "Old oddities", "Movie night", "Measurements", "Quotes", "Campaigns",
-        "Utilities"]
-    assert sections[3].startswith("🔮 **Old oddities**: Dreams, almanacs, herbs, witches and Mrs Beeton (")
+        "Rap sheet", "Fun", "Words & wisdom", "Beasts & magic", "Hearth & herbs", "Movie night", "Measurements", "Quotes",
+        "Campaigns", "Utilities"]
+    assert sections[3].startswith("🐉 **Beasts & magic**: Monsters, marvels, spells, witches and dreams (")
     assert not embed.fields and len(embed) < 1500  # Short: one line a section
     assert isinstance(ctx.last.view, help_feature.HelpMenu)
     assert [o.label for o in ctx.last.view.sections.options][:3] == ["Rap sheet", "Fun", "Words & wisdom"]
@@ -132,10 +132,10 @@ def test_the_menu_opens_a_section_privately(loaded_bot):
     async def go():
         await help_feature.help_command.callback(ctx)
         view = ctx.last.view
-        view.sections._values = ["🔮 Old oddities"]
+        view.sections._values = ["🐉 Beasts & magic"]
         dave = Interaction(User(2, "dave"))  # Anyone can use it: the section is shown just to them
         await view.sections.callback(dave)
-        assert dave.last.embed.title == "🔮 Old oddities" and dave.last.private
+        assert dave.last.embed.title == "🐉 Beasts & magic" and dave.last.private
         assert "`/dream [thing]`: " in dave.last.embed.description
     asyncio.run(go())
 
@@ -156,9 +156,9 @@ def test_section_pages(loaded_bot):
 
 def test_help_for_a_section_by_name(loaded_bot):
     ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
-    for typed, section in [("old oddities", "🔮 Old oddities"), ("Old Oddities", "🔮 Old oddities"),
-                           ("oddities", "🔮 Old oddities"), ("rap sheet", "💦 Rap sheet"), ("movie", "🎬 Movie night"),
-                           ("words and wisdom", "📚 Words & wisdom")]:
+    for typed, section in [("beasts and magic", "🐉 Beasts & magic"), ("Beasts & Magic", "🐉 Beasts & magic"),
+                           ("magic", "🐉 Beasts & magic"), ("hearth", "🌿 Hearth & herbs"), ("rap sheet", "💦 Rap sheet"),
+                           ("movie", "🎬 Movie night"), ("words and wisdom", "📚 Words & wisdom")]:
         asyncio.run(help_feature.help_command.callback(ctx, command=typed))
         assert ctx.last.private and ctx.last.embed.title == section, typed
     asyncio.run(help_feature.help_command.callback(ctx, command="spray"))
@@ -294,14 +294,14 @@ def test_help_autocompletes_sections_and_commands(loaded_bot):
     def suggest(typed):
         return [(c.name, c.value) for c in asyncio.run(help_feature.command_autocomplete(interaction, typed))]
 
-    assert [value for _, value in suggest("")[:9]] == [
-        "Rap sheet", "Fun", "Words & wisdom", "Old oddities", "Movie night", "Measurements", "Quotes", "Campaigns",
-        "Utilities"]  # The sections first
+    assert [value for _, value in suggest("")[:10]] == [
+        "Rap sheet", "Fun", "Words & wisdom", "Beasts & magic", "Hearth & herbs", "Movie night", "Measurements", "Quotes",
+        "Campaigns", "Utilities"]  # The sections first
     assert [value for _, value in suggest("bee")] == ["beeton", "beeton advice", "beeton menu"]
     assert ("nowplaying (also np)", "nowplaying") in suggest("np")  # Found by the name people type
     assert ("devils (also devil, devilsdictionary)", "devils") in suggest("devil")
     assert ("nowplaying vote show (also where, link)", "nowplaying vote show") in suggest("vote show")
-    assert suggest("odd")[0] == ("Old oddities", "Old oddities")
+    assert suggest("hearth")[0] == ("Hearth & herbs", "Hearth & herbs")
     assert not any("toenoyoudidnt" in value for _, value in suggest("toe"))  # Cryptids stay secret
     assert not any(value.startswith(("books", "rpg")) for _, value in suggest(""))  # Not set up on this server
     assert len(suggest("")) == 25 and all(len(n) <= 100 and len(v) <= 100 for n, v in suggest("e"))  # Discord's limits

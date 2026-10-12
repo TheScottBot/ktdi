@@ -19,7 +19,7 @@ from discord.ext import commands
 from ktdi import oldbooks
 from ktdi.lib import links
 
-HELP_CATEGORY = "🔮 Old oddities"
+HELP_CATEGORY = "🐉 Beasts & magic"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "secrets.json"
 SCAN = "bim_early-english-books-1475-1640_the-boke-of-secretes-of-_albertus-magnus_1560"
 SOURCE = "The Boke of Secretes of Albertus Magnus (1560)"

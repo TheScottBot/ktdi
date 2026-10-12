@@ -21,7 +21,7 @@ from ktdi.common import choices
 from ktdi.lib import cure as lookup
 from ktdi.lib import fuzzy, links
 
-HELP_CATEGORY = "🔮 Old oddities"
+HELP_CATEGORY = "🌿 Hearth & herbs"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "cures.json"
 SOURCE = "Culpeper's Complete Herbal (1653)"
 BOOK = 49513  # On Project Gutenberg

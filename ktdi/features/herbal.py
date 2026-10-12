@@ -17,7 +17,7 @@ from discord.ext import commands
 from ktdi import common, db, oldbooks
 from ktdi.common import NO_PINGS
 
-HELP_CATEGORY = "🔮 Old oddities"
+HELP_CATEGORY = "🌿 Hearth & herbs"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "herbal.json"
 BOOK = "bub_gb_9lIU1a_-ddAC"
 TITLE = "Tacuini sanitatis (1531)"

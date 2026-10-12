@@ -12,7 +12,7 @@ from ktdi.features import FEATURES, lore
 from tests.fakes import Ctx, User, run
 
 SCOTT = User(1, "scott")
-OLD_BOOK_SECTIONS = {"📚 Words & wisdom", "🔮 Old oddities"}
+OLD_BOOK_SECTIONS = {"📚 Words & wisdom", "🐉 Beasts & magic", "🌿 Hearth & herbs"}
 NOT_BOOKS = {"ktdi.features.lore", "ktdi.features.wisdom"}  # In an old-book section, but not books
 
 

@@ -30,8 +30,9 @@ EMBED_FIELD_COUNT_LIMIT = 25
 CATEGORIES = {
     "💦 Rap sheet": "Sprays, telling-offs, blame, bribes and the committee",
     "🎲 Fun": "Looting, Linux, anime and the war archives",
-    "📚 Words & wisdom": "Old dictionaries, idioms, slang, manners and gloom",
-    "🔮 Old oddities": "Dreams, almanacs, herbs, witches and Mrs Beeton",
+    "📚 Words & wisdom": "All the old books at once, then dictionaries, idioms, manners and gloom",
+    "🐉 Beasts & magic": "Monsters, marvels, spells, witches and dreams",
+    "🌿 Hearth & herbs": "Mrs Beeton, Culpeper's cures, a herbal and the almanac",
     "🎬 Movie night": "Countdowns, bingo, votes and ratings",
     "📏 Measurements": "Units, sincerely or absurdly",
     "💬 Quotes": "Save and replay what people say",
@@ -140,7 +141,7 @@ def main_help_lines(ctx: commands.Context) -> dict[str, list[str]]:
 
 
 def section_name(category: str) -> str:
-    """"🔮 Old oddities" is "Old oddities"."""
+    """"🐉 Beasts & magic" is "Beasts & magic"."""
     return category.split(" ", 1)[1] if " " in category else category
 
 

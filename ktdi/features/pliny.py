@@ -17,7 +17,7 @@ from discord.ext import commands
 from ktdi import oldbooks
 from ktdi.lib import links, roman
 
-HELP_CATEGORY = "🔮 Old oddities"
+HELP_CATEGORY = "🐉 Beasts & magic"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "pliny.json"
 SOURCE = "Pliny the Elder, Natural History (AD 77)"
 COLOUR = discord.Color.from_rgb(165, 42, 42)  # Imperial purple-ish red

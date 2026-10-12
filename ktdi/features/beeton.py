@@ -24,7 +24,7 @@ from ktdi.common import today
 from ktdi.lib import fuzzy, links, oldmoney
 from ktdi.lib.reminders import DAY_NAMES, DAY_WORDS, ScheduleError, parse_day
 
-HELP_CATEGORY = "🔮 Old oddities"
+HELP_CATEGORY = "🌿 Hearth & herbs"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "beeton.json"
 SOURCE = "Mrs Beeton's Book of Household Management (1861)"
 BOOK = 10136  # Project Gutenberg
