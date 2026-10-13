@@ -51,6 +51,9 @@ ktdi/
 │                      autocomplete), uses_embed, fit, clip, escape. A new old-book command should be a Dictionary
 │                      plus how its entries look, nothing more. Each old book also declares OLD_BOOK (an OldBook):
 │                      its random entry for Old Wisdom of the Day, and how /lore searches it
+├── daily.py           posting every day in a channel each server chooses: a feature registers a Daily (its name
+│                      and how to post today's), and its `setup here/stop/show` subcommands call setup_here, stop
+│                      and show; daily_loop posts what's due (daily_posts table). /wisdom and /almanac use it
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
 │   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
@@ -72,14 +75,15 @@ ktdi/
 │   │                  day's family dinner, household advice
 │   ├── enquire.py     /enquire: a hint on anything from Enquire Within Upon Everything (1856)
 │   ├── almanac.py     /almanac: a day from Hone's Every-Day Book (1826-27): saints, folklore, flower, temperature.
-│   │                  Dates are read by lib/reminders.py's parse_day (shared with campaign reminders)
+│   │                  Dates are read by lib/reminders.py's parse_day (shared with campaign reminders).
+│   │                  /almanac setup here posts the day's every morning (a Daily: daily.py)
 │   ├── melancholy.py  /melancholy: a passage of Burton's Anatomy of Melancholy (1621) on a topic, or at random
 │   ├── pliny.py       /pliny: a chapter of Pliny's Natural History (AD 77) on a topic, or at random
 │   ├── pseudodoxia.py /pseudodoxia: a chapter of Browne's Pseudodoxia Epidemica (1646) on a topic, or at random
 │   ├── bestiary.py    /bestiary: a passage of Topsell's beasts (1607) and serpents (1608) on a beast, or at random
 │   ├── lore.py        /lore: one search across every old book's OLD_BOOK, an entry from each, side by side
 │   ├── wisdom.py      /wisdom: a random entry from any OLD_BOOK; Old Wisdom of the Day (/wisdom setup here),
-│   │                  posted daily by wisdom_loop to the channel each server chose (wisdom_channels table)
+│   │                  a Daily (daily.py) that picks a different book each day
 │   ├── secrets.py     /secrets: a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
@@ -214,7 +218,7 @@ Extensions were chosen over Cog classes so commands stay plain functions that te
 - Listeners: `on_message` (blame's recent speakers), `on_raw_reaction_add` (💦 spray, 🔔 subscribe),
   `on_raw_reaction_remove` (🔔 unsubscribe). Use the `raw_` events so reactions on messages from before a restart
   still count.
-- `campaigns.reminder_loop` runs every 30 seconds; `wisdom.wisdom_loop` every minute. Both always move a due row on
+- `campaigns.reminder_loop` runs every 30 seconds; `daily.daily_loop` every minute. Both always move a due row on
   to its next time, even when sending fails, so nothing is posted over and over.
 - Code with no `ctx` to hand uses `common.bot` (the running bot) for `get_channel`, `user`, `guilds`.
 
@@ -299,7 +303,7 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `insurance_policies` | `/insurance buy`: who, the premium, when it was bought, and both clocks' expiries. `microwave_expires_at` is the real cover; `car_expires_at` is only ever shown. A person's newest policy is the one in force. Durations come from `lib/insurance.py` (user ID + UTC minute, no randomness, on purpose). |
 | `insurance_claims` | what a policy covered: who was sprayed or told off, by whom, on which policy, and `kind` (`spray`, or `bad` for `/bad` and `/badbonk`). Every spray goes through `fun.take_spray` and every telling-off through `fun.tell_off`, which record either the spray/bad or a claim (never both); covered sprays still go on to `fun.after_spray`, so spray futures pay out. |
 | `spray_rates` | the daily spray interest rate (1-20%), one row per day: picked at random the first time it's needed after `SPRAY_RATE_TIME` (in `BOT_TIMEZONE`). Bot-wide, so no `guild_id`. |
-| `wisdom_channels` | each server's Old Wisdom of the Day: the channel, the time (BOT_TIMEZONE), when it's next due (UTC), and the book it last came from. |
+| `daily_posts` | what each server has posted every day (`kind`: Old Wisdom of the Day, the almanac): the channel, the time (BOT_TIMEZONE), when it's next due (UTC), and what it remembers from the last one (wisdom: the book, so it's not the same twice). |
 | `herbal_posts` | each `/herbal` post: which box from `herbal.json` and how deep it's been dug with ⛏️, so a dig carries on after a restart. |
 | `committee_spending` | what the committee's money was spent on (`/committee spend`): amount, item, who. Money in isn't stored separately: it's the `bribes` totals (bribe, expunge, bail and insurance premiums all record a bribe), so the balance is bribes minus spending, both read through `scope()`. |
 

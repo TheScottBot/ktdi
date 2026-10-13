@@ -140,15 +140,17 @@ SCHEMA = [
         depth      INTEGER NOT NULL DEFAULT 0  -- 0 is the best guess; one past the last level is bedrock
     )
     """,
-    # Old Wisdom of the Day (/wisdom setup): where each server gets it, and when.
+    # Posted every day (ktdi/daily.py): Old Wisdom of the Day, the almanac. Where each server gets each, and when.
     """
-    CREATE TABLE IF NOT EXISTS wisdom_channels (
-        guild_id   INTEGER PRIMARY KEY,
+    CREATE TABLE IF NOT EXISTS daily_posts (
+        guild_id   INTEGER NOT NULL,
+        kind       TEXT NOT NULL,     -- which: "wisdom", "almanac"
         channel_id INTEGER NOT NULL,
         clock      TEXT NOT NULL,     -- "09:00", in BOT_TIMEZONE
         next_run   TEXT NOT NULL,     -- UTC, ISO
-        last_book  TEXT,              -- the command of the book it last came from, so it's not the same two days running
-        set_by     INTEGER NOT NULL
+        last       TEXT,              -- what it remembers from the last one (wisdom: the book, so it's not the same twice)
+        set_by     INTEGER NOT NULL,
+        PRIMARY KEY (guild_id, kind)
     )
     """,
     # Spray insurance (/insurance). A person's latest policy is the one in force; buying again replaces it.
@@ -388,6 +390,11 @@ def _upgrade() -> None:
     # Insurance covers being bad (/bad, /badbonk) as well as sprays.
     if "kind" not in _columns("insurance_claims"):
         conn.execute("ALTER TABLE insurance_claims ADD COLUMN kind TEXT NOT NULL DEFAULT 'spray'")
+    # Old Wisdom of the Day had a table of its own before the almanac was posted daily too.
+    if _columns("wisdom_channels"):
+        conn.execute("INSERT OR IGNORE INTO daily_posts (guild_id, kind, channel_id, clock, next_run, last, set_by) "
+                     "SELECT guild_id, 'wisdom', channel_id, clock, next_run, last_book, set_by FROM wisdom_channels")
+        conn.execute("DROP TABLE wisdom_channels")
 
 
 def init(path: str) -> None:

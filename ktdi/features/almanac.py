@@ -1,8 +1,9 @@
-"""/almanac [date]: the day as William Hone's Every-Day Book (1826-27, public domain) has it: its saints, its flower,
+"""/almanac day [date] (typed: !almanac [date]): the day as William Hone's Every-Day Book (1826-27, public domain) has it: its saints, its flower,
 London's mean temperature for it (1797-1816), and a passage on its customs, folklore or history ("On the first of
 April, 1810, Napoleon married Maria Louisa... some of the waggish Parisians called him un poisson d'Avril").
 
 No date: today (in BOT_TIMEZONE). A date: "5 november", "nov 5", "5/11", "tomorrow". Ask again for another passage.
+/almanac setup here [time] posts the day's in a channel every morning (ktdi/daily.py, as Old Wisdom of the Day does).
 The data is ktdi/lib/almanac.json, built by ktdi/tools/almanac_build.py from passages picked by hand.
 """
 
@@ -15,7 +16,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from ktdi import oldbooks
+from ktdi import daily, oldbooks
 from ktdi.common import today
 from ktdi.lib import links
 from ktdi.lib.reminders import ScheduleError, parse_day
@@ -89,15 +90,55 @@ def almanac_embed(when: str | None) -> discord.Embed:
     return day_embed(month, day)
 
 
-@commands.hybrid_command(name="almanac", aliases=["onthisday", "hone"],
-                         description="Today (or any day) in Hone's Every-Day Book (1826): saints, flower, folklore.")
+async def post_today(channel: discord.abc.Messageable, last: str | None = None) -> None:
+    """The day's almanac, as posted every day."""
+    await channel.send("📅 **Today in the almanac**", embed=almanac_embed(None))
+
+
+DAILY = daily.register(daily.Daily("almanac", "The almanac", "📅", "almanac", post=post_today))
+
+
+@commands.hybrid_group(name="almanac", aliases=["onthisday", "hone"], fallback="day", invoke_without_command=True,
+                       description="Today (or any day) in Hone's Every-Day Book (1826): saints, flower, folklore.")
 @app_commands.describe(date="A day (5 november, nov 5, 5/11, tomorrow). Empty: today")
 async def almanac(ctx: commands.Context, *, date: str | None = None):
-    """Today, or any day (`5 november`, `nov 5`, `25/12`, `tomorrow`), as William Hone's Every-Day Book (1826) has it:
-    the day's saints, a passage on its customs, folklore or history, its flower, and London's average temperature for
-    it in 1797-1816. Ask again for another passage: most days have two or three. 29 February has nothing (neither
-    1825 nor 1826 had one)."""
+    """Today, or any day (`/almanac day 5 november`, `nov 5`, `25/12`, `tomorrow`; typed, just `!almanac 5 november`),
+    as William Hone's Every-Day Book (1826) has it: the day's saints, a passage on its customs, folklore or history,
+    its flower, and London's average temperature for it in 1797-1816. Ask again for another passage: most days have
+    two or three. 29 February has nothing (neither 1825 nor 1826 had one).
+
+    **Every morning:** someone with Manage Server runs `/almanac setup here` in a channel, and the day's almanac is
+    posted there every day at 9am where the bot is, or the time given (`/almanac setup here 7am`). `/almanac setup
+    show` says where and when; `/almanac setup stop` stops it. One channel per server: set it up somewhere else and
+    it moves."""
     await ctx.send(embed=almanac_embed(date))
+
+
+@almanac.group(name="setup", invoke_without_command=True, description="Post the day's almanac in a channel every day.")
+@commands.guild_only()
+async def almanac_setup(ctx: commands.Context):
+    await daily.show(ctx, DAILY)
+
+
+@almanac_setup.command(name="here", description="Post the day's almanac in this channel, every day.")
+@commands.guild_only()
+@commands.has_guild_permissions(manage_guild=True)
+@app_commands.describe(time="What time each day (9am, 0730, 18:30). Empty: 9am")
+async def almanac_setup_here(ctx: commands.Context, *, time: str | None = None):
+    await daily.setup_here(ctx, DAILY, time)
+
+
+@almanac_setup.command(name="stop", description="Stop posting the day's almanac.")
+@commands.guild_only()
+@commands.has_guild_permissions(manage_guild=True)
+async def almanac_setup_stop(ctx: commands.Context):
+    await daily.stop(ctx, DAILY)
+
+
+@almanac_setup.command(name="show", description="Where and when the day's almanac is posted.")
+@commands.guild_only()
+async def almanac_setup_show(ctx: commands.Context):
+    await daily.show(ctx, DAILY)
 
 
 OLD_BOOK = oldbooks.OldBook(SOURCE, "📅", "almanac", random=lambda: almanac_embed(None))  # Today's: by date, not topic
@@ -106,3 +147,4 @@ OLD_BOOK = oldbooks.OldBook(SOURCE, "📅", "almanac", random=lambda: almanac_em
 
 async def setup(bot: commands.Bot):
     bot.add_command(almanac)
+    daily.start()
