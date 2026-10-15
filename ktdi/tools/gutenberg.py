@@ -29,18 +29,23 @@ SOURCES = [
     "https://gutenberg.pglaf.org/{path}/{book}/{book}-0.txt",
     "https://gutenberg.pglaf.org/{path}/{book}/{book}.txt",
 ]
+HTML_SOURCES = [  # The web page, for a book whose pictures are wanted (/wonder)
+    "https://www.gutenberg.org/cache/epub/{book}/pg{book}-images.html",
+    "https://gutenberg.pglaf.org/{path}/{book}/{book}-h/{book}-h.htm",
+]
 
 
-def source_urls(book: int) -> list[str]:
+def source_urls(book: int, html: bool = False) -> list[str]:
     """Where to look for a book, in order. The mirror files it by its digits: book 926 is in 9/2/926/."""
     path = "/".join(str(book)[:-1]) if book >= 10 else "0"
-    return [url.format(book=book, path=path) for url in SOURCES]
+    return [url.format(book=book, path=path) for url in (HTML_SOURCES if html else SOURCES)]
 
 
-def download(book: int, timeout: int = 60) -> str:
-    """A Gutenberg book's plain text, from gutenberg.org or, if that's down, its mirror."""
+def download(book: int, timeout: int = 60, html: bool = False) -> str:
+    """A Gutenberg book's plain text (or with html, its web page), from gutenberg.org or, if that's down, its
+    mirror."""
     problems = []
-    for url in source_urls(book):
+    for url in source_urls(book, html):
         print(f"Downloading {url} ...")
         try:
             with urllib.request.urlopen(url, timeout=timeout) as response:

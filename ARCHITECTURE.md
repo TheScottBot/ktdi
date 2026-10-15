@@ -84,6 +84,7 @@ ktdi/
 │   ├── lore.py        /lore: one search across every old book's OLD_BOOK, an entry from each, side by side
 │   ├── wisdom.py      /wisdom: a random entry from any OLD_BOOK; Old Wisdom of the Day (/wisdom setup here),
 │   │                  a Daily (daily.py) that picks a different book each day
+│   ├── wonder.py      /wonder: a curiosity from Ten Thousand Wonderful Things (1894), with its engraving
 │   ├── secrets.py     /secrets: a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
@@ -153,6 +154,9 @@ ktdi/
     ├── secrets.json   /secrets's magic (the Boke of Secretes, 1560, EEBO-TCP), built by tools/secrets_build.py the
     │                  same way from secrets_curation.json: only harmless magic, each tagged with what it's for
     │                  ("Enemies", "Fart") so modern words find it
+    ├── wonder.json    /wonder's curiosities (Ten Thousand Wonderful Things, 1894), built by tools/wonder_build.py
+    │                  from the book's web page (where its engravings are) and wonder_curation.json (titles
+    │                  kept); each is numbered in book order and keeps its pictures' Gutenberg URLs
     ├── roman.py       Roman numerals to numbers (/pliny's books, /pseudodoxia's chapters)
     ├── melancholy.json  /melancholy's excerpts (Burton, Gutenberg), built by tools/melancholy_build.py from
     │                  melancholy_curation.json, which lists them word for word; the build checks each is in the book

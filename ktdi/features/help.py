@@ -31,7 +31,7 @@ CATEGORIES = {
     "💦 Rap sheet": "Sprays, telling-offs, blame, bribes and the committee",
     "🎲 Fun": "Looting, Linux, anime and the war archives",
     "📚 Words & wisdom": "All the old books at once, then dictionaries, idioms, manners and gloom",
-    "🐉 Beasts & magic": "Monsters, marvels, spells, witches and dreams",
+    "🐉 Beasts & magic": "Monsters, marvels, curiosities, spells, witches and dreams",
     "🌿 Hearth & herbs": "Mrs Beeton, Culpeper's cures, a herbal and the almanac",
     "🎬 Movie night": "Countdowns, bingo, votes and ratings",
     "📏 Measurements": "Units, sincerely or absurdly",
