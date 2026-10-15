@@ -137,6 +137,17 @@ def curation_file(name: str) -> Path:
     return LIB / f"{name}_curation.json"
 
 
+def titled_keep(found: dict[str, dict], curation: dict, leave_out: tuple[str, ...] = ()) -> tuple[list[dict], list[str]]:
+    """For a book whose parts have numbers but no titles (/goblin's sections, /omen's paragraphs), so the curation
+    gives each one kept a title and other names: {"keep": {"1.2.4": {"title": ..., "also": [...]}}}. The parts kept
+    (from `found`, keyed and in book order), each with its "title" and "also" and without the fields in `leave_out`;
+    and the keys listed that aren't in the book."""
+    kept = [{**{k: v for k, v in part.items() if k not in leave_out}, "title": curation["keep"][key]["title"],
+             "also": curation["keep"][key].get("also", [])}
+            for key, part in found.items() if key in curation["keep"]]
+    return kept, sorted(set(curation["keep"]) - set(found))
+
+
 def kept(entries: list[dict], keep: list, key: Callable[[dict], object] = lambda entry: entry["word"]) -> list[dict]:
     """The entries on the allowlist (by headword, or whatever `key` says identifies one), in book order."""
     wanted = set(keep)

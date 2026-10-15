@@ -86,6 +86,7 @@ ktdi/
 │   │                  a Daily (daily.py) that picks a different book each day
 │   ├── wonder.py      /wonder: a curiosity from Ten Thousand Wonderful Things (1894), with its engraving
 │   ├── goblin.py      /goblin: a tale of Welsh fairies, ghosts and customs from British Goblins (1880)
+│   ├── omen.py        /omen: an everyday superstition from The Magic of the Horse-shoe (1898)
 │   ├── secrets.py     /secrets: a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
@@ -162,6 +163,10 @@ ktdi/
     │                  book's web page (T. H. Thomas's illustrations) and goblin_curation.json: its numbered
     │                  sections (book.chapter.section), each kept one given a title and other names. The web-page
     │                  builds (wonder, goblin) share gutenberg.html_text and gutenberg.titled
+    ├── omen.json      /omen's superstitions (Lawrence, The Magic of the Horse-shoe, 1898), built by
+    │                  tools/omen_build.py from the book's web page and omen_curation.json: paragraphs, or short
+    │                  runs of them (essay.subsection.paragraph, "to" for a run), each kept one given a title
+    │                  and other names (gutenberg.titled_keep, shared with goblin)
     ├── roman.py       Roman numerals to numbers (/pliny's books, /pseudodoxia's chapters)
     ├── melancholy.json  /melancholy's excerpts (Burton, Gutenberg), built by tools/melancholy_build.py from
     │                  melancholy_curation.json, which lists them word for word; the build checks each is in the book

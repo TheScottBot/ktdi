@@ -1,0 +1,2946 @@
+{
+ "_about": "The Magic of the Horse-shoe (1898): the paragraphs kept (essay.subsection.paragraph, \"to\" for a short run), each with the title it's shown under and other names to find it by. Read by hand, then checked again: the curious kept; contempt for peoples or faiths, sex, gore, cruelty to animals, charms someone might try, misogyny, ableism, harm to children, and anything taking gender or sexuality lightly, left out. See ktdi/tools/omen_build.py.",
+ "keep": {
+  "1.1.5": {
+   "title": "The Horseshoes of Oakham Castle",
+   "also": [
+    "oakham",
+    "rutland",
+    "tribute",
+    "queen elizabeth"
+   ],
+   "to": 8
+  },
+  "1.1.10": {
+   "title": "John of Gaunt's Horseshoe",
+   "also": [
+    "lancaster",
+    "horse-shoe corner",
+    "seven years"
+   ]
+  },
+  "1.1.11": {
+   "title": "A Nail Preserves a Country",
+   "also": [
+    "nail",
+    "german saying",
+    "proverb"
+   ]
+  },
+  "1.2.4": {
+   "title": "The Horseshoe as an Arch",
+   "also": [
+    "arch",
+    "passover",
+    "rowan",
+    "nails"
+   ],
+   "to": 5
+  },
+  "1.3.1": {
+   "title": "Hooks and Shears to Scare the Hag",
+   "also": [
+    "two prongs",
+    "moon",
+    "herrick",
+    "hag"
+   ],
+   "to": 3
+  },
+  "1.3.7": {
+   "title": "Neapolitan Horns by Rank",
+   "also": [
+    "horns",
+    "naples",
+    "evil eye",
+    "red ribbon"
+   ]
+  },
+  "1.3.8": {
+   "title": "The Andalusian Stag's Horn",
+   "also": [
+    "stag horn",
+    "spain",
+    "evil eye"
+   ]
+  },
+  "1.3.11": {
+   "title": "Antelope Horns of Mongolia",
+   "also": [
+    "antelope",
+    "mongolia",
+    "fortune-telling",
+    "whip"
+   ]
+  },
+  "1.3.13": {
+   "title": "The World on a Cow's Horn",
+   "also": [
+    "earthquake",
+    "cow",
+    "punjab",
+    "creation"
+   ]
+  },
+  "1.3.15": {
+   "title": "Making Horns: the Mano Cornuta",
+   "also": [
+    "mano cornuta",
+    "evil eye",
+    "gesture",
+    "jettatrice",
+    "pope"
+   ],
+   "to": 17
+  },
+  "1.3.24": {
+   "title": "The Wise Woman's Reaping-Hook",
+   "also": [
+    "reaping-hook",
+    "birth",
+    "bulgaria",
+    "midwife"
+   ]
+  },
+  "1.3.26": {
+   "title": "The Forked Divining Rod",
+   "also": [
+    "divining rod",
+    "dowsing",
+    "water",
+    "fork"
+   ]
+  },
+  "1.4.1": {
+   "title": "The Open Hand on the Door",
+   "also": [
+    "hand",
+    "hamsa",
+    "evil eye",
+    "red hand"
+   ]
+  },
+  "1.4.3": {
+   "title": "The White Hand-Print of Beirut",
+   "also": [
+    "hand-print",
+    "whitewash",
+    "syria",
+    "luck"
+   ]
+  },
+  "1.4.6": {
+   "title": "A Hand on the Butter Churn",
+   "also": [
+    "butter",
+    "churn",
+    "scotland",
+    "evil eye"
+   ]
+  },
+  "1.5.9": {
+   "title": "Zadkiel's Almanac and the Moon",
+   "also": [
+    "moon",
+    "astrology",
+    "almanac",
+    "planets"
+   ],
+   "to": 14
+  },
+  "1.5.28": {
+   "title": "Increase, O Moon",
+   "also": [
+    "wedding",
+    "moon",
+    "sweden",
+    "bride"
+   ]
+  },
+  "1.5.31": {
+   "title": "Moonwort, the Unshoe-the-Horse",
+   "also": [
+    "moonwort",
+    "fern",
+    "culpepper",
+    "herb",
+    "unshoe"
+   ],
+   "to": 33
+  },
+  "1.6.3": {
+   "title": "Coffin-Nails over the Door",
+   "also": [
+    "iron",
+    "nails",
+    "pliny",
+    "spirits"
+   ]
+  },
+  "1.6.7": {
+   "title": "The Herdswoman and the Giantess's Casket",
+   "also": [
+    "steel",
+    "troll",
+    "giantess",
+    "sweden",
+    "treasure"
+   ]
+  },
+  "1.6.8": {
+   "title": "Steel to Trap a Dwarf",
+   "also": [
+    "dwarf",
+    "steel",
+    "norse",
+    "wish"
+   ]
+  },
+  "1.6.9": {
+   "title": "Fireflies and the Needle's Eye",
+   "also": [
+    "fireflies",
+    "needle",
+    "knife",
+    "canada",
+    "imps"
+   ]
+  },
+  "1.6.12": {
+   "title": "Iron, Iron! against the Jinn",
+   "also": [
+    "jinn",
+    "iron",
+    "desert",
+    "simoom"
+   ],
+   "to": 13
+  },
+  "1.6.15": {
+   "title": "How Iron Saved Ireland from the Sea",
+   "also": [
+    "ireland",
+    "iron",
+    "sword",
+    "legend"
+   ]
+  },
+  "1.6.16": {
+   "title": "A Hammer to Beat the Devil",
+   "also": [
+    "devil",
+    "iron",
+    "ukraine",
+    "sand",
+    "smith"
+   ]
+  },
+  "1.6.17": {
+   "title": "Cauld Airn!",
+   "also": [
+    "cold iron",
+    "fishermen",
+    "swearing",
+    "scotland"
+   ]
+  },
+  "1.6.18": {
+   "title": "The Streamlet of the Knife",
+   "also": [
+    "fairies",
+    "knife",
+    "highlands",
+    "stolen wife"
+   ]
+  },
+  "1.6.21": {
+   "title": "Iron and the Water-Fiends",
+   "also": [
+    "iron",
+    "sea",
+    "cornwall",
+    "orkney",
+    "westray"
+   ]
+  },
+  "1.6.32": {
+   "title": "A Knife against the Neck",
+   "also": [
+    "neck",
+    "nix",
+    "river spirit",
+    "norway",
+    "charm"
+   ],
+   "to": 33
+  },
+  "1.6.34": {
+   "title": "The Presser of Finland",
+   "also": [
+    "nightmare",
+    "painajainen",
+    "finland",
+    "broom"
+   ]
+  },
+  "1.6.36": {
+   "title": "Oaths on Cold Iron",
+   "also": [
+    "oath",
+    "dirk",
+    "highlanders",
+    "iron",
+    "holy book"
+   ]
+  },
+  "1.6.37": {
+   "title": "The Lock at the Wedding",
+   "also": [
+    "lock",
+    "wedding",
+    "needle",
+    "gift of a knife",
+    "tyrol"
+   ]
+  },
+  "1.7.2": {
+   "title": "The Wizard Dactyls",
+   "also": [
+    "dactyls",
+    "iron",
+    "mount ida",
+    "wizards"
+   ]
+  },
+  "1.7.9": {
+   "title": "Odin at the Smithy",
+   "also": [
+    "odin",
+    "blacksmith",
+    "norway",
+    "horseshoes"
+   ]
+  },
+  "1.7.30": {
+   "title": "Chaining the Devil at the Anvil",
+   "also": [
+    "anvil",
+    "devil",
+    "blacksmith",
+    "tyrol"
+   ]
+  },
+  "1.7.31": {
+   "title": "The Devil Has His Horses Shod",
+   "also": [
+    "devil",
+    "blacksmith",
+    "tyrol",
+    "gossensass"
+   ],
+   "to": 32
+  },
+  "1.7.36": {
+   "title": "The Farrier's Bellows Plea",
+   "also": [
+    "farrier",
+    "sahara",
+    "battle",
+    "bellows"
+   ],
+   "to": 37
+  },
+  "1.7.39": {
+   "title": "Fine Bread for the Smith",
+   "also": [
+    "blacksmith",
+    "finland",
+    "proverb"
+   ]
+  },
+  "1.8.5": {
+   "title": "Exorcising the Ambassadors' Baggage",
+   "also": [
+    "fire",
+    "drums",
+    "bells",
+    "sogdiana",
+    "purification"
+   ]
+  },
+  "1.8.6": {
+   "title": "The Need-Fire",
+   "also": [
+    "need-fire",
+    "fire",
+    "cattle",
+    "highlands"
+   ]
+  },
+  "1.8.14": {
+   "title": "The Hunter's Hearth-Fire",
+   "also": [
+    "fire",
+    "hunting",
+    "luck",
+    "hearth"
+   ]
+  },
+  "1.9.4": {
+   "title": "Painted Serpents to Bewilder Witches",
+   "also": [
+    "serpent",
+    "snake",
+    "witch",
+    "italy"
+   ]
+  },
+  "1.9.8": {
+   "title": "Your Own Guardian Serpent",
+   "also": [
+    "serpent",
+    "snake",
+    "slavic",
+    "spring",
+    "omen"
+   ]
+  },
+  "1.9.15": {
+   "title": "The House-Serpent",
+   "also": [
+    "snake",
+    "house-serpent",
+    "milk",
+    "luck"
+   ]
+  },
+  "1.10.6": {
+   "title": "Which Way Up the Horseshoe Goes",
+   "also": [
+    "points down",
+    "points up",
+    "luck spilled",
+    "door"
+   ],
+   "to": 8
+  },
+  "1.10.9": {
+   "title": "Horseshoes on Boundary Stones",
+   "also": [
+    "boundary stone",
+    "holstein",
+    "kiel"
+   ]
+  },
+  "1.11.2": {
+   "title": "When Horses Had Wings",
+   "also": [
+    "horse",
+    "wings",
+    "india",
+    "demons"
+   ]
+  },
+  "1.11.4": {
+   "title": "The Horse's Head of Carthage",
+   "also": [
+    "carthage",
+    "dido",
+    "horse's head",
+    "omen"
+   ]
+  },
+  "1.11.5": {
+   "title": "Why the Devil Has Hoofs",
+   "also": [
+    "devil",
+    "hoofs",
+    "odin",
+    "thor"
+   ]
+  },
+  "1.11.6": {
+   "title": "Our Lady on the Horse",
+   "also": [
+    "church",
+    "mare",
+    "holstein",
+    "divination"
+   ]
+  },
+  "1.11.7": {
+   "title": "The Sacred Horse and the Spears",
+   "also": [
+    "augury",
+    "war",
+    "pomerania",
+    "right foot"
+   ]
+  },
+  "1.11.12": {
+   "title": "A Lucky Ducking in Bokhara",
+   "also": [
+    "stumble",
+    "river",
+    "bokhara",
+    "luck"
+   ]
+  },
+  "1.11.16": {
+   "title": "The Horse in the Stable at Bethlehem",
+   "also": [
+    "christmas",
+    "stable",
+    "ireland",
+    "ass"
+   ]
+  },
+  "1.11.17": {
+   "title": "White Horses of Augury",
+   "also": [
+    "neighing",
+    "augury",
+    "tacitus",
+    "white horses"
+   ],
+   "to": 18
+  },
+  "1.11.20": {
+   "title": "By the Shoulder of a Horse",
+   "also": [
+    "oath",
+    "battle",
+    "sword"
+   ]
+  },
+  "1.11.22": {
+   "title": "The Nightmare Hath Ridden Thee",
+   "also": [
+    "nightmare",
+    "demon-mare",
+    "tangled manes",
+    "sleep"
+   ],
+   "to": 24
+  },
+  "1.11.25": {
+   "title": "The Three White Gifts",
+   "also": [
+    "nightmare",
+    "flour",
+    "salt",
+    "egg",
+    "bavaria"
+   ]
+  },
+  "1.11.31": {
+   "title": "Horses Talking at Christmas",
+   "also": [
+    "christmas",
+    "twelve days",
+    "speech",
+    "prophecy"
+   ],
+   "to": 32
+  },
+  "1.11.33": {
+   "title": "The Mass Hay",
+   "also": [
+    "christmas",
+    "epiphany",
+    "hay",
+    "dew"
+   ]
+  },
+  "1.11.34": {
+   "title": "Horses That Scent Ghosts",
+   "also": [
+    "ghosts",
+    "haunted",
+    "thuringia",
+    "forest"
+   ]
+  },
+  "1.11.35": {
+   "title": "Everything Ten Times Bigger",
+   "also": [
+    "bohemia",
+    "horse",
+    "child",
+    "eyes"
+   ]
+  },
+  "1.11.36": {
+   "title": "A Handful of Home Soil",
+   "also": [
+    "bewitched horse",
+    "soil",
+    "shirt inside out",
+    "brandenburg"
+   ]
+  },
+  "1.12.9": {
+   "title": "Three Guardians of the House",
+   "also": [
+    "gable",
+    "broom",
+    "threshold",
+    "lightning"
+   ]
+  },
+  "1.12.13": {
+   "title": "Going a-Hodening",
+   "also": [
+    "hodening",
+    "kent",
+    "ramsgate",
+    "christmas",
+    "hobby horse"
+   ]
+  },
+  "1.13.3": {
+   "title": "Fairies Who Eat the Porridge",
+   "also": [
+    "fairies",
+    "lancashire",
+    "butter",
+    "porridge"
+   ]
+  },
+  "1.13.7": {
+   "title": "The Triangle of Horseshoes",
+   "also": [
+    "shropshire",
+    "stable",
+    "witches",
+    "nightmare"
+   ],
+   "to": 8
+  },
+  "1.13.11": {
+   "title": "Mars against Saturn",
+   "also": [
+    "aubrey",
+    "astrology",
+    "mars",
+    "saturn",
+    "witches"
+   ]
+  },
+  "1.13.13": {
+   "title": "Saint Dunstan Shoes the Devil",
+   "also": [
+    "dunstan",
+    "devil",
+    "farrier",
+    "legend"
+   ]
+  },
+  "1.13.14": {
+   "title": "Witches Milking a Hair-Rope",
+   "also": [
+    "milk",
+    "witches",
+    "cow",
+    "rowan",
+    "breeks"
+   ],
+   "to": 16
+  },
+  "1.13.19": {
+   "title": "Exorcist for Hire, 1777",
+   "also": [
+    "haunted houses",
+    "exorcism",
+    "advertisement",
+    "london"
+   ],
+   "to": 20
+  },
+  "1.14.1": {
+   "title": "Why the Horseshoe Goes Outside",
+   "also": [
+    "outside",
+    "door",
+    "saxon",
+    "witches"
+   ]
+  },
+  "1.14.2": {
+   "title": "The Rusty, Worn, but Lucky Shoe",
+   "also": [
+    "poem",
+    "hags",
+    "lucky shoe",
+    "door"
+   ],
+   "to": 3
+  },
+  "1.14.5": {
+   "title": "Behind the Door or on the Doorstep?",
+   "also": [
+    "london",
+    "beer-shop",
+    "argument",
+    "doorstep"
+   ]
+  },
+  "1.14.13": {
+   "title": "Spirits Must Be Invited In",
+   "also": [
+    "threshold",
+    "invitation",
+    "spirits",
+    "demonology"
+   ]
+  },
+  "1.14.14": {
+   "title": "A Shoe Forged by a Bachelor",
+   "also": [
+    "thuringia",
+    "bachelor",
+    "saint john's eve",
+    "goblin"
+   ]
+  },
+  "1.14.18": {
+   "title": "The Tibetan Decoy House",
+   "also": [
+    "tibet",
+    "demons",
+    "decoy",
+    "ram's skull"
+   ]
+  },
+  "1.14.20": {
+   "title": "Good Luck In, Bad Luck Out",
+   "also": [
+    "inscription",
+    "door",
+    "switzerland",
+    "bergun"
+   ]
+  },
+  "1.14.24": {
+   "title": "Saint Florian over the Door",
+   "also": [
+    "fire",
+    "saint florian",
+    "inscription",
+    "tyrol"
+   ]
+  },
+  "1.14.27": {
+   "title": "Avaunt, Satan!",
+   "also": [
+    "rowan",
+    "scotland",
+    "door",
+    "satan"
+   ]
+  },
+  "1.14.28": {
+   "title": "The Minister and the Horseshoes",
+   "also": [
+    "perthshire",
+    "minister",
+    "inside the door"
+   ]
+  },
+  "1.14.29": {
+   "title": "Sporting the Oak",
+   "also": [
+    "shop",
+    "oxford",
+    "doorway",
+    "ill-luck"
+   ]
+  },
+  "1.15.2": {
+   "title": "Points Out or Points In",
+   "also": [
+    "points",
+    "pennsylvania",
+    "sailors",
+    "mast",
+    "wraith-horse"
+   ]
+  },
+  "1.15.4": {
+   "title": "Counting the Nail-Holes",
+   "also": [
+    "nails",
+    "marriage",
+    "northumberland",
+    "bruxas"
+   ],
+   "to": 5
+  },
+  "1.15.7": {
+   "title": "The Horseshoe Nailed Upside Down",
+   "also": [
+    "upside down",
+    "farmer",
+    "poem",
+    "fortune"
+   ],
+   "to": 10
+  },
+  "1.15.12": {
+   "title": "Luck Rides a White Horse",
+   "also": [
+    "luck",
+    "jester",
+    "upside down",
+    "story"
+   ]
+  },
+  "1.15.13": {
+   "title": "A Horseshoe between Quarrelling Neighbours",
+   "also": [
+    "neighbours",
+    "stallion",
+    "byre",
+    "scotland"
+   ]
+  },
+  "1.15.15": {
+   "title": "Charming the Ash-Tree",
+   "also": [
+    "ash tree",
+    "shrewmouse",
+    "lincolnshire",
+    "cattle"
+   ]
+  },
+  "1.15.16": {
+   "title": "The Golspie Fisherman's Stallion Shoe",
+   "also": [
+    "fisherman",
+    "boat",
+    "luck",
+    "golspie"
+   ]
+  },
+  "1.15.17": {
+   "title": "Letters from the Flying Dutchman",
+   "also": [
+    "flying dutchman",
+    "ghost ship",
+    "letters",
+    "mast"
+   ],
+   "to": 18
+  },
+  "1.15.19": {
+   "title": "The Horseshoe Mark of Lightning",
+   "also": [
+    "lightning",
+    "sailor",
+    "adriatic",
+    "mast"
+   ]
+  },
+  "1.15.28": {
+   "title": "A Horseshoe in a Red Bag",
+   "also": [
+    "tuscany",
+    "red bag",
+    "hay",
+    "bed"
+   ]
+  },
+  "1.15.29": {
+   "title": "The Doctor's Lucky Find",
+   "also": [
+    "westminster bridge",
+    "fortune",
+    "crest",
+    "found horseshoe"
+   ]
+  },
+  "1.15.30": {
+   "title": "A Sermon against Horseshoes",
+   "also": [
+    "witchcraft",
+    "sermon",
+    "charms",
+    "lucky days"
+   ],
+   "to": 31
+  },
+  "1.15.33": {
+   "title": "Tell No Neighbour",
+   "also": [
+    "spreewald",
+    "found horseshoe",
+    "three nails",
+    "secret"
+   ]
+  },
+  "1.17.1": {
+   "title": "The Horseshoe Inn Sign",
+   "also": [
+    "tavern",
+    "inn",
+    "pub sign"
+   ],
+   "to": 2
+  },
+  "1.17.3": {
+   "title": "Horseshoe Signs of Essex",
+   "also": [
+    "farriers",
+    "beer-house",
+    "witch-scarer"
+   ]
+  },
+  "1.17.4": {
+   "title": "The Half-Moon Tavern Sign",
+   "also": [
+    "moon",
+    "crescent",
+    "inn",
+    "hudibras"
+   ],
+   "to": 7
+  },
+  "1.18.6": {
+   "title": "Horseshoes on Church Doors",
+   "also": [
+    "church",
+    "witches",
+    "holy water"
+   ]
+  },
+  "1.18.7": {
+   "title": "The Giant Horseshoes of Ashby-Foville",
+   "also": [
+    "church door",
+    "witches",
+    "leicestershire"
+   ],
+   "to": 8
+  },
+  "1.18.9": {
+   "title": "The Devil's Door",
+   "also": [
+    "north door",
+    "baptism",
+    "canterbury",
+    "evil spirits"
+   ]
+  },
+  "1.18.10": {
+   "title": "The Lincoln Imp",
+   "also": [
+    "lincoln",
+    "cathedral",
+    "devil",
+    "wind"
+   ],
+   "to": 11
+  },
+  "1.18.12": {
+   "title": "St. Leonard's Horseshoes",
+   "also": [
+    "saint leonard",
+    "horses",
+    "travellers",
+    "church door"
+   ]
+  },
+  "1.18.14": {
+   "title": "The Horseshoe Chain of Laupheim",
+   "also": [
+    "st leonard",
+    "chain",
+    "offering"
+   ],
+   "to": 15
+  },
+  "1.18.17": {
+   "title": "St. George's Day Horse Blessing",
+   "also": [
+    "st george",
+    "horses",
+    "sacred tree",
+    "wodan"
+   ],
+   "to": 18
+  },
+  "1.19.1": {
+   "title": "The Earl's Roan at Haccombe",
+   "also": [
+    "horse race",
+    "church door",
+    "ballad"
+   ],
+   "to": 2
+  },
+  "1.19.3": {
+   "title": "The Drinking Knight of Klettenburg",
+   "also": [
+    "harz",
+    "legend",
+    "four horseshoes",
+    "drinking"
+   ],
+   "to": 4
+  },
+  "1.19.5": {
+   "title": "The Blacksmiths' and Shoemakers' Wall",
+   "also": [
+    "tangermunde",
+    "guilds",
+    "church"
+   ]
+  },
+  "1.19.11": {
+   "title": "The Scoffer's Horses",
+   "also": [
+    "madonna",
+    "chapel",
+    "penance",
+    "wurttemberg"
+   ]
+  },
+  "1.19.15": {
+   "title": "Horseshoe Prints in Stone",
+   "also": [
+    "devil's foot",
+    "witches",
+    "dance-places",
+    "wodan"
+   ]
+  },
+  "1.21.2": {
+   "title": "A Horseshoe on the Threshold: A 1753 Satire",
+   "also": [
+    "witch act",
+    "witches",
+    "satire"
+   ],
+   "to": 3
+  },
+  "2.1.1": {
+   "title": "Tyche, Goddess of Good Luck",
+   "also": [
+    "tyche",
+    "greek",
+    "fortune",
+    "nemesis"
+   ]
+  },
+  "2.3.1": {
+   "title": "Fortune Folds Her Wings in Rome",
+   "also": [
+    "fortuna",
+    "rome",
+    "luck",
+    "fools"
+   ],
+   "to": 2
+  },
+  "2.3.3": {
+   "title": "Pliny on the Goddess Fortune",
+   "also": [
+    "pliny",
+    "chance",
+    "fortune"
+   ],
+   "to": 4
+  },
+  "2.3.6": {
+   "title": "Fortune Astride an Ostrich",
+   "also": [
+    "fortune",
+    "blindfold",
+    "wheel",
+    "art"
+   ],
+   "to": 7
+  },
+  "2.3.11": {
+   "title": "Galba's Little Fortune",
+   "also": [
+    "galba",
+    "emperor",
+    "fortune",
+    "dream"
+   ]
+  },
+  "2.3.12": {
+   "title": "The Fortune Verses of Wressell Castle",
+   "also": [
+    "wressell",
+    "yorkshire",
+    "proverbs",
+    "fortune"
+   ],
+   "to": 16
+  },
+  "2.3.18": {
+   "title": "The Chase of the Demon of Ill-Luck",
+   "also": [
+    "tibet",
+    "scapegoat",
+    "bad luck",
+    "yak"
+   ]
+  },
+  "2.4.3": {
+   "title": "A Thousand Temples to Fortune",
+   "also": [
+    "fortune",
+    "temples",
+    "rome",
+    "reason"
+   ]
+  },
+  "2.4.4": {
+   "title": "The Altar to Fortune at York",
+   "also": [
+    "york",
+    "roman",
+    "altar",
+    "fortune"
+   ],
+   "to": 5
+  },
+  "2.5.4": {
+   "title": "Cato and the Gnawed Boots",
+   "also": [
+    "cato",
+    "rats",
+    "bad omen",
+    "boots"
+   ]
+  },
+  "2.5.5": {
+   "title": "Leave the Bad Luck to the Last",
+   "also": [
+    "bad luck",
+    "proverb",
+    "irish saying"
+   ]
+  },
+  "3.1.3": {
+   "title": "The Goddess of Salt",
+   "also": [
+    "salt",
+    "huixtocihuatl",
+    "nahua",
+    "goddess"
+   ]
+  },
+  "3.1.5": {
+   "title": "Eating Someone's Salt",
+   "also": [
+    "salt",
+    "loyalty",
+    "hospitality",
+    "phrase"
+   ]
+  },
+  "3.1.6": {
+   "title": "The Robber and the Lump of Salt",
+   "also": [
+    "salt",
+    "hospitality",
+    "robber",
+    "persia"
+   ],
+   "to": 7
+  },
+  "3.2.1": {
+   "title": "The Devil Loveth No Salt",
+   "also": [
+    "salt",
+    "devil",
+    "witches",
+    "supper"
+   ],
+   "to": 2
+  },
+  "3.2.3": {
+   "title": "Abbot Richalmus and the Impish Spirits",
+   "also": [
+    "salt",
+    "abbot",
+    "demons",
+    "appetite"
+   ],
+   "to": 4
+  },
+  "3.2.7": {
+   "title": "The Man in the Witch's Tub",
+   "also": [
+    "salt",
+    "witches",
+    "hungary",
+    "garlic"
+   ],
+   "to": 8
+  },
+  "3.2.10": {
+   "title": "A Pinch of Salt after Sweets",
+   "also": [
+    "salt",
+    "sweets",
+    "bhuts",
+    "spirits"
+   ],
+   "to": 11
+  },
+  "3.3.2": {
+   "title": "Salt and Salary",
+   "also": [
+    "salt",
+    "salary",
+    "wages",
+    "latin"
+   ],
+   "to": 3
+  },
+  "3.3.5": {
+   "title": "The Mystic Letters of Sal",
+   "also": [
+    "salt",
+    "sal",
+    "letters",
+    "sun and moon"
+   ]
+  },
+  "3.3.6": {
+   "title": "Salt in French Sayings",
+   "also": [
+    "salt",
+    "french",
+    "wit",
+    "sayings"
+   ]
+  },
+  "3.4.1": {
+   "title": "The Merchants' Oath on Bread and Salt",
+   "also": [
+    "salt",
+    "oath",
+    "scotland",
+    "bread"
+   ],
+   "to": 2
+  },
+  "3.4.4": {
+   "title": "The Bread and Salt Between Us",
+   "also": [
+    "salt",
+    "covenant",
+    "alliance",
+    "bread"
+   ]
+  },
+  "3.4.8": {
+   "title": "Dipping Fingers in Salt",
+   "also": [
+    "salt",
+    "oath",
+    "salzburg",
+    "league"
+   ]
+  },
+  "3.5.1": {
+   "title": "Spilling Salt",
+   "also": [
+    "salt",
+    "bad luck",
+    "judas",
+    "spill"
+   ]
+  },
+  "3.5.2": {
+   "title": "Wine in the Lap for Fallen Salt",
+   "also": [
+    "salt",
+    "spill",
+    "wine",
+    "bishop hall"
+   ],
+   "to": 3
+  },
+  "3.5.5": {
+   "title": "May the Gods Avert the Omen",
+   "also": [
+    "salt",
+    "spill",
+    "romans",
+    "sicily"
+   ]
+  },
+  "3.5.6": {
+   "title": "The Greek Salt-Cellar Omens",
+   "also": [
+    "salt",
+    "greece",
+    "last supper",
+    "leonardo"
+   ]
+  },
+  "3.5.7": {
+   "title": "Spilt Salt and Spilt Wine",
+   "also": [
+    "salt",
+    "wine",
+    "friendship",
+    "latin"
+   ],
+   "to": 9
+  },
+  "3.5.10": {
+   "title": "A Tear for Every Grain",
+   "also": [
+    "salt",
+    "tears",
+    "spill",
+    "under the table"
+   ]
+  },
+  "3.5.11": {
+   "title": "Why Spilling Salt Is Such a Fault",
+   "also": [
+    "salt",
+    "verse",
+    "friendship",
+    "british apollo"
+   ],
+   "to": 13
+  },
+  "3.5.14": {
+   "title": "Spilt Salt on the Stove",
+   "also": [
+    "salt",
+    "new england",
+    "spill",
+    "stove"
+   ],
+   "to": 15
+  },
+  "3.5.17": {
+   "title": "Waiting at the Gate of Paradise",
+   "also": [
+    "salt",
+    "paradise",
+    "spill",
+    "penalty"
+   ]
+  },
+  "3.6.1": {
+   "title": "Help Me to Salt, Help Me to Sorrow",
+   "also": [
+    "salt",
+    "table",
+    "passing salt",
+    "sorrow"
+   ],
+   "to": 2
+  },
+  "3.6.3": {
+   "title": "Passing the Salt with a Smile",
+   "also": [
+    "salt",
+    "russia",
+    "quarrel",
+    "passing salt"
+   ],
+   "to": 4
+  },
+  "3.6.5": {
+   "title": "Offering Salt in Italy",
+   "also": [
+    "salt",
+    "italy",
+    "jealousy",
+    "manners"
+   ]
+  },
+  "3.7.3": {
+   "title": "The Witch Who Must Count the Salt",
+   "also": [
+    "salt",
+    "witches",
+    "baby",
+    "broom",
+    "marsala"
+   ]
+  },
+  "3.7.5": {
+   "title": "Salt in the Mouth at Baptism",
+   "also": [
+    "salt",
+    "baptism",
+    "wisdom",
+    "sicily"
+   ]
+  },
+  "3.7.6": {
+   "title": "Sal et Saliva",
+   "also": [
+    "salt",
+    "baptism",
+    "font",
+    "ipswich"
+   ],
+   "to": 7
+  },
+  "3.8.1": {
+   "title": "Salt in the Milk-Pot",
+   "also": [
+    "salt",
+    "milk",
+    "butter",
+    "witches"
+   ]
+  },
+  "3.8.6": {
+   "title": "Salt against the Lutins",
+   "also": [
+    "salt",
+    "lutins",
+    "goblins",
+    "horses",
+    "stables"
+   ]
+  },
+  "3.8.7": {
+   "title": "A Cure for Homesickness",
+   "also": [
+    "salt",
+    "homesick",
+    "chimney",
+    "pennsylvania"
+   ]
+  },
+  "3.8.9": {
+   "title": "Tasting for the Evil Eye",
+   "also": [
+    "salt",
+    "evil eye",
+    "bewitched",
+    "bavaria"
+   ]
+  },
+  "3.8.10": {
+   "title": "Bread, Psalm-Book and Rock-Salt",
+   "also": [
+    "salt",
+    "bread",
+    "bern",
+    "bohemia",
+    "protection"
+   ]
+  },
+  "3.8.14": {
+   "title": "Never Buy Salt at Night",
+   "also": [
+    "salt",
+    "japan",
+    "night",
+    "discord"
+   ]
+  },
+  "3.8.15": {
+   "title": "Burns's Bowl of Salt",
+   "also": [
+    "salt",
+    "robert burns",
+    "new house",
+    "flitting"
+   ]
+  },
+  "3.8.16": {
+   "title": "Never Give Salt Away",
+   "also": [
+    "salt",
+    "north of england",
+    "giving",
+    "ill-wisher"
+   ]
+  },
+  "3.8.17": {
+   "title": "Salt on the Caravan Coals",
+   "also": [
+    "salt",
+    "egypt",
+    "caravan",
+    "blessing"
+   ]
+  },
+  "3.9.1": {
+   "title": "The Salt-Box of My Love",
+   "also": [
+    "salt",
+    "andalusia",
+    "endearment",
+    "charm"
+   ]
+  },
+  "3.9.2": {
+   "title": "Salting the Nets",
+   "also": [
+    "salt",
+    "fishermen",
+    "fairies",
+    "isle of man"
+   ],
+   "to": 3
+  },
+  "3.9.4": {
+   "title": "Salt and Wisdom",
+   "also": [
+    "salt",
+    "wisdom",
+    "syracuse",
+    "litany"
+   ]
+  },
+  "3.9.5": {
+   "title": "Bread and Salt for the Newly-Weds",
+   "also": [
+    "salt",
+    "wedding",
+    "russia",
+    "bread"
+   ]
+  },
+  "3.9.6": {
+   "title": "Many Pecks of Salt",
+   "also": [
+    "salt",
+    "friendship",
+    "cicero",
+    "proverb"
+   ]
+  },
+  "3.9.7": {
+   "title": "The Tiny Salt-Cellars of Gentlefolk",
+   "also": [
+    "salt",
+    "manners",
+    "salt-cellar",
+    "etiquette"
+   ]
+  },
+  "3.9.9": {
+   "title": "Salt as Small Change",
+   "also": [
+    "salt",
+    "money",
+    "tibet",
+    "marco polo"
+   ]
+  },
+  "3.9.10": {
+   "title": "The True Gold of Timbuktu",
+   "also": [
+    "salt",
+    "timbuktu",
+    "sahara",
+    "money"
+   ]
+  },
+  "3.9.11": {
+   "title": "Camels and White Stones",
+   "also": [
+    "salt",
+    "camels",
+    "mongolia",
+    "steppes"
+   ]
+  },
+  "3.9.17": {
+   "title": "Salt, the Forbidden Fruit",
+   "also": [
+    "salt",
+    "doctor howard",
+    "diet",
+    "book"
+   ],
+   "to": 18
+  },
+  "3.10.3": {
+   "title": "Pythagoras's Salt-Cellar",
+   "also": [
+    "salt",
+    "pythagoras",
+    "justice",
+    "salt-cellar"
+   ]
+  },
+  "3.10.4": {
+   "title": "Salt First on the Roman Table",
+   "also": [
+    "salt",
+    "romans",
+    "salt-cellar",
+    "heirloom"
+   ]
+  },
+  "3.10.8": {
+   "title": "Setting Queen Elizabeth's Table",
+   "also": [
+    "salt",
+    "queen elizabeth",
+    "dinner",
+    "etiquette"
+   ],
+   "to": 9
+  },
+  "3.10.14": {
+   "title": "Salt First, Salt Last",
+   "also": [
+    "salt",
+    "friendship",
+    "banquet",
+    "table"
+   ],
+   "to": 15
+  },
+  "3.10.16": {
+   "title": "Salt and the Household Shrines",
+   "also": [
+    "salt",
+    "macrobius",
+    "banquet",
+    "welcome"
+   ]
+  },
+  "3.10.20": {
+   "title": "Silver Salt Ships and the Tower Salts",
+   "also": [
+    "salt-cellar",
+    "tower of london",
+    "silver",
+    "henry iii"
+   ],
+   "to": 22
+  },
+  "3.10.24": {
+   "title": "Above the Salt",
+   "also": [
+    "salt",
+    "rank",
+    "table",
+    "canute",
+    "below the salt"
+   ],
+   "to": 25
+  },
+  "3.10.26": {
+   "title": "The Poor Scholar below the Salt",
+   "also": [
+    "salt",
+    "below the salt",
+    "scholar",
+    "table"
+   ],
+   "to": 27
+  },
+  "3.10.28": {
+   "title": "Table Manners with the Salt",
+   "also": [
+    "salt",
+    "manners",
+    "babees book",
+    "children"
+   ]
+  },
+  "3.10.34": {
+   "title": "Lord Berkeley near the Salt",
+   "also": [
+    "salt",
+    "berkeley",
+    "christmas",
+    "hall"
+   ],
+   "to": 35
+  },
+  "3.10.37": {
+   "title": "The Chalk-Line at the Farmer's Table",
+   "also": [
+    "salt",
+    "scotland",
+    "farm",
+    "table"
+   ]
+  },
+  "3.10.40": {
+   "title": "The Innholders' Salt-Cellar",
+   "also": [
+    "salt-cellar",
+    "livery company",
+    "rank",
+    "dinner"
+   ]
+  },
+  "3.10.41": {
+   "title": "The Puritan Standing Salt",
+   "also": [
+    "salt-cellar",
+    "new england",
+    "puritans",
+    "silver"
+   ]
+  },
+  "4.1.1": {
+   "title": "Telemachus Sneezes for Penelope",
+   "also": [
+    "sneeze",
+    "homer",
+    "odyssey",
+    "omen"
+   ]
+  },
+  "4.1.2": {
+   "title": "The God of Sneezing",
+   "also": [
+    "sneeze",
+    "aristotle",
+    "greeks",
+    "romans",
+    "banquet"
+   ]
+  },
+  "4.1.3": {
+   "title": "A Sneeze before Salamis",
+   "also": [
+    "sneeze",
+    "themistocles",
+    "xenophon",
+    "battle"
+   ]
+  },
+  "4.1.6": {
+   "title": "Love Sneezed at Her Birth",
+   "also": [
+    "sneeze",
+    "love",
+    "propertius",
+    "beauty"
+   ]
+  },
+  "4.1.9": {
+   "title": "Sneeze Pleasantly: A Pompeii Inscription",
+   "also": [
+    "sneeze",
+    "pompeii",
+    "inscription",
+    "good luck"
+   ],
+   "to": 10
+  },
+  "4.1.13": {
+   "title": "Sneezing and the Spleen",
+   "also": [
+    "sneeze",
+    "spleen",
+    "egypt",
+    "dog"
+   ]
+  },
+  "4.1.15": {
+   "title": "Back to Bed after a Sneeze",
+   "also": [
+    "sneeze",
+    "augustine",
+    "shoes",
+    "morning"
+   ]
+  },
+  "4.1.16": {
+   "title": "Alcuin on Sneezing Omens",
+   "also": [
+    "sneeze",
+    "alcuin",
+    "auguries",
+    "devil"
+   ]
+  },
+  "4.2.1": {
+   "title": "Three Sneezes, Four Thieves",
+   "also": [
+    "sneeze",
+    "cat",
+    "wedding",
+    "thieves"
+   ]
+  },
+  "4.2.3": {
+   "title": "Elizabethan Rules for Sneezing",
+   "also": [
+    "sneeze",
+    "burghley papers",
+    "elizabethan",
+    "omens"
+   ],
+   "to": 6
+  },
+  "4.3.2": {
+   "title": "Someone Is Calling Your Name",
+   "also": [
+    "sneeze",
+    "banks islands",
+    "curse",
+    "divination"
+   ],
+   "to": 3
+  },
+  "4.3.5": {
+   "title": "It's No a Warlock",
+   "also": [
+    "sneeze",
+    "baby",
+    "fairy spell",
+    "scotland"
+   ]
+  },
+  "4.3.9": {
+   "title": "Sneezing Out of Bed",
+   "also": [
+    "sneeze",
+    "visitors",
+    "strangers",
+    "selkirkshire"
+   ]
+  },
+  "4.3.10": {
+   "title": "A Sneeze Proves It True",
+   "also": [
+    "sneeze",
+    "truth",
+    "flemish",
+    "snuff"
+   ]
+  },
+  "4.3.11": {
+   "title": "The Cat's Sneeze and the Devil's",
+   "also": [
+    "sneeze",
+    "cat",
+    "weather",
+    "devil",
+    "cross"
+   ]
+  },
+  "4.3.12": {
+   "title": "A New Year's Eve Sneeze",
+   "also": [
+    "sneeze",
+    "new year",
+    "china",
+    "cakes"
+   ]
+  },
+  "4.3.13": {
+   "title": "You Stole Something from Me",
+   "also": [
+    "sneeze",
+    "hiccup",
+    "turkistan",
+    "truth"
+   ]
+  },
+  "4.3.14": {
+   "title": "Counting Sneezes in Japan",
+   "also": [
+    "sneeze",
+    "japan",
+    "praise",
+    "gossip"
+   ]
+  },
+  "4.3.15": {
+   "title": "The Sneezing Cat of Sussex",
+   "also": [
+    "sneeze",
+    "cat",
+    "sussex",
+    "influenza"
+   ]
+  },
+  "4.3.16": {
+   "title": "Grace Rickard's Nine Sneezes",
+   "also": [
+    "sneeze",
+    "deafness",
+    "cornwall",
+    "pins"
+   ],
+   "to": 19
+  },
+  "4.4.8": {
+   "title": "Ha! You Have Come Back!",
+   "also": [
+    "sneeze",
+    "soul",
+    "spirit",
+    "rarotonga"
+   ]
+  },
+  "4.4.10": {
+   "title": "Blessed Be Ormuzd",
+   "also": [
+    "sneeze",
+    "parsees",
+    "demons",
+    "eating"
+   ]
+  },
+  "4.4.11": {
+   "title": "Touching the Ear after a Sneeze",
+   "also": [
+    "sneeze",
+    "brahmins",
+    "ear",
+    "spirits"
+   ]
+  },
+  "4.4.12": {
+   "title": "Not to Be Sneezed At",
+   "also": [
+    "sneeze",
+    "phrase",
+    "breath",
+    "spirits"
+   ],
+   "to": 13
+  },
+  "4.4.14": {
+   "title": "A Hand before a Yawn",
+   "also": [
+    "yawn",
+    "demons",
+    "turkistan",
+    "mouth"
+   ]
+  },
+  "4.4.15": {
+   "title": "Why Medicine Tastes Nasty",
+   "also": [
+    "medicine",
+    "bitter",
+    "evil spirits",
+    "remedies"
+   ]
+  },
+  "4.4.20": {
+   "title": "Keep the Door of My Lips",
+   "also": [
+    "yawn",
+    "sneeze",
+    "psalm",
+    "bhuts"
+   ]
+  },
+  "4.4.21": {
+   "title": "Eleazar's Ring",
+   "also": [
+    "exorcism",
+    "josephus",
+    "solomon",
+    "vespasian"
+   ]
+  },
+  "4.5.1": {
+   "title": "Prometheus and the First Sneeze",
+   "also": [
+    "sneeze",
+    "bless you",
+    "prometheus",
+    "jacob"
+   ]
+  },
+  "4.5.2": {
+   "title": "Cicero Sneezes at the Theatre",
+   "also": [
+    "sneeze",
+    "bless you",
+    "cicero",
+    "jupiter"
+   ]
+  },
+  "4.5.3": {
+   "title": "Tiberius Demands a Blessing",
+   "also": [
+    "sneeze",
+    "bless you",
+    "tiberius",
+    "pliny"
+   ]
+  },
+  "4.5.7": {
+   "title": "The Icelandic Sneeze Blessing",
+   "also": [
+    "sneeze",
+    "bless you",
+    "iceland",
+    "black death"
+   ]
+  },
+  "4.5.8": {
+   "title": "The Sprites under the Bridge",
+   "also": [
+    "sneeze",
+    "bless you",
+    "fairies",
+    "spell"
+   ]
+  },
+  "4.5.10": {
+   "title": "The Royal Sneeze",
+   "also": [
+    "sneeze",
+    "king",
+    "courtiers",
+    "bless you"
+   ]
+  },
+  "4.5.11": {
+   "title": "The Zend-Avesta on Sneezing",
+   "also": [
+    "sneeze",
+    "zend-avesta",
+    "egypt",
+    "bless you"
+   ]
+  },
+  "4.5.12": {
+   "title": "My Son and His Mother",
+   "also": [
+    "sneeze",
+    "sioux",
+    "omaha",
+    "name called"
+   ]
+  },
+  "4.5.13": {
+   "title": "Hats Off for a Sneeze",
+   "also": [
+    "sneeze",
+    "hat",
+    "etiquette",
+    "france"
+   ]
+  },
+  "4.5.14": {
+   "title": "Viva and Felicità",
+   "also": [
+    "sneeze",
+    "italy",
+    "pompeii",
+    "bless you"
+   ]
+  },
+  "4.5.15": {
+   "title": "The Irish Sneeze Blessing",
+   "also": [
+    "sneeze",
+    "ireland",
+    "fairies",
+    "bless you"
+   ]
+  },
+  "4.5.16": {
+   "title": "The Book of the Supreme Judge",
+   "also": [
+    "sneeze",
+    "siam",
+    "judgement",
+    "bless you"
+   ]
+  },
+  "4.5.17": {
+   "title": "A Sneeze Gives the Witch Power",
+   "also": [
+    "sneeze",
+    "netherlands",
+    "witch",
+    "bless you"
+   ]
+  },
+  "4.5.18": {
+   "title": "May St. Eloy Assist You",
+   "also": [
+    "sneeze",
+    "horse",
+    "st eloy",
+    "cat",
+    "rat"
+   ]
+  },
+  "4.6.1": {
+   "title": "The Sneezing Spirit of Picardy",
+   "also": [
+    "sneezing",
+    "bless you",
+    "ghost"
+   ],
+   "to": 4
+  },
+  "4.6.5": {
+   "title": "The Sneeze Under the Bridge",
+   "also": [
+    "sneezing",
+    "bridge",
+    "god help thee"
+   ]
+  },
+  "4.6.6": {
+   "title": "The Third Sneeze at Wurmlingen",
+   "also": [
+    "sneezing",
+    "spell",
+    "devil"
+   ]
+  },
+  "5.1.3": {
+   "title": "Hesiod's Lucky Days",
+   "also": [
+    "farming",
+    "lucky days",
+    "greece"
+   ]
+  },
+  "5.1.7": {
+   "title": "Shopping by the Length of Your Shadow",
+   "also": [
+    "marco polo",
+    "shadow",
+    "lucky days"
+   ]
+  },
+  "5.1.10": {
+   "title": "Unlucky Mondays for Bleeding",
+   "also": [
+    "monday",
+    "cain",
+    "judas",
+    "astrology"
+   ]
+  },
+  "5.2.2": {
+   "title": "Black Days of the Roman Calendar",
+   "also": [
+    "rome",
+    "unlucky days",
+    "dies atri"
+   ]
+  },
+  "5.2.3": {
+   "title": "Horace and the Cursed Tree",
+   "also": [
+    "horace",
+    "unlucky day",
+    "tree"
+   ]
+  },
+  "5.2.4": {
+   "title": "Augustus Moves New Year's Day",
+   "also": [
+    "new year",
+    "market day",
+    "augustus"
+   ]
+  },
+  "5.3.2": {
+   "title": "If Christmas Falls on a Sunday",
+   "also": [
+    "christmas",
+    "sunday",
+    "weather",
+    "verse"
+   ],
+   "to": 3
+  },
+  "5.3.20": {
+   "title": "The Almanac of 1568",
+   "also": [
+    "almanac",
+    "mars",
+    "good man"
+   ],
+   "to": 23
+  },
+  "5.3.33": {
+   "title": "Waiting for the Moon to Leave Scorpio",
+   "also": [
+    "moon",
+    "scorpio",
+    "frederick the great"
+   ]
+  },
+  "5.3.35": {
+   "title": "St Augustine on Travel Days",
+   "also": [
+    "travel",
+    "augustine",
+    "paternoster"
+   ],
+   "to": 36
+  },
+  "5.4.2": {
+   "title": "The Devil's Blackberries",
+   "also": [
+    "blackberries",
+    "october",
+    "sussex",
+    "may cats"
+   ]
+  },
+  "5.4.4": {
+   "title": "Sylvester Partridge's Lucky Seasons",
+   "also": [
+    "quack",
+    "nails",
+    "corns",
+    "almanac"
+   ]
+  },
+  "5.4.5": {
+   "title": "Zadkiel's Almanac for 1898",
+   "also": [
+    "astrology",
+    "zadkiel",
+    "prediction"
+   ],
+   "to": 7
+  },
+  "5.5.1": {
+   "title": "Freyja and Her Cat-Drawn Car",
+   "also": [
+    "friday",
+    "freyja",
+    "cats"
+   ]
+  },
+  "5.5.3": {
+   "title": "Freyja's Golden Tears",
+   "also": [
+    "freyja",
+    "tears",
+    "gold"
+   ]
+  },
+  "5.5.7": {
+   "title": "Born on a Friday",
+   "also": [
+    "birthday",
+    "friday",
+    "week days"
+   ],
+   "to": 8
+  },
+  "5.5.11": {
+   "title": "The Friday the World Would End",
+   "also": [
+    "comet",
+    "friday",
+    "thames",
+    "1712"
+   ]
+  },
+  "5.5.12": {
+   "title": "Friday Weddings in Glasgow",
+   "also": [
+    "friday",
+    "wedding",
+    "venus",
+    "lucky"
+   ]
+  },
+  "5.5.13": {
+   "title": "The Milkmaid's Friday Dream",
+   "also": [
+    "friday",
+    "dream",
+    "elfin king",
+    "scott"
+   ],
+   "to": 14
+  },
+  "5.5.15": {
+   "title": "Sir Winston Churchill's Lucky Friday",
+   "also": [
+    "friday",
+    "lucky",
+    "churchill"
+   ],
+   "to": 16
+  },
+  "5.6.6": {
+   "title": "A Second Soul on Friday Evening",
+   "also": [
+    "friday",
+    "soul",
+    "appetite"
+   ]
+  },
+  "5.6.7": {
+   "title": "The Witches' Friday Sabbath",
+   "also": [
+    "witches",
+    "friday",
+    "devil"
+   ],
+   "to": 8
+  },
+  "5.6.9": {
+   "title": "The Devil on the Bagpipes",
+   "also": [
+    "witches",
+    "scotland",
+    "saturday",
+    "broomstick"
+   ]
+  },
+  "5.6.12": {
+   "title": "Never Open the Door on a Friday",
+   "also": [
+    "friday",
+    "ireland",
+    "stranger",
+    "cat"
+   ]
+  },
+  "5.6.14": {
+   "title": "The Friday Phantom Ship",
+   "also": [
+    "friday",
+    "ghost ship",
+    "sailing"
+   ]
+  },
+  "5.6.16": {
+   "title": "Friday-Faced",
+   "also": [
+    "friday",
+    "news",
+    "wrinkle"
+   ],
+   "to": 17
+  },
+  "5.6.18": {
+   "title": "Friday in Germany",
+   "also": [
+    "friday",
+    "moving house",
+    "baking",
+    "harvest"
+   ]
+  },
+  "5.6.22": {
+   "title": "Good Friday Eggs",
+   "also": [
+    "eggs",
+    "good friday",
+    "bavaria"
+   ]
+  },
+  "5.6.29": {
+   "title": "The Italian Friday Child",
+   "also": [
+    "friday",
+    "birthday",
+    "italy"
+   ]
+  },
+  "5.6.31": {
+   "title": "No Friday Premieres in Paris",
+   "also": [
+    "friday",
+    "theatre",
+    "paris"
+   ]
+  },
+  "5.6.32": {
+   "title": "Bismarck's Unlucky Friday",
+   "also": [
+    "friday",
+    "bismarck",
+    "napoleon",
+    "hunting"
+   ]
+  },
+  "5.6.34": {
+   "title": "Mother Friday",
+   "also": [
+    "friday",
+    "spinning",
+    "st prascovia"
+   ],
+   "to": 36
+  },
+  "5.6.37": {
+   "title": "The Sun-God's Friday Warning",
+   "also": [
+    "friday",
+    "baking",
+    "sun god"
+   ]
+  },
+  "5.6.38": {
+   "title": "Hangman's Day",
+   "also": [
+    "friday",
+    "thirteen club",
+    "execution"
+   ]
+  },
+  "5.6.39": {
+   "title": "Friday and the Empty Purse",
+   "also": [
+    "friday",
+    "payday",
+    "money"
+   ]
+  },
+  "6.1.1": {
+   "title": "The Cat from the Lion's Nose",
+   "also": [
+    "rats",
+    "noah",
+    "ark",
+    "cat"
+   ]
+  },
+  "6.1.2": {
+   "title": "The Mice that Saved Egypt",
+   "also": [
+    "mice",
+    "apollo",
+    "troy",
+    "sennacherib"
+   ]
+  },
+  "6.1.3": {
+   "title": "Cicero's Nibbled Plato",
+   "also": [
+    "mice",
+    "rats",
+    "omen",
+    "cicero"
+   ]
+  },
+  "6.1.7": {
+   "title": "The Flies of Nisibis",
+   "also": [
+    "flies",
+    "siege",
+    "beelzebub"
+   ]
+  },
+  "6.1.9": {
+   "title": "Tell-Tale Rats",
+   "also": [
+    "rats",
+    "mexico",
+    "gnawing",
+    "accused"
+   ],
+   "to": 10
+  },
+  "6.2.2": {
+   "title": "Which Way the Magpie Calls",
+   "also": [
+    "magpie",
+    "omen",
+    "guests"
+   ]
+  },
+  "6.2.4": {
+   "title": "Two Crows for Luck",
+   "also": [
+    "crows",
+    "luck",
+    "morning"
+   ]
+  },
+  "6.3.1": {
+   "title": "A Letter to the Mice",
+   "also": [
+    "mice",
+    "letter",
+    "greece",
+    "farming"
+   ]
+  },
+  "6.3.4": {
+   "title": "Rats Banished from Spain",
+   "also": [
+    "rats",
+    "spain",
+    "exorcism",
+    "island"
+   ]
+  },
+  "6.3.6": {
+   "title": "Mice from the Clouds",
+   "also": [
+    "mice",
+    "storm",
+    "christmas eve",
+    "harvest"
+   ]
+  },
+  "6.3.7": {
+   "title": "The Devil's Mouse in the Ark",
+   "also": [
+    "mouse",
+    "devil",
+    "noah",
+    "cat"
+   ]
+  },
+  "6.3.9": {
+   "title": "The Excommunicated Flies",
+   "also": [
+    "flies",
+    "excommunication",
+    "st bernard",
+    "mice"
+   ]
+  },
+  "6.4.6": {
+   "title": "St Ulric's Rat-Free Monastery",
+   "also": [
+    "rats",
+    "relics",
+    "monks",
+    "bread"
+   ]
+  },
+  "6.4.9": {
+   "title": "The Rowan Against Witches",
+   "also": [
+    "rowan",
+    "witches",
+    "cattle",
+    "buzzards"
+   ],
+   "to": 12
+  },
+  "6.4.15": {
+   "title": "Blessing the Pigsty",
+   "also": [
+    "pigs",
+    "china",
+    "red paper"
+   ]
+  },
+  "6.5.1": {
+   "title": "Summoning the Crows",
+   "also": [
+    "crows",
+    "scarecrow",
+    "charm"
+   ]
+  },
+  "6.5.2": {
+   "title": "The Brazen Serpent and Dormouse of Paris",
+   "also": [
+    "snakes",
+    "dormice",
+    "talisman",
+    "paris"
+   ]
+  },
+  "6.5.3": {
+   "title": "The Silver Mouse",
+   "also": [
+    "mouse",
+    "offering",
+    "church"
+   ]
+  },
+  "6.5.6": {
+   "title": "The Muzzled Dog Charm",
+   "also": [
+    "dogs",
+    "tibet",
+    "mastiff",
+    "charm"
+   ]
+  },
+  "6.6.1": {
+   "title": "Charms Must Not Make Sense",
+   "also": [
+    "charm",
+    "carmen",
+    "magic words"
+   ]
+  },
+  "6.6.2": {
+   "title": "Burn Your Beard and Your Bones",
+   "also": [
+    "mice",
+    "moles",
+    "normandy",
+    "apples"
+   ]
+  },
+  "6.6.3": {
+   "title": "Pythagoras and the Bean-Eating Ox",
+   "also": [
+    "pythagoras",
+    "bear",
+    "ox",
+    "beans"
+   ]
+  },
+  "6.6.5": {
+   "title": "Out with You, Snakes and Fleas!",
+   "also": [
+    "vermin",
+    "bulgaria",
+    "grapes",
+    "fleas"
+   ]
+  },
+  "6.6.6": {
+   "title": "A Funeral for the Locusts",
+   "also": [
+    "locusts",
+    "albania",
+    "dirge"
+   ],
+   "to": 8
+  },
+  "6.6.9": {
+   "title": "A Charm Against Foxes",
+   "also": [
+    "foxes",
+    "hens",
+    "charm"
+   ],
+   "to": 10
+  },
+  "6.6.14": {
+   "title": "Adam on the Pigeon-House",
+   "also": [
+    "scorpions",
+    "pigeons",
+    "frogs",
+    "adam"
+   ]
+  },
+  "6.6.16": {
+   "title": "The Black-Handled Knife of Lesbos",
+   "also": [
+    "insects",
+    "wasps",
+    "ants",
+    "knife"
+   ],
+   "to": 18
+  },
+  "6.6.19": {
+   "title": "Rhyming Rats to Death",
+   "also": [
+    "rats",
+    "rhyme",
+    "shakespeare"
+   ]
+  },
+  "6.6.20": {
+   "title": "Mice on Napoleon's Map",
+   "also": [
+    "mice",
+    "napoleon",
+    "map",
+    "ink"
+   ]
+  },
+  "6.7.1": {
+   "title": "Who Sees the Wolf First",
+   "also": [
+    "wolf",
+    "hyena",
+    "wild animals"
+   ]
+  },
+  "6.8.5": {
+   "title": "The Axe on Trial",
+   "also": [
+    "deodand",
+    "law",
+    "axe",
+    "athens"
+   ]
+  },
+  "6.8.7": {
+   "title": "The Rats' Defence Lawyer",
+   "also": [
+    "rats",
+    "trial",
+    "summons",
+    "cats"
+   ]
+  },
+  "7.1.5": {
+   "title": "Caesar's Threefold Charm",
+   "also": [
+    "caesar",
+    "three",
+    "chariot",
+    "odd numbers"
+   ]
+  },
+  "7.1.6": {
+   "title": "Odd Storeys and Odd Stairs",
+   "also": [
+    "odd numbers",
+    "pagoda",
+    "siam",
+    "stairs"
+   ]
+  },
+  "7.2.3": {
+   "title": "The Third Time Never Fails",
+   "also": [
+    "three",
+    "third time",
+    "odd numbers"
+   ]
+  },
+  "7.2.4": {
+   "title": "The Welsh Triads",
+   "also": [
+    "three",
+    "wales",
+    "law",
+    "cat"
+   ],
+   "to": 5
+  },
+  "7.2.6": {
+   "title": "The High King's Threes",
+   "also": [
+    "three",
+    "ireland",
+    "jesters"
+   ]
+  },
+  "7.2.8": {
+   "title": "Triads of Sin",
+   "also": [
+    "three",
+    "world flesh devil",
+    "triads"
+   ]
+  },
+  "7.2.9": {
+   "title": "Holly Leaves and Three Pails",
+   "also": [
+    "holly",
+    "three",
+    "future husband",
+    "dreams"
+   ]
+  },
+  "7.3.4": {
+   "title": "The Seventh Heaven",
+   "also": [
+    "seven",
+    "seventh heaven",
+    "planets"
+   ]
+  },
+  "7.3.9": {
+   "title": "Seven Verses for Seven Shillings",
+   "also": [
+    "seven",
+    "verse",
+    "debt"
+   ],
+   "to": 10
+  },
+  "7.3.11": {
+   "title": "The Irish Farmer's Seven Possessions",
+   "also": [
+    "seven",
+    "ireland",
+    "farm"
+   ]
+  },
+  "7.3.18": {
+   "title": "The Seven Ages of the Planets",
+   "also": [
+    "seven",
+    "ages of man",
+    "planets"
+   ]
+  },
+  "7.3.19": {
+   "title": "The Seven Hours of Life",
+   "also": [
+    "seven",
+    "canonical hours",
+    "ages"
+   ],
+   "to": 20
+  },
+  "7.3.21": {
+   "title": "The Seven Parts of the Soul",
+   "also": [
+    "seven",
+    "soul",
+    "wisdom"
+   ]
+  },
+  "7.4.8": {
+   "title": "Three Things for a Haunted Place",
+   "also": [
+    "three",
+    "black cat",
+    "knife",
+    "haunted"
+   ]
+  },
+  "7.5.5": {
+   "title": "An Eagle's Eye, a Lion's Heart",
+   "also": [
+    "three",
+    "surgeon",
+    "physician"
+   ]
+  },
+  "7.6.2": {
+   "title": "Loki the Thirteenth",
+   "also": [
+    "thirteen",
+    "loki",
+    "norse"
+   ]
+  },
+  "7.6.3": {
+   "title": "Thirteen at the Last Supper",
+   "also": [
+    "thirteen",
+    "judas",
+    "unlucky"
+   ]
+  },
+  "7.6.4": {
+   "title": "Thirteen Moons",
+   "also": [
+    "thirteen",
+    "months",
+    "moon"
+   ]
+  },
+  "7.6.5": {
+   "title": "Berchta and Holle at Epiphany",
+   "also": [
+    "thirteen",
+    "epiphany",
+    "spinning",
+    "berchta"
+   ],
+   "to": 7
+  },
+  "7.6.9": {
+   "title": "The Professional Fourteenth Guest",
+   "also": [
+    "thirteen",
+    "dinner",
+    "quatorzieme",
+    "france"
+   ]
+  },
+  "7.6.11": {
+   "title": "Thirteen at Table",
+   "also": [
+    "thirteen",
+    "dinner",
+    "unlucky"
+   ]
+  },
+  "7.6.12": {
+   "title": "The Thirteen Club",
+   "also": [
+    "thirteen",
+    "club",
+    "new york",
+    "dinner"
+   ]
+  },
+  "7.6.14": {
+   "title": "Box 12A",
+   "also": [
+    "thirteen",
+    "house numbers",
+    "theatre"
+   ]
+  },
+  "7.6.15": {
+   "title": "Knitting to Thirteen",
+   "also": [
+    "thirteen",
+    "knitting",
+    "judas",
+    "counting"
+   ]
+  },
+  "7.6.17": {
+   "title": "King Edward's Thirteenth Fellow",
+   "also": [
+    "thirteen",
+    "cambridge",
+    "edward vi"
+   ],
+   "to": 18
+  },
+  "7.6.19": {
+   "title": "The Number Not Named",
+   "also": [
+    "thirteen",
+    "persia",
+    "nothing"
+   ]
+  },
+  "7.6.21": {
+   "title": "The Deil's Dozen and the Baker's Dozen",
+   "also": [
+    "thirteen",
+    "baker's dozen",
+    "devil",
+    "scotland"
+   ]
+  },
+  "7.6.23": {
+   "title": "Thirteen Generations Old",
+   "also": [
+    "thirteen",
+    "maya",
+    "nine souls"
+   ]
+  },
+  "7.6.24": {
+   "title": "Thirteen Eggs Under the Hen",
+   "also": [
+    "thirteen",
+    "eggs",
+    "hen",
+    "odd numbers"
+   ]
+  },
+  "7.6.26": {
+   "title": "The Thirteen Parts of the Day",
+   "also": [
+    "thirteen",
+    "cock-crow",
+    "candle-time"
+   ],
+   "to": 27
+  }
+ }
+}

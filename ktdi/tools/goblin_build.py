@@ -63,12 +63,8 @@ def sections(page: str) -> list[dict]:
 def build(page: str, curation: dict) -> dict:
     """The sections on the allowlist, in book order, each with its title and other names; and any listed that
     aren't in the book."""
-    found = {s["key"]: s for s in sections(page)}
-    tales = [{**{k: v for k, v in found[key].items() if k != "topics"}, "title": kept["title"],
-              "also": kept.get("also", [])}
-             for key, kept in curation["keep"].items() if key in found]
-    tales.sort(key=lambda t: (t["book"], t["chapter"], t["section"]))
-    return {"tales": tales, "missing": sorted(set(curation["keep"]) - set(found))}
+    tales, missing = gutenberg.titled_keep({s["key"]: s for s in sections(page)}, curation, leave_out=("topics",))
+    return {"tales": tales, "missing": missing}
 
 
 def main() -> None:

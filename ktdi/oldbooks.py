@@ -1,5 +1,5 @@
 """Shared by the old-book commands (/vulgartongue, /deadword, /devils, /dream, /phrase, /beeton, /enquire, /almanac,
-/melancholy, /pliny, /pseudodoxia, /bestiary, /secrets, /wonder, /goblin and the rest): a book of entries looked up by
+/melancholy, /pliny, /pseudodoxia, /bestiary, /secrets, /wonder, /goblin, /omen and the rest): a book of entries looked up by
 headword, and the replies they have in common.
 
 A command makes a Dictionary of its entries, then asks it to look things up (the headword's entry, else the entries
