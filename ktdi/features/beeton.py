@@ -106,8 +106,8 @@ def recipe(query: str | None) -> discord.Embed:
         return recipe_embed(random.choice(RECIPES.entries))
     found = RECIPES.look_up(query)
     if not found:
-        return nothing(query, "Mrs Beeton has no recipe for that. Try a dish or an ingredient (soup, eels, "
-                              "pudding, mutton).")
+        return nothing(query, oldbooks.not_here("No recipe for that here. Try a dish or an ingredient (soup, "
+                                                                       "eels, pudding, mutton)."))
     if found.kind == "uses":  # An ingredient: one of the recipes with it, and the rest named
         chosen = random.choice(found.entries)
         return recipe_embed(chosen, [e for e in found.entries if e is not chosen], query)
@@ -155,8 +155,8 @@ def household(query: str | None) -> discord.Embed:
     """Her advice on something, or (nothing typed) any of it."""
     found = ADVICE.one_of(query)
     if not found:
-        return nothing(query, "Mrs Beeton is silent on that, which is unlike her. Try servants, dinner, early "
-                              "rising, washing, a will.")
+        return nothing(query, oldbooks.not_here("Nothing from Mrs Beeton on that here. Try servants, dinner, "
+                                                                       "early rising, washing, a will."))
     return advice_embed(*found)
 
 

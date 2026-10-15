@@ -80,7 +80,8 @@ def slang_embed(query: str | None) -> discord.Embed:
     if found:  # Nothing uses it, but a word in the dictionary looks like it.
         return entry_embed(found.entries[0])
     return discord.Embed(title=f"📖 {oldbooks.shown_typed(query)}", color=COLOUR,
-                         description="Grose never wrote that down. Try a plainer word (drunk, fool, money, run away).")
+                         description=oldbooks.not_here("That isn't in this slang. Try a plainer word (drunk, fool, "
+                                                       "money, run away)."))
 
 
 def insult_text(insulter: discord.abc.User, person: discord.abc.User, entry: dict) -> str:

@@ -82,8 +82,9 @@ def interpret(query: str | None) -> discord.Embed:
     if found:  # Spelt like something Miller covered
         return dream_embed(found.entries[0])
     return discord.Embed(title=f"🔮 {oldbooks.shown_typed(query)}", color=COLOUR,
-                         description="Miller had nothing on that, which is itself an omen. Try the main thing in the "
-                                     "dream (teeth, eels, a ladder, your mother).")
+                         description=oldbooks.not_here("No dream of that here, which is itself an omen. Try the "
+                                                       "main thing in the dream (teeth, eels, a ladder, your "
+                                                       "mother)."))
 
 
 @commands.hybrid_command(name="dream", description="What your dream foretells, according to 1901. Or a random one.")

@@ -119,7 +119,7 @@ def test_lots_of_matches_are_sampled():
 
 def test_nothing_found():
     embed = slang.slang_embed("zzqx")
-    assert "Grose never wrote that down" in embed.description
+    assert "That isn't in this slang" in embed.description and "picked by hand to keep this a safe space" in embed.description
 
 
 def test_random_entry_is_never_an_insult(monkeypatch):

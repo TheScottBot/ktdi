@@ -64,8 +64,8 @@ def enquire_embed(query: str | None) -> discord.Embed:
     found = DICTIONARY.one_of(query)
     if not found:
         return discord.Embed(title=f"🔎 {oldbooks.shown_typed(query)}", color=COLOUR,
-                             description="Enquire Within, despite the name, has nothing on that. Try something "
-                                         "plainer (candles, mackerel, chess, whist, a nightcap).")
+                             description=oldbooks.not_here("Nothing on that here, despite the name. Try something "
+                                                           "plainer (candles, mackerel, chess, whist, a nightcap)."))
     return hint_embed(*found)
 
 

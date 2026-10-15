@@ -87,7 +87,7 @@ def test_other_names_misspellings_random_and_nothing():
     assert goblin.goblin_embed("canwyll corph").title == "🧚 The Corpse Candle"
     assert goblin.goblin_embed("corpse candel").title == "🧚 The Corpse Candle"
     assert goblin.goblin_embed(None).title == "🧚 Rowli Pugh and the Ellyll"
-    assert "Sikes heard no tale of that in all Wales" in goblin.goblin_embed("zzqx").description
+    assert "No tale of that here" in goblin.goblin_embed("zzqx").description
 
 
 def test_command_and_autocomplete():

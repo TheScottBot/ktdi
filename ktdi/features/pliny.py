@@ -46,7 +46,7 @@ def chapter_embed(chapter: dict, others: int = 0) -> discord.Embed:
 def pliny_embed(topic: str | None) -> discord.Embed:
     """A chapter on the topic, or (no topic) any."""
     return oldbooks.one_passage(DICTIONARY, topic, chapter_embed, emoji="🏛️", colour=COLOUR,
-                                nothing="Astonishingly, Pliny never heard anything about that. Try elephants, "
+                                nothing="Nothing from Pliny on that here. Try elephants, "
                                         "dragons, the phoenix, amber, lightning, or the basilisk.")
 
 

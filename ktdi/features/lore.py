@@ -19,8 +19,8 @@ HELP_CATEGORY = "📚 Words & wisdom"
 COLOUR = discord.Color.from_rgb(120, 94, 60)  # Parchment
 SNIPPET = 200  # How much of each book's entry is quoted
 EMBED_LIMIT = 6000  # Discord's, for a whole embed
-NOTHING = ("None of the old books has a word to say about that, which is a first. Try dragons, love, eels, the moon, "
-           "cheese, or the plague.")
+NOTHING = oldbooks.not_here("None of the old books has anything on that here. Try dragons, love, eels, the moon, "
+                            "cheese, or the plague.", where="books themselves")
 
 
 old_books = oldbooks.every_book

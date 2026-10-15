@@ -62,7 +62,7 @@ def test_a_plain_word_finds_the_dead_words_for_it():
 
 
 def test_nothing_found():
-    assert "Mackay never mourned that one" in deadword.deadword_embed("zzqx").description
+    assert "That isn't among these dead words" in deadword.deadword_embed("zzqx").description
 
 
 def test_random():

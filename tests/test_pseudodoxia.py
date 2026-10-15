@@ -93,7 +93,7 @@ def test_a_topic():
 
 def test_random_and_nothing():
     assert pseudodoxia.pseudodoxia_embed(None).title == "🧐 Of the Elephant"
-    assert "never got round to examining that one" in pseudodoxia.pseudodoxia_embed("zzqx").description
+    assert "Nothing from Browne on that here" in pseudodoxia.pseudodoxia_embed("zzqx").description
 
 
 def test_command_and_autocomplete():

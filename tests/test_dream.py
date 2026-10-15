@@ -160,7 +160,7 @@ def test_dreams_that_mention_it():
 
 
 def test_nothing_found():
-    assert "Miller had nothing on that" in dream.interpret("zzqx").description
+    assert "No dream of that here" in dream.interpret("zzqx").description
 
 
 def test_random():

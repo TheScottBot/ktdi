@@ -96,7 +96,7 @@ def test_more_than_one_and_no_picture():
 
 def test_random_and_nothing():
     assert wonder.wonders_embed(None).title == "✨ Fox Killed by a Swan"
-    assert "found nothing wonderful about that" in wonder.wonders_embed("zzqx").description
+    assert "Nothing on that in this cabinet" in wonder.wonders_embed("zzqx").description
 
 
 def test_command_and_autocomplete():

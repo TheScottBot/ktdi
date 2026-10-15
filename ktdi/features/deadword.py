@@ -75,8 +75,9 @@ def deadword_embed(query: str | None) -> discord.Embed:
     if found:  # One of the dead words, or (nothing meant it) one that looks like it
         return word_embed(found.entries[0])
     return discord.Embed(title=f"📜 {oldbooks.shown_typed(query)}", color=COLOUR,
-                         description="Mackay never mourned that one. It may still be alive. Try a plain word "
-                                     "(drink, fool, morning) to find the dead words for it.")
+                         description=oldbooks.not_here("That isn't among these dead words. It may still be alive. "
+                                                       "Try a plain word (drink, fool, morning) to find the dead "
+                                                       "words for it."))
 
 
 @commands.hybrid_command(name="deadword", description="A word English stopped using. Look one up, or get a random one.")

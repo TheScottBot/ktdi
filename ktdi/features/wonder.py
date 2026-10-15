@@ -53,7 +53,7 @@ def wonder_embed(wonder: dict, others: int = 0) -> discord.Embed:
 def wonders_embed(topic: str | None) -> discord.Embed:
     """A curiosity on the topic, or (no topic) any."""
     return oldbooks.one_passage(DICTIONARY, topic, wonder_embed, emoji=EMOJI, colour=COLOUR,
-                                nothing="Remarkably, the Victorians found nothing wonderful about that. Try giants, "
+                                nothing="Nothing on that in this cabinet. Try giants, "
                                         "clocks, coffee, swans, hoops or highwaymen.")
 
 

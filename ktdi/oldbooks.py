@@ -28,6 +28,8 @@ LINE_LENGTH = 140  # Each listed entry's name and summary (not counting its link
 TYPED_LENGTH = 60  # What was typed, when it's shown back
 LONGEST = 1500  # An entry longer than this is cut short, with the rest a click away
 MORE = "\n\n*…the rest is in the book.*"
+CURATED = ("There may be more on it in the {where}: what's here was picked by hand to keep this a safe space. Or "
+           "there may simply be nothing on it.")
 
 
 def clip(text: str, limit: int) -> str:
@@ -153,6 +155,12 @@ def modern_spelling(text: str) -> str:
     return re.sub(r"(?<=[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z])y(?=\w)", "i", text)
 
 
+def not_here(message: str, where: str = "book itself") -> str:
+    """A reply to something an old book doesn't have here, saying that this is a hand-picked selection: the book may
+    say more, or nothing."""
+    return f"{message}\n-# {CURATED.format(where=where)}"
+
+
 def titled(passages: list[dict]) -> "Dictionary":
     """A book of titled passages ({"title", "text"}: Pliny's chapters, Browne's, Burton's), looked up by title, and
     then by what the passages say; the title counts as the passage's opening, so passages about a topic come before
@@ -175,7 +183,7 @@ def one_passage(book: "Dictionary", topic: str | None, show: Callable[[dict, int
     """A passage on the topic (or any, with none), shown by `show(passage, others)`; or `nothing`, if there's none."""
     found = book.one_of(topic)
     if not found:
-        return discord.Embed(title=f"{emoji} {shown_typed(topic)}", description=nothing, color=colour)
+        return discord.Embed(title=f"{emoji} {shown_typed(topic)}", description=not_here(nothing), color=colour)
     return show(*found)
 
 

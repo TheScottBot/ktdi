@@ -59,7 +59,7 @@ def passage_embed(passage: dict, others: int = 0) -> discord.Embed:
 def bestiary_embed(beast: str | None) -> discord.Embed:
     """A passage on the beast, or (no beast) any."""
     return oldbooks.one_passage(DICTIONARY, beast, passage_embed, emoji=EMOJI, colour=COLOUR,
-                                nothing="Topsell never heard of that one, which is saying something. Try the "
+                                nothing="Nothing on that one in this bestiary. Try the "
                                         "unicorn, the dragon, the elephant, the hedgehog, or the cockatrice.")
 
 

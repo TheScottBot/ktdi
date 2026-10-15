@@ -107,7 +107,7 @@ def test_a_word_in_a_passage():
 
 def test_random_and_nothing():
     assert melancholy.melancholy_embed(None).title == "🖤 Democritus Junior to the Reader"
-    assert "found nothing to be melancholy about" in melancholy.melancholy_embed("zzqx").description
+    assert "Nothing from Burton on that here" in melancholy.melancholy_embed("zzqx").description
 
 
 def test_command_and_autocomplete():

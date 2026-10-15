@@ -163,7 +163,7 @@ def test_a_plain_word_finds_the_entries_that_use_it():
 
 
 def test_nothing_found():
-    assert "Bierce never got round to that one" in devils.devils_embed("zzqx").description
+    assert "No definition of that here" in devils.devils_embed("zzqx").description
 
 
 def test_random():

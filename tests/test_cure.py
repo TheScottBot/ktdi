@@ -175,7 +175,7 @@ def test_plant_embed(monkeypatch):
                          "Also called Cat's-foot, Gill-go-by-ground, Gill-creep-by-ground, Turn-hoof, Haymaids"]
     assert lines[4].startswith("**Good for:** ") and "gout" in lines[4] and lines[5].startswith("> ")
     assert "Also called St John" not in cure.plant_embed("st johns wort").description  # same as the title
-    assert cure.plant_embed("dave").description == "Culpeper never wrote about *dave*, not by that name anyway."
+    assert cure.plant_embed("dave").description.startswith("No herb called *dave* here, not by that name anyway.\n-# ")
     assert cure.plant_embed("sweet maudlin").description.endswith("Nothing on /cure's list, it turns out.")
 
 

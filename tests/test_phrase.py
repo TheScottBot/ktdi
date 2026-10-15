@@ -51,7 +51,7 @@ def test_idioms_that_mention_a_word():
 
 
 def test_nothing_found_and_random():
-    assert "Brewer had nothing to say about that" in phrase.explain("zzqx").description
+    assert "Nothing from Brewer on that here" in phrase.explain("zzqx").description
     assert phrase.explain(None).title == "🗣️ To rain cats and dogs"
     assert phrase.explain("the").title == "🗣️ To rain cats and dogs"  # Only filler: random
 

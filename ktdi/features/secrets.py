@@ -71,7 +71,7 @@ def secret_embed(secret: dict, others: int = 0) -> discord.Embed:
 def secrets_embed(what: str | None) -> discord.Embed:
     """A secret about what was typed, or (nothing typed) any."""
     return oldbooks.one_passage(DICTIONARY, what, secret_embed, emoji=EMOJI, colour=COLOUR,
-                                nothing="Albertus kept no secret about that. Try enemies, love, fire, invisible, "
+                                nothing="No secret about that here. Try enemies, love, fire, invisible, "
                                         "dogs, prophecy, or a stone (amethyst, the lodestone).")
 
 

@@ -74,8 +74,8 @@ def explain(query: str | None) -> discord.Embed:
     if found:
         return phrase_embed(found.entries[0])
     return discord.Embed(title=f"🗣️ {oldbooks.shown_typed(query)}", color=COLOUR,
-                         description="Brewer had nothing to say about that, which was rare for him. Try the idiom's "
-                                     "main word (cats, hatter, bag).")
+                         description=oldbooks.not_here("Nothing from Brewer on that here. Try the idiom's main word "
+                                                       "(cats, hatter, bag)."))
 
 
 @commands.hybrid_command(name="phrase", aliases=["idiom", "brewer"],

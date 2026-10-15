@@ -216,7 +216,7 @@ def test_subtitles_and_typos():
 
 def test_random_and_nothing():
     assert beeton.recipe(None).title == "🍽️ Almond Soup"
-    assert "no recipe for that" in beeton.recipe("zzqx").description
+    assert "No recipe for that here" in beeton.recipe("zzqx").description
 
 
 # --- Advice ---
@@ -225,7 +225,7 @@ def test_advice():
     assert embed.title == "🏠 Early rising is one of the most essential qualities"
     assert embed.footer.text == beeton.SOURCE  # Only the one passage
     assert beeton.household(None).title.startswith("🏠 As with the commander of an army")
-    assert "silent on that" in beeton.household("zzqx").description
+    assert "Nothing from Mrs Beeton on that here" in beeton.household("zzqx").description
 
 
 def test_commands():

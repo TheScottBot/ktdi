@@ -126,7 +126,7 @@ def test_links_go_to_the_hints_heading():
 
 def test_random_and_nothing():
     assert enquire.enquire_embed(None).title == "🔎 Choice of Articles of Food"
-    assert "has nothing on that" in enquire.enquire_embed("zzqx").description
+    assert "Nothing on that here, despite the name" in enquire.enquire_embed("zzqx").description
 
 
 def test_command_and_autocomplete():

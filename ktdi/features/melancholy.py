@@ -46,7 +46,7 @@ def passage_embed(passage: dict, others: int = 0) -> discord.Embed:
 def melancholy_embed(topic: str | None) -> discord.Embed:
     """A passage on the topic, or (no topic) any."""
     return oldbooks.one_passage(DICTIONARY, topic, passage_embed, emoji="🖤", colour=COLOUR,
-                                nothing="Remarkably, Burton found nothing to be melancholy about there. Try "
+                                nothing="Nothing from Burton on that here. Try "
                                         "love, study, sleep, idleness, jealousy, poverty or bad air.")
 
 

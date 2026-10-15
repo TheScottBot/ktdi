@@ -69,7 +69,7 @@ def test_other_names_random_and_nothing():
     assert bestiary.bestiary_embed("monoceros").title == "🐉 Unicorn"
     assert bestiary.bestiary_embed("sea unicorn").title == "🐉 Sea-unicorn"
     assert bestiary.bestiary_embed(None).title == "🐉 Unicorn"
-    assert "Topsell never heard of that one" in bestiary.bestiary_embed("zzqx").description
+    assert "Nothing on that one in this bestiary" in bestiary.bestiary_embed("zzqx").description
 
 
 def test_command_and_autocomplete():

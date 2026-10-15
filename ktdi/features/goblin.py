@@ -55,7 +55,7 @@ def tale_embed(tale: dict, others: int = 0) -> discord.Embed:
 def goblin_embed(what: str | None) -> discord.Embed:
     """A tale about what was asked, or (nothing asked) any."""
     return oldbooks.one_passage(DICTIONARY, what, tale_embed, emoji=EMOJI, colour=COLOUR,
-                                nothing="Sikes heard no tale of that in all Wales. Try the Pwca, corpse candles, the "
+                                nothing="No tale of that here. Try the Pwca, corpse candles, the "
                                         "Tylwyth Teg, lake maidens or the Cŵn Annwn.")
 
 

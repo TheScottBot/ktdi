@@ -98,8 +98,8 @@ def devils_embed(query: str | None) -> discord.Embed:
     if found:  # The word itself (all its entries), or one spelt like it
         return entry_embed(found.entries if found.kind == "exact" else DICTIONARY.same_name(found.entries[0]))
     return discord.Embed(title=f"😈 {oldbooks.shown_typed(query)}", color=COLOUR,
-                         description="Bierce never got round to that one, which is the nicest thing he never said. "
-                                     "Try a plain word (money, love, lawyer) to see what he made of it.")
+                         description=oldbooks.not_here("No definition of that here. Try a plain word (money, love, "
+                                                       "lawyer) to see what Bierce made of it."))
 
 
 @commands.hybrid_command(name="devils", aliases=["devil", "devilsdictionary"],

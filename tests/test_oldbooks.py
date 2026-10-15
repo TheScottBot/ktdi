@@ -155,6 +155,13 @@ def test_close_first_can_be_turned_off_for_one_look_up():
     assert book.look_up("eell").entries == [EEL]
 
 
+def test_not_here_says_the_book_may_have_more():
+    assert oldbooks.not_here("Nothing from Pliny on that here.") == (
+        "Nothing from Pliny on that here.\n-# There may be more on it in the book itself: what's here was picked by "
+        "hand to keep this a safe space. Or there may simply be nothing on it.")
+    assert "in the books themselves:" in oldbooks.not_here("None here.", where="books themselves")
+
+
 def test_modern_spelling_is_for_searching_old_spelling():
     assert oldbooks.modern_spelling("If thy wyfe loue the Vnicorne, inuisible vnder the fyre, haue a seruant") == \
         "If thy wife love the Unicorne, invisible under the fire, have a servant"

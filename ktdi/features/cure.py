@@ -85,7 +85,7 @@ def plant_embed(query: str) -> discord.Embed:
     if match is None:
         shown = discord.utils.escape_markdown(" ".join(query.split())[:80])
         return discord.Embed(title=f"🌿 {shown}"[:256], color=discord.Color.dark_green(),
-                             description=f"Culpeper never wrote about *{shown}*, not by that name anyway.")
+                             description=oldbooks.not_here(f"No herb called *{shown}* here, not by that name anyway."))
     herb = match.herb
     lines = [f"*{herb['latin']}*"] if herb["latin"] else []
     if herb["planet"]:

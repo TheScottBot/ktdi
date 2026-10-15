@@ -88,7 +88,7 @@ def test_found_in_modern_spelling():
 
 def test_random_and_nothing():
     assert secrets.secrets_embed(None).title == "🗝️ Marigold"
-    assert "Albertus kept no secret about that" in secrets.secrets_embed("zzqx").description
+    assert "No secret about that here" in secrets.secrets_embed("zzqx").description
 
 
 def test_command_and_autocomplete():

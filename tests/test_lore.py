@@ -76,7 +76,8 @@ def test_a_near_spelling_only_when_nothing_has_the_thing():
 
 def test_nothing():
     embed = lore.lore_embed("zzqx")
-    assert not embed.fields and "None of the old books has a word to say about that" in embed.description
+    assert not embed.fields and "None of the old books has anything on that here" in embed.description
+    assert "There may be more on it in the books themselves" in embed.description
 
 
 def test_it_fits_in_an_embed(monkeypatch):

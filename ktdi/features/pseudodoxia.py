@@ -46,18 +46,18 @@ def chapter_embed(chapter: dict, others: int = 0) -> discord.Embed:
 def pseudodoxia_embed(topic: str | None) -> discord.Embed:
     """A chapter on the topic, or (no topic) any."""
     return oldbooks.one_passage(DICTIONARY, topic, chapter_embed, emoji="🧐", colour=COLOUR,
-                                nothing="Browne never got round to examining that one. Try badgers, elephants, "
-                                        "griffins, the phoenix, unicorns, or the salamander.")
+                                nothing="Nothing from Browne on that here. Try badgers, elephants, griffins, "
+                                        "the basilisk, unicorns, or the salamander.")
 
 
 @commands.hybrid_command(name="pseudodoxia", aliases=["vulgarerrors", "browne"],
                          description="Browne's Vulgar Errors (1646): what everyone wrongly believed, solemnly examined.")
-@app_commands.describe(topic="A creature, thing or belief (badgers, elephants, the phoenix...). Empty: random")
+@app_commands.describe(topic="A creature, thing or belief (badgers, elephants, the basilisk...). Empty: random")
 async def pseudodoxia(ctx: commands.Context, *, topic: str | None = None):
     """A chapter of Sir Thomas Browne's Pseudodoxia Epidemica, or "Vulgar Errors" (1646): a whole book of what everyone
     wrongly believed (that a badger's legs are shorter on one side, that elephants have no joints, that a kingfisher
     hung by its beak shows which way the wind blows), each one stated and then solemnly taken apart. Give a topic
-    (badgers, griffins, the phoenix, unicorns) for a chapter about it; his chapter titles autocomplete. Ask again for
+    (badgers, griffins, the basilisk, unicorns) for a chapter about it; his chapter titles autocomplete. Ask again for
     another on the same topic. On its own: any chapter. Typed, `!vulgarerrors` and `!browne` work too."""
     await ctx.send(embed=pseudodoxia_embed(topic))
 
