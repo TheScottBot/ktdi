@@ -22,6 +22,12 @@ conventions; this file is only the working rules. (CLAUDE.md imports this file, 
   or almanac in 📚 Words & wisdom, 🐉 Beasts & magic or 🌿 Hearth & herbs) isn't finished until it declares `OLD_BOOK =
   oldbooks.OldBook(...)` (or a list of them): its `random` entry, for Old Wisdom of the Day, and, if it can be
   searched by topic, `find`, `title`, `link` and `text`, so `/lore` asks it too. `tests/test_lore.py` fails without it.
+- **Curating an old book:** keep only what's on an allowlist, and leave out anything with racism or contempt for a
+  people or faith (even in passing), mockery of America, sex, gore, cruelty to animals, remedies someone could try,
+  misogyny, suicide, harm to children, or anything that takes **gender or sexuality** lightly: people or animals
+  changing sex, hermaphrodites, eunuchs, cross-dressing as a joke, "effeminate" and the like as put-downs, mockery
+  of gender or sexuality. The bot is LGBTQIA+ safe, however innocently a Victorian author meant an aside. Give every
+  reviewer the whole list.
 - **Privacy:** never log who used `/books` or `/rpg` or what they searched for or downloaded.
 - **Tone:** never mock America, imperial units or Fahrenheit.
 - **Don't run the bot with the live token** from `.env`; the homelab is running it. Use `.env.dev` (a separate dev

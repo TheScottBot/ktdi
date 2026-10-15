@@ -32,7 +32,8 @@ NOT_NAMES = {"the", "it", "and", "some", "wild", "stinking", "wild and stinking"
              "spiked heads of flowers"}
 MAX_LENGTH = 350
 # A few of the herbal's remedies are for ending pregnancies or delivering stillbirths. Not for a joke command.
-LEFT_OUT = re.compile(r"abort|dead child|miscarr|bring away the birth|kill the child|untimely birth", re.IGNORECASE)
+LEFT_OUT = re.compile(r"abort|dead child|miscarr|bring away the birth|kill the child|untimely birth|effeminate",
+                      re.IGNORECASE)
 
 
 @dataclass
