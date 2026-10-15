@@ -145,6 +145,16 @@ def test_one_of_a_name_spelt_nearly_brings_all_filed_under_it(book, monkeypatch)
     assert secrets.one_of("fart") == (lamps[1], 0)  # Found by another name: only what's filed under that one
 
 
+def test_close_first_can_be_turned_off_for_one_look_up():
+    book = oldbooks.Dictionary([EEL, CAVE], names=lambda e: e["word"].split(" or "), text=lambda e: e["text"],
+                               close_first=True)
+    assert book.look_up("caves").kind == "close"  # The command: a name spelt like it first
+    found = book.look_up("cave", close_first=False)
+    assert found.kind == "exact"  # An exact name still wins
+    assert book.look_up("caver", close_first=False).kind == "close"  # Nothing uses it: spelt like it, as ever
+    assert book.look_up("eell").entries == [EEL]
+
+
 def test_modern_spelling_is_for_searching_old_spelling():
     assert oldbooks.modern_spelling("If thy wyfe loue the Vnicorne, inuisible vnder the fyre, haue a seruant") == \
         "If thy wife love the Unicorne, invisible under the fire, have a servant"

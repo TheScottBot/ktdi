@@ -31,6 +31,7 @@ FEATURES = [
     "ktdi.features.bestiary",
     "ktdi.features.secrets",
     "ktdi.features.wonder",
+    "ktdi.features.goblin",
     "ktdi.features.lore",
     "ktdi.features.wisdom",
     "ktdi.features.etiquette",

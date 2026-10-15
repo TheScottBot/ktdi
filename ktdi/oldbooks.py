@@ -1,6 +1,6 @@
 """Shared by the old-book commands (/vulgartongue, /deadword, /devils, /dream, /phrase, /beeton, /enquire, /almanac,
-/melancholy, /pliny, /pseudodoxia, /bestiary, /secrets, /wonder and the rest): a book of entries looked up by headword, and the
-replies they have in common.
+/melancholy, /pliny, /pseudodoxia, /bestiary, /secrets, /wonder, /goblin and the rest): a book of entries looked up by
+headword, and the replies they have in common.
 
 A command makes a Dictionary of its entries, then asks it to look things up (the headword's entry, else the entries
 that use the word, else one spelt like it: fuzzy.look_up), for a random entry, or for autocomplete. How an entry looks
@@ -75,13 +75,15 @@ class Dictionary(Generic[T]):
                 self._by_name.setdefault(name.casefold(), []).append(entry)
         self._first_name = {id(entry): next(iter(names(entry)), "").casefold() for entry in entries}
 
-    def look_up(self, query: str) -> fuzzy.LookUp | None:
-        """The entries for a headword typed exactly (even one fuzzy matching skips, like "I"), else fuzzy.look_up."""
+    def look_up(self, query: str, close_first: bool | None = None) -> fuzzy.LookUp | None:
+        """The entries for a headword typed exactly (even one fuzzy matching skips, like "I"), else fuzzy.look_up.
+        `close_first` overrides the dictionary's own for this once (/lore wants what mentions a thing before what's
+        spelt like it, even in a book whose command doesn't)."""
         exact = self._by_name.get(" ".join(query.split()).casefold())
         if exact:
             return fuzzy.LookUp("exact", exact)
         return fuzzy.look_up(query, self.index, self.entries, self.text, self.meaning_first,
-                             close_first=self.close_first)
+                             close_first=self.close_first if close_first is None else close_first)
 
     def one_of(self, query: str | None) -> tuple[T, int] | None:
         """For books of passages rather than definitions (Beeton's advice, Enquire Within): one passage on what was

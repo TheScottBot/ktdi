@@ -5,6 +5,7 @@ Allowlist builds: a book's entries were reviewed once, entry by entry, and only 
 ktdi/lib/<name>_curation.json, as {"keep": [...]}), so nothing taken out (slurs and the like) is ever in the repo.
 """
 
+import html
 import json
 import re
 import sys
@@ -15,6 +16,8 @@ from typing import Callable
 
 LIB = Path(__file__).resolve().parent.parent / "lib"
 END = "*** END OF THE PROJECT GUTENBERG"
+SMALL_WORDS = {"a", "an", "and", "as", "at", "by", "for", "from", "in", "into", "of", "on", "or", "the", "to", "with"}
+ROMAN = re.compile(r"^((?=[IVXLC])C{0,3}(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3}))(\.?(?:'S)?,?)$")  # Not "CIVIL"
 OLD_END = "*** END OF THIS PROJECT GUTENBERG"  # How older ebooks (and some of the mirror's copies) end
 
 
@@ -53,6 +56,40 @@ def download(book: int, timeout: int = 60, html: bool = False) -> str:
         except (urllib.error.URLError, TimeoutError) as error:
             problems.append(f"{url}: {error}")
     raise SystemExit("Couldn't download the book:\n  " + "\n  ".join(problems))
+
+
+def titled(title: str) -> str:
+    """A title in capitals as a title: "FOX KILLED BY A SWAN." is "Fox Killed by a Swan"; "HENRY VIII.'S WALKING
+    STICK" keeps its numerals."""
+    words = []
+    for i, word in enumerate(title.rstrip(".").split()):
+        numeral = ROMAN.match(word)
+        if numeral and word not in ("I", "A"):
+            words.append(numeral[1] + numeral[2].lower())  # "VIII.'S" is "VIII.'s"
+        elif i and word.lower() in SMALL_WORDS:
+            words.append(word.lower())
+        else:  # "SO-CALLED" is "So-Called", "JOHNSON'S" is "Johnson's"
+            words.append(re.sub(r"[^\W_]+(?:'[^\W_]+)?", lambda m: m[0][:1].upper() + m[0][1:], word.lower()))
+    return " ".join(words)
+
+
+def html_text(fragment: str) -> str:
+    """A bit of a book's web page as text (for a book whose pictures are wanted: /wonder, /goblin): italics as
+    _italics_ (as Gutenberg's plain text has them, so oldbooks.escape shows them), raised letters in their word
+    ("y<sup>e</sup>" is "ye"), paragraphs apart, lines of verse and table rows on lines of their own, and page
+    numbers, pictures' captions, footnote marks and the footnotes themselves out."""
+    fragment = " ".join(fragment.split())  # The page's own line breaks mean nothing
+    fragment = re.sub(r'<div class="footnotes">.*', "", fragment)  # A section's footnotes are at its end
+    fragment = re.sub(r'<span class="pagenum">.*?</span>|<a [^>]*class="fnanchor[^"]*"[^>]*>.*?</a>', "", fragment)
+    fragment = re.sub(r'<div class="caption[^"]*">.*?</div>|<p class="caption[^"]*">.*?</p>', "", fragment)
+    fragment = re.sub(r"<(i|em)\b[^>]*>(.*?)</\1>", lambda m: f"_{m[2].strip()}_" if m[2].strip() else m[2], fragment)
+    fragment = re.sub(r'</p>|</table>|<div class="(?:poem|stanza)[^"]*">', "\n\n", fragment)
+    fragment = re.sub(r"<br\s*/?>|</tr>|</div>", "\n", fragment)
+    fragment = re.sub(r"</t[dh]>\s*<t[dh][^>]*>", " — ", fragment)
+    fragment = html.unescape(re.sub(r"<[^>]+>", "", fragment)).replace("\xa0", " ")
+    paragraphs = ["\n".join(" ".join(line.split()) for line in block.split("\n") if line.strip())
+                  for block in re.split(r"\n\s*\n", fragment)]
+    return "\n\n".join(p for p in paragraphs if p)
 
 
 # A paragraph starting with its number: "110. INGREDIENTS.--...", "1000. Lighting Candles." (not "stock No.\n105.")

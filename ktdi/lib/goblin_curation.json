@@ -1,0 +1,1615 @@
+{
+ "_about": "British Goblins (1880): the numbered sections kept (book.chapter.section), each with the title it's shown under (mostly from its chapter's list of topics) and other names to find it by. Read by hand (and the scholarly sections read again, with a looser bar for what's interesting), then checked again: the tales kept; the scholarly asides, and what's 1880 at its worst (sneers at peoples and faiths, gore, cruelty to animals, charms someone might try, sex, harm to children), left out. See ktdi/tools/goblin_build.py.",
+ "keep": {
+  "1.1.2": {
+   "title": "Existing Belief in Fairies in Wales",
+   "also": [
+    "Fairies",
+    "Belief",
+    "Chaucer",
+    "Dryden",
+    "Tylwyth Teg"
+   ]
+  },
+  "1.1.3": {
+   "title": "The Old-Time Welsh Fairyland",
+   "also": [
+    "Craig y Ddinas",
+    "Vale of Neath",
+    "Gwydion",
+    "Dyfed",
+    "North Wales"
+   ]
+  },
+  "1.1.4": {
+   "title": "The Legend of St. Collen and Gwyn ap Nudd",
+   "also": [
+    "Fairy King",
+    "Gwyn ap Nudd",
+    "Collen",
+    "Annwn",
+    "Holy water"
+   ]
+  },
+  "1.1.5": {
+   "title": "The Green Meadows of the Sea",
+   "also": [
+    "Gwerddonau Llion",
+    "Fairies at Market",
+    "Milford Haven",
+    "Laugharne",
+    "Fairy islands",
+    "Pembrokeshire"
+   ]
+  },
+  "1.2.1": {
+   "title": "Classification of Welsh Fairies",
+   "also": [
+    "Tylwyth Teg",
+    "Fair Folk",
+    "Bendith y Mamau",
+    "Euphemism",
+    "Kind Gallows"
+   ]
+  },
+  "1.2.3": {
+   "title": "Rowli Pugh and the Ellyll",
+   "also": [
+    "Ellyll",
+    "Ellyllon",
+    "Elf",
+    "Catti Jones",
+    "Glamorganshire",
+    "Peterstone-super-Ely"
+   ]
+  },
+  "1.2.6": {
+   "title": "Usual Form of the Pooka Story",
+   "also": [
+    "Pwca",
+    "Puck",
+    "Lantern",
+    "Precipice",
+    "Will-o'-wisp"
+   ]
+  },
+  "1.2.7": {
+   "title": "Coblynau, or Mine Fairies",
+   "also": [
+    "Coblyn",
+    "Knockers",
+    "Gnomes",
+    "Mines",
+    "Miners"
+   ]
+  },
+  "1.2.8": {
+   "title": "Miners' Superstitions",
+   "also": [
+    "Miners",
+    "Knockers",
+    "Basilisks",
+    "Fire Fiends",
+    "Fire-damp",
+    "Ascension Day"
+   ]
+  },
+  "1.2.9": {
+   "title": "A Fairy Coal-mine",
+   "also": [
+    "Coblynau",
+    "Dwarfs of Cae Caled",
+    "Beacon Mountain",
+    "Bodfari",
+    "Denbighshire",
+    "Dwarfs"
+   ]
+  },
+  "1.2.10": {
+   "title": "Counterparts of the Coblynau",
+   "also": [
+    "Wichtlein",
+    "Kobolds",
+    "Dwarfs",
+    "Mine Spirits",
+    "Catskills",
+    "Ninepins"
+   ]
+  },
+  "1.2.11": {
+   "title": "The Bwbach and the Preacher",
+   "also": [
+    "Bwbach",
+    "Boobach",
+    "Household fairy",
+    "Cardiganshire",
+    "Baptist",
+    "Doppelganger"
+   ]
+  },
+  "1.2.12": {
+   "title": "Bogies and Hobgoblins",
+   "also": [
+    "Bwbach",
+    "Bogie",
+    "Hobgoblin",
+    "Gobelin",
+    "Bhaga"
+   ]
+  },
+  "1.3.1": {
+   "title": "The Gwragedd Annwn, or Dames of Elfin-Land",
+   "also": [
+    "Gwragedd Annwn",
+    "Lake fairies",
+    "Plant Annwn",
+    "Lake maidens",
+    "Mermaid"
+   ]
+  },
+  "1.3.2": {
+   "title": "St. Patrick and the Welshmen",
+   "also": [
+    "Crumlyn Lake",
+    "Briton Ferry",
+    "St. Patrick",
+    "St. David",
+    "Gwragedd Annwn",
+    "Drowned town"
+   ]
+  },
+  "1.3.4": {
+   "title": "The Legend of the Meddygon Myddfai",
+   "also": [
+    "Physicians of Myddfai",
+    "Llyn y Fan Fach",
+    "Rhiwallon",
+    "Lady of the Lake",
+    "Carmarthenshire",
+    "Gwraig Annwn"
+   ]
+  },
+  "1.3.6": {
+   "title": "The Fairy Maiden's Papa",
+   "also": [
+    "Drws Coed",
+    "Llyn y Dywarchen",
+    "Turf Lake",
+    "Iron",
+    "Fairy bride"
+   ]
+  },
+  "1.3.7": {
+   "title": "The Enchanted Isle in the Mountain Lake",
+   "also": [
+    "Gwragedd Annwn",
+    "Fairy garden",
+    "New Year's Day",
+    "Secret door",
+    "Island"
+   ]
+  },
+  "1.3.9": {
+   "title": "The Wife of Supernatural Race",
+   "also": [
+    "Seal Wife",
+    "Selkie",
+    "Water Maiden",
+    "Morgan",
+    "Mermaid",
+    "Lake Fairies"
+   ]
+  },
+  "1.4.1": {
+   "title": "The Old Woman of the Mountain",
+   "also": [
+    "Gwyllion",
+    "Gwyll",
+    "Hag",
+    "Wow up",
+    "Llanhiddel",
+    "Black Mountain",
+    "Juan White"
+   ]
+  },
+  "1.4.2": {
+   "title": "John ap John and the Phantom Coach",
+   "also": [
+    "Old Woman of the Mountain",
+    "Gwyllion",
+    "Milfre Mountain",
+    "Caerleon Fair",
+    "Wow up"
+   ]
+  },
+  "1.4.3": {
+   "title": "Exorcism by Knife",
+   "also": [
+    "Gwyllion",
+    "Knife",
+    "Evan Thomas",
+    "Bedwellty Mountain",
+    "Aberystruth"
+   ]
+  },
+  "1.5.4": {
+   "title": "Dewi Dal and the Fairies",
+   "also": [
+    "Dewi Dal",
+    "Eurwallt",
+    "Sparrow",
+    "Cae Mawr",
+    "Household fairies"
+   ]
+  },
+  "1.6.1": {
+   "title": "The Tale of Elidurus",
+   "also": [
+    "Elidurus",
+    "Giraldus Cambrensis",
+    "Vale of Neath",
+    "Golden ball",
+    "Pigmies",
+    "Underground country"
+   ]
+  },
+  "1.6.2": {
+   "title": "Shui Rhys and the Fairies",
+   "also": [
+    "Shui Rhys",
+    "Tylwyth Teg",
+    "Cardiganshire",
+    "Stolen girl",
+    "Fairy harps"
+   ]
+  },
+  "1.6.3": {
+   "title": "St. Dogmell's Parish, Pembrokeshire",
+   "also": [
+    "St Dogmaels",
+    "Led astray",
+    "Hoop-rods",
+    "Pembrokeshire",
+    "Ellyllon"
+   ]
+  },
+  "1.6.4": {
+   "title": "The Legend of Rhys and Llewellyn",
+   "also": [
+    "Fairy ring",
+    "Fairy dance",
+    "Rhys",
+    "Llewellyn",
+    "Dancing with the Ellyllon"
+   ]
+  },
+  "1.6.5": {
+   "title": "Death from Joining in the Fairy Reel",
+   "also": [
+    "Fairy ring",
+    "Bush of Heaven",
+    "Llwyn y Nef",
+    "Clynog",
+    "Crumbled to dust",
+    "Carmarthenshire"
+   ]
+  },
+  "1.6.6": {
+   "title": "The Tale of Twm and Iago",
+   "also": [
+    "Forest of the Magic Yew",
+    "Ffridd yr Ywen",
+    "Fairy circle",
+    "Llanwrin",
+    "Twm",
+    "Iago"
+   ]
+  },
+  "1.6.7": {
+   "title": "Taffy ap Sion, a Legend of Pencader",
+   "also": [
+    "Taffy ap Sion",
+    "Pencader",
+    "Pant Shon Shenkin",
+    "Fairy circle",
+    "Careg Hir",
+    "Carmarthenshire"
+   ]
+  },
+  "1.6.8": {
+   "title": "Tudur of Llangollen",
+   "also": [
+    "Nant yr Ellyllon",
+    "Tudur ap Einion Gloff",
+    "Devil's fiddle",
+    "Dinas Bran",
+    "Llangollen"
+   ]
+  },
+  "1.6.10": {
+   "title": "The Fairies of Frennifawr",
+   "also": [
+    "Frennifawr",
+    "Fairy palace",
+    "Forbidden well",
+    "Shepherd",
+    "Pembrokeshire",
+    "Fatal draught"
+   ]
+  },
+  "1.6.11": {
+   "title": "The Fiend Master",
+   "also": [
+    "Fairy Ointment",
+    "Nursemaid",
+    "Curiosity Tales",
+    "Psyche",
+    "Bluebeard",
+    "Blind Eye"
+   ]
+  },
+  "1.6.12": {
+   "title": "Iago ap Dewi",
+   "also": [
+    "Pilgrim's Progress",
+    "Llanllawddog",
+    "Seven years",
+    "Carmarthenshire",
+    "Astrology"
+   ]
+  },
+  "1.6.13": {
+   "title": "The Original of Rip van Winkle",
+   "also": [
+    "Rip van Winkle",
+    "Lost Time",
+    "Urashima",
+    "Epimenides",
+    "Fairy Bridge"
+   ]
+  },
+  "1.7.2": {
+   "title": "Legend of the Magic Harp",
+   "also": [
+    "Morgan ap Rhys",
+    "Cader Idris",
+    "Telyn",
+    "Harp",
+    "Dancing curse"
+   ]
+  },
+  "1.7.3": {
+   "title": "Songs and Tunes of the Tylwyth Teg",
+   "also": [
+    "Fairy Music",
+    "Fairy Song",
+    "Can y Tylwyth Teg",
+    "Cylepsta Waterfall"
+   ]
+  },
+  "1.7.4": {
+   "title": "The Legend of Iolo ap Hugh",
+   "also": [
+    "Iolo ap Hugh",
+    "Ffarwel Ned Pugh",
+    "Ogof",
+    "Cave",
+    "Fiddler",
+    "Hallowe'en",
+    "Elias ap Evan"
+   ]
+  },
+  "1.8.1": {
+   "title": "Fairy Rings",
+   "also": [
+    "Fairy circles",
+    "Peterstone-super-Ely",
+    "Ladder",
+    "Bad luck"
+   ]
+  },
+  "1.8.2": {
+   "title": "The Prophet Jones and his Works",
+   "also": [
+    "Edmund Jones",
+    "Prophet Jones",
+    "The Tranch",
+    "Apparitions",
+    "Aberystruth"
+   ]
+  },
+  "1.8.3": {
+   "title": "Fairies under the Female Oak",
+   "also": [
+    "Fairy rings",
+    "Brenhin-bren",
+    "Oak",
+    "William Jenkins",
+    "Trefethin",
+    "Prophet Jones"
+   ]
+  },
+  "1.8.5": {
+   "title": "Equestrian Fairies",
+   "also": [
+    "Fairy horses",
+    "White horses",
+    "Fairy battle",
+    "Merthyr",
+    "Aberdare",
+    "Vale of Neath"
+   ]
+  },
+  "1.8.6": {
+   "title": "The Flying Fairies of Bedwellty",
+   "also": [
+    "Bedwellty",
+    "Cefn Rhychdir",
+    "Fairy sheep",
+    "Fairy swine",
+    "Haymakers",
+    "Fairy cattle"
+   ]
+  },
+  "1.8.8": {
+   "title": "The Prophet Jones Led Astray",
+   "also": [
+    "Prophet Jones",
+    "Old Woman of the Mountain",
+    "Llanhiddel",
+    "Pontypool",
+    "Gwyllion"
+   ]
+  },
+  "1.9.2": {
+   "title": "Old Betty Griffith and her Eithin Barricade",
+   "also": [
+    "Betty Griffith",
+    "Eithin",
+    "Gorse",
+    "Furze",
+    "Anglesey",
+    "Fencing off the Fairies"
+   ]
+  },
+  "1.9.3": {
+   "title": "The Bwbach of the Hendrefawr Farm",
+   "also": [
+    "Bwbach",
+    "Hendrefawr",
+    "Flitting",
+    "Rhyd-y-Fen",
+    "Merionethshire",
+    "Churn"
+   ]
+  },
+  "1.9.4": {
+   "title": "The Pwca'r Trwyn's Flitting in a Jug of Barm",
+   "also": [
+    "Pwca",
+    "Pooka",
+    "Trwyn Farm",
+    "Pantygasseg",
+    "Barm",
+    "Ball of yarn",
+    "Mynyddyslwyn"
+   ]
+  },
+  "1.10.1": {
+   "title": "The Story of Gitto Bach",
+   "also": [
+    "Gitto Bach",
+    "Little Griffith",
+    "Fairy money",
+    "Fairy gold",
+    "Glamorganshire",
+    "Paper money"
+   ]
+  },
+  "1.10.2": {
+   "title": "The Penalty of Blabbing",
+   "also": [
+    "Fairy money",
+    "Cymmunod Bridge",
+    "Anglesey",
+    "Anne William Francis",
+    "Bassalleg",
+    "Groat"
+   ]
+  },
+  "1.10.3": {
+   "title": "Legends of the Shepherds of Cwm Llan",
+   "also": [
+    "Cwm Llan",
+    "Fairy child",
+    "Magic staff",
+    "Snowdon",
+    "Fairy silver"
+   ]
+  },
+  "1.10.5": {
+   "title": "The Legend of Hafod Lwyddog",
+   "also": [
+    "Hafod Lwyddog",
+    "Meirig",
+    "Llyn Glas",
+    "Cwm Dyli",
+    "Fairy silver",
+    "Bendith y Mamau"
+   ]
+  },
+  "1.10.6": {
+   "title": "Lessons Inculcated by these Superstitions",
+   "also": [
+    "Fairy Money",
+    "Clean Hearth",
+    "Toriad y Dydd",
+    "Hob",
+    "Fairy Gifts"
+   ]
+  },
+  "1.11.2": {
+   "title": "Lord Howell, the Pwca of the Trwyn",
+   "also": [
+    "Pwca'r Trwyn",
+    "Arglwydd Hywel",
+    "Lord Howell",
+    "Fairy hand",
+    "Mynyddyslwyn",
+    "Bwbach"
+   ]
+  },
+  "1.11.4": {
+   "title": "Colour in Welsh Fairy Attire",
+   "also": [
+    "Green Lady of Caerphilly",
+    "Fairy Clothes",
+    "Blue Petticoat",
+    "White Linen",
+    "Gwenllian"
+   ]
+  },
+  "1.11.5": {
+   "title": "Legend of the Prolific Woman",
+   "also": [
+    "Origin of fairies",
+    "Anglesey",
+    "Hidden children",
+    "Tylwyth Teg"
+   ]
+  },
+  "2.1.4": {
+   "title": "Lady Stradling's Ghost",
+   "also": [
+    "Haunted houses",
+    "St. Donat's Castle",
+    "Sir Thomas Button",
+    "Duffryn House",
+    "Glamorganshire"
+   ]
+  },
+  "2.1.5": {
+   "title": "The Legend of Catrin Gwyn",
+   "also": [
+    "White Catti",
+    "The Haunted Bridge",
+    "Pont Cwnca Bach",
+    "Cardiganshire",
+    "Rheidol"
+   ]
+  },
+  "2.1.6": {
+   "title": "An Insulted Corpse",
+   "also": [
+    "Skull",
+    "Charnel house",
+    "Newport",
+    "Tregaron",
+    "Whirlwind"
+   ]
+  },
+  "2.1.8": {
+   "title": "Cadogan's Ghost",
+   "also": [
+    "Laws of the spirit-world",
+    "Landmarks",
+    "Llantarnam",
+    "Speaking to ghosts"
+   ]
+  },
+  "2.2.1": {
+   "title": "Hidden Treasures",
+   "also": [
+    "Ogmore",
+    "Llantwit Major",
+    "Tailor's wife",
+    "Household ghosts",
+    "Hoard"
+   ]
+  },
+  "2.2.2": {
+   "title": "The Miser of St. Donat's",
+   "also": [
+    "Miser's ghost",
+    "Bag of money",
+    "Ogmore",
+    "Housekeeper"
+   ]
+  },
+  "2.2.5": {
+   "title": "Transportation through the Air",
+   "also": [
+    "Boobach",
+    "Bwbach",
+    "Above Wind",
+    "Below Wind",
+    "Flying"
+   ]
+  },
+  "2.2.6": {
+   "title": "From Breconshire to Philadelphia",
+   "also": [
+    "Ystradgynlais",
+    "Thomas Llewellyn",
+    "Elizabeth Gething",
+    "Pennsylvania",
+    "Flying ghost"
+   ]
+  },
+  "2.2.7": {
+   "title": "Sir David Llwyd, the Magician",
+   "also": [
+    "Charles Hugh",
+    "Conjuror of Aberystruth",
+    "Llanidloes",
+    "Garter",
+    "Flying"
+   ]
+  },
+  "2.2.8": {
+   "title": "The Levitation of Walter Jones",
+   "also": [
+    "Richard the Tailor",
+    "Hare",
+    "Crickhowell",
+    "Breconshire",
+    "Newport"
+   ]
+  },
+  "2.2.10": {
+   "title": "Aerial Transportation in Modern Spiritualism",
+   "also": [
+    "Levitation",
+    "Mrs Guppy",
+    "Mr Home",
+    "Flying Dreams",
+    "Sgilti Yscawndroed"
+   ]
+  },
+  "2.3.1": {
+   "title": "Spectral Animals",
+   "also": [
+    "Ghost Dog",
+    "Ghost Horse",
+    "Animal Ghosts",
+    "Dog's Soul"
+   ]
+  },
+  "2.3.2": {
+   "title": "The Chained Spirit",
+   "also": [
+    "Greyhound",
+    "Anglesey",
+    "Amlwch",
+    "St. Elian",
+    "Silver groat"
+   ]
+  },
+  "2.3.3": {
+   "title": "The Gwyllgi, or Dog of Darkness",
+   "also": [
+    "Gwyllgi",
+    "Black dog",
+    "Lisworney-Crossways",
+    "Devil's Nags",
+    "Pant y Madog",
+    "Laugharne"
+   ]
+  },
+  "2.3.5": {
+   "title": "The Gwyllgi's Counterparts",
+   "also": [
+    "Mauthe Doog",
+    "Black Shuck",
+    "Shock",
+    "Isle of Man",
+    "Spectral Dog"
+   ]
+  },
+  "2.4.1": {
+   "title": "The Phantom Horseman",
+   "also": [
+    "Rev. John Jones",
+    "Holywell",
+    "Bala",
+    "Machynlleth",
+    "Sickle",
+    "Guardian"
+   ]
+  },
+  "2.4.2": {
+   "title": "Gigantic Spirits",
+   "also": [
+    "Giant ghost",
+    "Ffynon yr Yspryd",
+    "Fountain of the Spirit",
+    "Black ghost",
+    "Llantarnam",
+    "Aberystruth"
+   ]
+  },
+  "2.4.5": {
+   "title": "Antic Spirits",
+   "also": [
+    "Poltergeist",
+    "Stone-throwing spirit",
+    "Llanllechid",
+    "Llangunllo",
+    "Radnorshire",
+    "Knighton"
+   ]
+  },
+  "2.4.6": {
+   "title": "The Tridoll Valley Ghost",
+   "also": [
+    "Poltergeist",
+    "William Thomas",
+    "Pilchards",
+    "Glamorganshire",
+    "Bed-clothes"
+   ]
+  },
+  "2.5.1": {
+   "title": "The Famous Sprite of Trwyn Farm",
+   "also": [
+    "Pwca'r Trwyn",
+    "Familiar spirit",
+    "Job John Harry",
+    "Mynyddyslwyn",
+    "Poltergeist"
+   ]
+  },
+  "2.5.2": {
+   "title": "Sir David Llwyd's Demon",
+   "also": [
+    "Familiar spirit",
+    "Magician",
+    "Spirit in a book",
+    "Wye",
+    "Throw stones out of the river"
+   ]
+  },
+  "2.5.4": {
+   "title": "The Legend of the Lady of the Wood",
+   "also": [
+    "Einion",
+    "Angharad",
+    "Treveilir",
+    "Hoofed lady",
+    "Goblin",
+    "Iolo MSS"
+   ]
+  },
+  "2.6.1": {
+   "title": "The Stupid Medieval Devil in Wales",
+   "also": [
+    "Devil",
+    "Pacts with the Fiend",
+    "Devil Outwitted",
+    "Sugar-bottle",
+    "Polyphemus"
+   ]
+  },
+  "2.6.2": {
+   "title": "Sion Cent",
+   "also": [
+    "John Kent",
+    "The Devil outwitted",
+    "Grosmont",
+    "Monnow bridge",
+    "Chancel wall",
+    "Necromancer"
+   ]
+  },
+  "2.6.3": {
+   "title": "Sion Dafydd's Foul Pipe",
+   "also": [
+    "Jack-o'-lantern",
+    "Stupid devil",
+    "Arfon",
+    "Llanfairfechan",
+    "Apple tree"
+   ]
+  },
+  "2.6.5": {
+   "title": "The Devil's Pulpit near Tintern",
+   "also": [
+    "Tintern Abbey",
+    "Cistercian monks",
+    "Holy water",
+    "Llandogo",
+    "Whitened doorsteps"
+   ]
+  },
+  "2.6.6": {
+   "title": "Angelic Spirits",
+   "also": [
+    "Angels",
+    "Angel Song",
+    "Deathbed",
+    "David Thomas",
+    "Rees David"
+   ]
+  },
+  "2.7.3": {
+   "title": "The Llandaff Gwrach",
+   "also": [
+    "Gwrach y Rhibyn",
+    "Llandaff",
+    "Cow and Snuffers Inn",
+    "Banshee",
+    "Cardiff"
+   ]
+  },
+  "2.7.5": {
+   "title": "The Cyhyraeth, or Crying Spirit",
+   "also": [
+    "Cyhyraeth",
+    "Groaning spirit",
+    "St. Mellons",
+    "Towy",
+    "Inis Cenin",
+    "Death-omen"
+   ]
+  },
+  "2.8.1": {
+   "title": "The Tolaeth Death Portent",
+   "also": [
+    "Tolaeth",
+    "Coffin",
+    "Phantom funeral",
+    "Death knock",
+    "Old Hundredth"
+   ]
+  },
+  "2.8.2": {
+   "title": "Ewythr Jenkin's Tolaeth",
+   "also": [
+    "Tolaeth before Death",
+    "John Clode",
+    "Sker Rocks",
+    "Nash",
+    "Llynwent"
+   ]
+  },
+  "2.8.3": {
+   "title": "The Railway Victim's Warning",
+   "also": [
+    "Tolaeth",
+    "Pontypridd",
+    "Omen",
+    "Footsteps on the stairs"
+   ]
+  },
+  "2.8.4": {
+   "title": "The Voice from the Cloud",
+   "also": [
+    "The Goblin Voice",
+    "Tolaeth",
+    "Llangurig",
+    "Mynyddyslwyn",
+    "Consumption"
+   ]
+  },
+  "2.8.5": {
+   "title": "Legend of the Lord and the Beggar",
+   "also": [
+    "Tolaeth",
+    "Iolo MSS",
+    "Richest man in the parish",
+    "Beggar's grave"
+   ]
+  },
+  "2.8.6": {
+   "title": "The Goblin Funeral",
+   "also": [
+    "Teulu",
+    "The Horse's Skull",
+    "The Goblin Veil",
+    "The Wraith of Llanllwch",
+    "Phantom funeral"
+   ]
+  },
+  "2.8.7": {
+   "title": "Dogs of Hell",
+   "also": [
+    "Cwn Annwn",
+    "Cwn y Wybr",
+    "Dogs of the Sky",
+    "Pwyll",
+    "Arawn",
+    "Hell-hounds",
+    "Wild hunt"
+   ]
+  },
+  "2.8.8": {
+   "title": "Spiritual Hunting Dogs",
+   "also": [
+    "Cwn Annwn",
+    "Wild Hunt",
+    "Wild Huntsman",
+    "Hounds",
+    "Odin",
+    "Hermes",
+    "King Arthur"
+   ]
+  },
+  "2.9.1": {
+   "title": "The Corpse Candle",
+   "also": [
+    "Canwyll Corph",
+    "Ghost light",
+    "Death-omen",
+    "Corpse light"
+   ]
+  },
+  "2.9.2": {
+   "title": "The Woman of Caerau",
+   "also": [
+    "Canwyll Corph",
+    "Corpse Candle",
+    "Caerau",
+    "Cardiff",
+    "The Crwys Candle",
+    "Grasping a Corpse Candle"
+   ]
+  },
+  "2.9.3": {
+   "title": "Jesting with the Canwyll Corph",
+   "also": [
+    "Corpse Candle",
+    "Lanboidy",
+    "Blacksmith",
+    "Foot-bridge",
+    "Carmarthenshire"
+   ]
+  },
+  "2.9.4": {
+   "title": "The Candle at Pontfaen",
+   "also": [
+    "Corpse Candle",
+    "The Three Candles at Golden Grove",
+    "Pembrokeshire",
+    "Joshua Coslet",
+    "Coracle"
+   ]
+  },
+  "2.9.5": {
+   "title": "Origin of Death-Portents in Wales",
+   "also": [
+    "St. David",
+    "Death omens",
+    "Banshee",
+    "Evansville",
+    "Druids"
+   ]
+  },
+  "3.1.2": {
+   "title": "The Apple Gift",
+   "also": [
+    "New Year's Day",
+    "Calennig",
+    "The First Foot",
+    "Levy Dew",
+    "New Year's water",
+    "Pembrokeshire"
+   ]
+  },
+  "3.1.3": {
+   "title": "The Mari Lwyd",
+   "also": [
+    "Mary Lwyd",
+    "Twelfth Night",
+    "Horse's skull",
+    "The Penglog",
+    "The Cutty Wren",
+    "Tooling and Sowling"
+   ]
+  },
+  "3.1.4": {
+   "title": "St. Valentine's Day",
+   "also": [
+    "Valentine",
+    "Love letters",
+    "Cardiff post office",
+    "February"
+   ]
+  },
+  "3.1.6": {
+   "title": "The Traditional St. David",
+   "also": [
+    "St. Dewi",
+    "Dewi Sant",
+    "Llandewi Brefi",
+    "Saint David's Day",
+    "Miracles"
+   ]
+  },
+  "3.2.1": {
+   "title": "Flowering Sunday",
+   "also": [
+    "Palm Sunday",
+    "Sul y Blodau",
+    "Mothering Sunday",
+    "Lent",
+    "graves",
+    "flowers"
+   ]
+  },
+  "3.2.3": {
+   "title": "The Eagle of Snowdon",
+   "also": [
+    "Unlucky Days",
+    "Friday",
+    "Holy Thursday",
+    "fairies' weather",
+    "Snowdon"
+   ]
+  },
+  "3.2.4": {
+   "title": "Lifting",
+   "also": [
+    "Easter",
+    "The Crown of Porcelain",
+    "Stocsio",
+    "Aberconwy",
+    "Conwy",
+    "bragawd",
+    "new clothes"
+   ]
+  },
+  "3.2.5": {
+   "title": "The Tump of Lies",
+   "also": [
+    "Cnwc y Celwydd",
+    "Ball-Playing in Churchyards",
+    "Dancing in Churchyards",
+    "Seeing the Sun Dance",
+    "Easter",
+    "St Dogmaels"
+   ]
+  },
+  "3.2.7": {
+   "title": "The Kings of Summer and Winter",
+   "also": [
+    "Defynog",
+    "May Day",
+    "birch",
+    "brigau bedw",
+    "Breconshire"
+   ]
+  },
+  "3.3.1": {
+   "title": "The Snake Stone",
+   "also": [
+    "Gleiniau Nadroedd",
+    "Midsummer Eve",
+    "St John's Eve",
+    "Pontypridd",
+    "Druids",
+    "Myfyr Morganwg",
+    "logan stone"
+   ]
+  },
+  "3.3.3": {
+   "title": "Carrying Cynog",
+   "also": [
+    "St Cynog",
+    "Defynog",
+    "Marketing on Tombstones",
+    "cheese",
+    "ducking"
+   ]
+  },
+  "3.3.4": {
+   "title": "The Three Nights for Spirits",
+   "also": [
+    "Nos Calan Gaeaf",
+    "Teir Nos Ysprydnos",
+    "Hallowe'en",
+    "All Hallows Eve",
+    "Thomas Williams",
+    "Puzzling Jug",
+    "Bobbing for Apples"
+   ]
+  },
+  "3.3.6": {
+   "title": "Stripping the Carpenter",
+   "also": [
+    "St Clement's Day",
+    "effigy",
+    "Pembrokeshire"
+   ]
+  },
+  "3.4.2": {
+   "title": "Eisteddfodau",
+   "also": [
+    "Eisteddfod",
+    "Bards",
+    "Christmas concerts",
+    "Evergreens",
+    "Druids"
+   ]
+  },
+  "3.4.3": {
+   "title": "Decorating Houses and Churches",
+   "also": [
+    "Christmas decorations",
+    "Holly",
+    "Ivy",
+    "Llandaff Cathedral"
+   ]
+  },
+  "3.4.4": {
+   "title": "The Plygain",
+   "also": [
+    "Christmas",
+    "watching for the dawn",
+    "gwynt traed y meirw",
+    "The Colliers' Star",
+    "Star of Bethlehem",
+    "Rhodd Nadolig"
+   ]
+  },
+  "3.4.5": {
+   "title": "The Christmas Thrift-box",
+   "also": [
+    "Christmas box",
+    "Boxing Day",
+    "Postman",
+    "Palmerston"
+   ]
+  },
+  "3.5.4": {
+   "title": "Egg-Shell Cake",
+   "also": [
+    "Rhamanta",
+    "Sowing Leeks",
+    "Twca and Sheath",
+    "love divination"
+   ]
+  },
+  "3.6.1": {
+   "title": "The Bidding",
+   "also": [
+    "Gwahoddwr",
+    "Cymmhorth",
+    "Welsh wedding",
+    "Nos Blaen",
+    "bidder"
+   ]
+  },
+  "3.7.1": {
+   "title": "Food and Drink over the Coffin",
+   "also": [
+    "Gwylnos",
+    "funeral",
+    "beer at funerals",
+    "cwrw",
+    "sponge cakes"
+   ]
+  },
+  "3.7.2": {
+   "title": "The Sin-Eater",
+   "also": [
+    "Sin-eaters",
+    "Aubrey",
+    "plate of salt",
+    "Llandebie",
+    "Hereford",
+    "funeral"
+   ]
+  },
+  "3.7.3": {
+   "title": "Superstitions regarding Salt",
+   "also": [
+    "Salt",
+    "Plate of salt",
+    "Spilled salt",
+    "Isle of Man",
+    "Judas"
+   ]
+  },
+  "3.7.6": {
+   "title": "The Grassless Grave",
+   "also": [
+    "John Newton",
+    "Montgomery",
+    "Welshpool",
+    "Montgomeryshire"
+   ]
+  },
+  "3.7.7": {
+   "title": "Arian y Rhaw, or Spade Money",
+   "also": [
+    "Offrwm",
+    "Parson's Penny",
+    "sexton's spade",
+    "Llanrhaeadr-ym-Mochnant",
+    "funeral"
+   ]
+  },
+  "3.7.10": {
+   "title": "Planting and Strewing Graves with Flowers",
+   "also": [
+    "Graves",
+    "Flowers",
+    "Rosemary",
+    "Cypress",
+    "Cymbeline",
+    "Funeral"
+   ]
+  },
+  "4.1.2": {
+   "title": "Tolling the Passing Bell",
+   "also": [
+    "Passing bell",
+    "Bangu",
+    "Handbell",
+    "Funeral bell",
+    "Evil spirits"
+   ]
+  },
+  "4.1.3": {
+   "title": "The Occult Powers of Bells",
+   "also": [
+    "walking bells",
+    "St David's bell",
+    "Ramsey Sound",
+    "sunken bell",
+    "storm bell"
+   ]
+  },
+  "4.1.4": {
+   "title": "The Bell of Rhayader",
+   "also": [
+    "Rhayader Castle",
+    "magic bell",
+    "prisoner"
+   ]
+  },
+  "4.1.5": {
+   "title": "St. Illtyd's Wonderful Bell",
+   "also": [
+    "St Illtud",
+    "Llantwit Major",
+    "horses",
+    "Severn"
+   ]
+  },
+  "4.1.6": {
+   "title": "The Golden Bell of Llandaff",
+   "also": [
+    "St Oudoceus",
+    "Euddogwy",
+    "butter",
+    "Llandaff"
+   ]
+  },
+  "4.2.1": {
+   "title": "Mystic Wells",
+   "also": [
+    "Holy wells",
+    "Ffynon Mair",
+    "Well of Mary",
+    "Healing wells",
+    "Cursing wells",
+    "Lourdes"
+   ]
+  },
+  "4.2.4": {
+   "title": "St. Dwynwen's Well",
+   "also": [
+    "Curing Love-sickness",
+    "Llanddwyn",
+    "Anglesey",
+    "Ffynon Dwynwen",
+    "lovers"
+   ]
+  },
+  "4.2.5": {
+   "title": "Wells for Curing Cattle",
+   "also": [
+    "St. Cynfran's Well",
+    "St. George's Well",
+    "Cattle",
+    "Horses",
+    "Abergele"
+   ]
+  },
+  "4.2.8": {
+   "title": "Ffynon Gwynwy",
+   "also": [
+    "Warts",
+    "Crooked pins",
+    "Llangelynin",
+    "Wart well"
+   ]
+  },
+  "4.2.9": {
+   "title": "Throwing Pins in Wells",
+   "also": [
+    "Pins",
+    "Wishing well",
+    "Cyff-elian",
+    "Coins",
+    "St. Elian",
+    "Clitumnus"
+   ]
+  },
+  "4.2.10": {
+   "title": "The Dreadful Cursing Well of St. Elian's",
+   "also": [
+    "Ffynnon Elian",
+    "Llanelian",
+    "cursing well",
+    "putting into the well"
+   ]
+  },
+  "4.2.12": {
+   "title": "Wells Flowing with Milk",
+   "also": [
+    "St Illtyd's Well",
+    "Gower",
+    "driving back the sea",
+    "milk"
+   ]
+  },
+  "4.2.13": {
+   "title": "Taff's Well",
+   "also": [
+    "Ffynnon Taf",
+    "Sanford's Well",
+    "Newton Nottage",
+    "tidal well",
+    "rheumatism"
+   ]
+  },
+  "4.2.14": {
+   "title": "Origins of Well Superstitions",
+   "also": [
+    "Water worship",
+    "Druids",
+    "Baptism",
+    "Changelings",
+    "Holy wells"
+   ]
+  },
+  "4.3.1": {
+   "title": "Personal Attributes of Legendary Welsh Stones",
+   "also": [
+    "Stone worship",
+    "Living stones",
+    "Walking stones",
+    "Canute",
+    "Edgar"
+   ]
+  },
+  "4.3.2": {
+   "title": "The Thigh Stone",
+   "also": [
+    "Maen Morddwyd",
+    "Canna's Stone Chair",
+    "Llangan",
+    "Walking Stone of Eitheinn",
+    "Carn Cabal",
+    "Anglesey"
+   ]
+  },
+  "4.3.3": {
+   "title": "The Talking Stone",
+   "also": [
+    "Llechlafar",
+    "The Expanding Stone",
+    "St Govan's",
+    "Stone of Invisibility",
+    "Stone of Remembrance",
+    "St David's"
+   ]
+  },
+  "4.3.4": {
+   "title": "Stone Thief-catchers",
+   "also": [
+    "St Tydecho",
+    "Maelgwn Gwynedd",
+    "Mawddwy",
+    "Llanfaes",
+    "blue stone"
+   ]
+  },
+  "4.3.7": {
+   "title": "Arthur's Quoits",
+   "also": [
+    "King Arthur",
+    "Round Table",
+    "Arthur's Pot",
+    "Caerleon",
+    "Black Mountain",
+    "Pen Arthur"
+   ]
+  },
+  "4.3.8": {
+   "title": "Mol Walbec and the Pebble in her Shoe",
+   "also": [
+    "Moll Walbee",
+    "Hay Castle",
+    "Idris",
+    "Cader Idris",
+    "Giant of Trichrug",
+    "giants"
+   ]
+  },
+  "4.3.9": {
+   "title": "Giants and the Mythology of the Heavens",
+   "also": [
+    "Idris Gawr",
+    "Cader Idris",
+    "Astrology",
+    "Stars",
+    "Rhitta Gawr",
+    "Giants"
+   ]
+  },
+  "4.4.2": {
+   "title": "The Sagranus Stone and the White Lady",
+   "also": [
+    "St Dogmaels",
+    "Dancing Stones of Stackpool",
+    "white lady",
+    "Pembrokeshire"
+   ]
+  },
+  "4.4.3": {
+   "title": "Human Beings changed to Stones",
+   "also": [
+    "Moelfre",
+    "Carreg y Lleidr",
+    "Robber's Stone",
+    "Rollright",
+    "St Ceyna",
+    "St Keyne",
+    "serpents"
+   ]
+  },
+  "4.4.4": {
+   "title": "The Devil's Stone at Llanarth",
+   "also": [
+    "Llanarth",
+    "devil",
+    "diawl",
+    "belfry",
+    "Cardiganshire"
+   ]
+  },
+  "4.4.6": {
+   "title": "The Fairies' Castle at St. Nicholas",
+   "also": [
+    "Castle Correg",
+    "Cromlechs and their Fairy Legends",
+    "korrigans",
+    "Frennifawr",
+    "cromlech"
+   ]
+  },
+  "4.4.7": {
+   "title": "The Stone of the Wolf Bitch",
+   "also": [
+    "Gast Rhymhi",
+    "The Welsh Melusina",
+    "greyhound",
+    "cromlech",
+    "Culhwch and Olwen"
+   ]
+  },
+  "4.4.8": {
+   "title": "Parc-y-Bigwrn Cromlech",
+   "also": [
+    "Llanboidy",
+    "moving a cromlech",
+    "fairy bees"
+   ]
+  },
+  "4.4.9": {
+   "title": "Connection of these Stones with Ancient Druidism",
+   "also": [
+    "Cromlechs",
+    "Druids",
+    "Inscribed stones",
+    "Standing stones",
+    "Tombstones"
+   ]
+  },
+  "4.5.1": {
+   "title": "The Shower at the Magic Fountain",
+   "also": [
+    "Lady of the Fountain",
+    "Owain",
+    "Red Lady of Paviland",
+    "Fall of Coychurch Tower",
+    "treasure"
+   ]
+  },
+  "4.5.2": {
+   "title": "The Ringing Hollow of Caerau",
+   "also": [
+    "Thunder and Lightning evoked by Digging",
+    "Caerau",
+    "treasure-seekers",
+    "Cardiganshire"
+   ]
+  },
+  "4.5.3": {
+   "title": "The Treasure-Chest under Moel Arthur",
+   "also": [
+    "Moel Arthur",
+    "Vale of Clwyd",
+    "iron chest",
+    "treasure"
+   ]
+  },
+  "4.5.4": {
+   "title": "The Treasure Dream of Pant-y-Saer",
+   "also": [
+    "Pant-y-Saer",
+    "Modern Credulity",
+    "crochan aur",
+    "Fountain of St Bernacus",
+    "dreams of treasure"
+   ]
+  },
+  "4.5.5": {
+   "title": "The Cavern of the Ravens",
+   "also": [
+    "Ogof Cigfrain",
+    "ravens",
+    "drover",
+    "treasure",
+    "Glamorgan"
+   ]
+  },
+  "4.5.7": {
+   "title": "Sleeping Warriors as Treasure-Guarders",
+   "also": [
+    "Owain Lawgoch",
+    "Craig-y-Ddinas",
+    "Arthur asleep",
+    "St Samson's dragon",
+    "Red Dragon",
+    "Ychain Bannog",
+    "dragons"
+   ]
+  },
+  "4.5.8": {
+   "title": "The Goblins of Electricity",
+   "also": [
+    "Lightning",
+    "Dragons",
+    "Draig",
+    "Thunder",
+    "Thor",
+    "Treasure caves",
+    "Red Dragon"
+   ]
+  }
+ }
+}

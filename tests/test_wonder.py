@@ -56,11 +56,11 @@ def test_articles_are_read_from_the_page():
 
 
 def test_titles():
-    assert build.titled("FOX KILLED BY A SWAN.") == "Fox Killed by a Swan"
-    assert build.titled("HENRY VIII.'S WALKING STICK.") == "Henry VIII.'s Walking Stick"
-    assert build.titled("THE FIRST HERMITS—WHY SO-CALLED.") == "The First Hermits—Why So-Called"
-    assert build.titled("DR. JOHNSON'S HOUSE") == "Dr. Johnson's House"
-    assert build.titled("CIVIL WAR AND LOUIS XIV.") == "Civil War and Louis XIV"  # CIVIL isn't a numeral
+    assert build.gutenberg.titled("FOX KILLED BY A SWAN.") == "Fox Killed by a Swan"
+    assert build.gutenberg.titled("HENRY VIII.'S WALKING STICK.") == "Henry VIII.'s Walking Stick"
+    assert build.gutenberg.titled("THE FIRST HERMITS—WHY SO-CALLED.") == "The First Hermits—Why So-Called"
+    assert build.gutenberg.titled("DR. JOHNSON'S HOUSE") == "Dr. Johnson's House"
+    assert build.gutenberg.titled("CIVIL WAR AND LOUIS XIV.") == "Civil War and Louis XIV"  # CIVIL isn't a numeral
 
 
 def test_the_curation_is_checked_against_the_book():

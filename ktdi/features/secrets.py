@@ -95,7 +95,8 @@ async def what_autocomplete(interaction: discord.Interaction, current: str) -> l
 
 
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "secrets", random=lambda: secrets_embed(None),
-                            find=lambda topic: DICTIONARY.look_up(topic), title=title, link=url)
+                            find=lambda topic: DICTIONARY.look_up(topic, close_first=False), title=title,
+                            link=url)
 
 
 

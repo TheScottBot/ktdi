@@ -29,46 +29,13 @@ LAST = "PRINTED BY WILLIAM CLOWES"  # The printer's line after the last
 TITLE = re.compile(r'<p class="center">((?:(?!</p>).)*)</p>', re.S)
 SMALL_CAPS = re.compile(r'\s*<span class="smcap">([^<]*)(?:<br\s*/?>)?')
 RULE = "i_006"  # The decorative line between sections, not a picture of anything
-SMALL_WORDS = {"a", "an", "and", "as", "at", "by", "for", "from", "in", "into", "of", "on", "or", "the", "to", "with"}
-ROMAN = re.compile(r"^((?=[IVXLC])C{0,3}(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3}))(\.?(?:'S)?,?)$")  # Not "CIVIL"
-
-
-def plain(fragment: str) -> str:
-    """A bit of the page as text: italics as _italics_ (as Gutenberg's plain text has them, so oldbooks.escape shows
-    them), raised letters in their word ("y<sup>e</sup>" is "ye"), paragraphs apart, lines of verse and table rows on
-    lines of their own, page numbers and captions out."""
-    fragment = " ".join(fragment.split())  # The page's own line breaks mean nothing
-    fragment = re.sub(r'<span class="pagenum">.*?</span>', "", fragment)
-    fragment = re.sub(r'<div class="caption[^"]*">.*?</div>', "", fragment)
-    fragment = re.sub(r"<(i|em)\b[^>]*>(.*?)</\1>", lambda m: f"_{m[2].strip()}_" if m[2].strip() else m[2], fragment)
-    fragment = re.sub(r'</p>|</table>|<div class="(?:poem|stanza)[^"]*">', "\n\n", fragment)
-    fragment = re.sub(r"<br\s*/?>|</tr>|</div>", "\n", fragment)
-    fragment = re.sub(r"</t[dh]>\s*<t[dh][^>]*>", " — ", fragment)
-    fragment = html.unescape(re.sub(r"<[^>]+>", "", fragment)).replace("\xa0", " ")
-    paragraphs = ["\n".join(" ".join(line.split()) for line in block.split("\n") if line.strip())
-                  for block in re.split(r"\n\s*\n", fragment)]
-    return "\n\n".join(p for p in paragraphs if p)
-
-
-def titled(title: str) -> str:
-    """"FOX KILLED BY A SWAN." is "Fox Killed by a Swan"; "HENRY VIII.'S WALKING STICK" keeps its numerals."""
-    words = []
-    for i, word in enumerate(title.rstrip(".").split()):
-        numeral = ROMAN.match(word)
-        if numeral and word not in ("I", "A"):
-            words.append(numeral[1] + numeral[2].lower())  # "VIII.'S" is "VIII.'s"
-        elif i and word.lower() in SMALL_WORDS:
-            words.append(word.lower())
-        else:  # "SO-CALLED" is "So-Called", "JOHNSON'S" is "Johnson's"
-            words.append(re.sub(r"[^\W_]+(?:'[^\W_]+)?", lambda m: m[0][:1].upper() + m[0][1:], word.lower()))
-    return " ".join(words)
 
 
 def heading(block: str) -> str | None:
     """A centred block's title, if it's one: in capitals ("A LUCKY FIND."), or its first line in small capitals
     ("may-fair play bill in the time of william iii.", above the playbill itself)."""
     small = SMALL_CAPS.match(block)
-    title = " ".join(plain(small[1].upper() if small else block).split())
+    title = " ".join(gutenberg.html_text(small[1].upper() if small else block).split())
     return title if re.search(r"[A-Z]{3}", title) and not re.search(r"[a-z]", title) else None
 
 
@@ -88,7 +55,7 @@ def articles(page: str) -> list[dict]:
         images = [{"url": IMAGES + src, "caption": html.unescape(alt).strip()}
                   for alt, src in re.findall(r'<img alt="([^"]*)"[^>]*src="([^"]+)"', content) if RULE not in src]
         found.append({"number": number, "key": title if seen[title] == 1 else f"{title} ({seen[title]})",
-                      "title": titled(title), "text": plain(content), "images": images})
+                      "title": gutenberg.titled(title), "text": gutenberg.html_text(content), "images": images})
     return found
 
 
