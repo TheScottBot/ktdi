@@ -4,11 +4,11 @@ Project Gutenberg 45849): python -m ktdi.tools.wonder_build
 A Victorian cabinet of curiosities: about a thousand short articles ("A LUCKY FIND.", "HOOPS IN 1740.", "FOX KILLED
 BY A SWAN.") on remarkable objects, customs, people, inventions and claims, many with an engraving. It's read from
 the book's web page rather than its plain text, as that's where the pictures are: each article starts with its
-title, centred and in capitals, and keeps its own pictures (the plain text loses a hundred of them).
+title, centred and in capitals, and keeps its own pictures (the plain text only marks where they were).
 
 Each article is numbered in book order (the book doesn't number them: "Wonder No. 312" is ours), and only those in
 ktdi/lib/wonder_curation.json are kept, by title (a title the book uses twice is "TITLE (2)" the second time): the
-book was read once, and the dull, and what's 1894 at its worst (the racism, the gloating over executions and
+book was read once, and the dull, and what's Victorian at its worst (the racism, the gloating over executions and
 torture, cruelty to animals), left out. Writes ktdi/lib/wonder.json.
 
 To add one, read it in the book, then add its title to "keep".

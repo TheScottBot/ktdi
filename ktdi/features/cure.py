@@ -1,8 +1,8 @@
 """/cure <ailment>: Nicholas Culpeper's remedy for whatever ails you, from his Complete Herbal (1653).
 
 ktdi/lib/cure.py works out which ailment was meant (synonyms, any word order, typos: no AI); ktdi/lib/cures.json has
-the herbal's sentences for each, built by ktdi/tools/cure_build.py. Nothing matching gets All-heal, which Culpeper
-named for exactly this situation.
+the herbal's sentences for each, built by ktdi/tools/cure_build.py. Nothing matching gets All-heal, which the herbal
+says was named after Hercules.
 
 /plant <name> goes the other way: a herb, by any of Culpeper's names for it or its Latin name (ktdi/lib/herb_latin.json,
 checked by hand), and everything on /cure's list he says it's good for.
@@ -23,7 +23,7 @@ from ktdi.lib import fuzzy, links
 
 HELP_CATEGORY = "🌿 Hearth & herbs"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "cures.json"
-SOURCE = "Culpeper's Complete Herbal (1653)"
+SOURCE = "Culpeper's Complete Herbal (1653; 1850 edition)"
 BOOK = 49513  # On Project Gutenberg
 SOURCE_URL = links.gutenberg(BOOK)
 
@@ -111,7 +111,7 @@ def plant_embed(query: str) -> discord.Embed:
 @commands.hybrid_command(name="plant", description="What Culpeper's 1653 herbal says a plant cures.")
 @app_commands.describe(name="A plant: any common name (ground ivy, piss-a-beds) or its Latin one (Glechoma hederacea)")
 async def plant(ctx: commands.Context, *, name: str):
-    """One of Culpeper's 320 herbs by any name he gives it (ground ivy, piss-a-beds) or its Latin name: the planet he
+    """One of the herbal's 320 herbs by any name he gives it (ground ivy, piss-a-beds) or its Latin name: the planet he
     puts it under, everything on `/cure`'s list he says it's good for, and one of his remedies. Typos are fine."""
     await ctx.send(embed=plant_embed(name))
 

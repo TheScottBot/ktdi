@@ -62,7 +62,7 @@ def omens_embed(what: str | None) -> discord.Embed:
 async def omen(ctx: commands.Context, *, what: str | None = None):
     """An everyday superstition and where it came from, from Robert Means Lawrence's The Magic of the Horse-shoe
     (1898): why a horseshoe over the door is lucky (and which way up), spilling salt, blessing a sneeze, unlucky
-    Fridays and lucky days, rats and caterpillars served with legal notices, charms against animals, the luck of odd
+    Fridays and lucky days, rats summoned to court, charms against animals, the luck of odd
     numbers and the ill luck of thirteen. Give one (salt, sneezing, Friday, thirteen, horseshoes) for a passage on
     it; the titles autocomplete. Ask again for another. On its own: any omen. Typed, `!omens` and `!superstition`
     work too."""

@@ -2,7 +2,7 @@
 domain, Project Gutenberg), when the Victorians sent messages in bouquets: a pansy is "Think of me", basil "Hate".
 
 The flowers are in ktdi/lib/flowers.json, built by ktdi/tools/flower_build.py from a hand-read allowlist: about 270,
-each with its meanings, the book's chapter of prose and verse for about a hundred of them, and one of the book's six
+each with its meanings, the book's chapter of prose and verse for 70 of them, and one of the book's six
 coloured plates of bouquets for a dozen. /flowermeaning <flower> is its meaning; /flowermeaning <meaning> ("love",
 "grief") is a flower that means it, with the others that do named; on its own, any flower. The meanings are Dumont's:
 other books of the day give others, and the footer says so.

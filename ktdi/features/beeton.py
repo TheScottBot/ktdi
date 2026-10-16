@@ -1,4 +1,4 @@
-"""/beeton: Mrs Beeton's Book of Household Management (1861, public domain). Her recipes really work.
+"""/beeton: Mrs Beeton's Book of Household Management (1861, public domain).
 
 /beeton recipe <dish> finds a recipe by name, or one using an ingredient ("eels"), with the others that use it
 listed; with no dish it's a random one ("what's for dinner, 1861"). Each shows her ingredients, method, time, cost

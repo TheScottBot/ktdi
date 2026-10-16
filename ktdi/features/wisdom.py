@@ -44,8 +44,8 @@ DAILY = daily.register(daily.Daily(
                        description="Old wisdom from any of the old books, at random. Or set up a daily one.")
 async def wisdom_group(ctx: commands.Context):
     """A random piece of old wisdom from any of the old books: Pliny, Topsell's bestiary, the Book of Secrets,
-    Mrs Beeton, the Devil's Dictionary, Grose's slang, Miller's dreams and the rest (each book is as likely as any
-    other, however big it is). Every one comes with the command that has more from the same book.
+    Mrs Beeton, the Devil's Dictionary, Grose's slang, Miller's dreams and the rest (each book's command is as likely
+    as any other, however big the book). Every one comes with the command that has more from the same book.
 
     **Old Wisdom of the Day:** someone with Manage Server runs `/wisdom setup here` in a channel, and one is posted
     there every day, from a different book each day. Give a time (`/wisdom setup here 7:30am`) or it's 9am, where

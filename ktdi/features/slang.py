@@ -1,5 +1,6 @@
-"""/vulgartongue: Regency slang from Grose's 1811 Dictionary of the Vulgar Tongue ("Buckish Slang, University Wit, and
-Pickpocket Eloquence"). Handy for NPC dialogue; handier for calling your friends a Captain Queernabs.
+"""/vulgartongue: slang from Captain Grose's Dictionary of the Vulgar Tongue (1785), in the enlarged 1811 edition
+("Buckish Slang, University Wit, and Pickpocket Eloquence").
+Handy for NPC dialogue; handier for calling your friends a Captain Queernabs.
 
 /vulgartongue lookup <word> looks a word up (any word order, small typos), or failing that finds the entries whose definitions
 use it ("drunk" gets every 1811 way of saying drunk); with no word, it's a random entry. /vulgartongue insult @someone
@@ -21,7 +22,7 @@ from ktdi.lib import fuzzy, links
 
 HELP_CATEGORY = "📚 Words & wisdom"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "slang.json"
-SOURCE = "Grose's Dictionary of the Vulgar Tongue (1811)"
+SOURCE = "Grose's Dictionary of the Vulgar Tongue (1811 edition)"
 BOOK = 5402  # On Project Gutenberg
 COLOUR = discord.Color.dark_teal()
 
@@ -96,7 +97,7 @@ def insult_text(insulter: discord.abc.User, person: discord.abc.User, entry: dic
                        description="1811 slang: look a word up, find the slang for one, or get a random one.")
 @app_commands.describe(word="A word to look up, or a plain one (drunk, fool...) to find the slang for. Empty: random")
 async def slang(ctx: commands.Context, *, word: str | None = None):
-    """Regency slang from Grose's Dictionary of the Vulgar Tongue (1811). `/vulgartongue lookup <word>` looks a word up,
+    """Slang from Grose's Dictionary of the Vulgar Tongue (1811 edition). `/vulgartongue lookup <word>` looks a word up,
     or for a plain word (drunk, coward) finds the slang for it. `/vulgartongue random`: a random phrase.
     `/vulgartongue insult @someone` insults them in the words of 1811 (enough insults flying and it's a diplomatic
     incident: `/wars`)."""

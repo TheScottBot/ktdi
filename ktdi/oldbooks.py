@@ -224,15 +224,15 @@ SHELVES = {  # The command for each, and what's on it; every old book is on at l
         "Victorian wonders", "fairies, salt, Friday, roses or ghosts"),
     "esoteric": Shelf(
         "🔮", "Esoteric", "secrets, dreams, gems, talismans and charms",
-        "Albertus Magnus's secrets, dreams, astrological cures, gems and talismans, magic squares, witches, and the "
-        "magic in the folklore books", "salt, the moon, rubies, scarabs or eagles"),
+        "the Book of Secrets credited to Albertus Magnus, dreams, astrological cures, gems and talismans, magic "
+        "squares, witches, and the magic in the folklore books", "salt, the moon, rubies, scarabs or eagles"),
     "words": Shelf(
         "📚", "Words", "slang, lost words, Bierce and Brewer",
         "Grose's slang, Mackay's lost words, Bierce's Devil's Dictionary and Brewer's phrases",
         "drunk, love, fool, money or the devil"),
     "household": Shelf(
         "🏠", "Household", "Mrs Beeton, Enquire Within, manners and melancholy",
-        "Mrs Beeton, Enquire Within, the etiquette manuals, the 1531 herbal and Burton's melancholy",
+        "Mrs Beeton, Enquire Within, the etiquette manuals, the 1531 health handbook and Burton's melancholy",
         "eggs, servants, dinner, cheese or sleep"),
 }
 

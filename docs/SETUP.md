@@ -38,7 +38,7 @@ The commands only work, and only appear, in the servers in `RPG_GUILD_IDS`, and 
 
 `/herbal` posts from `ktdi/lib/herbal.json`, built once from the [1531 *Tacuini sanitatis* on archive.org](https://archive.org/details/bub_gb_9lIU1a_-ddAC). The bad translations are the point, and they come from Google Translate, through Google Sheets (free, no API key):
 
-1. `python -m ktdi.tools.herbal_build extract` reads archive.org's OCR of the book's tables, keeps the cells that look like words (about 600), and writes `herbal-build/herbal_cells.csv` (gitignored), with `GOOGLETRANSLATE` formulas on each row: the translation, then four worse levels for digging.
+1. `python -m ktdi.tools.herbal_build extract` reads archive.org's OCR of the book's tables, keeps the cells that look like words (about 550), and writes `herbal-build/herbal_cells.csv` (gitignored), with `GOOGLETRANSLATE` formulas on each row: the translation, then four worse levels for digging.
 2. In Google Sheets: **File → Import → Upload** that CSV (**Replace spreadsheet**). Wait until no cell says *Loading…*: it's a few thousand translations, so give it a while (scroll to the bottom right to check), then **File → Download → Comma-separated values**.
 3. `python -m ktdi.tools.herbal_build merge` finds that download in your Downloads folder and writes `ktdi/lib/herbal.json`. Commit it, deploy, and `/herbal` is live.
 

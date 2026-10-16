@@ -1,4 +1,4 @@
-"""/pliny [topic]: Pliny the Elder's Natural History (AD 77, in Bostock and Riley's 1855 translation, public domain),
+"""/pliny [topic]: Pliny the Elder's Natural History (AD 77, in Bostock and Riley's 1855-57 translation, public domain),
 in which a Roman admiral wrote down everything anyone ever told him: elephants that worship the moon, the basilisk,
 showers of milk and baked tiles, mares impregnated by the wind.
 

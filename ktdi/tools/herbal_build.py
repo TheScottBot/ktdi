@@ -14,7 +14,7 @@
         the translations (and the worse levels for digging) onto the cells and writes ktdi/lib/herbal.json, which
         /herbal posts from.
 
-The OCR is bad (blackletter, long s read as f...) and machine translation of bad Latin is worse. That's the point.
+The OCR is bad (the long s read as f, and worse) and machine translation of bad Latin is worse. That's the point.
 """
 
 import csv

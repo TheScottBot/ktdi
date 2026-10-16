@@ -21,7 +21,7 @@ from ktdi.lib import links
 HELP_CATEGORY = "🐉 Beasts & magic"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "wonder.json"
 BOOK = 45849  # Project Gutenberg
-SOURCE = "Ten Thousand Wonderful Things (1894)"
+SOURCE = "Ten Thousand Wonderful Things (1894 edition)"
 EMOJI = "✨"
 COLOUR = discord.Color.from_rgb(176, 141, 87)  # Brass, like a cabinet's fittings
 
@@ -58,14 +58,15 @@ def wonders_embed(topic: str | None) -> discord.Embed:
 
 
 @commands.hybrid_command(name="wonder", aliases=["wonders", "curiosity"],
-                         description="A Victorian curiosity from Ten Thousand Wonderful Things (1894), engraving and all.")
+                         description="A Victorian curiosity from Ten Thousand Wonderful Things, engraving and all.")
 @app_commands.describe(topic="Anything (giants, clocks, coffee, swans, highwaymen...). Empty: a random one")
 async def wonder(ctx: commands.Context, *, topic: str | None = None):
-    """A curiosity from Ten Thousand Wonderful Things (1894), a Victorian cabinet of curiosities: remarkable objects,
+    """A curiosity from Ten Thousand Wonderful Things (first published about 1860; this is the 1894 edition), a
+    Victorian cabinet of curiosities: remarkable objects,
     old customs, eccentrics, inventions, animals and extraordinary claims, with the book's engraving when it has one.
     On its own: a random one, for stumbling on something odd. Give a topic (giants, clocks, coffee, swans,
     highwaymen) for one about it (the titles autocomplete); ask again for another. Each is numbered (Wonder No. 312)
-    and links to its place in the book. They're the book's claims, as it made them in 1894, not checked facts.
+    and links to its place in the book. They're the book's claims, as it made them, not checked facts.
     Typed, `!wonders` and `!curiosity` work too."""
     await ctx.send(embed=wonders_embed(topic))
 

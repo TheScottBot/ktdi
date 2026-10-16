@@ -69,12 +69,12 @@ def talismans_embed(thing: str | None) -> discord.Embed:
 @app_commands.describe(thing="A charm, symbol, sign or stone (scarab, ankh, aries, diamond...). Empty: random")
 async def talisman(ctx: commands.Context, *, thing: str | None = None):
     """A talisman or charm and what it was for, or a sign of the zodiac and its stones, from William Thomas and Kate
-    Pavitt's The Book of Talismans, Amulets and Zodiacal Gems (1922): the ankh, the scarab and the Eye of Horus,
+    Pavitt's The Book of Talismans, Amulets and Zodiacal Gems (1922): the ankh, the scarab and the Eye of Osiris,
     Chinese and Japanese charms, Gnostic gems, the pentagram, posy rings and gemmel rings, and a chapter for each star
     sign with its stones, its planet and the famous gems that go with it. Give a thing
     (`/talisman scarab`), a sign (`/talisman leo`) or a stone (`/talisman opal`) for a passage on it, with the book's
     drawing of it when there is one; the titles autocomplete. Ask again for another. On its own: any. It goes well
-    with `/gemlore`. The Pavitts made talismanic jewellery and wrote as believers, so it's their account, not
+    with `/gemlore`. William Pavitt made talismanic jewellery, and both wrote as believers, so it's their account, not
     checked fact. Typed, `!talismans`, `!amulet` and `!zodiac` work too."""
     await ctx.send(embed=talismans_embed(thing))
 

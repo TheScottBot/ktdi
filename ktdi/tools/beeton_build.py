@@ -3,7 +3,7 @@ Gutenberg: python -m ktdi.tools.beeton_build
 
 Every paragraph in the book is numbered. A recipe is one that starts "INGREDIENTS.--", under its title in capitals,
 with its _Mode_, _Time_, _Average cost_, _Seasonable_ and _Sufficient_ (and often an aside on where the food comes
-from, set in smaller type). Advice is the numbered paragraphs of the chapters on running a house: the mistress, the
+from). Advice is the numbered paragraphs of the chapters on running a house: the mistress, the
 housekeeper, the kitchen, dinners and dining, servants, and legal memoranda (not the nursery or the doctor: /cure
 has that). In the dinners chapter, her plain family dinners ("PLAIN FAMILY DINNERS FOR OCTOBER.", then a
 fortnight of days: "_Sunday_.--1. Roast sucking-pig... 2. Damson tart...") are menus, in courses. Only the paragraphs in ktdi/lib/beeton_curation.json are kept (their numbers): the book was read once,

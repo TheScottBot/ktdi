@@ -3,7 +3,7 @@ Gutenberg 71779): python -m ktdi.tools.flower_build
 
 The Victorians sent messages in flowers, and books like this one were the dictionary: a pansy is "Think of me",
 basil "Hate", an asphodel "My regrets follow you to the grave". This one has a Dictionary of Flowers (about 250, each
-with its meaning), a chapter of prose and verse on about a hundred of them, and six hand-coloured plates of bouquets
+with its meaning), a chapter of prose and verse on about a hundred of them, and six coloured plates of bouquets
 that spell out whole messages ("Your self-love and stupidity excite my pity"). Each flower is kept with its
 meanings, its chapter if it has one, and the plate it's in if it's in one. The meanings are this compiler's: other
 books of the day gave others.

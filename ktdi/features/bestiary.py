@@ -71,7 +71,7 @@ async def bestiary(ctx: commands.Context, *, beast: str | None = None):
     Serpents (1608), in which a Jacobean clergyman gathered everything ever said about every animal, believed nearly
     all of it, and put the unicorn, the gorgon and the winged dragon in among the badgers and the cats. Give a beast
     (unicorn, dragon, elephant, hedgehog, cockatrice, toad) for a passage about it; the beasts autocomplete. Ask again
-    for another on the same beast. On its own: any passage. It's in his own 1607 spelling (u and v swap: "Vnicorne",
+    for another on the same beast. On its own: any passage. It's in the books' own spelling (u and v swap: "Vnicorne",
     "haue"), and links to the page in the printed book. Typed, `!topsell` works too."""
     await ctx.send(embed=bestiary_embed(beast))
 

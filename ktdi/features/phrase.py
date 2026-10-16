@@ -1,5 +1,5 @@
 """/phrase [idiom]: where an idiom comes from, according to the Rev. E. Cobham Brewer's Dictionary of Phrase and Fable
-(1898, public domain), who was very sure of himself.
+(1898, public domain), who was very sure of his etymologies.
 
 The idioms are hand-picked from the archive.org scan into ktdi/lib/phrases.json, the OCR mended against the page:
 only phrases people still use or would want to know about (not Brewer's thousands of gods, saints and poets), each

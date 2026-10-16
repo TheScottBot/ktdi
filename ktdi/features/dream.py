@@ -21,7 +21,7 @@ from ktdi.lib import links
 
 HELP_CATEGORY = "🐉 Beasts & magic"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "dream.json"
-SOURCE = "Miller, Ten Thousand Dreams Interpreted (1901)"
+SOURCE = "Miller, Ten Thousand Dreams Interpreted (first published 1901)"
 BOOK = 926  # Project Gutenberg
 COLOUR = discord.Color.purple()
 DISCLAIMERS = [

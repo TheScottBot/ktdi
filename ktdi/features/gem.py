@@ -73,9 +73,9 @@ async def gemlore(ctx: commands.Context, *, stone: str | None = None):
     stones of the months, days, planets and zodiac, crystal balls, the High-Priest's breastplate, cursed and glowing
     stones, and famous jewels with stories. Give a stone (ruby, jade, opal), a month (`/gemlore january`) or a thing
     (crystal ball, breastplate) for a passage on it; the titles autocomplete. Ask again for another. On its own: any
-    stone. It goes well with `/secrets`, Albertus Magnus's book of stones. Kunz looked back over centuries of
-    writers, and some of what he says they believed is disputed. Typed, `!gems` and `!birthstone` work too. Its
-    medicine chapter isn't in it."""
+    stone. It goes well with `/secrets`, the Book of Secrets once credited to Albertus Magnus. Kunz looked back over
+    centuries of writers, and some of what he says they believed is disputed. Typed, `!gems` and `!birthstone` work
+    too. Its medicine chapter isn't in it."""
     await ctx.send(embed=gems_embed(stone))
 
 

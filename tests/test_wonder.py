@@ -83,7 +83,7 @@ def test_a_wonder_with_its_picture():
     assert embed.title == "✨ Henry VIII.'s Walking Stick"
     assert embed.description == "King Henry VIII. walking one night\nround the city."
     assert embed.image.url == f"{build.IMAGES}images/i_030.jpg"
-    assert embed.footer.text == ("Wonder No. 3, from Ten Thousand Wonderful Things (1894). The book's claims, not "
+    assert embed.footer.text == ("Wonder No. 3, from Ten Thousand Wonderful Things (1894 edition). The book's claims, not "
                                  "checked facts.")
     assert embed.url.startswith("https://www.gutenberg.org/cache/epub/45849/pg45849-images.html#:~:text=King")
 

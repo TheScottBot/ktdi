@@ -21,11 +21,11 @@ In Discord, `/help` has the same tour: a front page, a page per section, and a p
 for a friend, blame can be passed to whoever spoke last and bribed back again, the committee keeps the money, and
 the spray futures market lets you bet on who's next. It's all for show and all remembered.
 
-**📜 The old books.** About two dozen public-domain books, read by hand and kept to what's fun and kind: Pliny's beasts,
-Topsell's dragons, a medieval book of magic secrets, Victorian dreams, superstitions, goblins, gems and talismans,
-1811 slang, Mrs Beeton and an 1860s etiquette manual. `/lore dragon` asks all of them at once; `/nature`,
-`/folklore`, `/esoteric`, `/words` and `/household` ask one shelf; each book has its own command too. Old Wisdom of
-the Day posts one in a channel every day, at a time the server picks.
+**📜 The old books.** About two dozen public-domain books, read by hand and kept to what's fun and kind: Pliny's
+beasts, Topsell's dragons, a medieval book of magic secrets, turn-of-the-century dreams, superstitions, goblins,
+gems and talismans, 1811 slang, Mrs Beeton and two Victorian etiquette manuals. `/lore dragon` asks all of them at once;
+`/nature`, `/folklore`, `/esoteric`, `/words` and `/household` ask one shelf; each book has its own command too. Old
+Wisdom of the Day posts one in a channel every day, at a time the server picks.
 
 Around those: movie nights, quotes, D&D campaign links and reminders, unit conversions (sincere and absurd),
 timezones, the weather, and the library.
@@ -55,13 +55,13 @@ All the old books at once, then dictionaries, idioms, manners and gloom.
 - `nature` · `folklore` · `esoteric` · `words` · `household`: the same, on one shelf
 - `wisdom`: old wisdom at random, or Old Wisdom of the Day in a channel
 - `vulgartongue`: 1811 slang · `deadword`: words English lost · `devils`: Bierce's Devil's Dictionary
-- `phrase`: where an idiom comes from · `etiquette`: what an 1860s manual says to do
+- `phrase`: where an idiom comes from · `etiquette`: what a Victorian manual says to do
 - `enquire`: the Victorian answer to anything · `melancholy`: Burton's gloomy wisdom (1621)
 
 ### [🐉 Beasts & magic](docs/COMMANDS.md#beasts-and-magic)
 Monsters, marvels, curiosities, stones, spells, witches and dreams.
 - `pliny`: Pliny's Natural History (AD 77) · `pseudodoxia`: Browne's vulgar errors (1646)
-- `bestiary`: Topsell's beasts (1607) · `wonder`: Ten Thousand Wonderful Things (1894)
+- `bestiary`: Topsell's beasts (1607) · `wonder`: Ten Thousand Wonderful Things (c. 1860)
 - `secrets`: the Boke of Secretes (1560) · `hammeredofwitches`: witch-finding tips from the Malleus (1486)
 - `dream`: what your dream foretells (1901) · `omen`: everyday superstitions (1898)
 - `goblin`: Welsh fairies, ghosts and customs (1880) · `gemlore`: precious stones (1913)
@@ -69,8 +69,8 @@ Monsters, marvels, curiosities, stones, spells, witches and dreams.
 
 ### [🌿 Hearth & herbs](docs/COMMANDS.md#hearth-and-herbs)
 Mrs Beeton, Culpeper's cures, the language of flowers and the almanac.
-- `beeton`: Mrs Beeton's recipes and advice (1861) · `almanac`: today in Hone's Every-Day Book (1826)
-- `cure` / `plant`: Culpeper's herbal remedies (1653) · `herbal`: a 1531 herbal, machine-translated
+- `beeton`: Mrs Beeton's recipes and advice (1861) · `almanac`: today in Hone's Every-Day Book (1826-27)
+- `cure` / `plant`: Culpeper's herbal remedies (1653) · `herbal`: a 1531 health handbook, machine-translated
 - `flowermeaning`: the Victorian language of flowers (1851)
 
 ### [🎬 Movie night](docs/COMMANDS.md#movie-night)
@@ -89,7 +89,7 @@ Units, sincerely or absurdly.
 
 ### [🔧 Utilities](docs/COMMANDS.md#utilities)
 Timezones, weather and settings.
-- `timezone`: convert times between timezones · `weather`: the forecast, and what 1890s folk wisdom makes of it
+- `timezone`: convert times between timezones · `weather`: the forecast, and what old folk wisdom makes of it
 - `books`: the library (optional) · `rpg`: RPG rulebooks (optional)
 - `settings`: this server's settings · `help`: the tour, in Discord
 

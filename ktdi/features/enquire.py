@@ -1,6 +1,6 @@
 """/enquire [anything]: the Victorian answer to it, from Enquire Within Upon Everything (1856; public domain), the
-book that was the internet before the internet: how to light a candle, play écarté, mend a chair, choose a mackerel,
-or speak like a Londoner who has corrected his defects.
+book that was the internet before the internet: how to light a candle, play écarté, clean a cane chair, choose a
+mackerel, or speak like a Londoner who has corrected his defects.
 
 The hints are in ktdi/lib/enquire.json, built by ktdi/tools/enquire_build.py from a hand-read allowlist (with the
 medical, poisoning and chemistry topics left out whole: /cure has the remedies). /enquire on its own is a random
@@ -19,7 +19,7 @@ from ktdi.lib import links
 
 HELP_CATEGORY = "📚 Words & wisdom"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "enquire.json"
-SOURCE = "Enquire Within Upon Everything (1856)"
+SOURCE = "Enquire Within Upon Everything (1856; 1894 edition)"
 BOOK = 10766  # Project Gutenberg
 COLOUR = discord.Color.teal()
 

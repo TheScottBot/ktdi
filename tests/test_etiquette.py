@@ -73,7 +73,7 @@ def test_gentleman_gentlewoman_gentlethem(monkeypatch):
     gentleman = etiquette.advice_embed("texting", "gentleman")
     assert gentleman.title == "🎩 Gentleman's etiquette: texting"
     assert gentleman.description == "> Never write a letter in pencil.\n-# Filed under: letters"
-    assert gentleman.footer.text == "Routledge's Manual of Etiquette (1860s)"
+    assert gentleman.footer.text == "Routledge's Manual of Etiquette (c. 1875)"
     assert gentleman.url == ("https://www.gutenberg.org/cache/epub/12426/pg12426-images.html"
                              "#:~:text=Never%20write%20a%20letter%20in%20pencil.")  # Open at the rule
     gentlewoman = etiquette.advice_embed("ball", "gentlewoman")

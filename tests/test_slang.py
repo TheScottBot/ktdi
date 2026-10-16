@@ -142,7 +142,7 @@ def test_insulting_someone(monkeypatch):
     ctx = Ctx(SCOTT)
     run(slang.slang_insult.callback(ctx, DAVE))
     assert ctx.last.content == ("🎩 <@1> has insulted <@2>, in the words of 1811:\n# Captain Queernabs!\n"
-                                "> A shabby ill-dressed fellow.\n-# Grose's Dictionary of the Vulgar Tongue (1811)")
+                                "> A shabby ill-dressed fellow.\n-# Grose's Dictionary of the Vulgar Tongue (1811 edition)")
     assert [u.id for u in ctx.last.allowed_mentions.users] == [DAVE.id]  # only the insulted is pinged
 
 

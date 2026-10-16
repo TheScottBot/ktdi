@@ -94,10 +94,10 @@ def lore_embed(thing: str, shelf: str | None = None) -> discord.Embed:
 @app_commands.describe(thing="Anything at all (dragon, love, eels, the moon, cheese...)")
 async def lore(ctx: commands.Context, *, thing: str):
     """What all the old books have to say about something, side by side: `/lore dragon` is Pliny's, Browne's and
-    Topsell's dragons, Albertus's dragon stone, Miller's dream of one, and whatever else turns up. One entry from each
-    book, with where it mentions the thing and a link to the page; each ends with the command that has the rest
-    (`/pliny dragon`). Books with an entry for the thing come first, then ones that only mention it. Old spelling is
-    found too ("love" finds "loue"). The almanac, the weather sayings and a few others go by date or chance, not
+    Topsell's dragons, the Book of Secrets' dragon stone, Miller's dream of one, and whatever else turns up. One entry
+    from each book, with where it mentions the thing and a link to the page; each ends with the command that has the
+    rest (`/pliny dragon`). Books with an entry for the thing come first, then ones that only mention it. Old spelling
+    is found too ("love" finds "loue"). The almanac, the weather sayings and a few others go by date or chance, not
     topic, so they're not in it; they turn up in Old Wisdom of the Day. For one kind of book only, ask a shelf:
     `/nature`, `/folklore`, `/esoteric`, `/words` or `/household`."""
     await ctx.send(embed=lore_embed(thing))

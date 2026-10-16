@@ -1,6 +1,5 @@
 """/almanac day [date] (typed: !almanac [date]): the day as William Hone's Every-Day Book (1826-27, public domain) has it: its saints, its flower,
-London's mean temperature for it (1797-1816), and a passage on its customs, folklore or history ("On the first of
-April, 1810, Napoleon married Maria Louisa... some of the waggish Parisians called him un poisson d'Avril").
+London's mean temperature for it (1797-1816), and a passage on its customs, folklore or history.
 
 No date: today (in BOT_TIMEZONE). A date: "5 november", "nov 5", "5/11", "tomorrow". Ask again for another passage.
 /almanac setup here [time] posts the day's in a channel every morning (ktdi/daily.py, as Old Wisdom of the Day does).
@@ -99,11 +98,11 @@ DAILY = daily.register(daily.Daily("almanac", "The almanac", "📅", "almanac", 
 
 
 @commands.hybrid_group(name="almanac", aliases=["onthisday", "hone"], fallback="day", invoke_without_command=True,
-                       description="Today (or any day) in Hone's Every-Day Book (1826): saints, flower, folklore.")
+                       description="Today (or any day) in Hone's Every-Day Book (1826-27): saints, flower, folklore.")
 @app_commands.describe(date="A day (5 november, nov 5, 5/11, tomorrow). Empty: today")
 async def almanac(ctx: commands.Context, *, date: str | None = None):
     """Today, or any day (`/almanac day 5 november`, `nov 5`, `25/12`, `tomorrow`; typed, just `!almanac 5 november`),
-    as William Hone's Every-Day Book (1826) has it: the day's saints, a passage on its customs, folklore or history,
+    as William Hone's Every-Day Book (1826-27) has it: the day's saints, a passage on its customs, folklore or history,
     its flower, and London's average temperature for it in 1797-1816. Ask again for another passage: most days have
     two or three. 29 February has nothing (neither 1825 nor 1826 had one).
 

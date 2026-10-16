@@ -169,7 +169,7 @@ def test_no_plant_for_nonsense(typed):
 def test_plant_embed(monkeypatch):
     monkeypatch.setattr(cure.random, "choice", lambda options: options[0])
     embed = cure.plant_embed("ground ivy")
-    assert embed.title == "🌿 Alehoof, or Ground-Ivy" and embed.footer.text == "Culpeper's Complete Herbal (1653)"
+    assert embed.title == "🌿 Alehoof, or Ground-Ivy" and embed.footer.text == "Culpeper's Complete Herbal (1653; 1850 edition)"
     lines = embed.description.split("\n")
     assert lines[:3] == ["*Glechoma hederacea*", "♀ Governed by Venus",
                          "Also called Cat's-foot, Gill-go-by-ground, Gill-creep-by-ground, Turn-hoof, Haymaids"]
@@ -201,7 +201,7 @@ def test_cure_embed(monkeypatch):
     embed = cure.cure_embed("my throat is tickly")
     assert embed.title == "🌿 A cure for my throat is tickly"
     assert embed.description == "**Sage**: It helps the **quinsy** \\*wonderfully\\*.\n-# Filed under: sore throat"
-    assert embed.footer.text == "Culpeper's Complete Herbal (1653)"
+    assert embed.footer.text == "Culpeper's Complete Herbal (1653; 1850 edition)"
     assert embed.url == ("https://www.gutenberg.org/cache/epub/49513/pg49513-images.html"
                          "#:~:text=It%20helps%20the%20quinsy")  # Open at the remedy; "*wonderfully*." isn't plain
     assert "Filed under" not in cure.cure_embed("sore throat").description  # asked for it by name

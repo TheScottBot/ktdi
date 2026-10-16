@@ -1,11 +1,11 @@
 """Build /pliny's chapters from Pliny the Elder's Natural History (AD 77), in John Bostock and H. T. Riley's
-translation (1855), from Project Gutenberg's six volumes: python -m ktdi.tools.pliny_build
+translation (1855-57), from Project Gutenberg's six volumes: python -m ktdi.tools.pliny_build
 
 Pliny wrote down everything anyone told him: elephants that worship the moon, people with no mouths who live on the
 smell of apples, a fish that stops ships. Every book is in short titled chapters ("CHAP. 3. (3.)--THE DOCILITY OF THE
-ELEPHANT."), each one an entry here, its footnote marks taken out. Only the chapters in
-ktdi/lib/pliny_curation.json are kept (as "VIII.3": book, chapter): the books worth it (the world, man, the animals,
-remedies, metals and stones; not the gazetteer, trees or crops) were read once, chapter by chapter, keeping the
+ELEPHANT."), each one an entry here, its footnote marks taken out. Only the chapters in ktdi/lib/pliny_curation.json
+are kept (as "VIII.3": book, chapter): the books worth it (the world, man, the animals, remedies from animals, metals
+and stones; not the gazetteer, trees, crops or plant remedies) were read once, chapter by chapter, keeping the
 gloriously wrong and leaving out anything racist, cruel, or a remedy someone might actually try. Writes
 ktdi/lib/pliny.json. The books are public domain; they're downloaded each time (about 9 MB).
 

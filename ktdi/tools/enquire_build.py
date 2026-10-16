@@ -2,12 +2,12 @@
 python -m ktdi.tools.enquire_build
 
 Every hint in the book is a numbered paragraph with a title ("1000. Lighting Candles." and how to). The book's
-contents give the number each topic starts at (roughly: the book is famously jumbled). The medical, poisoning,
-cosmetic, vermin-killing and chemistry topics are left out whole (their advice would hurt someone who followed it,
-and /cure has the remedies), as are the reckoning tables. Of the rest, only the hints in
-ktdi/lib/enquire_curation.json are kept (by number and title): the book was read once, and anything racist, cruel,
-dangerous or meaningless on its own left out, so it's never in the repo. Writes ktdi/lib/enquire.json. The book is public domain; it's
-downloaded each time (about 2 MB).
+contents give the number each topic starts at (roughly: its own preface expects readers to find it "confused and
+ill-arranged"). The medical, poisoning, cosmetic, vermin-killing and chemistry topics are left out whole (their advice
+would hurt someone who followed it, and /cure has the remedies), as are the reckoning tables. Of the rest, only the
+hints in ktdi/lib/enquire_curation.json are kept (by number and title): the book was read once, and anything racist,
+cruel, dangerous or meaningless on its own left out, so it's never in the repo. Writes ktdi/lib/enquire.json. The book
+is public domain; it's downloaded each time (about 2 MB).
 
 To add a hint, read it in the book first, then add its number and title to "keep" ("1000. Lighting Candles").
 """
@@ -77,7 +77,8 @@ def entries(book: str) -> list[dict]:
 
 
 def key(entry: dict) -> str:
-    """How a hint is named on the allowlist: "1000. Lighting Candles" (the book numbers two pairs of hints the same)."""
+    """How a hint is named on the allowlist: "1000. Lighting Candles" (the book numbers three pairs of hints the
+    same)."""
     return f"{entry['number']}. {entry['title']}"
 
 

@@ -1,4 +1,5 @@
-"""Build /cure's remedies from Culpeper's Complete Herbal (1653), from Project Gutenberg:  python -m ktdi.tools.cure_build
+"""Build /cure's remedies from Culpeper's Complete Herbal (1653, in the 1850 London edition, which adds over a
+hundred herbs), from Project Gutenberg:  python -m ktdi.tools.cure_build
 
 Reads each herb's "Government and virtues" (what it cures, in Culpeper's words), finds the sentences that mention each
 ailment in ktdi/lib/ailments.py, and writes ktdi/lib/cures.json (also each herb's names, planet and what it treats,
@@ -41,7 +42,7 @@ class Herb:
     name: str  # As Culpeper titles it: "Alehoof, or Ground-Ivy"
     aliases: list[str]  # Every other name he gives it: "Cat's-foot", "Gill-go-by-ground", "Haymaids"...
     virtues: str  # His "Government and virtues": what it's ruled by and what it cures
-    planet: str | None  # "Jupiter": he puts every herb under a planet
+    planet: str | None  # "Jupiter": he puts nearly every herb under a planet
     headed: bool = True  # False for the "so well known" ones without a "Government and virtues" heading
 
 

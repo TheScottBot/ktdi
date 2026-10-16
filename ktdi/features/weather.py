@@ -1,5 +1,5 @@
-"""/weather: today's real forecast (Open-Meteo, ktdi/lib/openmeteo.py) next to what 19th-century folk wisdom
-has to say about it, from Richard Inwards' Weather Lore (1893, public domain), and the committee's view on who's right.
+"""/weather: today's real forecast (Open-Meteo, ktdi/lib/openmeteo.py) next to what old folk wisdom has to say about
+it, as collected from Richard Inwards' Weather Lore (1893, public domain), and the committee's view on who's right.
 
 The sayings are hand-picked and tidied from the archive.org scan into ktdi/lib/weather_lore.json, each tagged with the
 weather it's about and any months or day it belongs to. The saying shown is one for today's date if there is one (St
@@ -114,7 +114,7 @@ def weather_embed(forecast: openmeteo.Forecast | None, title: str, today: date) 
 # /weather in [place] (typed: !weather [place]) and /weather here (a private form; typed: !weather here <place>).
 # "private": the bot never logs /weather (see bot.is_private_command), so nobody's place ends up in the log file.
 @commands.hybrid_group(name="weather", fallback="in", invoke_without_command=True, extras={"private": True},
-                       description="Today's forecast, and what 1890s folk wisdom makes of it.")
+                       description="Today's forecast, and what old folk wisdom (collected in 1893) makes of it.")
 @app_commands.describe(place="A town or city (add a county if there are several: Highbridge, Cumbria). Empty: home")
 async def weather_group(ctx: commands.Context, *, place: str | None = None):
     name = " ".join((place or config.WEATHER_PLACE).split())[:100]

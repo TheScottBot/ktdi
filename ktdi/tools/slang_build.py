@@ -1,4 +1,5 @@
-"""Build /vulgartongue's dictionary from Grose's 1811 Dictionary of the Vulgar Tongue, from Project Gutenberg:
+"""Build /vulgartongue's dictionary from Grose's Dictionary of the Vulgar Tongue (the 1811 edition, enlarged after his
+death in 1791 from his 1785 Classical Dictionary of the Vulgar Tongue), from Project Gutenberg:
 python -m ktdi.tools.slang_build
 
 Parses every entry and keeps only the ones in ktdi/lib/slang_curation.json, which also picks the insults for

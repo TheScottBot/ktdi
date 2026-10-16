@@ -1,8 +1,9 @@
-"""/etiquette: what an 1860s etiquette manual says to do, for any situation, today's included ("texting", "D&D").
+"""/etiquette: what a Victorian etiquette manual says to do, for any situation, today's included ("texting", "D&D").
 
-The rules are hand-picked, word for word, from Routledge's Manual of Etiquette and Cecil Hartley's The Gentlemen's Book
-of Etiquette (both 1860s, public domain, via Project Gutenberg) into ktdi/lib/etiquette.json, each tagged with its
-topics (dinner, letters, games...). ktdi/lib/etiquette.py files what people type under those topics, no AI.
+The rules are hand-picked, word for word, from Routledge's Manual of Etiquette and Cecil Hartley's The Gentlemen's
+Book of Etiquette (about 1875 and 1860, public domain, via Project Gutenberg) into ktdi/lib/etiquette.json, each
+tagged with its topics (dinner, letters, games...). ktdi/lib/etiquette.py files what people type under those topics,
+no AI.
 
 /etiquette gentleman, gentlewoman and gentlethem [situation] each give a rule for it from their own pool: rules written
 for gentlemen, for ladies, or for nobody in particular (any rule that says "he", "she", "gentleman" or "lady" is
@@ -27,7 +28,7 @@ from ktdi.lib import links
 HELP_CATEGORY = "📚 Words & wisdom"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "etiquette.json"
 BOOKS = {  # (title, Project Gutenberg number)
-    "routledge": ("Routledge's Manual of Etiquette (1860s)", 12426),
+    "routledge": ("Routledge's Manual of Etiquette (c. 1875)", 12426),
     "hartley": ("Hartley, The Gentlemen's Book of Etiquette (1860)", 39293),
 }
 FOR = {"ladies": "For ladies", "gentlemen": "For gentlemen"}
@@ -112,9 +113,10 @@ def reminder_text(reminder: discord.abc.User, person: discord.abc.User) -> str:
 # /etiquette gentleman, gentlewoman, gentlethem [situation], and /etiquette remind <person>. Typed, !etiquette
 # <situation> on its own is gentlethem's.
 @commands.hybrid_group(name="etiquette", invoke_without_command=True,
-                       description="What an 1860s etiquette manual says to do, for any situation.")
+                       description="What a Victorian etiquette manual says to do, for any situation.")
 async def etiquette_group(ctx: commands.Context, *, situation: str | None = None):
-    """What an 1860s etiquette manual says to do, word for word: `/etiquette gentleman`, `gentlewoman` or `gentlethem`
+    """What a Victorian etiquette manual says to do, word for word: `/etiquette gentleman`, `gentlewoman` or
+    `gentlethem`
     (rules for anyone), about any situation, today's included (texting, D&D, the pub, splitting the bill). No
     situation: any rule. `/etiquette remind @someone` reminds them of the rules, publicly."""
     await ctx.send(embed=advice_embed(situation, "gentlethem"))
@@ -123,25 +125,25 @@ async def etiquette_group(ctx: commands.Context, *, situation: str | None = None
 SITUATION = "What's happening (texting, dinner, D&D, the pub...). Empty: any rule"
 
 
-@etiquette_group.command(name="gentleman", aliases=["gentlemen"], description="An 1860s rule for gentlemen.")
+@etiquette_group.command(name="gentleman", aliases=["gentlemen"], description="A Victorian rule for gentlemen.")
 @app_commands.describe(situation=SITUATION)
 async def etiquette_gentleman(ctx: commands.Context, *, situation: str | None = None):
     await ctx.send(embed=advice_embed(situation, "gentleman"))
 
 
-@etiquette_group.command(name="gentlewoman", aliases=["gentlewomen"], description="An 1860s rule for ladies.")
+@etiquette_group.command(name="gentlewoman", aliases=["gentlewomen"], description="A Victorian rule for ladies.")
 @app_commands.describe(situation=SITUATION)
 async def etiquette_gentlewoman(ctx: commands.Context, *, situation: str | None = None):
     await ctx.send(embed=advice_embed(situation, "gentlewoman"))
 
 
-@etiquette_group.command(name="gentlethem", description="An 1860s rule for anyone at all.")
+@etiquette_group.command(name="gentlethem", description="A Victorian rule for anyone at all.")
 @app_commands.describe(situation=SITUATION)
 async def etiquette_gentlethem(ctx: commands.Context, *, situation: str | None = None):
     await ctx.send(embed=advice_embed(situation, "gentlethem"))
 
 
-@etiquette_group.command(name="remind", description="Remind someone of the rules, in 1860s terms.")
+@etiquette_group.command(name="remind", description="Remind someone of the rules, in Victorian terms.")
 @app_commands.describe(person="Who needs reminding")
 async def etiquette_remind(ctx: commands.Context, person: discord.Member):
     await ctx.send(reminder_text(ctx.author, person),
@@ -156,7 +158,7 @@ for _command in (etiquette_gentleman, etiquette_gentlewoman, etiquette_gentlethe
     _command.autocomplete("situation")(situation_autocomplete)
 
 
-OLD_BOOK = oldbooks.OldBook("Routledge's and Hartley's etiquette manuals (1860s)", "🎩", "etiquette",
+OLD_BOOK = oldbooks.OldBook("Routledge's and Hartley's etiquette manuals (1860s-70s)", "🎩", "etiquette",
                             random=lambda: advice_embed(None, random.choice(list(WHO))),
                             shelves=("household",))
 

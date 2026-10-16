@@ -1,7 +1,7 @@
 """Build /talisman's passages from William Thomas and Kate Pavitt's The Book of Talismans, Amulets and Zodiacal Gems
 (1914; second edition 1922; Project Gutenberg 78789): python -m ktdi.tools.talisman_build
 
-The Pavitts, a London maker of talismanic jewellery and his wife, Theosophists both, wrote it as believers: Part I is
+The Pavitts, a London maker of talismanic jewellery and his wife, a Theosophist, wrote it as believers: Part I is
 the talismans of the world (the axe and the arrow-head, the Chinese and Japanese, the Egyptian ankh and scarab, the
 Gnostic and the medieval, the pentagram and Abracadabra), Part II a chapter for each sign of the zodiac, with its
 stones, its planet and the famous gems that go with it. They died in 1937 and 1949, so it's out of copyright in the

@@ -23,7 +23,7 @@ DATA = Path(__file__).resolve().parent.parent / "lib" / "goblin.json"
 BOOK = 34704  # Project Gutenberg
 SOURCE = "Wirt Sikes, British Goblins (1880)"
 EMOJI = "🧚"
-COLOUR = discord.Color.from_rgb(0, 122, 61)  # The green of the Welsh flag
+COLOUR = discord.Color.from_rgb(0, 177, 64)  # The green of the Welsh flag (Pantone 354)
 
 TALES: list[dict] = json.loads(DATA.read_text(encoding="utf-8"))["tales"]
 

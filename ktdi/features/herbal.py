@@ -1,11 +1,11 @@
-"""/herbal: a random box from the grids of a 1531 herbal (Tacuini sanitatis), in all its machine-translated glory,
-and a dig: react ⛏️ to go one translation worse, down to bedrock.
+"""/herbal: a random box from the grids of a 1531 health handbook (Tacuini sanitatis, mostly about food), in all its
+machine-translated glory, and a dig: react ⛏️ to go one translation worse, down to bedrock.
 
-The cells were read by archive.org's OCR (badly: it's blackletter) and translated by Google Translate (worse), once,
-by ktdi/tools/herbal_build.py, into ktdi/lib/herbal.json. Each box has levels: the best guess, then the same again
-round-tripped through one more language per level. Below the last level is bedrock: the Latin as the scanner read it.
-Posts and how deep they've been dug are in the database (herbal_posts), so a dig carries on after a restart.
-"""
+The cells were read by archive.org's OCR (badly: the long s reads as f, and worse) and translated by Google Translate
+(worse), once, by ktdi/tools/herbal_build.py, into ktdi/lib/herbal.json. Each box has levels: the best guess, then the
+same again round-tripped through one more language per level. Below the last level is bedrock: the Latin as the
+scanner read it. Posts and how deep they've been dug are in the database (herbal_posts), so a dig carries on after a
+restart. """
 
 import json
 import random
@@ -68,11 +68,12 @@ def herbal_embed(entry: dict, depth: int = 0) -> discord.Embed:
     return embed
 
 
-@commands.hybrid_command(name="herbal", description="Wisdom from a 1531 herbal, as translated by a machine. ⛏️ to dig.")
+@commands.hybrid_command(name="herbal",
+                         description="Wisdom from a 1531 health handbook, as translated by a machine. ⛏️ to dig.")
 async def herbal(ctx: commands.Context):
-    """A box of wisdom from a 1531 herbal, as badly read by a scanner and translated by Google Translate, with the
-    original picture. React ⛏️ to dig: each dig is one translation worse, down to 🪨 bedrock, the Latin as the scanner
-    read it."""
+    """A box of wisdom from a 1531 health handbook (the Tacuini sanitatis), as badly read by a scanner and translated
+    by Google Translate, with the box itself cropped from the scan. React ⛏️ to dig: each dig is one translation
+    worse, down to 🪨 bedrock, the Latin as the scanner read it."""
     if not entries:
         await ctx.send("The herbal hasn't been translated yet. See docs/SETUP.md: Herbal.", ephemeral=True)
         return
