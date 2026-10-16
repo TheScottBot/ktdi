@@ -23,7 +23,6 @@ from ktdi.tools import gutenberg
 
 BOOK = 57411
 CURATION = gutenberg.curation_file("omen")
-HEADING = re.compile(r"<h([23])\b[^>]*>(.*?)</h\1>", re.S)
 
 
 def paragraphs(page: str) -> list[dict]:
@@ -31,36 +30,23 @@ def paragraphs(page: str) -> list[dict]:
     Common Salt", "section": 5, "section_title": "Salt-Spilling as an Omen", "paragraph": 2, "text"}. An essay's
     motto, before its first subsection, isn't one."""
     start = page.rindex("<h2", 0, page.index('id="THE_MAGIC_OF_THE_HORSE-SHOE"'))
-    body = page[start:page.index("<h2>FOOTNOTES</h2>")]
-    heads = list(HEADING.finditer(body))
-    found, essay, essay_title = [], 0, ""
-    for i, head in enumerate(heads):
-        content = body[head.end():heads[i + 1].start() if i + 1 < len(heads) else len(body)]
-        title = " ".join(gutenberg.html_text(head[2]).split())
-        if head[1] == "2":
-            essay, essay_title = essay + 1, gutenberg.titled(re.sub(r"\[\d+\]", "", title))
+    found = []
+    for p in gutenberg.headed_paragraphs(page[start:page.index("<h2>FOOTNOTES</h2>")]):
+        if not p["section"]:
             continue
-        number, section_title = title.split(" ", 1)  # "V. SALT-SPILLING AS AN OMEN"
+        number, section_title = p["section_title"].split(" ", 1)  # "V. SALT-SPILLING AS AN OMEN"
         section = roman.to_int(number.rstrip("."))
-        for n, text in enumerate(gutenberg.html_text(content).split("\n\n"), start=1):
-            found.append({"key": f"{essay}.{section}.{n}", "essay": essay, "essay_title": essay_title,
-                          "section": section, "section_title": gutenberg.titled(section_title), "paragraph": n,
-                          "text": text})
+        found.append({"key": f"{p['chapter']}.{section}.{p['paragraph']}", "essay": p["chapter"],
+                      "essay_title": gutenberg.titled(re.sub(r"\[\d+\]", "", p["chapter_title"])),
+                      "section": section, "section_title": gutenberg.titled(section_title),
+                      "paragraph": p["paragraph"], "text": p["text"]})
     return found
 
 
 def build(page: str, curation: dict) -> dict:
     """The paragraphs on the allowlist, in book order, each with its title and other names; and any listed that
     aren't in the book."""
-    found = {p["key"]: p for p in paragraphs(page)}
-    omens, missing = gutenberg.titled_keep(found, curation)
-    for omen in omens:  # A run of paragraphs: from the key's to "to" (an omen, then its explanation)
-        last = curation["keep"][omen["key"]].get("to")
-        if last:
-            run = [found.get(f"{omen['essay']}.{omen['section']}.{n}") for n in range(omen["paragraph"], last + 1)]
-            if None in run:
-                missing.append(f"{omen['key']} to {last}")
-            omen["text"] = "\n\n".join(p["text"] for p in run if p)
+    omens, missing = gutenberg.titled_keep({p["key"]: p for p in paragraphs(page)}, curation)
     return {"omens": omens, "missing": missing}
 
 

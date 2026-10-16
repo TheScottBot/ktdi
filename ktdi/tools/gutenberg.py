@@ -80,7 +80,7 @@ def html_text(fragment: str) -> str:
     numbers, pictures' captions, footnote marks and the footnotes themselves out."""
     fragment = " ".join(fragment.split())  # The page's own line breaks mean nothing
     fragment = re.sub(r'<div class="footnotes">.*', "", fragment)  # A section's footnotes are at its end
-    fragment = re.sub(r'<span class="pagenum">.*?</span>|<a [^>]*class="fnanchor[^"]*"[^>]*>.*?</a>', "", fragment)
+    fragment = re.sub(r'<span class="pagenum"[^>]*>.*?</span>|<a [^>]*class="fnanchor[^"]*"[^>]*>.*?</a>', "", fragment)
     fragment = re.sub(r'<div class="caption[^"]*">.*?</div>|<p class="caption[^"]*">.*?</p>', "", fragment)
     fragment = re.sub(r"<(i|em)\b[^>]*>(.*?)</\1>", lambda m: f"_{m[2].strip()}_" if m[2].strip() else m[2], fragment)
     fragment = re.sub(r'</p>|</table>|<div class="(?:poem|stanza)[^"]*">', "\n\n", fragment)
@@ -137,15 +137,49 @@ def curation_file(name: str) -> Path:
     return LIB / f"{name}_curation.json"
 
 
+HEADING = re.compile(r"<h([234])\b[^>]*>(.*?)</h\1>", re.S)
+
+
+def headed_paragraphs(body: str) -> list[dict]:
+    """A book of chapters (<h2>) in sections (<h3> or <h4>) as its paragraphs, in order (for /omen and /gemlore,
+    whose sections run to pages): {"key": "3.5.2", "chapter": 3, "chapter_title", "section": 5, "section_title",
+    "paragraph": 2, "text"}. Sections are counted from 1 in each chapter; what's before a chapter's first section
+    (its motto, its introduction) is section 0. Titles are as the page has them."""
+    heads = list(HEADING.finditer(body))
+    found, chapter, chapter_title, section, section_title = [], 0, "", 0, ""
+    for i, head in enumerate(heads):
+        content = body[head.end():heads[i + 1].start() if i + 1 < len(heads) else len(body)]
+        title = " ".join(html_text(head[2]).split())
+        if head[1] == "2":
+            chapter, chapter_title, section, section_title = chapter + 1, title, 0, ""
+        else:
+            section, section_title = section + 1, title
+        for n, text in enumerate((p for p in html_text(content).split("\n\n") if p), start=1):
+            found.append({"key": f"{chapter}.{section}.{n}", "chapter": chapter, "chapter_title": chapter_title,
+                          "section": section, "section_title": section_title, "paragraph": n, "text": text})
+    return found
+
+
 def titled_keep(found: dict[str, dict], curation: dict, leave_out: tuple[str, ...] = ()) -> tuple[list[dict], list[str]]:
-    """For a book whose parts have numbers but no titles (/goblin's sections, /omen's paragraphs), so the curation
-    gives each one kept a title and other names: {"keep": {"1.2.4": {"title": ..., "also": [...]}}}. The parts kept
-    (from `found`, keyed and in book order), each with its "title" and "also" and without the fields in `leave_out`;
-    and the keys listed that aren't in the book."""
-    kept = [{**{k: v for k, v in part.items() if k not in leave_out}, "title": curation["keep"][key]["title"],
-             "also": curation["keep"][key].get("also", [])}
-            for key, part in found.items() if key in curation["keep"]]
-    return kept, sorted(set(curation["keep"]) - set(found))
+    """For a book whose parts have numbers but no titles (/goblin's sections, /omen's and /gemlore's paragraphs), so
+    the curation gives each one kept a title and other names: {"keep": {"1.2.4": {"title": ..., "also": [...]}}}, and
+    for a run of paragraphs, the last one's number ("to": 6 is 1.2.4 to 1.2.6). The parts kept (from `found`, keyed
+    and in book order), each with its "title" and "also" and without the fields in `leave_out`; and the keys listed
+    that aren't in the book (or whose run isn't)."""
+    keep = curation["keep"]
+    kept = [{**{k: v for k, v in part.items() if k not in leave_out}, "title": keep[key]["title"],
+             "also": keep[key].get("also", [])}
+            for key, part in found.items() if key in keep]
+    missing = sorted(set(keep) - set(found))
+    for part in kept:  # A run: an omen, then its explanation
+        last = keep[part["key"]].get("to")
+        if last:
+            within, first = part["key"].rsplit(".", 1)
+            run = [found.get(f"{within}.{n}") for n in range(int(first), last + 1)]
+            if None in run:
+                missing.append(f"{part['key']} to {last}")
+            part["text"] = "\n\n".join(p["text"] for p in run if p)
+    return kept, missing
 
 
 def kept(entries: list[dict], keep: list, key: Callable[[dict], object] = lambda entry: entry["word"]) -> list[dict]:

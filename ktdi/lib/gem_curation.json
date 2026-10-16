@@ -1,0 +1,3830 @@
+{
+ "_about": "The Curious Lore of Precious Stones (1913): the paragraphs kept (chapter.section.paragraph, \"to\" for a short run), each with the title it's shown under, its stones and other names to find it by, and the picture that shows it, if one does. Chapters I to X only (XI is remedies). Read by hand, then checked again: the curious kept; contempt for peoples or faiths, sex, gore, cruelty to animals, health claims and charms someone might try, misogyny, ableism, harm to children, and anything taking gender or sexuality lightly, left out. See ktdi/tools/gem_build.py.",
+ "keep": {
+  "1.0.2": {
+   "title": "Gems of the Magi",
+   "also": [
+    "gem",
+    "talisman",
+    "magi",
+    "astrologers",
+    "zodiac",
+    "natal stone",
+    "planets"
+   ]
+  },
+  "1.0.10": {
+   "title": "An Angel in the Turquoise",
+   "also": [
+    "turquoise",
+    "de boot",
+    "angels",
+    "rudolph ii",
+    "spirits"
+   ],
+   "to": 11
+  },
+  "1.0.14": {
+   "title": "Paracelsus and the Spirit Azoth",
+   "also": [
+    "jewel",
+    "talisman",
+    "paracelsus",
+    "azoth",
+    "spirit"
+   ]
+  },
+  "1.0.24": {
+   "title": "Ruby Lips and Sapphire Seas",
+   "also": [
+    "emerald",
+    "sapphire",
+    "ruby",
+    "coral",
+    "pearl",
+    "turquoise",
+    "amethyst",
+    "amber",
+    "adamant",
+    "crystal",
+    "shakespeare",
+    "emerald isle"
+   ]
+  },
+  "1.0.25": {
+   "title": "Diamond Type and Ruby Type",
+   "also": [
+    "diamond",
+    "agate",
+    "emerald",
+    "ruby",
+    "pearl",
+    "printing",
+    "typography",
+    "england"
+   ]
+  },
+  "1.0.28": {
+   "title": "Shelley's Jewelled Skies",
+   "also": [
+    "diamond",
+    "emerald",
+    "sapphire",
+    "chrysolite",
+    "ruby",
+    "shelley",
+    "poetry"
+   ]
+  },
+  "1.0.35": {
+   "title": "Le Grand Albert",
+   "also": [
+    "gem",
+    "albertus magnus",
+    "grand albert",
+    "petit albert",
+    "france",
+    "secrets"
+   ]
+  },
+  "2.0.5": {
+   "title": "The Opal Once Held Every Virtue",
+   "also": [
+    "opal",
+    "bad luck",
+    "superstition"
+   ]
+  },
+  "2.0.7": {
+   "title": "Seals That Choose Their Pebbles",
+   "also": [
+    "chalcedony",
+    "serpentine",
+    "pebble",
+    "seals"
+   ]
+  },
+  "2.0.11": {
+   "title": "The Jester and the Turquoise",
+   "also": [
+    "turquoise",
+    "charles v",
+    "jester",
+    "falling",
+    "joke"
+   ]
+  },
+  "2.0.20": {
+   "title": "The Opalised Serpent",
+   "also": [
+    "opal",
+    "serpent",
+    "australia",
+    "fossil",
+    "amulet"
+   ]
+  },
+  "2.0.24": {
+   "title": "White, the Pearl and Monday",
+   "also": [
+    "pearl",
+    "white",
+    "moon",
+    "monday",
+    "ermine",
+    "mourning",
+    "colour"
+   ]
+  },
+  "2.0.29": {
+   "title": "Violet, the Sapphire and Thursday",
+   "also": [
+    "sapphire",
+    "violet",
+    "jupiter",
+    "thursday",
+    "bull",
+    "old age",
+    "colour"
+   ]
+  },
+  "2.0.32": {
+   "title": "Erasmus on Pictures in Gems",
+   "also": [
+    "rock-crystal",
+    "emerald",
+    "pyrope",
+    "amber",
+    "ceraunia",
+    "aetites",
+    "erasmus",
+    "thunderbolt",
+    "eagle-stone"
+   ]
+  },
+  "2.0.36": {
+   "title": "Ninib's Blessing and Curse on Stones",
+   "also": [
+    "chalcedony",
+    "dolomite",
+    "alabaster",
+    "babylon",
+    "ninib",
+    "stone of love",
+    "stone of hate",
+    "sumer"
+   ],
+   "to": 37
+  },
+  "2.0.41": {
+   "title": "Egyptian Amulets and Their Stones",
+   "also": [
+    "carnelian",
+    "hematite",
+    "lapis-lazuli",
+    "jasper",
+    "porphyry",
+    "egypt",
+    "book of the dead",
+    "cairo",
+    "heart"
+   ]
+  },
+  "2.0.42": {
+   "title": "Seven Amulets for Sailors",
+   "also": [
+    "carbuncle",
+    "chalcedony",
+    "rock-crystal",
+    "beryl",
+    "aquamarine",
+    "agate",
+    "coral",
+    "jet",
+    "sailors",
+    "sea",
+    "drowning",
+    "evil eye"
+   ],
+   "to": 43
+  },
+  "2.0.44": {
+   "title": "The Loadstone Heart of Hecate",
+   "also": [
+    "loadstone",
+    "hecate",
+    "magician",
+    "spirits",
+    "underworld",
+    "phylactery"
+   ]
+  },
+  "2.0.54": {
+   "title": "The Girdle of Riches",
+   "also": [
+    "gem",
+    "roman de la rose",
+    "chaucer",
+    "riches",
+    "girdle",
+    "buckle"
+   ],
+   "to": 56
+  },
+  "2.0.58": {
+   "title": "Hubert de Burgh's Stolen Stone",
+   "also": [
+    "gem",
+    "hubert de burgh",
+    "henry iii",
+    "llewellyn",
+    "wales",
+    "invincibility",
+    "battle"
+   ]
+  },
+  "2.0.59": {
+   "title": "Consecrating Precious Stones",
+   "also": [
+    "gem",
+    "consecration",
+    "blessing",
+    "mass",
+    "adam",
+    "altar",
+    "priest"
+   ],
+   "to": 60
+  },
+  "2.0.64": {
+   "title": "Ruskin's Dissolute Crystal",
+   "also": [
+    "rock-crystal",
+    "crystal",
+    "ruskin",
+    "bad luck",
+    "hindu"
+   ],
+   "to": 65
+  },
+  "3.1.4": {
+   "title": "The Agate's Bold Heart",
+   "also": [
+    "agate",
+    "protection",
+    "courage"
+   ]
+  },
+  "3.1.6": {
+   "title": "Agate in a Flying Machine",
+   "also": [
+    "agate",
+    "coral-agate",
+    "air-ship",
+    "flying",
+    "magnet"
+   ],
+   "picture": "i_053"
+  },
+  "3.1.8": {
+   "title": "Agate Eyes for the Soudan",
+   "also": [
+    "agate",
+    "evil eye",
+    "idar",
+    "oberstein",
+    "africa"
+   ],
+   "picture": "i_054fp"
+  },
+  "3.2.1": {
+   "title": "Alexandrite, the Tsar's Stone",
+   "also": [
+    "alexandrite",
+    "chrysoberyl",
+    "russia",
+    "alexander ii",
+    "ural"
+   ]
+  },
+  "3.3.2": {
+   "title": "Amber, Tears of the Heliades",
+   "also": [
+    "amber",
+    "phaethon",
+    "heliades",
+    "lynx",
+    "greek myth"
+   ],
+   "picture": "i_056"
+  },
+  "3.3.4": {
+   "title": "Homer's Amber Necklace",
+   "also": [
+    "amber",
+    "homer",
+    "odyssey",
+    "necklace"
+   ],
+   "to": 5
+  },
+  "3.3.6": {
+   "title": "Carved Amber Beasts of Norway",
+   "also": [
+    "amber",
+    "norway",
+    "amulet"
+   ]
+  },
+  "3.3.7": {
+   "title": "Amber Marked with a King's Initials",
+   "also": [
+    "amber",
+    "prussia",
+    "charles xii",
+    "initials"
+   ]
+  },
+  "3.4.2": {
+   "title": "How the Amethyst Turned Violet",
+   "also": [
+    "amethyst",
+    "bacchus",
+    "diana",
+    "legend"
+   ]
+  },
+  "3.5.1": {
+   "title": "The Beryl in Battle and in Court",
+   "also": [
+    "beryl",
+    "battle",
+    "lawsuit",
+    "marriage"
+   ]
+  },
+  "3.6.2": {
+   "title": "The Bloodstone of the Leyden Papyrus",
+   "also": [
+    "bloodstone",
+    "heliotrope",
+    "leyden papyrus",
+    "kings",
+    "doors"
+   ],
+   "to": 3
+  },
+  "3.8.3": {
+   "title": "Carnelian for a Timid Voice",
+   "also": [
+    "carnelian",
+    "alfonso x",
+    "courage",
+    "speech"
+   ]
+  },
+  "3.8.4": {
+   "title": "The Carnelian Prayer Against Envy",
+   "also": [
+    "carnelian",
+    "envy",
+    "prayer",
+    "devil",
+    "arabic"
+   ],
+   "to": 6
+  },
+  "3.10.1": {
+   "title": "Ceylon's Cat's-Eye Charm",
+   "also": [
+    "cat's-eye",
+    "chrysoberyl",
+    "ceylon",
+    "evil spirits"
+   ]
+  },
+  "3.11.2": {
+   "title": "The Magi's Peridots at Cologne",
+   "also": [
+    "chrysolite",
+    "peridot",
+    "cologne",
+    "three magi",
+    "crusades"
+   ]
+  },
+  "3.11.4": {
+   "title": "The Island of Topazos",
+   "also": [
+    "chrysolite",
+    "topaz",
+    "red sea",
+    "pliny",
+    "arsinoe"
+   ]
+  },
+  "3.11.5": {
+   "title": "Chrysolite Against the Night",
+   "also": [
+    "chrysolite",
+    "peridot",
+    "olivine",
+    "evil spirits",
+    "sun"
+   ]
+  },
+  "3.12.2": {
+   "title": "Alexander's Lost Victory Stone",
+   "also": [
+    "prase",
+    "chrysoprase",
+    "emerald",
+    "jade",
+    "alexander the great",
+    "euphrates"
+   ]
+  },
+  "3.14.1": {
+   "title": "The Diamond, King of Gems",
+   "also": [
+    "diamond",
+    "pearl",
+    "victory",
+    "hildegard",
+    "devil"
+   ]
+  },
+  "3.14.2": {
+   "title": "Cardano Distrusts the Diamond",
+   "also": [
+    "diamond",
+    "cardano",
+    "fear",
+    "prudence"
+   ],
+   "to": 3
+  },
+  "3.14.4": {
+   "title": "Diamonds Melted by Thunder",
+   "also": [
+    "diamond",
+    "thunder",
+    "lightning",
+    "thunderbolt"
+   ]
+  },
+  "3.14.7": {
+   "title": "The Four Castes of Diamond",
+   "also": [
+    "diamond",
+    "india",
+    "hindu",
+    "caste",
+    "buddhabhatta"
+   ],
+   "to": 8
+  },
+  "3.14.12": {
+   "title": "The Orphic Adamas",
+   "also": [
+    "diamond",
+    "adamas",
+    "orphic",
+    "evil eye"
+   ],
+   "to": 13
+  },
+  "3.14.15": {
+   "title": "Diamond Colours Fit for Kings",
+   "also": [
+    "diamond",
+    "india",
+    "caste",
+    "kings",
+    "buddhabhatta"
+   ]
+  },
+  "3.14.16": {
+   "title": "The Perfect Six-Pointed Diamond",
+   "also": [
+    "diamond",
+    "india",
+    "hindu"
+   ],
+   "to": 17
+  },
+  "3.14.18": {
+   "title": "A Gift, Never Bought",
+   "also": [
+    "diamond",
+    "turquoise",
+    "gift",
+    "spirit",
+    "friendship"
+   ]
+  },
+  "3.14.25": {
+   "title": "Sindbad's Eagles of Adam's Peak",
+   "also": [
+    "corundum",
+    "ruby",
+    "sapphire",
+    "diamond",
+    "sindbad",
+    "ceylon",
+    "eagles"
+   ]
+  },
+  "3.15.1": {
+   "title": "The Emerald Against Enchantment",
+   "also": [
+    "emerald",
+    "prophecy",
+    "magicians",
+    "spells"
+   ]
+  },
+  "3.15.3": {
+   "title": "Solomon's Four Stones",
+   "also": [
+    "emerald",
+    "carbuncle",
+    "lapis-lazuli",
+    "topaz",
+    "solomon"
+   ]
+  },
+  "3.15.4": {
+   "title": "Cardano's Honest Emerald",
+   "also": [
+    "emerald",
+    "cardano",
+    "honesty",
+    "riches"
+   ]
+  },
+  "3.15.5": {
+   "title": "The Mogul Emperors' Emerald",
+   "also": [
+    "emerald",
+    "mogul",
+    "delhi",
+    "persian",
+    "inscription"
+   ]
+  },
+  "3.16.1": {
+   "title": "Niagara Luck Stones",
+   "also": [
+    "gypsum",
+    "satin spar",
+    "niagara",
+    "luck"
+   ]
+  },
+  "3.17.2": {
+   "title": "The Pueblo Bonito Bird Cylinder",
+   "also": [
+    "hematite",
+    "turquoise",
+    "pueblo bonito",
+    "bird",
+    "amulet"
+   ]
+  },
+  "3.19.5": {
+   "title": "The Jade Butterfly",
+   "also": [
+    "jade",
+    "china",
+    "butterfly",
+    "love",
+    "wedding"
+   ]
+  },
+  "3.19.10": {
+   "title": "Confucius and the Jade Chime",
+   "also": [
+    "jade",
+    "china",
+    "confucius",
+    "music",
+    "chime"
+   ]
+  },
+  "3.20.1": {
+   "title": "The Rain-Bringing Jasper",
+   "also": [
+    "jasper",
+    "rain",
+    "lithica",
+    "harvest"
+   ],
+   "to": 2
+  },
+  "3.21.1": {
+   "title": "Jet in the Ice Age Caves",
+   "also": [
+    "jet",
+    "palaeolithic",
+    "switzerland",
+    "belgium",
+    "necklace"
+   ]
+  },
+  "3.21.2": {
+   "title": "The Jet Frog of Pueblo Bonito",
+   "also": [
+    "jet",
+    "turquoise",
+    "pueblo bonito",
+    "frog",
+    "amulet"
+   ]
+  },
+  "3.22.1": {
+   "title": "Bright as Lapis-Lazuli",
+   "also": [
+    "lapis-lazuli",
+    "babylon",
+    "sin",
+    "moon-god",
+    "hymn"
+   ]
+  },
+  "3.23.1": {
+   "title": "Magnes the Shepherd",
+   "also": [
+    "loadstone",
+    "magnet",
+    "magnesia",
+    "mount ida",
+    "pliny"
+   ]
+  },
+  "3.25.2": {
+   "title": "The Moonstone That Waxed and Waned",
+   "also": [
+    "moonstone",
+    "selenite",
+    "moon",
+    "edward vi",
+    "mizauld"
+   ]
+  },
+  "3.27.1": {
+   "title": "Fool's Gold and Pyrite Mirrors",
+   "also": [
+    "pyrites",
+    "pyrite",
+    "fool's gold",
+    "mirror",
+    "mexico"
+   ],
+   "to": 2
+  },
+  "3.28.1": {
+   "title": "Rock-Crystal, Water Turned to Stone",
+   "also": [
+    "rock-crystal",
+    "quartz",
+    "st jerome",
+    "ice",
+    "caverns"
+   ]
+  },
+  "3.28.2": {
+   "title": "Emperor Wu's Crystal Doors",
+   "also": [
+    "rock-crystal",
+    "china",
+    "emperor wu",
+    "draughts",
+    "mandarin"
+   ],
+   "to": 3
+  },
+  "3.28.4": {
+   "title": "The Crystal Skull",
+   "also": [
+    "rock-crystal",
+    "quartz",
+    "skull",
+    "aztec",
+    "mexico"
+   ],
+   "picture": "i_100"
+  },
+  "3.29.1": {
+   "title": "The Ruby, King of Precious Stones",
+   "also": [
+    "ruby",
+    "sanskrit",
+    "india",
+    "lotus"
+   ]
+  },
+  "3.29.3": {
+   "title": "The Ruby, Lord of Gems",
+   "also": [
+    "ruby",
+    "sapphire",
+    "aaron",
+    "lapidaire"
+   ]
+  },
+  "3.29.5": {
+   "title": "Mandeville's Ruby",
+   "also": [
+    "ruby",
+    "mandeville",
+    "tempest",
+    "peace"
+   ]
+  },
+  "3.30.1": {
+   "title": "The Sapphire of Kings",
+   "also": [
+    "sapphire",
+    "lapis-lazuli",
+    "moses",
+    "kings",
+    "envy"
+   ]
+  },
+  "3.30.2": {
+   "title": "The Bishop's Sapphire Ring",
+   "also": [
+    "sapphire",
+    "marbodus",
+    "rennes",
+    "ring",
+    "oracles"
+   ],
+   "picture": "i_104fp"
+  },
+  "3.30.5": {
+   "title": "The Witches' Sapphire",
+   "also": [
+    "sapphire",
+    "witches",
+    "necromancy",
+    "bartholomew"
+   ]
+  },
+  "3.30.7": {
+   "title": "The Star Sapphire's Moving Star",
+   "also": [
+    "sapphire",
+    "star sapphire",
+    "asteria",
+    "ceylon",
+    "witchcraft"
+   ]
+  },
+  "3.30.9": {
+   "title": "The Star of India",
+   "also": [
+    "sapphire",
+    "star sapphire",
+    "star of india",
+    "new york",
+    "museum"
+   ]
+  },
+  "3.30.10": {
+   "title": "The Stone of Destiny",
+   "also": [
+    "sapphire",
+    "star sapphire",
+    "asteria",
+    "destiny",
+    "evil eye"
+   ]
+  },
+  "3.34.6": {
+   "title": "The Turquoise That Struck the Hour",
+   "also": [
+    "turquoise",
+    "de boot",
+    "pendulum",
+    "clock"
+   ]
+  },
+  "3.34.7": {
+   "title": "A Gentleman's Turquoise",
+   "also": [
+    "turquoise",
+    "de boot",
+    "fashion",
+    "rings"
+   ]
+  },
+  "3.34.8": {
+   "title": "The New Moon in a Turquoise",
+   "also": [
+    "turquoise",
+    "persia",
+    "new moon",
+    "friend",
+    "koran"
+   ]
+  },
+  "3.34.9": {
+   "title": "The Sacred Turquoise of Los Cerrillos",
+   "also": [
+    "turquoise",
+    "new mexico",
+    "pueblo",
+    "montezuma",
+    "santo domingo"
+   ]
+  },
+  "3.34.10": {
+   "title": "The Zuni Turquoise Toad",
+   "also": [
+    "turquoise",
+    "garnet",
+    "zuni",
+    "arizona",
+    "toad"
+   ]
+  },
+  "3.34.12": {
+   "title": "The Turquoise Basket",
+   "also": [
+    "turquoise",
+    "pueblo bonito",
+    "navaho",
+    "basket",
+    "mosaic"
+   ]
+  },
+  "3.34.13": {
+   "title": "The Apache Turquoise",
+   "also": [
+    "turquoise",
+    "apache",
+    "rainbow",
+    "hunting",
+    "aim"
+   ]
+  },
+  "4.0.13": {
+   "title": "Funeral Scarabs of the Dead",
+   "also": [
+    "jasper",
+    "amethyst",
+    "lapis-lazuli",
+    "ruby",
+    "carnelian",
+    "scarab",
+    "egypt",
+    "resurrection",
+    "horus"
+   ]
+  },
+  "4.0.15": {
+   "title": "Sacred Symbols on Egyptian Signets",
+   "also": [
+    "scarab",
+    "signet",
+    "seal",
+    "egypt",
+    "ankh",
+    "uraeus",
+    "gold",
+    "symbol"
+   ]
+  },
+  "4.0.16": {
+   "title": "Lapis-Lazuli and the Image of Truth",
+   "also": [
+    "lapis-lazuli",
+    "cyanus",
+    "glass",
+    "egypt",
+    "truth",
+    "ma",
+    "scarab"
+   ]
+  },
+  "4.0.17": {
+   "title": "Scarab Rings of the Legionaries",
+   "also": [
+    "scarab",
+    "rome",
+    "legion",
+    "soldier",
+    "courage",
+    "ring"
+   ]
+  },
+  "4.0.21": {
+   "title": "Babylonian Cylinders as Amulets",
+   "also": [
+    "cylinder",
+    "seal",
+    "babylon",
+    "assyria",
+    "amulet",
+    "contract",
+    "gods"
+   ],
+   "to": 22
+  },
+  "4.0.23": {
+   "title": "The Oldest Seals of All",
+   "also": [
+    "serpentine",
+    "hematite",
+    "chalcedony",
+    "sapphirine",
+    "diorite",
+    "cylinder",
+    "seal",
+    "babylon",
+    "assyria",
+    "conch"
+   ]
+  },
+  "4.0.26": {
+   "title": "The Cylinder of Nebo",
+   "also": [
+    "cylinder",
+    "nebo",
+    "mercury",
+    "borsippa",
+    "babylon",
+    "star",
+    "moon",
+    "writing"
+   ],
+   "picture": "i_123fpb"
+  },
+  "4.0.28": {
+   "title": "Zodiac Signs on Roman Gems",
+   "also": [
+    "onyx",
+    "carnelian",
+    "emerald",
+    "ruby",
+    "sapphire",
+    "zodiac",
+    "astrology",
+    "serapis",
+    "isis",
+    "polycrates",
+    "rome"
+   ],
+   "picture": "i_124a"
+  },
+  "4.0.29": {
+   "title": "Alexander's Lucky Portrait",
+   "also": [
+    "amber",
+    "alexander the great",
+    "cup",
+    "rome",
+    "luck",
+    "coin",
+    "chrysostom"
+   ]
+  },
+  "4.0.32": {
+   "title": "Abrasax and the 365 Heavens",
+   "also": [
+    "abrasax",
+    "abraxas",
+    "gnostic",
+    "basilides",
+    "365",
+    "numbers",
+    "mithra",
+    "sun"
+   ],
+   "to": 35,
+   "picture": "i_127"
+  },
+  "4.0.38": {
+   "title": "The Bishop of Chichester's Gnostic Ring",
+   "also": [
+    "jasper",
+    "gnostic",
+    "chichester",
+    "bishop",
+    "seffrid",
+    "ring",
+    "isis",
+    "horus"
+   ]
+  },
+  "4.0.39": {
+   "title": "A Charm for a Racehorse",
+   "also": [
+    "jasper",
+    "bloodstone",
+    "racehorse",
+    "horse",
+    "abraxas",
+    "gnostic",
+    "victory",
+    "tiberis"
+   ]
+  },
+  "4.0.40": {
+   "title": "Alexander and Christ on One Amulet",
+   "also": [
+    "amulet",
+    "alexander the great",
+    "christ",
+    "scorpion",
+    "paris",
+    "christos"
+   ]
+  },
+  "4.0.41": {
+   "title": "If You Find Such a Figure",
+   "also": [
+    "engraving",
+    "talisman",
+    "middle ages",
+    "found",
+    "figure"
+   ]
+  },
+  "4.0.42": {
+   "title": "Engraving Under the Right Star",
+   "also": [
+    "engraving",
+    "astrology",
+    "planet",
+    "zodiac",
+    "constellation",
+    "hour",
+    "talisman"
+   ]
+  },
+  "4.0.43": {
+   "title": "Agate's Many Virtues",
+   "also": [
+    "agate",
+    "camillo leonardo",
+    "engraving",
+    "middle ages",
+    "magic"
+   ]
+  },
+  "4.0.44": {
+   "title": "The Glory of the Emerald",
+   "also": [
+    "emerald",
+    "scarab",
+    "isis",
+    "damigeron",
+    "brooch",
+    "luminous",
+    "consecration"
+   ]
+  },
+  "4.0.47": {
+   "title": "Falcon on a Topaz, Astrolabe on a Sapphire",
+   "also": [
+    "topaz",
+    "sapphire",
+    "falcon",
+    "astrolabe",
+    "kings",
+    "wealth",
+    "prophecy",
+    "book of wings"
+   ]
+  },
+  "4.0.49": {
+   "title": "The Prophetic Ass on a Chrysolite",
+   "also": [
+    "chrysolite",
+    "ass",
+    "donkey",
+    "prophecy",
+    "future",
+    "book of wings"
+   ]
+  },
+  "4.0.51": {
+   "title": "Gems That Command Demons",
+   "also": [
+    "beryl",
+    "onyx",
+    "chrysolite",
+    "heliotrope",
+    "bloodstone",
+    "frog",
+    "camel",
+    "vulture",
+    "bat",
+    "demons",
+    "book of wings",
+    "visions"
+   ],
+   "to": 54
+  },
+  "4.0.58": {
+   "title": "Archers, Swords and the Hoopoe",
+   "also": [
+    "iris",
+    "carnelian",
+    "prase",
+    "beryl",
+    "celonite",
+    "hoopoe",
+    "swallow",
+    "bull",
+    "lightning",
+    "spirits",
+    "the dead",
+    "book of wings"
+   ],
+   "to": 62
+  },
+  "4.0.64": {
+   "title": "The Names of God on a Thunderstone",
+   "also": [
+    "ceraunia",
+    "thunderstone",
+    "storm",
+    "tempest",
+    "victory",
+    "book of wings"
+   ]
+  },
+  "4.0.66": {
+   "title": "The Armoured Man on a Loadstone",
+   "also": [
+    "loadstone",
+    "magnet",
+    "magnetite",
+    "armour",
+    "war",
+    "incantation",
+    "book of wings"
+   ]
+  },
+  "4.0.67": {
+   "title": "Talismans from an Italian Manuscript",
+   "also": [
+    "talisman",
+    "italy",
+    "manuscript",
+    "goat",
+    "laurel",
+    "scythe",
+    "fortune",
+    "strength"
+   ],
+   "to": 70
+  },
+  "4.0.73": {
+   "title": "The Palm-Bearer's Stone",
+   "also": [
+    "talisman",
+    "palm",
+    "victory",
+    "battle",
+    "disputes",
+    "italy"
+   ]
+  },
+  "4.0.79": {
+   "title": "A Week of Guardians Against the Evil Eye",
+   "also": [
+    "sard",
+    "evil eye",
+    "days of the week",
+    "lion",
+    "owl",
+    "scorpion",
+    "planets"
+   ]
+  },
+  "4.0.80": {
+   "title": "Malachite Peacock-Stones",
+   "also": [
+    "malachite",
+    "peacock-stone",
+    "evil eye",
+    "italy",
+    "bettona",
+    "etruscan",
+    "chiusi"
+   ]
+  },
+  "4.0.84": {
+   "title": "The Flute-Player's Bargain",
+   "also": [
+    "emerald",
+    "smaragd",
+    "ismenias",
+    "pliny",
+    "cyprus",
+    "price",
+    "amymone"
+   ]
+  },
+  "4.0.85": {
+   "title": "Scarab, Parrot and Mars",
+   "also": [
+    "emerald",
+    "jasper",
+    "scarab",
+    "parrot",
+    "mars",
+    "cross",
+    "drowning",
+    "cethel"
+   ]
+  },
+  "4.0.86": {
+   "title": "When Andromeda Became a Dromedary",
+   "also": [
+    "andromeda",
+    "dromedary",
+    "camel",
+    "translation",
+    "amulet",
+    "marriage",
+    "circe"
+   ]
+  },
+  "4.0.87": {
+   "title": "Talismans Made by Nature",
+   "also": [
+    "engraving",
+    "talisman",
+    "konrad von megenberg",
+    "middle ages",
+    "sceptics"
+   ]
+  },
+  "4.0.88": {
+   "title": "Vine and Ivy on the Sard",
+   "also": [
+    "sard",
+    "damigeron",
+    "grape-vine",
+    "ivy",
+    "luck",
+    "engraving"
+   ]
+  },
+  "4.0.89": {
+   "title": "Nature Fails, Fortune Changes",
+   "also": [
+    "topaz",
+    "inscription",
+    "agricola",
+    "naples",
+    "latin",
+    "verse",
+    "thomas nicols"
+   ],
+   "to": 92
+  },
+  "4.0.93": {
+   "title": "The Shah's Golden-Lettered Turquoise",
+   "also": [
+    "turquoise",
+    "shah",
+    "persia",
+    "koran",
+    "moscow",
+    "amulet"
+   ]
+  },
+  "5.0.1": {
+   "title": "The Opal: A Mother's Charm",
+   "also": [
+    "opal",
+    "verse",
+    "poem",
+    "mother",
+    "daughter",
+    "charm",
+    "rainbow"
+   ],
+   "to": 4
+  },
+  "5.0.5": {
+   "title": "How Sir Walter Scott Cursed the Opal",
+   "also": [
+    "opal",
+    "walter scott",
+    "anne of geierstein",
+    "hermione",
+    "unlucky",
+    "enchantment",
+    "holy water"
+   ]
+  },
+  "5.0.6": {
+   "title": "October's Opal",
+   "also": [
+    "opal",
+    "october",
+    "birthstone",
+    "month",
+    "autumn"
+   ]
+  },
+  "5.0.7": {
+   "title": "The Opal of Nonius",
+   "also": [
+    "opal",
+    "nonius",
+    "mark antony",
+    "pliny",
+    "rome",
+    "ring",
+    "exile"
+   ]
+  },
+  "5.0.9": {
+   "title": "The Opal from the Ruins of Alexandria",
+   "also": [
+    "opal",
+    "alexandria",
+    "egypt",
+    "nonius",
+    "constantinople",
+    "hungary"
+   ]
+  },
+  "5.0.11": {
+   "title": "The Orphan Jewel of the Imperial Crown",
+   "also": [
+    "opal",
+    "orphanus",
+    "crown",
+    "holy roman empire",
+    "albertus magnus",
+    "luminous",
+    "emperor"
+   ],
+   "to": 12,
+   "picture": "i_147"
+  },
+  "5.0.21": {
+   "title": "Shakespeare's Opal Mind",
+   "also": [
+    "opal",
+    "shakespeare",
+    "twelfth night",
+    "taffeta",
+    "inconstancy",
+    "clown"
+   ],
+   "to": 22
+  },
+  "5.0.23": {
+   "title": "Cardano's Bargain Opal",
+   "also": [
+    "opal",
+    "diamond",
+    "cardano",
+    "luck",
+    "sixteenth century"
+   ]
+  },
+  "5.0.24": {
+   "title": "The Lucky Black Opal",
+   "also": [
+    "opal",
+    "black opal",
+    "new south wales",
+    "australia",
+    "white cliffs",
+    "luck",
+    "marion crawford"
+   ]
+  },
+  "5.0.25": {
+   "title": "The Opal Given Away in Paris",
+   "also": [
+    "opal",
+    "paris",
+    "shopgirl",
+    "ring",
+    "unlucky",
+    "gift",
+    "luck"
+   ]
+  },
+  "5.0.26": {
+   "title": "Why Jewellers Feared the Opal",
+   "also": [
+    "opal",
+    "jeweller",
+    "lapidary",
+    "unlucky",
+    "brittle",
+    "superstition"
+   ]
+  },
+  "5.0.29": {
+   "title": "The Flawed Diamond and Indra's Heaven",
+   "also": [
+    "diamond",
+    "india",
+    "hindu",
+    "indra",
+    "flaw",
+    "shape",
+    "unlucky"
+   ]
+  },
+  "5.0.51": {
+   "title": "Noah's Shining Stone",
+   "also": [
+    "luminous",
+    "noah",
+    "ark",
+    "flood",
+    "abraham",
+    "pearl",
+    "light"
+   ]
+  },
+  "5.0.52": {
+   "title": "The Stork's Gift to Heracleis",
+   "also": [
+    "ceraunia",
+    "ruby",
+    "luminous",
+    "stork",
+    "storchstein",
+    "tarentum",
+    "aelian",
+    "gratitude",
+    "lightning"
+   ],
+   "to": 53
+  },
+  "5.0.54": {
+   "title": "Burning Coals and Lamps",
+   "also": [
+    "ruby",
+    "carbuncle",
+    "anthrax",
+    "lychnis",
+    "luminous",
+    "phosphorescence",
+    "fire"
+   ]
+  },
+  "5.0.55": {
+   "title": "The Lamp-Stone and the Altar Flame",
+   "also": [
+    "lychnis",
+    "spinel",
+    "diamond",
+    "rock-crystal",
+    "luminous",
+    "pliny",
+    "lithica",
+    "burning-glass"
+   ]
+  },
+  "5.0.57": {
+   "title": "The Lamp in Astarte's Crown",
+   "also": [
+    "lychnos",
+    "luminous",
+    "astarte",
+    "syria",
+    "temple",
+    "diadem",
+    "goddess"
+   ]
+  },
+  "5.0.60": {
+   "title": "The Carbuncle of St Elizabeth",
+   "also": [
+    "carbuncle",
+    "rock-crystal",
+    "garnet",
+    "ruby",
+    "luminous",
+    "st elizabeth",
+    "marburg",
+    "shrine",
+    "dusseldorf"
+   ],
+   "to": 61
+  },
+  "5.0.62": {
+   "title": "The Glowing Rubies of Pegu",
+   "also": [
+    "ruby",
+    "topaz",
+    "diamond",
+    "luminous",
+    "pegu",
+    "burma",
+    "arnobio"
+   ]
+  },
+  "5.0.64": {
+   "title": "Emperor Manuel's Shining Crown",
+   "also": [
+    "crown",
+    "throne",
+    "luminous",
+    "constantinople",
+    "emperor manuel",
+    "benjamin of tudela",
+    "byzantium"
+   ]
+  },
+  "5.0.65": {
+   "title": "A Fiery Stone for Henry II",
+   "also": [
+    "luminous",
+    "henry ii",
+    "france",
+    "boulogne",
+    "india",
+    "gift"
+   ]
+  },
+  "5.0.66": {
+   "title": "The Ruby in the Tablecloth",
+   "also": [
+    "ruby",
+    "luminous",
+    "ceylon",
+    "sri lanka",
+    "garcias ab orta",
+    "gem-dealer",
+    "night"
+   ]
+  },
+  "5.0.67": {
+   "title": "The Emerald-Eyed Lion of Hermias",
+   "also": [
+    "emerald",
+    "luminous",
+    "lion",
+    "tomb",
+    "tunny",
+    "fishermen",
+    "pliny",
+    "tyre",
+    "athene"
+   ]
+  },
+  "5.0.72": {
+   "title": "The Bologna Moonstone",
+   "also": [
+    "bologna stone",
+    "barytes",
+    "lunar stone",
+    "phosphorescence",
+    "luminous",
+    "alchemy",
+    "bologna"
+   ]
+  },
+  "5.0.73": {
+   "title": "The Diamond That Glowed in the Closet",
+   "also": [
+    "diamond",
+    "phosphorescence",
+    "fluorescence",
+    "luminous",
+    "kunz",
+    "robert boyle",
+    "experiment"
+   ]
+  },
+  "5.0.74": {
+   "title": "Making Diamonds Glow in the Dark",
+   "also": [
+    "diamond",
+    "emerald",
+    "phosphorescence",
+    "triboluminescence",
+    "du fay",
+    "boyle",
+    "luminous"
+   ],
+   "to": 75
+  },
+  "5.0.76": {
+   "title": "Tiffanyite, the Light-Storing Diamond",
+   "also": [
+    "diamond",
+    "tiffanyite",
+    "willemite",
+    "kunzite",
+    "sphalerite",
+    "phosphorescence",
+    "ultra-violet",
+    "tiffany",
+    "brazil"
+   ],
+   "picture": "i_170fp"
+  },
+  "5.0.77": {
+   "title": "A Diamond to Read By",
+   "also": [
+    "diamond",
+    "phosphorescence",
+    "radium",
+    "william crookes",
+    "vacuum",
+    "luminous",
+    "kunz"
+   ],
+   "to": 79
+  },
+  "5.0.80": {
+   "title": "Chlorophane, the Warm-Hand Glow",
+   "also": [
+    "chlorophane",
+    "fluorite",
+    "thermoluminescence",
+    "luminous",
+    "siberia",
+    "virginia",
+    "amelia court house"
+   ]
+  },
+  "5.0.86": {
+   "title": "Where Shining Stones Come From",
+   "also": [
+    "luminous",
+    "richard burton",
+    "refraction",
+    "legend",
+    "cut gems",
+    "light"
+   ]
+  },
+  "6.0.1": {
+   "title": "How Visions Rise in the Crystal",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "scrying",
+    "mirror",
+    "quicksilver"
+   ]
+  },
+  "6.0.7": {
+   "title": "Tezcatlipoca's All-Seeing Mirror",
+   "also": [
+    "obsidian",
+    "mirror",
+    "tezcatlipoca",
+    "mexico",
+    "aztec"
+   ]
+  },
+  "6.0.11": {
+   "title": "The Magi's Spinning Golden Ball",
+   "also": [
+    "sapphire",
+    "gold",
+    "magi",
+    "zoroaster",
+    "trance",
+    "scrying"
+   ]
+  },
+  "6.0.12": {
+   "title": "St Patrick and the Witch in the Mirror",
+   "also": [
+    "mirror",
+    "crystal ball",
+    "st patrick",
+    "lamia",
+    "witch",
+    "synod"
+   ]
+  },
+  "6.0.13": {
+   "title": "The Water-Gazers of Rheims",
+   "also": [
+    "water",
+    "hydromantii",
+    "hincmar",
+    "rheims",
+    "demons",
+    "scrying"
+   ]
+  },
+  "6.0.15": {
+   "title": "Andrew Lang's Pictures Before Sleep",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "andrew lang",
+    "hypnagogic",
+    "scrying"
+   ]
+  },
+  "6.0.16": {
+   "title": "Ibn Khaldun on the Mist in the Mirror",
+   "also": [
+    "mirror",
+    "ibn khaldun",
+    "ibn kaldoun",
+    "scrying",
+    "soul"
+   ],
+   "to": 17
+  },
+  "6.0.18": {
+   "title": "Abbot Tritheim's Angel Crystal",
+   "also": [
+    "rock-crystal",
+    "gold",
+    "tritheim",
+    "trithemius",
+    "tetragrammaton",
+    "angels",
+    "crystal ball"
+   ],
+   "to": 19
+  },
+  "6.0.21": {
+   "title": "Jami's Magic Mirror",
+   "also": [
+    "mirror",
+    "jami",
+    "salaman and absal",
+    "persia",
+    "verse"
+   ],
+   "to": 22
+  },
+  "6.0.26": {
+   "title": "The Scottish Stones of Power",
+   "also": [
+    "rock-crystal",
+    "beryl",
+    "scottish regalia",
+    "sceptre",
+    "druids",
+    "walter scott",
+    "stones of power"
+   ]
+  },
+  "6.0.28": {
+   "title": "The Specularii Catch a Thief",
+   "also": [
+    "mirror",
+    "specularii",
+    "john of salisbury",
+    "theft",
+    "scrying"
+   ]
+  },
+  "6.0.29": {
+   "title": "Paracelsus Conjures the Crystal",
+   "also": [
+    "rock-crystal",
+    "paracelsus",
+    "speculum",
+    "crystal ball",
+    "air"
+   ]
+  },
+  "6.0.31": {
+   "title": "The Capuchin's Earth-Mirror",
+   "also": [
+    "mirror",
+    "erdenspiegel",
+    "earth-mirror",
+    "capuchin",
+    "archangel",
+    "white magic"
+   ],
+   "to": 34
+  },
+  "6.0.42": {
+   "title": "Queen Elizabeth Sees Dr Dee's Glass",
+   "also": [
+    "rock-crystal",
+    "john dee",
+    "queen elizabeth",
+    "mortlake",
+    "crystal ball"
+   ],
+   "to": 43
+  },
+  "6.0.48": {
+   "title": "The Angel Uriel's Table for Dee's Crystal",
+   "also": [
+    "rock-crystal",
+    "john dee",
+    "edward kelley",
+    "uriel",
+    "sigillum dei",
+    "seal of god",
+    "angels"
+   ],
+   "to": 50
+  },
+  "6.0.51": {
+   "title": "Nalvage, the Spirit in White Silk",
+   "also": [
+    "rock-crystal",
+    "mother-of-pearl",
+    "john dee",
+    "edward kelley",
+    "nalvage",
+    "cracow",
+    "spirit"
+   ],
+   "to": 52
+  },
+  "6.0.56": {
+   "title": "Hudibras on the Devil's Looking-Glass",
+   "also": [
+    "rock-crystal",
+    "hudibras",
+    "john dee",
+    "edward kelley",
+    "verse"
+   ],
+   "to": 58
+  },
+  "6.0.59": {
+   "title": "Dr Dee's Black Obsidian Mirror",
+   "also": [
+    "obsidian",
+    "john dee",
+    "horace walpole",
+    "strawberry hill",
+    "mirror",
+    "mexico"
+   ],
+   "picture": "i_190fpb"
+  },
+  "6.0.62": {
+   "title": "Compton's Looking-Glass",
+   "also": [
+    "mirror",
+    "looking-glass",
+    "glanvil",
+    "compton",
+    "somerset",
+    "scrying"
+   ]
+  },
+  "6.0.63": {
+   "title": "Sir Marmaduke Langdale's Vision",
+   "also": [
+    "mirror",
+    "glass",
+    "marmaduke langdale",
+    "italy",
+    "sorcerer",
+    "crucifix"
+   ]
+  },
+  "6.0.69": {
+   "title": "Rogues and Vagabonds: The 1824 Act",
+   "also": [
+    "crystal ball",
+    "vagrancy act",
+    "fortune-telling",
+    "palmistry",
+    "law",
+    "england"
+   ]
+  },
+  "6.0.70": {
+   "title": "The Clear Stone of Yucatan",
+   "also": [
+    "rock-crystal",
+    "quartz",
+    "zaztun",
+    "yucatan",
+    "h'men",
+    "maya",
+    "lost things"
+   ]
+  },
+  "6.0.76": {
+   "title": "Heaven-Fallen Crystals of Madagascar",
+   "also": [
+    "rock-crystal",
+    "madagascar",
+    "geomancy",
+    "flacourt",
+    "divination"
+   ]
+  },
+  "6.0.78": {
+   "title": "Tezcatlipoca, the Shining Mirror",
+   "also": [
+    "obsidian",
+    "tezcatlipoca",
+    "mexico",
+    "aztec",
+    "mirror",
+    "john dee"
+   ],
+   "picture": "i_190fpb"
+  },
+  "6.0.82": {
+   "title": "My Peri Loves You Dearly",
+   "also": [
+    "peri",
+    "armenia",
+    "guardian spirit",
+    "friendship",
+    "spirits"
+   ]
+  },
+  "6.0.85": {
+   "title": "The Forgotten Address in the Crystal",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "goodrich-freer",
+    "memory",
+    "scrying"
+   ]
+  },
+  "6.0.89": {
+   "title": "Crystal Visions Under the Magnifying-Glass",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "magnifying-glass",
+    "verrall",
+    "hypnotism",
+    "play-bill"
+   ]
+  },
+  "6.0.92": {
+   "title": "The Cube of Blue Beryl",
+   "also": [
+    "beryl",
+    "crystal ball",
+    "scrying",
+    "emanations"
+   ]
+  },
+  "6.0.94": {
+   "title": "Near Visions and Far Visions",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "past",
+    "future",
+    "scrying"
+   ]
+  },
+  "6.0.95": {
+   "title": "Positive and Passive Scryers",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "symbols",
+    "scrying"
+   ],
+   "to": 96
+  },
+  "6.0.101": {
+   "title": "Seven Tapers and a Velvet Screen",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "candles",
+    "scrying",
+    "pillow"
+   ]
+  },
+  "6.0.103": {
+   "title": "The Authoress and Her Crystal Plot",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "writing",
+    "story",
+    "scrying"
+   ]
+  },
+  "6.0.104": {
+   "title": "The Dragon's Breath of Japan",
+   "also": [
+    "rock-crystal",
+    "japan",
+    "dragon",
+    "white dragon",
+    "violet dragon",
+    "suisho",
+    "tama"
+   ],
+   "to": 105,
+   "picture": "i_217fp"
+  },
+  "6.0.106": {
+   "title": "The Great Madagascar Crystal Ball",
+   "also": [
+    "rock-crystal",
+    "madagascar",
+    "crystal ball",
+    "famous gem"
+   ]
+  },
+  "6.0.110": {
+   "title": "Twenty Crystal Balls in a Hidden Urn",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "childeric",
+    "tomb",
+    "rome",
+    "lateran",
+    "urn"
+   ]
+  },
+  "6.0.113": {
+   "title": "Crystals from the Tombs of French Kings",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "french revolution",
+    "kings of france",
+    "duchess of portland",
+    "tomb"
+   ]
+  },
+  "6.0.117": {
+   "title": "Cardinal Farnese's Urn",
+   "also": [
+    "rock-crystal",
+    "agate",
+    "amber",
+    "farnese",
+    "thomas browne",
+    "urn burial"
+   ]
+  },
+  "6.0.118": {
+   "title": "The Crystal of the Green Vaults",
+   "also": [
+    "rock-crystal",
+    "crystal ball",
+    "dresden",
+    "green vaults",
+    "augury",
+    "famous gem"
+   ]
+  },
+  "6.0.120": {
+   "title": "Ghost and Phantom Crystals",
+   "also": [
+    "rock-crystal",
+    "quartz",
+    "phantom crystal",
+    "ghost crystal",
+    "cap-quartz",
+    "crystal ball"
+   ],
+   "picture": "i_224fpa"
+  },
+  "7.1.3": {
+   "title": "The Carnelian Buckle of Isis",
+   "also": [
+    "carnelian",
+    "jasper",
+    "porphyry",
+    "isis",
+    "book of the dead",
+    "egypt",
+    "mummy",
+    "amulet"
+   ],
+   "to": 7
+  },
+  "7.1.8": {
+   "title": "The Tet Amulet of Stability",
+   "also": [
+    "carnelian",
+    "lapis lazuli",
+    "tet",
+    "egypt",
+    "mummy",
+    "amulet"
+   ]
+  },
+  "7.1.9": {
+   "title": "The Papyrus Sceptre of Matrix-Emerald",
+   "also": [
+    "emerald",
+    "uat",
+    "thoth",
+    "book of the dead",
+    "egypt",
+    "mummy",
+    "amulet"
+   ]
+  },
+  "7.1.12": {
+   "title": "Egyptian Heart Amulets",
+   "also": [
+    "carnelian",
+    "jasper",
+    "basalt",
+    "lapis lazuli",
+    "heart",
+    "scarab",
+    "neith",
+    "phoenix",
+    "egypt",
+    "amulet"
+   ],
+   "to": 13
+  },
+  "7.1.14": {
+   "title": "The Chapter of the Heart Scarab",
+   "also": [
+    "lapis lazuli",
+    "scarab",
+    "heart",
+    "book of the dead",
+    "osiris",
+    "amenti",
+    "egypt"
+   ],
+   "to": 17
+  },
+  "7.1.21": {
+   "title": "Heart Chapters Engraved on Particular Stones",
+   "also": [
+    "lapis lazuli",
+    "feldspar",
+    "serpentine",
+    "carnelian",
+    "book of the dead",
+    "egypt"
+   ]
+  },
+  "7.1.22": {
+   "title": "The Lapis-Lazuli Eye of Ra",
+   "also": [
+    "lapis lazuli",
+    "jasper",
+    "eye",
+    "ra",
+    "book of the dead",
+    "egypt",
+    "amulet"
+   ]
+  },
+  "7.1.23": {
+   "title": "The Lapis-Lazuli Image of Truth",
+   "also": [
+    "lapis lazuli",
+    "truth",
+    "aelian",
+    "high priest",
+    "egypt"
+   ]
+  },
+  "7.1.24": {
+   "title": "The Seven Splendid Stones of the Assyrian King",
+   "also": [
+    "lapis lazuli",
+    "pearl",
+    "diamond",
+    "assyria",
+    "incantation",
+    "seven",
+    "bel",
+    "amulet"
+   ],
+   "to": 32
+  },
+  "7.1.36": {
+   "title": "The Jewel-Fruited Cedar of Humbaba",
+   "also": [
+    "lapis lazuli",
+    "gilgamesh",
+    "humbaba",
+    "irnina",
+    "babylon",
+    "tree"
+   ],
+   "to": 37
+  },
+  "7.1.40": {
+   "title": "The Babylonian Agate Axe-Head",
+   "also": [
+    "agate",
+    "onyx",
+    "babylon",
+    "sumer",
+    "axe",
+    "morgan-tiffany",
+    "votive"
+   ],
+   "picture": "i_233fp"
+  },
+  "7.1.43": {
+   "title": "Fabia Fabiana's Jewels for Isis",
+   "also": [
+    "pearl",
+    "emerald",
+    "beryl",
+    "ruby",
+    "hyacinth",
+    "diamond",
+    "isis",
+    "alicante",
+    "spain",
+    "statue"
+   ]
+  },
+  "7.1.45": {
+   "title": "The Three Qualities of the Diamond",
+   "also": [
+    "diamond",
+    "king milinda",
+    "buddhism",
+    "bhikshu",
+    "sutta nipata"
+   ],
+   "to": 49
+  },
+  "7.1.50": {
+   "title": "Krishna's Jewelled City of Dwaraka",
+   "also": [
+    "pearl",
+    "ruby",
+    "diamond",
+    "emerald",
+    "sapphire",
+    "krishna",
+    "dwaraka",
+    "puranas",
+    "vishnu"
+   ],
+   "to": 54
+  },
+  "7.1.56": {
+   "title": "The Seven Ramparts of Kusavati",
+   "also": [
+    "beryl",
+    "crystal",
+    "agate",
+    "coral",
+    "jade",
+    "kusavati",
+    "maha sudassana",
+    "palm trees"
+   ]
+  },
+  "7.1.57": {
+   "title": "Lucian's City of the Blessed",
+   "also": [
+    "emerald",
+    "beryl",
+    "amethyst",
+    "lucian",
+    "islands of the blessed",
+    "vera historia"
+   ]
+  },
+  "7.1.58": {
+   "title": "The Crystal Tank of Maya",
+   "also": [
+    "rock crystal",
+    "pearl",
+    "maya",
+    "illusion",
+    "hindu"
+   ]
+  },
+  "7.1.59": {
+   "title": "The Jewelled Kalpa Tree",
+   "also": [
+    "pearl",
+    "emerald",
+    "coral",
+    "ruby",
+    "sapphire",
+    "diamond",
+    "cat's-eye",
+    "topaz",
+    "zircon",
+    "kalpa tree",
+    "hindu"
+   ]
+  },
+  "7.1.60": {
+   "title": "The Diamond Throne of the Buddha",
+   "also": [
+    "diamond",
+    "buddha",
+    "diamond throne",
+    "heuen tsang",
+    "tree of knowledge"
+   ]
+  },
+  "7.1.64": {
+   "title": "Gems Offered to Krishna",
+   "also": [
+    "coral",
+    "ruby",
+    "emerald",
+    "diamond",
+    "gold",
+    "krishna",
+    "rig veda",
+    "offering",
+    "nirvana"
+   ],
+   "to": 65
+  },
+  "7.1.68": {
+   "title": "The Nine-Gem Naoratna Ring",
+   "also": [
+    "ruby",
+    "diamond",
+    "pearl",
+    "coral",
+    "jacinth",
+    "sapphire",
+    "topaz",
+    "cat's-eye",
+    "emerald",
+    "naoratna",
+    "planets",
+    "astrology"
+   ],
+   "to": 71
+  },
+  "7.1.76": {
+   "title": "Why the Naoratna Was Prized",
+   "also": [
+    "naoratna",
+    "talisman",
+    "planets",
+    "flaw"
+   ]
+  },
+  "7.1.78": {
+   "title": "The Seven Planet Rings of Apollonius",
+   "also": [
+    "apollonius of tyana",
+    "iarchas",
+    "planets",
+    "rings",
+    "weekdays"
+   ]
+  },
+  "7.1.81": {
+   "title": "The Burmese Order of the Nine Gems",
+   "also": [
+    "ruby",
+    "diamond",
+    "pearl",
+    "coral",
+    "topaz",
+    "sapphire",
+    "cat's-eye",
+    "amethyst",
+    "emerald",
+    "burma",
+    "naoratna"
+   ]
+  },
+  "7.1.83": {
+   "title": "Jewels of the Chinese Imperial Altars",
+   "also": [
+    "lapis lazuli",
+    "jade",
+    "coral",
+    "china",
+    "temple of heaven",
+    "emperor",
+    "manchu"
+   ]
+  },
+  "7.1.84": {
+   "title": "The Miraculous Jade Plaque of Samantabhadra",
+   "also": [
+    "jade",
+    "samantabhadra",
+    "song dynasty",
+    "china",
+    "buddhism"
+   ]
+  },
+  "7.1.86": {
+   "title": "Turquoise in Navajo Sand-Paintings",
+   "also": [
+    "turquoise",
+    "coral",
+    "navajo",
+    "rain gods",
+    "sand painting",
+    "whirlwind"
+   ]
+  },
+  "7.1.87": {
+   "title": "The Turquoise of the Gods",
+   "also": [
+    "turquoise",
+    "teuxivitl",
+    "aztec",
+    "sahagun",
+    "mexico"
+   ]
+  },
+  "7.1.90": {
+   "title": "Emeralds That Ripen Like Fruit",
+   "also": [
+    "emerald",
+    "garcilasso",
+    "peru"
+   ]
+  },
+  "7.1.91": {
+   "title": "The Kunz Jadeite Adze",
+   "also": [
+    "jadeite",
+    "jade",
+    "kunz adze",
+    "oaxaca",
+    "mexico",
+    "aztec"
+   ],
+   "picture": "i_249fp"
+  },
+  "7.1.102": {
+   "title": "The Jade Mountain of Minneapolis",
+   "also": [
+    "jade",
+    "jade mountain",
+    "wang hi-che",
+    "minneapolis",
+    "calligraphy",
+    "china"
+   ],
+   "picture": "i_245fp"
+  },
+  "7.1.105": {
+   "title": "Burnt Offerings of Emeralds and Pearls",
+   "also": [
+    "emerald",
+    "pearl",
+    "gold",
+    "new granada",
+    "mound-builders",
+    "offering"
+   ]
+  },
+  "7.1.106": {
+   "title": "The Gods of the Mexican Lapidaries",
+   "also": [
+    "obsidian",
+    "rock crystal",
+    "amber",
+    "lapidary",
+    "mexico",
+    "aztec"
+   ]
+  },
+  "7.1.107": {
+   "title": "Rank Stones of the Chinese Mandarins",
+   "also": [
+    "tourmaline",
+    "ruby",
+    "coral",
+    "garnet",
+    "beryl",
+    "lapis lazuli",
+    "rock crystal",
+    "mandarin",
+    "china"
+   ],
+   "to": 108
+  },
+  "7.1.110": {
+   "title": "St. Valentine's Amethyst Ring",
+   "also": [
+    "amethyst",
+    "st. valentine",
+    "cupid",
+    "ring"
+   ]
+  },
+  "7.1.111": {
+   "title": "The Gems on St. Martial's Gloves",
+   "also": [
+    "st. martial",
+    "gloves",
+    "sacrilege"
+   ]
+  },
+  "7.1.112": {
+   "title": "The St. Sylvester Stone",
+   "also": [
+    "agate",
+    "st. sylvester",
+    "st. james",
+    "new year"
+   ]
+  },
+  "7.1.113": {
+   "title": "The Sacro Catino of Genoa",
+   "also": [
+    "emerald",
+    "glass",
+    "sacro catino",
+    "genoa",
+    "last supper",
+    "holy grail"
+   ]
+  },
+  "7.1.115": {
+   "title": "Agricola's Holy Emeralds",
+   "also": [
+    "emerald",
+    "chrysoprase",
+    "holy grail",
+    "lyons",
+    "prague",
+    "st. wenceslaus",
+    "magdeburg",
+    "otho"
+   ]
+  },
+  "7.1.118": {
+   "title": "The Emerald of the Virgen del Sagrario",
+   "also": [
+    "emerald",
+    "ruby",
+    "pearl",
+    "toledo",
+    "virgen del sagrario",
+    "crown",
+    "junot"
+   ],
+   "to": 119
+  },
+  "7.1.120": {
+   "title": "The Lost Treasury of Loreto",
+   "also": [
+    "diamond",
+    "pearl",
+    "loreto",
+    "santa casa",
+    "henrietta maria",
+    "infanta isabel"
+   ],
+   "to": 122
+  },
+  "7.1.123": {
+   "title": "The Pectoral Cross of the Escorial",
+   "also": [
+    "emerald",
+    "diamond",
+    "pearl",
+    "escorial",
+    "philip ii",
+    "cross"
+   ]
+  },
+  "7.1.124": {
+   "title": "The Jet Rosaries of Whitby",
+   "also": [
+    "jet",
+    "whitby",
+    "st. hilda",
+    "oswy",
+    "rosary",
+    "black amber"
+   ],
+   "to": 125
+  },
+  "7.1.130": {
+   "title": "The Natural Picture in St. Sophia",
+   "also": [
+    "marble",
+    "picture stone",
+    "st. sophia",
+    "constantinople",
+    "clavijo",
+    "virgin mary"
+   ],
+   "to": 131
+  },
+  "7.1.132": {
+   "title": "The Agate King of St. Mark's",
+   "also": [
+    "agate",
+    "picture stone",
+    "venice",
+    "st. mark",
+    "san giorgio maggiore"
+   ],
+   "to": 133
+  },
+  "7.1.137": {
+   "title": "The Onyx of St. Elizabeth of Marburg",
+   "also": [
+    "onyx",
+    "st. elizabeth",
+    "marburg",
+    "castor and pollux",
+    "mainz"
+   ]
+  },
+  "7.1.138": {
+   "title": "The Oberammergau Stone",
+   "also": [
+    "chert",
+    "limestone",
+    "oberammergau",
+    "passion play",
+    "picture stone"
+   ],
+   "to": 139
+  },
+  "7.1.140": {
+   "title": "The Diamond, Lover of God",
+   "also": [
+    "diamond",
+    "lapidaria",
+    "amante di dio",
+    "incarnation"
+   ],
+   "to": 141
+  },
+  "7.1.145": {
+   "title": "Staurolite, the Fairy Cross",
+   "also": [
+    "staurolite",
+    "fairy stone",
+    "fairy cross",
+    "baptismal stone",
+    "lapis crucifer",
+    "virginia",
+    "brittany",
+    "roosevelt"
+   ],
+   "to": 146,
+   "picture": "i_271fp"
+  },
+  "7.1.147": {
+   "title": "Blue Stones at the Miners' Shrines",
+   "also": [
+    "calamine",
+    "turquoise",
+    "sonora",
+    "chihuahua",
+    "new mexico",
+    "shrine"
+   ]
+  },
+  "7.1.148": {
+   "title": "The Rare Jewel of Mary Courtney's Tomb",
+   "also": [
+    "jewel",
+    "epitaph",
+    "cornwall",
+    "mary courtney",
+    "tombstone"
+   ],
+   "to": 149
+  },
+  "8.0.2": {
+   "title": "The Sapphire Throne and the Emerald Rainbow",
+   "also": [
+    "sapphire",
+    "emerald",
+    "ezekiel",
+    "throne",
+    "rainbow",
+    "revelation"
+   ]
+  },
+  "8.0.4": {
+   "title": "The Breastplate of Judgment in Exodus",
+   "also": [
+    "sardius",
+    "topaz",
+    "carbuncle",
+    "emerald",
+    "sapphire",
+    "diamond",
+    "ligure",
+    "agate",
+    "amethyst",
+    "beryl",
+    "onyx",
+    "jasper",
+    "breastplate",
+    "exodus",
+    "twelve tribes",
+    "high priest"
+   ],
+   "to": 11,
+   "picture": "i_281"
+  },
+  "8.0.19": {
+   "title": "The Urim and Thummim",
+   "also": [
+    "breastplate",
+    "urim and thummim",
+    "aaron",
+    "high priest",
+    "exodus"
+   ],
+   "to": 20,
+   "picture": "i_279"
+  },
+  "8.0.25": {
+   "title": "The Shamir That Engraved the Tribes",
+   "also": [
+    "emery",
+    "shamir",
+    "breastplate",
+    "moses",
+    "engraving",
+    "twelve tribes"
+   ]
+  },
+  "8.0.29": {
+   "title": "An Egyptian Origin for the Breastplate",
+   "also": [
+    "breastplate",
+    "egypt",
+    "memphis",
+    "high priest",
+    "urim and thummim"
+   ]
+  },
+  "8.0.30": {
+   "title": "St. Augustine on the Urim and Thummim",
+   "also": [
+    "breastplate",
+    "urim and thummim",
+    "augustine",
+    "oracle",
+    "high priest"
+   ]
+  },
+  "8.0.31": {
+   "title": "The Breastplate's Road from Jerusalem",
+   "also": [
+    "breastplate",
+    "titus",
+    "rome",
+    "vandals",
+    "constantinople",
+    "justinian",
+    "lost treasure"
+   ],
+   "to": 32
+  },
+  "8.0.44": {
+   "title": "Odem, the Stone of Reuben",
+   "also": [
+    "carnelian",
+    "sardius",
+    "jasper",
+    "odem",
+    "tribe of reuben",
+    "breastplate",
+    "egypt"
+   ]
+  },
+  "8.0.45": {
+   "title": "Pitdah, the Stone of Simeon",
+   "also": [
+    "peridot",
+    "topaz",
+    "chrysolite",
+    "serpentine",
+    "pitdah",
+    "tribe of simeon",
+    "breastplate",
+    "topazos"
+   ]
+  },
+  "8.0.46": {
+   "title": "Bareketh, the Stone of Levi",
+   "also": [
+    "emerald",
+    "feldspar",
+    "bareketh",
+    "tribe of levi",
+    "breastplate",
+    "rainbow"
+   ]
+  },
+  "8.0.47": {
+   "title": "Nophek, the Stone of Judah",
+   "also": [
+    "carbuncle",
+    "ruby",
+    "garnet",
+    "nophek",
+    "tribe of judah",
+    "breastplate"
+   ]
+  },
+  "8.0.48": {
+   "title": "Sappir, the Stone of Issachar",
+   "also": [
+    "lapis lazuli",
+    "sapphire",
+    "sappir",
+    "tribe of issachar",
+    "breastplate",
+    "egypt",
+    "azure"
+   ]
+  },
+  "8.0.49": {
+   "title": "Yahalom, the Smiter, Stone of Zebulun",
+   "also": [
+    "onyx",
+    "diamond",
+    "jasper",
+    "yahalom",
+    "tribe of zebulun",
+    "breastplate",
+    "smiter"
+   ]
+  },
+  "8.0.54": {
+   "title": "Shoham, the Stone of Gad",
+   "also": [
+    "beryl",
+    "onyx",
+    "aquamarine",
+    "malachite",
+    "turquoise",
+    "shoham",
+    "tribe of gad",
+    "breastplate"
+   ]
+  },
+  "8.0.60": {
+   "title": "From Breastplate to Foundation Stones",
+   "also": [
+    "breastplate",
+    "new jerusalem",
+    "foundation stones",
+    "revelation"
+   ]
+  },
+  "8.0.63": {
+   "title": "The Foundations of the New Jerusalem",
+   "also": [
+    "jasper",
+    "sapphire",
+    "chalcedony",
+    "emerald",
+    "sardonyx",
+    "sardius",
+    "chrysolite",
+    "beryl",
+    "topaz",
+    "chrysoprase",
+    "jacinth",
+    "amethyst",
+    "pearl",
+    "new jerusalem",
+    "foundation stones",
+    "revelation",
+    "pearly gates"
+   ],
+   "to": 74
+  },
+  "8.0.76": {
+   "title": "The Apostles of the Foundation Stones",
+   "also": [
+    "foundation stones",
+    "apostles",
+    "new jerusalem",
+    "revelation",
+    "st paul"
+   ]
+  },
+  "8.0.79": {
+   "title": "The Jasper and Sardine Stone Throne",
+   "also": [
+    "jasper",
+    "sardius",
+    "emerald",
+    "sardine stone",
+    "throne",
+    "rainbow",
+    "revelation"
+   ],
+   "to": 82
+  },
+  "8.0.83": {
+   "title": "Rabanus Maurus on the Twelve Gems",
+   "also": [
+    "jasper",
+    "sapphire",
+    "chalcedony",
+    "emerald",
+    "sardonyx",
+    "sard",
+    "chrysolite",
+    "beryl",
+    "topaz",
+    "chrysoprase",
+    "hyacinth",
+    "amethyst",
+    "rabanus maurus",
+    "foundation stones",
+    "symbolism"
+   ],
+   "to": 84
+  },
+  "8.0.85": {
+   "title": "Isaiah's Gates of Carbuncles",
+   "also": [
+    "sapphire",
+    "carbuncle",
+    "agate",
+    "pearl",
+    "isaiah",
+    "jerusalem",
+    "rabbi johanan",
+    "angels",
+    "talmud"
+   ],
+   "to": 89
+  },
+  "9.0.6": {
+   "title": "Josephus on the High-Priest's Robes",
+   "also": [
+    "sardonyx",
+    "breastplate",
+    "josephus",
+    "high priest",
+    "zodiac",
+    "months",
+    "sun",
+    "moon"
+   ],
+   "to": 7
+  },
+  "9.0.9": {
+   "title": "Apostles' Names on the Foundation Stones",
+   "also": [
+    "foundation stones",
+    "apostles",
+    "revelation",
+    "epiphanius",
+    "birthstone"
+   ]
+  },
+  "9.0.10": {
+   "title": "Andreas of Caesarea on Peter and Paul",
+   "also": [
+    "jasper",
+    "sapphire",
+    "st peter",
+    "st paul",
+    "apostles",
+    "andreas",
+    "foundation stones"
+   ],
+   "to": 12
+  },
+  "9.0.14": {
+   "title": "The Emerald of St John",
+   "also": [
+    "emerald",
+    "st john",
+    "apostles",
+    "oil",
+    "foundation stones"
+   ]
+  },
+  "9.0.15": {
+   "title": "The Sardonyx of St James",
+   "also": [
+    "sardonyx",
+    "st james",
+    "apostles",
+    "foundation stones"
+   ]
+  },
+  "9.0.17": {
+   "title": "The Chrysolite of St Bartholomew",
+   "also": [
+    "chrysolite",
+    "st bartholomew",
+    "apostles",
+    "foundation stones"
+   ]
+  },
+  "9.0.18": {
+   "title": "The Beryl of St Thomas",
+   "also": [
+    "beryl",
+    "jacinth",
+    "st thomas",
+    "apostles",
+    "sea",
+    "foundation stones"
+   ]
+  },
+  "9.0.20": {
+   "title": "The Chrysoprase of St Thaddaeus",
+   "also": [
+    "chrysoprase",
+    "st thaddaeus",
+    "apostles",
+    "abgar",
+    "edessa",
+    "foundation stones"
+   ]
+  },
+  "9.0.21": {
+   "title": "The Jacinth of Simon Zelotes",
+   "also": [
+    "jacinth",
+    "simon zelotes",
+    "apostles",
+    "foundation stones"
+   ]
+  },
+  "9.0.22": {
+   "title": "The Amethyst of St Matthias",
+   "also": [
+    "amethyst",
+    "st matthias",
+    "apostles",
+    "foundation stones"
+   ]
+  },
+  "9.0.23": {
+   "title": "The Foundation Stones as Signs of Christ",
+   "also": [
+    "jasper",
+    "sapphire",
+    "chalcedony",
+    "emerald",
+    "sardonyx",
+    "sardius",
+    "chrysolite",
+    "beryl",
+    "topaz",
+    "chrysoprase",
+    "jacinth",
+    "amethyst",
+    "christ",
+    "colour",
+    "foundation stones"
+   ]
+  },
+  "9.0.24": {
+   "title": "The Tribes and the Zodiac",
+   "also": [
+    "breastplate",
+    "tribal stones",
+    "astral stones",
+    "epiphanius",
+    "zodiac",
+    "tribes",
+    "aries",
+    "pisces"
+   ],
+   "to": 25
+  },
+  "9.0.26": {
+   "title": "Nine Gems for Nine Orders of Angels",
+   "also": [
+    "angels",
+    "rabanus maurus",
+    "king of tyre",
+    "apostles",
+    "foundation stones"
+   ]
+  },
+  "9.0.36": {
+   "title": "Catherine de' Medici's Zodiac Girdle",
+   "also": [
+    "onyx",
+    "catherine de medici",
+    "girdle",
+    "zodiac",
+    "talisman"
+   ]
+  },
+  "9.0.37": {
+   "title": "Kunz Defends the Old Birthstones",
+   "also": [
+    "birthstone",
+    "kansas city",
+    "jewellers",
+    "sentiment",
+    "1912"
+   ],
+   "to": 38
+  },
+  "9.0.42": {
+   "title": "The 1912 Kansas City Birthstone List",
+   "also": [
+    "garnet",
+    "amethyst",
+    "bloodstone",
+    "aquamarine",
+    "diamond",
+    "emerald",
+    "pearl",
+    "moonstone",
+    "ruby",
+    "sardonyx",
+    "peridot",
+    "sapphire",
+    "opal",
+    "tourmaline",
+    "topaz",
+    "turquoise",
+    "lapis lazuli",
+    "birthstone",
+    "kansas city"
+   ],
+   "to": 44
+  },
+  "9.0.48": {
+   "title": "Astral and Zodiacal Stones",
+   "also": [
+    "birthstone",
+    "astral stones",
+    "zodiac",
+    "aquarius",
+    "pisces",
+    "aries",
+    "capricorn"
+   ]
+  },
+  "9.0.51": {
+   "title": "American Birthstones",
+   "also": [
+    "garnet",
+    "rhodolite",
+    "amethyst",
+    "californite",
+    "sapphire",
+    "tourmaline",
+    "moss agate",
+    "turquoise",
+    "beryl",
+    "kunzite",
+    "aquamarine",
+    "topaz",
+    "rubellite",
+    "united states",
+    "america",
+    "birthstone"
+   ],
+   "to": 52
+  },
+  "9.0.53": {
+   "title": "The Emerald, Gem of Spring",
+   "also": [
+    "emerald",
+    "ruby",
+    "sapphire",
+    "diamond",
+    "spring",
+    "seasons",
+    "bogota"
+   ],
+   "to": 54
+  },
+  "9.0.55": {
+   "title": "The Ruby, Gem of Summer",
+   "also": [
+    "ruby",
+    "sapphire",
+    "summer",
+    "seasons",
+    "burma",
+    "ceylon",
+    "siam",
+    "pigeon's blood"
+   ]
+  },
+  "9.0.56": {
+   "title": "The Sapphire, Gem of Autumn",
+   "also": [
+    "sapphire",
+    "ruby",
+    "autumn",
+    "seasons",
+    "constancy"
+   ]
+  },
+  "9.0.57": {
+   "title": "The Diamond, Gem of Winter",
+   "also": [
+    "diamond",
+    "gold",
+    "winter",
+    "seasons",
+    "light"
+   ]
+  },
+  "9.0.58": {
+   "title": "How the God of the Mines Made the Diamond",
+   "also": [
+    "diamond",
+    "pearl",
+    "ruby",
+    "emerald",
+    "sapphire",
+    "legend",
+    "god of the mines"
+   ]
+  },
+  "9.2.1": {
+   "title": "January's Stones",
+   "also": [
+    "garnet",
+    "onyx",
+    "jasper",
+    "january",
+    "aquarius",
+    "snowdrop",
+    "gabriel",
+    "birthstone"
+   ]
+  },
+  "9.3.1": {
+   "title": "February's Stones",
+   "also": [
+    "amethyst",
+    "jasper",
+    "carbuncle",
+    "february",
+    "pisces",
+    "primrose",
+    "barchiel",
+    "birthstone"
+   ],
+   "to": 3
+  },
+  "9.4.1": {
+   "title": "March's Stones",
+   "also": [
+    "jasper",
+    "bloodstone",
+    "ruby",
+    "emerald",
+    "march",
+    "aries",
+    "violet",
+    "malchediel",
+    "birthstone"
+   ],
+   "to": 3
+  },
+  "9.5.1": {
+   "title": "April's Stones",
+   "also": [
+    "diamond",
+    "sapphire",
+    "topaz",
+    "carnelian",
+    "april",
+    "taurus",
+    "daisy",
+    "ashmodei",
+    "birthstone"
+   ]
+  },
+  "9.6.1": {
+   "title": "May's Stones",
+   "also": [
+    "emerald",
+    "carbuncle",
+    "chrysolite",
+    "may",
+    "gemini",
+    "hawthorn",
+    "amriel",
+    "birthstone"
+   ]
+  },
+  "9.7.1": {
+   "title": "June's Stones",
+   "also": [
+    "agate",
+    "emerald",
+    "beryl",
+    "june",
+    "cancer",
+    "honeysuckle",
+    "muriel",
+    "birthstone"
+   ]
+  },
+  "9.8.1": {
+   "title": "July's Stones",
+   "also": [
+    "turquoise",
+    "sapphire",
+    "topaz",
+    "july",
+    "leo",
+    "water lily",
+    "verchiel",
+    "birthstone"
+   ],
+   "to": 3
+  },
+  "9.9.1": {
+   "title": "August's Stones",
+   "also": [
+    "carnelian",
+    "diamond",
+    "sardonyx",
+    "august",
+    "virgo",
+    "poppy",
+    "hamatiel",
+    "birthstone"
+   ]
+  },
+  "9.10.1": {
+   "title": "September's Stones",
+   "also": [
+    "chrysolite",
+    "jacinth",
+    "chrysoprase",
+    "september",
+    "libra",
+    "morning-glory",
+    "tsuriel",
+    "birthstone"
+   ]
+  },
+  "9.11.1": {
+   "title": "October's Stones",
+   "also": [
+    "beryl",
+    "agate",
+    "jacinth",
+    "october",
+    "scorpio",
+    "hops",
+    "bariel",
+    "birthstone"
+   ],
+   "to": 3
+  },
+  "9.12.1": {
+   "title": "November's Stones",
+   "also": [
+    "topaz",
+    "amethyst",
+    "november",
+    "sagittarius",
+    "chrysanthemum",
+    "adnachiel",
+    "birthstone"
+   ],
+   "to": 3
+  },
+  "9.13.1": {
+   "title": "December's Stones",
+   "also": [
+    "ruby",
+    "beryl",
+    "sapphire",
+    "december",
+    "capricorn",
+    "holly",
+    "humiel",
+    "birthstone"
+   ],
+   "to": 3
+  },
+  "9.16.1": {
+   "title": "Gems of the Days of the Week",
+   "also": [
+    "topaz",
+    "diamond",
+    "pearl",
+    "crystal",
+    "emerald",
+    "ruby",
+    "amethyst",
+    "loadstone",
+    "turquoise",
+    "sapphire",
+    "carnelian",
+    "cat's eye",
+    "moonstone",
+    "jasper",
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "week"
+   ],
+   "to": 22
+  },
+  "9.16.23": {
+   "title": "Cat's-Eyes and Star Stones",
+   "also": [
+    "cat's eye",
+    "chrysoberyl",
+    "star sapphire",
+    "star ruby",
+    "alexandrite",
+    "phenomenal gems",
+    "good fortune",
+    "constantine"
+   ]
+  },
+  "9.16.25": {
+   "title": "The Moonstone's Shifting Light",
+   "also": [
+    "moonstone",
+    "feldspar",
+    "chatoyancy",
+    "moon"
+   ]
+  },
+  "9.17.1": {
+   "title": "Siam's Colours and Gems for Each Day",
+   "also": [
+    "sunstone",
+    "moonstone",
+    "star sapphire",
+    "star ruby",
+    "cat's eye",
+    "alexandrite",
+    "labradorite",
+    "ruby",
+    "coral",
+    "emerald",
+    "diamond",
+    "sapphire",
+    "siam",
+    "week",
+    "days"
+   ],
+   "to": 2
+  },
+  "9.17.4": {
+   "title": "The Magus's Rings for Each Day",
+   "also": [
+    "chrysolite",
+    "ruby",
+    "pearl",
+    "crystal",
+    "selenite",
+    "amethyst",
+    "agate",
+    "emerald",
+    "sapphire",
+    "turquoise",
+    "lapis lazuli",
+    "beryl",
+    "onyx",
+    "magic",
+    "ritual",
+    "week",
+    "saturn",
+    "jupiter",
+    "venus"
+   ]
+  },
+  "10.0.1": {
+   "title": "The Magnet, Iron and Mars",
+   "also": [
+    "magnet",
+    "loadstone",
+    "iron",
+    "mars",
+    "polar star",
+    "planets"
+   ],
+   "to": 2
+  },
+  "10.0.7": {
+   "title": "Wearing Your Zodiac Gem",
+   "also": [
+    "zodiac",
+    "saints",
+    "guardian angel",
+    "birthstone",
+    "talisman"
+   ]
+  },
+  "10.0.9": {
+   "title": "Engraving by the Light of a Planet",
+   "also": [
+    "engraved gem",
+    "amulet",
+    "mirror",
+    "planets",
+    "talisman"
+   ]
+  },
+  "10.0.10": {
+   "title": "Why Hard Stones Keep Their Virtues",
+   "also": [
+    "hardness",
+    "planets",
+    "stars",
+    "virtues"
+   ]
+  },
+  "10.0.11": {
+   "title": "Caesar's Comet on a Carnelian",
+   "also": [
+    "carnelian",
+    "julius caesar",
+    "comet",
+    "aries",
+    "taurus",
+    "leo",
+    "engraved gem"
+   ],
+   "picture": "i_322"
+  },
+  "10.0.12": {
+   "title": "Jupiter Enthroned Among the Zodiac",
+   "also": [
+    "carnelian",
+    "jupiter",
+    "mars",
+    "mercury",
+    "neptune",
+    "zodiac",
+    "virgo",
+    "unicorn",
+    "domitian",
+    "engraved gem"
+   ]
+  },
+  "10.0.13": {
+   "title": "Horoscope Gems in New York",
+   "also": [
+    "jasper",
+    "agate",
+    "sard",
+    "horoscope",
+    "sagittarius",
+    "capricorn",
+    "taurus",
+    "aries",
+    "metropolitan museum",
+    "engraved gem"
+   ]
+  },
+  "10.0.14": {
+   "title": "The Gemma Augustea",
+   "also": [
+    "cameo",
+    "gemma augustea",
+    "augustus",
+    "tiberius",
+    "capricorn",
+    "scorpio",
+    "dioskorides",
+    "vienna"
+   ]
+  },
+  "10.0.16": {
+   "title": "The Ruby, the Hyades and Taurus",
+   "also": [
+    "ruby",
+    "diamond",
+    "crystal",
+    "carbuncle",
+    "sandastros",
+    "taurus",
+    "hyades",
+    "pleiades",
+    "babylonia",
+    "pliny"
+   ]
+  },
+  "10.0.19": {
+   "title": "The Jewel of the Eclipse Dragon",
+   "also": [
+    "hyacinth",
+    "zircon",
+    "rahuratna",
+    "eclipse",
+    "dragon",
+    "sanskrit",
+    "hindu"
+   ]
+  },
+  "10.0.20": {
+   "title": "A Turquoise After the New Moon",
+   "also": [
+    "turquoise",
+    "new moon",
+    "moon",
+    "wealth",
+    "hindu"
+   ]
+  },
+  "10.1.1": {
+   "title": "Zodiac Gems of Aquarius, Pisces and Aries",
+   "also": [
+    "garnet",
+    "amethyst",
+    "bloodstone",
+    "aquarius",
+    "pisces",
+    "aries",
+    "zodiac",
+    "january",
+    "february",
+    "march"
+   ],
+   "to": 3,
+   "picture": "i_343fp"
+  },
+  "10.1.6": {
+   "title": "Zodiac Gems from Cancer to Capricorn",
+   "also": [
+    "emerald",
+    "onyx",
+    "carnelian",
+    "chrysolite",
+    "beryl",
+    "topaz",
+    "ruby",
+    "cancer",
+    "leo",
+    "virgo",
+    "libra",
+    "scorpio",
+    "sagittarius",
+    "capricorn",
+    "zodiac"
+   ],
+   "to": 12,
+   "picture": "i_343fp"
+  },
+  "10.1.15": {
+   "title": "The Planets in Alfonso X's Lapidary",
+   "also": [
+    "diamond",
+    "emerald",
+    "jargoon",
+    "carnelian",
+    "ruby",
+    "coral",
+    "lapis lazuli",
+    "chalcedony",
+    "beryl",
+    "alfonso x",
+    "lapidario",
+    "planets",
+    "saturn",
+    "venus",
+    "mars",
+    "jupiter",
+    "mercury"
+   ]
+  },
+  "10.2.12": {
+   "title": "The Perseus Gem Against Lightning",
+   "also": [
+    "engraved gem",
+    "perseus",
+    "gorgon",
+    "taurus",
+    "lightning",
+    "enchantment",
+    "constellation"
+   ]
+  },
+  "10.2.25": {
+   "title": "Hydra, Crowns, Charioteer and Banner",
+   "also": [
+    "engraved gem",
+    "hydra",
+    "corona australis",
+    "auriga",
+    "vexillum",
+    "hunting",
+    "constellation"
+   ],
+   "to": 28
+  },
+  "10.3.1": {
+   "title": "Figures of the Planets on Gems",
+   "also": [
+    "engraved gem",
+    "saturn",
+    "jupiter",
+    "mars",
+    "sun",
+    "venus",
+    "mercury",
+    "moon",
+    "planets",
+    "talisman"
+   ],
+   "picture": "i_332fp"
+  },
+  "10.3.8": {
+   "title": "What It Means to Dream of Gems",
+   "also": [
+    "agate",
+    "amber",
+    "amethyst",
+    "aquamarine",
+    "beryl",
+    "bloodstone",
+    "carbuncle",
+    "carnelian",
+    "cat's eye",
+    "chalcedony",
+    "chrysoberyl",
+    "chrysolite",
+    "coral",
+    "crystal",
+    "diamond",
+    "emerald",
+    "garnet",
+    "heliotrope",
+    "hyacinth",
+    "jacinth",
+    "jasper",
+    "jet",
+    "lapis lazuli",
+    "moonstone",
+    "moss agate",
+    "onyx",
+    "opal",
+    "pearl",
+    "porphyry",
+    "ruby",
+    "sapphire",
+    "sardonyx",
+    "topaz",
+    "tourmaline",
+    "turquoise",
+    "dream"
+   ],
+   "to": 9
+  },
+  "10.4.1": {
+   "title": "Gem Acrostics: Faith, Hope and Charity",
+   "also": [
+    "opal",
+    "alexandrite",
+    "hyacinth",
+    "pearl",
+    "emerald",
+    "ruby",
+    "topaz",
+    "garnet",
+    "diamond",
+    "acrostic",
+    "motto",
+    "ring",
+    "good luck",
+    "mizpah"
+   ],
+   "to": 3
+  },
+  "10.4.6": {
+   "title": "The Five-Pointed Star Engagement Ring",
+   "also": [
+    "diamond",
+    "engagement ring",
+    "pentagon",
+    "star",
+    "zodiac",
+    "guardian angel"
+   ]
+  }
+ }
+}

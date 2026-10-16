@@ -12,7 +12,7 @@ from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "bestiary", "blame", "books", "bribe", "campaign", "committee",
-                  "cure", "deadword", "devils", "dream", "enquire", "etiquette", "expunge", "flowermeaning", "goblin", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot", "lore", "melancholy",
+                  "cure", "deadword", "devils", "dream", "enquire", "etiquette", "expunge", "flowermeaning", "gemlore", "goblin", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot", "lore", "melancholy",
                   "nowplaying", "omen", "phrase", "plant", "pliny", "pseudodoxia", "quote", "rapsheet", "rpg", "secrets", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
                   "tdoi", "timezone", "vulgartongue", "wars", "weather", "whospray", "wisdom", "wonder"]
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
@@ -122,7 +122,7 @@ def test_help_front_page(loaded_bot):
     assert [line.split(" **")[1].split("**")[0] for line in sections] == [
         "Rap sheet", "Fun", "Words & wisdom", "Beasts & magic", "Hearth & herbs", "Movie night", "Measurements", "Quotes",
         "Campaigns", "Utilities"]
-    assert sections[3].startswith("🐉 **Beasts & magic**: Monsters, marvels, curiosities, spells, witches and dreams (")
+    assert sections[3].startswith("🐉 **Beasts & magic**: Monsters, marvels, curiosities, stones, spells, witches and dreams (")
     assert not embed.fields and len(embed) < 1500  # Short: one line a section
     assert isinstance(ctx.last.view, help_feature.HelpMenu)
     assert [o.label for o in ctx.last.view.sections.options][:3] == ["Rap sheet", "Fun", "Words & wisdom"]

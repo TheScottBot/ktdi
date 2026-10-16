@@ -88,6 +88,7 @@ ktdi/
 │   ├── goblin.py      /goblin: a tale of Welsh fairies, ghosts and customs from British Goblins (1880)
 │   ├── omen.py        /omen: an everyday superstition from The Magic of the Horse-shoe (1898)
 │   ├── flower.py      /flowermeaning: a flower's Victorian meaning (Dumont, 1851), or the flowers for a meaning
+│   ├── gem.py         /gemlore: a stone and what was believed of it (Kunz, The Curious Lore of Precious Stones, 1913)
 │   ├── secrets.py     /secrets: a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
@@ -172,6 +173,11 @@ ktdi/
     │                  tools/flower_build.py from the book's web page: its Dictionary of Flowers, its chapters
     │                  (joined to the dictionary's flower by name) and its six plates, and flower_curation.json
     │                  ("keep" by name; "no_text" keeps the meaning but not the chapter)
+    ├── gems.json      /gemlore's passages (Kunz, The Curious Lore of Precious Stones, 1913), built by
+    │                  tools/gem_build.py from the book's web page (chapters I to X; XI, on remedies, left
+    │                  out) and gem_curation.json: paragraphs or runs (chapter.section.paragraph, read by
+    │                  gutenberg.headed_paragraphs, shared with omen), each with a title, its stones and
+    │                  maybe one of the book's pictures
     ├── roman.py       Roman numerals to numbers (/pliny's books, /pseudodoxia's chapters)
     ├── melancholy.json  /melancholy's excerpts (Burton, Gutenberg), built by tools/melancholy_build.py from
     │                  melancholy_curation.json, which lists them word for word; the build checks each is in the book
