@@ -74,7 +74,7 @@ async def herbal(ctx: commands.Context):
     original picture. React ⛏️ to dig: each dig is one translation worse, down to 🪨 bedrock, the Latin as the scanner
     read it."""
     if not entries:
-        await ctx.send("The herbal hasn't been translated yet. See the README: Herbal.", ephemeral=True)
+        await ctx.send("The herbal hasn't been translated yet. See docs/SETUP.md: Herbal.", ephemeral=True)
         return
     await post_box(ctx)
 
@@ -123,7 +123,7 @@ async def dig(payload: discord.RawReactionActionEvent):
 OLD_BOOK = [oldbooks.OldBook(TITLE, "🌱", "herbal", random=lambda: herbal_embed(random.choice(list(entries.values()))),
                              send=post_box,
                              shelves=("household",))
-            ] if entries else []  # Only once it's been translated (see the README: Herbal)
+            ] if entries else []  # Only once it's been translated (see docs/SETUP.md: Herbal)
 
 
 

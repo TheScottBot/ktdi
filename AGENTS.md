@@ -5,16 +5,17 @@ conventions; this file is only the working rules. (CLAUDE.md imports this file, 
 
 - **Never commit or push.** Make and verify changes; the maintainer commits.
 - **Run the tests** (`python -m pytest`, ~3 s) before and after changes, and add tests for new behaviour.
-- **Keep /help and the README accurate** after every change. `/help` is a short front page, then sections, then one
-  page per command (ARCHITECTURE.md §6), and people rely on the command pages for the detail, so every new or changed
-  command needs all of:
+- **Keep /help, the README and docs/COMMANDS.md accurate** after every change. `/help` is a short front page, then
+  sections, then one page per command (ARCHITECTURE.md §6), and people rely on the command pages for the detail, so
+  every new or changed command needs all of:
   - a one-line `description=` (≤ 100 characters: Discord's slash limit), shown in its section's list;
   - its feature's `HELP_CATEGORY` (one of `help.CATEGORIES`), or `extras={"category": ...}` for one command;
   - a **docstring** on the command's function, written for the people using it: what it does beyond the one-liner,
     how to word things, examples, who gets pinged. It's the `/help <command>` page (aliases are added by themselves).
     A group's docstring covers its subcommands; each subcommand keeps its own `description=`;
   - `@app_commands.describe(...)` for each slash option;
-  - a row in the README's table for its section (and in ARCHITECTURE.md's layout, for a new file).
+  - a row in its section's table in `docs/COMMANDS.md` (the full reference), a one-line entry in the README's
+    section index (the short tour), and a line in ARCHITECTURE.md's layout, for a new file.
   Help pages must fit Discord's limits (field ≤ 1024, embed ≤ 6000). `tests/test_registration.py` checks the limits,
   that every command has a section, and that no command's page only repeats its one-liner; add the command to its
   `SLASH_COMMANDS` / `SUBCOMMANDS` lists.
@@ -26,10 +27,10 @@ conventions; this file is only the working rules. (CLAUDE.md imports this file, 
     household), so `/nature`, `/esoteric` and the rest ask it. A book that's mostly one shelf with some entries that
     belong on another (/omen's charms against witches are esoteric too) also gives `entry_shelves`;
   - its shelf says so: the shelf's `about` in `SHELVES` (its `/help` page), `short` too if the book is a big part
-    of it, and the shelf row in the README, which name the books on each.
+    of it, and the shelves row in `docs/COMMANDS.md`, which name the books on each.
   `tests/test_lore.py` fails without the first two. A new shelf is a `SHELVES` entry (the command makes itself),
-  plus its name in `tests/test_registration.py`'s `SLASH_COMMANDS`, the README's shelf row and the shelves listed
-  here; and the books that belong on it.
+  plus its name in `tests/test_registration.py`'s `SLASH_COMMANDS`, the shelves row in `docs/COMMANDS.md`, the
+  README's index and the shelves listed here; and the books that belong on it.
 - **Curating an old book:** keep only what's on an allowlist, and leave out anything with racism or contempt for a
   people or faith (even in passing), mockery of America, sex, gore, cruelty to animals, remedies someone could try,
   misogyny, suicide, harm to children, or anything that takes **gender or sexuality** lightly: people or animals

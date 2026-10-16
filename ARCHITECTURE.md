@@ -1,6 +1,6 @@
 # KTDI architecture and design
 
-How the bot is put together, why, and the rules to follow when changing it. Written for anyone making changes. The [README](README.md) covers what the commands do for users; this covers how they work.
+How the bot is put together, why, and the rules to follow when changing it. Written for anyone making changes. The [README](README.md) is the short tour and [docs/COMMANDS.md](docs/COMMANDS.md) what every command does for users; this covers how they work.
 
 **Before changing anything:** read [Rules for changes](#rules-for-changes) and run the tests (`python -m pytest`).
 
@@ -261,6 +261,25 @@ Extensions were chosen over Cog classes so commands stay plain functions that te
 `books.recent_books` (a cache so `/books download <id>` knows
 formats and sizes).
 
+### Adding an old book
+
+Every old book (a dictionary, bestiary or almanac in 📚 Words & wisdom, 🐉 Beasts & magic or 🌿 Hearth & herbs) is also a
+source for `/lore`, its shelf and Old Wisdom of the Day, so adding one comes with declaring it. Its feature sets
+`OLD_BOOK = oldbooks.OldBook(...)` (see `ktdi/oldbooks.py`) with:
+
+- a `random` entry (what Old Wisdom of the Day posts);
+- if it can be searched by topic, `find`, `title`, `link` and `text` (what `/lore` asks and quotes);
+- its `shelves`: which of `/nature`, `/folklore`, `/esoteric`, `/words` and `/household` ask it (one or more). A book
+  that's mostly one shelf with some entries on another gives `entry_shelves` too (`/omen`'s charms against witches
+  are folklore and esoteric).
+
+A test fails until it does. Then name it on its shelf: the shelf's `about` in `oldbooks.SHELVES` (its `/help` page)
+and the shelves row in [docs/COMMANDS.md](docs/COMMANDS.md). Then the usual: a `/help` page, a row in [docs/COMMANDS.md](docs/COMMANDS.md), a line in the README's
+section index, and the curation rules in `AGENTS.md`.
+
+A new shelf is an entry in `oldbooks.SHELVES` (its command makes itself), its name in `tests/test_registration.py`,
+a mention in the shelves row in [docs/COMMANDS.md](docs/COMMANDS.md) and the README's index, and `shelves=` on the books that belong on it.
+
 ## 6. /help
 
 `/help` is built from the registered prefix commands and printed with a `/`. It's three levels, so it never becomes
@@ -288,7 +307,7 @@ section privately for whoever picks it), a section's page (`/help old oddities`:
   - `"private": True` → never logged with who used it (see §9).
   - `"hidden": True` → a cryptid: left off the main `/help` list, though `/help <name>` still works. Make it a plain
     `commands.command` (`!`-only) too: Discord's slash menu shows every slash command, and a bot can't hide one from
-    it. `/help` titles `!`-only commands with `!`. **Cryptids are deliberately left out of the README and these docs**
+    it. `/help` titles `!`-only commands with `!`. **Cryptids are deliberately left out of the README, docs/COMMANDS.md and these docs**
     (an exception to keeping the README complete): they're only meant to be found by seeing one used, or by reading
     the code. Don't add them back.
 - If a prefix command's arguments are in a different order to its slash version, set `usage=` to the slash form
@@ -446,7 +465,8 @@ python -m pytest            # ~3 seconds
 - Freeze time with the `clock` fixture: `clock.set(datetime(...), campaigns)` patches that module's `datetime.now()`.
 - `test_registration.py` loads every feature onto a real `KTDIBot` and checks the command list, listeners and that
   every `/help` page, including the main list, fits Discord's limits. Update its expected lists when you add commands.
-  It also checks the README mentions every command, subcommand and feature file (and no cryptids), and that
+  It also checks docs/COMMANDS.md mentions every command and subcommand, the README's index every command, this
+  file every feature file (and none of them a cryptid), and that
   `.env.example` has every setting `config.py` reads.
 - `test_books.py` runs a fake Calibre-Web with aiohttp; `test_rpg.py` runs a fake Dropbox.
 
@@ -456,7 +476,7 @@ python -m pytest            # ~3 seconds
 2. **New feature** → new `ktdi/features/<name>.py` with `setup(bot)`, add it to `FEATURES`, optionally `help_extras`.
    New settings go in `config.py` and `.env.example`.
 3. **Help and README stay accurate.** Command descriptions appear in `/help` automatically; anything that isn't a
-   command (reactions, extra tips) needs `help_extras` / `main_help_lines`. Give new features a `HELP_CATEGORY`, and each command a docstring for its `/help` page. Update the README command table.
+   command (reactions, extra tips) needs `help_extras` / `main_help_lines`. Give new features a `HELP_CATEGORY`, and each command a docstring for its `/help` page. Add the command's row to [docs/COMMANDS.md](docs/COMMANDS.md) and its line to the README's section index.
 4. **Data:** reads through `db.scope()`, writes record the current server, edits target the row's own server,
    schema changes are additive upgrades in `db._upgrade()`.
 5. **Privacy:** nothing about `/books` or `/rpg` use may be logged against a person, and where someone is

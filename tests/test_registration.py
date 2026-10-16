@@ -236,22 +236,40 @@ def test_one_unreachable_server_doesnt_stop_startup(monkeypatch, caplog):
     assert "Couldn't add slash commands to server 222" in caplog.text
 
 
-def test_readme_covers_every_command_and_feature(loaded_bot):
-    """The README lists every command, subcommand and feature file, and no cryptids (they're found, not documented)."""
+def test_the_docs_cover_every_command_and_feature(loaded_bot):
+    """docs/COMMANDS.md (the full reference) has every command and subcommand, the README's section index every
+    command, ARCHITECTURE.md's layout every feature file, and none of them a cryptid (they're found, not documented)."""
     import pathlib
     import re
     from ktdi.features import FEATURES
     root = pathlib.Path(__file__).resolve().parent.parent
+    reference = (root / "docs" / "COMMANDS.md").read_text(encoding="utf-8")
     readme = (root / "README.md").read_text(encoding="utf-8")
+    architecture = (root / "ARCHITECTURE.md").read_text(encoding="utf-8")
     for command in loaded_bot.walk_commands():
         root_command = command.root_parent or command
         if root_command.extras.get("hidden"):
-            assert command.name not in readme, f"cryptid {command.qualified_name} is in the README"
+            for doc in (reference, readme, architecture):
+                assert command.name not in doc, f"cryptid {command.qualified_name} is in the docs"
             continue
-        assert f"`{root_command.name}" in readme or f"`!{root_command.name}" in readme, command.qualified_name
-        assert re.search(rf"\b{re.escape(command.name)}\b", readme), command.qualified_name
+        assert f"`{root_command.name}" in reference or f"`!{root_command.name}" in reference, command.qualified_name
+        assert re.search(rf"\b{re.escape(command.name)}\b", reference), command.qualified_name
+        assert f"`{root_command.name}`" in readme, f"{root_command.name} isn't in the README's index"
     for feature in FEATURES:
-        assert f"{feature.rsplit('.', 1)[1]}.py" in readme, feature
+        assert f"{feature.rsplit('.', 1)[1]}.py" in architecture, feature
+
+
+def test_the_readme_links_to_every_section_of_the_reference():
+    import pathlib
+    import re
+    root = pathlib.Path(__file__).resolve().parent.parent
+    reference = (root / "docs" / "COMMANDS.md").read_text(encoding="utf-8")
+    readme = (root / "README.md").read_text(encoding="utf-8")
+    anchors = set(re.findall(r'<a id="([a-z-]+)"></a>', reference))
+    linked = set(re.findall(r"docs/COMMANDS\.md#([a-z-]+)", readme))
+    assert linked and linked == anchors
+    for doc in ("docs/SETUP.md", "ARCHITECTURE.md", "AGENTS.md"):  # The README is the way in to the rest
+        assert (root / doc).exists() and f"]({doc})" in readme, doc
 
 
 def test_env_example_covers_every_setting():

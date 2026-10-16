@@ -43,7 +43,7 @@ CALIBRE_PASSWORD = os.getenv("CALIBRE_PASSWORD", "")
 BOOK_FORMATS = [f for f in (os.getenv("BOOK_FORMATS") or "epub,kepub,azw3,mobi,pdf,cbz").replace(" ", "").split(",") if f]
 
 # RPG rulebooks in a Dropbox folder, for /rpg. Only in RPG_GUILD_IDS, and only if all the DROPBOX_* values are set
-# (a Dropbox app with read-only access; see the README for setting one up).
+# (a Dropbox app with read-only access; see docs/SETUP.md for setting one up).
 RPG_GUILD_IDS = parse_ids("RPG_GUILD_IDS")
 DROPBOX_APP_KEY = os.getenv("DROPBOX_APP_KEY", "")
 DROPBOX_APP_SECRET = os.getenv("DROPBOX_APP_SECRET", "")

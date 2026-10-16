@@ -1,8 +1,8 @@
 """Read one folder of a Dropbox (the RPG rulebooks) through Dropbox's API: list it, search it, and make download
 links. No Discord code.
 
-The bot uses a Dropbox app with read-only scopes and a refresh token (see README: RPG rulebooks), and never looks
-outside the folder it's given. Downloads are Dropbox's own temporary links (valid for 4 hours), so files of any
+The bot uses a Dropbox app with read-only scopes and a refresh token (see docs/SETUP.md: RPG rulebooks), and never
+looks outside the folder it's given. Downloads are Dropbox's own temporary links (valid for 4 hours), so files of any
 size work: rulebooks are often far bigger than Discord's upload limit.
 """
 
@@ -68,7 +68,7 @@ class Dropbox:
         async with session.post(self.token_url, data=data) as response:
             if response.status in (400, 401):
                 raise DropboxError("Dropbox rejected the bot's login. The DROPBOX_* settings need redoing "
-                                   "(see the README).")
+                                   "(see docs/SETUP.md).")
             if response.status != 200:
                 raise DropboxError(f"Dropbox's login returned an error ({response.status}).")
             body = await response.json(content_type=None)

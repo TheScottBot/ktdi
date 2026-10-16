@@ -1,7 +1,7 @@
 """Get the DROPBOX_REFRESH_TOKEN for /rpg, once:  python -m ktdi.tools.dropbox_login
 
 You approve the bot's Dropbox app in your browser; Dropbox gives you a code; this swaps the code for a refresh token
-for your .env. Nothing is saved or sent anywhere else. See README: RPG rulebooks.
+for your .env. Nothing is saved or sent anywhere else. See docs/SETUP.md: RPG rulebooks.
 """
 
 import getpass
