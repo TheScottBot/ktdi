@@ -89,6 +89,7 @@ ktdi/
 │   ├── omen.py        /omen: an everyday superstition from The Magic of the Horse-shoe (1898)
 │   ├── flower.py      /flowermeaning: a flower's Victorian meaning (Dumont, 1851), or the flowers for a meaning
 │   ├── gem.py         /gemlore: a stone and what was believed of it (Kunz, The Curious Lore of Precious Stones, 1913)
+│   ├── talisman.py    /talisman: a talisman, charm or star sign and its stones (Pavitt, 1922)
 │   ├── secrets.py     /secrets: a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
@@ -178,6 +179,10 @@ ktdi/
     │                  out) and gem_curation.json: paragraphs or runs (chapter.section.paragraph, read by
     │                  gutenberg.headed_paragraphs, shared with omen), each with a title, its stones and
     │                  maybe one of the book's pictures
+    ├── talismans.json /talisman's passages (Pavitt, The Book of Talismans, Amulets and Zodiacal Gems, 1922),
+    │                  built by tools/talisman_build.py from the book's web page and talisman_curation.json:
+    │                  paragraphs or runs (part.chapter.paragraph), each with a title and other names; a
+    │                  passage citing a plate shows it (talisman_build.PLATES: the ones that may be shown)
     ├── roman.py       Roman numerals to numbers (/pliny's books, /pseudodoxia's chapters)
     ├── melancholy.json  /melancholy's excerpts (Burton, Gutenberg), built by tools/melancholy_build.py from
     │                  melancholy_curation.json, which lists them word for word; the build checks each is in the book

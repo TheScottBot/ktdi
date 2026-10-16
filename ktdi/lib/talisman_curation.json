@@ -1,0 +1,1930 @@
+{
+ "_about": "The Book of Talismans, Amulets and Zodiacal Gems (Pavitt, 1922): the paragraphs kept (part.chapter.paragraph, \"to\" for a short run), each with the title it's shown under and other names to find it by. Read by hand, then checked again: the curious kept; contempt for peoples or faiths, the swastika, sex and fertility, gore, cruelty to animals and charms made from them, every health claim (the book gives them as advice), misogyny, ableism, harm to children, anything taking gender or sexuality lightly, and plainly wrong history, left out. See ktdi/tools/talisman_build.py.",
+ "keep": {
+  "1.1.1": {
+   "title": "Jewels of the Great",
+   "also": [
+    "precious stones",
+    "gems",
+    "talismans",
+    "luck",
+    "wealth",
+    "history"
+   ]
+  },
+  "1.1.5": {
+   "title": "The Allure of the Marvellous",
+   "also": [
+    "gems",
+    "magnet",
+    "south america",
+    "mystery",
+    "minerals"
+   ]
+  },
+  "1.1.7": {
+   "title": "The Seer and the Jargoon",
+   "also": [
+    "jargoon",
+    "lapis lazuli",
+    "psychometry",
+    "theosophy",
+    "seer"
+   ],
+   "to": 8
+  },
+  "1.1.10": {
+   "title": "Every Red Stone a Ruby",
+   "also": [
+    "ruby",
+    "emerald",
+    "sapphire",
+    "month stones",
+    "birthstones",
+    "zodiac"
+   ]
+  },
+  "1.1.11": {
+   "title": "The High Priest's Breastplate",
+   "also": [
+    "breastplate",
+    "urim and thummim",
+    "month stones",
+    "twelve tribes",
+    "israel",
+    "zodiac",
+    "angels"
+   ]
+  },
+  "1.1.14": {
+   "title": "A Thought Made Concrete",
+   "also": [
+    "talisman",
+    "amulet",
+    "belief",
+    "purpose"
+   ]
+  },
+  "1.1.15": {
+   "title": "The Virtue Behind the Symbol",
+   "also": [
+    "symbols",
+    "charms",
+    "lamb",
+    "eagle",
+    "religion",
+    "worship",
+    "colour"
+   ],
+   "to": 16
+  },
+  "1.1.19": {
+   "title": "Made Under Favourable Aspects",
+   "also": [
+    "talisman",
+    "planets",
+    "astrology",
+    "alchemists",
+    "metals"
+   ],
+   "to": 20
+  },
+  "1.3.6": {
+   "title": "The Jewel in the Lotus",
+   "also": [
+    "om mani padme hum",
+    "aum",
+    "mani",
+    "prayer-wheel",
+    "tibet",
+    "buddhism",
+    "rebirth",
+    "colours"
+   ],
+   "to": 9
+  },
+  "1.3.14": {
+   "title": "Aum at the Start and Close",
+   "also": [
+    "aum",
+    "om",
+    "india",
+    "brahmin",
+    "teacher",
+    "knowledge"
+   ]
+  },
+  "1.3.15": {
+   "title": "Vishnu and His Avataras",
+   "also": [
+    "vishnu",
+    "brahma",
+    "siva",
+    "avatara",
+    "india",
+    "trinity"
+   ]
+  },
+  "1.3.17": {
+   "title": "Ganesa, Remover of Obstacles",
+   "also": [
+    "ganesa",
+    "ganesh",
+    "siva",
+    "elephant",
+    "india",
+    "wisdom",
+    "lotus",
+    "shell"
+   ]
+  },
+  "1.3.20": {
+   "title": "The Wheel of Life",
+   "also": [
+    "wheel of life",
+    "wheel",
+    "buddha",
+    "wheel of fortune",
+    "rice",
+    "fortune"
+   ],
+   "to": 21
+  },
+  "1.3.27": {
+   "title": "The Three Gems Talisman",
+   "also": [
+    "three gems",
+    "buddha",
+    "buddhism",
+    "courage",
+    "endurance"
+   ]
+  },
+  "1.4.1": {
+   "title": "The Hindu Talisman of Wisdom",
+   "also": [
+    "circle",
+    "triangles",
+    "serpent",
+    "bamboo",
+    "india",
+    "wisdom",
+    "perseverance"
+   ]
+  },
+  "1.4.9": {
+   "title": "Bats, Geese and the Lucky Tea-cup",
+   "also": [
+    "bats",
+    "goose",
+    "deer",
+    "stork",
+    "pine",
+    "peach",
+    "china",
+    "tea-cup",
+    "luck"
+   ]
+  },
+  "1.4.13": {
+   "title": "The Three Chinese Dragons",
+   "also": [
+    "dragon",
+    "lung",
+    "li",
+    "kiao",
+    "china",
+    "emperor"
+   ],
+   "to": 14
+  },
+  "1.4.16": {
+   "title": "The Money Sword",
+   "also": [
+    "money sword",
+    "cash sword",
+    "coins",
+    "china",
+    "wealth",
+    "evil spirits"
+   ]
+  },
+  "1.4.19": {
+   "title": "The Tortoise of the Universe",
+   "also": [
+    "tortoise",
+    "china",
+    "japan",
+    "india",
+    "longevity",
+    "venus",
+    "aphrodite"
+   ],
+   "to": 20
+  },
+  "1.5.13": {
+   "title": "Hotei, the Children's God",
+   "also": [
+    "hotei",
+    "japan",
+    "happiness",
+    "good fortune",
+    "household"
+   ]
+  },
+  "1.5.14": {
+   "title": "Rakes and Dumplings at the Eagle Shrine",
+   "also": [
+    "eagle",
+    "rake",
+    "potato",
+    "dumpling",
+    "mochi",
+    "japan",
+    "luck",
+    "november"
+   ],
+   "to": 16
+  },
+  "1.5.20": {
+   "title": "The Narita Charm of Tokio",
+   "also": [
+    "narita",
+    "tokyo",
+    "tokio",
+    "japan",
+    "shrine",
+    "luck"
+   ]
+  },
+  "1.5.28": {
+   "title": "The Beckoning Leaf of Teg-a-shiwa",
+   "also": [
+    "teg-a-shiwa",
+    "leaf",
+    "japan",
+    "travellers",
+    "journey"
+   ]
+  },
+  "1.5.29": {
+   "title": "Ota-fu-ku, the Joyful Goddess",
+   "also": [
+    "ota-fu-ku",
+    "otafuku",
+    "japan",
+    "luck",
+    "joy",
+    "gifts"
+   ]
+  },
+  "1.5.30": {
+   "title": "The Shinenaka Rope",
+   "also": [
+    "shinenaka",
+    "shimenawa",
+    "rope",
+    "japan",
+    "new year",
+    "evil spirits"
+   ]
+  },
+  "1.6.6": {
+   "title": "Amen, the Hidden One",
+   "also": [
+    "amen",
+    "amen ra",
+    "egypt",
+    "thebes",
+    "ra",
+    "sun god"
+   ]
+  },
+  "1.6.7": {
+   "title": "The Ka and the Mummy",
+   "also": [
+    "ka",
+    "mummy",
+    "egypt",
+    "book of the dead",
+    "astral body",
+    "soul"
+   ]
+  },
+  "1.6.8": {
+   "title": "Words of Power in Egypt",
+   "also": [
+    "inscribed amulets",
+    "egypt",
+    "thoth",
+    "ra",
+    "prayer",
+    "words of power"
+   ]
+  },
+  "1.6.13": {
+   "title": "The Crux Ansata, or Ankh",
+   "also": [
+    "ankh",
+    "crux ansata",
+    "egypt",
+    "nile",
+    "life",
+    "venus"
+   ],
+   "to": 14
+  },
+  "1.6.19": {
+   "title": "The Cartouche, or Name Amulet",
+   "also": [
+    "cartouche",
+    "name amulet",
+    "egypt",
+    "book of the dead",
+    "name"
+   ]
+  },
+  "1.6.20": {
+   "title": "The Angles and Plummet of Thoth",
+   "also": [
+    "angles",
+    "plummet",
+    "thoth",
+    "egypt",
+    "wisdom",
+    "truth"
+   ],
+   "to": 23
+  },
+  "1.6.27": {
+   "title": "The Tat of Osiris",
+   "also": [
+    "tat",
+    "djed",
+    "osiris",
+    "egypt",
+    "stability",
+    "underworld"
+   ]
+  },
+  "1.6.28": {
+   "title": "The Heart Amulet and the Weighing of the Heart",
+   "also": [
+    "heart",
+    "heart amulet",
+    "egypt",
+    "soul",
+    "judgment",
+    "black magic"
+   ]
+  },
+  "1.7.1": {
+   "title": "The Buckle of the Girdle of Isis",
+   "also": [
+    "buckle of isis",
+    "tyet",
+    "carnelian",
+    "isis",
+    "horus",
+    "egypt"
+   ]
+  },
+  "1.7.2": {
+   "title": "The Tie, or Sa, of Ta-urt",
+   "also": [
+    "sa",
+    "tie",
+    "ta-urt",
+    "taweret",
+    "hippopotamus",
+    "egypt",
+    "thoth"
+   ]
+  },
+  "1.7.3": {
+   "title": "The Scarab of Khepera",
+   "also": [
+    "scarab",
+    "beetle",
+    "khepera",
+    "egypt",
+    "sun",
+    "creation"
+   ]
+  },
+  "1.7.5": {
+   "title": "The Eye Amulet",
+   "also": [
+    "eye amulet",
+    "eye of horus",
+    "eye of osiris",
+    "eye of ra",
+    "egypt",
+    "pole star",
+    "ra",
+    "osiris"
+   ],
+   "to": 6
+  },
+  "1.7.10": {
+   "title": "The Two Utchats",
+   "also": [
+    "utchat",
+    "eye of horus",
+    "eye amulet",
+    "egypt",
+    "ra",
+    "isis",
+    "sun",
+    "moon",
+    "solstice",
+    "june"
+   ]
+  },
+  "1.7.13": {
+   "title": "The Collar of Isis",
+   "also": [
+    "collar amulet",
+    "isis",
+    "horus",
+    "hawk",
+    "egypt",
+    "gold"
+   ]
+  },
+  "1.7.15": {
+   "title": "The Ladder and the Steps",
+   "also": [
+    "ladder",
+    "steps",
+    "horus",
+    "osiris",
+    "egypt",
+    "heaven",
+    "staircase"
+   ],
+   "to": 16
+  },
+  "1.7.18": {
+   "title": "The Sun's Disc of Ra",
+   "also": [
+    "sun's disc",
+    "ra",
+    "ram",
+    "aries",
+    "egypt",
+    "sun"
+   ]
+  },
+  "1.8.1": {
+   "title": "What the Gnostics Believed",
+   "also": [
+    "gnostics",
+    "gnosis",
+    "gnosticism",
+    "kabala",
+    "rome",
+    "angels"
+   ],
+   "to": 2
+  },
+  "1.8.11": {
+   "title": "The Veil of Isis",
+   "also": [
+    "isis",
+    "veil",
+    "rome",
+    "ptolemies",
+    "wisdom",
+    "egypt"
+   ]
+  },
+  "1.8.17": {
+   "title": "The Horn and the Stable Keys",
+   "also": [
+    "horn",
+    "keys",
+    "isis",
+    "cattle",
+    "stables",
+    "evil spirits"
+   ]
+  },
+  "1.8.21": {
+   "title": "Serapis and the Bull Apis",
+   "also": [
+    "apis",
+    "bull",
+    "serapis",
+    "osiris",
+    "hades",
+    "egypt",
+    "greece"
+   ]
+  },
+  "1.8.25": {
+   "title": "Anubis, Guardian of Souls",
+   "also": [
+    "anubis",
+    "jackal",
+    "egypt",
+    "underworld",
+    "souls"
+   ]
+  },
+  "1.8.26": {
+   "title": "Bellerophon and Pegasus Gems",
+   "also": [
+    "bellerophon",
+    "pegasus",
+    "engraved gems",
+    "greece",
+    "rome",
+    "soldiers",
+    "courage"
+   ]
+  },
+  "1.9.1": {
+   "title": "The Roman Bulla",
+   "also": [
+    "bulla",
+    "rome",
+    "etruscans",
+    "evil eye",
+    "envy",
+    "triumph",
+    "pendant"
+   ],
+   "to": 2
+  },
+  "1.9.8": {
+   "title": "The Key of Janus",
+   "also": [
+    "key",
+    "janus",
+    "jana",
+    "diana",
+    "prudence",
+    "doors",
+    "rome",
+    "greece"
+   ]
+  },
+  "1.9.14": {
+   "title": "Mercury's Rod and the Two Serpents",
+   "also": [
+    "caduceus",
+    "rod",
+    "mercury",
+    "hermes",
+    "apollo",
+    "serpents",
+    "eloquence",
+    "merchants"
+   ]
+  },
+  "1.9.17": {
+   "title": "The Talismanic Hand",
+   "also": [
+    "hand",
+    "mano pantea",
+    "devil's horns",
+    "evil eye",
+    "etruscan",
+    "italy",
+    "benediction"
+   ]
+  },
+  "1.9.19": {
+   "title": "The Spider of Mercury",
+   "also": [
+    "spider",
+    "mercury",
+    "business",
+    "money",
+    "webs",
+    "luck"
+   ]
+  },
+  "1.9.20": {
+   "title": "The Eagle of Jupiter",
+   "also": [
+    "eagle",
+    "jupiter",
+    "dignity",
+    "perception",
+    "favour"
+   ]
+  },
+  "1.9.22": {
+   "title": "Snails in the Ashes",
+   "also": [
+    "snail",
+    "divination",
+    "rome",
+    "hearth",
+    "love",
+    "initials"
+   ]
+  },
+  "1.10.2": {
+   "title": "The Name Jochebed",
+   "also": [
+    "jochebed",
+    "moses",
+    "names",
+    "secrets",
+    "locked doors",
+    "treachery"
+   ]
+  },
+  "1.10.4": {
+   "title": "Painted Hands for Luck",
+   "also": [
+    "hand",
+    "italy",
+    "syria",
+    "turkey",
+    "india",
+    "luck",
+    "witchcraft"
+   ]
+  },
+  "1.10.18": {
+   "title": "The Palm Branch",
+   "also": [
+    "palm",
+    "palm branch",
+    "christian",
+    "sun",
+    "victory",
+    "triumph"
+   ]
+  },
+  "1.10.20": {
+   "title": "Name Rings of the Early Christians",
+   "also": [
+    "ring",
+    "rogate",
+    "vivas in deo",
+    "christian",
+    "gift",
+    "motto"
+   ]
+  },
+  "1.10.24": {
+   "title": "The Hand and the Cross",
+   "also": [
+    "hand",
+    "cross",
+    "evil eye",
+    "luck",
+    "composite charm"
+   ]
+  },
+  "1.10.25": {
+   "title": "The Wheel Cross",
+   "also": [
+    "wheel cross",
+    "irish cross",
+    "cross",
+    "sun",
+    "storks",
+    "denmark",
+    "holland",
+    "horse brass"
+   ],
+   "to": 26
+  },
+  "1.11.2": {
+   "title": "The Coventry Ring",
+   "also": [
+    "coventry ring",
+    "ring",
+    "three kings",
+    "magi",
+    "caspar",
+    "melchior",
+    "baltasar",
+    "edward iii",
+    "sluys"
+   ],
+   "to": 4
+  },
+  "1.11.8": {
+   "title": "The Cross of St. Benedict",
+   "also": [
+    "cross of st. benedict",
+    "st benedict",
+    "cross",
+    "vade retro satana",
+    "latin",
+    "prayer"
+   ]
+  },
+  "1.11.12": {
+   "title": "The Seventh New Moon in Cancer",
+   "also": [
+    "cancer",
+    "moon",
+    "new moon",
+    "business",
+    "auspicious",
+    "july"
+   ]
+  },
+  "1.11.20": {
+   "title": "The Pentagram",
+   "also": [
+    "pentagram",
+    "pentacle",
+    "pentalpha",
+    "five-pointed star",
+    "evil spirits",
+    "magic",
+    "good luck"
+   ]
+  },
+  "1.11.25": {
+   "title": "The Table of Jupiter",
+   "also": [
+    "table of jupiter",
+    "magic square",
+    "jupiter",
+    "silver",
+    "durer",
+    "melancholy",
+    "riches"
+   ],
+   "to": 27
+  },
+  "1.12.7": {
+   "title": "The Cock of Abraxas",
+   "also": [
+    "cock",
+    "abraxas",
+    "gnostic",
+    "vigilance",
+    "sun",
+    "mercury",
+    "corn"
+   ]
+  },
+  "1.12.9": {
+   "title": "Bells Against the Devil",
+   "also": [
+    "bells",
+    "gargoyles",
+    "church",
+    "devil",
+    "evil spirits",
+    "horses"
+   ]
+  },
+  "1.12.17": {
+   "title": "Posy Rings",
+   "also": [
+    "posy ring",
+    "ring",
+    "wedding ring",
+    "betrothal",
+    "posies",
+    "mottoes",
+    "love"
+   ],
+   "to": 30
+  },
+  "1.12.31": {
+   "title": "A Ring in Place of a Friend",
+   "also": [
+    "ring",
+    "sapphire",
+    "posy",
+    "friendship",
+    "french"
+   ],
+   "to": 32
+  },
+  "1.12.33": {
+   "title": "The Regard Ring",
+   "also": [
+    "regard ring",
+    "ring",
+    "ruby",
+    "emerald",
+    "garnet",
+    "amethyst",
+    "diamond",
+    "acrostic"
+   ],
+   "to": 35
+  },
+  "1.12.36": {
+   "title": "Gemmel Rings",
+   "also": [
+    "gemmel ring",
+    "gemmow",
+    "ring",
+    "betrothal",
+    "wedding ring",
+    "unlucky"
+   ]
+  },
+  "1.12.50": {
+   "title": "The Peacock of Immortality",
+   "also": [
+    "peacock",
+    "immortality",
+    "resurrection",
+    "church",
+    "plumage"
+   ]
+  },
+  "1.12.53": {
+   "title": "Gold Nuggets and Leap Year Pennies",
+   "also": [
+    "gold nugget",
+    "leap year penny",
+    "gold",
+    "miners",
+    "windfall",
+    "kitchen",
+    "luck"
+   ]
+  },
+  "1.12.54": {
+   "title": "Lucky and Unlucky Cards",
+   "also": [
+    "deuce of clubs",
+    "four of clubs",
+    "cards",
+    "devil's bedstead",
+    "luck",
+    "trumps"
+   ]
+  },
+  "2.1.1": {
+   "title": "The Zodiacal Year Begins in Aries",
+   "also": [
+    "aries",
+    "zodiac",
+    "ecliptic",
+    "equinox",
+    "spring",
+    "calendar",
+    "march",
+    "new year"
+   ],
+   "to": 3
+  },
+  "2.1.4": {
+   "title": "Hamal, the Dawn Proclaimer",
+   "also": [
+    "aries",
+    "hamal",
+    "constellation",
+    "stars",
+    "akkadian",
+    "chinese",
+    "babylonians",
+    "creation"
+   ]
+  },
+  "2.1.7": {
+   "title": "The Aries Character",
+   "also": [
+    "aries",
+    "character",
+    "ambition",
+    "adventure",
+    "march",
+    "april"
+   ]
+  },
+  "2.1.8": {
+   "title": "Bloodstone and Heliotrope",
+   "also": [
+    "bloodstone",
+    "heliotrope",
+    "aries",
+    "jasper",
+    "chalcedony",
+    "seals",
+    "sun"
+   ],
+   "to": 10
+  },
+  "2.1.19": {
+   "title": "Adamas, the Indomitable",
+   "also": [
+    "diamond",
+    "aries",
+    "adamas",
+    "hardness",
+    "polishing"
+   ],
+   "to": 20
+  },
+  "2.1.24": {
+   "title": "Mandeville on Wearing a Diamond",
+   "also": [
+    "diamond",
+    "mandeville",
+    "left side",
+    "north",
+    "east"
+   ],
+   "to": 25
+  },
+  "2.1.32": {
+   "title": "The Mountain of Light",
+   "also": [
+    "koh-i-noor",
+    "diamond",
+    "delhi",
+    "mogul",
+    "baber",
+    "tavernier",
+    "india"
+   ]
+  },
+  "2.1.35": {
+   "title": "The Fateful Diamond",
+   "also": [
+    "diamond",
+    "hope diamond",
+    "omen",
+    "misfortune",
+    "curse",
+    "gift"
+   ]
+  },
+  "2.2.1": {
+   "title": "Taurus, the Hyades and the Pleiades",
+   "also": [
+    "taurus",
+    "hyades",
+    "pleiades",
+    "aldebaran",
+    "atlas",
+    "stars",
+    "rain",
+    "april",
+    "may"
+   ]
+  },
+  "2.2.2": {
+   "title": "The Bull of the Chaldeans",
+   "also": [
+    "taurus",
+    "bull",
+    "chaldeans",
+    "zodiac",
+    "foundation",
+    "temple"
+   ]
+  },
+  "2.2.4": {
+   "title": "The Tenacity of Taurus",
+   "also": [
+    "taurus",
+    "character",
+    "tenacity",
+    "friendship"
+   ]
+  },
+  "2.2.9": {
+   "title": "Taurus, Memory and Music",
+   "also": [
+    "taurus",
+    "venus",
+    "music",
+    "singers",
+    "childhood",
+    "character"
+   ],
+   "to": 10
+  },
+  "2.2.14": {
+   "title": "The Sapphire, Stone of Stones",
+   "also": [
+    "sapphire",
+    "taurus",
+    "pansy",
+    "buddhists",
+    "prayer",
+    "spiritual light"
+   ],
+   "to": 15
+  },
+  "2.2.16": {
+   "title": "The Bishop's Sapphire Ring",
+   "also": [
+    "sapphire",
+    "bishop",
+    "ring",
+    "innocent iii",
+    "church",
+    "st jerome",
+    "seal of secrets"
+   ],
+   "to": 17
+  },
+  "2.2.18": {
+   "title": "Solomon's Sapphire Seal",
+   "also": [
+    "sapphire",
+    "lapis lazuli",
+    "solomon",
+    "seal",
+    "exodus",
+    "tables of the law",
+    "bible"
+   ],
+   "to": 20
+  },
+  "2.2.24": {
+   "title": "The Turkeystone",
+   "also": [
+    "turquoise",
+    "taurus",
+    "venus",
+    "persia",
+    "constantinople",
+    "arizona",
+    "new mexico",
+    "koran"
+   ],
+   "to": 26
+  },
+  "2.3.1": {
+   "title": "Castor and Pollux",
+   "also": [
+    "gemini",
+    "castor",
+    "pollux",
+    "twins",
+    "jupiter",
+    "argonauts",
+    "sailors",
+    "navigation",
+    "may",
+    "june"
+   ],
+   "to": 3
+  },
+  "2.3.18": {
+   "title": "Everything Happens Twice for Gemini",
+   "also": [
+    "gemini",
+    "agate",
+    "chrysoprase",
+    "marriage",
+    "twice",
+    "aries",
+    "leo",
+    "libra",
+    "aquarius"
+   ],
+   "to": 19
+  },
+  "2.3.24": {
+   "title": "Chaucer in a Moss Agate",
+   "also": [
+    "moss agate",
+    "agate",
+    "onyx agate",
+    "eye agate",
+    "iris agate",
+    "chaucer",
+    "voltaire",
+    "british museum"
+   ]
+  },
+  "2.4.1": {
+   "title": "Cancer, the Dark Sign",
+   "also": [
+    "cancer",
+    "crab",
+    "scarab",
+    "midsummer",
+    "stars",
+    "june",
+    "july",
+    "egypt",
+    "resurrection"
+   ],
+   "to": 4
+  },
+  "2.4.7": {
+   "title": "Cancer and the Home",
+   "also": [
+    "cancer",
+    "crab",
+    "moon",
+    "sea",
+    "home",
+    "family",
+    "character"
+   ],
+   "to": 8
+  },
+  "2.4.33": {
+   "title": "Pearls and Tears",
+   "also": [
+    "pearl",
+    "cancer",
+    "oyster",
+    "tears",
+    "japan",
+    "cleopatra"
+   ],
+   "to": 35
+  },
+  "2.4.37": {
+   "title": "Pearls for Divers",
+   "also": [
+    "pearl",
+    "divers",
+    "sharks",
+    "amulet",
+    "love",
+    "engagement ring",
+    "tears"
+   ],
+   "to": 38
+  },
+  "2.4.40": {
+   "title": "Crystal-Gazing",
+   "also": [
+    "crystal",
+    "rock crystal",
+    "crystal ball",
+    "quartz",
+    "scrying",
+    "persia",
+    "saint augustine",
+    "future"
+   ]
+  },
+  "2.5.2": {
+   "title": "Leo and the Nemean Lion",
+   "also": [
+    "leo",
+    "lion",
+    "hercules",
+    "nemea",
+    "greek",
+    "constellation"
+   ],
+   "to": 3
+  },
+  "2.5.5": {
+   "title": "The Fixed and Sunny Leo",
+   "also": [
+    "leo",
+    "sun",
+    "character",
+    "luck",
+    "july",
+    "august"
+   ],
+   "to": 6
+  },
+  "2.5.8": {
+   "title": "Leo in Love and at Work",
+   "also": [
+    "leo",
+    "sardonyx",
+    "chrysolite",
+    "tourmaline",
+    "amber",
+    "marriage",
+    "careers",
+    "artists"
+   ],
+   "to": 10
+  },
+  "2.5.11": {
+   "title": "The Sardonyx and the Roman Cameo",
+   "also": [
+    "sardonyx",
+    "sard",
+    "cornelian",
+    "leo",
+    "cameo",
+    "romans",
+    "mars",
+    "hercules",
+    "courage"
+   ],
+   "to": 13
+  },
+  "2.5.15": {
+   "title": "The Chrysolite, the Golden Stone",
+   "also": [
+    "chrysolite",
+    "peridot",
+    "olivine",
+    "leo",
+    "meteorites",
+    "vesuvius",
+    "pliny"
+   ],
+   "to": 16
+  },
+  "2.5.19": {
+   "title": "The Electric Tourmaline",
+   "also": [
+    "tourmaline",
+    "leo",
+    "electricity",
+    "crystal"
+   ],
+   "to": 20
+  },
+  "2.5.22": {
+   "title": "Amber, the Tears of Phaethon's Sisters",
+   "also": [
+    "amber",
+    "leo",
+    "phaethon",
+    "pliny",
+    "baltic",
+    "fossil",
+    "resin",
+    "insects"
+   ],
+   "to": 23
+  },
+  "2.5.30": {
+   "title": "Yellow Stones and the Sun",
+   "also": [
+    "leo",
+    "sardonyx",
+    "chrysolite",
+    "tourmaline",
+    "amber",
+    "topaz",
+    "sun",
+    "taurus",
+    "scorpio"
+   ],
+   "to": 31
+  },
+  "2.6.1": {
+   "title": "Virgo the Gleaner",
+   "also": [
+    "virgo",
+    "spica",
+    "ceres",
+    "isis",
+    "corn",
+    "wheat",
+    "mercury",
+    "harvest",
+    "lily"
+   ],
+   "to": 2
+  },
+  "2.6.8": {
+   "title": "Virgo and the Planets",
+   "also": [
+    "virgo",
+    "mercury",
+    "mars",
+    "saturn",
+    "horoscope",
+    "collectors",
+    "priests"
+   ],
+   "to": 10
+  },
+  "2.6.11": {
+   "title": "The Orderly Virgo",
+   "also": [
+    "virgo",
+    "character",
+    "mimics",
+    "critics"
+   ],
+   "to": 12
+  },
+  "2.6.18": {
+   "title": "Virgo, Nature and the Bees",
+   "also": [
+    "virgo",
+    "cornelian",
+    "jade",
+    "bees",
+    "birds",
+    "nature",
+    "capricorn",
+    "cancer",
+    "scorpio"
+   ],
+   "to": 19
+  },
+  "2.6.20": {
+   "title": "The Cornelian, Pliny's Seal Stone",
+   "also": [
+    "cornelian",
+    "chalcedony",
+    "virgo",
+    "seal",
+    "pliny",
+    "egypt",
+    "isis",
+    "buckle"
+   ]
+  },
+  "2.6.22": {
+   "title": "Napoleon's Cornelian Seal",
+   "also": [
+    "cornelian",
+    "napoleon",
+    "egypt",
+    "seal",
+    "arabic",
+    "inscription"
+   ],
+   "to": 23
+  },
+  "2.6.36": {
+   "title": "Jade for the Racecourse",
+   "also": [
+    "jade",
+    "cornelian",
+    "virgo",
+    "racing",
+    "luck",
+    "sagittarius",
+    "gemini"
+   ]
+  },
+  "2.7.1": {
+   "title": "Libra and the Autumn Equinox",
+   "also": [
+    "libra",
+    "scales",
+    "balance",
+    "venus",
+    "equinox",
+    "september",
+    "october"
+   ],
+   "to": 3
+  },
+  "2.7.6": {
+   "title": "The Weighing, Tolerant Libran",
+   "also": [
+    "libra",
+    "character",
+    "intuition",
+    "religion",
+    "tolerance"
+   ],
+   "to": 7
+  },
+  "2.7.8": {
+   "title": "Libra and Late Success",
+   "also": [
+    "libra",
+    "saturn",
+    "venus",
+    "indecision",
+    "fate"
+   ],
+   "to": 10
+  },
+  "2.7.11": {
+   "title": "Libra in Double Harness",
+   "also": [
+    "libra",
+    "companionship",
+    "botany",
+    "flowers",
+    "heaths"
+   ]
+  },
+  "2.7.13": {
+   "title": "Libra's Temper, Belongings and Trades",
+   "also": [
+    "libra",
+    "temper",
+    "careers",
+    "musicians",
+    "gambling",
+    "speculation"
+   ],
+   "to": 15
+  },
+  "2.7.18": {
+   "title": "The Harlequin Opal",
+   "also": [
+    "opal",
+    "coral",
+    "lapis lazuli",
+    "libra",
+    "harlequin opal",
+    "fire opal",
+    "mexico"
+   ],
+   "to": 21
+  },
+  "2.7.23": {
+   "title": "Is the Opal Unlucky?",
+   "also": [
+    "opal",
+    "libra",
+    "luck",
+    "walter scott",
+    "anne of geierstein",
+    "engagement ring",
+    "nonnius",
+    "pliny",
+    "omens"
+   ],
+   "to": 25
+  },
+  "2.7.30": {
+   "title": "Lapis Lazuli and the Tables of the Law",
+   "also": [
+    "lapis lazuli",
+    "sapphire",
+    "libra",
+    "bible",
+    "blue",
+    "azul"
+   ],
+   "to": 32
+  },
+  "2.8.1": {
+   "title": "Scorpio and the Star Antares",
+   "also": [
+    "scorpio",
+    "scorpion",
+    "antares",
+    "mars",
+    "constellation",
+    "october",
+    "november"
+   ],
+   "to": 2
+  },
+  "2.8.10": {
+   "title": "Scorpio in Justice and Love",
+   "also": [
+    "scorpio",
+    "beryl",
+    "aquamarine",
+    "carbuncle",
+    "lodestone",
+    "justice",
+    "marriage",
+    "pisces",
+    "cancer"
+   ],
+   "to": 12
+  },
+  "2.8.13": {
+   "title": "Beryl or Aquamarine?",
+   "also": [
+    "beryl",
+    "aquamarine",
+    "scorpio",
+    "pliny",
+    "sea"
+   ]
+  },
+  "2.8.15": {
+   "title": "The Beryl, Stone of the Seer",
+   "also": [
+    "beryl",
+    "scorpio",
+    "seer",
+    "clairvoyance",
+    "visions",
+    "rossetti",
+    "aubrey",
+    "magicians"
+   ],
+   "to": 16
+  },
+  "2.8.18": {
+   "title": "The Carbuncle, Noah's Lamp",
+   "also": [
+    "carbuncle",
+    "garnet",
+    "scorpio",
+    "noah",
+    "light",
+    "chaucer",
+    "mandeville"
+   ]
+  },
+  "2.9.1": {
+   "title": "Sagittarius the Centaur Archer",
+   "also": [
+    "sagittarius",
+    "centaur",
+    "jupiter",
+    "november",
+    "december",
+    "archer",
+    "bow"
+   ],
+   "to": 2
+  },
+  "2.9.4": {
+   "title": "The Bow of Sagittarius and Noah's Altar",
+   "also": [
+    "sagittarius",
+    "bow",
+    "noah",
+    "ark",
+    "rainbow",
+    "argo",
+    "hydra",
+    "raven",
+    "constellation"
+   ]
+  },
+  "2.9.7": {
+   "title": "The Sagittarian Character",
+   "also": [
+    "sagittarius",
+    "archer",
+    "freedom",
+    "intuition",
+    "justice",
+    "jupiter"
+   ],
+   "to": 8
+  },
+  "2.9.9": {
+   "title": "The Sagittarian Temper",
+   "also": [
+    "sagittarius",
+    "temper",
+    "anger",
+    "manners"
+   ]
+  },
+  "2.9.13": {
+   "title": "Sagittarius in Married Life",
+   "also": [
+    "sagittarius",
+    "marriage",
+    "aries",
+    "leo",
+    "aquarius",
+    "libra"
+   ]
+  },
+  "2.9.14": {
+   "title": "Topaz, Stone of Sagittarius",
+   "also": [
+    "topaz",
+    "chrysolite",
+    "sagittarius",
+    "slave's diamond",
+    "brazil",
+    "pink topaz"
+   ],
+   "to": 17
+  },
+  "2.9.19": {
+   "title": "How the Topaz Got Its Name",
+   "also": [
+    "topaz",
+    "chrysolite",
+    "sagittarius",
+    "pliny",
+    "topazos",
+    "red sea",
+    "pirates"
+   ]
+  },
+  "2.9.24": {
+   "title": "Marbodus on the Topaz",
+   "also": [
+    "topaz",
+    "marbodus",
+    "verse",
+    "poem",
+    "study",
+    "contemplation"
+   ],
+   "to": 25
+  },
+  "2.10.2": {
+   "title": "Capricorn and Old Father Time",
+   "also": [
+    "capricorn",
+    "goat",
+    "saturn",
+    "father time",
+    "scythe",
+    "akkadian",
+    "december",
+    "january"
+   ]
+  },
+  "2.10.3": {
+   "title": "Capricorn's Horn of Plenty",
+   "also": [
+    "cornucopia",
+    "horn of plenty",
+    "capricorn",
+    "saturn",
+    "virgil",
+    "golden age",
+    "plenty"
+   ],
+   "to": 5
+  },
+  "2.10.6": {
+   "title": "Pan and the Sea-Goat",
+   "also": [
+    "capricorn",
+    "sea-goat",
+    "goat",
+    "pan",
+    "typhon",
+    "nile",
+    "fish"
+   ]
+  },
+  "2.10.7": {
+   "title": "The Climbing Goat of Capricorn",
+   "also": [
+    "capricorn",
+    "goat",
+    "courage",
+    "perseverance",
+    "mexico",
+    "sheep"
+   ]
+  },
+  "2.10.9": {
+   "title": "The Capricornian Character",
+   "also": [
+    "capricorn",
+    "goat",
+    "saturn",
+    "knowledge",
+    "money",
+    "generosity",
+    "work"
+   ],
+   "to": 11
+  },
+  "2.10.16": {
+   "title": "Capricorn in Love and Friendship",
+   "also": [
+    "capricorn",
+    "saturn",
+    "marriage",
+    "friendship",
+    "taurus",
+    "virgo",
+    "pisces",
+    "scorpio"
+   ]
+  },
+  "2.10.24": {
+   "title": "Malachite and the Mallow",
+   "also": [
+    "malachite",
+    "capricorn",
+    "mallow",
+    "copper",
+    "egypt",
+    "siberia",
+    "molochites"
+   ],
+   "to": 25
+  },
+  "2.11.1": {
+   "title": "Finding the Water-Bearer",
+   "also": [
+    "aquarius",
+    "water-bearer",
+    "pitcher",
+    "urn",
+    "vase",
+    "constellation",
+    "january",
+    "february"
+   ],
+   "to": 2
+  },
+  "2.11.3": {
+   "title": "Sadal Melik, the King's Fortunate Star",
+   "also": [
+    "aquarius",
+    "water-bearer",
+    "sadal melik",
+    "february fill-dyke",
+    "glyph",
+    "king",
+    "star"
+   ]
+  },
+  "2.11.4": {
+   "title": "Uranus, Ruler of Aquarius",
+   "also": [
+    "aquarius",
+    "uranus",
+    "saturn",
+    "planet",
+    "astrology"
+   ]
+  },
+  "2.11.5": {
+   "title": "The Aquarian Mind",
+   "also": [
+    "aquarius",
+    "water-bearer",
+    "knowledge",
+    "companions",
+    "anecdote"
+   ]
+  },
+  "2.11.6": {
+   "title": "The Independent Aquarian",
+   "also": [
+    "aquarius",
+    "independence",
+    "judges of character",
+    "will-power",
+    "money"
+   ]
+  },
+  "2.11.7": {
+   "title": "Aquarian Extremes",
+   "also": [
+    "aquarius",
+    "temper",
+    "eccentricity",
+    "obstinacy"
+   ],
+   "to": 8
+  },
+  "2.11.9": {
+   "title": "Famous Aquarians",
+   "also": [
+    "aquarius",
+    "darwin",
+    "dickens",
+    "edison",
+    "ruskin",
+    "henry irving",
+    "inventors",
+    "professions"
+   ]
+  },
+  "2.11.11": {
+   "title": "Aquarius in Marriage and Friendship",
+   "also": [
+    "aquarius",
+    "marriage",
+    "friendship",
+    "gemini",
+    "libra",
+    "aries",
+    "sagittarius"
+   ]
+  },
+  "2.11.12": {
+   "title": "The Garnet, Gem of Aquarius",
+   "also": [
+    "garnet",
+    "zircon",
+    "jacinth",
+    "hyacinth",
+    "jargoon",
+    "aquarius",
+    "almandine",
+    "cape ruby",
+    "cinnamon stone"
+   ],
+   "to": 14
+  },
+  "2.12.1": {
+   "title": "Pisces and the Precession of the Equinoxes",
+   "also": [
+    "pisces",
+    "fishes",
+    "constellation",
+    "equinox",
+    "precession",
+    "february",
+    "march",
+    "aries"
+   ],
+   "to": 3
+  },
+  "2.12.4": {
+   "title": "Venus, Cupid and the Two Fishes",
+   "also": [
+    "pisces",
+    "fishes",
+    "ichthys",
+    "venus",
+    "cupid",
+    "typhon",
+    "minerva",
+    "euphrates",
+    "jupiter",
+    "neptune"
+   ],
+   "to": 5
+  },
+  "2.12.6": {
+   "title": "The Two-Fold Nature of Pisces",
+   "also": [
+    "pisces",
+    "fishes",
+    "dual nature",
+    "water",
+    "contradictions"
+   ]
+  },
+  "2.12.7": {
+   "title": "The Piscean Character",
+   "also": [
+    "pisces",
+    "fishes",
+    "emotion",
+    "imagination",
+    "art",
+    "scenery"
+   ]
+  },
+  "2.12.10": {
+   "title": "Pisces at Work",
+   "also": [
+    "pisces",
+    "baden-powell",
+    "professions",
+    "sailors",
+    "fishermen",
+    "teachers",
+    "water"
+   ],
+   "to": 11
+  },
+  "2.12.12": {
+   "title": "Pisces in Marriage and Friendship",
+   "also": [
+    "pisces",
+    "marriage",
+    "friendship",
+    "cancer",
+    "scorpio",
+    "taurus",
+    "capricorn"
+   ]
+  },
+  "2.12.13": {
+   "title": "The Amethyst, Gem of Pisces",
+   "also": [
+    "amethyst",
+    "pisces",
+    "quartz",
+    "purple",
+    "brazil",
+    "siberia"
+   ]
+  },
+  "2.12.17": {
+   "title": "The Bishop's Stone",
+   "also": [
+    "amethyst",
+    "bishop's stone",
+    "rosary",
+    "episcopal ring",
+    "church",
+    "marbodus",
+    "verse",
+    "violet"
+   ],
+   "to": 19
+  },
+  "2.12.21": {
+   "title": "St. Valentine's Amethyst",
+   "also": [
+    "amethyst",
+    "st. valentine",
+    "valentine",
+    "heart",
+    "knight",
+    "chivalry",
+    "romance",
+    "silver"
+   ]
+  }
+ }
+}

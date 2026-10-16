@@ -160,6 +160,16 @@ def headed_paragraphs(body: str) -> list[dict]:
     return found
 
 
+def mid_sentence(paragraph: str, following: str) -> bool:
+    """Whether the book broke a sentence across two paragraphs ("...attached much importance to the" | "Eye Amulet,
+    which..."): both are prose (not verse, a table or a list, which have lines), and the first ends on a small word
+    ("the", "of", "and") or the next goes on in small letters. Not a missing full stop: "...the gem of winter" | "For
+    spring"."""
+    last = paragraph.rsplit(" ", 1)[-1]
+    return ("\n" not in paragraph + following and last.isalpha() and last.islower()
+            and (last in SMALL_WORDS or following[:1].islower()))
+
+
 def titled_keep(found: dict[str, dict], curation: dict, leave_out: tuple[str, ...] = ()) -> tuple[list[dict], list[str]]:
     """For a book whose parts have numbers but no titles (/goblin's sections, /omen's and /gemlore's paragraphs), so
     the curation gives each one kept a title and other names: {"keep": {"1.2.4": {"title": ..., "also": [...]}}}, and
@@ -178,7 +188,9 @@ def titled_keep(found: dict[str, dict], curation: dict, leave_out: tuple[str, ..
             run = [found.get(f"{within}.{n}") for n in range(int(first), last + 1)]
             if None in run:
                 missing.append(f"{part['key']} to {last}")
-            part["text"] = "\n\n".join(p["text"] for p in run if p)
+            texts = [p["text"] for p in run if p]
+            part["text"] = "".join(t + ("" if i == len(texts) - 1 else " " if mid_sentence(t, texts[i + 1])
+                                        else "\n\n") for i, t in enumerate(texts))
     return kept, missing
 
 
