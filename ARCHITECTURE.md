@@ -93,6 +93,7 @@ ktdi/
 │   ├── flower.py      /flowermeaning: a flower's Victorian meaning (Dumont, 1851), or the flowers for a meaning
 │   ├── gem.py         /gemlore: a stone and what was believed of it (Kunz, The Curious Lore of Precious Stones, 1913)
 │   ├── talisman.py    /talisman: a talisman, charm or star sign and its stones (Pavitt, 1922)
+│   ├── magicsquare.py /magicsquare: Agrippa's planetary magic squares, worked out, and the SATOR square
 │   ├── secrets.py     /secrets: a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)

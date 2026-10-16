@@ -36,6 +36,7 @@ FEATURES = [
     "ktdi.features.flower",
     "ktdi.features.gem",
     "ktdi.features.talisman",
+    "ktdi.features.magicsquare",
     "ktdi.features.lore",
     "ktdi.features.wisdom",
     "ktdi.features.etiquette",

@@ -65,7 +65,7 @@ Monsters, marvels, curiosities, stones, spells, witches and dreams.
 - `secrets`: the Boke of Secretes (1560) · `hammeredofwitches`: witch-finding tips from the Malleus (1486)
 - `dream`: what your dream foretells (1901) · `omen`: everyday superstitions (1898)
 - `goblin`: Welsh fairies, ghosts and customs (1880) · `gemlore`: precious stones (1913)
-- `talisman`: talismans, charms and star signs (1922)
+- `talisman`: talismans, charms and star signs (1922) · `magicsquare`: Agrippa's planetary squares, and SATOR
 
 ### [🌿 Hearth & herbs](docs/COMMANDS.md#hearth-and-herbs)
 Mrs Beeton, Culpeper's cures, the language of flowers and the almanac.
