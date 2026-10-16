@@ -95,3 +95,60 @@ def test_command():
     run(lore.lore.callback(ctx, thing="dragons"))
     assert ctx.last.embed.title == "📜 Lore: dragons"
     assert lore.lore.aliases == ["oldbooks"]
+
+
+# --- The shelves ---
+def shelved(name: str, entries: list[dict], shelves: tuple[str, ...], entry_shelves=lambda e: ()):
+    dictionary = oldbooks.Dictionary(entries, names=lambda e: [e["title"]], text=lambda e: e["text"])
+    return oldbooks.OldBook(f"The Book of {name}", "📕", name.lower(), random=lambda: discord.Embed(title=name),
+                            find=dictionary.look_up, shelves=shelves, entry_shelves=entry_shelves)
+
+
+SALT = [{"title": "Salt at dinner", "text": "Pass the salt."},
+        {"title": "Salt against witches", "text": "Witches hate salt.", "magic": True}]
+OMENS = shelved("Omens", SALT, ("folklore",), lambda e: ("esoteric",) if e.get("magic") else ())
+SECRETS = shelved("Secrets", [{"title": "Salt of the stars", "text": "A magical salt."}], ("esoteric",))
+NATURE = shelved("Nature", [{"title": "Rock salt", "text": "Salt is dug from mines."}], ("nature",))
+
+
+def test_every_old_book_is_on_a_shelf(monkeypatch):
+    monkeypatch.undo()  # The real books
+    for old_book in lore.old_books():
+        assert old_book.shelves and set(old_book.shelves) <= set(oldbooks.SHELVES), old_book.command
+
+
+def test_a_shelf_has_its_books_and_the_entries_of_others_on_it(monkeypatch):
+    monkeypatch.setattr(lore, "old_books", lambda: [OMENS, SECRETS, NATURE])
+    assert [book.command for book, _ in lore.searched("salt")] == ["omens", "secrets", "nature"]
+    esoteric = lore.searched("salt", "esoteric")
+    assert [(book.command, [e["title"] for e in entries]) for book, entries in esoteric] == [
+        ("omens", ["Salt against witches"]), ("secrets", ["Salt of the stars"])]  # Not salt at dinner, nor rock salt
+    assert [book.command for book, _ in lore.searched("salt", "folklore")] == ["omens"]
+    assert OMENS.find_on("folklore", "salt").entries == SALT  # All of a book on the shelf
+
+
+def test_a_shelf_page(monkeypatch):
+    monkeypatch.setattr(lore, "old_books", lambda: [OMENS, SECRETS, NATURE])
+    embed = lore.lore_embed("salt", "esoteric")
+    assert embed.title == "🔮 Esoteric: salt"
+    assert embed.description == "What 2 old books on the esoteric shelf have to say about it."
+    assert embed.footer.text.endswith("or every book with /lore.")
+    assert "/esoteric" in lore.lore_embed("salt").footer.text  # /lore points to the shelves
+    nothing = lore.lore_embed("zzqx", "nature").description
+    assert "Nothing on that on the natural history shelf" in nothing and "picked by hand" in nothing
+
+
+def test_the_shelf_commands():
+    assert [c.name for c in lore.SHELF_COMMANDS] == list(oldbooks.SHELVES)
+    for command in lore.SHELF_COMMANDS:
+        assert len(command.description) <= 100 and command.help.startswith("/lore, on the")
+    ctx = Ctx(SCOTT)
+    run(lore.SHELF_COMMANDS[0].callback(ctx, thing="dragons"))
+    assert ctx.last.embed.title == "🦉 Natural history: dragons"
+
+
+def test_the_magic_in_the_folklore_books_is_real():
+    from ktdi.features import goblin, omen
+    assert {o["key"] for o in omen.OMENS if omen.shelves_of(o)} and \
+        {(o["essay"], o["section"]) for o in omen.OMENS} >= omen.MAGIC  # Every subsection named is in the book
+    assert goblin.MAGIC <= {t["key"] for t in goblin.TALES}

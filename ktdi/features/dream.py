@@ -102,7 +102,8 @@ async def thing_autocomplete(interaction: discord.Interaction, current: str) -> 
 
 
 OLD_BOOK = oldbooks.OldBook(SOURCE, "🔮", "dream", random=lambda: interpret(None),
-                            find=lambda topic: DICTIONARY.look_up(topic), title=lambda e: e["word"], link=url)
+                            find=lambda topic: DICTIONARY.look_up(topic), title=lambda e: e["word"], link=url,
+                            shelves=("esoteric",))
 
 
 

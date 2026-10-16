@@ -12,9 +12,9 @@ from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "bestiary", "blame", "books", "bribe", "campaign", "committee",
-                  "cure", "deadword", "devils", "dream", "enquire", "etiquette", "expunge", "flowermeaning", "gemlore", "goblin", "hammeredofwitches", "help", "herbal", "imperial", "insurance", "linux", "loot", "lore", "melancholy",
-                  "nowplaying", "omen", "phrase", "plant", "pliny", "pseudodoxia", "quote", "rapsheet", "rpg", "secrets", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
-                  "talisman", "tdoi", "timezone", "vulgartongue", "wars", "weather", "whospray", "wisdom", "wonder"]
+                  "cure", "deadword", "devils", "dream", "enquire", "esoteric", "etiquette", "expunge", "flowermeaning", "folklore", "gemlore", "goblin", "hammeredofwitches", "help", "herbal", "household", "imperial", "insurance", "linux", "loot", "lore", "melancholy",
+                  "nature", "nowplaying", "omen", "phrase", "plant", "pliny", "pseudodoxia", "quote", "rapsheet", "rpg", "secrets", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
+                  "talisman", "tdoi", "timezone", "vulgartongue", "wars", "weather", "whospray", "wisdom", "wonder", "words"]
 PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
 HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {

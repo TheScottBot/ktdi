@@ -157,7 +157,8 @@ for _command in (etiquette_gentleman, etiquette_gentlewoman, etiquette_gentlethe
 
 
 OLD_BOOK = oldbooks.OldBook("Routledge's and Hartley's etiquette manuals (1860s)", "🎩", "etiquette",
-                            random=lambda: advice_embed(None, random.choice(list(WHO))))
+                            random=lambda: advice_embed(None, random.choice(list(WHO))),
+                            shelves=("household",))
 
 
 

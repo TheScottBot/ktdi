@@ -204,7 +204,8 @@ def saying_embed() -> discord.Embed:
     return embed
 
 
-OLD_BOOK = oldbooks.OldBook(LORE_SOURCE, "🌦️", "weather", random=saying_embed)
+OLD_BOOK = oldbooks.OldBook(LORE_SOURCE, "🌦️", "weather", random=saying_embed,
+                            shelves=("folklore",))
 
 
 async def setup(bot: commands.Bot):

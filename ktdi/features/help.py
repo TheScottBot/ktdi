@@ -217,7 +217,10 @@ async def help_command(ctx: commands.Context, *, command: str | None = None):
     this. Start typing and it suggests sections and commands, by any name (`np` finds nowplaying)."""
     lines = main_help_lines(ctx)
     if command:
-        found = ctx.bot.get_command(command.lstrip("/" + config.COMMAND_PREFIX).lower())
+        typed = command.lstrip("/" + config.COMMAND_PREFIX).lower()
+        found = ctx.bot.get_command(typed)
+        if found is not None and len(typed.split()) > len(found.qualified_name.split()):
+            found = None  # "words and wisdom" is the section, not /words with something after it
         if found is not None and can_use(found, ctx):
             # Private, so the details don't fill the channel.
             await ctx.send(embed=command_help_embed(found), ephemeral=True)

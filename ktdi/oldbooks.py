@@ -7,7 +7,8 @@ that use the word, else one spelt like it: fuzzy.look_up), for a random entry, o
 is the command's own business; the list of entries that use a word looks the same everywhere (uses_embed).
 
 Every old book also declares itself as OLD_BOOK (an OldBook, or a list of them): how /lore searches it alongside the
-others, and how Old Wisdom of the Day gets a random entry from it. A new old book isn't finished without one.
+others, how Old Wisdom of the Day gets a random entry from it, and which shelves it's on (SHELVES: /nature, /folklore,
+/esoteric, /words, /household search just theirs). A new old book isn't finished without one.
 """
 
 import importlib
@@ -202,12 +203,49 @@ def uses_embed(found: list[T], *, query: str, title: str, name: Callable[[T], st
 
 
 @dataclass(frozen=True)
+class Shelf:
+    """A shelf of old books, between /lore (every book) and a book's own command: /esoteric salt is salt in the books
+    of magic, and the magic in the others."""
+    emoji: str
+    name: str  # "Esoteric": the embed says "🔮 Esoteric: salt"
+    short: str  # What's on it, in a few words, for its command's one-line description
+    about: str  # What's on it, for its /help page
+    examples: str  # What to try
+
+
+SHELVES = {  # The command for each, and what's on it; every old book is on at least one (tests/test_lore.py)
+    "nature": Shelf(
+        "🦉", "Natural history", "Pliny, Browne, Topsell's beasts and Culpeper's plants",
+        "Pliny, Browne's vulgar errors, Topsell's beasts, Culpeper's plants and the Victorian wonders",
+        "dragons, elephants, the moon, eels or the mandrake"),
+    "folklore": Shelf(
+        "🧚", "Folklore", "goblins, superstitions, flowers and old sayings",
+        "Welsh goblins, everyday superstitions, the language of flowers, the almanac, weather sayings and the "
+        "Victorian wonders", "fairies, salt, Friday, roses or ghosts"),
+    "esoteric": Shelf(
+        "🔮", "Esoteric", "secrets, dreams, gems, talismans and charms",
+        "Albertus Magnus's secrets, dreams, astrological cures, gems and talismans, witches, and the magic in the "
+        "folklore books", "salt, the moon, rubies, scarabs or eagles"),
+    "words": Shelf(
+        "📚", "Words", "slang, lost words, Bierce and Brewer",
+        "Grose's slang, Mackay's lost words, Bierce's Devil's Dictionary and Brewer's phrases",
+        "drunk, love, fool, money or the devil"),
+    "household": Shelf(
+        "🏠", "Household", "Mrs Beeton, Enquire Within, manners and melancholy",
+        "Mrs Beeton, Enquire Within, the etiquette manuals, the 1531 herbal and Burton's melancholy",
+        "eggs, servants, dinner, cheese or sleep"),
+}
+
+
+@dataclass(frozen=True)
 class OldBook:
     """An old book as /lore and Old Wisdom of the Day see it. `random` is any entry, as its own command shows it.
     `find` (for /lore) is what it has on a topic, as Dictionary.look_up finds it; None for a book that can't be
     searched by topic (/almanac goes by date). `title`, `link` and `text` are an entry's name, its place in the book,
     and the text /lore quotes from (plain text, as the book has it: /lore escapes it). `send`, for a book whose post
-    is more than an embed (/herbal's, which people dig into), posts a random one itself: send(where, content)."""
+    is more than an embed (/herbal's, which people dig into), posts a random one itself: send(where, content).
+    `shelves` are the SHELVES it's on; `entry_shelves`, for a book with some entries that belong on another shelf
+    too (/omen's charms against witches are esoteric as well as folklore), is the extra shelves an entry is on."""
     book: str  # Who wrote what: "Pliny the Elder, Natural History (AD 77)"
     emoji: str
     command: str  # The command with more: "pliny", or "beeton recipe"
@@ -217,6 +255,19 @@ class OldBook:
     link: Callable[[Any], str | None] = lambda entry: None
     text: Callable[[Any], str] = lambda entry: entry["text"]
     send: Callable[[discord.abc.Messageable, str | None], Awaitable[discord.Message]] | None = None
+    shelves: tuple[str, ...] = ()
+    entry_shelves: Callable[[Any], Iterable[str]] = lambda entry: ()
+
+    def find_on(self, shelf: str | None, topic: str) -> fuzzy.LookUp | None:
+        """What it has on a topic (as `find`), on a shelf: all of it if the book's on that shelf, else only the
+        entries that are on it themselves; with no shelf, all of it."""
+        if not self.find:
+            return None
+        found = self.find(topic)
+        if not found or shelf is None or shelf in self.shelves:
+            return found
+        entries = [entry for entry in found.entries if shelf in self.entry_shelves(entry)]
+        return fuzzy.LookUp(found.kind, entries) if entries else None
 
     async def post(self, where: discord.abc.Messageable, content: str | None = None) -> discord.Message:
         """A random entry, posted (with `content` above it)."""

@@ -74,8 +74,23 @@ async def what_autocomplete(interaction: discord.Interaction, current: str) -> l
     return DICTIONARY.autocomplete(current)
 
 
+MAGIC = {  # The subsections (essay, subsection) about charms, witches and spirits: on the esoteric shelf too
+    (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 13),  # Horns, the hand, crescents, iron, smiths, fire, witches
+    (3, 2), (3, 8),  # Salt uncongenial to witches; salt as a magical substance
+    (4, 4),  # Demoniacal possession
+    (6, 2), (6, 3), (6, 4), (6, 5), (6, 6),  # Spirits as black animals; conjuring vermin; charms against animals
+    (7, 4),  # Odd numbers in witchcraft
+}
+
+
+def shelves_of(omen: dict) -> tuple[str, ...]:
+    """The esoteric shelf, for an omen about charms, witches or spirits."""
+    return ("esoteric",) if (omen["essay"], omen["section"]) in MAGIC else ()
+
+
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "omen", random=lambda: omens_embed(None),
-                            find=lambda what: DICTIONARY.look_up(what, close_first=False), link=url)
+                            find=lambda what: DICTIONARY.look_up(what, close_first=False), link=url,
+                            shelves=("folklore",), entry_shelves=shelves_of)
 
 
 async def setup(bot: commands.Bot):

@@ -121,7 +121,8 @@ async def dig(payload: discord.RawReactionActionEvent):
 
 
 OLD_BOOK = [oldbooks.OldBook(TITLE, "🌱", "herbal", random=lambda: herbal_embed(random.choice(list(entries.values()))),
-                             send=post_box)
+                             send=post_box,
+                             shelves=("household",))
             ] if entries else []  # Only once it's been translated (see the README: Herbal)
 
 

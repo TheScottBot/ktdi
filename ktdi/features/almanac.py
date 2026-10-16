@@ -141,7 +141,8 @@ async def almanac_setup_show(ctx: commands.Context):
     await daily.show(ctx, DAILY)
 
 
-OLD_BOOK = oldbooks.OldBook(SOURCE, "📅", "almanac", random=lambda: almanac_embed(None))  # Today's: by date, not topic
+OLD_BOOK = oldbooks.OldBook(SOURCE, "📅", "almanac", random=lambda: almanac_embed(None),
+                            shelves=("folklore",))  # Today's: by date, not topic
 
 
 

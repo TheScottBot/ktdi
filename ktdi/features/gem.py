@@ -85,7 +85,8 @@ async def stone_autocomplete(interaction: discord.Interaction, current: str) -> 
 
 
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "gemlore", random=lambda: gems_embed(None),
-                            find=lambda stone: DICTIONARY.look_up(stone, close_first=False), link=url)
+                            find=lambda stone: DICTIONARY.look_up(stone, close_first=False), link=url,
+                            shelves=("esoteric",))
 
 
 async def setup(bot: commands.Bot):

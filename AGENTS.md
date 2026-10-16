@@ -18,10 +18,18 @@ conventions; this file is only the working rules. (CLAUDE.md imports this file, 
   Help pages must fit Discord's limits (field ≤ 1024, embed ≤ 6000). `tests/test_registration.py` checks the limits,
   that every command has a section, and that no command's page only repeats its one-liner; add the command to its
   `SLASH_COMMANDS` / `SUBCOMMANDS` lists.
-- **Every old book is a source for `/lore` and Old Wisdom of the Day.** A new old-book feature (a book, dictionary
-  or almanac in 📚 Words & wisdom, 🐉 Beasts & magic or 🌿 Hearth & herbs) isn't finished until it declares `OLD_BOOK =
-  oldbooks.OldBook(...)` (or a list of them): its `random` entry, for Old Wisdom of the Day, and, if it can be
-  searched by topic, `find`, `title`, `link` and `text`, so `/lore` asks it too. `tests/test_lore.py` fails without it.
+- **Every old book is a source for `/lore`, its shelves and Old Wisdom of the Day.** A new old-book feature (a book,
+  dictionary or almanac in 📚 Words & wisdom, 🐉 Beasts & magic or 🌿 Hearth & herbs) isn't finished until:
+  - it declares `OLD_BOOK = oldbooks.OldBook(...)` (or a list of them): its `random` entry, for Old Wisdom of the
+    Day, and, if it can be searched by topic, `find`, `title`, `link` and `text`, so `/lore` asks it too;
+  - it's on a shelf: `shelves=(...)`, one or more of `oldbooks.SHELVES` (nature, folklore, esoteric, words,
+    household), so `/nature`, `/esoteric` and the rest ask it. A book that's mostly one shelf with some entries that
+    belong on another (/omen's charms against witches are esoteric too) also gives `entry_shelves`;
+  - its shelf says so: the shelf's `about` in `SHELVES` (its `/help` page), `short` too if the book is a big part
+    of it, and the shelf row in the README, which name the books on each.
+  `tests/test_lore.py` fails without the first two. A new shelf is a `SHELVES` entry (the command makes itself),
+  plus its name in `tests/test_registration.py`'s `SLASH_COMMANDS`, the README's shelf row and the shelves listed
+  here; and the books that belong on it.
 - **Curating an old book:** keep only what's on an allowlist, and leave out anything with racism or contempt for a
   people or faith (even in passing), mockery of America, sex, gore, cruelty to animals, remedies someone could try,
   misogyny, suicide, harm to children, or anything that takes **gender or sexuality** lightly: people or animals

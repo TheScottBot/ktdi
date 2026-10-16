@@ -43,7 +43,8 @@ async def hammeredofwitches(ctx: commands.Context):
     await ctx.send(embed=tip_embed(random.choice(tips)))
 
 
-OLD_BOOK = oldbooks.OldBook(SOURCE, "🧹", "hammeredofwitches", random=lambda: tip_embed(random.choice(tips)))
+OLD_BOOK = oldbooks.OldBook(SOURCE, "🧹", "hammeredofwitches", random=lambda: tip_embed(random.choice(tips)),
+                            shelves=("esoteric",))
 
 
 

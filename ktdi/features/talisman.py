@@ -85,7 +85,8 @@ async def thing_autocomplete(interaction: discord.Interaction, current: str) -> 
 
 
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "talisman", random=lambda: talismans_embed(None),
-                            find=lambda thing: DICTIONARY.look_up(thing, close_first=False), link=url)
+                            find=lambda thing: DICTIONARY.look_up(thing, close_first=False), link=url,
+                            shelves=("esoteric",))
 
 
 async def setup(bot: commands.Bot):

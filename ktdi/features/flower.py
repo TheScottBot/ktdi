@@ -110,7 +110,8 @@ async def flower_autocomplete(interaction: discord.Interaction, current: str) ->
 
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "flowermeaning", random=lambda: flowermeaning_embed(None),
                             find=lambda topic: DICTIONARY.look_up(topic, close_first=False), title=lambda f: f["name"],
-                            link=url, text=lambda f: f"{meanings(f)}. {f.get('text') or ''}")
+                            link=url, text=lambda f: f"{meanings(f)}. {f.get('text') or ''}",
+                            shelves=("folklore",))
 
 
 async def setup(bot: commands.Bot):

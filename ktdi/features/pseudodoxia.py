@@ -68,7 +68,8 @@ async def topic_autocomplete(interaction: discord.Interaction, current: str) -> 
 
 
 OLD_BOOK = oldbooks.OldBook(SOURCE, "🧐", "pseudodoxia", random=lambda: pseudodoxia_embed(None),
-                            find=lambda topic: DICTIONARY.look_up(topic), link=url)
+                            find=lambda topic: DICTIONARY.look_up(topic), link=url,
+                            shelves=("nature",))
 
 
 

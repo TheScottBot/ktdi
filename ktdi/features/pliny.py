@@ -67,7 +67,8 @@ async def topic_autocomplete(interaction: discord.Interaction, current: str) -> 
 
 
 OLD_BOOK = oldbooks.OldBook(SOURCE, "🏛️", "pliny", random=lambda: pliny_embed(None),
-                            find=lambda topic: DICTIONARY.look_up(topic), link=url)
+                            find=lambda topic: DICTIONARY.look_up(topic), link=url,
+                            shelves=("nature",))
 
 
 

@@ -45,6 +45,7 @@ All the old books at once, then dictionaries, idioms, slang, manners and gloom, 
 | Command | What it does |
 |---|---|
 | `lore <thing>` | What all the old books have to say about something, side by side: `lore dragon` is Pliny's, Browne's and Topsell's dragons, Albertus's dragon stone, Miller's dream of one, Brewer's idioms and whatever else turns up, one entry from each with where it mentions the thing and a link to the page, then the command that has the rest (`/pliny dragon`). Books with an entry for the thing itself come first, then ones that mention it; old spelling is found too ("love" finds "loue"). Typed, `!oldbooks` works too. It searches every old book that declares itself (see Adding an old book, below); the almanac, weather sayings and a few others go by date or chance, so they only turn up in Old Wisdom of the Day. |
+| `nature <thing>` / `folklore <thing>` / `esoteric <thing>` / `words <thing>` / `household <thing>` | `lore`, on one shelf of the old books. 🦉 `nature` is natural history (Pliny, Browne, Topsell's beasts, Culpeper's plants, the Victorian wonders); 🧚 `folklore` is Welsh goblins, everyday superstitions, the language of flowers and the wonders again; 🔮 `esoteric` is magic (Albertus Magnus's secrets, dreams, astrological cures, gems, talismans), plus the charms and spells in the folklore books, so `esoteric salt` is salt against witches and salt as a magical substance, not salt at dinner; 📚 `words` is the dictionaries (Grose, Mackay, Bierce, Brewer); 🏠 `household` is Mrs Beeton, *Enquire Within*, the etiquette manuals and Burton. Each finds what the books on it say about the thing, an entry from each, like `lore`. A book can be on more than one shelf, and a mostly-folklore book can put some entries on another (`/omen`'s and `/goblin`'s magic is esoteric too). |
 | `wisdom` / `wisdom setup here [time]` / `wisdom setup show` / `wisdom setup stop` | `wisdom` is a random piece of old wisdom from any of the old books (Pliny, Topsell, the Book of Secrets, Mrs Beeton, Bierce, Grose, Miller, the almanac, Culpeper, the weather sayings and the rest), with the command that has more from the same book; each book is as likely as any other, however big. **Old Wisdom of the Day:** someone with Manage Server runs `wisdom setup here` in a channel, and one is posted there every day at 9am where the bot is (or the time given: `wisdom setup here 7:30am`), from a different book each day. `wisdom setup show` says where and when; `wisdom setup stop` stops it. One channel per server: set it up in another and it moves. It's stored in the database, not `.env`, so nothing needs a restart. A day missed by hours (the bot was down) is skipped rather than posted late. |
 | `devils [word]` | Ambrose Bierce's cynical definition of a word, from *The Devil's Dictionary* (1911, public domain, via Project Gutenberg): **bore** (a person who talks when you wish him to listen), **lawyer** (one skilled in circumvention of the law), **reason** (to weigh probabilities in the scales of desire)... with his verse and asides, and the made-up poets he credits them to. On its own it's a random entry; `devils <word>` looks one up (typos are fine, and the slash version autocompletes), or, for a word he didn't define, lists the entries that use it (`devils money`). Very long entries are cut short, with the rest a click away. Typed, `!devil` and `!devilsdictionary` work too. Bierce is cruel to everyone, which is the point, but entries that are racist, sexist or mock disability beyond that were read and taken out; only what was kept is recorded (an allowlist, `ktdi/lib/devils_curation.json`), and a test checks the rest stays out using fingerprints. To add an entry, read it in the book, add its headword to that file and run `python -m ktdi.tools.devils_build`. |
 | `phrase [idiom]` | Where an idiom comes from, according to the Rev. E. Cobham Brewer's *Dictionary of Phrase and Fable* (1898, public domain, via archive.org), who was very sure of himself: **mad as a hatter**, **to let the cat out of the bag**, **to rain cats and dogs**... Word it however you like (`phrase raining cats and dogs` finds "To rain cats and dogs"; typos are fine and the slash version autocompletes); for a word that isn't an idiom it lists the idioms that mention it (`phrase secret`). On its own it's a random one. Typed, `!idiom` and `!brewer` work too. About 1,800 idioms were hand-picked from the scan's OCR into `ktdi/lib/phrases.json` and mended against the page (Brewer's thousands of gods, saints and poets are left out, and so is anything that punches down), each linked to its page in the scan. |
@@ -228,11 +229,22 @@ Slash commands can take a while to appear or update when registered globally. Se
 
 ### Adding an old book
 
-Every old book (a dictionary, bestiary or almanac in 📚 Words & wisdom, 🐉 Beasts & magic or 🌿 Hearth & herbs) is also a source for
-`/lore` and Old Wisdom of the Day, so adding one comes with declaring it: its feature sets
-`OLD_BOOK = oldbooks.OldBook(...)` (see `ktdi/oldbooks.py`) with a `random` entry (what Old Wisdom of the Day posts),
-and, if it can be searched by topic, `find`, `title`, `link` and `text` (what `/lore` asks and quotes). A test fails
-until it does. Then the usual: a `/help` page, a row in this README, and the curation rules in `ARCHITECTURE.md`.
+Every old book (a dictionary, bestiary or almanac in 📚 Words & wisdom, 🐉 Beasts & magic or 🌿 Hearth & herbs) is also a
+source for `/lore`, its shelf and Old Wisdom of the Day, so adding one comes with declaring it. Its feature sets
+`OLD_BOOK = oldbooks.OldBook(...)` (see `ktdi/oldbooks.py`) with:
+
+- a `random` entry (what Old Wisdom of the Day posts);
+- if it can be searched by topic, `find`, `title`, `link` and `text` (what `/lore` asks and quotes);
+- its `shelves`: which of `/nature`, `/folklore`, `/esoteric`, `/words` and `/household` ask it (one or more). A book
+  that's mostly one shelf with some entries on another gives `entry_shelves` too (`/omen`'s charms against witches
+  are folklore and esoteric).
+
+A test fails until it does. Then name it on its shelf: the shelf's `about` in `oldbooks.SHELVES` (its `/help` page)
+and the shelves row in this README. Then the usual: a `/help` page, a row in this README, and the curation rules in
+`AGENTS.md`.
+
+A new shelf is an entry in `oldbooks.SHELVES` (its command makes itself), its name in `tests/test_registration.py`,
+a mention in the shelves row here, and `shelves=` on the books that belong on it.
 
 ## Project layout
 

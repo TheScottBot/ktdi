@@ -50,7 +50,9 @@ ktdi/
 │                      /beeton, /enquire) share: Dictionary (look_up, named_in, uses, one_of, same_name,
 │                      autocomplete), uses_embed, fit, clip, escape. A new old-book command should be a Dictionary
 │                      plus how its entries look, nothing more. Each old book also declares OLD_BOOK (an OldBook):
-│                      its random entry for Old Wisdom of the Day, and how /lore searches it
+│                      its random entry for Old Wisdom of the Day, how /lore searches it, and its shelves (SHELVES:
+│                      the /nature, /folklore, /esoteric, /words and /household searches; entry_shelves for a book
+│                      with some entries on another shelf too)
 ├── daily.py           posting every day in a channel each server chooses: a feature registers a Daily (its name
 │                      and how to post today's), and its `setup here/stop/show` subcommands call setup_here, stop
 │                      and show; daily_loop posts what's due (daily_posts table). /wisdom and /almanac use it
@@ -82,6 +84,7 @@ ktdi/
 │   ├── pseudodoxia.py /pseudodoxia: a chapter of Browne's Pseudodoxia Epidemica (1646) on a topic, or at random
 │   ├── bestiary.py    /bestiary: a passage of Topsell's beasts (1607) and serpents (1608) on a beast, or at random
 │   ├── lore.py        /lore: one search across every old book's OLD_BOOK, an entry from each, side by side
+│                      and the shelf commands (/nature, /folklore, /esoteric, /words, /household): the same, on one shelf
 │   ├── wisdom.py      /wisdom: a random entry from any OLD_BOOK; Old Wisdom of the Day (/wisdom setup here),
 │   │                  a Daily (daily.py) that picks a different book each day
 │   ├── wonder.py      /wonder: a curiosity from Ten Thousand Wonderful Things (1894), with its engraving
