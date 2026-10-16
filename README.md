@@ -72,7 +72,7 @@ Monsters, marvels, curiosities, spells, witches and dreams: the old natural hist
 
 ### 🌿 Hearth & herbs
 
-Mrs Beeton, Culpeper's cures, a herbal and the almanac: the old household books, for the kitchen, the medicine cupboard and the calendar. Don't actually take any of the cures.
+Mrs Beeton, Culpeper's cures, a herbal, the language of flowers and the almanac: the old household books, for the kitchen, the medicine cupboard, the garden and the calendar. Don't actually take any of the cures.
 
 | Command | What it does |
 |---|---|
@@ -81,6 +81,7 @@ Mrs Beeton, Culpeper's cures, a herbal and the almanac: the old household books,
 | `plant <name>` | The other way round: look up one of Culpeper's 320 herbs by any name he gives it ("ground ivy", "piss-a-beds") or its Latin name ("Glechoma hederacea"), and see its Latin name, the planet he puts it under, everything on `/cure`'s list he says it's good for, and one of his remedies. Typos are fine and the slash version autocompletes. The Latin names were checked by hand (`ktdi/lib/herb_latin.json`), and a few herbs Culpeper doesn't pin down are left without one. After editing that file, run `python -m ktdi.tools.cure_build` again. |
 | `herbal` | Wisdom from a 1531 herbal, the *Tacuini sanitatis*: a random box from its grids, as badly OCR'd by archive.org and translated by Google Translate, with the original cell cropped from the scan. React ⛏️ to dig: each dig is one translation worse (round-tripped through Japanese, Zulu, Finnish, then Korean), down to 🪨 bedrock, the Latin as the scanner read it. The bot takes your ⛏️ back off so you can dig again (needs Manage Messages; otherwise un-react and react). Needs `ktdi/lib/herbal.json` (see Herbal below). |
 | `almanac day [date]` / `almanac setup here [time]` / `almanac setup show` / `almanac setup stop` | Today (or any day: `almanac day 5 november`, `almanac day 25/12`, `almanac day tomorrow`; typed, just `!almanac 5 november`) as William Hone's *Every-Day Book* (1826-27, public domain, via Project Gutenberg) has it: the day's saints, a passage on its customs, folklore or history (Hertfordshire's "ganging-day", April Fools' tricks with shoe buckles and "pigeon's milk", the druids' mistletoe), its flower ("Holly. *Ilex aquifolium*", dedicated to its saint), and London's average temperature for it in 1797-1816, in °F and °C. Ask again for another passage: most days have two or three. 29 February has nothing, as neither 1825 nor 1826 had one. Typed, `!onthisday` and `!hone` work too. **Every morning:** someone with Manage Server runs `almanac setup here` in a channel, and the day's almanac is posted there every day at 9am where the bot is, or the time given (`almanac setup here 7am`); `almanac setup show` says where and when, `almanac setup stop` stops it. One channel per server, separate from Old Wisdom of the Day's (they can share one). About 620 passages, picked by hand as the best for their day (and nothing gruesome, racist or cruel); only their keys are recorded (`ktdi/lib/almanac_curation.json`). To add one, read it in the book, add its key to that file and run `python -m ktdi.tools.almanac_build`. |
+| `flowermeaning [flower or meaning]` | What a flower meant in the Victorian language of flowers, from Henrietta Dumont's *The Language of Flowers* (1851, public domain, via Project Gutenberg), when people sent messages in bouquets: a pansy is "Think of me", basil "Hate", an asphodel "My regrets follow you to the grave". Give a flower (`flowermeaning pansy`) for its meaning, with the book's prose and verse on it if it has a chapter, and its hand-coloured plate if it's in one ("Your self-love and stupidity excite my pity"); the names autocomplete. Or give a meaning (`flowermeaning love`, `flowermeaning grief`) for a flower that says it, with the others that do. On its own: any flower. They're Dumont's meanings: other books of the day gave others, and the footer says so. Typed, `!flower` and `!floriography` work too. About 270 flowers, read by hand: any chapter that breaks the house rules (verse running down women, plants recommended as cures, sneers at peoples) is left out and the flower kept with just its meaning (`ktdi/lib/flower_curation.json`). To change one, edit that file and run `python -m ktdi.tools.flower_build`. |
 
 ### 🎬 Movie night
 
@@ -270,6 +271,7 @@ ktdi/
 │   ├── wonder.py      # wonder
 │   ├── goblin.py      # goblin
 │   ├── omen.py        # omen
+│   ├── flower.py      # flowermeaning
 │   ├── lore.py        # lore: all the old books at once
 │   ├── wisdom.py      # wisdom: Old Wisdom (of the Day)
 │   ├── etiquette.py   # etiquette
@@ -284,7 +286,7 @@ ktdi/
 │   ├── rpg.py         # RPG rulebooks from Dropbox
 │   └── help.py        # asks each feature for its HELP_CATEGORY and help_extras(), so new features don't touch it
 ├── lib/               # no Discord code: unit conversions, reminder schedules, timezones, and the Calibre-Web, Dropbox, Letterboxd and AniList clients
-└── tools/             # one-off helpers: dropbox_login, herbal_build, cure_build, slang_build, devils_build, dream_build, beeton_build, enquire_build, almanac_build, melancholy_build, pliny_build, pseudodoxia_build, bestiary_build, secrets_build, wonder_build, goblin_build, omen_build, deadword_pages, weather_lore_pages (python -m ktdi.tools.<name>); gutenberg.py is what the Gutenberg builds share, and tcp.py what the EEBO-TCP ones (bestiary, secrets) do
+└── tools/             # one-off helpers: dropbox_login, herbal_build, cure_build, slang_build, devils_build, dream_build, beeton_build, enquire_build, almanac_build, melancholy_build, pliny_build, pseudodoxia_build, bestiary_build, secrets_build, wonder_build, goblin_build, omen_build, flower_build, deadword_pages, weather_lore_pages (python -m ktdi.tools.<name>); gutenberg.py is what the Gutenberg builds share, and tcp.py what the EEBO-TCP ones (bestiary, secrets) do
 tests/                 # pytest
 ```
 

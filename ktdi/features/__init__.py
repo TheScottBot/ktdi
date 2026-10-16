@@ -33,6 +33,7 @@ FEATURES = [
     "ktdi.features.wonder",
     "ktdi.features.goblin",
     "ktdi.features.omen",
+    "ktdi.features.flower",
     "ktdi.features.lore",
     "ktdi.features.wisdom",
     "ktdi.features.etiquette",

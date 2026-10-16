@@ -84,7 +84,10 @@ def test_it_fits_in_an_embed(monkeypatch):
     many = [book(f"Dragons {n}", [{"title": "Dragons", "text": "Dragons. " + "Long " * 300}]) for n in range(25)]
     monkeypatch.setattr(lore, "old_books", lambda: many)
     embed = lore.lore_embed("dragons")
-    assert len(embed) <= 6000 and 0 < len(embed.fields) < 25
+    assert len(embed) <= 6000 and len(embed.fields) == 25  # Every book gets its line...
+    monkeypatch.setattr(lore, "old_books", lambda: many[:1])
+    alone = lore.lore_embed("dragons").fields[0].value
+    assert all(len(f.value) < len(alone) for f in embed.fields)  # ...with a shorter quote than a book on its own
 
 
 def test_command():

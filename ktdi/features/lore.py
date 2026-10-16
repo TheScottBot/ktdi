@@ -17,7 +17,8 @@ from ktdi import oldbooks
 
 HELP_CATEGORY = "📚 Words & wisdom"
 COLOUR = discord.Color.from_rgb(120, 94, 60)  # Parchment
-SNIPPET = 200  # How much of each book's entry is quoted
+SNIPPET = 200  # How much of each book's entry is quoted, when there's room
+SHORTEST = 60  # ...and when there isn't, when many books have something
 EMBED_LIMIT = 6000  # Discord's, for a whole embed
 NOTHING = oldbooks.not_here("None of the old books has anything on that here. Try dragons, love, eels, the moon, "
                             "cheese, or the plague.", where="books themselves")
@@ -35,16 +36,18 @@ def searched(thing: str) -> list[tuple[oldbooks.OldBook, list]]:
     return [(book, hits.entries) for book, hits in found]
 
 
-def entry_line(book: oldbooks.OldBook, entries: list, thing: str) -> str:
-    """One entry, as a field: its name (linking to it), where it mentions the thing, and how to ask for the rest."""
+def entry_line(book: oldbooks.OldBook, entries: list, thing: str, room: int = 1024) -> str:
+    """One entry, as a field's value: its name (linking to it), where it mentions the thing, and how to ask for the
+    rest; in `room` characters at most, the quote shortened to fit (but never below SHORTEST)."""
     entry = random.choice(entries)
     name, link = oldbooks.escape(book.title(entry)), book.link(entry)
-    line = f"**[{name}]({link})**" if link else f"**{name}**"
-    line += f": {oldbooks.escape(oldbooks.clip(oldbooks.mention(book.text(entry), thing), SNIPPET))}"
+    head = f"**[{name}]({link})**: " if link else f"**{name}**: "
+    tail = ""
     if len(entries) > 1:
         asked = " ".join(thing.replace("`", "").split())[:oldbooks.TYPED_LENGTH]
-        line += f"\n-# …and {len(entries) - 1} more: `/{book.command} {asked}`"
-    return line[:1024]
+        tail = f"\n-# …and {len(entries) - 1} more: `/{book.command} {asked}`"
+    quote = max(SHORTEST, min(SNIPPET, room - len(head) - len(tail)))
+    return (head + oldbooks.escape(oldbooks.clip(oldbooks.mention(book.text(entry), thing), quote)) + tail)[:1024]
 
 
 def lore_embed(thing: str) -> discord.Embed:
@@ -56,9 +59,12 @@ def lore_embed(thing: str) -> discord.Embed:
                           description=f"What {len(found)} old book{'s' if len(found) > 1 else ''} "
                                       f"{'have' if len(found) > 1 else 'has'} to say about it.")
     embed.set_footer(text="Ask any of them for more with its own command.")
-    for book, entries in found[:25]:  # Discord's most fields
-        embed.add_field(name=f"{book.emoji} {book.book}"[:256], value=entry_line(book, entries, thing), inline=False)
-        if len(embed) > EMBED_LIMIT:
+    shown_books = found[:25]  # Discord's most fields
+    share = (EMBED_LIMIT - len(embed) - 50) // len(shown_books)  # Every book gets its line: the more, the shorter
+    for book, entries in shown_books:
+        name = f"{book.emoji} {book.book}"[:256]
+        embed.add_field(name=name, value=entry_line(book, entries, thing, share - len(name)), inline=False)
+        if len(embed) > EMBED_LIMIT:  # Only if even the shortest quotes don't fit
             embed.remove_field(-1)
             break
     return embed

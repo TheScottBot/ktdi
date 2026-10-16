@@ -32,7 +32,7 @@ CATEGORIES = {
     "🎲 Fun": "Looting, Linux, anime and the war archives",
     "📚 Words & wisdom": "All the old books at once, then dictionaries, idioms, manners and gloom",
     "🐉 Beasts & magic": "Monsters, marvels, curiosities, spells, witches and dreams",
-    "🌿 Hearth & herbs": "Mrs Beeton, Culpeper's cures, a herbal and the almanac",
+    "🌿 Hearth & herbs": "Mrs Beeton, Culpeper's cures, the language of flowers and the almanac",
     "🎬 Movie night": "Countdowns, bingo, votes and ratings",
     "📏 Measurements": "Units, sincerely or absurdly",
     "💬 Quotes": "Save and replay what people say",
