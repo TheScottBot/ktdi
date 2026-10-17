@@ -32,8 +32,8 @@ SUBCOMMANDS = {
     "weather": ["here", "in"],
     "wisdom": ["now", "setup"],
     "insurance": ["buy", "complain", "status"],
-    "nowplaying": ["bingo", "canon", "committeesviews", "elapsed", "end", "history", "objection", "pause", "predict",
-                   "predictions", "rate", "resume", "sct", "set", "show", "start", "vote", "watchlist"],
+    "nowplaying": ["bingo", "canon", "end", "history", "objection", "pause", "predict", "rate", "set", "show", "start",
+                   "sync", "vote", "watchlist"],
     "timezone": ["clear", "convert", "set", "show"],
     "campaign": ["add", "edit", "list", "remind", "remove", "reschedule", "show", "skip", "unremind"],
     "quote": ["add", "claim", "delete", "dissociate", "last", "random", "search", "show"],
@@ -63,9 +63,9 @@ def test_slash_commands(loaded_bot):
         assert sorted(c.name for c in tree.get_command(group).commands) == subs
     nowplaying = tree.get_command("nowplaying")
     watchlist = nowplaying.get_command("watchlist")
-    assert sorted(c.name for c in watchlist.commands) == ["add", "import", "remove", "show", "strike", "unstrike"]
-    assert sorted(c.name for c in nowplaying.get_command("vote").commands) == ["end", "show", "start"]
-    assert sorted(c.name for c in nowplaying.get_command("bingo").commands) == ["card", "mark", "unmark"]
+    assert sorted(c.name for c in watchlist.commands) == ["add", "remove", "show", "strike"]
+    assert sorted(c.name for c in nowplaying.get_command("vote").commands) == ["end", "start"]
+    assert sorted(c.name for c in nowplaying.get_command("bingo").commands) == ["card"]
     for group in ("wisdom", "almanac"):
         assert sorted(c.name for c in tree.get_command(group).get_command("setup").commands) == ["here", "show", "stop"]
     assert tree.get_command("np") is None  # slash commands can't have aliases: /nowplaying only
@@ -75,6 +75,36 @@ def test_np_still_works_typed(loaded_bot):
     assert loaded_bot.get_command("np") is loaded_bot.get_command("nowplaying")
     assert loaded_bot.get_command("np bingo card") is loaded_bot.get_command("nowplaying bingo card")
     assert loaded_bot.get_command("np countdown") is loaded_bot.get_command("nowplaying start")
+    # Merged into others in the slash menu, but every old one still works typed, aliases and all
+    for typed, merged_into in [("np resume", "nowplaying start"), ("np elapsed", "nowplaying sync"),
+                               ("np seek", "nowplaying sync"), ("np watchlist import", "nowplaying watchlist add"),
+                               ("np watchlist unstrike", "nowplaying watchlist strike undo:True"),
+                               ("np vote where", "nowplaying vote start"), ("np predictions", "nowplaying history"),
+                               ("np committeesviews", "nowplaying history"), ("np bingo mark", "nowplaying bingo card"),
+                               ("np bingo unmark", "nowplaying bingo card unmark:True")]:
+        command = loaded_bot.get_command(typed)
+        assert command is not None and command.app_command is None, typed  # Not in the slash menu
+        assert command.extras["merged_into"] == merged_into, typed
+        page = help_feature.command_help_embed(command)
+        assert page.title.startswith(f"!{command.qualified_name}") and f"it's part of `/{merged_into}`" in page.description
+
+
+def test_typed_titles_can_be_several_words(loaded_bot):
+    """Typed, a film's title is the rest of the line (!np watchlist strike The Thing), even where the slash version
+    has an option after it (undo:)."""
+    import inspect
+    for name in ("nowplaying watchlist strike", "nowplaying watchlist remove", "nowplaying history", "nowplaying set"):
+        last = list(loaded_bot.get_command(name).clean_params.values())[0]
+        assert last.kind == inspect.Parameter.KEYWORD_ONLY, name
+
+
+def test_nowplaying_help_lists_the_slash_menu(loaded_bot):
+    """/help nowplaying lists what the slash menu has (the moved ones say where they went on their own pages)."""
+    page = help_feature.command_help_embed(loaded_bot.get_command("nowplaying"))
+    listed = [f.name for f in page.fields if f.name.startswith("/")]
+    assert "/nowplaying sync [position]" in listed and "/nowplaying bingo card [square] [unmark=False]" in listed
+    assert "/nowplaying vote start [count=5] [hours] [include_watched=False] [films]" in listed
+    assert not any(word in name for name in listed for word in ("resume", "elapsed", "sct", "committeesviews"))
 
 
 def test_prefix_commands(loaded_bot):

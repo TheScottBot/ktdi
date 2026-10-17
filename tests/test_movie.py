@@ -56,15 +56,15 @@ def test_start_pause_resume_end(at, bot):
     at(52)
     reply = np("pause", reason="snacks\nand drinks")
     assert reply.content == ("⏸️ **Paused** Shrek 2 at 0:47:00.\n> snacks and drinks\n"
-                             f"-# Paused {live(52)}. `/nowplaying resume` to carry on.")
+                             f"-# Paused {live(52)}. `/nowplaying start` to carry on.")
     assert bot.activity.name == "Shrek 2 (paused)"
     assert "already paused" in np("pause").content
     at(60)
     assert np("show").content.startswith("⏸️ **Paused:** Shrek 2 at 0:47:00")  # the clock stops while paused
 
     at(64)
-    reply = np("resume")
-    assert reply.content.startswith("▶️ **Resumed** Shrek 2 at 0:47:00, after 12m.")
+    reply = np("resume")  # Typed (!np resume): the same as /nowplaying start, when it's paused
+    assert reply.content.startswith("# ▶️ GO!\n**Resumed** Shrek 2 at 0:47:00, after 12m.")
     assert any(line in reply.content for line in movie.LONG_PAUSE_LINES)
     # The live clock starts 12 minutes later than the film did, so it shows time watched, not counting the pause.
     assert reply.content.endswith(f"\n-# ⏱️ Started {live(5 + 12)}, not counting pauses.")
@@ -87,7 +87,7 @@ def test_short_pauses_get_no_comment(at):
     np("start")
     np("pause")
     at(3)
-    assert np("resume").content == ("▶️ **Resumed** Up at 0:00:00, after 3m.\n"
+    assert np("resume").content == ("# ▶️ GO!\n**Resumed** Up at 0:00:00, after 3m.\n"
                                     f"-# ⏱️ Started {live(3)}, not counting pauses.")
 
 
@@ -148,7 +148,7 @@ def test_sct_corrects_a_playing_film(at, sleeps):
     at(30)  # the bot thinks 30 minutes in, but we restarted it and it's really 12:00 in
     reply = sct("12:00")
     assert reply.content == (f"⏱️ **Alien** is now at **0:12:00**.\n"
-                             f"-# ⏱️ Started {live(30 - 12)}. Out of sync? `/nowplaying elapsed` to catch up.")
+                             f"-# ⏱️ Started {live(30 - 12)}. Out of sync? `/nowplaying sync` to catch up.")
     assert not reply.private
     assert movie.watched_seconds(movie.current_movie(111)) == 12 * 60
     at(40)
@@ -182,7 +182,7 @@ def test_sct_while_paused(at):
     at(45)  # still paused: doesn't move
     assert np("show").content.startswith("⏸️ **Paused:** Alien at 0:25:00")
     at(46)
-    assert np("resume").content.startswith("▶️ **Resumed** Alien at 0:25:00, after 16m.")
+    assert np("resume").content.startswith("# ▶️ GO!\n**Resumed** Alien at 0:25:00, after 16m.")
 
 
 def test_sct_starts_a_film_started_without_the_bot(at, bot):
@@ -397,13 +397,15 @@ def test_bingo_autocomplete_offers_unmarked_squares(at):
     np("set", title="Up")
     np("start")
     mark(SCOTT, 1)
-    interaction = types.SimpleNamespace(guild_id=111, user=SCOTT)
+    interaction = types.SimpleNamespace(guild_id=111, user=SCOTT, namespace=types.SimpleNamespace())
     choices = run(movie.bingo_square_autocomplete(interaction, ""))
     assert [c.value for c in choices] == [n for n in range(2, 26) if n != 13]
     assert choices[0].name.startswith("2. ")
     assert [c.value for c in run(movie.bingo_square_autocomplete(interaction, "7"))] == [7]  # by number
     word = movie.bingo_card(movie.current_movie(111).id, SCOTT.id)[4].split()[-1]
     assert 5 in [c.value for c in run(movie.bingo_square_autocomplete(interaction, word.upper()))]  # or by words
+    interaction.namespace.unmark = True  # Unmarking: the marked ones (not the free space)
+    assert [c.value for c in run(movie.bingo_square_autocomplete(interaction, ""))] == [1]
 
 
 def test_history(at):
@@ -631,8 +633,7 @@ def test_sealed_predictions_stay_sealed(at):
 
 @pytest.fixture(autouse=True)
 def sleeps(monkeypatch):
-    """Countdowns (every /nowplaying start) don't really wait: the clock reads 1000.4 seconds, each sleep is recorded
-    instead, and something can run mid-countdown."""
+    """Sleeps (/nowplaying sync's catch-up waits for its moment) don't really wait: each is recorded instead."""
     record = types.SimpleNamespace(delays=[], during=None)
 
     async def fake_sleep(delay):
@@ -640,52 +641,31 @@ def sleeps(monkeypatch):
         if record.during:
             await record.during()
     monkeypatch.setattr(movie.asyncio, "sleep", fake_sleep)
-    monkeypatch.setattr(movie, "time", types.SimpleNamespace(time=lambda: 1000.4))
     return record
 
 
-def test_start_counts_down(at, sleeps, bot):
+def test_start_goes_at_once(at, sleeps, bot):
+    """No countdown (it didn't keep people in step: some only saw it at GO): one big GO, now."""
     assert "Nothing's lined up" in np("start").content
     np("set", title="Alien")
     reply = np("start")
-    # A live Discord timestamp counts down by itself: the next whole second (1001) plus 5. Only one edit, for GO.
-    assert reply.edits[0].startswith("# ▶️ GO!\n🎬 **Starting: Alien.**") and len(reply.edits) == 1
-    assert sleeps.delays == [5.6]  # from 1000.4 to 1006
-    assert reply.original == ("# 🎬 Alien starts <t:1006:R>\n"
-                              "-# Get ready to press play. This changes to GO when it's time.")
+    assert reply.content.startswith("# ▶️ GO!\n🎬 **Starting: Alien.**") and not reply.edits
+    assert sleeps.delays == []
     assert movie.current_movie(111).started_at is not None and bot.activity.name == "Alien"
     assert "already started" in np("start").content
-    assert not movie.counting_down
-    assert movie.np_start.aliases == ["countdown"]  # !np countdown still works
+    assert movie.np_start.aliases == ["countdown", "go"]  # !np countdown still works
 
 
-def test_no_starting_twice_during_a_countdown(at, sleeps):
+def test_start_carries_on_after_a_pause(at, bot):
     np("set", title="Alien")
-    others = []
-
-    async def someone_else_tries():
-        ctx = Ctx(DAVE)
-        await movie.np_start.callback(ctx)
-        await movie.np_sct.callback(ctx, position="10:00")
-        others.extend(ctx.sent)
-    sleeps.during = someone_else_tries
-    reply = np("start")
-    assert [o.content for o in others] == ["There's already a countdown going.",
-                                          "There's a countdown going. Wait for it, then correct the time."]
-    assert all(o.private for o in others)
-    assert reply.content.startswith("# ▶️ GO!")
-
-
-def test_countdown_called_off_if_the_film_changes(at, sleeps):
-    np("set", title="Alien")
-
-    async def change_film():
-        await movie.np_set.callback(Ctx(DAVE), title="Jaws")
-    sleeps.during = change_film
-    reply = np("start")
-    assert reply.content.startswith("🎬 Countdown called off")
-    assert movie.current_movie(111).title == "Jaws" and movie.current_movie(111).started_at is None
-    assert not movie.counting_down
+    np("start")
+    at(30)
+    np("pause")
+    at(40)
+    reply = np("start")  # The same GO, so everyone unpauses together
+    assert reply.content.startswith("# ▶️ GO!\n**Resumed** Alien at 0:30:00, after 10m.")
+    assert movie.current_movie(111).paused_at is None and bot.activity.name == "Alien"
+    assert "already started" in np("start").content  # Not paused now
 
 
 # --- /nowplaying vote ---
@@ -726,7 +706,7 @@ def test_vote_picks_random_films_from_the_watchlist(theatre):
     assert poll.question == "🍿 What are we watching next?" and poll.duration.total_seconds() == 32 * 24 * 3600
     assert len(poll.answers) == 5 and {a.text for a in poll.answers} <= set(HALLOWEEN)
     assert reply.content.startswith("-# Voting closes when someone runs `/nowplaying vote end`. The winner gets lined up.")
-    assert "There's already a vote going" in vote(channel=theatre).content
+    assert "**What are we watching next?** [Vote here]" in vote(channel=theatre).content  # The one that's on
 
 
 def test_vote_on_chosen_films_then_end_it(theatre):
@@ -815,13 +795,17 @@ def test_strike_and_unstrike(theatre):
     assert embed.description.splitlines()[-1] == "~~Alien (1979)~~ (watched 03 Oct)"  # still listed, crossed out, last
     assert embed.footer.text.startswith("1 struck off as watched.")
 
-    choices = run(movie.unstruck_autocomplete(types.SimpleNamespace(guild_id=111), "a"))
-    assert "Alien (1979)" not in [c.value for c in choices]
-    assert [c.name for c in run(movie.struck_autocomplete(types.SimpleNamespace(guild_id=111), ""))] == [
-        "Alien (1979) (watched)"]
+    def suggested(typed, **namespace):
+        interaction = types.SimpleNamespace(guild_id=111, namespace=types.SimpleNamespace(**namespace))
+        return run(movie.strike_autocomplete(interaction, typed))
+    assert "Alien (1979)" not in [c.value for c in suggested("a")]
+    assert [c.name for c in suggested("", undo=True)] == ["Alien (1979) (watched)"]  # undo: the struck-off ones
 
-    assert watchlist_cmd("unstrike", title="Alien").content == "🍿 **Alien (1979)** is back on the watchlist. 6 to watch."
-    assert "isn't struck off" in watchlist_cmd("unstrike", title="Alien").content
+    assert watchlist_cmd("strike", title="Alien", undo=True).content == (
+        "🍿 **Alien (1979)** is back on the watchlist. 6 to watch.")
+    assert "isn't struck off" in watchlist_cmd("strike", title="Alien", undo=True).content
+    watchlist_cmd("strike", title="Alien")
+    assert "back on the watchlist" in watchlist_cmd("unstrike", title="Alien").content  # Typed: !np watchlist unstrike
 
 
 def test_votes_leave_out_struck_films_unless_asked(theatre):
@@ -1034,7 +1018,7 @@ def test_committees_views(at, bot, monkeypatch):
     channel = Channel(500, Guild())
     ending = Ctx(SCOTT, channel=channel)
     run(movie.np_end.callback(ending))
-    assert "/nowplaying committeesviews" in ending.sent[0].content
+    assert "`/nowplaying history` with the film for the official report" in ending.sent[0].content
     react(movie.prediction_vote, channel.sent[1], SCOTT, "✅")  # Dave's prediction: upheld
     run(movie.rate.callback(Ctx(SCOTT), score=3))
     run(movie.rate.callback(Ctx(DAVE), score=5))
@@ -1069,7 +1053,7 @@ def show_vote(channel, user=DAVE):
 def test_the_vote_can_be_found_again(theatre):
     assert "There's no vote going" in show_vote(theatre).content
     poll_message = vote(channel=theatre, films="Alien, Braindead, Deadstream")
-    assert poll_message.content.endswith("`/nowplaying vote show` finds this again.")
+    assert poll_message.content.endswith("`/nowplaying vote` finds this again.")
     link = f"https://discord.com/channels/111/{theatre.id}/{poll_message.id}"
     cast(poll_message, **{"Alien (1979)": 2, "Deadstream (2022)": 1})
     found = show_vote(theatre)
@@ -1077,7 +1061,7 @@ def test_the_vote_can_be_found_again(theatre):
         f"🗳️ **What are we watching next?** [Vote here]({link})",
         "Alien (1979) · Braindead (1992) · Deadstream (2022)",  # The films, not the tally: no swaying
         "-# 3 votes so far · open until `/nowplaying vote end`"]
-    assert f"[here]({link})" in vote(channel=theatre).content  # "There's already a vote going" links to it too
+    assert vote(channel=theatre).content == found.content  # /nowplaying vote again, while one's on, shows it
     assert movie.np_vote_show.aliases == ["where", "link"]
 
 
@@ -1087,3 +1071,66 @@ def test_a_timed_vote_says_when_it_closes(theatre):
     poll_message.poll._expiry = datetime(2026, 10, 12, 20, 0, tzinfo=timezone.utc)  # As Discord's own polls have
     closes = int(poll_message.poll._expiry.timestamp())
     assert show_vote(theatre).content.endswith(f"-# 0 votes so far · closes <t:{closes}:R>, or `/nowplaying vote end`")
+
+
+# --- One slash subcommand for several: Discord lists every slash subcommand as its own line ---
+def test_sync_catches_you_up_or_corrects_the_clock(at, sleeps):
+    np("set", title="Alien")
+    np("start")
+    at(30)
+    ctx = Ctx(SCOTT)
+    run(movie.np_sync.callback(ctx))  # On its own: just you, where it is and when to press play
+    assert "is at **0:30:00**" in ctx.sent[0].original and ctx.sent[0].private
+    run(movie.np_sync.callback(ctx, position="12:00"))  # With a time: the bot's clock was wrong
+    assert ctx.last.content.startswith("⏱️ **Alien** is now at **0:12:00**.") and not ctx.last.private
+    assert movie.watched_seconds(movie.current_movie(111)) == 12 * 60
+
+
+def test_add_takes_a_whole_letterboxd_list(at, letterboxd_list):
+    reply = watchlist_cmd("add", link="https://letterboxd.com/jenny/list/halloween-2026/")
+    assert reply.content.startswith(f"🍿 Added **{len(FILMS)} films** from [Halloween 2026]")
+    typed = watchlist_cmd("add", title="https://letterboxd.com/jenny/list/halloween-2026/")  # !np watchlist add <link>
+    assert typed.content.startswith("🍿 Everything on [Halloween 2026]")
+    assert watchlist_cmd("add", link="https://letterboxd.com/jenny/list/nope/").content == (
+        "🍿 Letterboxd says that list doesn't exist (or it's private).")
+
+
+def test_add_tries_a_short_link_as_a_film_then_a_list(at, letterboxd_list, letterboxd_films):
+    reply = watchlist_cmd("add", link="https://boxd.it/abcd")  # Not a film the fake knows: so it's a list
+    assert reply.content.startswith(f"🍿 Added **{len(FILMS)} films** from [Halloween 2026]")
+
+
+def test_history_of_one_film_is_its_report_and_predictions(at):
+    np("set", title="Alien")
+    run(movie.predict.callback(Ctx(DAVE), guess="The cat lives"))
+    np("start")
+    at(117)
+    np("end")
+    reply = np("history", film="alien")
+    assert [embed.title for embed in reply.embeds] == ["📋 OFFICIAL VIEWING REPORT",
+                                                       "🔮 Predictions for Alien, 03 Oct 2026"]
+    assert "The cat lives" in reply.embeds[1].description
+    assert "No finished film called “Jaws”" in np("history", film="Jaws").content
+    assert np("history").embed.title == "🎬 What we've watched"  # On its own: everything watched
+    assert np("committeesviews").embed.title == "📋 OFFICIAL VIEWING REPORT"  # Typed: still the last film's report
+
+
+def test_bingo_card_shows_marks_and_unmarks(at):
+    np("set", title="Up")
+    np("start")
+    ctx = Ctx(SCOTT)
+    run(movie.bingo_group.callback(ctx))  # On its own: your card, just for you
+    assert ctx.last.embed.title.startswith("🎯 Your bingo card") and ctx.last.private
+    run(movie.bingo_group.callback(ctx, square=7))
+    assert "marked" in ctx.sent[-2].content and not ctx.sent[-2].private  # Everyone sees the mark...
+    assert ctx.last.private and ctx.last.embed.title.startswith("🎯 Your bingo card")  # ...and you, your card
+    film = movie.current_movie(111).id
+    assert 7 in movie.bingo_marks(film, SCOTT.id)
+    run(movie.bingo_group.callback(ctx, square=7, unmark=True))
+    assert ctx.sent[-2].content.startswith("Unmarked square 7") and 7 not in movie.bingo_marks(film, SCOTT.id)
+    sent = len(ctx.sent)
+    run(movie.bingo_group.callback(ctx, square=7, unmark=True))  # Not marked: just the reason, no card
+    assert len(ctx.sent) == sent + 1 and "isn't marked" in ctx.last.content
+    typed = Ctx(SCOTT, slash=False)
+    run(movie.bingo_group.callback(typed, square=8))  # Typed: the mark, but no card (that would be a DM)
+    assert len(typed.sent) == 1 and "marked" in typed.last.content

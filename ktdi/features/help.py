@@ -33,7 +33,7 @@ CATEGORIES = {
     "📚 Words & wisdom": "All the old books at once, the shelf of words, slang, lost words and Old Wisdom",
     "🐉 Beasts & magic": "The shelves of natural history, folklore and magic, Pliny, omens and witches",
     "🌿 Hearth & herbs": "The household shelf, Mrs Beeton, manners, Culpeper's cures and the almanac",
-    "🎬 Movie night": "Countdowns, bingo, votes and ratings",
+    "🎬 Movie night": "Starting together, bingo, votes and ratings",
     "📏 Measurements": "Units, sincerely or absurdly",
     "💬 Quotes": "Save and replay what people say",
     "🗓️ Campaigns": "Our games' links and session reminders",
@@ -92,6 +92,10 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
         embed.title = f"/{command.name}"
     elif shelved:  # A book asked through its shelf: /esoteric book:talisman [thing], or !talisman
         embed.title = f"{shelved.asked()} {command.signature}".strip()
+    elif merged := command.extras.get("merged_into"):  # Typed only now: in the slash menu it's part of another
+        embed.title = f"{p}{command.qualified_name} {command.signature}".strip()
+        embed.description = (f"{about}\n\nOnly typed now ({typed}): in the slash menu, it's part of "
+                             f"`/{merged}`.")
     elif not isinstance(command, commands.HybridCommand):  # !-only (e.g. !quote anon): there's no slash version.
         embed.title = f"{p}{command.qualified_name} {command.signature}".strip()
         embed.description = f"{about}\n\nOnly works typed with `{p}`."
@@ -102,10 +106,13 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
             embed.description += description
             extra_fields += fields
     if isinstance(command, commands.Group):
-        subcommands = [(sub.name, f"{p if sub.extras.get('prefix_only') else '/'}{sub.qualified_name} {sub.signature}",
-                        sub.description) for sub in command.commands]
+        def slash_usage(sub):  # A subgroup that runs itself is its fallback, slashed: /nowplaying bingo card
+            fallback = f" {sub.fallback}" if getattr(sub, "fallback", None) else ""
+            return f"{p if sub.extras.get('prefix_only') else '/'}{sub.qualified_name}{fallback} {sub.signature}"
+        subcommands = [(sub.name, slash_usage(sub), sub.description) for sub in command.commands
+                       if not sub.extras.get("merged_into")]  # Only typed now: its page says where it went
         if getattr(command, "fallback", None):  # The group itself, as a slash subcommand: /beeton recipe [dish]
-            subcommands.append((command.fallback, f"/{command.name} {command.fallback} {command.signature}",
+            subcommands.append((command.fallback, f"/{command.qualified_name} {command.fallback} {command.signature}",
                                 command.description))
         for _, usage, description in sorted(subcommands):
             add_help_field(embed, usage.strip(), description)

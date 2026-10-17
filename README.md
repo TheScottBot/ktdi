@@ -11,7 +11,7 @@ everything. Commands work as slash commands (`/spray`) and typed (`!spray`; the 
 - **`/rapsheet`**: see who's been sprayed, and who bribed their way out of it.
 - **`/bad`**: a telling-off, in GIF form.
 - **`/quote random`**: something someone said, back to haunt them.
-- **`/nowplaying`**: movie night, with a countdown so everyone presses play together.
+- **`/nowplaying`**: movie night, with one big GO so everyone presses play together.
 
 In Discord, `/help` has the same tour: a front page, a page per section, and a page per command with the detail.
 
@@ -78,7 +78,7 @@ The household shelf, Mrs Beeton, manners, Culpeper's cures and the almanac.
 
 ### [🎬 Movie night](docs/COMMANDS.md#movie-night)
 Countdowns, bingo, votes and ratings.
-- `nowplaying`: what's on, the countdown, pauses, the watchlist, votes, bingo and ratings · `shhh`: quiet, please
+- `nowplaying`: what's on, starting together, pauses, the watchlist, votes, bingo and ratings · `shhh`: quiet, please
 
 ### [📏 Measurements](docs/COMMANDS.md#measurements)
 Units, sincerely or absurdly.

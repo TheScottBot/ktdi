@@ -1,4 +1,4 @@
-"""Reading a public Letterboxd list (/nowplaying watchlist import) or film page (/nowplaying watchlist add). No Discord code.
+"""Reading a public Letterboxd list or film page (/nowplaying watchlist add takes either). No Discord code.
 
 Letterboxd has no open API, so this reads the list's web page, the same one anyone can open in a browser. Each film
 on it carries data-item-name="Alien (1979)" and data-item-link="/film/alien/"; long lists have a "next" page link.
@@ -124,6 +124,23 @@ def looks_like_link(text: str) -> bool:
     """Whether a word someone typed is meant as a link (rather than part of a title)."""
     lowered = text.lower()
     return lowered.startswith(("http://", "https://")) or any(f"{host}/" in lowered for host in HOSTS | SHORT_HOSTS)
+
+
+def _parsed(text: str):
+    text = text.strip().strip("<>")
+    return urlparse(text if "://" in text else "https://" + text)
+
+
+def is_list_link(text: str) -> bool:
+    """Whether it's a Letterboxd list's address (letterboxd.com/someone/list/halloween/), not a film's."""
+    parsed = _parsed(text)
+    return (parsed.hostname or "").lower() in HOSTS and bool(LIST_PATH_RE.match(parsed.path))
+
+
+def is_short_link(text: str) -> bool:
+    """Whether it's a boxd.it link, which could be a film's or a list's: only following it says which."""
+    parsed = _parsed(text)
+    return (parsed.hostname or "").lower() in SHORT_HOSTS and bool(parsed.path.strip("/"))
 
 
 def check_film_url(url: str) -> str:

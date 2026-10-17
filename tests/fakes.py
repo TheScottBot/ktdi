@@ -38,8 +38,10 @@ class Sent:
     """A message the bot sent."""
 
     def __init__(self, content=None, embed=None, view=None, file=None, private=False, allowed_mentions=None,
-                 poll=None):
-        self.content, self.embed, self.view, self.file, self.poll = content, embed, view, file, poll
+                 poll=None, embeds=None):
+        embeds = list(embeds or ([embed] if embed else []))  # Several, or one: .embed is the first
+        self.content, self.view, self.file, self.poll = content, view, file, poll
+        self.embed, self.embeds = embeds[0] if embeds else None, embeds
         self.private, self.allowed_mentions = private, allowed_mentions
         self.id = id(self)
         self.reactions: list = []
@@ -130,8 +132,8 @@ class Ctx:
         self.sent: list[Sent] = []
 
     async def send(self, content=None, embed=None, view=None, file=None, ephemeral=False, allowed_mentions=None,
-                   poll=None, delete_after=None, **kwargs):
-        message = Sent(content, embed, view, file, ephemeral, allowed_mentions, poll)
+                   poll=None, delete_after=None, embeds=None, **kwargs):
+        message = Sent(content, embed, view, file, ephemeral, allowed_mentions, poll, embeds)
         message.delete_after = delete_after  # seconds until Discord deletes it, if set
         self.sent.append(message)
         self.channel.messages[message.id] = message  # so it can be fetched again, like a real one

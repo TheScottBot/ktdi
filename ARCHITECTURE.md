@@ -102,7 +102,9 @@ ktdi/
 │   ├── secrets.py     !secrets (on /esoteric): a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
-│   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
+│   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener);
+│   │                  related subcommands are one slash subcommand with an option (sync [time]), the old ones
+│   │                  typed-only (with_app_command=False, extras["merged_into"]: see §6)
 │   ├── units.py       /abm, /imperial
 │   ├── timezones.py   /timezone (convert, set, show, clear); parsing lives in lib/timezones.py
 │   ├── weather.py     /weather: Open-Meteo's forecast (lib/openmeteo.py) next to 1893 weather lore; /weather here
@@ -331,6 +333,9 @@ section privately for whoever picks it), a section's page (`/help old oddities`:
     it. `/help` titles `!`-only commands with `!`. **Cryptids are deliberately left out of the README, docs/COMMANDS.md and these docs**
     (an exception to keeping the README complete): they're only meant to be found by seeing one used, or by reading
     the code. Don't add them back.
+- `"merged_into": "nowplaying sync"` → a subcommand that's only typed now (`with_app_command=False`), because
+  Discord lists every slash subcommand as its own line and it was merged into another as an option (`!np sct` is
+  `/nowplaying sync <time>`). Left off its group's `/help` list; its own page says where it went.
 - A book asked through its shelf (`OldBook.own_command=False`) is left off its section's list (its shelf's page lists
   it, from `lore.help_extras`), and its own page is titled the shelf way: `/esoteric book:talisman [thing]`.
 - If a prefix command's arguments are in a different order to its slash version, set `usage=` to the slash form
@@ -367,9 +372,9 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `movies` | one row per **watch** of a film: title (and `title_key`, casefolded, to match rewatches), who set it, started/paused/ended times, seconds paused, `watch_number` (fixed at `/nowplaying start`, counting earlier watches through `scope()`), `archived_at` for the watchlist (the to-watch list: added, imported from Letterboxd, or set aside unstarted), `link` (its Letterboxd page), `dropped_at` (taken off the watchlist; kept) and `struck_at` (struck off as watched: still listed, crossed out, left out of random votes) and `from_watchlist` (lined up from the watchlist: when that watch ends, `keep_on_watchlist_struck()` adds a fresh struck entry, since the watch's own row keeps its ratings and predictions). A server's current film is its row that's neither ended nor archived; that and the watchlist are per server, never shared. `/nowplaying history` and `/nowplaying predictions` read through `scope()`. Nothing is deleted: a film swapped or ended before it starts is archived, predictions and all, and `/nowplaying set` of the same title restores it. |
 | `movie_votes` / `movie_vote_options` | `/nowplaying vote`: the Discord poll's message, and which poll answer (1, 2, 3...) is which watchlist film. The votes themselves stay in Discord; the bot reads them when the poll closes (`/nowplaying vote end`, or the "poll results" message Discord posts when its time runs out). One open vote per server. |
 | `movie_ratings` | `/nowplaying rate` scores, per (movie, person) |
-| `movie_predictions` / `movie_prediction_votes` | sealed `/nowplaying predict`ions, each tied to its film by `movie_id`. `message_id` is set when `/nowplaying end` reveals them, and ✅/❌ reactions on that message are the votes (called it if ✅ > ❌). Only revealed ones are ever shown (`/nowplaying predictions`, rap sheets); archived films keep theirs, still sealed. |
+| `movie_predictions` / `movie_prediction_votes` | sealed `/nowplaying predict`ions, each tied to its film by `movie_id`. `message_id` is set when `/nowplaying end` reveals them, and ✅/❌ reactions on that message are the votes (called it if ✅ > ❌). Only revealed ones are ever shown (`/nowplaying history <film>`, rap sheets); archived films keep theirs, still sealed. |
 | `movie_canon` / `movie_canon_votes` | `/nowplaying canon` claims, against the watch they were proposed in (`movie_id`) and the title (`title_key`), so accepted canon (✅ > ❌, proposer can't vote) is read out at the start of later watches. The ✅/❌ listener is shared with predictions (`movie.VOTE_TABLES`). |
-| `movie_objections` | `/nowplaying objection`: who, how far into the film (`at_seconds`), the reason and the committee's ruling (`sustained`, about one in six). Shown in `/nowplaying committeesviews`. |
+| `movie_objections` | `/nowplaying objection`: who, how far into the film (`at_seconds`), the reason and the committee's ruling (`sustained`, about one in six). Shown in the film's report (`/nowplaying history <film>`). |
 | `movie_bingo_marks` / `movie_bingo_wins` | squares marked and wins. Cards aren't stored: `movie.bingo_card()` shuffles the squares with a seed of (movie, person). |
 | `user_timezones` | each person's own timezone (`/timezone set`), per person, not per server: an IANA name or a fixed offset like `UTC+5:30`. Logged as "set their timezone", never which one. |
 | `spray_futures` | `/sprayfutures` bets: who bet on whom, the stake, `hours`, the day's `rate` and the `amount` on the line (stake × hours plus interest, fixed when placed), when it expires, and how it settled (`outcome` won/lost, `paid` on a win, capped so a record never goes below zero, and `sprayed_by`, never the bettor). Lost amounts and paid winnings are part of `fun.get_spray_count`. Every spray goes through `fun.after_spray`, which pays out open bets on the target; `futures.expiry_loop` settles the rest as lost. |
