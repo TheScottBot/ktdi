@@ -1,6 +1,7 @@
 """/almanac: Hone's Every-Day Book day by day (ktdi.features.almanac, ktdi.tools.almanac_build)."""
 
 import json
+import re
 from datetime import date
 
 import pytest
@@ -86,6 +87,7 @@ def calendar(monkeypatch):
     monkeypatch.setattr(almanac, "DAYS", data["days"])
     monkeypatch.setattr(almanac, "today", lambda: date(2026, 1, 22))
     monkeypatch.setattr(almanac.random, "choice", lambda options: options[0])
+    monkeypatch.setattr(almanac, "PLATES", {})  # No pictures, unless a test gives some
 
 
 # --- Reading the book ---
@@ -105,6 +107,19 @@ def test_days_are_read_from_the_book(days):
     assert second["saints"] == "_St. Vincent._" and second["temperature"] == 37.58  # Not indented, in volume 2
 
 
+def test_a_flower_with_ae_oe_or_a_one_word_name():
+    """The 1826 spellings (_Pæonia_, _Æschylus_, _Furerœa_) and a name of one word (_Arbutus._) are flowers too."""
+    assert build.floral("Slender-leaved Piony. _Pæonia Tenuifolia._\n\n  Dedicated to _St. Comgall_.") == {
+        "plant": "Slender-leaved Piony. _Pæonia Tenuifolia._", "for": "_St. Comgall_"}
+    assert build.floral("The Horse-chestnut. _Æschylus Hippocastanum._\n\n  Dedicated to _St. Barnardine_ of "
+                        "Sienna.")["plant"] == "The Horse-chestnut. _Æschylus Hippocastanum._"
+    assert build.floral("Large Furerœa. _Furerœa Gigantea._\n\n  Dedicated to _St. Willibrord_.")["for"] == \
+        "_St. Willibrord_"
+    assert build.floral("Strawberry-tree. _Arbutus._\n\n  Dedicated to _St. Brinstan_.") == {
+        "plant": "Strawberry-tree. _Arbutus._", "for": "_St. Brinstan_"}
+    assert build.floral("Dedicated to _St. Brinstan_.") is None  # A saint isn't a flower
+
+
 def test_build_merges_the_volumes_and_keeps_the_allowlist():
     data = build.build({1: VOLUME_1, 2: VOLUME_2}, {"keep": ["1:01-22:c0", "2:01-22:0"]})["days"]
     vincent = data["01-22"]
@@ -121,7 +136,8 @@ def test_the_real_almanac_is_exactly_whats_on_the_allowlist():
     assert len(days) == 365 and "02-29" not in days  # Neither 1825 nor 1826 had one
     assert sum(len(day["passages"]) for day in days.values()) == len(curation["keep"])
     assert sum(1 for day in days.values() if day["passages"]) >= 300
-    assert sum(1 for day in days.values() if day["flower"]) >= 300
+    flowerless = sorted(date for date, day in days.items() if not day["flower"])
+    assert flowerless == [f"01-{n:02d}" for n in range(1, 20)] + ["03-31", "12-31"]  # Hone's directory has no more
 
 
 # --- Dates ---
@@ -170,3 +186,42 @@ def test_command():
     run(almanac.almanac.callback(ctx, date="1/4"))
     assert ctx.last.embed.title.startswith("📅 Wednesday 1 April")
     assert almanac.almanac.aliases == ["onthisday", "hone"]
+
+
+# --- The plant of the day's picture ---
+DRABA = {"name": "Draba verna", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Draba.jpg/"
+                                         "960px-Draba.jpg",
+         "page": "https://commons.wikimedia.org/wiki/File:Draba.jpg", "credit": "Flora Batava, vol. 6 (1832)"}
+
+
+def test_the_plant_of_the_day_with_its_plate(monkeypatch):
+    monkeypatch.setattr(almanac, "PLATES", {"Draba verna": DRABA, "Mercurialis annua": None})
+    embed = almanac.almanac_embed("22 january")
+    assert embed.image.url == DRABA["image"]
+    assert embed.footer.text == (f"{almanac.SOURCE}. Ask again for another (3 for this day). "
+                                 "Plate: Flora Batava, vol. 6 (1832).")
+    fools = almanac.almanac_embed("1 april")  # Looked, and there wasn't a good one
+    assert fools.image.url is None and fools.footer.text == almanac.SOURCE
+
+
+# Commons: a thumbnail at a width it serves, 500 px or more ("960px-", "lossy-page1-960px-" for a scanned TIFF), never
+# the file itself (Commons rate-limits those), and no tracking on the end. BHL: a page image.
+COMMONS_IMAGE = re.compile(r"https://(upload|thumb)\.wikimedia\.org/wikipedia/commons/(thumb/[0-9a-f]/[0-9a-f]{2}/[^/?]+/"
+                           r"(lossy-page1-)?(500|960|1280)px-[^/?]+)")
+BHL_IMAGE = re.compile(r"https://www\.biodiversitylibrary\.org/pageimage/\d+")
+
+
+def test_the_real_plates():
+    """Every plate is for one of Hone's plants, links to Commons (at a width it serves) or BHL, and says where it's
+    from; null is a plant looked at with no good plate."""
+    days = json.loads(almanac.DATA.read_text(encoding="utf-8"))["days"]  # The real ones, not the tests'
+    plants = {re.findall(r"_([^_]+)_", day["flower"]["plant"])[-1].strip(" .") for day in days.values() if day["flower"]}
+    data = json.loads(almanac.PLATES_DATA.read_text(encoding="utf-8"))
+    assert set(data) == {"_about", "plates"} and set(data["plates"]) <= plants
+    for plant, plate in data["plates"].items():
+        if plate is None:
+            continue
+        assert set(plate) == {"name", "image", "page", "credit"} and plate["credit"].strip(), plant
+        assert COMMONS_IMAGE.fullmatch(plate["image"]) or BHL_IMAGE.fullmatch(plate["image"]), plant
+        assert plate["page"].startswith(("https://commons.wikimedia.org/wiki/File:",
+                                         "https://www.biodiversitylibrary.org/page/")), plant

@@ -2248,7 +2248,10 @@
 "05-10": {
 "saints": "_St. Antoninus_, or _Little Antony_, Abp. A. D. 1459. _Sts. Gordian_, A. D. 362, and _Epimachus_, A. D. 250. _St. Isidore_, Patron of Madrid, A. D. 1170. _St. Comgall_, Irish abbot, A. D. 601. _St. Cataldus_, Bp. of Tarentum.",
 "name": null,
-"flower": null,
+"flower": {
+"plant": "Slender-leaved Piony. _Pæonia Tenuifolia._",
+"for": "_St. Comgall_"
+},
 "temperature": 53.87,
 "passages": [
 {
@@ -2313,7 +2316,10 @@
 "05-14": {
 "saints": "_St. Boniface_, A. D. 307. _St. Pachomius_, Abbot, A. D. 348. _St. Pontius_, A. D. 258. _St. Carthagh_, or _Mochudu_, Bp. of Lismore, A. D. 637 or 638.",
 "name": null,
-"flower": null,
+"flower": {
+"plant": "Common Piony. _Pæonia officinalis._",
+"for": "_St. Pontius_"
+},
 "temperature": 53.47,
 "passages": []
 },
@@ -2403,7 +2409,10 @@
 "05-20": {
 "saints": "_St. Bernardin_ of Sienna, A. D. 1444. _St. Ethelbert_, King of the East Angles, A. D. 793. _St. Yvo_, Bp. of Chartres, A. D. 1115.",
 "name": null,
-"flower": null,
+"flower": {
+"plant": "The Horse-chestnut. _Æschylus Hippocastanum._",
+"for": "_St. Barnardine_ of Sienna"
+},
 "temperature": 55.42,
 "passages": [
 {
@@ -3546,7 +3555,10 @@
 "07-25": {
 "saints": "_St. James the Great_, Apostle, A. D. 43. _St. Christopher._ _Sts. Thea_, and _Valentina_, and _Paul_, A. D. 308. _St. Cucufas_, A. D. 304. _St. Nissen_, Abbot.",
 "name": null,
-"flower": null,
+"flower": {
+"plant": "Herb Christopher. _Actæa Spicata._",
+"for": "_St. Christopher_"
+},
 "temperature": 64.2,
 "passages": [
 {
@@ -5039,7 +5051,10 @@
 "10-16": {
 "saints": "_St. Gall_, Abbot, A. D. 646. _St. Lullus_, or _Lullon_, Abp., A. D. 787. _St. Mummolin_, or _Mommolin_, Bp. A. D. 665.",
 "name": null,
-"flower": null,
+"flower": {
+"plant": "Yarrow. _Achillæ multifolium._",
+"for": "_St. Gall_"
+},
 "temperature": 58.45,
 "passages": [
 {
@@ -5330,7 +5345,10 @@
 "11-02": {
 "saints": "_All Souls; or the Commemoration of the Faithful departed._ _St. Victorinus_ Bp. A. D. 304. _St. Marcian_, A. D. 387. _St. Vulgan_, 8th Cent.",
 "name": null,
-"flower": null,
+"flower": {
+"plant": "Winter Cherry. _Physalis._",
+"for": "_St. Marcian_"
+},
 "temperature": 47.37,
 "passages": [
 {
@@ -5357,7 +5375,10 @@
 "11-04": {
 "saints": "_St. Charles Borromeo_, Cardinal, Abp. of Milan, A. D. 1584. _Sts. Vitalis_ and _Agricola_, A. D. 304. _St. Joannicius_, Abbot, A. D. 845. _St. Clarus_, A. D. 894. _St. Brinstan_, Bp. of Winchester, A. D. 931.",
 "name": null,
-"flower": null,
+"flower": {
+"plant": "Strawberry-tree. _Arbutus._",
+"for": "_St. Brinstan_"
+},
 "temperature": 43.27,
 "passages": []
 },
@@ -5406,7 +5427,10 @@
 "11-07": {
 "saints": "_St. Willibrord_, 1st Bp. of Utrecht, A. D. 738. _St. Werenfrid._ _St. Prosdecionus_, 1st. Bp. of Padua, A. D. 103.",
 "name": null,
-"flower": null,
+"flower": {
+"plant": "Large Furerœa. _Furerœa Gigantea._",
+"for": "_St. Willibrord_"
+},
 "temperature": 42.92,
 "passages": [
 {

@@ -1,0 +1,1666 @@
+{
+ "_about": "A picture for each of the almanac's plants of the day, by Hone's Latin name: an old botanical plate, coloured and public domain, on Wikimedia Commons or the Biodiversity Heritage Library. Every one was looked at and is the plant named (by its current name, in \"name\"); null means looked and found no good one, and a plant not listed hasn't been looked at yet. \"credit\" is what the plate's own page says it's from. Candidates come from ktdi/tools/almanac_plates_find.py.",
+ "plates": {
+  "Achania pilosa": {
+   "name": "Malvaviscus arboreus",
+   "image": "https://www.biodiversitylibrary.org/pageimage/29221739",
+   "page": "https://www.biodiversitylibrary.org/page/29221739",
+   "credit": "Loddiges, The Botanical Cabinet, vol. 9, no. 829, via the Biodiversity Heritage Library"
+  },
+  "Achillæ multifolium": {
+   "name": "Achillea millefolium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Achillea_millefolium_%28K%C3%B6hler%E2%80%99s_Medizinal-Pflanzen_Bd.1_1887%2C_BHL-303704%2C_Tafel_70%29_clean%2C_no-description.jpg/960px-Achillea_millefolium_%28K%C3%B6hler%E2%80%99s_Medizinal-Pflanzen_Bd.1_1887%2C_BHL-303704%2C_Tafel_70%29_clean%2C_no-description.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Achillea_millefolium_(K%C3%B6hler%E2%80%99s_Medizinal-Pflanzen_Bd.1_1887,_BHL-303704,_Tafel_70)_clean,_no-description.jpg",
+   "credit": "Köhler's Medizinal-Pflanzen, vol. 1, plate 70 (1887)"
+  },
+  "Aconitum Napellus": {
+   "name": "Aconitum napellus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Aconitum_napellus_%28K%C3%B6hler%29.jpg/960px-Aconitum_napellus_%28K%C3%B6hler%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Aconitum_napellus_(K%C3%B6hler).jpg",
+   "credit": "Köhler's Medizinal-Pflanzen (1887)"
+  },
+  "Actillea Ageratum": {
+   "name": "Achillea ageratum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Achillea_ageratum.jpg/960px-Achillea_ageratum.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Achillea_ageratum.jpg",
+   "credit": "Houttuyn, Afbeeldingen der Artseny-Gewassen, vol. 2, plate 356 (1796)"
+  },
+  "Actæa Spicata": {
+   "name": "Actaea spicata",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Billeder_af_nordens_flora_%28Plate_179%29_%286028830809%29.jpg/960px-Billeder_af_nordens_flora_%28Plate_179%29_%286028830809%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Billeder_af_nordens_flora_(Plate_179)_(6028830809).jpg",
+   "credit": "Mentz & Ostenfeld, Billeder af Nordens Flora, plate 179 (1917–1927)"
+  },
+  "Adonis autumnalis": {
+   "name": "Adonis annua",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Adonis_annua_-_English_botany%2C_or%2C_Coloured_figures_of_British_plants_-_vol._1_%28ed._3%29_-_t._13.jpg/960px-Adonis_annua_-_English_botany%2C_or%2C_Coloured_figures_of_British_plants_-_vol._1_%28ed._3%29_-_t._13.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Adonis_annua_-_English_botany,_or,_Coloured_figures_of_British_plants_-_vol._1_(ed._3)_-_t._13.jpg",
+   "credit": "Sowerby, English Botany, 3rd ed., vol. 1, plate 13 (1873)"
+  },
+  "Agapanthus umbellatus": {
+   "name": "Agapanthus africanus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Les_liliacees_%28Color_Plate_4%29_BHL287184.jpg/500px-Les_liliacees_%28Color_Plate_4%29_BHL287184.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Les_liliacees_(Color_Plate_4)_BHL287184.jpg",
+   "credit": "Redouté, Les Liliacées, vol. 1, plate 4 (1805)"
+  },
+  "Agaricus Campestris": {
+   "name": "Agaricus campestris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/1797-09-03_Agaricus_campestris_Plate_by_James_Sowerby.jpg/960px-1797-09-03_Agaricus_campestris_Plate_by_James_Sowerby.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:1797-09-03_Agaricus_campestris_Plate_by_James_Sowerby.jpg",
+   "credit": "Sowerby, Coloured Figures of English Fungi, plate 305 (1797)"
+  },
+  "Agaricus fimetarius": {
+   "name": "Coprinopsis atramentaria",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._188.png/960px-Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._188.png",
+   "page": "https://commons.wikimedia.org/wiki/File:Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._188.png",
+   "credit": "Sowerby, Coloured Figures of English Fungi, plate 188 (1797)"
+  },
+  "Agaricus floccosus": {
+   "name": "Pholiota squarrosa",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._284.png/960px-Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._284.png",
+   "page": "https://commons.wikimedia.org/wiki/File:Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._284.png",
+   "credit": "Sowerby, Coloured Figures of English Fungi, plate 284 (1803)"
+  },
+  "Agaricus lactiflorus": null,
+  "Agrimonia Eupatoria": {
+   "name": "Agrimonia eupatoria",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Agrimonia_eupatoria_Sturm08057.jpg/500px-Agrimonia_eupatoria_Sturm08057.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Agrimonia_eupatoria_Sturm08057.jpg",
+   "credit": "Sturm, Deutschlands Flora in Abbildungen, plate 57 (1796)"
+  },
+  "Allium Porrum": {
+   "name": "Allium porrum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/Herbarius_Porrum.jpg/960px-Herbarius_Porrum.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Herbarius_Porrum.jpg",
+   "credit": "Herbarius Moguntinus (1484)"
+  },
+  "Allium Ursinum": {
+   "name": "Allium ursinum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Allium_ursinum_by_Lydia_Penrose.jpg/960px-Allium_ursinum_by_Lydia_Penrose.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Allium_ursinum_by_Lydia_Penrose.jpg",
+   "credit": "Lydia Penrose, Flora Devoniensis, watercolour (1800–1842), RHS Lindley Library"
+  },
+  "Alsine media": {
+   "name": "Stellaria media",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Stellaria_media_-_Billeder_af_nordens_flora_%281917%29_%2819750123373%29.jpg/960px-Stellaria_media_-_Billeder_af_nordens_flora_%281917%29_%2819750123373%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Stellaria_media_-_Billeder_af_nordens_flora_(1917)_(19750123373).jpg",
+   "credit": "Mentz, Billeder af Nordens Flora (1917)"
+  },
+  "Althea flava": null,
+  "Althea rosea": {
+   "name": "Alcea rosea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ad/Favourite_flowers_of_garden_and_greenhouse_%28Pl._51%29_%287789091746%29.jpg/960px-Favourite_flowers_of_garden_and_greenhouse_%28Pl._51%29_%287789091746%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Favourite_flowers_of_garden_and_greenhouse_(Pl._51)_(7789091746).jpg",
+   "credit": "Step, Favourite Flowers of Garden and Greenhouse, plate 51 (1896)"
+  },
+  "Amaranthus hypochondriacus": {
+   "name": "Amaranthus hypochondriacus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Plantarum_indigenarum_et_exoticarum_icones_ad_vivum_coloratae%2C_oder%2C_Sammlung_nach_der_Natur_gemalter_Abbildungen_inn-_und_ausl%C3%A4ndlischer_Pflanzen%2C_f%C3%BCr_Liebhaber_und_Beflissene_der_Botanik_%2815902764610%29.jpg/960px-thumbnail.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Plantarum_indigenarum_et_exoticarum_icones_ad_vivum_coloratae,_oder,_Sammlung_nach_der_Natur_gemalter_Abbildungen_inn-_und_ausl%C3%A4ndlischer_Pflanzen,_f%C3%BCr_Liebhaber_und_Beflissene_der_Botanik_(15902764610).jpg",
+   "credit": "Plantarum indigenarum et exoticarum icones ad vivum coloratae, vol. 5 (1792)"
+  },
+  "Amaranthus procumbens": null,
+  "Amaryllis Aurea": {
+   "name": "Lycoris aurea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Flore_des_serres_et_des_jardins_de_l%27Europe_%288589455408%29.jpg/960px-Flore_des_serres_et_des_jardins_de_l%27Europe_%288589455408%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flore_des_serres_et_des_jardins_de_l%27Europe_(8589455408).jpg",
+   "credit": "Van Houtte, Flore des Serres et des Jardins de l'Europe, vol. 4 (1848)"
+  },
+  "Amaryllis Belladonna": {
+   "name": "Amaryllis belladonna",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/A_selection_of_Hexandrian_plants%2C_belonging_to_the_natural_orders_Amaryllidae_and_Liliacae_%28Pl._45%29_BHL288120.jpg/500px-A_selection_of_Hexandrian_plants%2C_belonging_to_the_natural_orders_Amaryllidae_and_Liliacae_%28Pl._45%29_BHL288120.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_selection_of_Hexandrian_plants,_belonging_to_the_natural_orders_Amaryllidae_and_Liliacae_(Pl._45)_BHL288120.jpg",
+   "credit": "Bury, A Selection of Hexandrian Plants, plate 45 (1831)"
+  },
+  "Amaryllis humilis": {
+   "name": "Nerine humilis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/Nerine_humilis_%28Jacq.%29_Herb._%28Amaryllis_humilis%29%2C_RP-T-1914-18-75.jpg/960px-Nerine_humilis_%28Jacq.%29_Herb._%28Amaryllis_humilis%29%2C_RP-T-1914-18-75.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Nerine_humilis_(Jacq.)_Herb._(Amaryllis_humilis),_RP-T-1914-18-75.jpg",
+   "credit": "Robert Jacob Gordon, watercolour (1777-86), Rijksmuseum"
+  },
+  "Amaryllis Sarniensis": {
+   "name": "Nerine sarniensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Les_liliacees_%28Color_Plate_33%29_BHL287358.jpg/500px-Les_liliacees_%28Color_Plate_33%29_BHL287358.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Les_liliacees_(Color_Plate_33)_BHL287358.jpg",
+   "credit": "Redouté, Les Liliacées, vol. 1, plate 33 (1805)"
+  },
+  "Amaryllis vittata": {
+   "name": "Hippeastrum vittatum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Hippeastrum_vittatum.jpg/500px-Hippeastrum_vittatum.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hippeastrum_vittatum.jpg",
+   "credit": "Redouté, Les Liliacées, vol. 1 (1802–1815)"
+  },
+  "Amygdalus Persica": {
+   "name": "Prunus persica",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/Illustration_Prunus_persica_clean.jpg/960px-Illustration_Prunus_persica_clean.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Prunus_persica_clean.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Anagallis arvensis": {
+   "name": "Anagallis arvensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Anagallis_arvensis_%28modern%3DAnagallis_arvensis_subsp._arvensis%29_-_Pl0003_-_FloraBatava-KB-v01.jpg/960px-Anagallis_arvensis_%28modern%3DAnagallis_arvensis_subsp._arvensis%29_-_Pl0003_-_FloraBatava-KB-v01.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Anagallis_arvensis_(modern%3DAnagallis_arvensis_subsp._arvensis)_-_Pl0003_-_FloraBatava-KB-v01.jpg",
+   "credit": "Flora Batava, vol. 1, plate 3 (1800)"
+  },
+  "Anchusa sempervirus": {
+   "name": "Pentaglottis sempervirens",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Anchusa_sempervirens_by_Lydia_Penrose.jpg/960px-Anchusa_sempervirens_by_Lydia_Penrose.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Anchusa_sempervirens_by_Lydia_Penrose.jpg",
+   "credit": "Lydia Penrose, Flora Devoniensis, watercolour (1800–1842), RHS Lindley Library"
+  },
+  "Anemone hepatica": {
+   "name": "Hepatica nobilis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Illustration.Hepatica_nobilis.jpg/500px-Illustration.Hepatica_nobilis.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration.Hepatica_nobilis.jpg",
+   "credit": "Curtis's Botanical Magazine, plate 10 (1787)"
+  },
+  "Anemone Nemorosa": {
+   "name": "Anemone nemorosa",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Anemone_nemorosa_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v4.jpg/960px-Anemone_nemorosa_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v4.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Anemone_nemorosa_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v4.jpg",
+   "credit": "Flora Batava, vol. 4, plate 248 (1822)"
+  },
+  "Anterrhenum Linaria": {
+   "name": "Linaria vulgaris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/243_Linaria_vulgaris_Mill.jpg/500px-243_Linaria_vulgaris_Mill.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:243_Linaria_vulgaris_Mill.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 243 (1891)"
+  },
+  "Antirrhinum purpureum": null,
+  "Antirrhinum triphyllum": {
+   "name": "Linaria triphylla",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/The_Botanical_Magazine%2C_Plate_324_%28Volume_9%2C_1795%29.png/960px-The_Botanical_Magazine%2C_Plate_324_%28Volume_9%2C_1795%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_324_(Volume_9,_1795).png",
+   "credit": "Curtis's Botanical Magazine, plate 324 (1795)"
+  },
+  "Apargia Autumnalis": {
+   "name": "Scorzoneroides autumnalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Familiar_wild_flowers_figured_and_described_%28Pl._26%29_%288768078853%29.jpg/960px-Familiar_wild_flowers_figured_and_described_%28Pl._26%29_%288768078853%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Familiar_wild_flowers_figured_and_described_(Pl._26)_(8768078853).jpg",
+   "credit": "Hulme, Familiar Wild Flowers, plate 26 (1878)"
+  },
+  "Arbutus": {
+   "name": "Arbutus unedo",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/21_Arbutus_unedo_par_Pierre-Joseph_Redout%C3%A9.jpeg/500px-21_Arbutus_unedo_par_Pierre-Joseph_Redout%C3%A9.jpeg",
+   "page": "https://commons.wikimedia.org/wiki/File:21_Arbutus_unedo_par_Pierre-Joseph_Redout%C3%A9.jpeg",
+   "credit": "Redouté, Traité des arbres et arbustes, plate 21"
+  },
+  "Artemesia Aproxanum": {
+   "name": "Artemisia abrotanum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Artemisia_abrotanum%2C_Vietz_1800%2C_Band1%2C_Tafel1_clean.jpg/960px-Artemisia_abrotanum%2C_Vietz_1800%2C_Band1%2C_Tafel1_clean.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Artemisia_abrotanum,_Vietz_1800,_Band1,_Tafel1_clean.jpg",
+   "credit": "Vietz, Icones Plantarum Medico-oeconomico-technologicarum, vol. 1, plate 1 (1800)"
+  },
+  "Arum Arisarum": {
+   "name": "Arisarum vulgare",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Arisarum_vulgare_CBM.jpg/960px-Arisarum_vulgare_CBM.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Arisarum_vulgare_CBM.jpg",
+   "credit": "Curtis's Botanical Magazine, plate 6023 (1873)"
+  },
+  "Arum Maculatum": {
+   "name": "Arum maculatum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/A_curious_herbal_%28Plate_228%29_BHL296693.jpg/960px-A_curious_herbal_%28Plate_228%29_BHL296693.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_curious_herbal_(Plate_228)_BHL296693.jpg",
+   "credit": "Blackwell, A Curious Herbal, plate 228 (1737)"
+  },
+  "Asphodelus Luteus": null,
+  "Asplenium Scolopendium": {
+   "name": "Asplenium scolopendrium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/A_curious_herbal_%28Plate_138%29_BHL296465.jpg/960px-A_curious_herbal_%28Plate_138%29_BHL296465.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_curious_herbal_(Plate_138)_BHL296465.jpg",
+   "credit": "Blackwell, A Curious Herbal, plate 138 (1737)"
+  },
+  "Asplenium trichomanes": {
+   "name": "Asplenium trichomanes",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Asplenium_trichomanes_Moore39.png/960px-Asplenium_trichomanes_Moore39.png",
+   "page": "https://commons.wikimedia.org/wiki/File:Asplenium_trichomanes_Moore39.png",
+   "credit": "Moore, The Ferns of Great Britain and Ireland, plate 39 (1857)"
+  },
+  "Aster Amellus": {
+   "name": "Aster amellus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Floral_illustrations_of_the_seasons_%28Plate_40%29_%286049524270%29.jpg/960px-Floral_illustrations_of_the_seasons_%28Plate_40%29_%286049524270%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Floral_illustrations_of_the_seasons_(Plate_40)_(6049524270).jpg",
+   "credit": "Roscoe, Floral Illustrations of the Seasons, plate 40 (1851)"
+  },
+  "Aster Chinensis": {
+   "name": "Callistephus chinensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Callistephus_sinensis.jpg/960px-Callistephus_sinensis.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Callistephus_sinensis.jpg",
+   "credit": "Redouté, Choix des plus belles fleurs, plate 121 (1833)"
+  },
+  "Aster Conizoides": null,
+  "Aster dumotus": null,
+  "Aster flexuosus": null,
+  "Aster floribundus": null,
+  "Aster junicus": null,
+  "Aster multiflorus": null,
+  "Aster pendulus": null,
+  "Aster Solidaginoides": null,
+  "Aster Tradescanti": null,
+  "Aster Tripolum": {
+   "name": "Tripolium pannonicum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Aster_tripolium_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v2.jpg/960px-Aster_tripolium_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Aster_tripolium_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v2.jpg",
+   "credit": "Flora Batava, vol. 2, plate 129 (1807)"
+  },
+  "Barberis vulgaris": {
+   "name": "Berberis vulgaris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/American_medicinal_plants_%28Plate_15%29_%286025390799%29.jpg/960px-American_medicinal_plants_%28Plate_15%29_%286025390799%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:American_medicinal_plants_(Plate_15)_(6025390799).jpg",
+   "credit": "Millspaugh, American Medicinal Plants, plate 15 (1887)"
+  },
+  "Bellis perennis": {
+   "name": "Bellis perennis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_1%29_%286022542124%29.jpg/960px-Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_1%29_%286022542124%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Atlas_de_poche_des_plantes_des_champs,_des_prairies_et_des_bois_(PLATE_1)_(6022542124).jpg",
+   "credit": "Siélain, Atlas de poche des plantes des champs, plate 1 (1895)"
+  },
+  "Bellis perennis plenus": {
+   "name": "Bellis perennis 'Flore Pleno'",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Hans_Simon_Holtzbecker%2C_Bellis_perennis_almindelig_tusindfryd_%2C_%2C_KKSgb2949-16%2C_Statens_Museum_for_Kunst.jpg/960px-Hans_Simon_Holtzbecker%2C_Bellis_perennis_almindelig_tusindfryd_%2C_%2C_KKSgb2949-16%2C_Statens_Museum_for_Kunst.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hans_Simon_Holtzbecker,_Bellis_perennis_almindelig_tusindfryd_,_,_KKSgb2949-16,_Statens_Museum_for_Kunst.jpg",
+   "credit": "Hans Simon Holtzbecker, gouache (1649–1659), Statens Museum for Kunst"
+  },
+  "Boletus arborens": {
+   "name": "Serpula himantioides",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._346.png/960px-Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._346.png",
+   "page": "https://commons.wikimedia.org/wiki/File:Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._346.png",
+   "credit": "Sowerby, Coloured Figures of English Fungi, plate 346 (1803)"
+  },
+  "Boletus Bovinus": null,
+  "Boltonia Asteroides": null,
+  "Borago Officinalis": {
+   "name": "Borago officinalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Borage_officinalis_by_Lydia_Penrose.jpg/960px-Borage_officinalis_by_Lydia_Penrose.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Borage_officinalis_by_Lydia_Penrose.jpg",
+   "credit": "Lydia Penrose, Flora Devoniensis, watercolour (1800–1842), RHS Lindley Library"
+  },
+  "Cactus Pereskia": {
+   "name": "Pereskia aculeata",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Flore_m%C3%A9dicale_des_Antilles%2C_ou%2C_Trait%C3%A9_des_plantes_usuelles_%289920577374%29.jpg/960px-Flore_m%C3%A9dicale_des_Antilles%2C_ou%2C_Trait%C3%A9_des_plantes_usuelles_%289920577374%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flore_m%C3%A9dicale_des_Antilles,_ou,_Trait%C3%A9_des_plantes_usuelles_(9920577374).jpg",
+   "credit": "Descourtilz, Flore médicale des Antilles, vol. 4, plate 294 (1827)"
+  },
+  "Calendula Officinalis": {
+   "name": "Calendula officinalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Calendula_officinalis_-_001x.jpg/960px-Calendula_officinalis_-_001x.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Calendula_officinalis_-_001x.jpg",
+   "credit": "Köhler's Medizinal-Pflanzen, vol. 3, plate 61 (1898)"
+  },
+  "Calendula pluvialis": null,
+  "Campanula Medium": {
+   "name": "Campanula medium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Familiar_garden_flowers_%28Plate_11%29_%287402385802%29.jpg/960px-Familiar_garden_flowers_%28Plate_11%29_%287402385802%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Familiar_garden_flowers_(Plate_11)_(7402385802).jpg",
+   "credit": "Hulme, in Hibberd's Familiar Garden Flowers, plate 11 (1907)"
+  },
+  "Campanula rotundifolia": {
+   "name": "Campanula rotundifolia",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/202_Campanula_rotondifolia_L.jpg/500px-202_Campanula_rotondifolia_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:202_Campanula_rotondifolia_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 202 (1891)"
+  },
+  "Cardemeni hirsuta": {
+   "name": "Cardamine hirsuta",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Cardamine_hirsuta_-_Deutschlands_flora_in_abbildungen_nach_der_natur_-_vol._12_-_t._38.jpg/960px-Cardamine_hirsuta_-_Deutschlands_flora_in_abbildungen_nach_der_natur_-_vol._12_-_t._38.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Cardamine_hirsuta_-_Deutschlands_flora_in_abbildungen_nach_der_natur_-_vol._12_-_t._38.jpg",
+   "credit": "Sturm, Deutschlands Flora in Abbildungen, vol. 12, plate 38 (1827)"
+  },
+  "Centaurea Cyanus": {
+   "name": "Centaurea cyanus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/7_Centaurea_cyanus.jpg/500px-7_Centaurea_cyanus.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:7_Centaurea_cyanus.jpg",
+   "credit": "Lindman, Bilder ur Nordens Flora (1917–1926)"
+  },
+  "Centaurea moschi": {
+   "name": "Amberboa moschata",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ca/Amberboa_moschata.jpg/960px-Amberboa_moschata.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Amberboa_moschata.jpg",
+   "credit": "Jaume Saint-Hilaire, Plantes de la France, vol. 6, plate 587 (1819)"
+  },
+  "Centaurea suavcolens": null,
+  "Centauria montana": {
+   "name": "Centaurea montana",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Choix_de_plantes_de_l%27Europe_centrale_et_particuli%C3%A8rement_de_la_Suisse_et_de_la_Savoie_%28Plate_102%29_%286031671097%29.jpg/960px-Choix_de_plantes_de_l%27Europe_centrale_et_particuli%C3%A8rement_de_la_Suisse_et_de_la_Savoie_%28Plate_102%29_%286031671097%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Choix_de_plantes_de_l%27Europe_centrale_et_particuli%C3%A8rement_de_la_Suisse_et_de_la_Savoie_(Plate_102)_(6031671097).jpg",
+   "credit": "Bouvier, Choix de plantes de l'Europe centrale, plate 102 (1878)"
+  },
+  "Cerastium pumilum": null,
+  "Cerasus Lusitanica": {
+   "name": "Prunus lusitanica",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Traite_des_arbrisseaux_et_des_arbustes_cultives_en_France_et_en_pleine_terre_%28Illustration_47%29_BHL284951.jpg/500px-Traite_des_arbrisseaux_et_des_arbustes_cultives_en_France_et_en_pleine_terre_%28Illustration_47%29_BHL284951.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Traite_des_arbrisseaux_et_des_arbustes_cultives_en_France_et_en_pleine_terre_(Illustration_47)_BHL284951.jpg",
+   "credit": "Jaume Saint-Hilaire, Traité des arbrisseaux et des arbustes, plate 47 (1825)"
+  },
+  "Chelidonium glaucum": {
+   "name": "Glaucium flavum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/English-Botany_James-Sowerby_Plate-8_CHELIDONIUM_glaucium_Yellow---Horned-Poppy.jpg/960px-English-Botany_James-Sowerby_Plate-8_CHELIDONIUM_glaucium_Yellow---Horned-Poppy.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:English-Botany_James-Sowerby_Plate-8_CHELIDONIUM_glaucium_Yellow---Horned-Poppy.jpg",
+   "credit": "Sowerby, English Botany, plate 8 (1791)"
+  },
+  "Chironia centaureum": {
+   "name": "Centaurium erythraea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/219_Erythraea_centaurium_Pers.jpg/500px-219_Erythraea_centaurium_Pers.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:219_Erythraea_centaurium_Pers.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 219 (1891)"
+  },
+  "Chironia Centaureum": {
+   "name": "Centaurium erythraea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/219_Erythraea_centaurium_Pers.jpg/500px-219_Erythraea_centaurium_Pers.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:219_Erythraea_centaurium_Pers.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 219 (1891)"
+  },
+  "Chrysanthemum coronarium": null,
+  "Chrysanthemum Indicum": {
+   "name": "Chrysanthemum indicum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Edwards%27_botanical_register%2C_or%2C_Ornamental_flower-garden_and_shrubbery_.._%281829-1847%29_%2821171633455%29.jpg/960px-Edwards%27_botanical_register%2C_or%2C_Ornamental_flower-garden_and_shrubbery_.._%281829-1847%29_%2821171633455%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Edwards%27_botanical_register,_or,_Ornamental_flower-garden_and_shrubbery_.._(1829-1847)_(21171633455).jpg",
+   "credit": "Edwards's Botanical Register, plate 1287 (1829)"
+  },
+  "Chrysanthemum Leucanthemum": {
+   "name": "Leucanthemum vulgare",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Illustration_Chrysanthemum_leucanthemum0.jpg/960px-Illustration_Chrysanthemum_leucanthemum0.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Chrysanthemum_leucanthemum0.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Chrysanthemum scrotinum": {
+   "name": "Leucanthemella serotina",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Leucanthemella_serotina_-_Curtis%27s_1827.jpg/960px-Leucanthemella_serotina_-_Curtis%27s_1827.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Leucanthemella_serotina_-_Curtis%27s_1827.jpg",
+   "credit": "Curtis's Botanical Magazine, plate 2706 (1827)"
+  },
+  "Chrysosplenum oppositifolium": {
+   "name": "Chrysosplenium oppositifolium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Chrysosplenium_oppositifolium_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v10.jpg/960px-Chrysosplenium_oppositifolium_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v10.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Chrysosplenium_oppositifolium_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v10.jpg",
+   "credit": "Flora Batava, vol. 10, plate 747 (1849)"
+  },
+  "Cistus Helianthemum": {
+   "name": "Helianthemum nummularium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_42%29_%286022557508%29.jpg/960px-Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_42%29_%286022557508%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Atlas_de_poche_des_plantes_des_champs,_des_prairies_et_des_bois_(PLATE_42)_(6022557508).jpg",
+   "credit": "Siélain, Atlas de poche des plantes des champs, plate 42 (1895)"
+  },
+  "Clematis Vitalba": {
+   "name": "Clematis vitalba",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/1_Clematis_vitalba_L.jpg/500px-1_Clematis_vitalba_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:1_Clematis_vitalba_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 1 (1891)"
+  },
+  "Colchicum autumnale": {
+   "name": "Colchicum autumnale",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b4/Illustration_Colchicum_autumnale0.jpg/960px-Illustration_Colchicum_autumnale0.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Colchicum_autumnale0.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Colchicum Byzanticum": null,
+  "Colchium variegatum": {
+   "name": "Colchicum variegatum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Curtis%27s_botanical_magazine_%2810596426033%29.jpg/960px-Curtis%27s_botanical_magazine_%2810596426033%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(10596426033).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 1028 (1807)"
+  },
+  "Convallaria majalis": {
+   "name": "Convallaria majalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Billeder_af_nordens_flora_%281917%29_%2820362679492%29.jpg/960px-Billeder_af_nordens_flora_%281917%29_%2820362679492%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Billeder_af_nordens_flora_(1917)_(20362679492).jpg",
+   "credit": "Mentz & Ostenfeld, Billeder af Nordens Flora (1917)"
+  },
+  "Convallaria multiflora": {
+   "name": "Polygonatum multiflorum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Illustration_Polygonatum_multiflorum0.jpg/960px-Illustration_Polygonatum_multiflorum0.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Polygonatum_multiflorum0.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Convolvulus purpureus": {
+   "name": "Ipomoea purpurea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/The_Botanical_Magazine%2C_Plate_113_%28Volume_4%2C_1791%29.png/960px-The_Botanical_Magazine%2C_Plate_113_%28Volume_4%2C_1791%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_113_(Volume_4,_1791).png",
+   "credit": "Curtis's Botanical Magazine, plate 113 (1791)"
+  },
+  "Coreopsis ferulifolia": null,
+  "Coreopsis procosa": null,
+  "Crepis barbara": {
+   "name": "Tolpis barbata",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Crepis_barbata_1787.jpg/960px-Crepis_barbata_1787.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Crepis_barbata_1787.jpg",
+   "credit": "Curtis's Botanical Magazine, plate 35 (1787)"
+  },
+  "Crocus autumnalis": null,
+  "Crocus Mæsiacus": {
+   "name": "Crocus flavus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Crocus_flavus_in_Les_liliacees.jpg/960px-Crocus_flavus_in_Les_liliacees.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Crocus_flavus_in_Les_liliacees.jpg",
+   "credit": "Redouté, Les Liliacées, vol. 4 (1802–1816)"
+  },
+  "Crocus Sativus": {
+   "name": "Crocus sativus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Bentley_-_Trimen_Crocus.jpg/500px-Bentley_-_Trimen_Crocus.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bentley_-_Trimen_Crocus.jpg",
+   "credit": "Bentley & Trimen, Medicinal Plants, plate 274 (1880)"
+  },
+  "Crocus sulphureus": null,
+  "Crocus Susianus": null,
+  "Crocus vernus": {
+   "name": "Crocus vernus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Crocus_vernus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v6.jpg/960px-Crocus_vernus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v6.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Crocus_vernus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v6.jpg",
+   "credit": "Flora Batava, vol. 6, plate 446 (1832)"
+  },
+  "Crocus versicolor": null,
+  "Cupressus Australis": null,
+  "Cupressus Lusitanica": {
+   "name": "Cupressus lusitanica",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/A_description_of_the_genus_Pinus_%28Tab._XLII%29_%287797088544%29.jpg/960px-A_description_of_the_genus_Pinus_%28Tab._XLII%29_%287797088544%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_description_of_the_genus_Pinus_(Tab._XLII)_(7797088544).jpg",
+   "credit": "Lambert, A Description of the Genus Pinus, plate 42"
+  },
+  "Cupressus thyoides": {
+   "name": "Chamaecyparis thyoides",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/NAS-152_Chamaecyparis_thyoides.png/960px-NAS-152_Chamaecyparis_thyoides.png",
+   "page": "https://commons.wikimedia.org/wiki/File:NAS-152_Chamaecyparis_thyoides.png",
+   "credit": "Bessa, in Michaux's North American Sylva (1819)"
+  },
+  "Cyclamen Coum": {
+   "name": "Cyclamen coum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/The_Botanical_Magazine%2C_Plate_4_%28Volume_1%2C_1787%29.png/960px-The_Botanical_Magazine%2C_Plate_4_%28Volume_1%2C_1787%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_4_(Volume_1,_1787).png",
+   "credit": "Curtis's Botanical Magazine, plate 4 (1787)"
+  },
+  "Cynoglossum omphalodes": {
+   "name": "Omphalodes verna",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/The_Botanical_Magazine%2C_Plate_7_%28Volume_1%2C_1787%29.png/960px-The_Botanical_Magazine%2C_Plate_7_%28Volume_1%2C_1787%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_7_(Volume_1,_1787).png",
+   "credit": "Curtis's Botanical Magazine, plate 7 (1787)"
+  },
+  "Cypripedium Calceolus": {
+   "name": "Cypripedium calceolus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/Album_des_orchid%C3%A9es_de_l%27Europe_centrale_et_septentrionale_BHL15446363.jpg/960px-Album_des_orchid%C3%A9es_de_l%27Europe_centrale_et_septentrionale_BHL15446363.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Album_des_orchid%C3%A9es_de_l%27Europe_centrale_et_septentrionale_BHL15446363.jpg",
+   "credit": "Correvon, Album des orchidées de l'Europe centrale et septentrionale, plate 10 (1899)"
+  },
+  "Daphne Mezereon": {
+   "name": "Daphne mezereum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/08_Daphne_mezereum_par_Pierre-Joseph_Redout%C3%A9.jpeg/500px-08_Daphne_mezereum_par_Pierre-Joseph_Redout%C3%A9.jpeg",
+   "page": "https://commons.wikimedia.org/wiki/File:08_Daphne_mezereum_par_Pierre-Joseph_Redout%C3%A9.jpeg",
+   "credit": "Redouté, Traité des arbres et arbustes (Nouveau Duhamel), plate 8 (1801)"
+  },
+  "Datura arborea": {
+   "name": "Brugmansia arborea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Datura_arborea_-_Stramoine_en_arbre._%28Tree_datura%29_%28NYPL_b14485031-1110797%29.tiff/lossy-page1-960px-Datura_arborea_-_Stramoine_en_arbre._%28Tree_datura%29_%28NYPL_b14485031-1110797%29.tiff.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Datura_arborea_-_Stramoine_en_arbre._(Tree_datura)_(NYPL_b14485031-1110797).tiff",
+   "credit": "Bessa, Traité des arbres et arbustes, vol. 7, plate 1"
+  },
+  "Datura Stramonium": {
+   "name": "Datura stramonium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/American_medicinal_plants_%28Plate_127%29_%286025983730%29.jpg/960px-American_medicinal_plants_%28Plate_127%29_%286025983730%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:American_medicinal_plants_(Plate_127)_(6025983730).jpg",
+   "credit": "Millspaugh, American Medicinal Plants, plate 127 (1887)"
+  },
+  "Dianthus barbatus": {
+   "name": "Dianthus barbatus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/The_Botanical_magazine%2C_or%2C_Flower-garden_displayed_%28Plate_207%29_%288560623036%29.jpg/960px-The_Botanical_magazine%2C_or%2C_Flower-garden_displayed_%28Plate_207%29_%288560623036%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_magazine,_or,_Flower-garden_displayed_(Plate_207)_(8560623036).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 207 (1793)"
+  },
+  "Dianthus Chinensis": {
+   "name": "Dianthus chinensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Dianthus_chinensis_1787.jpg/960px-Dianthus_chinensis_1787.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Dianthus_chinensis_1787.jpg",
+   "credit": "Curtis's Botanical Magazine, plate 25 (1787)"
+  },
+  "Dianthus deltoides": {
+   "name": "Dianthus deltoides",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Dianthus_deltoides_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v8.jpg/960px-Dianthus_deltoides_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v8.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Dianthus_deltoides_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v8.jpg",
+   "credit": "Flora Batava, vol. 8, plate 578 (1844)"
+  },
+  "Doronicum Pardalionetes": null,
+  "Doronicum Plantagineum": null,
+  "Draba verna": {
+   "name": "Draba verna",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Flora_Danica_Hft_17_Tab_0983.tif/lossy-page1-960px-Flora_Danica_Hft_17_Tab_0983.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flora_Danica_Hft_17_Tab_0983.tif",
+   "credit": "Flora Danica, plate 983 (1790)"
+  },
+  "Dracocephalus Virginianum": {
+   "name": "Physostegia virginiana",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/The_Botanical_Magazine%2C_Plate_467_%28Volume_13%2C_1799%29.png/960px-The_Botanical_Magazine%2C_Plate_467_%28Volume_13%2C_1799%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_467_(Volume_13,_1799).png",
+   "credit": "Curtis's Botanical Magazine, plate 467 (1799)"
+  },
+  "Echium vulgare": {
+   "name": "Echium vulgare",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Deutschlands_flora_in_abbildungen_nach_der_natur_%281806%29_%2814576574469%29.jpg/960px-Deutschlands_flora_in_abbildungen_nach_der_natur_%281806%29_%2814576574469%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Deutschlands_flora_in_abbildungen_nach_der_natur_(1806)_(14576574469).jpg",
+   "credit": "Sturm, Deutschlands Flora in Abbildungen (1806)"
+  },
+  "Erica bicolor": {
+   "name": "Erica bicolor",
+   "image": "https://www.biodiversitylibrary.org/pageimage/58109799",
+   "page": "https://www.biodiversitylibrary.org/page/58109799",
+   "credit": "Andrews, Coloured Engravings of Heaths, vol. 2, plate 79 (1805), via the Biodiversity Heritage Library"
+  },
+  "Erica conferta": {
+   "name": "Erica conferta",
+   "image": "https://www.biodiversitylibrary.org/pageimage/58109772",
+   "page": "https://www.biodiversitylibrary.org/page/58109772",
+   "credit": "Andrews, Coloured Engravings of Heaths, vol. 2, plate 83 (1805), via the Biodiversity Heritage Library"
+  },
+  "Erica cruenta": {
+   "name": "Erica cruenta",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/The_botanical_cabinet_%28No_1656%29_%288613687752%29.jpg/960px-The_botanical_cabinet_%28No_1656%29_%288613687752%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_botanical_cabinet_(No_1656)_(8613687752).jpg",
+   "credit": "Loddiges, The Botanical Cabinet, vol. 17, no. 1656 (1831)"
+  },
+  "Erica flammea": {
+   "name": "Erica bibax",
+   "image": "https://www.biodiversitylibrary.org/pageimage/58109852",
+   "page": "https://www.biodiversitylibrary.org/page/58109852",
+   "credit": "Andrews, Coloured Engravings of Heaths, vol. 2, plate 92 (1805), via the Biodiversity Heritage Library"
+  },
+  "Erica genistopha": null,
+  "Erica nidiflora": null,
+  "Erica passerina": null,
+  "Erica pellucida": {
+   "name": "Erica pellucida",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Coloured_engravings_of_heaths_%28Plate_197%29_%288450790710%29.jpg/960px-Coloured_engravings_of_heaths_%28Plate_197%29_%288450790710%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Coloured_engravings_of_heaths_(Plate_197)_(8450790710).jpg",
+   "credit": "Andrews, Coloured Engravings of Heaths, plate 197 (1809)"
+  },
+  "Erica purpurea": {
+   "name": "Erica abietina subsp. atrorosea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Loddiges_703_Erica_purpurea_drawn_by_W_Miller.jpg/960px-Loddiges_703_Erica_purpurea_drawn_by_W_Miller.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Loddiges_703_Erica_purpurea_drawn_by_W_Miller.jpg",
+   "credit": "Loddiges, The Botanical Cabinet, vol. 8, no. 703 (1820)"
+  },
+  "Erica vaguus": null,
+  "Erysemum Barbarea": {
+   "name": "Barbarea vulgaris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/Erysimum_barbarea_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v6.jpg/960px-Erysimum_barbarea_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v6.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Erysimum_barbarea_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v6.jpg",
+   "credit": "Flora Batava, vol. 6, plate 450 (1832)"
+  },
+  "Euphorbia Tirucalli": {
+   "name": "Euphorbia tirucalli",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Euphorbia_tirucalli_Blanco1.210b-cropped.jpg/960px-Euphorbia_tirucalli_Blanco1.210b-cropped.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Euphorbia_tirucalli_Blanco1.210b-cropped.jpg",
+   "credit": "Blanco, Flora de Filipinas, plate 210 (1880–83)"
+  },
+  "Ficaria verna": {
+   "name": "Ficaria verna",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_6%29_%286022544276%29.jpg/960px-Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_6%29_%286022544276%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Atlas_de_poche_des_plantes_des_champs,_des_prairies_et_des_bois_(PLATE_6)_(6022544276).jpg",
+   "credit": "Siélain, Atlas de poche des plantes des champs, plate 6 (1895)"
+  },
+  "Fontinalis Antepyretica": {
+   "name": "Fontinalis antipyretica",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Fontinalis_antipyretica_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v9.jpg/960px-Fontinalis_antipyretica_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v9.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Fontinalis_antipyretica_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v9.jpg",
+   "credit": "Flora Batava, vol. 9 (1846)"
+  },
+  "Fontinalis minor": null,
+  "Fritillaria Imperialis": {
+   "name": "Fritillaria imperialis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/28/Corona_Imperialis%2C_flore_pulchre_rubente_-_Corona_Imperiale_-_Couronne_Imperiale_%28NYPL_b14444147-1130752%29.tiff/lossy-page1-960px-Corona_Imperialis%2C_flore_pulchre_rubente_-_Corona_Imperiale_-_Couronne_Imperiale_%28NYPL_b14444147-1130752%29.tiff.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Corona_Imperialis,_flore_pulchre_rubente_-_Corona_Imperiale_-_Couronne_Imperiale_(NYPL_b14444147-1130752).tiff",
+   "credit": "Hortus Romanus, vol. 6, plate 81 (1772)"
+  },
+  "Fritillaria Imperialis Lutea": {
+   "name": "Fritillaria imperialis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/Fritillaria_imperialis_CBM.png/960px-Fritillaria_imperialis_CBM.png",
+   "page": "https://commons.wikimedia.org/wiki/File:Fritillaria_imperialis_CBM.png",
+   "credit": "Curtis's Botanical Magazine, plate 1215 (1809)"
+  },
+  "Fumaria bulbosa": {
+   "name": "Corydalis solida",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Fumaria_bulbosa_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v1.jpg/960px-Fumaria_bulbosa_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Fumaria_bulbosa_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v1.jpg",
+   "credit": "Flora Batava, vol. 1, plate 17 (1800)"
+  },
+  "Furerœa Gigantea": null,
+  "Galanthus Nivalis": {
+   "name": "Galanthus nivalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Flora_Danica_Hft_28_Tab_1641.tif/lossy-page1-960px-Flora_Danica_Hft_28_Tab_1641.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flora_Danica_Hft_28_Tab_1641.tif",
+   "credit": "Flora Danica, plate 1641 (1819)"
+  },
+  "Geodorum citrinum": {
+   "name": "Geodorum terrestre",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Geodorum_citrinum-_Curtis%27_47_pl._2172_%281821%29.jpg/960px-Geodorum_citrinum-_Curtis%27_47_pl._2172_%281821%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Geodorum_citrinum-_Curtis%27_47_pl._2172_(1821).jpg",
+   "credit": "Curtis's Botanical Magazine, vol. 48, plate 2195"
+  },
+  "Geranium Robertianum": {
+   "name": "Geranium robertianum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Familiar_wild_flowers_figured_and_described_%28Pl._25%29_%287393705898%29.jpg/960px-Familiar_wild_flowers_figured_and_described_%28Pl._25%29_%287393705898%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Familiar_wild_flowers_figured_and_described_(Pl._25)_(7393705898).jpg",
+   "credit": "Hulme, Familiar Wild Flowers, plate 25 (1878)"
+  },
+  "Geum Urbanum": {
+   "name": "Geum urbanum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Geum_urbanum_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v1.jpg/960px-Geum_urbanum_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Geum_urbanum_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v1.jpg",
+   "credit": "Kops, Flora Batava, vol. 1 (1800)"
+  },
+  "Glecoma hederacea": {
+   "name": "Glechoma hederacea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Illustration_Glechoma_hederacea0.jpg/960px-Illustration_Glechoma_hederacea0.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Glechoma_hederacea0.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Helenium autumnale": {
+   "name": "Helenium autumnale",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Curtis%27s_botanical_magazine_%288293268301%29.jpg/960px-Curtis%27s_botanical_magazine_%288293268301%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(8293268301).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 2994 (1830)"
+  },
+  "Helenium pubescens": null,
+  "Helianthus Annuus": {
+   "name": "Helianthus annuus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Gc4_helianthus_annuus.jpg/960px-Gc4_helianthus_annuus.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Gc4_helianthus_annuus.jpg",
+   "credit": "Holtzbecker, Gottorfer Codex, gouache (1649–1659)"
+  },
+  "Helianthus decapetalus": {
+   "name": "Helianthus decapetalus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Curtis%27s_botanical_magazine_%28Plate_3510%29_%288043252243%29.jpg/960px-Curtis%27s_botanical_magazine_%28Plate_3510%29_%288043252243%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(Plate_3510)_(8043252243).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 3510 (1836)"
+  },
+  "Helianthus multiflorus": {
+   "name": "Helianthus × multiflorus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/The_Botanical_Magazine%2C_Plate_227_%28Volume_7%2C_1794%29.png/960px-The_Botanical_Magazine%2C_Plate_227_%28Volume_7%2C_1794%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_227_(Volume_7,_1794).png",
+   "credit": "Curtis's Botanical Magazine, plate 227 (1794)"
+  },
+  "Helleborus hyemalis": {
+   "name": "Eranthis hyemalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Helleborus_hyemalis-1797.jpg/960px-Helleborus_hyemalis-1797.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Helleborus_hyemalis-1797.jpg",
+   "credit": "Curtis's Botanical Magazine, plate 3 (1787)"
+  },
+  "Helleborus niger flore albo": {
+   "name": "Helleborus niger",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/13_Helleborus_niger_L.jpg/500px-13_Helleborus_niger_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:13_Helleborus_niger_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 13 (1891)"
+  },
+  "Helleborus viridis": {
+   "name": "Helleborus viridis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Helleborus_viridis_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v10.jpg/960px-Helleborus_viridis_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v10.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Helleborus_viridis_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v10.jpg",
+   "credit": "Flora Batava, vol. 10 (1849)"
+  },
+  "Hemerocallis fulva": {
+   "name": "Hemerocallis fulva",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Hemerocallis_fulva_Les_liliacees_vol._1_t._16.jpg/960px-Hemerocallis_fulva_Les_liliacees_vol._1_t._16.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hemerocallis_fulva_Les_liliacees_vol._1_t._16.jpg",
+   "credit": "Redouté, Les Liliacées, vol. 1, plate 16 (1805)"
+  },
+  "Hesperis tristis": {
+   "name": "Hesperis tristis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Curtis%27s_botanical_magazine_%28No._730%29_%288447537799%29.jpg/960px-Curtis%27s_botanical_magazine_%28No._730%29_%288447537799%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(No._730)_(8447537799).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 730 (1804)"
+  },
+  "Hibiscus pedunculatus": {
+   "name": "Hibiscus pedunculatus",
+   "image": "https://www.biodiversitylibrary.org/pageimage/130257",
+   "page": "https://www.biodiversitylibrary.org/page/130257",
+   "credit": "Edwards, Botanical Register, vol. 3, plate 231 (1817), via the Biodiversity Heritage Library"
+  },
+  "Hieracium Aurantiacum": {
+   "name": "Pilosella aurantiaca",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Hieracium_aurantiacum_Atlas_Alpenflora.jpg/500px-Hieracium_aurantiacum_Atlas_Alpenflora.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hieracium_aurantiacum_Atlas_Alpenflora.jpg",
+   "credit": "Hartinger, Atlas der Alpenflora (1882)"
+  },
+  "Hieracium Pilosella": {
+   "name": "Pilosella officinarum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Illustration_Hieracium_pilosella0.jpg/960px-Illustration_Hieracium_pilosella0.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Hieracium_pilosella0.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Hieracium umbellatum": {
+   "name": "Hieracium umbellatum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/198_Hieracium_umbellatum_L.jpg/500px-198_Hieracium_umbellatum_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:198_Hieracium_umbellatum_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 198 (1891)"
+  },
+  "Hyacinthus non scriptus": {
+   "name": "Hyacinthoides non-scripta",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Hyacinthus_non-scriptus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v1.jpg/960px-Hyacinthus_non-scriptus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Hyacinthus_non-scriptus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v1.jpg",
+   "credit": "Flora Batava, vol. 1, plate 36 (1800)"
+  },
+  "Hyacinthus Orientalis cœruleus": {
+   "name": "Hyacinthus orientalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/De_blauwe_hyacint_Franciscus_Primus%2C_RP-T-1948-46.jpg/960px-De_blauwe_hyacint_Franciscus_Primus%2C_RP-T-1948-46.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:De_blauwe_hyacint_Franciscus_Primus,_RP-T-1948-46.jpg",
+   "credit": "Jan Augustini, watercolour (1762), Rijksmuseum"
+  },
+  "Hyacinthus racemosus": {
+   "name": "Muscari neglectum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/aa/The_Botanical_Magazine%2C_Plate_122_%28Volume_4%2C_1791%29.png/960px-The_Botanical_Magazine%2C_Plate_122_%28Volume_4%2C_1791%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_122_(Volume_4,_1791).png",
+   "credit": "Curtis's Botanical Magazine, plate 122 (1791)"
+  },
+  "Hyoscyamus Scopolia": {
+   "name": "Scopolia carniolica",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Scopolia_carniolica_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v16.jpg/960px-Scopolia_carniolica_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v16.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Scopolia_carniolica_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v16.jpg",
+   "credit": "Flora Batava, vol. 16, plate 1255 (1881)"
+  },
+  "Hypericum perforatum": {
+   "name": "Hypericum perforatum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/61_Hypericum_perforatum_L.jpg/500px-61_Hypericum_perforatum_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:61_Hypericum_perforatum_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 61 (1891)"
+  },
+  "Hypericum Pulchrum": {
+   "name": "Hypericum pulchrum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Billeder_af_nordens_flora_%28Plate_231%29_%286028847471%29.jpg/960px-Billeder_af_nordens_flora_%28Plate_231%29_%286028847471%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Billeder_af_nordens_flora_(Plate_231)_(6028847471).jpg",
+   "credit": "Mentz & Ostenfeld, Billeder af Nordens Flora, plate 231 (1917)"
+  },
+  "Ilex aquifolium": {
+   "name": "Ilex aquifolium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Ilex_Aquifolium_-_Houx_Commun._%28Holly_trees%29_%28NYPL_b14485031-1108730%29.tiff/lossy-page1-960px-Ilex_Aquifolium_-_Houx_Commun._%28Holly_trees%29_%28NYPL_b14485031-1108730%29.tiff.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Ilex_Aquifolium_-_Houx_Commun._(Holly_trees)_(NYPL_b14485031-1108730).tiff",
+   "credit": "Redouté, in Duhamel, Traité des Arbres et Arbustes, plate 1 (1801)"
+  },
+  "Ilex bacciflora": null,
+  "Impatiens balsama": {
+   "name": "Impatiens balsamina",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Impatiens_balsamina_Blanco_clean.jpg/960px-Impatiens_balsamina_Blanco_clean.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Impatiens_balsamina_Blanco_clean.jpg",
+   "credit": "Blanco, Flora de Filipinas (1880–1883)"
+  },
+  "Inula dysenterica": {
+   "name": "Pulicaria dysenterica",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Inula_dysenterica_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v2.jpg/960px-Inula_dysenterica_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v2.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Inula_dysenterica_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v2.jpg",
+   "credit": "Flora Batava, vol. 2, plate 149 (1807)"
+  },
+  "Inula Indica": null,
+  "Inula undulata": null,
+  "Iris Germanica": {
+   "name": "Iris × germanica",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Illustration_Iris_germanica0.jpg/960px-Illustration_Iris_germanica0.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Iris_germanica0.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Iris Lurida": {
+   "name": "Iris lurida",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Curtis%27s_botanical_magazine_%2810596095863%29.jpg/960px-Curtis%27s_botanical_magazine_%2810596095863%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(10596095863).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 986 (1807)"
+  },
+  "Iris Pseudacorus": {
+   "name": "Iris pseudacorus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Billeder_af_nordens_flora_%281917%29_%2820184580859%29.jpg/960px-Billeder_af_nordens_flora_%281917%29_%2820184580859%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Billeder_af_nordens_flora_(1917)_(20184580859).jpg",
+   "credit": "Mentz & Ostenfeld, Billeder af Nordens Flora (1917)"
+  },
+  "Ixia Bulbocodium": {
+   "name": "Romulea bulbocodium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/The_Botanical_Magazine%2C_Plate_265_%28Volume_8%2C_1794%29.png/960px-The_Botanical_Magazine%2C_Plate_265_%28Volume_8%2C_1794%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_265_(Volume_8,_1794).png",
+   "credit": "Curtis's Botanical Magazine, plate 265 (1794)"
+  },
+  "Larnium garganicum": null,
+  "Lathyrus odoratus": {
+   "name": "Lathyrus odoratus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/The_Botanical_Magazine%2C_Plate_60_%28Volume_2%2C_1788%29.png/960px-The_Botanical_Magazine%2C_Plate_60_%28Volume_2%2C_1788%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_60_(Volume_2,_1788).png",
+   "credit": "Curtis's Botanical Magazine, plate 60 (1788)"
+  },
+  "Laurastinus sempervirens": {
+   "name": "Viburnum tinus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Viburnum_Tinus_-_Viorne_Laurier-tin_%28NYPL_b14485031-1108827%29.tiff/lossy-page1-960px-Viburnum_Tinus_-_Viorne_Laurier-tin_%28NYPL_b14485031-1108827%29.tiff.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Viburnum_Tinus_-_Viorne_Laurier-tin_(NYPL_b14485031-1108827).tiff",
+   "credit": "Redouté, Traité des arbres et arbustes, vol. 2, plate 37"
+  },
+  "Laurus poetica": {
+   "name": "Laurus nobilis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/A_curious_herbal_%28Page_175%29_BHL296559.jpg/960px-A_curious_herbal_%28Page_175%29_BHL296559.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_curious_herbal_(Page_175)_BHL296559.jpg",
+   "credit": "Blackwell, A Curious Herbal, plate 175 (1737)"
+  },
+  "Leucojum vernum": {
+   "name": "Leucojum vernum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/333_Leucoium_vernum_L.jpg/500px-333_Leucoium_vernum_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:333_Leucoium_vernum_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 333 (1891)"
+  },
+  "Lilium candidum": {
+   "name": "Lilium candidum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/A_selection_of_Hexandrian_plants%2C_belonging_to_the_natural_orders_Amaryllidae_and_Liliacae_%28Pl._38%29_BHL288092.jpg/500px-A_selection_of_Hexandrian_plants%2C_belonging_to_the_natural_orders_Amaryllidae_and_Liliacae_%28Pl._38%29_BHL288092.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_selection_of_Hexandrian_plants,_belonging_to_the_natural_orders_Amaryllidae_and_Liliacae_(Pl._38)_BHL288092.jpg",
+   "credit": "Bury, A Selection of Hexandrian Plants, plate 38 (1831)"
+  },
+  "Lilium Philadelphicum": {
+   "name": "Lilium philadelphicum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/A_monograph_of_the_genus_Lilium_%28Plate_%2812%29%29_BHL286997.jpg/500px-A_monograph_of_the_genus_Lilium_%28Plate_%2812%29%29_BHL286997.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_monograph_of_the_genus_Lilium_(Plate_(12))_BHL286997.jpg",
+   "credit": "Elwes, A Monograph of the Genus Lilium, plate 12 (1880)"
+  },
+  "Lilium Pomponicum flavum": {
+   "name": "Lilium pyrenaicum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Lilium_pyrenaicum_-_Les_liliac%C3%A9es_-_vol._3_-_t._145.jpg/960px-Lilium_pyrenaicum_-_Les_liliac%C3%A9es_-_vol._3_-_t._145.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Lilium_pyrenaicum_-_Les_liliac%C3%A9es_-_vol._3_-_t._145.jpg",
+   "credit": "Redouté, Les Liliacées, vol. 3, plate 145 (1802)"
+  },
+  "Lilium tigrinum": {
+   "name": "Lilium lancifolium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Lilium_lancifolium_in_Les_liliacees.jpg/960px-Lilium_lancifolium_in_Les_liliacees.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Lilium_lancifolium_in_Les_liliacees.jpg",
+   "credit": "Redouté, Les Liliacées, vol. 7 (1802–1816)"
+  },
+  "Lupinus arboreus": {
+   "name": "Lupinus arboreus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Curtis%27s_botanical_magazine_%28No._682%29_%288318335410%29.jpg/960px-Curtis%27s_botanical_magazine_%28No._682%29_%288318335410%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(No._682)_(8318335410).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 682 (1803)"
+  },
+  "Lupinus cœruleus": null,
+  "Lupinus flævus": {
+   "name": "Lupinus luteus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Illustration_Lupinus_luteus0.jpg/960px-Illustration_Lupinus_luteus0.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Lupinus_luteus0.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Lupinus perennis": null,
+  "Lychnis flos cuculi": {
+   "name": "Silene flos-cuculi",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Illustration_Silene_flos-cuculi0.jpg/960px-Illustration_Silene_flos-cuculi0.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Silene_flos-cuculi0.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Lysimachia nummularia": {
+   "name": "Lysimachia nummularia",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Choix_de_plantes_de_l%27Europe_centrale_et_particuli%C3%A8rement_de_la_Suisse_et_de_la_Savoie_%281878%29_%2820583941866%29.jpg/960px-Choix_de_plantes_de_l%27Europe_centrale_et_particuli%C3%A8rement_de_la_Suisse_et_de_la_Savoie_%281878%29_%2820583941866%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Choix_de_plantes_de_l%27Europe_centrale_et_particuli%C3%A8rement_de_la_Suisse_et_de_la_Savoie_(1878)_(20583941866).jpg",
+   "credit": "Bouvier, Choix de plantes de l'Europe centrale (1878)"
+  },
+  "Lythrum Salicaria": {
+   "name": "Lythrum salicaria",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Billeder_af_nordens_flora_%28Plate_339%29_%288147586949%29.jpg/960px-Billeder_af_nordens_flora_%28Plate_339%29_%288147586949%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Billeder_af_nordens_flora_(Plate_339)_(8147586949).jpg",
+   "credit": "Mentz & Ostenfeld, Billeder af Nordens Flora, plate 339 (1917)"
+  },
+  "Malva augustiflora": {
+   "name": "Sphaeralcea angustifolia",
+   "image": "https://www.biodiversitylibrary.org/pageimage/485273",
+   "page": "https://www.biodiversitylibrary.org/page/485273",
+   "credit": "Curtis's Botanical Magazine, plate 2839 (1828), via the Biodiversity Heritage Library"
+  },
+  "Malva Sylvestris": {
+   "name": "Malva sylvestris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Familiar_wild_flowers_figured_and_described_%28Pl._21%29_%288768062965%29.jpg/960px-Familiar_wild_flowers_figured_and_described_%28Pl._21%29_%288768062965%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Familiar_wild_flowers_figured_and_described_(Pl._21)_(8768062965).jpg",
+   "credit": "Hulme, Familiar Wild Flowers, plate 21 (1878)"
+  },
+  "Mathiola incana": null,
+  "Matricaria Chamomilla": {
+   "name": "Matricaria chamomilla",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/182_Matricaria_chamomilla_L.jpg/500px-182_Matricaria_chamomilla_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:182_Matricaria_chamomilla_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 182 (1891)"
+  },
+  "Mercurialis annua": {
+   "name": "Mercurialis annua",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/Mercurialis_annua_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v3.jpg/960px-Mercurialis_annua_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v3.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Mercurialis_annua_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v3.jpg",
+   "credit": "Flora Batava, vol. 3, plate 195 (1814)"
+  },
+  "Mesembrianthemum aureum": {
+   "name": "Lampranthus aureus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Plantarum_historia_succulentarum_%3D_%28Plate_11%29_BHL280692.jpg/960px-Plantarum_historia_succulentarum_%3D_%28Plate_11%29_BHL280692.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Plantarum_historia_succulentarum_%3D_(Plate_11)_BHL280692.jpg",
+   "credit": "Redouté, Plantarum historia succulentarum, plate 11 (1802)"
+  },
+  "Mimosa sensit": {
+   "name": "Mimosa sensitiva",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/The_Botanical_register_%28Plate_25%29_BHL8348.jpg/960px-The_Botanical_register_%28Plate_25%29_BHL8348.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_register_(Plate_25)_BHL8348.jpg",
+   "credit": "Edwards's Botanical Register, plate 25 (1815)"
+  },
+  "Mimulus luteus": {
+   "name": "Erythranthe lutea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/The_botanist%27s_repository%2C_for_new_and_rare_plants_-_containing_coloured_figures_of_such_plants%2C_as_have_not_hitherto_appeared_in_any_similar_publication%3B_with_all_their_essential_characters%2C_%2820405046535%29.jpg/960px-thumbnail.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_botanist%27s_repository,_for_new_and_rare_plants_-_containing_coloured_figures_of_such_plants,_as_have_not_hitherto_appeared_in_any_similar_publication;_with_all_their_essential_characters,_(20405046535).jpg",
+   "credit": "Andrews, The Botanist's Repository (1797)"
+  },
+  "Mnium Androgynum": {
+   "name": "Aulacomnium androgynum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Flora_Danica_Hft_05_Tab_0299.tif/lossy-page1-960px-Flora_Danica_Hft_05_Tab_0299.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flora_Danica_Hft_05_Tab_0299.tif",
+   "credit": "Flora Danica, plate 299 (1766)"
+  },
+  "Narcissus Bulbocodium": {
+   "name": "Narcissus bulbocodium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Les_liliacees_%28Color_Plate_24%29_BHL287304.jpg/500px-Les_liliacees_%28Color_Plate_24%29_BHL287304.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Les_liliacees_(Color_Plate_24)_BHL287304.jpg",
+   "credit": "Redouté, Les Liliacées, vol. 1 (1805)"
+  },
+  "Narcissus incomparabilis": {
+   "name": "Narcissus × incomparabilis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/The_Botanical_Magazine%2C_Plate_121_%28Volume_4%2C_1791%29.png/960px-The_Botanical_Magazine%2C_Plate_121_%28Volume_4%2C_1791%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_121_(Volume_4,_1791).png",
+   "credit": "Curtis's Botanical Magazine, plate 121 (1791)"
+  },
+  "Narcissus major": {
+   "name": "Narcissus hispanicus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Narcissus_major_51.jpg/960px-Narcissus_major_51.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Narcissus_major_51.jpg",
+   "credit": "Curtis's Botanical Magazine, plate 51 (1788)"
+  },
+  "Narcissus moschatus": {
+   "name": "Narcissus moschatus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Narcissus_moschatus.jpg/500px-Narcissus_moschatus.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Narcissus_moschatus.jpg",
+   "credit": "Curtis's Botanical Magazine, plate 924 (1806)"
+  },
+  "Narcissus nutans": null,
+  "Narcissus Odorus": {
+   "name": "Narcissus × odorus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/The_Botanical_Magazine%2C_Plate_78_%28Volume_3%2C_1790%29.png/960px-The_Botanical_Magazine%2C_Plate_78_%28Volume_3%2C_1790%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_78_(Volume_3,_1790).png",
+   "credit": "Curtis's Botanical Magazine, plate 78 (1790)"
+  },
+  "Narcissus Orientalis albus": null,
+  "Narcissus poeticus": {
+   "name": "Narcissus poeticus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Die_Alpenpflanzen_nach_der_Natur_gemalt_%28Page_99%29_%287216053790%29.jpg/960px-Die_Alpenpflanzen_nach_der_Natur_gemalt_%28Page_99%29_%287216053790%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Die_Alpenpflanzen_nach_der_Natur_gemalt_(Page_99)_(7216053790).jpg",
+   "credit": "Seboth, Die Alpenpflanzen nach der Natur gemalt, vol. 1 (1879)"
+  },
+  "Narcissus Pseudonarcissus multiplex": null,
+  "Narcissus Pseudonarcissus simplex": {
+   "name": "Narcissus pseudonarcissus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/Familiar_wild_flowers_figured_and_described_%28Pl._31%29_%287393712942%29.jpg/960px-Familiar_wild_flowers_figured_and_described_%28Pl._31%29_%287393712942%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Familiar_wild_flowers_figured_and_described_(Pl._31)_(7393712942).jpg",
+   "credit": "Hulme, Familiar Wild Flowers, plate 31 (1878)"
+  },
+  "Narcissus Romanus": {
+   "name": "Narcissus tazetta",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Curtis%27s_botanical_magazine_%2810596107835%29.jpg/960px-Curtis%27s_botanical_magazine_%2810596107835%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(10596107835).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 1011 (1807)"
+  },
+  "Narcissus Viridiflorus": {
+   "name": "Narcissus viridiflorus",
+   "image": "https://www.biodiversitylibrary.org/pageimage/477005",
+   "page": "https://www.biodiversitylibrary.org/page/477005",
+   "credit": "Curtis's Botanical Magazine, plate 1687 (1814), via the Biodiversity Heritage Library"
+  },
+  "Narcissus viridiflorus": {
+   "name": "Narcissus viridiflorus",
+   "image": "https://www.biodiversitylibrary.org/pageimage/477005",
+   "page": "https://www.biodiversitylibrary.org/page/477005",
+   "credit": "Curtis's Botanical Magazine, plate 1687 (1814), via the Biodiversity Heritage Library"
+  },
+  "Nelumbo Nilotica": null,
+  "Oenothera biennis": {
+   "name": "Oenothera biennis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/116_Oenothera_biennis_L.jpg/500px-116_Oenothera_biennis_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:116_Oenothera_biennis_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 116 (1891)"
+  },
+  "Ormithogalum luteum": {
+   "name": "Gagea lutea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Flora_Danica_Hft_07_Tab_0378.tif/lossy-page1-960px-Flora_Danica_Hft_07_Tab_0378.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flora_Danica_Hft_07_Tab_0378.tif",
+   "credit": "Flora Danica, plate 378 (1768)"
+  },
+  "Ornithogalum Umbrellatum": {
+   "name": "Ornithogalum umbellatum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Flora_Danica_Hft_22_Tab_1266.tif/lossy-page1-960px-Flora_Danica_Hft_22_Tab_1266.tif.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flora_Danica_Hft_22_Tab_1266.tif",
+   "credit": "Flora Danica, plate 1266 (1806)"
+  },
+  "Oscimum Basilicum": {
+   "name": "Ocimum basilicum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Flora_medica%2C_oder%2C_Abbildung_der_wichtigsten_officinellen_Pflanzen_%28Pl._135%29_%286032000225%29.jpg/960px-Flora_medica%2C_oder%2C_Abbildung_der_wichtigsten_officinellen_Pflanzen_%28Pl._135%29_%286032000225%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flora_medica,_oder,_Abbildung_der_wichtigsten_officinellen_Pflanzen_(Pl._135)_(6032000225).jpg",
+   "credit": "Dietrich, Flora medica, plate 135 (1828)"
+  },
+  "Osmunda regalis": {
+   "name": "Osmunda regalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/400_Osmunda_regalis_L.jpg/500px-400_Osmunda_regalis_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:400_Osmunda_regalis_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 400 (1891)"
+  },
+  "Oxalis convexula": {
+   "name": "Oxalis convexula",
+   "image": "https://www.biodiversitylibrary.org/pageimage/753174",
+   "page": "https://www.biodiversitylibrary.org/page/753174",
+   "credit": "Jacquin, Oxalis Monographia, plate 55 (1794), via the Biodiversity Heritage Library"
+  },
+  "Oxalis grandiflora": {
+   "name": "Oxalis purpurea",
+   "image": "https://www.biodiversitylibrary.org/pageimage/753173",
+   "page": "https://www.biodiversitylibrary.org/page/753173",
+   "credit": "Jacquin, Oxalis Monographia, plate 54 (1794), via the Biodiversity Heritage Library"
+  },
+  "Oxalis linearis": {
+   "name": "Oxalis linearis",
+   "image": "https://www.biodiversitylibrary.org/pageimage/753151",
+   "page": "https://www.biodiversitylibrary.org/page/753151",
+   "credit": "Jacquin, Oxalis Monographia, plate 32 (1794), via the Biodiversity Heritage Library"
+  },
+  "Oxalis lupinifolia": {
+   "name": "Oxalis flava",
+   "image": "https://www.biodiversitylibrary.org/pageimage/753191",
+   "page": "https://www.biodiversitylibrary.org/page/753191",
+   "credit": "Jacquin, Oxalis Monographia, plate 72 (1794), via the Biodiversity Heritage Library"
+  },
+  "Oxalis tricolor": {
+   "name": "Oxalis ambigua",
+   "image": "https://www.biodiversitylibrary.org/pageimage/753166",
+   "page": "https://www.biodiversitylibrary.org/page/753166",
+   "credit": "Jacquin, Oxalis Monographia, plate 47 (1794), via the Biodiversity Heritage Library"
+  },
+  "Oxalis ubiflora": {
+   "name": "Oxalis hirta",
+   "image": "https://www.biodiversitylibrary.org/pageimage/753129",
+   "page": "https://www.biodiversitylibrary.org/page/753129",
+   "credit": "Jacquin, Oxalis Monographia, plate 10 (1794), via the Biodiversity Heritage Library"
+  },
+  "Papaver Argemone": {
+   "name": "Papaver argemone",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/22_Papaver_Argemone_L.jpg/500px-22_Papaver_Argemone_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:22_Papaver_Argemone_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 22 (1891)"
+  },
+  "Papaver Cambricum": {
+   "name": "Papaver cambricum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Choix_des_plus_belles_fleurs_%28Plate_68%29_%287851459644%29.jpg/960px-Choix_des_plus_belles_fleurs_%28Plate_68%29_%287851459644%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Choix_des_plus_belles_fleurs_(Plate_68)_(7851459644).jpg",
+   "credit": "Redouté, Choix des plus belles fleurs, plate 68 (1827)"
+  },
+  "Papaver dubium": {
+   "name": "Papaver dubium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Billeder_af_Nordens_flora_%281901%29_%2820183436188%29.jpg/960px-Billeder_af_Nordens_flora_%281901%29_%2820183436188%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Billeder_af_Nordens_flora_(1901)_(20183436188).jpg",
+   "credit": "Lindman, Billeder af Nordens Flora, plate 183 (1901)"
+  },
+  "Papaver Orientale": {
+   "name": "Papaver orientale",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/The_Botanical_Magazine%2C_Plate_57_%28Volume_2%2C_1788%29.png/960px-The_Botanical_Magazine%2C_Plate_57_%28Volume_2%2C_1788%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_57_(Volume_2,_1788).png",
+   "credit": "Curtis's Botanical Magazine, plate 57 (1788)"
+  },
+  "Passiflora cilcata": {
+   "name": "Passiflora ciliata",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Passiflora_ciliata_1844_Joseph_Franz_Jacquin.png/960px-Passiflora_ciliata_1844_Joseph_Franz_Jacquin.png",
+   "page": "https://commons.wikimedia.org/wiki/File:Passiflora_ciliata_1844_Joseph_Franz_Jacquin.png",
+   "credit": "Jacquin, Eclogae Plantarum Rariorum (1844)"
+  },
+  "Passiflora cærulea": {
+   "name": "Passiflora caerulea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Favourite_flowers_of_garden_and_greenhouse_%2810575037173%29.jpg/960px-Favourite_flowers_of_garden_and_greenhouse_%2810575037173%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Favourite_flowers_of_garden_and_greenhouse_(10575037173).jpg",
+   "credit": "Step, Favourite Flowers of Garden and Greenhouse, plate 111 (1897)"
+  },
+  "Passiflora maliformis": {
+   "name": "Passiflora maliformis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/The_botanist%27s_repository%2C_for_new%2C_and_rare_plants_-_containing_coloured_figures_of_such_plants%2C_as_have_not_hitherto_appeared_in_any_similar_publication%2C_with_all_their_essential_characters%2C_%2814596729549%29.jpg/960px-thumbnail.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_botanist%27s_repository,_for_new,_and_rare_plants_-_containing_coloured_figures_of_such_plants,_as_have_not_hitherto_appeared_in_any_similar_publication,_with_all_their_essential_characters,_(14596729549).jpg",
+   "credit": "Andrews, The Botanist's Repository (1797–1815)"
+  },
+  "Passiflora peltata": null,
+  "Passiflora serrata": null,
+  "Peziza acetabulum": {
+   "name": "Helvella acetabulum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._59.png/960px-Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._59.png",
+   "page": "https://commons.wikimedia.org/wiki/File:Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._59.png",
+   "credit": "Sowerby, Coloured Figures of English Fungi, plate 59 (1797)"
+  },
+  "Phascum cuspidatum": null,
+  "Phascum muticum": null,
+  "Phleum panniculatum": {
+   "name": "Phleum paniculatum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Phleum_paniculatum_illustration_%2801%29.jpg/960px-Phleum_paniculatum_illustration_%2801%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Phleum_paniculatum_illustration_(01).jpg",
+   "credit": "Host, Icones et descriptiones Graminum austriacorum (1801–1809)"
+  },
+  "Phleum pratense": {
+   "name": "Phleum pratense",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/367_Phleum_pratense_L.jpg/500px-367_Phleum_pratense_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:367_Phleum_pratense_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 367 (1891)"
+  },
+  "Physalis": {
+   "name": "Physalis alkekengi",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/A_curious_herbal_%28Page_161%29_BHL296525.jpg/960px-A_curious_herbal_%28Page_161%29_BHL296525.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_curious_herbal_(Page_161)_BHL296525.jpg",
+   "credit": "Blackwell, A Curious Herbal, plate 161 (1737)"
+  },
+  "Physalis Alkakengi": null,
+  "Pinus cedrus": {
+   "name": "Cedrus libani",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/A_description_of_the_genus_Pinus_%28Tab._XXXVII_bis.%29_%287797082440%29.jpg/960px-A_description_of_the_genus_Pinus_%28Tab._XXXVII_bis.%29_%287797082440%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_description_of_the_genus_Pinus_(Tab._XXXVII_bis.)_(7797082440).jpg",
+   "credit": "Lambert, A Description of the Genus Pinus, plate 37 bis"
+  },
+  "Pinus Halipensis": {
+   "name": "Pinus halepensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Pinus_halepensis_-_Pin_d%27Alep._%28Aleppo_Pine%29_%28NYPL_b14485031-1110118%29.tiff/lossy-page1-960px-Pinus_halepensis_-_Pin_d%27Alep._%28Aleppo_Pine%29_%28NYPL_b14485031-1110118%29.tiff.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Pinus_halepensis_-_Pin_d%27Alep._(Aleppo_Pine)_(NYPL_b14485031-1110118).tiff",
+   "credit": "Bessa, Traité des arbres et arbustes, vol. 5, plate 70"
+  },
+  "Pinus Laricio": {
+   "name": "Pinus nigra subsp. laricio",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Pinus_laricio_-_Pin_laricio._%28Black_pine%29_%28NYPL_b14485031-1110119%29.tiff/lossy-page1-960px-Pinus_laricio_-_Pin_laricio._%28Black_pine%29_%28NYPL_b14485031-1110119%29.tiff.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Pinus_laricio_-_Pin_laricio._(Black_pine)_(NYPL_b14485031-1110119).tiff",
+   "credit": "Redouté, Traité des arbres et arbustes, vol. 5, plate 71"
+  },
+  "Pinus palustris": {
+   "name": "Pinus palustris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/A_description_of_the_genus_Pinus_%28Tab._XX%29_%287797064376%29.jpg/960px-A_description_of_the_genus_Pinus_%28Tab._XX%29_%287797064376%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_description_of_the_genus_Pinus_(Tab._XX)_(7797064376).jpg",
+   "credit": "Lambert, A Description of the Genus Pinus, plate 20 (1803)"
+  },
+  "Pinus Pinea": {
+   "name": "Pinus pinea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/A_description_of_the_genus_Pinus_%28Tab._VI%29_%287797050682%29.jpg/960px-A_description_of_the_genus_Pinus_%28Tab._VI%29_%287797050682%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_description_of_the_genus_Pinus_(Tab._VI)_(7797050682).jpg",
+   "credit": "Lambert, A Description of the Genus Pinus, plate 6 (1803)"
+  },
+  "Pinus resinosa": null,
+  "Pinus Silvestris": {
+   "name": "Pinus sylvestris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/A_description_of_the_genus_Pinus_%28Tab._I%29_%287797044884%29.jpg/960px-A_description_of_the_genus_Pinus_%28Tab._I%29_%287797044884%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_description_of_the_genus_Pinus_(Tab._I)_(7797044884).jpg",
+   "credit": "Lambert, A Description of the Genus Pinus, plate 1 (1803)"
+  },
+  "Pinus Strobus": {
+   "name": "Pinus strobus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/A_description_of_the_genus_Pinus_%28Tab._XXII%29_%287797066566%29.jpg/960px-A_description_of_the_genus_Pinus_%28Tab._XXII%29_%287797066566%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_description_of_the_genus_Pinus_(Tab._XXII)_(7797066566).jpg",
+   "credit": "Lambert, A Description of the Genus Pinus, plate 22 (1803)"
+  },
+  "Pinus Tæda": {
+   "name": "Pinus taeda",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/NAS-144_Pinus_taeda.png/960px-NAS-144_Pinus_taeda.png",
+   "page": "https://commons.wikimedia.org/wiki/File:NAS-144_Pinus_taeda.png",
+   "credit": "Redouté, in Michaux's North American Sylva (1819)"
+  },
+  "Polytricum Commune": {
+   "name": "Polytrichum commune",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Plantarum_indigenarum_et_exoticarum_icones_ad_vivum_coloratae%2C_oder%2C_Sammlung_nach_der_Natur_gemalter_Abbildungen_inn-_und_ausl%C3%A4ndlischer_Pflanzen%2C_f%C3%BCr_Liebhaber_und_Beflissene_der_Botanik_%2815902714920%29.jpg/960px-thumbnail.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Plantarum_indigenarum_et_exoticarum_icones_ad_vivum_coloratae,_oder,_Sammlung_nach_der_Natur_gemalter_Abbildungen_inn-_und_ausl%C3%A4ndlischer_Pflanzen,_f%C3%BCr_Liebhaber_und_Beflissene_der_Botanik_(15902714920).jpg",
+   "credit": "Plantarum indigenarum et exoticarum icones ad vivum coloratae, vol. 4 (1791)"
+  },
+  "Ponthieva glandalom": null,
+  "Primula acaulis plena": {
+   "name": "Primula vulgaris (double lilac)",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/The_Botanical_Magazine%2C_Plate_229_%28Volume_7%2C_1794%29.png/960px-The_Botanical_Magazine%2C_Plate_229_%28Volume_7%2C_1794%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_229_(Volume_7,_1794).png",
+   "credit": "Curtis's Botanical Magazine, plate 229 (1794)"
+  },
+  "Primula elatior": {
+   "name": "Primula elatior",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Atlas_de_la_flora_alpine_%28Pl._321%29_%286389259361%29.jpg/960px-Atlas_de_la_flora_alpine_%28Pl._321%29_%286389259361%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Atlas_de_la_flora_alpine_(Pl._321)_(6389259361).jpg",
+   "credit": "Correvon, Atlas de la flore alpine, plate 321 (1899)"
+  },
+  "Primula polyantha": null,
+  "Primula polyantha rubra": null,
+  "Primula Veris": {
+   "name": "Primula veris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/A_curious_herbal_%28Plate_226%29_BHL296689.jpg/960px-A_curious_herbal_%28Plate_226%29_BHL296689.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_curious_herbal_(Plate_226)_BHL296689.jpg",
+   "credit": "Blackwell, A Curious Herbal, plate 226 (1737)"
+  },
+  "Primula Verna rubra": null,
+  "Primula vulgaris": {
+   "name": "Primula vulgaris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Familiar_wild_flowers_figured_and_described_%28Pl._10%29_%287393688048%29.jpg/960px-Familiar_wild_flowers_figured_and_described_%28Pl._10%29_%287393688048%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Familiar_wild_flowers_figured_and_described_(Pl._10)_(7393688048).jpg",
+   "credit": "Hulme, Familiar Wild Flowers, plate 10 (1878)"
+  },
+  "Prunus Armeniaca": {
+   "name": "Prunus armeniaca",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/Flore_des_serres_et_des_jardins_de_l%27Europe_%288589458828%29.jpg/960px-Flore_des_serres_et_des_jardins_de_l%27Europe_%288589458828%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flore_des_serres_et_des_jardins_de_l%27Europe_(8589458828).jpg",
+   "credit": "Van Houtte, Flore des serres et des jardins de l'Europe, vol. 4 (1848)"
+  },
+  "Prunus Spinosa": {
+   "name": "Prunus spinosa",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_109%29_%286022593456%29.jpg/960px-Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_109%29_%286022593456%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Atlas_de_poche_des_plantes_des_champs,_des_prairies_et_des_bois_(PLATE_109)_(6022593456).jpg",
+   "credit": "Siélain, Atlas de poche des plantes des champs, plate 109 (1895)"
+  },
+  "Pulmonaria Officinalis": {
+   "name": "Pulmonaria officinalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/English_botany%2C_or%2C_Coloured_figures_of_British_plants_%281863%29_%2814764432185%29.jpg/960px-English_botany%2C_or%2C_Coloured_figures_of_British_plants_%281863%29_%2814764432185%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:English_botany,_or,_Coloured_figures_of_British_plants_(1863)_(14764432185).jpg",
+   "credit": "English Botany, or, Coloured Figures of British Plants, plate 1098 (1863)"
+  },
+  "Pyrethrum Scrotinum": {
+   "name": "Leucanthemella serotina",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Leucanthemella_serotina_-_Curtis%27s_1827.jpg/960px-Leucanthemella_serotina_-_Curtis%27s_1827.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Leucanthemella_serotina_-_Curtis%27s_1827.jpg",
+   "credit": "Curtis's Botanical Magazine, plate 2706 (1827)"
+  },
+  "Pyrus Malus": {
+   "name": "Malus domestica",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Illustration_Malus_domestica0.jpg/960px-Illustration_Malus_domestica0.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Malus_domestica0.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Pæonia officinalis": {
+   "name": "Paeonia officinalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Favourite_flowers_of_garden_and_greenhouse_%28Pl._14%29_%287789027048%29.jpg/960px-Favourite_flowers_of_garden_and_greenhouse_%28Pl._14%29_%287789027048%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Favourite_flowers_of_garden_and_greenhouse_(Pl._14)_(7789027048).jpg",
+   "credit": "Step, Favourite Flowers of Garden and Greenhouse, plate 14 (1896)"
+  },
+  "Pæonia Tenuifolia": {
+   "name": "Paeonia tenuifolia",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Curtis%27s_botanical_magazine_%2810594453236%29.jpg/960px-Curtis%27s_botanical_magazine_%2810594453236%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(10594453236).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 926 (1806)"
+  },
+  "Ranunculus acris": {
+   "name": "Ranunculus acris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/42/Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_18%29_%286022548380%29.jpg/960px-Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_18%29_%286022548380%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Atlas_de_poche_des_plantes_des_champs,_des_prairies_et_des_bois_(PLATE_18)_(6022548380).jpg",
+   "credit": "Siélain, Atlas de poche des plantes des champs, plate 18 (1895)"
+  },
+  "Ranunculus Asiaticus": {
+   "name": "Ranunculus asiaticus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Favourite_flowers_of_garden_and_greenhouse_%28Pl._6%29_%287789013932%29.jpg/960px-Favourite_flowers_of_garden_and_greenhouse_%28Pl._6%29_%287789013932%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Favourite_flowers_of_garden_and_greenhouse_(Pl._6)_(7789013932).jpg",
+   "credit": "Step, Favourite Flowers of Garden and Greenhouse, plate 6 (1896)"
+  },
+  "Ranunculus flammula": {
+   "name": "Ranunculus flammula",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Ranunculus_flammula_Sturm45.jpg/500px-Ranunculus_flammula_Sturm45.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Ranunculus_flammula_Sturm45.jpg",
+   "credit": "Sturm, Deutschlands Flora in Abbildungen, plate 45 (1796)"
+  },
+  "Rhaphanus Rhafaristrum": {
+   "name": "Raphanus raphanistrum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Billeder_af_nordens_flora_%281917%29_%2814598126500%29.jpg/960px-Billeder_af_nordens_flora_%281917%29_%2814598126500%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Billeder_af_nordens_flora_(1917)_(14598126500).jpg",
+   "credit": "Mentz & Ostenfeld, Billeder af Nordens Flora, plate 199 (1917)"
+  },
+  "Rhinanthus Galli": {
+   "name": "Rhinanthus minor",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/247_Rhinanthus_crista-galli_L.jpg/500px-247_Rhinanthus_crista-galli_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:247_Rhinanthus_crista-galli_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 247 (1891)"
+  },
+  "Rhododendrum Ponticum": {
+   "name": "Rhododendron ponticum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Rhododendrum_ponticum_-_Rosage_du_pont_%28NYPL_b14485031-1108831%29.tiff/lossy-page1-960px-Rhododendrum_ponticum_-_Rosage_du_pont_%28NYPL_b14485031-1108831%29.tiff.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Rhododendrum_ponticum_-_Rosage_du_pont_(NYPL_b14485031-1108831).tiff",
+   "credit": "Redouté, Traité des arbres et arbustes (Nouveau Duhamel), vol. 2, plate 41 (1801)"
+  },
+  "Rosa arvensis": {
+   "name": "Rosa arvensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Rosa_arvensis_by_Lydia_Penrose.jpg/960px-Rosa_arvensis_by_Lydia_Penrose.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Rosa_arvensis_by_Lydia_Penrose.jpg",
+   "credit": "Lydia Penrose, watercolour for Flora Devoniensis (before 1842)"
+  },
+  "Rosa lutea": {
+   "name": "Rosa foetida",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fd/Reitter-Abel_Holzarten_T063.jpg/960px-Reitter-Abel_Holzarten_T063.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Reitter-Abel_Holzarten_T063.jpg",
+   "credit": "Reitter & Abel, Abbildung der hundert deutschen wilden Holz-Arten, plate 63 (1790s)"
+  },
+  "Rosa muscosa": {
+   "name": "Rosa × centifolia 'Muscosa'",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/BotMag2%2869%29.jpg/500px-BotMag2%2869%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:BotMag2(69).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 69 (1788)"
+  },
+  "Rosa provincialis": null,
+  "Rosa Semperflorens": {
+   "name": "Rosa chinensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Rosa_semperflorens_Curtis.jpg/960px-Rosa_semperflorens_Curtis.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Rosa_semperflorens_Curtis.jpg",
+   "credit": "Curtis's Botanical Magazine, plate 284 (1794)"
+  },
+  "Rosa Sinica": {
+   "name": "Rosa laevigata",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Rosa_sinica.jpg/960px-Rosa_sinica.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Rosa_sinica.jpg",
+   "credit": "Lindley, Rosarum Monographia (1820)"
+  },
+  "Rosa Sulphurea": {
+   "name": "Rosa hemisphaerica",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/The_Botanical_register_%28Plate_46%29_BHL8410.jpg/960px-The_Botanical_register_%28Plate_46%29_BHL8410.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_register_(Plate_46)_BHL8410.jpg",
+   "credit": "Edwards, Botanical Register, vol. 1, plate 46 (1815)"
+  },
+  "Rununculus Auricomus": {
+   "name": "Ranunculus auricomus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Ranunculus_auricomus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v7.jpg/960px-Ranunculus_auricomus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v7.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Ranunculus_auricomus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v7.jpg",
+   "credit": "Flora Batava, vol. 7, plate 484 (1836)"
+  },
+  "Sansciviera Guineam": {
+   "name": "Sansevieria hyacinthoides",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Sansevieria_hyacinthoides_pm330.jpg/960px-Sansevieria_hyacinthoides_pm330.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Sansevieria_hyacinthoides_pm330.jpg",
+   "credit": "Redouté, Les Liliacées, plate 330"
+  },
+  "Saponaria officinalis": {
+   "name": "Saponaria officinalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/A_curious_herbal_%28Plate_113%29_BHL296403.jpg/960px-A_curious_herbal_%28Plate_113%29_BHL296403.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_curious_herbal_(Plate_113)_BHL296403.jpg",
+   "credit": "Blackwell, A Curious Herbal, plate 113 (1737)"
+  },
+  "Saponaria Officinalis": {
+   "name": "Saponaria officinalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/A_curious_herbal_%28Plate_113%29_BHL296403.jpg/960px-A_curious_herbal_%28Plate_113%29_BHL296403.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_curious_herbal_(Plate_113)_BHL296403.jpg",
+   "credit": "Blackwell, A Curious Herbal, plate 113 (1737)"
+  },
+  "Saxifraga crassifolia": {
+   "name": "Bergenia crassifolia",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/The_Botanical_Magazine%2C_Plate_196_%28Volume_6%2C_1793%29.png/960px-The_Botanical_Magazine%2C_Plate_196_%28Volume_6%2C_1793%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_196_(Volume_6,_1793).png",
+   "credit": "Curtis's Botanical Magazine, plate 196 (1793)"
+  },
+  "Scabiosa atropurpurea": {
+   "name": "Sixalix atropurpurea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/The_Botanical_Magazine%2C_Plate_247_%28Volume_7%2C_1794%29.png/960px-The_Botanical_Magazine%2C_Plate_247_%28Volume_7%2C_1794%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_247_(Volume_7,_1794).png",
+   "credit": "Curtis's Botanical Magazine, plate 247 (1794)"
+  },
+  "Scabiosa Succisa": {
+   "name": "Succisa pratensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/A_curious_herbal_%28Plate_142%29_BHL296475.jpg/960px-A_curious_herbal_%28Plate_142%29_BHL296475.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_curious_herbal_(Plate_142)_BHL296475.jpg",
+   "credit": "Blackwell, A Curious Herbal, plate 142 (1737)"
+  },
+  "Sedum Telephium": {
+   "name": "Hylotelephium telephium",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5a/Prof._Dr._Thom%C3%A9%27s_Flora_von_Deutschland%2C_%C3%96sterreich_und_der_Schweiz%2C_in_Wort_und_Bild%2C_f%C3%BCr_Schule_und_Haus%3B_mit_..._Tafeln_..._von_Walter_M%C3%BCller_%28Pl._349%29_%287982389014%29.jpg/960px-thumbnail.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Prof._Dr._Thom%C3%A9%27s_Flora_von_Deutschland,_%C3%96sterreich_und_der_Schweiz,_in_Wort_und_Bild,_f%C3%BCr_Schule_und_Haus;_mit_..._Tafeln_..._von_Walter_M%C3%BCller_(Pl._349)_(7982389014).jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz, plate 349 (1888)"
+  },
+  "Senecio jacobea": {
+   "name": "Jacobaea vulgaris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/177_Senecio_jacobaea_L.jpg/500px-177_Senecio_jacobaea_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:177_Senecio_jacobaea_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 177 (1891)"
+  },
+  "Senecio montanus": null,
+  "Senecio paludotus": {
+   "name": "Jacobaea paludosa",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Senecio_paludosus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v4.jpg/960px-Senecio_paludosus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v4.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Senecio_paludosus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v4.jpg",
+   "credit": "Kops, Flora Batava, vol. 4, plate 304 (1822)"
+  },
+  "Silphium asteriscus": null,
+  "Silphium trifoliatum": {
+   "name": "Silphium asteriscus var. trifoliatum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Curtis%27s_botanical_magazine_%28Plate_3355%29_%288203280092%29.jpg/960px-Curtis%27s_botanical_magazine_%28Plate_3355%29_%288203280092%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(Plate_3355)_(8203280092).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 3355 (1834)"
+  },
+  "Soldanella Alpina": {
+   "name": "Soldanella alpina",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Atlas_der_Alpenflora_%2810424253305%29.jpg/960px-Atlas_der_Alpenflora_%2810424253305%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Atlas_der_Alpenflora_(10424253305).jpg",
+   "credit": "Hartinger, Atlas der Alpenflora, plate 411 (1882)"
+  },
+  "Solidago Canadensis": {
+   "name": "Solidago canadensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Solidago_canadense%2C_Step_%26_Watson_1896_v2_pl_127%2C_clean.jpg/960px-Solidago_canadense%2C_Step_%26_Watson_1896_v2_pl_127%2C_clean.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Solidago_canadense,_Step_%26_Watson_1896_v2_pl_127,_clean.jpg",
+   "credit": "Step & Watson, Favourite Flowers of Garden and Greenhouse, plate 127 (1897)"
+  },
+  "Solidago gigantea": null,
+  "Solidago petiolaris": null,
+  "Solidago sempervirens": null,
+  "Solidago Virgaurea": {
+   "name": "Solidago virgaurea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/172_Solidago_virga-aurea_L.jpg/500px-172_Solidago_virga-aurea_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:172_Solidago_virga-aurea_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 172 (1891)"
+  },
+  "Solidago virgaurea": {
+   "name": "Solidago virgaurea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Billeder_af_Nordens_flora_%281901%29_%2819748277334%29.jpg/960px-Billeder_af_Nordens_flora_%281901%29_%2819748277334%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Billeder_af_Nordens_flora_(1901)_(19748277334).jpg",
+   "credit": "Lindman, Billeder af Nordens Flora (1901)"
+  },
+  "Sonchus Cœruleus": {
+   "name": "Cicerbita alpina",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Cicerbita_alpina_Sturm48.jpg/500px-Cicerbita_alpina_Sturm48.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Cicerbita_alpina_Sturm48.jpg",
+   "credit": "Sturm, Deutschlands Flora in Abbildungen (1796)"
+  },
+  "Sonchus palustris": {
+   "name": "Sonchus palustris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Sonchus_palustris_Sturm51.jpg/500px-Sonchus_palustris_Sturm51.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Sonchus_palustris_Sturm51.jpg",
+   "credit": "Sturm, Deutschlands Flora in Abbildungen, plate 51 (1796)"
+  },
+  "Sphenogyne piliflora": null,
+  "Stapelia pulla": {
+   "name": "Ceropegia mammillaris",
+   "image": "https://www.biodiversitylibrary.org/pageimage/485771",
+   "page": "https://www.biodiversitylibrary.org/page/485771",
+   "credit": "Curtis's Botanical Magazine, plate 1648 (1814), via the Biodiversity Heritage Library"
+  },
+  "Stapelia radiata": {
+   "name": "Duvalia caespitosa",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Curtis%27s_botanical_magazine_%28No._619%29_%288317236831%29.jpg/960px-Curtis%27s_botanical_magazine_%28No._619%29_%288317236831%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(No._619)_(8317236831).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 619 (1803)"
+  },
+  "Stapelia rufa": {
+   "name": "Ceropegia rufa",
+   "image": "https://www.biodiversitylibrary.org/pageimage/29151996",
+   "page": "https://www.biodiversitylibrary.org/page/29151996",
+   "credit": "Loddiges, The Botanical Cabinet, no. 239 (1818), via the Biodiversity Heritage Library"
+  },
+  "Stapelia variegata": {
+   "name": "Orbea variegata",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Orbea_variegata_%28as_Stapelia_variegata%29-Curtis_1-26_%281790%29.jpg/960px-Orbea_variegata_%28as_Stapelia_variegata%29-Curtis_1-26_%281790%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Orbea_variegata_(as_Stapelia_variegata)-Curtis_1-26_(1790).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 26 (1790)"
+  },
+  "Stellaria holostea": {
+   "name": "Stellaria holostea",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Stellaria_holostea_I02.jpg/500px-Stellaria_holostea_I02.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Stellaria_holostea_I02.jpg",
+   "credit": "Flora Batava, vol. 4, plate 253 (1822)"
+  },
+  "Symphetum officinale": {
+   "name": "Symphytum officinale",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Billeder_af_nordens_flora_%281917%29_%2814784380832%29.jpg/960px-Billeder_af_nordens_flora_%281917%29_%2814784380832%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Billeder_af_nordens_flora_(1917)_(14784380832).jpg",
+   "credit": "Mentz & Ostenfeld, Billeder af Nordens Flora, plate 86 (1917)"
+  },
+  "Syringa vulgaris": {
+   "name": "Syringa vulgaris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Choix_des_plus_belles_fleurs_%28Plate_109%29_%287851495934%29.jpg/960px-Choix_des_plus_belles_fleurs_%28Plate_109%29_%287851495934%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Choix_des_plus_belles_fleurs_(Plate_109)_(7851495934).jpg",
+   "credit": "Redouté, Choix des plus belles fleurs, plate 109 (1827)"
+  },
+  "Tagetes patula": {
+   "name": "Tagetes patula",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/The_Botanical_Magazine%2C_Plate_150_%28Volume_5%2C_1792%29.png/960px-The_Botanical_Magazine%2C_Plate_150_%28Volume_5%2C_1792%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_150_(Volume_5,_1792).png",
+   "credit": "Curtis's Botanical Magazine, plate 150 (1792)"
+  },
+  "Tagites erecta": {
+   "name": "Tagetes erecta",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Favourite_flowers_of_garden_and_greenhouse_%2810575191053%29.jpg/960px-Favourite_flowers_of_garden_and_greenhouse_%2810575191053%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Favourite_flowers_of_garden_and_greenhouse_(10575191053).jpg",
+   "credit": "Step, Favourite Flowers of Garden and Greenhouse, plate 144 (1897)"
+  },
+  "Tanacetum vulgare": {
+   "name": "Tanacetum vulgare",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/179_Tanacetum_vulgare_L.jpg/500px-179_Tanacetum_vulgare_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:179_Tanacetum_vulgare_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 179 (1891)"
+  },
+  "Taraxacum Dens Leonis": {
+   "name": "Taraxacum officinale",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Taraxacum_officinale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-135.jpg/960px-Taraxacum_officinale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-135.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Taraxacum_officinale_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-135.jpg",
+   "credit": "Köhler's Medizinal-Pflanzen (1887)"
+  },
+  "Taxus baccata": {
+   "name": "Taxus baccata",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Atlas_de_la_flora_alpine_%28Page_175%29_BHL10388752.jpg/960px-Atlas_de_la_flora_alpine_%28Page_175%29_BHL10388752.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Atlas_de_la_flora_alpine_(Page_175)_BHL10388752.jpg",
+   "credit": "Atlas de la flore alpine, no. 488 (1899)"
+  },
+  "Thuja cupressioides": null,
+  "Thuja occidentalis": {
+   "name": "Thuja occidentalis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/A_curious_herbal_%28Page_210%29_BHL296649.jpg/960px-A_curious_herbal_%28Page_210%29_BHL296649.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:A_curious_herbal_(Page_210)_BHL296649.jpg",
+   "credit": "Blackwell, A Curious Herbal, plate 210 (1737)"
+  },
+  "Thuja orientalis": null,
+  "Tragopogon pratensis": {
+   "name": "Tragopogon pratensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Illustration_Tragopogon_pratensis0.jpg/960px-Illustration_Tragopogon_pratensis0.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Illustration_Tragopogon_pratensis0.jpg",
+   "credit": "Thomé, Flora von Deutschland, Österreich und der Schweiz (1885)"
+  },
+  "Tressilago alba": {
+   "name": "Petasites albus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Petasites_minor_-_Tussilago_alba_-_Tossilagine_falsa_-_Le_P%C3%A9tasite._%28White_butterbur%29_%28NYPL_b14444147-1130851%29.tiff/lossy-page1-960px-Petasites_minor_-_Tussilago_alba_-_Tossilagine_falsa_-_Le_P%C3%A9tasite._%28White_butterbur%29_%28NYPL_b14444147-1130851%29.tiff.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Petasites_minor_-_Tussilago_alba_-_Tossilagine_falsa_-_Le_P%C3%A9tasite._(White_butterbur)_(NYPL_b14444147-1130851).tiff",
+   "credit": "Hortus Romanus, vol. 7, plate 85"
+  },
+  "Trollius Asiaticus": {
+   "name": "Trollius asiaticus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/The_Botanical_Magazine%2C_Plate_235_%28Volume_7%2C_1794%29.png/960px-The_Botanical_Magazine%2C_Plate_235_%28Volume_7%2C_1794%29.png",
+   "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_235_(Volume_7,_1794).png",
+   "credit": "Curtis's Botanical Magazine, plate 235 (1794)"
+  },
+  "Trollius Europæus": {
+   "name": "Trollius europaeus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Trollius_europaeus_Atlas_Alpenflora.jpg/960px-Trollius_europaeus_Atlas_Alpenflora.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Trollius_europaeus_Atlas_Alpenflora.jpg",
+   "credit": "Hartinger, Atlas der Alpenflora (1882)"
+  },
+  "Tropocolum majus": {
+   "name": "Tropaeolum majus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Gc1_tropaeolum_majus.jpg/960px-Gc1_tropaeolum_majus.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Gc1_tropaeolum_majus.jpg",
+   "credit": "Holtzbecker, Gottorfer Codex, gouache (1649–1659)"
+  },
+  "Tulipa Gesneri": {
+   "name": "Tulipa gesneriana",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Favourite_flowers_of_garden_and_greenhouse_%288344988159%29.jpg/960px-Favourite_flowers_of_garden_and_greenhouse_%288344988159%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Favourite_flowers_of_garden_and_greenhouse_(8344988159).jpg",
+   "credit": "Step, Favourite Flowers of Garden and Greenhouse, plate 284 (1897)"
+  },
+  "Tulipa præcox": null,
+  "Tulipa Sylvestris": {
+   "name": "Tulipa sylvestris",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/89/Flora_Europaea_inchoata_%28Pl._51%29_%286033193402%29.jpg/960px-Flora_Europaea_inchoata_%28Pl._51%29_%286033193402%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flora_Europaea_inchoata_(Pl._51)_(6033193402).jpg",
+   "credit": "Römer, Flora Europaea inchoata, plate 51 (1801)"
+  },
+  "Tussilago Farfala": {
+   "name": "Tussilago farfara",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/170_Tussilago_farfara_L.jpg/500px-170_Tussilago_farfara_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:170_Tussilago_farfara_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 170 (1891)"
+  },
+  "Tussilago fragrans": {
+   "name": "Petasites pyrenaicus",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Floral_illustrations_of_the_seasons_%28Plate_51%29_%286049525040%29.jpg/960px-Floral_illustrations_of_the_seasons_%28Plate_51%29_%286049525040%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Floral_illustrations_of_the_seasons_(Plate_51)_(6049525040).jpg",
+   "credit": "Roscoe, Floral Illustrations of the Seasons, plate 51 (1851)"
+  },
+  "Veltheimia glauca": {
+   "name": "Veltheimia capensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Veltheimia_capensis_in_Les_liliacees.jpg/960px-Veltheimia_capensis_in_Les_liliacees.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Veltheimia_capensis_in_Les_liliacees.jpg",
+   "credit": "Redouté, Les Liliacées, vol. 8"
+  },
+  "Velthemia Viridifolia": {
+   "name": "Veltheimia capensis",
+   "image": "https://www.biodiversitylibrary.org/pageimage/469077",
+   "page": "https://www.biodiversitylibrary.org/page/469077",
+   "credit": "Curtis's Botanical Magazine, plate 501 (1800), via the Biodiversity Heritage Library"
+  },
+  "Velthennia Uvaria": {
+   "name": "Kniphofia uvaria",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Flore_des_serres_v13_187a.jpg/960px-Flore_des_serres_v13_187a.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Flore_des_serres_v13_187a.jpg",
+   "credit": "Van Houtte, Flore des Serres et des Jardins de l'Europe, vol. 13"
+  },
+  "Verbuscum Lychnitis": {
+   "name": "Verbascum lychnitis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Verbascum_lychnitis_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v16.jpg/960px-Verbascum_lychnitis_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v16.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Verbascum_lychnitis_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v16.jpg",
+   "credit": "Flora Batava, vol. 16, plate 1226 (1881)"
+  },
+  "Verbuscum Virgatum": null,
+  "Veronica agrestis": {
+   "name": "Veronica agrestis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Veronica_agrestis_Sturm48.jpg/500px-Veronica_agrestis_Sturm48.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Veronica_agrestis_Sturm48.jpg",
+   "credit": "Sturm, Deutschlands Flora in Abbildungen (1796)"
+  },
+  "Veronica triphyllos": {
+   "name": "Veronica triphyllos",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e9/Veronica_triphyllos_Sturm46.jpg/500px-Veronica_triphyllos_Sturm46.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Veronica_triphyllos_Sturm46.jpg",
+   "credit": "Sturm, Deutschlands Flora in Abbildungen (1796)"
+  },
+  "Veronica vivensis": {
+   "name": "Veronica arvensis",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Veronica_arvensis_Sturm45.jpg/500px-Veronica_arvensis_Sturm45.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Veronica_arvensis_Sturm45.jpg",
+   "credit": "Sturm, Deutschlands Flora in Abbildungen (1796)"
+  },
+  "Vinca minor": {
+   "name": "Vinca minor",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_5%29_%286022543932%29.jpg/960px-Atlas_de_poche_des_plantes_des_champs%2C_des_prairies_et_des_bois_%28PLATE_5%29_%286022543932%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Atlas_de_poche_des_plantes_des_champs,_des_prairies_et_des_bois_(PLATE_5)_(6022543932).jpg",
+   "credit": "Siélain, Atlas de poche des plantes des champs, plate 5 (1895)"
+  },
+  "Viola alba": {
+   "name": "Viola alba",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Viola_alba_Sturm57.jpg/500px-Viola_alba_Sturm57.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Viola_alba_Sturm57.jpg",
+   "credit": "Sturm, Deutschlands Flora in Abbildungen (1796)"
+  },
+  "Viola Canina": null,
+  "Viola odorata": {
+   "name": "Viola odorata",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/41_Viola_odorata_L.jpg/500px-41_Viola_odorata_L.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:41_Viola_odorata_L.jpg",
+   "credit": "Masclef, Atlas des plantes de France, plate 41 (1891)"
+  },
+  "Viola Tonbrigens": null,
+  "Viola Tricolor": {
+   "name": "Viola tricolor",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/American_medicinal_plants_%28Plate_27%29_%286025949904%29.jpg/960px-American_medicinal_plants_%28Plate_27%29_%286025949904%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:American_medicinal_plants_(Plate_27)_(6025949904).jpg",
+   "credit": "Millspaugh, American Medicinal Plants, plate 27 (1887)"
+  },
+  "Zinnia elegans": {
+   "name": "Zinnia elegans",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/Curtis%27s_botanical_magazine_%28No._527%29_%288413256835%29.jpg/960px-Curtis%27s_botanical_magazine_%28No._527%29_%288413256835%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(No._527)_(8413256835).jpg",
+   "credit": "Curtis's Botanical Magazine, plate 527 (1801)"
+  },
+  "Æschylus Hippocastanum": {
+   "name": "Aesculus hippocastanum",
+   "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Afbeeldingen_der_fraaiste%2C_meest_uitheemsche_boomen_en_heesters_%28Plate_49%29_%287899788266%29.jpg/960px-Afbeeldingen_der_fraaiste%2C_meest_uitheemsche_boomen_en_heesters_%28Plate_49%29_%287899788266%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Afbeeldingen_der_fraaiste,_meest_uitheemsche_boomen_en_heesters_(Plate_49)_(7899788266).jpg",
+   "credit": "Krauss, Afbeeldingen der fraaiste, meest uitheemsche boomen en heesters, plate 49 (1802)"
+  }
+ }
+}

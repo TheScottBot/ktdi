@@ -42,6 +42,21 @@ The commands only work, and only appear, in the servers in `RPG_GUILD_IDS`, and 
 2. In Google Sheets: **File → Import → Upload** that CSV (**Replace spreadsheet**). Wait until no cell says *Loading…*: it's a few thousand translations, so give it a while (scroll to the bottom right to check), then **File → Download → Comma-separated values**.
 3. `python -m ktdi.tools.herbal_build merge` finds that download in your Downloads folder and writes `ktdi/lib/herbal.json`. Commit it, deploy, and `/herbal` is live.
 
+## Almanac plates
+
+`/almanac`'s plant of the day comes with a coloured botanical plate, linked from Wikimedia Commons or the Biodiversity
+Heritage Library (nothing to host). Which plate goes with which plant is recorded by hand in
+`ktdi/lib/almanac_plates.json`. To look for more, or check the links still work:
+
+```bash
+python -m ktdi.tools.almanac_plates_find --plant "Draba verna"
+python -m ktdi.tools.almanac_plates_find --bhl --plant "Stapelia rufa"
+python -m ktdi.tools.almanac_plates_find --check
+```
+
+Candidates and small copies to look at go to `private/almanac/` (gitignored). `--bhl` needs a free BHL API key as
+`BHL_API_KEY` in `.env.dev`; the bot itself never uses it.
+
 ## Logs
 
 The bot logs startup, every command used (except `/books` and `/rpg`, which are never logged against anyone), 💦 sprays, bribes and role changes to `logs/ktdi.log` next to `bot.py` (and to the terminal/journal). The file rotates at 1 MB, keeping 5 old files (`ktdi.log.1` … `ktdi.log.5`). To follow it live:

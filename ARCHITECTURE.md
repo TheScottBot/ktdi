@@ -76,7 +76,8 @@ ktdi/
 │   ├── beeton.py      /beeton recipe, menu and advice: Mrs Beeton (1861), recipes by dish or ingredient, the
 │   │                  day's family dinner, household advice
 │   ├── enquire.py     /enquire: a hint on anything from Enquire Within Upon Everything (1856)
-│   ├── almanac.py     /almanac: a day from Hone's Every-Day Book (1826-27): saints, folklore, flower, temperature.
+│   ├── almanac.py     /almanac: a day from Hone's Every-Day Book (1826-27): saints, folklore, flower (with its
+│                      plate, from almanac_plates.json), temperature.
 │   │                  Dates are read by lib/reminders.py's parse_day (shared with campaign reminders).
 │   │                  /almanac setup here posts the day's every morning (a Daily: daily.py)
 │   ├── melancholy.py  /melancholy: a passage of Burton's Anatomy of Melancholy (1621) on a topic, or at random
@@ -148,6 +149,10 @@ ktdi/
     ├── almanac.json   /almanac's days (both volumes of Hone, Gutenberg), built by tools/almanac_build.py: every
     │                  day's saints, flower and temperature, and the passages on almanac_curation.json (picked by hand,
     │                  keyed "volume:MM-DD:passage")
+    ├── almanac_plates.json  a coloured plate of each of the almanac's plants, by Hone's Latin name: the image's
+    │                  URL (Commons, at a width it serves, or BHL), its page, the accepted name and a credit; null for
+    │                  a plant with no good plate. Linked, not kept. Picked by looking at each candidate that
+    │                  tools/almanac_plates_find.py found (dev only; --check tests the links)
     ├── pliny.json     /pliny's chapters (all six Gutenberg volumes of Bostock and Riley), built by
     │                  tools/pliny_build.py from pliny_curation.json (keys like VIII.3); each keeps its volume and
     │                  the words to link to it by, taken from the page's text so they never span a footnote mark

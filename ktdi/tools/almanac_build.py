@@ -58,12 +58,16 @@ def saints_of(body: str) -> tuple[str, str]:
     return "", body
 
 
+LATIN_NAME = re.compile(r"_[A-ZÆŒ][a-zæœ]+(?: [A-Za-zæœ]|\._)")  # "_Draba verna._", "_Physalis._", "_Æschylus..."
+
+
 def floral(text: str) -> dict | None:
     """The day's flower from its FLORAL DIRECTORY, {"plant": "Early Witlow grass. _Draba verna._", "for":
-    "_St. Vincent._"}: the plant is the line with its Latin name in italics, and it's dedicated to the saint on the
-    other line (either way round, "Dedicated to" or not). Footnotes ("[349] Brand.") are left out."""
+    "_St. Vincent._"}: the plant is the line with its Latin name in italics (two words or one, "_Arbutus._", and with
+    the book's æ and œ, "_Pæonia Tenuifolia._"), and it's dedicated to the saint on the other line (either way round,
+    "Dedicated to" or not). Footnotes ("[349] Brand.") are left out."""
     lines = [tidy(line) for line in text.strip().split("\n") if line.strip() and not line.strip().startswith("[")]
-    plant = next((line for line in lines if re.search(r"_[A-Z][a-z]+ [A-Za-z]", line) and "Dedicated" not in line
+    plant = next((line for line in lines if LATIN_NAME.search(line) and "Dedicated" not in line
                   and not re.match(r"_(?:Sts?|B)\.", line)), None)
     if not plant:
         return None

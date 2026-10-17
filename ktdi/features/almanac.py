@@ -4,10 +4,17 @@ London's mean temperature for it (1797-1816), and a passage on its customs, folk
 No date: today (in BOT_TIMEZONE). A date: "5 november", "nov 5", "5/11", "tomorrow". Ask again for another passage.
 /almanac setup here [time] posts the day's in a channel every morning (ktdi/daily.py, as Old Wisdom of the Day does).
 The data is ktdi/lib/almanac.json, built by ktdi/tools/almanac_build.py from passages picked by hand.
+
+The plant of the day comes with a picture of it where there's a good one: an old botanical plate, coloured and public
+domain, linked from Wikimedia Commons or the Biodiversity Heritage Library (not kept here) and credited in the footer.
+Which plate goes with which plant was decided by looking at every one, and is recorded in ktdi/lib/almanac_plates.json
+by Hone's Latin name (null: looked, and there wasn't a good one; better none than the wrong plant). The candidates come
+from ktdi/tools/almanac_plates_find.py, which also checks the links still work (--check).
 """
 
 import json
 import random
+import re
 from datetime import date
 from pathlib import Path
 
@@ -28,7 +35,17 @@ COLOUR = discord.Color.dark_green()
 MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
           "November", "December"]
 
+PLATES_DATA = DATA.with_name("almanac_plates.json")
+
 DAYS: dict[str, dict] = json.loads(DATA.read_text(encoding="utf-8"))["days"]
+PLATES: dict[str, dict | None] = json.loads(PLATES_DATA.read_text(encoding="utf-8"))["plates"]
+
+
+def plate(flower: dict | None) -> dict | None:
+    """The picture of the day's plant, if there's a good one: {"image", "page", "credit"}. It's found by the plant's
+    Latin name as Hone gives it ("Early Witlow grass. _Draba verna._" is "Draba verna")."""
+    names = re.findall(r"_([^_]+)_", flower["plant"]) if flower else []
+    return PLATES.get(names[-1].strip(" .")) if names else None
 
 
 def heading(month: int, day: int) -> str:
@@ -73,7 +90,12 @@ def day_embed(month: int, day: int) -> discord.Embed:
     embed = discord.Embed(title=title[:256], url=url(passage) if passage else None,
                           description="\n\n".join(lines)[:4096], color=COLOUR)
     count = len(entry["passages"])
-    embed.set_footer(text=f"{SOURCE}. Ask again for another ({count} for this day)." if count > 1 else SOURCE)
+    footer = f"{SOURCE}. Ask again for another ({count} for this day)." if count > 1 else SOURCE
+    picture = plate(entry["flower"])
+    if picture:
+        embed.set_image(url=picture["image"])
+        footer = f"{footer.rstrip('.')}. Plate: {picture['credit']}."
+    embed.set_footer(text=footer)
     return embed
 
 
