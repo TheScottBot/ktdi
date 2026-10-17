@@ -26,11 +26,18 @@ conventions; this file is only the working rules. (CLAUDE.md imports this file, 
   - it's on a shelf: `shelves=(...)`, one or more of `oldbooks.SHELVES` (nature, folklore, esoteric, words,
     household), so `/nature`, `/esoteric` and the rest ask it. A book that's mostly one shelf with some entries that
     belong on another (/omen's charms against witches are esoteric too) also gives `entry_shelves`;
+  - **no slash command of its own**: it's asked through its shelf (`/esoteric book:talisman thing:scarab`), to keep
+    Discord's command list short. Its command is a plain `commands.command` (typed-only, `!talisman`, with no
+    `app_commands.describe` or autocomplete), and its OldBook gives `names=lambda: DICTIONARY.names` (the shelf's
+    autocomplete) and `own_command=False`. Only a book that does something a lookup can't, or that the maintainer
+    asks for, gets a slash command too;
   - its shelf says so: the shelf's `about` in `SHELVES` (its `/help` page), `short` too if the book is a big part
-    of it, and the shelves row in `docs/COMMANDS.md`, which name the books on each.
-  `tests/test_lore.py` fails without the first two. A new shelf is a `SHELVES` entry (the command makes itself),
-  plus its name in `tests/test_registration.py`'s `SLASH_COMMANDS`, the shelves row in `docs/COMMANDS.md`, the
-  README's index and the shelves listed here; and the books that belong on it.
+    of it, the shelf's row in `docs/COMMANDS.md` and a row for the book under it, and the shelf's line in the
+    README's index; and the book in `SHELVED_BOOKS` in `tests/test_registration.py`.
+  `tests/test_lore.py` fails without the first two, or if `own_command` doesn't match the command. A new shelf is a
+  `SHELVES` entry (the command makes itself; `category` is its /help section), plus its name in
+  `tests/test_registration.py`'s `SLASH_COMMANDS`, a row in `docs/COMMANDS.md`, the README's index and the shelves
+  listed here; and the books that belong on it.
 - **Curating an old book:** keep only what's on an allowlist, and leave out anything with racism or contempt for a
   people or faith (even in passing), mockery of America, sex, gore, cruelty to animals, remedies someone could try,
   misogyny, suicide, harm to children, or anything that takes **gender or sexuality** lightly: people or animals

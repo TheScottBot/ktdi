@@ -30,7 +30,7 @@ def pick(last: str | None = None) -> oldbooks.OldBook:
 async def post_wisdom(where: discord.abc.Messageable, heading: str, last: str | None = None) -> str:
     """One, from any book but `last`; returns the book's command (the daily post remembers it)."""
     book = pick(last)
-    await book.post(where, f"{heading}, from `/{book.command}`")
+    await book.post(where, f"{heading}, from `{book.asked()}`")
     return book.command
 
 

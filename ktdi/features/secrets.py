@@ -1,10 +1,11 @@
-"""/secrets [what]: The Boke of Secretes of Albertus Magnus (English, 1560, public domain): the magic of herbs, stones
-and beasts, and the marvels of the world. Not really by Albertus (a medieval compilation that borrowed his name),
-and none of it works, which is the charm: lay a lodestone under your wife's head to learn if she's faithful, carry
-marigold and a wolf's tooth so nobody can speak against you, light a lamp that makes whoever holds it fart.
+"""/esoteric book:secrets [what] (typed: !secrets [what]): The Boke of Secretes of Albertus Magnus (English, 1560,
+public domain): the magic of herbs, stones and beasts, and the marvels of the world. Not really by Albertus (a medieval
+compilation that borrowed his name), and none of it works, which is the charm: lay a lodestone under your wife's head to
+learn if she's faithful, carry marigold and a wolf's tooth so nobody can speak against you, light a lamp that makes
+whoever holds it fart.
 
 The secrets are in ktdi/lib/secrets.json, built by ktdi/tools/secrets_build.py from a hand-read allowlist (only the
-harmless magic). /secrets on its own is a random one; /secrets <what> finds one by what it's for ("enemies",
+harmless magic). !secrets on its own is a random one; !secrets <what> finds one by what it's for ("enemies",
 "invisible", "fire") or what it's made of ("amethyst", "owl"), and says if there are more. Each links to its page in
 the scan of the printed book.
 """
@@ -13,7 +14,6 @@ import json
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -75,9 +75,8 @@ def secrets_embed(what: str | None) -> discord.Embed:
                                         "dogs, prophecy, or a stone (amethyst, the lodestone).")
 
 
-@commands.hybrid_command(name="secrets", aliases=["albertus"],
-                         description="The Boke of Secretes (1560): medieval magic from herbs, stones and beasts.")
-@app_commands.describe(what="What it's for or made of (enemies, invisible, fire, amethyst, owl...). Empty: random")
+@commands.command(name="secrets", aliases=["albertus"],
+                  description="The Boke of Secretes (1560): medieval magic from herbs, stones and beasts.")
 async def secrets(ctx: commands.Context, *, what: str | None = None):
     """A secret from The Boke of Secretes of Albertus Magnus (1560): the magic of herbs, stones and beasts, and the
     marvels of the world. Not really by Albertus (a medieval book that borrowed his name), and none of it works,
@@ -89,14 +88,10 @@ async def secrets(ctx: commands.Context, *, what: str | None = None):
     await ctx.send(embed=secrets_embed(what))
 
 
-@secrets.autocomplete("what")
-async def what_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "secrets", random=lambda: secrets_embed(None),
                             find=lambda topic: DICTIONARY.look_up(topic, close_first=False), title=title,
                             link=url,
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("esoteric",))
 
 

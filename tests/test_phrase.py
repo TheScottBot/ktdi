@@ -1,12 +1,11 @@
 """/phrase: where idioms come from, per Brewer's Dictionary of Phrase and Fable (ktdi.features.phrase)."""
 
 import json
-import types
 
 import pytest
 
 from ktdi import oldbooks
-from ktdi.features import phrase
+from ktdi.features import lore, phrase
 from tests.fakes import Ctx, User, run
 
 SCOTT = User(1, "scott")
@@ -56,11 +55,11 @@ def test_nothing_found_and_random():
     assert phrase.explain("the").title == "🗣️ To rain cats and dogs"  # Only filler: random
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(phrase.phrase.callback(ctx, idiom="mad as a hatter"))
     assert ctx.last.embed.title == "🗣️ Mad as a hatter"
-    choices = run(phrase.idiom_autocomplete(types.SimpleNamespace(), "cat"))
+    choices = lore.suggestions("words", "phrase", "cat", [phrase.OLD_BOOK])
     assert [c.value for c in choices] == ["To let the cat out of the bag", "To rain cats and dogs"]
     assert phrase.phrase.aliases == ["idiom", "brewer"]
 

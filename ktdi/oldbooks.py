@@ -1,5 +1,5 @@
-"""Shared by the old-book commands (/vulgartongue, /deadword, /devils, /dream, /phrase, /beeton, /enquire, /almanac,
-/melancholy, /pliny, /pseudodoxia, /bestiary, /secrets, /wonder, /goblin, /omen, /flowermeaning and the rest): a book of entries looked up by
+"""Shared by the old-book commands (/vulgartongue, /deadword, /pliny, /omen, /beeton, /almanac and the rest, and the
+books asked through their shelves: /esoteric book:talisman, /nature book:bestiary): a book of entries looked up by
 headword, and the replies they have in common.
 
 A command makes a Dictionary of its entries, then asks it to look things up (the headword's entry, else the entries
@@ -8,14 +8,16 @@ is the command's own business; the list of entries that use a word looks the sam
 
 Every old book also declares itself as OLD_BOOK (an OldBook, or a list of them): how /lore searches it alongside the
 others, how Old Wisdom of the Day gets a random entry from it, and which shelves it's on (SHELVES: /nature, /folklore,
-/esoteric, /words, /household search just theirs). A new old book isn't finished without one.
+/esoteric, /words, /household search just theirs, or ask one of their books). A new old book isn't finished without
+one. Most books have no slash command of their own (own_command=False): they're asked through their shelf, which
+keeps Discord's command list short, and their command is typed-only (!talisman).
 """
 
 import importlib
 import random
 import re
 from dataclasses import dataclass
-from typing import Any, Awaitable, Callable, Generic, Iterable, TypeVar
+from typing import Any, Awaitable, Callable, Generic, Iterable, Sequence, TypeVar
 
 import discord
 from discord import app_commands
@@ -211,29 +213,30 @@ class Shelf:
     short: str  # What's on it, in a few words, for its command's one-line description
     about: str  # What's on it, for its /help page
     examples: str  # What to try
+    category: str  # Its /help section
 
 
 SHELVES = {  # The command for each, and what's on it; every old book is on at least one (tests/test_lore.py)
     "nature": Shelf(
         "🦉", "Natural history", "Pliny, Browne, Topsell's beasts and Culpeper's plants",
         "Pliny, Browne's vulgar errors, Topsell's beasts, Culpeper's plants and the Victorian wonders",
-        "dragons, elephants, the moon, eels or the mandrake"),
+        "dragons, elephants, the moon, eels or the mandrake", "🐉 Beasts & magic"),
     "folklore": Shelf(
         "🧚", "Folklore", "goblins, superstitions, flowers and old sayings",
         "Welsh goblins, everyday superstitions, the language of flowers, the almanac, weather sayings and the "
-        "Victorian wonders", "fairies, salt, Friday, roses or ghosts"),
+        "Victorian wonders", "fairies, salt, Friday, roses or ghosts", "🐉 Beasts & magic"),
     "esoteric": Shelf(
         "🔮", "Esoteric", "secrets, dreams, gems, talismans and charms",
         "the Book of Secrets credited to Albertus Magnus, dreams, astrological cures, gems and talismans, magic "
-        "squares, witches, and the magic in the folklore books", "salt, the moon, rubies, scarabs or eagles"),
+        "squares, witches, and the magic in the folklore books", "salt, the moon, rubies, scarabs or eagles", "🐉 Beasts & magic"),
     "words": Shelf(
         "📚", "Words", "slang, lost words, Bierce and Brewer",
         "Grose's slang, Mackay's lost words, Bierce's Devil's Dictionary and Brewer's phrases",
-        "drunk, love, fool, money or the devil"),
+        "drunk, love, fool, money or the devil", "📚 Words & wisdom"),
     "household": Shelf(
         "🏠", "Household", "Mrs Beeton, Enquire Within, manners and melancholy",
         "Mrs Beeton, Enquire Within, the etiquette manuals, the 1531 health handbook and Burton's melancholy",
-        "eggs, servants, dinner, cheese or sleep"),
+        "eggs, servants, dinner, cheese or sleep", "🌿 Hearth & herbs"),
 }
 
 
@@ -245,7 +248,10 @@ class OldBook:
     and the text /lore quotes from (plain text, as the book has it: /lore escapes it). `send`, for a book whose post
     is more than an embed (/herbal's, which people dig into), posts a random one itself: send(where, content).
     `shelves` are the SHELVES it's on; `entry_shelves`, for a book with some entries that belong on another shelf
-    too (/omen's charms against witches are esoteric as well as folklore), is the extra shelves an entry is on."""
+    too (/omen's charms against witches are esoteric as well as folklore), is the extra shelves an entry is on.
+    `names` gives its entries' names, for autocomplete when it's picked on a shelf (/esoteric book:talisman thing:…).
+    `own_command` is False for a book asked through its shelf, with no slash command of its own (its command is
+    typed-only, as !talisman)."""
     book: str  # Who wrote what: "Pliny the Elder, Natural History (AD 77)"
     emoji: str
     command: str  # The command with more: "pliny", or "beeton recipe"
@@ -257,6 +263,16 @@ class OldBook:
     send: Callable[[discord.abc.Messageable, str | None], Awaitable[discord.Message]] | None = None
     shelves: tuple[str, ...] = ()
     entry_shelves: Callable[[Any], Iterable[str]] = lambda entry: ()
+    names: Callable[[], Sequence[str]] = lambda: ()
+    own_command: bool = True
+
+    def asked(self, thing: str | None = None, shelf: str | None = None) -> str:
+        """How to ask it (for something), as a slash command: "/pliny dragon", or for a book asked through its
+        shelf, "/esoteric book:talisman thing:scarab" (on `shelf`, if it's one of its own)."""
+        if self.own_command:
+            return f"/{self.command} {thing}" if thing else f"/{self.command}"
+        on = shelf if shelf in self.shelves else self.shelves[0]
+        return f"/{on} book:{self.command}" + (f" thing:{thing}" if thing else "")
 
     def find_on(self, shelf: str | None, topic: str) -> fuzzy.LookUp | None:
         """What it has on a topic (as `find`), on a shelf: all of it if the book's on that shelf, else only the
@@ -285,3 +301,8 @@ def every_book() -> list[OldBook]:
         books = getattr(importlib.import_module(name), "OLD_BOOK", None)
         found.extend(books if isinstance(books, list) else [books] if books else [])
     return found
+
+
+def shelved(command: str) -> OldBook | None:
+    """The book asked through its shelf that this command is (talisman, but not pliny), if it's one."""
+    return next((book for book in every_book() if not book.own_command and book.command == command), None)

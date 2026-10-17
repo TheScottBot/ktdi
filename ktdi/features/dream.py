@@ -1,8 +1,9 @@
-"""/dream [thing]: what dreaming of it foretells, from Gustavus Hindman Miller's Ten Thousand Dreams Interpreted (1901,
-public domain): "To dream of an eel is good if you can maintain your grip on him."
+"""/esoteric book:dream [thing] (typed: !dream [thing]): what dreaming of it foretells, from Gustavus Hindman Miller's
+Ten Thousand Dreams Interpreted (1901, public domain): "To dream of an eel is good if you can maintain your grip on
+him."
 
-The entries are in ktdi/lib/dream.json, built by ktdi/tools/dream_build.py from a hand-read allowlist. /dream on its
-own is a random dream. /dream <thing> takes a thing ("eel") or the whole dream ("I dreamt my teeth fell out": Teeth),
+The entries are in ktdi/lib/dream.json, built by ktdi/tools/dream_build.py from a hand-read allowlist. !dream on its
+own is a random dream. !dream <thing> takes a thing ("eel") or the whole dream ("I dreamt my teeth fell out": Teeth),
 any word order and small typos; failing that it lists the dreams whose meanings mention it ("landlord"). Each links to
 its place in the book.
 """
@@ -13,7 +14,6 @@ import re
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -87,8 +87,7 @@ def interpret(query: str | None) -> discord.Embed:
                                                        "mother)."))
 
 
-@commands.hybrid_command(name="dream", description="What your dream foretells, according to 1901. Or a random one.")
-@app_commands.describe(thing="What you dreamt of (eels, teeth...) or the whole dream. Empty: random")
+@commands.command(name="dream", description="What your dream foretells, according to 1901. Or a random one.")
 async def dream(ctx: commands.Context, *, thing: str | None = None):
     """What dreaming of something foretells, according to Miller's Ten Thousand Dreams Interpreted (1901). Give the
     thing (eels) or the whole dream (I dreamt my teeth fell out); for something Miller didn't cover, you get the
@@ -96,13 +95,9 @@ async def dream(ctx: commands.Context, *, thing: str | None = None):
     await ctx.send(embed=interpret(thing))
 
 
-@dream.autocomplete("thing")
-async def thing_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook(SOURCE, "🔮", "dream", random=lambda: interpret(None),
                             find=lambda topic: DICTIONARY.look_up(topic), title=lambda e: e["word"], link=url,
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("esoteric",))
 
 

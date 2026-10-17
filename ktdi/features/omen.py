@@ -90,6 +90,7 @@ def shelves_of(omen: dict) -> tuple[str, ...]:
 
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "omen", random=lambda: omens_embed(None),
                             find=lambda what: DICTIONARY.look_up(what, close_first=False), link=url,
+                            names=lambda: DICTIONARY.names,
                             shelves=("folklore",), entry_shelves=shelves_of)
 
 

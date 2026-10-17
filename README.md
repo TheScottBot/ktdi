@@ -24,8 +24,8 @@ the spray futures market lets you bet on who's next. It's all for show and all r
 **📜 The old books.** About two dozen public-domain books, read by hand and kept to what's fun and kind: Pliny's
 beasts, Topsell's dragons, a medieval book of magic secrets, turn-of-the-century dreams, superstitions, goblins,
 gems and talismans, 1811 slang, Mrs Beeton and two Victorian etiquette manuals. `/lore dragon` asks all of them at once;
-`/nature`, `/folklore`, `/esoteric`, `/words` and `/household` ask one shelf; each book has its own command too. Old
-Wisdom of the Day posts one in a channel every day, at a time the server picks.
+`/nature`, `/folklore`, `/esoteric`, `/words` and `/household` ask one shelf, or one of its books
+(`/esoteric book:talisman`). Old Wisdom of the Day posts one in a channel every day, at a time the server picks.
 
 Around those: movie nights, quotes, D&D campaign links and reminders, unit conversions (sincere and absurd),
 timezones, the weather, and the library.
@@ -50,28 +50,31 @@ Looting, Linux, anime and the war archives.
 - `wars`: the KTDI War Archives
 
 ### [📚 Words & wisdom](docs/COMMANDS.md#words-and-wisdom)
-All the old books at once, then dictionaries, idioms, manners and gloom.
+All the old books at once, the shelf of words, slang, lost words and Old Wisdom.
 - `lore`: what every old book says about something, side by side
-- `nature` · `folklore` · `esoteric` · `words` · `household`: the same, on one shelf
 - `wisdom`: old wisdom at random, or Old Wisdom of the Day in a channel
-- `vulgartongue`: 1811 slang · `deadword`: words English lost · `devils`: Bierce's Devil's Dictionary
-- `phrase`: where an idiom comes from · `etiquette`: what a Victorian manual says to do
-- `enquire`: the Victorian answer to anything · `melancholy`: Burton's gloomy wisdom (1621)
+- `words`: the dictionaries' shelf, with `devils` (Bierce's Devil's Dictionary) and `phrase` (where idioms come from)
+- `vulgartongue`: 1811 slang · `deadword`: words English lost
+
+Most old books are asked on their shelf (`/words book:devils`), and still typed by their own name (`!devils`).
 
 ### [🐉 Beasts & magic](docs/COMMANDS.md#beasts-and-magic)
-Monsters, marvels, curiosities, stones, spells, witches and dreams.
-- `pliny`: Pliny's Natural History (AD 77) · `pseudodoxia`: Browne's vulgar errors (1646)
-- `bestiary`: Topsell's beasts (1607) · `wonder`: Ten Thousand Wonderful Things (c. 1860)
-- `secrets`: the Boke of Secretes (1560) · `hammeredofwitches`: witch-finding tips from the Malleus (1486)
-- `dream`: what your dream foretells (1901) · `omen`: everyday superstitions (1898)
-- `goblin`: Welsh fairies, ghosts and customs (1880) · `gemlore`: precious stones (1913)
-- `talisman`: talismans, charms and star signs (1922) · `magicsquare`: Agrippa's planetary squares, and SATOR
+The shelves of natural history, folklore and magic, Pliny, omens and witches.
+- `nature`: natural history, with `bestiary` (Topsell's beasts, 1607), `pseudodoxia` (Browne's vulgar errors, 1646)
+  and `wonder` (Ten Thousand Wonderful Things, c. 1860)
+- `folklore`: with `goblin` (Welsh fairies and ghosts, 1880) and `flowermeaning` (the language of flowers, 1851)
+- `esoteric`: magic, with `secrets` (the Boke of Secretes, 1560), `dream` (what your dream foretells, 1901),
+  `gemlore` (precious stones, 1913), `talisman` (talismans and star signs, 1922) and `magicsquare` (Agrippa's
+  squares, and SATOR)
+- `pliny`: Pliny's Natural History (AD 77) · `omen`: everyday superstitions (1898)
+- `hammeredofwitches`: witch-finding tips from the Malleus (1486)
 
 ### [🌿 Hearth & herbs](docs/COMMANDS.md#hearth-and-herbs)
-Mrs Beeton, Culpeper's cures, the language of flowers and the almanac.
-- `beeton`: Mrs Beeton's recipes and advice (1861) · `almanac`: today in Hone's Every-Day Book (1826-27)
+The household shelf, Mrs Beeton, manners, Culpeper's cures and the almanac.
+- `household`: with `enquire` (the Victorian answer to anything) and `melancholy` (Burton's gloomy wisdom, 1621)
+- `beeton`: Mrs Beeton's recipes and advice (1861) · `etiquette`: what a Victorian manual says to do
 - `cure` / `plant`: Culpeper's herbal remedies (1653) · `herbal`: a 1531 health handbook, machine-translated
-- `flowermeaning`: the Victorian language of flowers (1851)
+- `almanac`: today in Hone's Every-Day Book (1826-27)
 
 ### [🎬 Movie night](docs/COMMANDS.md#movie-night)
 Countdowns, bingo, votes and ratings.

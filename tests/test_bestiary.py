@@ -2,11 +2,10 @@
 books is tests/test_tcp.py)."""
 
 import json
-import types
 
 import pytest
 
-from ktdi.features import bestiary
+from ktdi.features import bestiary, lore
 from ktdi.tools import bestiary_build as build, tcp
 from tests.fakes import Ctx, User, run
 
@@ -72,9 +71,9 @@ def test_other_names_random_and_nothing():
     assert "Nothing on that one in this bestiary" in bestiary.bestiary_embed("zzqx").description
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(bestiary.bestiary.callback(ctx, beast="sea-unicorn"))
     assert ctx.last.embed.title == "🐉 Sea-unicorn"
-    assert [c.value for c in run(bestiary.beast_autocomplete(types.SimpleNamespace(), "mono"))] == ["Monoceros"]
+    assert [c.value for c in lore.suggestions("nature", "bestiary", "mono", [bestiary.OLD_BOOK])] == ["Monoceros"]
     assert bestiary.bestiary.aliases == ["topsell"]

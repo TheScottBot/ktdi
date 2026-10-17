@@ -1,11 +1,10 @@
 """/wonder: Ten Thousand Wonderful Things (ktdi.features.wonder, ktdi.tools.wonder_build)."""
 
 import json
-import types
 
 import pytest
 
-from ktdi.features import wonder
+from ktdi.features import lore, wonder
 from ktdi.tools import wonder_build as build
 from tests.fakes import Ctx, User, run
 
@@ -99,10 +98,10 @@ def test_random_and_nothing():
     assert "Nothing on that in this cabinet" in wonder.wonders_embed("zzqx").description
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(wonder.wonder.callback(ctx, topic="walking stick"))
     assert ctx.last.embed.title == "✨ Henry VIII.'s Walking Stick"
-    assert [c.value for c in run(wonder.topic_autocomplete(types.SimpleNamespace(), "henry"))] == \
+    assert [c.value for c in lore.suggestions("nature", "wonder", "henry", [wonder.OLD_BOOK])] == \
         ["Henry VIII.'s Walking Stick"]
     assert wonder.wonder.aliases == ["wonders", "curiosity"]

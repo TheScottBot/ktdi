@@ -46,13 +46,15 @@ ktdi/
 ├── config.py          every setting from .env, in one place
 ├── db.py              SQLite connection, schema, upgrades, shared state (scope())
 ├── common.py          helpers shared by features (Reply, send_reply/respond, NO_PINGS, get_member, common.bot)
-├── oldbooks.py        what the 📜 Old books lookups (/vulgartongue, /deadword, /devils, /dream, /phrase,
-│                      /beeton, /enquire) share: Dictionary (look_up, named_in, uses, one_of, same_name,
+├── oldbooks.py        what the 📜 Old books lookups (/vulgartongue, /deadword, !devils, !dream, !phrase,
+│                      /beeton, !enquire) share: Dictionary (look_up, named_in, uses, one_of, same_name,
 │                      autocomplete), uses_embed, fit, clip, escape. A new old-book command should be a Dictionary
 │                      plus how its entries look, nothing more. Each old book also declares OLD_BOOK (an OldBook):
-│                      its random entry for Old Wisdom of the Day, how /lore searches it, and its shelves (SHELVES:
-│                      the /nature, /folklore, /esoteric, /words and /household searches; entry_shelves for a book
-│                      with some entries on another shelf too)
+│                      its random entry for Old Wisdom of the Day, how /lore searches it, its shelves (SHELVES:
+│                      /nature, /folklore, /esoteric, /words and /household; entry_shelves for a book with some
+│                      entries on another shelf too), its entries' names (autocomplete when it's picked on a shelf),
+│                      and own_command: False for a book asked only through its shelf (/esoteric book:talisman),
+│                      whose command is typed-only (!talisman)
 ├── daily.py           posting every day in a channel each server chooses: a feature registers a Daily (its name
 │                      and how to post today's), and its `setup here/stop/show` subcommands call setup_here, stop
 │                      and show; daily_loop posts what's due (daily_posts table). /wisdom and /almanac use it
@@ -70,32 +72,34 @@ ktdi/
 │   │                  its Latin one); lookups in lib/cure.py, data in lib/cures.json
 │   ├── slang.py       /vulgartongue lookup (1811 slang, or the slang for a plain word) and insult @someone
 │   ├── deadword.py    /deadword: words English stopped using (Mackay, 1874), looked up or at random
-│   ├── devils.py      /devils: Bierce's cynical definitions (1911), looked up or at random
-│   ├── dream.py       /dream: what a dream foretells (Miller, 1901), by thing or whole dream, or at random
-│   ├── phrase.py      /phrase: where an idiom comes from (Brewer, 1898), the nearest idiom however it's worded
+│   ├── devils.py      !devils (on /words): Bierce's cynical definitions (1911), looked up or at random
+│   ├── dream.py       !dream (on /esoteric): what a dream foretells (Miller, 1901), by thing or whole dream, or at random
+│   ├── phrase.py      !phrase (on /words): where an idiom comes from (Brewer, 1898), the nearest idiom however it's worded
 │   ├── beeton.py      /beeton recipe, menu and advice: Mrs Beeton (1861), recipes by dish or ingredient, the
 │   │                  day's family dinner, household advice
-│   ├── enquire.py     /enquire: a hint on anything from Enquire Within Upon Everything (1856)
+│   ├── enquire.py     !enquire (on /household): a hint on anything from Enquire Within Upon Everything (1856)
 │   ├── almanac.py     /almanac: a day from Hone's Every-Day Book (1826-27): saints, folklore, flower (with its
 │                      plate, from almanac_plates.json), temperature.
 │   │                  Dates are read by lib/reminders.py's parse_day (shared with campaign reminders).
 │   │                  /almanac setup here posts the day's every morning (a Daily: daily.py)
-│   ├── melancholy.py  /melancholy: a passage of Burton's Anatomy of Melancholy (1621) on a topic, or at random
+│   ├── melancholy.py  !melancholy (on /household): a passage of Burton's Anatomy of Melancholy (1621) on a topic, or at random
 │   ├── pliny.py       /pliny: a chapter of Pliny's Natural History (AD 77) on a topic, or at random
-│   ├── pseudodoxia.py /pseudodoxia: a chapter of Browne's Pseudodoxia Epidemica (1646) on a topic, or at random
-│   ├── bestiary.py    /bestiary: a passage of Topsell's beasts (1607) and serpents (1608) on a beast, or at random
-│   ├── lore.py        /lore: one search across every old book's OLD_BOOK, an entry from each, side by side
-│                      and the shelf commands (/nature, /folklore, /esoteric, /words, /household): the same, on one shelf
+│   ├── pseudodoxia.py !pseudodoxia (on /nature): a chapter of Browne's Pseudodoxia Epidemica (1646) on a topic, or at random
+│   ├── bestiary.py    !bestiary (on /nature): a passage of Topsell's beasts (1607) and serpents (1608) on a beast, or at random
+│   ├── lore.py        /lore: one search across every old book's OLD_BOOK, an entry from each, side by side,
+│                      and the shelf commands (/nature, /folklore, /esoteric, /words, /household): the same on one
+│                      shelf, or (book:) one of its books, by running that book's own command; book: comes first,
+│                      so thing:'s autocomplete knows which book's entries to suggest
 │   ├── wisdom.py      /wisdom: a random entry from any OLD_BOOK; Old Wisdom of the Day (/wisdom setup here),
 │   │                  a Daily (daily.py) that picks a different book each day
-│   ├── wonder.py      /wonder: a curiosity from Ten Thousand Wonderful Things (1894), with its engraving
-│   ├── goblin.py      /goblin: a tale of Welsh fairies, ghosts and customs from British Goblins (1880)
+│   ├── wonder.py      !wonder (on /nature, /folklore): a curiosity from Ten Thousand Wonderful Things (1894), with its engraving
+│   ├── goblin.py      !goblin (on /folklore): a tale of Welsh fairies, ghosts and customs from British Goblins (1880)
 │   ├── omen.py        /omen: an everyday superstition from The Magic of the Horse-shoe (1898)
-│   ├── flower.py      /flowermeaning: a flower's Victorian meaning (Dumont, 1851), or the flowers for a meaning
-│   ├── gem.py         /gemlore: a stone and what was believed of it (Kunz, The Curious Lore of Precious Stones, 1913)
-│   ├── talisman.py    /talisman: a talisman, charm or star sign and its stones (Pavitt, 1922)
-│   ├── magicsquare.py /magicsquare: Agrippa's planetary magic squares, worked out, and the SATOR square
-│   ├── secrets.py     /secrets: a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
+│   ├── flower.py      !flowermeaning (on /folklore): a flower's Victorian meaning (Dumont, 1851), or the flowers for a meaning
+│   ├── gem.py         !gemlore (on /esoteric): a stone and what was believed of it (Kunz, The Curious Lore of Precious Stones, 1913)
+│   ├── talisman.py    !talisman (on /esoteric): a talisman, charm or star sign and its stones (Pavitt, 1922)
+│   ├── magicsquare.py !magicsquare (on /esoteric): Agrippa's planetary magic squares, worked out, and the SATOR square
+│   ├── secrets.py     !secrets (on /esoteric): a secret from the Boke of Secretes of Albertus Magnus (1560), or at random
 │   ├── etiquette.py   /etiquette gentleman, gentlewoman, gentlethem and remind: 1860s rules for any situation
 │   ├── anime.py       /anime (asks ANIME_USER_ID about a random AniList anime)
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener)
@@ -116,7 +120,7 @@ ktdi/
     ├── ailments.py    /cure's dictionary: ~90 ailments, each with the names people use and Culpeper's 1653 terms
     ├── fuzzy.py       loose matching, no AI: any word order, small typos, filler ignored (best_match), autocomplete
     │                  (starting_first) and "which entries use this word" (containing). Used by /cure, /plant,
-    │                  /vulgartongue, /deadword, /devils and /etiquette: use it for any new lookup rather
+    │                  /vulgartongue, /deadword, !devils and /etiquette: use it for any new lookup rather
     │                  than writing another (look_up does a whole dictionary lookup: headword, then uses, then close)
     ├── cure.py        /cure's and /plant's lookups: ailments and herbs, matched with fuzzy.py
     ├── links.py       links into old books at the exact spot: Gutenberg text fragments (#:~:text=, scrolls to and
@@ -138,9 +142,9 @@ ktdi/
     │                  (slang_curation.json: entries kept, and the insults). Slurs and anything that punches down
     │                  were reviewed out once; the repo only records what was kept, never what was removed
     │                  (tests/slang_left_out.sha256.json fingerprints it so a test can check it stays out)
-    ├── devils.json    /devils's entries (Bierce, 1911, Gutenberg), built by tools/devils_build.py from an
+    ├── devils.json    !devils's entries (Bierce, 1911, Gutenberg), built by tools/devils_build.py from an
     │                  allowlist (devils_curation.json), the same way as slang.json (tests/devils_left_out.sha256.json)
-    ├── dream.json     /dream's entries (Miller, 1901, Gutenberg), built by tools/dream_build.py the same way
+    ├── dream.json     !dream's entries (Miller, 1901, Gutenberg), built by tools/dream_build.py the same way
     │                  (dream_curation.json, tests/dream_left_out.sha256.json). All three allowlist builds share
     │                  tools/gutenberg.py: downloading (falling back to Gutenberg's mirror) and the build run itself
     ├── beeton.json    /beeton's recipes, advice and family dinners (Gutenberg), built by tools/beeton_build.py from an allowlist of
@@ -156,22 +160,22 @@ ktdi/
     ├── pliny.json     /pliny's chapters (all six Gutenberg volumes of Bostock and Riley), built by
     │                  tools/pliny_build.py from pliny_curation.json (keys like VIII.3); each keeps its volume and
     │                  the words to link to it by, taken from the page's text so they never span a footnote mark
-    ├── pseudodoxia.json  /pseudodoxia's chapters (Browne, in Sayle's three-volume Works, Gutenberg), built by
+    ├── pseudodoxia.json  !pseudodoxia's chapters (Browne, in Sayle's three-volume Works, Gutenberg), built by
     │                  tools/pseudodoxia_build.py from pseudodoxia_curation.json (keys like 3.5: book, chapter);
     │                  side-notes and footnotes taken out
-    ├── bestiary.json  /bestiary's passages (Topsell, from EEBO-TCP's hand-keyed transcriptions, CC0), built by
+    ├── bestiary.json  !bestiary's passages (Topsell, from EEBO-TCP's hand-keyed transcriptions, CC0), built by
     │                  tools/bestiary_build.py from bestiary_curation.json: single paragraphs, keyed by section
     │                  ("beasts:483", with its heading as a check) and paragraph, each filed under a modern name
     │                  ("Unicorn" for OF THE VNICORNE); each keeps its image in the archive.org scan of the printed
     │                  book and a word the scan's OCR has on that page, to highlight. Read by tools/tcp.py, which
     │                  every EEBO-TCP build shares (the long s, the strokes for m and n, "yᵉ", page images)
-    ├── secrets.json   /secrets's magic (the Boke of Secretes, 1560, EEBO-TCP), built by tools/secrets_build.py the
+    ├── secrets.json   !secrets's magic (the Boke of Secretes, 1560, EEBO-TCP), built by tools/secrets_build.py the
     │                  same way from secrets_curation.json: only harmless magic, each tagged with what it's for
     │                  ("Enemies", "Fart") so modern words find it
-    ├── wonder.json    /wonder's curiosities (Ten Thousand Wonderful Things, 1894), built by tools/wonder_build.py
+    ├── wonder.json    !wonder's curiosities (Ten Thousand Wonderful Things, 1894), built by tools/wonder_build.py
     │                  from the book's web page (where its engravings are) and wonder_curation.json (titles
     │                  kept); each is numbered in book order and keeps its pictures' Gutenberg URLs
-    ├── goblin.json    /goblin's tales (Sikes, British Goblins, 1880), built by tools/goblin_build.py from the
+    ├── goblin.json    !goblin's tales (Sikes, British Goblins, 1880), built by tools/goblin_build.py from the
     │                  book's web page (T. H. Thomas's illustrations) and goblin_curation.json: its numbered
     │                  sections (book.chapter.section), each kept one given a title and other names. The web-page
     │                  builds (wonder, goblin) share gutenberg.html_text and gutenberg.titled
@@ -179,27 +183,27 @@ ktdi/
     │                  tools/omen_build.py from the book's web page and omen_curation.json: paragraphs, or short
     │                  runs of them (essay.subsection.paragraph, "to" for a run), each kept one given a title
     │                  and other names (gutenberg.titled_keep, shared with goblin)
-    ├── flowers.json   /flowermeaning's flowers (Dumont, The Language of Flowers, 1851), built by
+    ├── flowers.json   !flowermeaning's flowers (Dumont, The Language of Flowers, 1851), built by
     │                  tools/flower_build.py from the book's web page: its Dictionary of Flowers, its chapters
     │                  (joined to the dictionary's flower by name) and its six plates, and flower_curation.json
     │                  ("keep" by name; "no_text" keeps the meaning but not the chapter)
-    ├── gems.json      /gemlore's passages (Kunz, The Curious Lore of Precious Stones, 1913), built by
+    ├── gems.json      !gemlore's passages (Kunz, The Curious Lore of Precious Stones, 1913), built by
     │                  tools/gem_build.py from the book's web page (chapters I to X; XI, on remedies, left
     │                  out) and gem_curation.json: paragraphs or runs (chapter.section.paragraph, read by
     │                  gutenberg.headed_paragraphs, shared with omen), each with a title, its stones and
     │                  maybe one of the book's pictures
-    ├── talismans.json /talisman's passages (Pavitt, The Book of Talismans, Amulets and Zodiacal Gems, 1922),
+    ├── talismans.json !talisman's passages (Pavitt, The Book of Talismans, Amulets and Zodiacal Gems, 1922),
     │                  built by tools/talisman_build.py from the book's web page and talisman_curation.json:
     │                  paragraphs or runs (part.chapter.paragraph), each with a title and other names; a
     │                  passage citing a plate shows it (talisman_build.PLATES: the ones that may be shown)
-    ├── roman.py       Roman numerals to numbers (/pliny's books, /pseudodoxia's chapters)
-    ├── melancholy.json  /melancholy's excerpts (Burton, Gutenberg), built by tools/melancholy_build.py from
+    ├── roman.py       Roman numerals to numbers (/pliny's books, !pseudodoxia's chapters)
+    ├── melancholy.json  !melancholy's excerpts (Burton, Gutenberg), built by tools/melancholy_build.py from
     │                  melancholy_curation.json, which lists them word for word; the build checks each is in the book
     │                  (footnote marks, escaped Greek and Unicode forms aside) and works out the words a link can find
     │                  it by on the web page, where the footnote marks are still in the text
-    ├── enquire.json   /enquire's hints (Gutenberg), built by tools/enquire_build.py: risky topics left out whole, the
+    ├── enquire.json   !enquire's hints (Gutenberg), built by tools/enquire_build.py: risky topics left out whole, the
     │                  rest from an allowlist keyed "number. title" (enquire_curation.json; the book reuses two numbers)
-    ├── phrases.json   /phrase's idioms: hand-picked from Brewer's Dictionary of Phrase and Fable (1898, archive.org
+    ├── phrases.json   !phrase's idioms: hand-picked from Brewer's Dictionary of Phrase and Fable (1898, archive.org
     │                  scan; not on Gutenberg), OCR mended against the page, each with its page in the scan
     ├── oldmoney.py    old money (£ s. d.) in today's: /beeton's "2s. 3d." is "about £17 now" (£1 in 1861 is about
     │                  £155; SINCE_1861 to update)
@@ -274,17 +278,28 @@ source for `/lore`, its shelf and Old Wisdom of the Day, so adding one comes wit
 `OLD_BOOK = oldbooks.OldBook(...)` (see `ktdi/oldbooks.py`) with:
 
 - a `random` entry (what Old Wisdom of the Day posts);
-- if it can be searched by topic, `find`, `title`, `link` and `text` (what `/lore` asks and quotes);
+- if it can be searched by topic, `find`, `title`, `link` and `text` (what `/lore` asks and quotes), and `names`
+  (its entries' names, for autocomplete on its shelf: `lambda: DICTIONARY.names`);
 - its `shelves`: which of `/nature`, `/folklore`, `/esoteric`, `/words` and `/household` ask it (one or more). A book
   that's mostly one shelf with some entries on another gives `entry_shelves` too (`/omen`'s charms against witches
   are folklore and esoteric).
 
-A test fails until it does. Then name it on its shelf: the shelf's `about` in `oldbooks.SHELVES` (its `/help` page)
-and the shelves row in [docs/COMMANDS.md](docs/COMMANDS.md). Then the usual: a `/help` page, a row in [docs/COMMANDS.md](docs/COMMANDS.md), a line in the README's
-section index, and the curation rules in `AGENTS.md`.
+**A new book has no slash command of its own.** Discord's command list was getting long, so books are asked through
+their shelf (`/esoteric book:talisman thing:scarab`): the book's command is a plain `commands.command` (typed-only,
+`!talisman scarab`, which is what the shelf runs), with no `app_commands.describe` or autocomplete (the shelf has
+those), and its OldBook says `own_command=False`. Only a book that does something a lookup can't (`/beeton menu`,
+`/etiquette remind @someone`) or is a favourite people reach for gets a hybrid command too, and stays
+`own_command=True`. `tests/test_lore.py` checks the two agree, and that the shelf can ask every book in its menu.
 
-A new shelf is an entry in `oldbooks.SHELVES` (its command makes itself), its name in `tests/test_registration.py`,
-a mention in the shelves row in [docs/COMMANDS.md](docs/COMMANDS.md) and the README's index, and `shelves=` on the books that belong on it.
+A test fails until it's declared. Then name it on its shelf: the shelf's `about` in `oldbooks.SHELVES` (its `/help`
+page, which lists the shelf's books by itself), the shelf's row in [docs/COMMANDS.md](docs/COMMANDS.md), and a row
+of its own under it (`esoteric book:talisman [thing]` (typed: `!talisman`)). Then the usual: a `/help` page (its
+docstring), a mention under its shelf in the README's section index, `SHELVED_BOOKS` in
+`tests/test_registration.py` (or `SLASH_COMMANDS`, if it has its own), and the curation rules in `AGENTS.md`.
+
+A new shelf is an entry in `oldbooks.SHELVES` (its command makes itself, with its section: `category`), its name in
+`tests/test_registration.py`, a row in [docs/COMMANDS.md](docs/COMMANDS.md) and the README's index, and `shelves=` on
+the books that belong on it.
 
 ## 6. /help
 
@@ -316,6 +331,8 @@ section privately for whoever picks it), a section's page (`/help old oddities`:
     it. `/help` titles `!`-only commands with `!`. **Cryptids are deliberately left out of the README, docs/COMMANDS.md and these docs**
     (an exception to keeping the README complete): they're only meant to be found by seeing one used, or by reading
     the code. Don't add them back.
+- A book asked through its shelf (`OldBook.own_command=False`) is left off its section's list (its shelf's page lists
+  it, from `lore.help_extras`), and its own page is titled the shelf way: `/esoteric book:talisman [thing]`.
 - If a prefix command's arguments are in a different order to its slash version, set `usage=` to the slash form
   (e.g. `quote add`).
 

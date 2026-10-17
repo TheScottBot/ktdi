@@ -1,11 +1,10 @@
 """/melancholy: Burton's The Anatomy of Melancholy (ktdi.features.melancholy, ktdi.tools.melancholy_build)."""
 
 import json
-import types
 
 import pytest
 
-from ktdi.features import melancholy
+from ktdi.features import lore, melancholy
 from ktdi.tools import melancholy_build as build
 from tests.fakes import Ctx, User, run
 
@@ -110,10 +109,10 @@ def test_random_and_nothing():
     assert "Nothing from Burton on that here" in melancholy.melancholy_embed("zzqx").description
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(melancholy.melancholy.callback(ctx, topic="air"))
     assert ctx.last.embed.title == "🖤 Bad Air, a cause of Melancholy"
-    choices = run(melancholy.topic_autocomplete(types.SimpleNamespace(), "air"))
+    choices = lore.suggestions("household", "melancholy", "air", [melancholy.OLD_BOOK])
     assert [c.value for c in choices] == ["Bad Air, a cause of Melancholy"]
     assert melancholy.melancholy.aliases == ["burton", "gloom"]

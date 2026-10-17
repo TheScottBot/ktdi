@@ -144,10 +144,10 @@ OLD_BOOK = [
     oldbooks.OldBook(SOURCE, "🌿", "cure", random=lambda: cure_embed(random.choice(list(data["remedies"]))),
                      find=remedy_for, title=lambda r: f"For {r['ailment']}: {r['herb']}",
                      link=lambda r: links.gutenberg(BOOK, r["text"]),
-                     shelves=("esoteric",)),
+                     names=lambda: list(dict.fromkeys(name for _, name, _ in lookup.index())), shelves=("esoteric",)),
     oldbooks.OldBook(SOURCE, "🌱", "plant", random=lambda: plant_embed(random.choice(herb_titles)), find=herb_called,
                      title=lambda h: h["name"], link=lambda h: SOURCE_URL, text=treats,
-                     shelves=("nature",)),
+                     names=lambda: all_herb_names, shelves=("nature",)),
 ]
 
 

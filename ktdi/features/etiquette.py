@@ -25,7 +25,7 @@ from ktdi.common import choices
 from ktdi.lib import etiquette as situations
 from ktdi.lib import links
 
-HELP_CATEGORY = "📚 Words & wisdom"
+HELP_CATEGORY = "🌿 Hearth & herbs"
 DATA = Path(__file__).resolve().parent.parent / "lib" / "etiquette.json"
 BOOKS = {  # (title, Project Gutenberg number)
     "routledge": ("Routledge's Manual of Etiquette (c. 1875)", 12426),

@@ -1,10 +1,10 @@
-"""/wonder [topic]: a curiosity from Ten Thousand Wonderful Things (ed. Edmund Fillingham King, 1894; public domain,
-Project Gutenberg), a Victorian cabinet of curiosities: remarkable objects, customs, eccentric people, inventions,
-animals and extraordinary claims, many with an engraving, which is shown with it.
+"""/nature book:wonder [topic] (typed: !wonder [topic]): a curiosity from Ten Thousand Wonderful Things (ed. Edmund
+Fillingham King, 1894; public domain, Project Gutenberg), a Victorian cabinet of curiosities: remarkable objects,
+customs, eccentric people, inventions, animals and extraordinary claims, many with an engraving, which is shown with it.
 
 The curiosities are in ktdi/lib/wonder.json, built by ktdi/tools/wonder_build.py from a hand-read allowlist. Each
-is numbered in book order ("Wonder No. 312": the book doesn't number them). /wonder on its own is a random one;
-/wonder <topic> finds one about it, by its title or what it says, and says if there are more. They're the book's
+is numbered in book order ("Wonder No. 312": the book doesn't number them). !wonder on its own is a random one;
+!wonder <topic> finds one about it, by its title or what it says, and says if there are more. They're the book's
 claims, not checked facts, and the footer says so.
 """
 
@@ -12,7 +12,6 @@ import json
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -57,9 +56,8 @@ def wonders_embed(topic: str | None) -> discord.Embed:
                                         "clocks, coffee, swans, hoops or highwaymen.")
 
 
-@commands.hybrid_command(name="wonder", aliases=["wonders", "curiosity"],
-                         description="A Victorian curiosity from Ten Thousand Wonderful Things, engraving and all.")
-@app_commands.describe(topic="Anything (giants, clocks, coffee, swans, highwaymen...). Empty: a random one")
+@commands.command(name="wonder", aliases=["wonders", "curiosity"],
+                  description="A Victorian curiosity from Ten Thousand Wonderful Things, engraving and all.")
 async def wonder(ctx: commands.Context, *, topic: str | None = None):
     """A curiosity from Ten Thousand Wonderful Things (first published about 1860; this is the 1894 edition), a
     Victorian cabinet of curiosities: remarkable objects,
@@ -71,13 +69,9 @@ async def wonder(ctx: commands.Context, *, topic: str | None = None):
     await ctx.send(embed=wonders_embed(topic))
 
 
-@wonder.autocomplete("topic")
-async def topic_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "wonder", random=lambda: wonders_embed(None),
                             find=lambda topic: DICTIONARY.look_up(topic), link=url,
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("nature", "folklore"))
 
 

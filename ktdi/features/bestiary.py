@@ -1,10 +1,11 @@
-"""/bestiary [beast]: Edward Topsell's The Historie of Foure-footed Beastes (1607) and The Historie of Serpents (1608),
-public domain, in which a Jacobean clergyman gathered everything ever said about every animal, believed nearly all of
-it, and put the unicorn, the gorgon and the winged dragon in among the badgers and the cats.
+"""/nature book:bestiary [beast] (typed: !bestiary [beast]): Edward Topsell's The Historie of Foure-footed Beastes
+(1607) and The Historie of Serpents (1608), public domain, in which a Jacobean clergyman gathered everything ever said
+about every animal, believed nearly all of it, and put the unicorn, the gorgon and the winged dragon in among the
+badgers and the cats.
 
 The passages are in ktdi/lib/bestiary.json, built by ktdi/tools/bestiary_build.py from a hand-read allowlist: single
 paragraphs, in the books' own spelling, each filed under a modern name for its beast ("Unicorn" for "OF THE
-VNICORNE"). /bestiary on its own is a random passage; /bestiary <beast> finds one about it (or, failing that, one
+VNICORNE"). !bestiary on its own is a random passage; !bestiary <beast> finds one about it (or, failing that, one
 that mentions it) and says if there are more. Each links to its page in the scan of the printed book.
 """
 
@@ -12,7 +13,6 @@ import json
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -63,9 +63,8 @@ def bestiary_embed(beast: str | None) -> discord.Embed:
                                         "unicorn, the dragon, the elephant, the hedgehog, or the cockatrice.")
 
 
-@commands.hybrid_command(name="bestiary", aliases=["topsell"],
-                         description="Topsell's bestiary (1607): unicorns, dragons and badgers, all equally real.")
-@app_commands.describe(beast="An animal, real or otherwise (unicorn, dragon, elephant, toad...). Empty: random")
+@commands.command(name="bestiary", aliases=["topsell"],
+                  description="Topsell's bestiary (1607): unicorns, dragons and badgers, all equally real.")
 async def bestiary(ctx: commands.Context, *, beast: str | None = None):
     """A passage from Edward Topsell's bestiary: The Historie of Foure-footed Beastes (1607) and The Historie of
     Serpents (1608), in which a Jacobean clergyman gathered everything ever said about every animal, believed nearly
@@ -76,15 +75,11 @@ async def bestiary(ctx: commands.Context, *, beast: str | None = None):
     await ctx.send(embed=bestiary_embed(beast))
 
 
-@bestiary.autocomplete("beast")
-async def beast_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook("Edward Topsell's bestiary (1607-08)", EMOJI, "bestiary",
                             random=lambda: bestiary_embed(None),
                             find=lambda topic: DICTIONARY.look_up(topic, close_first=False),
                             title=lambda e: e["name"], link=url,
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("nature",))
 
 

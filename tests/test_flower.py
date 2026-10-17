@@ -1,11 +1,10 @@
 """/flowermeaning: The Language of Flowers (ktdi.features.flower, ktdi.tools.flower_build)."""
 
 import json
-import types
 
 import pytest
 
-from ktdi.features import flower
+from ktdi.features import flower, lore
 from ktdi.tools import flower_build as build
 from tests.fakes import Ctx, User, run
 
@@ -104,9 +103,9 @@ def test_another_name_misspelt_random_and_nothing():
     assert "No flower for that here" in flower.flowermeaning_embed("zzqx").description
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(flower.flowermeaning.callback(ctx, flower="basil"))
     assert ctx.last.embed.title == "🌸 Basil" and ctx.last.embed.description == "**Hate**"
-    assert [c.value for c in run(flower.flower_autocomplete(types.SimpleNamespace(), "bas"))] == ["Basil"]
+    assert [c.value for c in lore.suggestions("folklore", "flowermeaning", "bas", [flower.OLD_BOOK])] == ["Basil"]
     assert flower.flowermeaning.aliases == ["flower", "floriography"]

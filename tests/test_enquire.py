@@ -1,11 +1,10 @@
 """/enquire: Enquire Within Upon Everything (ktdi.features.enquire, ktdi.tools.enquire_build)."""
 
 import json
-import types
 
 import pytest
 
-from ktdi.features import enquire
+from ktdi.features import enquire, lore
 from ktdi.tools import enquire_build as build
 from tests.fakes import Ctx, User, run
 
@@ -129,10 +128,10 @@ def test_random_and_nothing():
     assert "Nothing on that here, despite the name" in enquire.enquire_embed("zzqx").description
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(enquire.enquire.callback(ctx, anything="mackerel"))
     assert ctx.last.embed.title == "🔎 Mackerel"
-    choices = run(enquire.anything_autocomplete(types.SimpleNamespace(), "candle"))
+    choices = lore.suggestions("household", "enquire", "candle", [enquire.OLD_BOOK])
     assert [c.value for c in choices] == ["Candles", "Lighting Candles"]
     assert enquire.enquire.aliases == ["enquirewithin", "ewue"]

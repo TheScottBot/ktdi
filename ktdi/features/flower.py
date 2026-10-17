@@ -1,9 +1,10 @@
-"""/flowermeaning [flower or meaning]: what a flower meant in Henrietta Dumont's The Language of Flowers (1851; public
-domain, Project Gutenberg), when the Victorians sent messages in bouquets: a pansy is "Think of me", basil "Hate".
+"""/folklore book:flowermeaning [flower or meaning] (typed: !flowermeaning [flower or meaning]): what a flower meant in
+Henrietta Dumont's The Language of Flowers (1851; public domain, Project Gutenberg), when the Victorians sent messages
+in bouquets: a pansy is "Think of me", basil "Hate".
 
 The flowers are in ktdi/lib/flowers.json, built by ktdi/tools/flower_build.py from a hand-read allowlist: about 270,
 each with its meanings, the book's chapter of prose and verse for 70 of them, and one of the book's six
-coloured plates of bouquets for a dozen. /flowermeaning <flower> is its meaning; /flowermeaning <meaning> ("love",
+coloured plates of bouquets for a dozen. !flowermeaning <flower> is its meaning; !flowermeaning <meaning> ("love",
 "grief") is a flower that means it, with the others that do named; on its own, any flower. The meanings are Dumont's:
 other books of the day give others, and the footer says so.
 """
@@ -13,7 +14,6 @@ import random
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -89,10 +89,9 @@ def flowermeaning_embed(asked: str | None) -> discord.Embed:
     return flower_embed(found.entries[0])
 
 
-@commands.hybrid_command(name="flowermeaning", aliases=["flower", "floriography"],
-                         description="What a flower means in the Victorian language of flowers (1851), "
-                                     "or the other way round.")
-@app_commands.describe(flower="A flower (rose, pansy, basil...) or a meaning (love, grief, hope...). Empty: any")
+@commands.command(name="flowermeaning", aliases=["flower", "floriography"],
+                  description="What a flower means in the Victorian language of flowers (1851), "
+                              "or the other way round.")
 async def flowermeaning(ctx: commands.Context, *, flower: str | None = None):
     """What a flower meant in the Victorian language of flowers, from Henrietta Dumont's The Language of Flowers
     (1851), when people sent messages in bouquets: a pansy is "Think of me", basil "Hate", an asphodel "My regrets
@@ -103,14 +102,10 @@ async def flowermeaning(ctx: commands.Context, *, flower: str | None = None):
     await ctx.send(embed=flowermeaning_embed(flower))
 
 
-@flowermeaning.autocomplete("flower")
-async def flower_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "flowermeaning", random=lambda: flowermeaning_embed(None),
                             find=lambda topic: DICTIONARY.look_up(topic, close_first=False), title=lambda f: f["name"],
                             link=url, text=lambda f: f"{meanings(f)}. {f.get('text') or ''}",
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("folklore",))
 
 

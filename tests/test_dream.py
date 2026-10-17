@@ -3,12 +3,11 @@
 import hashlib
 import json
 import re
-import types
 from pathlib import Path
 
 import pytest
 
-from ktdi.features import dream
+from ktdi.features import dream, lore
 from ktdi.tools import dream_build as build
 from tests.fakes import Ctx, User, run
 
@@ -168,11 +167,11 @@ def test_random():
     assert dream.interpret("  ").title == "🔮 Abbey"
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(dream.dream.callback(ctx))
     assert ctx.last.embed.title == "🔮 Abbey"
     run(dream.dream.callback(ctx, thing="eek a kangaroo"))
     assert ctx.last.embed.title == "🔮 Kangaroo"
-    choices = run(dream.thing_autocomplete(types.SimpleNamespace(), "ca"))
+    choices = lore.suggestions("esoteric", "dream", "ca", [dream.OLD_BOOK])
     assert [c.value for c in choices] == ["Canary Birds", "Cave", "Cavern", "Baby Carriages", "Landlord's Cat"]

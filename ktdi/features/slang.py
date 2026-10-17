@@ -129,6 +129,7 @@ async def word_autocomplete(interaction: discord.Interaction, current: str) -> l
 OLD_BOOK = oldbooks.OldBook(SOURCE, "📖", "vulgartongue", random=lambda: slang_embed(None),
                             find=lambda topic: DICTIONARY.look_up(topic), title=lambda e: shown_word(e["word"]),
                             link=url,
+                            names=lambda: DICTIONARY.names,
                             shelves=("words",))
 
 

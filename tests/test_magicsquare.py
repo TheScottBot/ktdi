@@ -1,11 +1,10 @@
 """/magicsquare: Agrippa's planetary squares, made-to-order ones and SATOR (ktdi.features.magicsquare)."""
 
 import random
-import types
 
 import pytest
 
-from ktdi.features import magicsquare as squares
+from ktdi.features import lore, magicsquare as squares
 from tests.fakes import Ctx, User, run
 
 SCOTT = User(1, "scott")
@@ -114,7 +113,7 @@ def test_random_and_nothing():
     assert "No magic square for that" in squares.squares_embed("zzqx").description
 
 
-def test_command_alias_and_autocomplete():
+def test_command_alias_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(squares.magicsquare.callback(ctx, which="venus"))
     assert ctx.last.embed.title == "🔢 The Square of Venus"
@@ -122,7 +121,7 @@ def test_command_alias_and_autocomplete():
     ctx.invoked_with = "sator"
     run(squares.magicsquare.callback(ctx, which=None))
     assert ctx.last.embed.title == "🔤 The SATOR Square"
-    assert "Tiriel" in [c.value for c in run(squares.which_autocomplete(types.SimpleNamespace(), "tiri"))]
+    assert "Tiriel" in [c.value for c in lore.suggestions("esoteric", "magicsquare", "tiri", [squares.OLD_BOOK])]
     assert squares.magicsquare.aliases == ["magicsquares", "kamea", "sator"]
 
 

@@ -1,10 +1,11 @@
-"""/gemlore [stone]: a stone and what was believed of it, from George Frederick Kunz's The Curious Lore of Precious
-Stones (1913; public domain, Project Gutenberg): talismans and amulets, birthstones, stones of the planets and the
-days, crystal balls, the High-Priest's breastplate, cursed and glowing stones, famous jewels.
+"""/esoteric book:gemlore [stone] (typed: !gemlore [stone]): a stone and what was believed of it, from George Frederick
+Kunz's The Curious Lore of Precious Stones (1913; public domain, Project Gutenberg): talismans and amulets, birthstones,
+stones of the planets and the days, crystal balls, the High-Priest's breastplate, cursed and glowing stones, famous
+jewels.
 
 The passages are in ktdi/lib/gems.json, built by ktdi/tools/gem_build.py from a hand-read allowlist: a paragraph, or
 a short run of them, each titled, filed under the book's chapter and section, and named for its stones, and some with
-the book's picture of it. /gemlore on its own is a random one; /gemlore <stone> finds one about it (ruby, jade,
+the book's picture of it. !gemlore on its own is a random one; !gemlore <stone> finds one about it (ruby, jade,
 January, crystal ball), else one that mentions it, and says if there are more. Kunz looked back over centuries of
 writers, and some of what he says they believed is disputed: the footer says so.
 """
@@ -13,7 +14,6 @@ import json
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -63,29 +63,24 @@ def gems_embed(stone: str | None) -> discord.Embed:
                                         "ball, or your birth month.")
 
 
-@commands.hybrid_command(name="gemlore", aliases=["gems", "birthstone"],
-                         description="A precious stone and what was believed of it "
-                                     "(The Curious Lore of Precious Stones, 1913).")
-@app_commands.describe(stone="A stone, a month or a thing (ruby, jade, opal, january, crystal ball). Empty: random")
+@commands.command(name="gemlore", aliases=["gems", "birthstone"],
+                  description="A precious stone and what was believed of it "
+                              "(The Curious Lore of Precious Stones, 1913).")
 async def gemlore(ctx: commands.Context, *, stone: str | None = None):
-    """A precious stone and what people believed of it, from George Frederick Kunz's The Curious Lore of Precious
-    Stones (1913): talismans and amulets, what each stone was said to do (agate to turquoise), birthstones and the
-    stones of the months, days, planets and zodiac, crystal balls, the High-Priest's breastplate, cursed and glowing
-    stones, and famous jewels with stories. Give a stone (ruby, jade, opal), a month (`/gemlore january`) or a thing
-    (crystal ball, breastplate) for a passage on it; the titles autocomplete. Ask again for another. On its own: any
-    stone. It goes well with `/secrets`, the Book of Secrets once credited to Albertus Magnus. Kunz looked back over
-    centuries of writers, and some of what he says they believed is disputed. Typed, `!gems` and `!birthstone` work
+    """A precious stone and what people believed of it, from George Frederick Kunz's The Curious Lore of Precious Stones
+    (1913): talismans and amulets, what each stone was said to do (agate to turquoise), birthstones and the stones of
+    the months, days, planets and zodiac, crystal balls, the High-Priest's breastplate, cursed and glowing stones, and
+    famous jewels with stories. Give a stone (ruby, jade, opal), a month (`/esoteric book:gemlore thing:january`) or a
+    thing (crystal ball, breastplate) for a passage on it; the titles autocomplete. Ask again for another. On its own:
+    any stone. It goes well with `book:secrets`, the Book of Secrets once credited to Albertus Magnus. Kunz looked back
+    over centuries of writers, and some of what he says they believed is disputed. Typed, `!gems` and `!birthstone` work
     too. Its medicine chapter isn't in it."""
     await ctx.send(embed=gems_embed(stone))
 
 
-@gemlore.autocomplete("stone")
-async def stone_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "gemlore", random=lambda: gems_embed(None),
                             find=lambda stone: DICTIONARY.look_up(stone, close_first=False), link=url,
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("esoteric",))
 
 

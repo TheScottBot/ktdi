@@ -1,11 +1,10 @@
 """/goblin: Wirt Sikes's British Goblins (ktdi.features.goblin, ktdi.tools.goblin_build)."""
 
 import json
-import types
 
 import pytest
 
-from ktdi.features import goblin
+from ktdi.features import goblin, lore
 from ktdi.tools import goblin_build as build
 from tests.fakes import Ctx, User, run
 
@@ -90,10 +89,10 @@ def test_other_names_misspellings_random_and_nothing():
     assert "No tale of that here" in goblin.goblin_embed("zzqx").description
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(goblin.goblin.callback(ctx, what="corpse candle"))
     assert ctx.last.embed.title == "🧚 The Corpse Candle" and not ctx.last.embed.image.url
-    assert [c.value for c in run(goblin.what_autocomplete(types.SimpleNamespace(), "rowli"))] == \
+    assert [c.value for c in lore.suggestions("folklore", "goblin", "rowli", [goblin.OLD_BOOK])] == \
         ["Rowli Pugh and the Ellyll"]
     assert goblin.goblin.aliases == ["goblins", "fairies"]

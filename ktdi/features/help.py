@@ -15,7 +15,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 
-from ktdi import config
+from ktdi import config, oldbooks
 from ktdi.common import log
 from ktdi.lib import fuzzy
 from ktdi.features import FEATURES
@@ -30,9 +30,9 @@ EMBED_FIELD_COUNT_LIMIT = 25
 CATEGORIES = {
     "💦 Rap sheet": "Sprays, telling-offs, blame, bribes and the committee",
     "🎲 Fun": "Looting, Linux, anime and the war archives",
-    "📚 Words & wisdom": "All the old books at once, then dictionaries, idioms, manners and gloom",
-    "🐉 Beasts & magic": "Monsters, marvels, curiosities, stones, spells, witches and dreams",
-    "🌿 Hearth & herbs": "Mrs Beeton, Culpeper's cures, the language of flowers and the almanac",
+    "📚 Words & wisdom": "All the old books at once, the shelf of words, slang, lost words and Old Wisdom",
+    "🐉 Beasts & magic": "The shelves of natural history, folklore and magic, Pliny, omens and witches",
+    "🌿 Hearth & herbs": "The household shelf, Mrs Beeton, manners, Culpeper's cures and the almanac",
     "🎬 Movie night": "Countdowns, bingo, votes and ratings",
     "📏 Measurements": "Units, sincerely or absurdly",
     "💬 Quotes": "Save and replay what people say",
@@ -87,8 +87,11 @@ def command_help_embed(command: commands.Command) -> discord.Embed:
         description=f"{about}\n\nAlso works typed as {typed}.",
         color=discord.Color.blurple(),
     )
+    shelved = oldbooks.shelved(command.qualified_name)
     if isinstance(command, commands.Group):
         embed.title = f"/{command.name}"
+    elif shelved:  # A book asked through its shelf: /esoteric book:talisman [thing], or !talisman
+        embed.title = f"{shelved.asked()} {command.signature}".strip()
     elif not isinstance(command, commands.HybridCommand):  # !-only (e.g. !quote anon): there's no slash version.
         embed.title = f"{p}{command.qualified_name} {command.signature}".strip()
         embed.description = f"{about}\n\nOnly works typed with `{p}`."
@@ -128,8 +131,9 @@ def main_help_lines(ctx: commands.Context) -> dict[str, list[str]]:
     """Each section's lines, in section order: its commands, then any lines features add (main_help_lines())."""
     lines: dict[str, list[str]] = {}
     for cmd in sorted(ctx.bot.commands, key=lambda c: c.name):
-        # Left out: /books away from the library servers, and cryptids (extras["hidden"]), which you have to know about.
-        if can_use(cmd, ctx) and not cmd.extras.get("hidden"):
+        # Left out: /books away from the library servers, cryptids (extras["hidden"]), which you have to know about, and
+        # the books asked through their shelf, which the shelf's page lists.
+        if can_use(cmd, ctx) and not cmd.extras.get("hidden") and not oldbooks.shelved(cmd.name):
             lines.setdefault(command_category(cmd), []).append(command_line(cmd))
     for module in feature_modules():
         for category, line in getattr(module, "main_help_lines", lambda: [])():

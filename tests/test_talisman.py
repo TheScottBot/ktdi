@@ -1,11 +1,10 @@
 """/talisman: The Book of Talismans, Amulets and Zodiacal Gems (ktdi.features.talisman, ktdi.tools.talisman_build)."""
 
 import json
-import types
 
 import pytest
 
-from ktdi.features import talisman
+from ktdi.features import lore, talisman
 from ktdi.tools import talisman_build as build
 from tests.fakes import Ctx, User, run
 
@@ -104,9 +103,9 @@ def test_a_sign_misspelt_random_and_nothing():
     assert "No talisman for that here" in embed.description and "picked by hand" in embed.description
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(talisman.talisman.callback(ctx, thing="luck"))
     assert ctx.last.embed.title == "🧿 Four-Leaved Clover"
-    assert [c.value for c in run(talisman.thing_autocomplete(types.SimpleNamespace(), "four"))] == ["Four-Leaved Clover"]
+    assert [c.value for c in lore.suggestions("esoteric", "talisman", "four", [talisman.OLD_BOOK])] == ["Four-Leaved Clover"]
     assert talisman.talisman.aliases == ["talismans", "amulet", "zodiac"]

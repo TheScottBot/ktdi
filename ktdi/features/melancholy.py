@@ -1,9 +1,9 @@
-"""/melancholy [topic]: Robert Burton's The Anatomy of Melancholy (1621, public domain): a passage of his gloomy,
-learned, digressive wisdom on love, study, bad air, sleep, poverty, jealousy, idleness, or anything else that might
-make a person melancholy (which, by his account, is everything).
+"""/household book:melancholy [topic] (typed: !melancholy [topic]): Robert Burton's The Anatomy of Melancholy (1621,
+public domain): a passage of his gloomy, learned, digressive wisdom on love, study, bad air, sleep, poverty, jealousy,
+idleness, or anything else that might make a person melancholy (which, by his account, is everything).
 
 The passages are excerpts picked by hand, word for word, into ktdi/lib/melancholy.json (ktdi/tools/melancholy_build.py
-checks each against the book). /melancholy on its own is a random one; /melancholy <topic> finds one in a part of the
+checks each against the book). !melancholy on its own is a random one; !melancholy <topic> finds one in a part of the
 book about it (Burton's own subsection titles: "Bad Air, a cause of Melancholy"), or one that mentions it.
 """
 
@@ -11,7 +11,6 @@ import json
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -50,9 +49,8 @@ def melancholy_embed(topic: str | None) -> discord.Embed:
                                         "love, study, sleep, idleness, jealousy, poverty or bad air.")
 
 
-@commands.hybrid_command(name="melancholy", aliases=["burton", "gloom"],
-                         description="Burton's gloomy wisdom (1621) on love, study, sleep, poverty... Or a random bit.")
-@app_commands.describe(topic="What to be melancholy about (love, study, sleep, jealousy...). Empty: anything")
+@commands.command(name="melancholy", aliases=["burton", "gloom"],
+                  description="Burton's gloomy wisdom (1621) on love, study, sleep, poverty... Or a random bit.")
 async def melancholy(ctx: commands.Context, *, topic: str | None = None):
     """A passage of Robert Burton's The Anatomy of Melancholy (1621) on whatever's getting you down: love, study, sleep,
     jealousy, poverty, tobacco. It comes from a part of the book about it (his own titles autocomplete), or one that
@@ -60,13 +58,9 @@ async def melancholy(ctx: commands.Context, *, topic: str | None = None):
     await ctx.send(embed=melancholy_embed(topic))
 
 
-@melancholy.autocomplete("topic")
-async def topic_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook(SOURCE, "🖤", "melancholy", random=lambda: melancholy_embed(None),
                             find=lambda topic: DICTIONARY.look_up(topic), link=url,
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("household",))
 
 

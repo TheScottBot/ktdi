@@ -1,11 +1,10 @@
 """/pseudodoxia: Browne's Pseudodoxia Epidemica (ktdi.features.pseudodoxia, ktdi.tools.pseudodoxia_build)."""
 
 import json
-import types
 
 import pytest
 
-from ktdi.features import pseudodoxia
+from ktdi.features import lore, pseudodoxia
 from ktdi.tools import pseudodoxia_build as build
 from tests.fakes import Ctx, User, run
 
@@ -96,9 +95,9 @@ def test_random_and_nothing():
     assert "Nothing from Browne on that here" in pseudodoxia.pseudodoxia_embed("zzqx").description
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(pseudodoxia.pseudodoxia.callback(ctx, topic="elephants"))
     assert ctx.last.embed.title == "🧐 Of the Elephant"
-    assert [c.value for c in run(pseudodoxia.topic_autocomplete(types.SimpleNamespace(), "badg"))] == ["Of the Badger"]
+    assert [c.value for c in lore.suggestions("nature", "pseudodoxia", "badg", [pseudodoxia.OLD_BOOK])] == ["Of the Badger"]
     assert pseudodoxia.pseudodoxia.aliases == ["vulgarerrors", "browne"]

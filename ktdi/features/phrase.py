@@ -1,9 +1,9 @@
-"""/phrase [idiom]: where an idiom comes from, according to the Rev. E. Cobham Brewer's Dictionary of Phrase and Fable
-(1898, public domain), who was very sure of his etymologies.
+"""/words book:phrase [idiom] (typed: !phrase [idiom]): where an idiom comes from, according to the Rev. E. Cobham
+Brewer's Dictionary of Phrase and Fable (1898, public domain), who was very sure of his etymologies.
 
 The idioms are hand-picked from the archive.org scan into ktdi/lib/phrases.json, the OCR mended against the page:
 only phrases people still use or would want to know about (not Brewer's thousands of gods, saints and poets), each
-with his explanation and its page in the scan. /phrase on its own is a random one; /phrase <idiom> finds the nearest
+with his explanation and its page in the scan. !phrase on its own is a random one; !phrase <idiom> finds the nearest
 idiom however it's worded ("raining cats and dogs" finds "To rain cats and dogs"), or failing that the idioms whose
 explanations mention it.
 """
@@ -13,7 +13,6 @@ import random
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -78,9 +77,8 @@ def explain(query: str | None) -> discord.Embed:
                                                        "(cats, hatter, bag)."))
 
 
-@commands.hybrid_command(name="phrase", aliases=["idiom", "brewer"],
-                         description="Where an idiom comes from, according to Brewer (1898). Or a random one.")
-@app_commands.describe(idiom="An idiom or saying (raining cats and dogs, mad as a hatter...). Empty: random")
+@commands.command(name="phrase", aliases=["idiom", "brewer"],
+                  description="Where an idiom comes from, according to Brewer (1898). Or a random one.")
 async def phrase(ctx: commands.Context, *, idiom: str | None = None):
     """Where an idiom comes from, according to Brewer's Dictionary of Phrase and Fable (1898). Word it however you like
     (raining cats and dogs finds To rain cats and dogs); for a word that isn't an idiom, you get the idioms that
@@ -88,13 +86,9 @@ async def phrase(ctx: commands.Context, *, idiom: str | None = None):
     await ctx.send(embed=explain(idiom))
 
 
-@phrase.autocomplete("idiom")
-async def idiom_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook(SOURCE, "🗣️", "phrase", random=lambda: explain(None),
                             find=lambda topic: DICTIONARY.look_up(topic), title=lambda e: e["phrase"], link=url,
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("words",))
 
 

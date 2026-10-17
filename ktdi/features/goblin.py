@@ -1,10 +1,10 @@
-"""/goblin [what]: a tale from Wirt Sikes's British Goblins (1880; public domain, Project Gutenberg): the fairies,
-goblins, spectral hounds, corpse candles, lake maidens, ghosts and old customs of Wales, as people told them to the
-American consul in Cardiff, with T. H. Thomas's illustrations where there are any.
+"""/folklore book:goblin [what] (typed: !goblin [what]): a tale from Wirt Sikes's British Goblins (1880; public domain,
+Project Gutenberg): the fairies, goblins, spectral hounds, corpse candles, lake maidens, ghosts and old customs of
+Wales, as people told them to the American consul in Cardiff, with T. H. Thomas's illustrations where there are any.
 
 The tales are in ktdi/lib/goblin.json, built by ktdi/tools/goblin_build.py from a hand-read allowlist: the book's
 short numbered sections, each about one creature, place or incident, titled for the purpose (mostly from the
-chapter's own list of topics). /goblin on its own is a random tale; /goblin <what> finds one by its title or other
+chapter's own list of topics). !goblin on its own is a random tale; !goblin <what> finds one by its title or other
 names (Pwca, Tylwyth Teg, corpse candle), else by what it says, and says if there are more.
 """
 
@@ -12,7 +12,6 @@ import json
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -59,9 +58,8 @@ def goblin_embed(what: str | None) -> discord.Embed:
                                         "Tylwyth Teg, lake maidens or the Cŵn Annwn.")
 
 
-@commands.hybrid_command(name="goblin", aliases=["goblins", "fairies"],
-                         description="Welsh fairies, goblins, ghosts and customs, from British Goblins (1880).")
-@app_commands.describe(what="A creature, place or custom (pwca, corpse candle, lake maiden...). Empty: random")
+@commands.command(name="goblin", aliases=["goblins", "fairies"],
+                  description="Welsh fairies, goblins, ghosts and customs, from British Goblins (1880).")
 async def goblin(ctx: commands.Context, *, what: str | None = None):
     """A tale from Wirt Sikes's British Goblins (1880), the folklore of Wales as people told it to the American
     consul in Cardiff: the Tylwyth Teg (the fair folk), the Pwca, mine goblins that knock, lake maidens, corpse
@@ -70,11 +68,6 @@ async def goblin(ctx: commands.Context, *, what: str | None = None):
     candle, lake maiden, sin-eater) for a tale about it; the titles autocomplete, and Welsh and English names both
     work. Ask again for another. On its own: any tale. Typed, `!goblins` and `!fairies` work too."""
     await ctx.send(embed=goblin_embed(what))
-
-
-@goblin.autocomplete("what")
-async def what_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
 
 
 MAGIC = {  # The tales of magicians, spells, charms and enchanted things: on the esoteric shelf too
@@ -92,6 +85,7 @@ def shelves_of(tale: dict) -> tuple[str, ...]:
 
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "goblin", random=lambda: goblin_embed(None),
                             find=lambda what: DICTIONARY.look_up(what, close_first=False), link=url,
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("folklore",), entry_shelves=shelves_of)
 
 

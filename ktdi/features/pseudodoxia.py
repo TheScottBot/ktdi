@@ -1,9 +1,10 @@
-"""/pseudodoxia [topic]: Sir Thomas Browne's Pseudodoxia Epidemica, or "Vulgar Errors" (1646, public domain): a whole
-book of what everyone wrongly believed (that a badger's legs are shorter on one side, that elephants have no joints,
-that a kingfisher hung by the beak shows which way the wind blows), each one solemnly examined.
+"""/nature book:pseudodoxia [topic] (typed: !pseudodoxia [topic]): Sir Thomas Browne's Pseudodoxia Epidemica, or "Vulgar
+Errors" (1646, public domain): a whole book of what everyone wrongly believed (that a badger's legs are shorter on one
+side, that elephants have no joints, that a kingfisher hung by the beak shows which way the wind blows), each one
+solemnly examined.
 
 The chapters are in ktdi/lib/pseudodoxia.json, built by ktdi/tools/pseudodoxia_build.py from a hand-read allowlist.
-/pseudodoxia on its own is a random chapter; /pseudodoxia <topic> finds one about it (his chapter titles: "Of the
+!pseudodoxia on its own is a random chapter; !pseudodoxia <topic> finds one about it (his chapter titles: "Of the
 Badger"), or one that mentions it, and says if there are more. Each links to its place in the book.
 """
 
@@ -11,7 +12,6 @@ import json
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -50,9 +50,8 @@ def pseudodoxia_embed(topic: str | None) -> discord.Embed:
                                         "the basilisk, unicorns, or the salamander.")
 
 
-@commands.hybrid_command(name="pseudodoxia", aliases=["vulgarerrors", "browne"],
-                         description="Browne's Vulgar Errors (1646): what everyone wrongly believed, solemnly examined.")
-@app_commands.describe(topic="A creature, thing or belief (badgers, elephants, the basilisk...). Empty: random")
+@commands.command(name="pseudodoxia", aliases=["vulgarerrors", "browne"],
+                  description="Browne's Vulgar Errors (1646): what everyone wrongly believed, solemnly examined.")
 async def pseudodoxia(ctx: commands.Context, *, topic: str | None = None):
     """A chapter of Sir Thomas Browne's Pseudodoxia Epidemica, or "Vulgar Errors" (1646): a whole book of what everyone
     wrongly believed (that a badger's legs are shorter on one side, that elephants have no joints, that a kingfisher
@@ -62,13 +61,9 @@ async def pseudodoxia(ctx: commands.Context, *, topic: str | None = None):
     await ctx.send(embed=pseudodoxia_embed(topic))
 
 
-@pseudodoxia.autocomplete("topic")
-async def topic_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook(SOURCE, "🧐", "pseudodoxia", random=lambda: pseudodoxia_embed(None),
                             find=lambda topic: DICTIONARY.look_up(topic), link=url,
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("nature",))
 
 

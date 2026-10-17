@@ -11,11 +11,17 @@ from ktdi.bot import KTDIBot, describe_options
 from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
-SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "bestiary", "blame", "books", "bribe", "campaign", "committee",
-                  "cure", "deadword", "devils", "dream", "enquire", "esoteric", "etiquette", "expunge", "flowermeaning", "folklore", "gemlore", "goblin", "hammeredofwitches", "help", "herbal", "household", "imperial", "insurance", "linux", "loot", "lore", "magicsquare", "melancholy",
-                  "nature", "nowplaying", "omen", "phrase", "plant", "pliny", "pseudodoxia", "quote", "rapsheet", "rpg", "secrets", "settings", "shhh", "spray", "sprayfutures", "sprayrate",
-                  "talisman", "tdoi", "timezone", "vulgartongue", "wars", "weather", "whospray", "wisdom", "wonder", "words"]
-PREFIX_ONLY_COMMANDS = ["toenoyoudidnt"]  # !-only, so they're not in Discord's slash menu
+SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books", "bribe",
+                  "campaign", "committee", "cure", "deadword", "esoteric", "etiquette", "expunge", "folklore",
+                  "hammeredofwitches", "help", "herbal", "household", "imperial", "insurance", "linux", "loot",
+                  "lore", "nature", "nowplaying", "omen", "plant", "pliny", "quote", "rapsheet", "rpg", "settings",
+                  "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone", "vulgartongue", "wars", "weather",
+                  "whospray", "wisdom", "words"]
+# !-only, so they're not in Discord's slash menu: the books asked through their shelf (/esoteric book:talisman), and
+# the cryptids
+SHELVED_BOOKS = ["bestiary", "devils", "dream", "enquire", "flowermeaning", "gemlore", "goblin", "magicsquare",
+                 "melancholy", "phrase", "pseudodoxia", "secrets", "talisman", "wonder"]
+PREFIX_ONLY_COMMANDS = SHELVED_BOOKS + ["toenoyoudidnt"]
 HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
     "almanac": ["day", "setup"],
@@ -122,7 +128,8 @@ def test_help_front_page(loaded_bot):
     assert [line.split(" **")[1].split("**")[0] for line in sections] == [
         "Rap sheet", "Fun", "Words & wisdom", "Beasts & magic", "Hearth & herbs", "Movie night", "Measurements", "Quotes",
         "Campaigns", "Utilities"]
-    assert sections[3].startswith("🐉 **Beasts & magic**: Monsters, marvels, curiosities, stones, spells, witches and dreams (")
+    assert sections[3].startswith("🐉 **Beasts & magic**: The shelves of natural history, folklore and magic, Pliny, "
+                                  "omens and witches (6)")
     assert not embed.fields and len(embed) < 1500  # Short: one line a section
     assert isinstance(ctx.last.view, help_feature.HelpMenu)
     assert [o.label for o in ctx.last.view.sections.options][:3] == ["Rap sheet", "Fun", "Words & wisdom"]
@@ -139,7 +146,7 @@ def test_the_menu_opens_a_section_privately(loaded_bot):
         dave = Interaction(User(2, "dave"))  # Anyone can use it: the section is shown just to them
         await view.sections.callback(dave)
         assert dave.last.embed.title == "🐉 Beasts & magic" and dave.last.private
-        assert "`/dream [thing]`: " in dave.last.embed.description
+        assert "`/esoteric [book] [thing]`: " in dave.last.embed.description
     asyncio.run(go())
 
 
@@ -201,6 +208,24 @@ def test_a_group_lists_its_own_slash_subcommand(loaded_bot):
     beeton = help_feature.command_help_embed(loaded_bot.get_command("beeton"))
     assert [f.name for f in beeton.fields if f.name.startswith("/")] == [
         "/beeton advice [topic]", "/beeton menu [day]", "/beeton recipe [dish]"]  # "recipe" is /beeton itself
+
+
+def test_a_book_asked_through_its_shelf_in_help(loaded_bot):
+    talisman = help_feature.command_help_embed(loaded_bot.get_command("talisman"))
+    assert talisman.title == "/esoteric book:talisman [thing]"  # How to ask it
+    assert "Also works typed as `!talisman`, `!talismans`, `!amulet`, `!zodiac`." in talisman.description
+    ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
+    listed = "\n".join(line for lines in help_feature.main_help_lines(ctx).values() for line in lines)
+    for name in SHELVED_BOOKS:
+        assert f"`/{name}" not in listed, name  # Its shelf's page lists it instead
+    esoteric = help_feature.command_help_embed(loaded_bot.get_command("esoteric"))
+    books = next(f.value for f in esoteric.fields if f.name == "📚 Its books")
+    assert "`book:talisman` 🧿 W. T. and K. Pavitt" in books and "`book:cure` 🌿 Culpeper's" in books
+    assert "`book:cure` 🌿 Culpeper's Complete Herbal (1653; 1850 edition) (also `/cure`)" in books
+    assert "`book:talisman` 🧿 W. T. and K. Pavitt, The Book of Talismans, Amulets and Zodiacal Gems (1922)\n" in books
+    assert books.endswith("Also on it, by their own commands: `/hammeredofwitches`.")
+    household = help_feature.command_help_embed(loaded_bot.get_command("household"))
+    assert "(also `/beeton`)" in next(f.value for f in household.fields if f.name == "📚 Its books")
 
 
 def test_help_unknown_command(loaded_bot):

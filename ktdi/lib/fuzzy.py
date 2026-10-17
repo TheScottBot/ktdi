@@ -1,5 +1,5 @@
 """Finding what someone means, however they type it: the loose matching behind /cure, /plant, /vulgartongue,
-/deadword, /devils, /dream, /phrase, /pliny and /etiquette. No AI.
+/deadword, !devils, !dream, !phrase, /pliny and /etiquette. No AI.
 
 A name matches what was typed word by word, in any order, with small typos allowed ("my throat is tickly" finds
 "tickly throat", "diarhea" finds "diarrhoea"), or failing that as a whole phrase spelt nearly the same. Filler words

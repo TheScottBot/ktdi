@@ -1,11 +1,10 @@
 """/gemlore: The Curious Lore of Precious Stones (ktdi.features.gem, ktdi.tools.gem_build)."""
 
 import json
-import types
 
 import pytest
 
-from ktdi.features import gem
+from ktdi.features import gem, lore
 from ktdi.tools import gem_build as build
 from ktdi.tools import gutenberg
 from tests.fakes import Ctx, User, run
@@ -117,9 +116,9 @@ def test_a_month_misspelt_random_and_nothing():
     assert "Nothing on that stone here" in embed.description and "picked by hand" in embed.description
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(gem.gemlore.callback(ctx, stone="garnet"))
     assert ctx.last.embed.title == "💎 January's Stones"
-    assert [c.value for c in run(gem.stone_autocomplete(types.SimpleNamespace(), "sacro"))] == ["The Sacro Catino"]
+    assert [c.value for c in lore.suggestions("esoteric", "gemlore", "sacro", [gem.OLD_BOOK])] == ["The Sacro Catino"]
     assert gem.gemlore.aliases == ["gems", "birthstone"]

@@ -198,10 +198,10 @@ OLD_BOOK = [  # Her recipes and her advice, searched apart (and either can be th
     oldbooks.OldBook(SOURCE, "🍽️", "beeton recipe", random=lambda: recipe(None),
                      find=lambda topic: RECIPES.look_up(topic), title=lambda e: e["name"], link=url,
                      text=lambda e: e["method"],
-                     shelves=("household",)),
+                     names=lambda: RECIPES.names, shelves=("household",)),
     oldbooks.OldBook(SOURCE, "🏠", "beeton advice", random=lambda: household(None),
                      find=lambda topic: ADVICE.look_up(topic), title=lambda e: e["name"], link=url,
-                     shelves=("household",)),
+                     names=lambda: ADVICE.names, shelves=("household",)),
 ]
 
 

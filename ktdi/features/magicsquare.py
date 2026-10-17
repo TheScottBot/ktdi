@@ -1,4 +1,5 @@
-"""/magicsquare [which]: a magic square, drawn in the chat. Every row, column and both diagonals add up the same.
+"""/esoteric book:magicsquare [which] (typed: !magicsquare [which]): a magic square, drawn in the chat. Every row,
+column and both diagonals add up the same.
 
 The seven planetary squares are Cornelius Agrippa's, from book II, chapter 22 of his De occulta philosophia (1533):
 the Square of Saturn (3×3) to the Square of the Moon (9×9), each with the planet's day, what he says to engrave it
@@ -29,7 +30,6 @@ import random
 import re
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -250,29 +250,24 @@ def squares_embed(which: str | None) -> discord.Embed:
     return square_embed(found[0])
 
 
-@commands.hybrid_command(name="magicsquare", aliases=["magicsquares", "kamea", "sator"],
-                         description="A planet's magic square (Agrippa, 1533), any size up to 12, or the SATOR square.")
-@app_commands.describe(which="A planet (saturn, sun, moon...), a size (3 to 12) or sator. Empty: any")
+@commands.command(name="magicsquare", aliases=["magicsquares", "kamea", "sator"],
+                  description="A planet's magic square (Agrippa, 1533), any size up to 12, or the SATOR square.")
 async def magicsquare(ctx: commands.Context, *, which: str | None = None):
     """A magic square, drawn in the chat: every row, column and both diagonals add up the same. The seven planetary
     squares are Cornelius Agrippa's (1533), from the Square of Saturn (3×3, adding to 15) to the Square of the Moon
-    (9×9, adding to 369), each with its day, what he says to engrave it on, and the intelligence and spirit he
-    gives it. Ask by planet (`/magicsquare jupiter`), day (`friday`), metal (`gold`), spirit or size
-    (`/magicsquare 5`). Sizes with no planet, 10 to 12, are made fresh each time. `/magicsquare sator` is the Roman SATOR AREPO TENET OPERA ROTAS
-    square, which reads the same four ways, and its history. On its own: any of them. Typed, `!sator` goes straight
-    to SATOR (`!magicsquares` and `!kamea` work too)."""
+    (9×9, adding to 369), each with its day, what he says to engrave it on, and the intelligence and spirit he gives it.
+    Ask by planet (`/esoteric book:magicsquare thing:jupiter`), day (`friday`), metal (`gold`), spirit or size (`5`).
+    Sizes with no planet, 10 to 12, are made fresh each time. `sator` is the Roman SATOR AREPO TENET OPERA ROTAS square,
+    which reads the same four ways, and its history. On its own: any of them. Typed, `!sator` goes straight to SATOR
+    (`!magicsquares` and `!kamea` work too)."""
     if getattr(ctx, "invoked_with", None) == "sator" and not which:  # !sator
         which = "sator"
     await ctx.send(embed=squares_embed(which))
 
 
-@magicsquare.autocomplete("which")
-async def which_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook(SOURCE, EMOJI, "magicsquare", random=lambda: square_embed(random.choice(SQUARES)),
                             find=lambda topic: DICTIONARY.look_up(topic, close_first=False),
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("esoteric",))
 
 

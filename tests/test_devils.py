@@ -2,12 +2,11 @@
 
 import hashlib
 import json
-import types
 from pathlib import Path
 
 import pytest
 
-from ktdi.features import devils
+from ktdi.features import devils, lore
 from ktdi.tools import devils_build as build, gutenberg
 from tests.fakes import Ctx, User, run
 
@@ -171,12 +170,12 @@ def test_random():
     assert devils.devils_embed("   ").title == "😈 ABRACADABRA"
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(devils.devils.callback(ctx))
     assert ctx.last.embed.title == "😈 ABRACADABRA"
     run(devils.devils.callback(ctx, word="bore"))
     assert ctx.last.embed.title == "😈 BORE"
-    choices = run(devils.word_autocomplete(types.SimpleNamespace(), "re"))
+    choices = lore.suggestions("words", "devils", "re", [devils.OLD_BOOK])
     assert [c.value for c in choices] == ["REASON", "BORE"]  # Starting with it first, then containing it
     assert devils.devils.aliases == ["devil", "devilsdictionary"]

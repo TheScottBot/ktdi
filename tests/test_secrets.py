@@ -2,11 +2,10 @@
 is tests/test_tcp.py)."""
 
 import json
-import types
 
 import pytest
 
-from ktdi.features import secrets
+from ktdi.features import lore, secrets
 from ktdi.tools import secrets_build as build, tcp
 from tests.fakes import Ctx, User, run
 
@@ -91,9 +90,9 @@ def test_random_and_nothing():
     assert "No secret about that here" in secrets.secrets_embed("zzqx").description
 
 
-def test_command_and_autocomplete():
+def test_command_and_autocomplete():  # Autocompleted on its shelf
     ctx = Ctx(SCOTT)
     run(secrets.secrets.callback(ctx, what="magpie"))
     assert ctx.last.embed.title == "🗝️ If thou wilt louse bondes"
-    assert [c.value for c in run(secrets.what_autocomplete(types.SimpleNamespace(), "lode"))] == ["Lodestone"]
+    assert [c.value for c in lore.suggestions("esoteric", "secrets", "lode", [secrets.OLD_BOOK])] == ["Lodestone"]
     assert secrets.secrets.aliases == ["albertus"]

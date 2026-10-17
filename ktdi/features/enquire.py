@@ -1,17 +1,16 @@
-"""/enquire [anything]: the Victorian answer to it, from Enquire Within Upon Everything (1856; public domain), the
-book that was the internet before the internet: how to light a candle, play écarté, clean a cane chair, choose a
-mackerel, or speak like a Londoner who has corrected his defects.
+"""/household book:enquire [anything] (typed: !enquire [anything]): the Victorian answer to it, from Enquire Within Upon
+Everything (1856; public domain), the book that was the internet before the internet: how to light a candle, play
+écarté, clean a cane chair, choose a mackerel, or speak like a Londoner who has corrected his defects.
 
 The hints are in ktdi/lib/enquire.json, built by ktdi/tools/enquire_build.py from a hand-read allowlist (with the
-medical, poisoning and chemistry topics left out whole: /cure has the remedies). /enquire on its own is a random
-hint; /enquire <anything> finds one about it (any word order, small typos), and says if there are more.
+medical, poisoning and chemistry topics left out whole: /cure has the remedies). !enquire on its own is a random
+hint; !enquire <anything> finds one about it (any word order, small typos), and says if there are more.
 """
 
 import json
 from pathlib import Path
 
 import discord
-from discord import app_commands
 from discord.ext import commands
 
 from ktdi import oldbooks
@@ -69,9 +68,8 @@ def enquire_embed(query: str | None) -> discord.Embed:
     return hint_embed(*found)
 
 
-@commands.hybrid_command(name="enquire", aliases=["enquirewithin", "ewue"],
-                         description="The Victorian answer to anything, from Enquire Within (1856). Or a random hint.")
-@app_commands.describe(anything="What you want to know (candles, mackerel, whist, ink stains...). Empty: random")
+@commands.command(name="enquire", aliases=["enquirewithin", "ewue"],
+                  description="The Victorian answer to anything, from Enquire Within (1856). Or a random hint.")
 async def enquire(ctx: commands.Context, *, anything: str | None = None):
     """The Victorian answer to anything, from Enquire Within Upon Everything (1856): how to light a candle, choose a
     mackerel, play whist or fold a nightcap. If the book has several hints on it, you get one and it says how many
@@ -79,13 +77,9 @@ async def enquire(ctx: commands.Context, *, anything: str | None = None):
     await ctx.send(embed=enquire_embed(anything))
 
 
-@enquire.autocomplete("anything")
-async def anything_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
-    return DICTIONARY.autocomplete(current)
-
-
 OLD_BOOK = oldbooks.OldBook(SOURCE, "🔎", "enquire", random=lambda: enquire_embed(None),
                             find=lambda topic: DICTIONARY.look_up(topic), link=url,
+                            names=lambda: DICTIONARY.names, own_command=False,
                             shelves=("household",))
 
 
