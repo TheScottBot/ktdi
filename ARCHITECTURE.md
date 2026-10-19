@@ -57,7 +57,7 @@ ktdi/
 │                      whose command is typed-only (!talisman)
 ├── daily.py           posting every day in a channel each server chooses: a feature registers a Daily (its name
 │                      and how to post today's), and its `setup here/stop/show` subcommands call setup_here, stop
-│                      and show; daily_loop posts what's due (daily_posts table). /wisdom and /almanac use it
+│                      and show; daily_loop posts what's due (daily_posts table). /wisdom, /almanac and /bread use it
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
 │   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
@@ -92,6 +92,9 @@ ktdi/
 │                      so thing:'s autocomplete knows which book's entries to suggest
 │   ├── wisdom.py      /wisdom: a random entry from any OLD_BOOK; Old Wisdom of the Day (/wisdom setup here),
 │   │                  a Daily (daily.py) that picks a different book each day
+│   ├── bread.py   /bread (How well do you 🍞?): a question a day from lib/bread.json, answered
+│   │                  privately with lasting buttons (a DynamicItem); the next day's post (a Daily) gives the
+│   │                  answer and who got it right, then the new question. Scores, streaks and loaves
 │   ├── wonder.py      !wonder (on /nature, /folklore): a curiosity from Ten Thousand Wonderful Things (1894), with its engraving
 │   ├── goblin.py      !goblin (on /folklore): a tale of Welsh fairies, ghosts and customs from British Goblins (1880)
 │   ├── omen.py        /omen: an everyday superstition from The Magic of the Horse-shoe (1898)
@@ -194,6 +197,12 @@ ktdi/
     │                  out) and gem_curation.json: paragraphs or runs (chapter.section.paragraph, read by
     │                  gutenberg.headed_paragraphs, shared with omen), each with a title, its stones and
     │                  maybe one of the book's pictures
+    ├── bread.json /bread's questions, built by tools/bread_build.py: from the books (a lost word's,
+    │                  a bit of slang's, a Bierce definition's, a phrase's or a flower's first sense, with three
+    │                  other entries' as the wrong answers) and hand-written scenarios (etiquette, Hone's
+    │                  customs, omens), each checked against its passage. bread_curation.json: what was
+    │                  left out (every built question was read; leave_out's answers aren't offered as wrong
+    │                  ones either, not_asked's are) and the scenarios
     ├── talismans.json !talisman's passages (Pavitt, The Book of Talismans, Amulets and Zodiacal Gems, 1922),
     │                  built by tools/talisman_build.py from the book's web page and talisman_curation.json:
     │                  paragraphs or runs (part.chapter.paragraph), each with a title and other names; a
@@ -383,7 +392,9 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `insurance_policies` | `/insurance buy`: who, the premium, when it was bought, and both clocks' expiries. `microwave_expires_at` is the real cover; `car_expires_at` is only ever shown. A person's newest policy is the one in force. Durations come from `lib/insurance.py` (user ID + UTC minute, no randomness, on purpose). |
 | `insurance_claims` | what a policy covered: who was sprayed or told off, by whom, on which policy, and `kind` (`spray`, or `bad` for `/bad` and `/badbonk`). Every spray goes through `fun.take_spray` and every telling-off through `fun.tell_off`, which record either the spray/bad or a claim (never both); covered sprays still go on to `fun.after_spray`, so spray futures pay out. |
 | `spray_rates` | the daily spray interest rate (1-20%), one row per day: picked at random the first time it's needed after `SPRAY_RATE_TIME` (in `BOT_TIMEZONE`). Bot-wide, so no `guild_id`. |
-| `daily_posts` | what each server has posted every day (`kind`: Old Wisdom of the Day, the almanac): the channel, the time (BOT_TIMEZONE), when it's next due (UTC), and what it remembers from the last one (wisdom: the book, so it's not the same twice). |
+| `daily_posts` | what each server has posted every day (`kind`: Old Wisdom of the Day, the almanac, the daily bread): the channel, the time (BOT_TIMEZONE), when it's next due (UTC), and what it remembers from the last one (wisdom: the book, so it's not the same twice). |
+| `bread_bakes` | each server's `/bread` questions, one a day: which question (its id in `bread.json`), its four answers in the order shown and which is right, the post, and `closed_at` once the next day's post has given the answer (one open per server). |
+| `bread_answers` | one answer per person per question (`PRIMARY KEY (bake_id, user_id)`: no changing it), and whether it was right. Nobody's told what anyone picked until it's closed; scores read them through `scope()`. |
 | `herbal_posts` | each `/herbal` post: which box from `herbal.json` and how deep it's been dug with ⛏️, so a dig carries on after a restart. |
 | `committee_spending` | what the committee's money was spent on (`/committee spend`): amount, item, who. Money in isn't stored separately: it's the `bribes` totals (bribe, expunge, bail and insurance premiums all record a bribe), so the balance is bribes minus spending, both read through `scope()`. |
 

@@ -15,7 +15,7 @@ from discord.ext import commands
 
 from ktdi import common, config, db
 from ktdi.common import get_member, log, plural
-from ktdi.features import committee, movie
+from ktdi.features import bread, committee, movie
 
 SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
 SPRAY_EMOJI = "💦"
@@ -423,8 +423,48 @@ async def nose(ctx: commands.Context, user: discord.Member | None = None):
 @commands.guild_only()
 async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     """Someone's record (yours, if you don't name anyone): sprays, times they've been bad, expunges and bails, the Don's
-    orders, sprays insurance covered, bribes, committee spending, called predictions, bingo wins and spray futures."""
-    user = user or ctx.author
+    orders, sprays insurance covered, bribes, committee spending, called predictions, bingo wins, their 🍞 (one
+    for each day they won How well do you 🍞?) and spray futures."""
+    await send_rap_sheet(ctx, user or ctx.author)
+
+
+# A cryptid: the rap sheet, with every last 🍞 in it, however many messages that takes. !-only and left off /help.
+@commands.command(name="breadsheet", description="🍞", extras={"hidden": True})
+@commands.guild_only()
+async def breadsheet(ctx: commands.Context, user: discord.Member | None = None):
+    await send_rap_sheet(ctx, user or ctx.author, unabridged_bread=True)
+
+
+MESSAGE_LIMIT = 1900  # Discord's is 2,000 characters (counted as UTF-16, so a 🍞 is two): with room to spare
+
+
+def message_length(text: str) -> int:
+    return len(text.encode("utf-16-le")) // 2
+
+
+def in_messages(lines: list[str], limit: int = MESSAGE_LIMIT) -> list[str]:
+    """Lines in as few messages as they fit in, and a line too long for one (a lot of 🍞) split across as many as
+    it takes."""
+    messages, current = [], ""
+    for line in lines:
+        while message_length(line) > limit:  # Split at a character, never mid-emoji
+            cut = len(line)
+            while message_length(line[:cut]) > limit:
+                cut = cut * limit // message_length(line[:cut]) or 1
+            if current:
+                messages.append(current)
+                current = ""
+            messages.append(line[:cut])
+            line = line[cut:]
+        candidate = f"{current}\n{line}" if current else line
+        if message_length(candidate) > limit:
+            messages.append(current)
+            candidate = line
+        current = candidate
+    return messages + [current] if current else messages
+
+
+async def send_rap_sheet(ctx: commands.Context, user: discord.abc.User, unabridged_bread: bool = False) -> None:
     sprays = get_spray_count(ctx.guild.id, user.id)
     bribes, bribe_total = get_bribe_stats(ctx.guild.id, user.id)
     lines = []
@@ -462,6 +502,10 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     bingos = movie.bingo_win_count(ctx.guild.id, user.id)
     if bingos:
         lines.append(f"🎉 Won movie bingo {plural(bingos, 'time')}.")
+    right, answered = bread.record(ctx.guild.id, user.id)
+    if answered:
+        lines.append(f"{bread.breads(right, unabridged_bread)} from How well do you 🍞? "
+                     f"(right {right} of {answered}).")
     won, lost = get_futures_record(ctx.guild.id, user.id)
     if won or lost:
         sprays_on, sprays_off = get_futures_totals(ctx.guild.id, user.id)
@@ -470,7 +514,10 @@ async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     if not lines:
         await ctx.send(f"📋 {user.display_name} has a clean record. Suspicious.")
         return
-    await ctx.send("\n".join([f"📋 **Rap sheet: {user.display_name}**", *lines]))
+    heading = (f"🍞 **Bread sheet: {user.display_name}**" if unabridged_bread
+               else f"📋 **Rap sheet: {user.display_name}**")
+    for message in in_messages([heading, *lines]):
+        await ctx.send(message)
 
 
 @commands.hybrid_command(name="blame", description="Blame someone who's been talking recently.")
@@ -604,7 +651,8 @@ def main_help_lines() -> list[tuple[str, str]]:
 async def setup(bot: commands.Bot):
     # `nose` is written but not registered: Discord's sensitive-media filter blurs its image (and asks UK users for ID).
     # Add it back here to bring it back.
-    for command in (spray, whospray, tdoi, loot, bad, badbonk, toenoyoudidnt, rapsheet, blame, bribe, expunge, bail, linux):
+    for command in (spray, whospray, tdoi, loot, bad, badbonk, toenoyoudidnt, rapsheet, breadsheet, blame, bribe,
+                    expunge, bail, linux):
         bot.add_command(command)
     bot.add_listener(remember_speaker, "on_message")
     bot.add_listener(spray_reaction, "on_raw_reaction_add")

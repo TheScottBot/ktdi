@@ -39,6 +39,7 @@ FEATURES = [
     "ktdi.features.magicsquare",
     "ktdi.features.lore",
     "ktdi.features.wisdom",
+    "ktdi.features.bread",
     "ktdi.features.etiquette",
     "ktdi.features.movie",
     "ktdi.features.units",

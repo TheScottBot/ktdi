@@ -13,7 +13,7 @@ from tests.fakes import Ctx, User, run
 
 SCOTT = User(1, "scott")
 OLD_BOOK_SECTIONS = {"📚 Words & wisdom", "🐉 Beasts & magic", "🌿 Hearth & herbs"}
-NOT_BOOKS = {"ktdi.features.lore", "ktdi.features.wisdom"}  # In an old-book section, but not books
+NOT_BOOKS = {"ktdi.features.lore", "ktdi.features.wisdom", "ktdi.features.bread"}  # In an old-book section, not books
 
 
 def book(name: str, entries: list[dict]) -> oldbooks.OldBook:

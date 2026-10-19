@@ -53,6 +53,7 @@ Looting, Linux, anime and the war archives.
 All the old books at once, the shelf of words, slang, lost words and Old Wisdom.
 - `lore`: what every old book says about something, side by side
 - `wisdom`: old wisdom at random, or Old Wisdom of the Day in a channel
+- `bread`: How well do you 🍞? (how well-read are you, in Somerset) A question a day from the old books
 - `words`: the dictionaries' shelf, with `devils` (Bierce's Devil's Dictionary) and `phrase` (where idioms come from)
 - `vulgartongue`: 1811 slang · `deadword`: words English lost
 

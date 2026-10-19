@@ -9,6 +9,7 @@ posting fails, so nothing is posted over and over; a day missed by hours (the bo
 late.
 """
 
+import asyncio
 import sqlite3
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -125,7 +126,8 @@ async def daily_loop():
                 log.warning("Skipped %s for server %s: it was due at %s", daily.name, setup.guild_id, setup.next_run)
             else:
                 last = await daily.post(channel, setup.last)
-                log.info("Posted %s in server %s", daily.name, setup.guild_id)
+                where = getattr(getattr(channel, "guild", None), "name", setup.guild_id)
+                log.info("Posted %s in %s", daily.name, where)
         except discord.HTTPException as error:
             log.warning("Couldn't post %s in server %s: %s", setup.kind, setup.guild_id, error)
         finally:  # Always on to tomorrow, so a failure can't post it over and over
@@ -135,6 +137,13 @@ async def daily_loop():
 @daily_loop.before_loop
 async def before_daily_loop():
     await common.bot.wait_until_ready()
+    # Start on the minute, so each check is just after one ticks over: a post due at 9:00 goes at 9:00, not at
+    # whatever second past the minute the bot happened to start (up to a minute late).
+    await asyncio.sleep(seconds_to_next_minute(datetime.now(timezone.utc)))
+
+
+def seconds_to_next_minute(now: datetime) -> float:
+    return 60 - now.second - now.microsecond / 1_000_000 + 0.5  # Half a second in, to be sure it's ticked over
 
 
 def start() -> None:

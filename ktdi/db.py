@@ -345,6 +345,30 @@ SCHEMA = [
         created_at TEXT NOT NULL
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS bread_bakes (  -- /bread: one question a day
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id    INTEGER NOT NULL,
+        channel_id  INTEGER NOT NULL,
+        message_id  INTEGER,
+        question_id TEXT NOT NULL,     -- its id in lib/bread.json
+        options     TEXT NOT NULL,     -- the four answers, as JSON, in the order shown
+        correct     INTEGER NOT NULL,  -- which of them is right (0-3)
+        opened_at   TEXT NOT NULL,
+        closed_at   TEXT               -- when the next day's post revealed it; NULL while it's open
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS bread_answers (
+        bake_id     INTEGER NOT NULL,
+        guild_id    INTEGER NOT NULL,
+        user_id     INTEGER NOT NULL,
+        choice      INTEGER NOT NULL,
+        correct     INTEGER NOT NULL,
+        answered_at TEXT NOT NULL,
+        PRIMARY KEY (bake_id, user_id)  -- one answer each, never changed
+    )
+    """,
 ]
 
 

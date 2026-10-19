@@ -11,7 +11,7 @@ from ktdi.bot import KTDIBot, describe_options
 from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
-SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books", "bribe",
+SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books", "bread", "bribe",
                   "campaign", "committee", "cure", "deadword", "esoteric", "etiquette", "expunge", "folklore",
                   "hammeredofwitches", "help", "herbal", "household", "imperial", "insurance", "linux", "loot",
                   "lore", "metric", "nature", "nowplaying", "omen", "plant", "pliny", "quote", "rapsheet", "rpg",
@@ -21,8 +21,8 @@ SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton",
 # the cryptids
 SHELVED_BOOKS = ["bestiary", "devils", "dream", "enquire", "flowermeaning", "gemlore", "goblin", "magicsquare",
                  "melancholy", "phrase", "pseudodoxia", "secrets", "talisman", "wonder"]
-PREFIX_ONLY_COMMANDS = SHELVED_BOOKS + ["toenoyoudidnt"]
-HIDDEN_COMMANDS = ["toenoyoudidnt"]  # cryptids: real commands, left off the /help list
+PREFIX_ONLY_COMMANDS = SHELVED_BOOKS + ["breadsheet", "toenoyoudidnt"]
+HIDDEN_COMMANDS = ["breadsheet", "toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
     "almanac": ["day", "setup"],
     "beeton": ["advice", "menu", "recipe"],
@@ -31,6 +31,7 @@ SUBCOMMANDS = {
     "vulgartongue": ["insult", "lookup", "random"],
     "weather": ["here", "in"],
     "wisdom": ["now", "setup"],
+    "bread": ["scores", "setup", "today"],
     "insurance": ["buy", "complain", "status"],
     "nowplaying": ["bingo", "canon", "end", "history", "objection", "pause", "predict", "rate", "set", "show", "start",
                    "sync", "vote", "watchlist"],
@@ -66,7 +67,7 @@ def test_slash_commands(loaded_bot):
     assert sorted(c.name for c in watchlist.commands) == ["add", "remove", "show", "strike"]
     assert sorted(c.name for c in nowplaying.get_command("vote").commands) == ["end", "start"]
     assert sorted(c.name for c in nowplaying.get_command("bingo").commands) == ["card"]
-    for group in ("wisdom", "almanac"):
+    for group in ("wisdom", "almanac", "bread"):
         assert sorted(c.name for c in tree.get_command(group).get_command("setup").commands) == ["here", "show", "stop"]
     assert tree.get_command("np") is None  # slash commands can't have aliases: /nowplaying only
 

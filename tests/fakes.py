@@ -88,8 +88,8 @@ class Channel:
     def __str__(self):
         return f"channel-{self.id}"
 
-    async def send(self, content=None, embed=None, view=None, allowed_mentions=None, **kwargs):
-        message = Sent(content, embed, view, allowed_mentions=allowed_mentions)
+    async def send(self, content=None, embed=None, view=None, allowed_mentions=None, embeds=None, **kwargs):
+        message = Sent(content, embed, view, allowed_mentions=allowed_mentions, embeds=embeds)
         self.sent.append(message)
         return message
 

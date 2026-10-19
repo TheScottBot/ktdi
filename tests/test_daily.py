@@ -165,3 +165,10 @@ def test_the_old_wisdom_table_is_moved_across():
     setup = daily.get_setup(5, "wisdom")
     assert (setup.channel_id, setup.clock, setup.last) == (700, "09:00", "pliny")
     assert not db._columns("wisdom_channels")
+
+
+def test_the_loop_starts_on_the_minute():
+    """So a post due at 9:00 goes just after 9:00, not up to a minute late."""
+    from datetime import datetime, timezone
+    assert daily.seconds_to_next_minute(datetime(2026, 10, 19, 22, 11, 58, 500_000, tzinfo=timezone.utc)) == 2.0
+    assert daily.seconds_to_next_minute(datetime(2026, 10, 19, 22, 12, 0, tzinfo=timezone.utc)) == 60.5

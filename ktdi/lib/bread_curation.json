@@ -1,0 +1,3198 @@
+{
+ "_about": "What ktdi/tools/bread_build.py leaves out of the questions it builds from the books (every one was read): leave_out (id: why) for what broke a rule or was garbled, whose answers aren't offered as wrong ones either; not_asked (id: why) for questions not asked, whose answers still are (a wrong answer they drew is arguably right too, or their wording is best avoided). And the scenarios written by hand from a passage (each checked against it).",
+ "leave_out": {
+  "bierce:abnormal": "plain meaning stands out among jokes",
+  "bierce:abridge": "plain meaning stands out among jokes",
+  "bierce:absolute": "wrong option isn't a meaning (\"no definition\")",
+  "bierce:acknowledge": "plain meaning stands out among jokes",
+  "bierce:adder": "dull plain answer, stands out",
+  "bierce:art": "answer isn't a meaning (\"no definition\")",
+  "bierce:bastinado": "headword is a torture",
+  "bierce:birth": "wrong option jabs at America (Connecticut violins)",
+  "bierce:canonicals": "contempt for clergy and faith",
+  "bierce:congress": "mocks US Congress; religious-yoke jab",
+  "bierce:cremona": "jab at America (fake violins from Connecticut)",
+  "bierce:cunning": "wrong option scorns clergy (Jesters of Heaven)",
+  "bierce:decide": "wrong option could also be right",
+  "bierce:defame": "plain meaning stands out among jokes",
+  "bierce:emancipation": "wrong option: impaling, wound",
+  "bierce:emotion": "wrong option: impaling, wound",
+  "bierce:esoteric": "wrong option: soldiers killing bystanders",
+  "bierce:eucharist": "scorns a faith's sacrament",
+  "bierce:feast": "dull plain answer",
+  "bierce:flag": "wrong option scorns the religious",
+  "bierce:goose": "wrong option is a verse fragment",
+  "bierce:grape": "answer is a line of verse, not a meaning",
+  "bierce:hades": "plain meaning stands out among jokes",
+  "bierce:heart": "wrong option jabs at America (Connecticut)",
+  "bierce:homicide": "plain answer stands out; killing",
+  "bierce:hovel": "wrong option: impaling, wound",
+  "bierce:husband": "wrong option jabs at America (Connecticut)",
+  "bierce:hypochondriasis": "wrong option scorns the religious",
+  "bierce:immigrant": "contempt for immigrants",
+  "bierce:impale": "answer is gore; verse option",
+  "bierce:improbability": "answer is a line of verse",
+  "bierce:inauspiciously": "answer echoes the word",
+  "bierce:inexpedient": "wrong option scorns a sacrament",
+  "bierce:inscription": "plain meaning stands out among jokes",
+  "bierce:keep": "answer is a verse fragment",
+  "bierce:lickspittle": "wrong option: soldiers killing bystanders",
+  "bierce:low-bred": "wrong option jabs at America (Connecticut)",
+  "bierce:mace": "plain meaning stands out among jokes",
+  "bierce:majesty": "plain meaning stands out among jokes",
+  "bierce:manna": "plain meaning stands out among jokes",
+  "bierce:martyr": "answer: a desired death",
+  "bierce:mausoleum": "wrong option: soldiers killing bystanders",
+  "bierce:medicine": "answer: killing a dog",
+  "bierce:mendacious": "wrong option could also be right",
+  "bierce:mercy": "wrong option: killing a dog",
+  "bierce:metropolis": "wrong option is a line of verse",
+  "bierce:myrmidon": "wrong option is a line of verse",
+  "bierce:november": "wrong option scorns the religious",
+  "bierce:obsessed": "wrong option scorns a sacrament",
+  "bierce:occasional": "wrong option scorns piety",
+  "bierce:oleaginous": "plain meaning stands out among jokes",
+  "bierce:orthodox": "scorns the religious",
+  "bierce:owe": "wrong option jabs at America (Connecticut)",
+  "bierce:phrenology": "wrong option jabs at America (Connecticut)",
+  "bierce:piano": "wrong option is a line of verse",
+  "bierce:picture": "wrong option: soldiers killing bystanders",
+  "bierce:piety": "scorns faith",
+  "bierce:plenipotentiary": "plain meaning stands out among jokes",
+  "bierce:portable": "wrong option: impaling, wound",
+  "bierce:potable": "plain meaning stands out among jokes",
+  "bierce:preside": "wrong option scorns a sacrament",
+  "bierce:rank": "wrong option: impaling, wound",
+  "bierce:reason": "wrong option scorns a sacrament",
+  "bierce:reason-2": "wrong option is also Bierce's Reason",
+  "bierce:redundant": "plain meaning stands out among jokes",
+  "bierce:refuge": "plain meaning stands out among jokes",
+  "bierce:resolute": "wrong options: soldiers killing bystanders, desired death",
+  "bierce:rime": "wrong option: impaling, wound",
+  "bierce:rimer": "wrong option scorns the religious",
+  "bierce:riot": "soldiers killing bystanders",
+  "bierce:rope": "hanging, execution",
+  "bierce:ruin": "dull plain answer",
+  "bierce:saw": "wrong option scorns a sacrament",
+  "bierce:scarification": "self-wounding as penance",
+  "bierce:scepter": "plain meaning stands out among jokes",
+  "bierce:symbol": "plain meaning stands out among jokes",
+  "bierce:tedium": "plain meaning stands out among jokes",
+  "bierce:twice": "wrong option isn't a meaning (\"no definition\")",
+  "bierce:unction": "plain meaning stands out among jokes",
+  "bierce:wall-street": "jab at an American institution",
+  "flower:anemone": "unfair: option near the answer (Solitude)",
+  "flower:flax": "unfair: option near the answer (Beneficence)",
+  "flower:heart-s-ease": "unfair: option arguable from the name (heartache)",
+  "flower:honeysuckle": "unfair: option near the answer",
+  "flower:ipom-a": "unfair: option near the answer",
+  "flower:ivy": "unfair: option near the answer (fidelity)",
+  "flower:larkspur": "garbled option (repeated text)",
+  "flower:lichen": "unfair: option near the answer (Forsaken)",
+  "flower:mezereon": "garbled answer (repeated text)",
+  "flower:orange-flower-tree": "unfair: option a synonym (Beneficence)",
+  "flower:ranunculus": "unfair: option near the answer (Beauty and Love)",
+  "flower:rosebud-white": "unfair: option near the answer",
+  "flower:rosemary": "garbled option (repeated text)",
+  "flower:tuberose": "innuendo (dangerous pleasures)",
+  "lostword:acold": "giveaway: answer echoes the word",
+  "lostword:aftertale": "garbled wrong option ('opposed to sib, of kin')",
+  "lostword:agasp": "giveaway: answer echoes the word",
+  "lostword:agore": "house rule: gore; also giveaway",
+  "lostword:alderbest": "giveaway: answer echoes the word",
+  "lostword:alderfirst": "giveaway: answer echoes the word",
+  "lostword:alderhighest": "giveaway: answer echoes the word",
+  "lostword:alderwisest": "giveaway: answer echoes the word",
+  "lostword:alderworst": "giveaway: answer echoes the word",
+  "lostword:allwholly": "giveaway: answer echoes the word",
+  "lostword:amiddleward": "giveaway: answer echoes the word",
+  "lostword:amort": "wrong option 'Grief, sorrow' too near",
+  "lostword:backword": "garbled wrong option ('From jimp or jimply')",
+  "lostword:bendsome": "giveaway: answer echoes the word",
+  "lostword:benothinged": "giveaway: answer echoes the word",
+  "lostword:bicker": "garbled answer ('a step in the wrong direction')",
+  "lostword:blae": "house rule: 'Obscene in speech' option",
+  "lostword:blaud": "garbled wrong option (bicker's)",
+  "lostword:branglesome": "wrong option 'Contention, strife' too near",
+  "lostword:brast": "giveaway: answer echoes the word",
+  "lostword:burdalane": "house rule: children dying",
+  "lostword:cark": "house rule: 'Obscene in speech' option",
+  "lostword:clash": "wrong option 'A lie, a falsehood' too near",
+  "lostword:clem": "garbled wrong option ('Sometimes written nirl')",
+  "lostword:crink": "house rule: 'shrunken child' (body, children)",
+  "lostword:crool": "answer explains the source, not a meaning",
+  "lostword:dearworth": "giveaway: answer echoes the word",
+  "lostword:dight": "wrong option 'To clothe, to cover' too near",
+  "lostword:dorty": "garbled wrong option ('From the Gaelic liath')",
+  "lostword:dout": "giveaway: answer says 'do out'",
+  "lostword:drumly": "answer is etymology, not a meaning",
+  "lostword:earth-tilth": "giveaway: answer echoes the word",
+  "lostword:eldfather": "giveaway: answer echoes the word",
+  "lostword:eldmother": "giveaway: answer echoes the word",
+  "lostword:evenhood": "giveaway: answer echoes the word",
+  "lostword:everly": "garbled wrong option ('From the Gaelic liath')",
+  "lostword:evil-will": "giveaway; wrong option 'Perversity' too near",
+  "lostword:ferlie": "garbled answer ('V., to wonder')",
+  "lostword:fibster": "giveaway: answer echoes the word",
+  "lostword:fire-flinger": "giveaway: answer echoes the word",
+  "lostword:flite": "wrong option 'To quarrel' too near",
+  "lostword:forechosen": "giveaway: answer echoes the word",
+  "lostword:forgrown": "giveaway: answer echoes the word",
+  "lostword:forwearied": "giveaway: answer echoes the word",
+  "lostword:fouth": "answer is etymology ('From full, and full-eth')",
+  "lostword:fremit": "garbled answer ('opposed to sib, of kin')",
+  "lostword:gainstrife": "giveaway: answer echoes the word",
+  "lostword:gleek": "garbled answer ('V., to scoff')",
+  "lostword:glumpse": "wrong option 'Melancholy' too near",
+  "lostword:groundwall": "giveaway: answer echoes the word",
+  "lostword:guest-meal": "giveaway: answer echoes the word",
+  "lostword:haet": "house rule: 'Entrails' option (gore)",
+  "lostword:hinderling": "giveaway: answer echoes the word",
+  "lostword:ill-willer": "giveaway: answer echoes the word",
+  "lostword:ill-willy": "giveaway: answer echoes the word",
+  "lostword:jumply": "garbled answer ('From jimp or jimply')",
+  "lostword:knurl": "garbled answer ('Sometimes written nirl')",
+  "lostword:lippen": "garbled wrong option ('From the Gaelic liath')",
+  "lostword:loresman": "giveaway: answer echoes the word",
+  "lostword:lubbard": "garbled wrong option ('From jimp or jimply')",
+  "lostword:lyard": "answer is etymology, not a meaning",
+  "lostword:meden": "house rule: 'Obscene in speech' option",
+  "lostword:melch": "garbled wrong option ('From the Gaelic muirn')",
+  "lostword:mereswine": "giveaway: answer says 'sea-swine'",
+  "lostword:misdeem": "giveaway: answer echoes the word",
+  "lostword:misfall": "giveaway; garbled wrong option ('nirl')",
+  "lostword:misgang": "giveaway: answer echoes the word",
+  "lostword:misgo": "giveaway: answer echoes the word",
+  "lostword:mislive": "giveaway: answer echoes the word",
+  "lostword:mournival": "garbled answer ('From the Gaelic muirn')",
+  "lostword:nake": "giveaway: answer echoes the word",
+  "lostword:nay-word": "giveaway: answer echoes the word",
+  "lostword:neeze": "house rule: 'Entrails' option (gore)",
+  "lostword:nowl": "garbled wrong option ('From the Gaelic muirn')",
+  "lostword:noy": "giveaway: answer echoes the word",
+  "lostword:oke": "dull: 'Preterite of ache'",
+  "lostword:outener": "garbled wrong option ('Preterite of ye')",
+  "lostword:overcraft": "giveaway: answer echoes the word",
+  "lostword:overtimely": "giveaway: answer echoes the word",
+  "lostword:pinder": "garbled wrong option ('Defined in Phillips')",
+  "lostword:poulter": "giveaway: answer echoes the word",
+  "lostword:proyne": "giveaway: answer says 'prune'",
+  "lostword:revel-coyle": "giveaway: answer echoes the word",
+  "lostword:revel-rout": "giveaway: answer echoes the word",
+  "lostword:rowe": "garbled wrong option ('nirl')",
+  "lostword:samely": "giveaway: answer echoes the word",
+  "lostword:scart-free": "giveaway: answer echoes the word",
+  "lostword:sleeple": "giveaway: answer echoes the word",
+  "lostword:sloom": "garbled wrong option ('From full, and full-eth')",
+  "lostword:slorp": "giveaway: answer echoes the word",
+  "lostword:slug": "giveaway: answer echoes the word",
+  "lostword:sud": "garbled wrong option ('Defined in Phillips')",
+  "lostword:sundriness": "giveaway: answer echoes the word",
+  "lostword:swaff": "garbled wrong option ('nirl')",
+  "lostword:sweltersome": "giveaway: answer echoes the word",
+  "lostword:swikedom": "garbled wrong option ('V., to scoff')",
+  "lostword:tankerous": "giveaway: cantankerous",
+  "lostword:thairms": "house rule: entrails (gore)",
+  "lostword:thirle": "garbled wrong option ('V., to scoff')",
+  "lostword:thitherto": "confusing: 'For the future' clashes with usual sense",
+  "lostword:thone": "garbled wrong option ('opposed to sib')",
+  "lostword:thoughty": "giveaway: answer echoes the word",
+  "lostword:thrawardness": "garbled wrong option ('V., to scoff')",
+  "lostword:throme": "garbled wrong option ('From jimp or jimply')",
+  "lostword:throughgang": "giveaway: answer echoes the word",
+  "lostword:thrum": "garbled wrong option ('opposed to sib')",
+  "lostword:thrumble": "garbled wrong option ('nirl')",
+  "lostword:thwartover": "giveaway: answer echoes the word",
+  "lostword:tod": "garbled wrong option ('From full, and full-eth')",
+  "lostword:trangle": "garbled wrong option ('nirl')",
+  "lostword:triple-trine": "giveaway: answer echoes the word",
+  "lostword:troke": "house rule: 'Obscene in speech' option",
+  "lostword:tuz": "house rule: 'last child surviving' option",
+  "lostword:um-be-clippe": "wrong option 'To fondle, to caress' too near",
+  "lostword:unbuxom": "house rule: appearance ('Uncomely')",
+  "lostword:unchancy": "wrong option 'Difficult, perilous' too near",
+  "lostword:unchary": "giveaway: answer repeats 'chary'",
+  "lostword:unhale": "giveaway: answer repeats 'hale'",
+  "lostword:unlifty": "giveaway: answer echoes the word",
+  "lostword:unsneck": "giveaway: answer repeats 'sneck'",
+  "lostword:untrowable": "giveaway: answer repeats 'trowed'",
+  "lostword:unwinnable": "giveaway: answer echoes the word",
+  "lostword:unwit": "garbled wrong option ('opposed to sib')",
+  "lostword:upgang": "garbled wrong option ('From the Gaelic liath')",
+  "lostword:upstir": "giveaway: answer echoes the word",
+  "lostword:urf": "house rule: 'stunted, ill-grown child'; garbled",
+  "lostword:wafture": "garbled wrong option ('opposed to sib')",
+  "lostword:well-willer": "giveaway: answer echoes the word",
+  "lostword:wern": "house rule: 'last child surviving' option",
+  "lostword:whingle": "giveaway: whinge",
+  "lostword:whuffle": "house rule: 'Entrails' option (gore)",
+  "lostword:wishworthy": "giveaway: answer echoes the word",
+  "lostword:witch-thimble": "house rule: 'last child surviving' option",
+  "lostword:within-forth": "giveaway: answer echoes the word",
+  "lostword:without-forth": "giveaway: answer echoes the word",
+  "lostword:word-wanton": "house rule: obscenity",
+  "lostword:worksome": "house rule: 'shrunken child' option; giveaway",
+  "lostword:wrox": "garbled wrong option ('From the Gaelic trom')",
+  "lostword:wush": "dull: 'Preterite of wash'",
+  "lostword:yald": "garbled wrong option ('From the Gaelic liath')",
+  "lostword:yawney": "house rule: 'last child surviving' option",
+  "lostword:yede": "dull/garbled: 'Preterite of ye, to go'",
+  "lostword:yernful": "giveaway; garbled wrong option ('muirn')",
+  "lostword:yester": "giveaway: answer echoes the word",
+  "lostword:yonderly": "house rule: 'Gory, bloody' option",
+  "phrase:a-bad-job": "nonsense option",
+  "phrase:a-bag-of-game": "confusing answer",
+  "phrase:a-bear-stock-exchange": "nonsense option",
+  "phrase:a-bed-of-thorns": "nonsense option",
+  "phrase:a-bird-of-passage": "nonsense option",
+  "phrase:a-canterbury-tale": "ableism option (mental state joke)",
+  "phrase:a-cockshy": "cruelty to animals (shying at cocks)",
+  "phrase:a-diplomatic-cold": "confusing option",
+  "phrase:a-draft-on-aldgate-pump": "gore option (strangling)",
+  "phrase:a-figure-of-fun": "nonsense option",
+  "phrase:a-fool-s-bolt-is-soon-shot": "garbled answer",
+  "phrase:a-great-gulf-fixed": "garbled answer",
+  "phrase:a-little-bird-told-me-so": "garbled answer",
+  "phrase:a-loose-fish": "violence option (a licking)",
+  "phrase:a-man-of-pluck": "gore in the entry (offal)",
+  "phrase:a-miss-is-as-good-as-a-mile": "nonsense option",
+  "phrase:a-nose-of-wax": "confusing answer",
+  "phrase:a-passage-of-arms": "nonsense option",
+  "phrase:a-penny-a-liner": "nonsense option",
+  "phrase:a-pilgarlic-or-pill-d-garlic": "ableism (baldness mocked)",
+  "phrase:a-pilot-balloon": "nonsense option",
+  "phrase:a-raw-lobster": "confusing option (French)",
+  "phrase:a-rod-in-pickle": "harm to children (the rod)",
+  "phrase:a-set-to": "confusing option",
+  "phrase:a-white-elephant": "garbled answer",
+  "phrase:a-wild-goose-chase": "confusing option (French)",
+  "phrase:adam-s-apple": "too obvious",
+  "phrase:after-my-own-heart": "confusing options (French)",
+  "phrase:all-is-not-gold-that-glitters": "too obvious; wrong option is a proverb, not a meaning",
+  "phrase:all-one": "wrong option could be argued right",
+  "phrase:all-there": "wrong option is the opposite phrase; mental-health jab",
+  "phrase:alma-mater": "wrong option mocks baldness",
+  "phrase:an-anodyne-necklace": "hanging; nonsense option",
+  "phrase:an-itching-palm": "nonsense option",
+  "phrase:an-unlicked-cub": "nonsense option",
+  "phrase:angel-visits": "answer reads as innuendo",
+  "phrase:babes-in-the-wood": "nonsense option",
+  "phrase:bad-form": "nonsense option",
+  "phrase:battle-royal": "cruelty to animals (cockfighting)",
+  "phrase:bean-feast": "confusing answer",
+  "phrase:better-off": "nonsense option",
+  "phrase:between-hay-and-grass": "nonsense option",
+  "phrase:birds-of-a-feather-flock-together": "cruelty to animals option (cockfighting)",
+  "phrase:bold-as-brass": "nonsense option",
+  "phrase:bolt-upright": "nonsense option",
+  "phrase:born-in-the-purple": "confusing answer",
+  "phrase:bristol-fashion": "nonsense option",
+  "phrase:brother-bung": "nonsense option",
+  "phrase:ch-teaux-en-espagne": "answer given away (bracketed gloss)",
+  "phrase:comparisons-are-odorous": "garbled answer",
+  "phrase:cum-grano-salis": "gore option (strangling)",
+  "phrase:cut-and-long-tail": "cruelty to animals (docking tails)",
+  "phrase:de-mortuis-nil-nisi-bonum": "nonsense option",
+  "phrase:dead-reckoning": "violence option (blow to the eyes)",
+  "phrase:diamond-cut-diamond": "confusing option",
+  "phrase:die-hards": "dull answer (regiment name)",
+  "phrase:dirt-is-matter-in-the-wrong-place": "garbled answer",
+  "phrase:elbow-room": "nonsense option",
+  "phrase:fa-on-de-parler": "nonsense option",
+  "phrase:fair-game": "nonsense option",
+  "phrase:fire-away-flanagan": "nonsense option",
+  "phrase:for-my-part": "nonsense option",
+  "phrase:for-the-nonce": "garbled answer",
+  "phrase:from-the-teeth-outwards": "confusing option (French)",
+  "phrase:good-form-bad-form": "confusing answer (French)",
+  "phrase:have-at-you": "nonsense option",
+  "phrase:having-a-tile-loose": "ableism (mental state joke)",
+  "phrase:he-has-a-slate-or-tile-loose": "ableism (mental state joke)",
+  "phrase:he-has-a-tile-loose": "ableism (mental state joke)",
+  "phrase:he-has-got-his-sea-legs": "nonsense option",
+  "phrase:he-is-coming-round": "nonsense option",
+  "phrase:he-is-my-right-hand": "confusing answer (French)",
+  "phrase:he-s-a-sad-dog": "confusing answer (French), debauchee",
+  "phrase:hinc-ill-lacrym": "confusing option (French)",
+  "phrase:his-back-is-up": "nonsense option",
+  "phrase:his-fingers-are-all-thumbs": "nonsense option",
+  "phrase:hugger-mugger": "garbled answer",
+  "phrase:i-am-for-all-waters": "garbled wrong options",
+  "phrase:i-don-t-care-for-it-a-brass-farthing": "garbled answer",
+  "phrase:i-ll-give-him-beans": "violence (a hiding)",
+  "phrase:in-hand": "nonsense option",
+  "phrase:in-one-s-birthday-suit": "nudity",
+  "phrase:in-one-s-heart-of-hearts": "nonsense option",
+  "phrase:in-the-small-hours-of-the-morning": "nonsense option",
+  "phrase:in-the-twinkling-of-an-eye": "nonsense option",
+  "phrase:in-touch-with-him": "confusing answer (French)",
+  "phrase:ipse-dixit": "gore option (strangling)",
+  "phrase:leave-some-for-manners": "garbled answer",
+  "phrase:led-by-the-nose": "garbled answer",
+  "phrase:lightly-come-lightly-go": "garbled answer",
+  "phrase:like-a-dying-duck-in-a-thunderstorm": "confusing option",
+  "phrase:lip-service": "confusing option",
+  "phrase:loud-patterns": "nonsense option",
+  "phrase:mum-s-the-word": "cruelty option (scourging)",
+  "phrase:my-venus-turns-out-a-whelp": "confusing option (French)",
+  "phrase:narrow-house-or-home": "nonsense option",
+  "phrase:newgate-fashion": "nonsense option",
+  "phrase:next-to-nothing": "nonsense option",
+  "phrase:nimble-as-a-cat-on-a-hot-bake-stone": "cruelty to animals (cat on a hot stone)",
+  "phrase:no-great-shakes": "nonsense option",
+  "phrase:no-man-is-a-hero-to-his-own-valet": "garbled answer",
+  "phrase:not-a-hundred-miles-off": "nonsense option",
+  "phrase:not-a-patch-upon": "violence option (thrashing)",
+  "phrase:not-at-home": "garbled answer",
+  "phrase:not-so-dusty": "confusing option (French)",
+  "phrase:of-the-first-water": "nonsense option",
+  "phrase:old-as-methuselah": "contempt for common people (vulgus ignobile)",
+  "phrase:old-scratch": "confusing option (French)",
+  "phrase:on-the-cross": "nonsense option",
+  "phrase:on-the-horns-of-a-dilemma": "garbled answer",
+  "phrase:on-the-loose": "garbled answer",
+  "phrase:on-the-side-of-the-angels": "garbled answer",
+  "phrase:one-man-may-steal-a-horse-but-another-must-not-look-over-the-hedge": "innuendo (libertines)",
+  "phrase:othello-s-occupation-s-gone": "garbled answer",
+  "phrase:out-and-out": "confusing option",
+  "phrase:out-at-elbows": "nonsense option",
+  "phrase:out-of-countenance": "nonsense option",
+  "phrase:out-of-court": "violence option (thrashing)",
+  "phrase:out-of-harness": "nonsense option",
+  "phrase:pari-passu": "nonsense option",
+  "phrase:peace-with-honour": "nonsense option",
+  "phrase:pen-name": "garbled answer",
+  "phrase:played-out": "nonsense option",
+  "phrase:pot-valiant": "confusing option (French)",
+  "phrase:prima-facie": "nonsense option",
+  "phrase:propos-de-bottes": "wrong option isn't a meaning",
+  "phrase:queen-anne-s-fan": "wrong option: cockfighting",
+  "phrase:right-off-the-reel": "confusing option (French)",
+  "phrase:ringing-the-changes": "violence option (blow to the eyes)",
+  "phrase:she-s-no-chicken": "misogyny (a woman's age)",
+  "phrase:sour-grapes": "ableism option (appearance)",
+  "phrase:spare-the-rod-and-spoil-the-child": "garbled answer, harm to children (the rod)",
+  "phrase:tag-rag-and-bobtail": "contempt for common people (vulgus ignobile)",
+  "phrase:taking-a-sight": "nonsense option",
+  "phrase:tarring-and-feathering": "torture (tarring and feathering)",
+  "phrase:tertium-quid": "nonsense option",
+  "phrase:that-s-nuts-to-him": "nonsense option",
+  "phrase:the-bitter-end": "confusing answer",
+  "phrase:the-die-is-cast": "confusing option",
+  "phrase:the-funny-bone": "dull answer (explains the pun)",
+  "phrase:the-greater-the-truth-the-greater-the-libel": "garbled answer",
+  "phrase:the-horse-marines": "dull answer (explains the joke)",
+  "phrase:the-ins-and-outs-of-the-matter": "nonsense option",
+  "phrase:the-last-straw": "unfair: answer misleading",
+  "phrase:the-moon-is-made-of-green-cheese": "confusing answer",
+  "phrase:the-more-the-merrier": "garbled answer",
+  "phrase:the-roaring-forties": "answer cut off",
+  "phrase:the-schoolmaster-is-abroad": "garbled answer",
+  "phrase:the-small-hours-of-the-morning": "nonsense option",
+  "phrase:the-straits-of-ballambangjan": "nonsense option",
+  "phrase:the-thin-red-line": "garbled answer",
+  "phrase:this-may-be-play-to-you-tis-death-to-us": "garbled answer",
+  "phrase:throw-a-tub-to-the-whale": "nonsense option",
+  "phrase:to-baste-your-bacon": "cruelty (scourging)",
+  "phrase:to-be-in-leading-strings": "nonsense option",
+  "phrase:to-blow-great-guns": "ableism (appearance)",
+  "phrase:to-box-the-compass": "confusing option",
+  "phrase:to-break-a-butterfly-on-a-wheel": "cruelty (breaking on the wheel)",
+  "phrase:to-break-priscian-s-head": "nonsense option",
+  "phrase:to-bridle-up": "confusing answer (French)",
+  "phrase:to-bring-down-the-house": "nonsense option",
+  "phrase:to-bring-to-book": "nonsense option",
+  "phrase:to-burke-a-question": "gore (strangling at birth)",
+  "phrase:to-butter-one-s-bread-on-both-sides": "nonsense option",
+  "phrase:to-carry-out-one-s-bat": "nonsense option",
+  "phrase:to-cast-a-sheep-s-eye-at-one": "innuendo (looking wantonly)",
+  "phrase:to-cast-in-one-s-lot": "nudity",
+  "phrase:to-catch-at-a-straw": "nonsense option",
+  "phrase:to-cherish-a-serpent-in-your-bosom": "confusing option",
+  "phrase:to-chronicle-small-beer": "nonsense option",
+  "phrase:to-comb-one-s-hair-the-wrong-way": "nonsense option",
+  "phrase:to-come-captain-stiff-over-one": "ableism (appearance)",
+  "phrase:to-come-to-the-hammer": "ableism option (mental state joke)",
+  "phrase:to-cut-a-figure": "garbled answer",
+  "phrase:to-cut-blocks-with-a-razor": "nonsense option",
+  "phrase:to-cut-one-s-comb": "capons (gelding) in the entry",
+  "phrase:to-cut-one-s-lucky": "ableism option (appearance)",
+  "phrase:to-cut-the-gordian-knot": "unfair: answer wrong, option nearly right",
+  "phrase:to-darken-one-s-daylights": "violence (blow to the eyes)",
+  "phrase:to-draw-a-bow-at-a-venture": "confusing option",
+  "phrase:to-eat-a-man-s-salt": "nonsense option",
+  "phrase:to-eat-one-s-words": "nonsense option",
+  "phrase:to-end-in-smoke": "nonsense option",
+  "phrase:to-fall-out": "harm to children in the entry (drowning rhyme)",
+  "phrase:to-fly-out-at": "nonsense option",
+  "phrase:to-fork-out": "nonsense option",
+  "phrase:to-get-or-have-one-s-monkey-up": "nonsense option",
+  "phrase:to-get-to-the-bottom-of-the-matter": "nonsense option",
+  "phrase:to-give-it-him": "violence (thrashing)",
+  "phrase:to-give-one-a-roasting": "nonsense option",
+  "phrase:to-give-one-the-mitten": "ableism option (mental state joke)",
+  "phrase:to-give-one-the-slip": "nonsense option",
+  "phrase:to-go-on-all-fours": "gives itself away",
+  "phrase:to-go-through-fire-and-water-to-serve-you": "torture in the entry (ordeals)",
+  "phrase:to-go-without-saying": "confusing answer (French)",
+  "phrase:to-grant-quarter": "nonsense option",
+  "phrase:to-have-a-bee-in-your-bonnet": "nonsense option",
+  "phrase:to-have-his-fling": "nonsense option",
+  "phrase:to-have-it-at-my-fingers-end": "nonsense option",
+  "phrase:to-hold-water": "nonsense option",
+  "phrase:to-keep-good-hours": "nonsense option",
+  "phrase:to-keep-the-ball-up": "ableism option (mental state joke)",
+  "phrase:to-kick-the-beam": "nonsense option",
+  "phrase:to-kick-up-a-row": "gore option (strangling)",
+  "phrase:to-kiss-the-blarney-stone": "nonsense option",
+  "phrase:to-kiss-the-dust": "nonsense option",
+  "phrase:to-leak-out": "nonsense option",
+  "phrase:to-leave-out-in-the-cold": "nonsense option",
+  "phrase:to-light-on-one-s-feet": "cruelty to animals (throwing cats)",
+  "phrase:to-look-blue": "nonsense option",
+  "phrase:to-make-a-hit": "nonsense option",
+  "phrase:to-make-common-cause": "violence option (thrashing)",
+  "phrase:to-make-one-s-bread": "nonsense option",
+  "phrase:to-make-one-s-mark": "nonsense option",
+  "phrase:to-maroon": "confusing option",
+  "phrase:to-oil-the-knocker": "confusing option",
+  "phrase:to-open-the-ball": "nonsense option",
+  "phrase:to-out-herod-herod": "harm to children (Herod)",
+  "phrase:to-pay-one-off-in-his-own-coin": "garbled answer",
+  "phrase:to-pipe-your-eye": "nonsense option",
+  "phrase:to-place-one-s-head-in-the-lion-s-mouth": "nonsense option",
+  "phrase:to-pull-bacon": "confusing answer, nonsense option",
+  "phrase:to-raise-the-wind": "confusing option (French)",
+  "phrase:to-rip-up-old-grievances-or-sores": "nonsense option",
+  "phrase:to-run-a-rig": "nonsense option",
+  "phrase:to-set-on-his-legs": "nonsense option",
+  "phrase:to-smell-of-the-lamp-or-candle": "nonsense option",
+  "phrase:to-sow-dragons-teeth": "confusing option (French)",
+  "phrase:to-stand-buff": "garbled answer",
+  "phrase:to-stare-like-a-stuck-pig": "cruelty to animals (stuck pig)",
+  "phrase:to-strike-a-bargain": "garbled answer",
+  "phrase:to-strike-the-ball-under-the-line": "nonsense option",
+  "phrase:to-take-a-rise-out-of-one": "garbled answer",
+  "phrase:to-take-the-bear-by-the-tooth": "confusing option",
+  "phrase:to-tap-the-admiral": "gore in the entry (Nelson's body)",
+  "phrase:to-touch-bottom": "confusing option (French)",
+  "phrase:to-walk-the-plank": "execution (walking the plank)",
+  "phrase:to-work-the-oracle": "nonsense option",
+  "phrase:tour-de-force": "violence option (thrashing)",
+  "phrase:truth-in-a-well": "garbled answer",
+  "phrase:turnspit-dog": "nonsense option, cruelty to animals (turnspit dog)",
+  "phrase:twisting-the-lion-s-tail": "America-Britain jibe (Britishers), confusing",
+  "phrase:ultima-thule": "ableism option (mental state joke)",
+  "phrase:uncle-sam": "nonsense option",
+  "phrase:up-to-the-mark": "garbled answer",
+  "phrase:verbum-sap": "answer given away (bracketed gloss)",
+  "phrase:what-the-deuce": "garbled answer",
+  "phrase:whom-the-gods-love-die-young": "garbled answer",
+  "phrase:your-mother-was-a-blue-hen-no-doubt": "nonsense option",
+  "slang:admiral-of-the-blue": "answer cut off mid-thought",
+  "slang:against-the-grain": "giveaway: still everyday English",
+  "slang:aground": "giveaway: still everyday English",
+  "slang:ale-post": "wrong option garbled ('The magistrates, &c')",
+  "slang:anodyne-necklace": "house rule: execution (halter)",
+  "slang:ars-musica": "house rule: crude innuendo",
+  "slang:autem-bawler": "house rule: jeer at clergy",
+  "slang:awake": "wrong option 'To excite, stimulate' arguable",
+  "slang:bakers-dozen": "confusing: 'Fourteen' reads as wrong",
+  "slang:barber-s-sign": "house rule: sexual innuendo",
+  "slang:barnacle": "wrong option garbled ('A society held, A')",
+  "slang:becalmed": "answer doesn't give a meaning",
+  "slang:bell-swagger": "house rule: 'milksop' option (gendered put-down)",
+  "slang:birds-of-a-feather": "giveaway: still everyday English",
+  "slang:bleaters": "answer needs another entry to make sense",
+  "slang:blunderbuss": "house rule: 'one eye, stinking breath' option; giveaway",
+  "slang:bob": "wrong option garbled (two entries run together)",
+  "slang:body-snatchers": "wrong option nonsense ('The same')",
+  "slang:bolt-upright": "giveaway and dull",
+  "slang:bone-picker": "house rule: 'To strangle' option",
+  "slang:booby-hutch": "confusing answer (chaise or bottle)",
+  "slang:bow-wow-mutton": "house rule: eating dogs",
+  "slang:braggadocia": "giveaway: still everyday English",
+  "slang:bread-basket": "giveaway: still everyday slang",
+  "slang:brown-george": "answer garbled (two meanings run together)",
+  "slang:bubble-and-squeak": "giveaway: still everyday English",
+  "slang:bully-ruffians": "answer garbled ('paths' for oaths)",
+  "slang:bum": "modern meaning, gives itself away",
+  "slang:button": "wrong option \"as above\" makes no sense alone",
+  "slang:cackler-s-ken": "crude nonsense wrong option",
+  "slang:capsize": "same as modern meaning",
+  "slang:captain-queernabs": "\"queer\" in the question invites jokes about sexuality",
+  "slang:cat-harping-fashion": "crude nonsense wrong option",
+  "slang:chalking": "answer refers to \"above described\"",
+  "slang:chap": "modern meaning; \"The same\" option",
+  "slang:chaunter-culls": "garbled wrong option (\"A.D\")",
+  "slang:cheek-by-jowl": "modern meaning",
+  "slang:chelsea": "wrong option mocks appearance; dull answer",
+  "slang:chicken-hearted": "modern meaning",
+  "slang:chops": "modern meaning",
+  "slang:chubby": "about bodies; modern meaning",
+  "slang:chum": "modern meaning",
+  "slang:churl": "wrong option \"rude uncouth fellow\" also right",
+  "slang:cleymes": "beggars' sores; flogging option",
+  "slang:clinch": "wrong option cut off (\"To catch the\")",
+  "slang:clod-pole": "answer \"The same\" meaningless",
+  "slang:close-fisted": "modern meaning",
+  "slang:clutches": "modern meaning",
+  "slang:clutter": "modern meaning",
+  "slang:cobbler": "modern meaning, gives itself away",
+  "slang:cog": "answer confusing out of context",
+  "slang:cokes": "wrong option cut off mid-quote",
+  "slang:collegiates": "answer garbled (\"the one ... the other\")",
+  "slang:comus-s-court": "crude nonsense wrong option",
+  "slang:conveniency": "answer \"A necessary\" confusing",
+  "slang:cook-ruffian": "answer is a fragment",
+  "slang:corporation": "large belly: mocks bodies",
+  "slang:costard-monger": "scaring crying children option, \"foolish nurses\"",
+  "slang:country-harry": "wrong option \"A coilin\" nonsense",
+  "slang:cove": "wrong option \"a cheat\" also arguably right",
+  "slang:cow-s-courant": "crude, answer is a toilet joke",
+  "slang:crabbed": "modern meaning",
+  "slang:cracking-tools": "gives itself away; near-meaning option",
+  "slang:cramp-words": "death sentence; excrement option",
+  "slang:crony": "modern meaning",
+  "slang:cure-a-se": "a remedy (plaister); crude",
+  "slang:dart": "wrong option \"carries the same meaning\" nonsense alone",
+  "slang:david-jones": "wrong option \"taking out the lining of it\" a fragment",
+  "slang:dead-louse": "a mispronounced ship name",
+  "slang:death-s-head-upon-a-mop-stick": "mocks an emaciated body; excrement option",
+  "slang:devil": "flogging option (sings out at the halberts)",
+  "slang:dilberries": "excrement; one-eyed stinking-breath option",
+  "slang:dilberry-maker": "crude, made from the excrement entry",
+  "slang:domineer": "modern meaning",
+  "slang:double-jugg": "\"the cheeks\" arguable; excrement option",
+  "slang:down-hills": "wrong option mocks a red fiery nose",
+  "slang:duke-of-limbs": "mocks an ill-made body; nonsense option",
+  "slang:elbow-room": "modern meaning",
+  "slang:ensign-bearer": "garbled wrong option",
+  "slang:fakement": "crude nonsense wrong option",
+  "slang:fawney-rig": "answer \"thus practised\" garbled",
+  "slang:feint": "modern meaning",
+  "slang:fermerdy-beggars": "answer confusing (sham sores)",
+  "slang:fiddle-faddle": "modern meaning",
+  "slang:firing-a-gun": "\"ill-made fellow\" option mocks a body",
+  "slang:fit": "modern meaning",
+  "slang:fizzle": "strangling option",
+  "slang:flabagasted": "modern meaning",
+  "slang:flea-bite": "modern meaning; excrement option",
+  "slang:flip": "flogging option (halberts)",
+  "slang:flying-pasty": "crude: excrement thrown over a wall",
+  "slang:foreman-of-the-jury": "flogging option (halberts)",
+  "slang:free-booters": "modern meaning",
+  "slang:fudge": "wrong option \"High and Low\" nonsense alone",
+  "slang:fuss": "modern meaning",
+  "slang:gaggers": "answer \"High and Low\" garbled",
+  "slang:gallipot": "answer garbled (\"namefor\")",
+  "slang:gambadoes": "wrong option about \"clymes\" confusing",
+  "slang:gang": "modern meaning; typo option",
+  "slang:garnish": "excrement wrong option",
+  "slang:gazebo": "modern meaning",
+  "slang:gift-of-the-gab": "modern meaning",
+  "slang:gigger": "wrong option \"amusement above described\"",
+  "slang:gills": "wrong option \"The face\" arguable",
+  "slang:gingerly": "modern meaning",
+  "slang:ginny": "answer garbled (\"lift up a great\"); medicinal option",
+  "slang:glaymore": "claymore, gives itself away",
+  "slang:glib": "modern meaning",
+  "slang:go-shop": "flogging option (halberts)",
+  "slang:gob": "modern meaning",
+  "slang:greedy-guts": "modern meaning",
+  "slang:green": "modern meaning; excrement option",
+  "slang:greenhead": "gives itself away",
+  "slang:grog": "modern meaning",
+  "slang:grub": "modern meaning",
+  "slang:grub-street-news": "crude nonsense wrong option",
+  "slang:grumbletonian": "gives itself away",
+  "slang:gull": "modern meaning",
+  "slang:gulled": "modern meaning",
+  "slang:gutting-a-quart-pot": "answer confusing out of context",
+  "slang:guzzle-guts": "gives itself away",
+  "slang:gybing": "modern meaning (jibing)",
+  "slang:half-a-hog": "garbled wrong option (\"shake bands\")",
+  "slang:hand": "modern meaning",
+  "slang:hanger-on": "modern meaning",
+  "slang:hard-at-his-a-se": "crude, censored",
+  "slang:hasty": "modern meaning",
+  "slang:hawkers": "modern meaning",
+  "slang:hector": "crude nonsense wrong option",
+  "slang:hell-hound": "innuendo wrong option (pole and two balls)",
+  "slang:hen-hearted": "gives itself away",
+  "slang:hide-and-seek": "modern meaning; body option",
+  "slang:higgledy-piggledy": "modern meaning",
+  "slang:hoaxing": "modern meaning",
+  "slang:hobberdehoy": "wrong option \"inexperienced young man\" arguable",
+  "slang:hodge": "answer just \"abbreviation of Roger\"",
+  "slang:hodge-podge": "modern meaning",
+  "slang:hoggish": "gives itself away",
+  "slang:honey-moon": "modern meaning",
+  "slang:hood-winked": "modern meaning",
+  "slang:hubbub": "modern meaning; death-sentence option",
+  "slang:hucksters": "modern meaning",
+  "slang:hunks": "wrong option a fragment (\"Who roasted the devil\")",
+  "slang:hurly-burly": "modern meaning",
+  "slang:in-twig": "wrong option \"The same\" is nonsense",
+  "slang:jack-tar": "modern meaning",
+  "slang:jacked": "wrong option \"A coilin\" nonsense",
+  "slang:jacob-2": "wrong option \"A pawnbroker's\" a fragment",
+  "slang:jail-birds": "modern meaning",
+  "slang:janizaries": "flogging option (halberts)",
+  "slang:jarvis": "garbled wrong option (\"A society held, A\")",
+  "slang:jason-s-fleece": "garbled wrong option (\"namefor\")",
+  "slang:jaw": "modern meaning",
+  "slang:jessamy": "a fop: \"jessamy\" was an effeminate put-down",
+  "slang:jingle-brains": "wrong option cut off mid-quote",
+  "slang:job": "wrong option \"A necessary\" confusing",
+  "slang:job-s-comforter": "modern meaning; excrement option",
+  "slang:kidder": "\"Bailiffs, or Philistines\": a people as an insult",
+  "slang:kiddeys": "\"Bailiffs, or Philistines\": a people as an insult",
+  "slang:kip": "innuendo wrong option (pole and two balls)",
+  "slang:knight-of-the-road": "gives itself away",
+  "slang:knob": "innuendo in British English",
+  "slang:lamb-s-wool": "wrong option a fragment (\"kill all the birds\")",
+  "slang:lark": "modern meaning",
+  "slang:latitat": "crude anatomical wrong option",
+  "slang:lickspittle": "modern meaning",
+  "slang:light-fingered": "modern meaning",
+  "slang:light-house": "mocks a red fiery nose",
+  "slang:lob": "wrong option a fragment (\"because both...\")",
+  "slang:lollpoop": "wrong option \"A necessary\" confusing",
+  "slang:loophole": "modern meaning",
+  "slang:louse": "excrement wrong option",
+  "slang:lout": "modern meaning",
+  "slang:lurries": "wrong option reads as innuendo (\"down upon his knees\")",
+  "slang:malingeror": "modern meaning",
+  "slang:man-of-the-turf": "modern meaning",
+  "slang:mealy-mouthed": "modern meaning",
+  "slang:medlar": "crude anatomical answer",
+  "slang:mettlesome": "modern meaning",
+  "slang:moabites": "a people's name used as an insult",
+  "slang:moiety": "explains the word, not slang",
+  "slang:moss": "answer garbled (\"because both...\")",
+  "slang:moveables": "wrong option \"plunder, goods\" arguable",
+  "slang:mumchance": "crude excrement wrong option",
+  "slang:nacky": "garbled wrong option (\"A society held, A\")",
+  "slang:nailed": "modern meaning",
+  "slang:new-college-students": "beggars' artificial sores option",
+  "slang:nicknacks": "modern meaning",
+  "slang:nightingale": "answer is about flogging",
+  "slang:nipps": "wrong option \"amusement above described\"",
+  "slang:noisy-dog-racket": "wrong option \"carries the same meaning\" nonsense",
+  "slang:nostrum": "modern meaning (quack medicine)",
+  "slang:numbscull": "modern meaning; body option",
+  "slang:oaf": "modern meaning",
+  "slang:old-hand": "modern meaning",
+  "slang:old-nick": "modern meaning",
+  "slang:old-stager": "modern meaning",
+  "slang:oliver-s-scull": "wrong option \"a vessel to hold liquor\" arguable",
+  "slang:olli-compolli": "crude purging wrong option",
+  "slang:omnium-gatherum": "modern meaning",
+  "slang:open-arse": "crude anatomical name",
+  "slang:oschives": "excrement wrong option",
+  "slang:ostler": "answer \"Oatstealer\" is a pun, not a meaning",
+  "slang:owl": "answer cut off (\"To catch the\")",
+  "slang:oyster": "consumptive man's phlegm: illness, gross",
+  "slang:p-s": "answer just repeats the phrase",
+  "slang:pall": "modern meaning (pal)",
+  "slang:partial": "answer garbled (\"all o' one hugh\")",
+  "slang:pat": "modern meaning",
+  "slang:pate": "modern meaning",
+  "slang:paw": "modern meaning",
+  "slang:pell-mell": "modern meaning",
+  "slang:penny-wise-and-pound-foolish": "modern meaning",
+  "slang:pennyworth": "modern meaning",
+  "slang:peppery": "modern meaning",
+  "slang:peter-gunner": "answer a joke fragment, not a meaning",
+  "slang:pettish": "modern meaning",
+  "slang:philistines": "a people's name used as an insult",
+  "slang:physog": "modern meaning",
+  "slang:phyz": "modern meaning; \"The head\" near option",
+  "slang:picking": "modern meaning",
+  "slang:pig": "modern meaning",
+  "slang:pig-headed": "modern meaning",
+  "slang:pilgrim-s-salve": "excrement",
+  "slang:piscinarians": "answer garbled (\"A.D\")",
+  "slang:piss-burned": "crude",
+  "slang:piss-maker": "remedy option (plaister for galled parts)",
+  "slang:pissing-down-any-one-s-back": "crude",
+  "slang:pit-a-pat": "modern meaning; \"fopling\" option",
+  "slang:pizzy-club": "answer garbled (\"A society held, A\")",
+  "slang:poke": "modern meaning",
+  "slang:pothooks-and-hangeks": "question garbled (\"Hangeks\")",
+  "slang:prad-lay": "emaciated-fellow option mocks a body",
+  "slang:prinking": "red fiery nose option",
+  "slang:puffing": "answer \"as above\" makes no sense alone",
+  "slang:puppy": "emaciated-fellow option mocks a body",
+  "slang:purl-royal": "wrong option \"A looseness\" confusing",
+  "slang:purse-proud": "gives itself away",
+  "slang:quack": "modern meaning",
+  "slang:queer-as-dick-s-hatband": "\"queer\" in the question invites jokes about sexuality",
+  "slang:queer-birds": "\"queer\" in the question; crude anatomical option",
+  "slang:queer-bung": "\"queer\" in the question invites jokes about sexuality",
+  "slang:queer-cole-fencer": "\"queer\" in the question; consumptive phlegm option",
+  "slang:queer-cuffin": "\"queer\" in the question invites jokes about sexuality",
+  "slang:queer-degen": "\"queer\" in the question invites jokes about sexuality",
+  "slang:queer-ken": "\"queer\" in the question invites jokes about sexuality",
+  "slang:queer-kicks": "\"queer\" in the question invites jokes about sexuality",
+  "slang:queer-nab": "\"queer\" in the question invites jokes about sexuality",
+  "slang:queer-prancer": "\"queer\" in the question; one-eyed option; excrement",
+  "slang:queer-wedges": "\"queer\" in the question invites jokes about sexuality",
+  "slang:quick-and-nimble": "answer an ironic joke, not a meaning",
+  "slang:quids": "modern meaning",
+  "slang:quipps": "modern meaning",
+  "slang:quiz": "wrong option \"to make a fool of\" arguable",
+  "slang:quota": "modern meaning; flogging option",
+  "slang:rabbit-suckers": "remedy option (plaister for galled parts)",
+  "slang:rackaback": "answer \"A gormagon\" means nothing alone",
+  "slang:ramshackled": "modern meaning",
+  "slang:rank": "modern meaning",
+  "slang:rawhead-and-bloody-bones": "scaring children; \"foolish nurses\"",
+  "slang:rebus": "modern meaning; answer ends \"thus\"",
+  "slang:recruiting-service": "\"any robbery\" arguable; garbled option",
+  "slang:red-rag": "garbled wrong option (\"shake bands\")",
+  "slang:religious-horse": "mocks prayer; reads as innuendo",
+  "slang:rendezvous": "modern meaning",
+  "slang:rigmarole": "modern meaning",
+  "slang:roarer": "wrong option \"High and Low\" nonsense alone",
+  "slang:roast-and-boiled": "crude excrement wrong option",
+  "slang:roby-douglass": "mocks one eye and stinking breath",
+  "slang:round-mouth": "crude anatomical",
+  "slang:rovers": "emaciated-fellow option mocks a body",
+  "slang:row": "modern meaning",
+  "slang:rumboyle": "garbled wrong option",
+  "slang:rumbumtious": "wrong option \"The same\" is nonsense",
+  "slang:sauce-box": "wrong option: death sentence",
+  "slang:scald-miserables": "answer cut off",
+  "slang:scrope": "wrong option \"The same\" is nonsense",
+  "slang:scull-thatcher": "garbled wrong option",
+  "slang:sh-t-ng-through-the-teeth": "crude, garbled headword",
+  "slang:sharper": "wrong option cut off",
+  "slang:shavings": "wrong option is innuendo",
+  "slang:shoulder-feast": "garbled wrong options",
+  "slang:singleton": "wrong option meaningless",
+  "slang:sir-john-barleycorn": "wrong option meaningless (gormagon)",
+  "slang:six-and-eight-pence": "wrong option cut off",
+  "slang:smoky": "wrong option is a fragment",
+  "slang:sneak": "wrong option: strangling",
+  "slang:son-of-prattlement": "wrong option \"The same\" is nonsense",
+  "slang:spunk": "headword innuendo today",
+  "slang:stoop": "crude garbled wrong option",
+  "slang:strangle-goose": "cruelty to animals in headword",
+  "slang:surveyor-of-the-highways": "wrong option mocks appearance",
+  "slang:swagger": "wrong option mocks body",
+  "slang:swigmen": "garbled wrong option",
+  "slang:t-d": "garbled answer, crude headword",
+  "slang:taken-in": "wrong option is a fragment",
+  "slang:tears-of-the-tankard": "garbled, cut-off wrong options",
+  "slang:to-bam": "wrong option 'A great lye' too near",
+  "slang:to-bamboozle": "giveaway: still everyday English",
+  "slang:to-bolt": "wrong option cut off ('Who carries his flag...')",
+  "slang:to-budge": "giveaway: still everyday English",
+  "slang:to-cap-2": "garbled wrong option (\"namefor\")",
+  "slang:to-cascade": "wrong option about strangling",
+  "slang:to-clutch-the-fist": "explains the phrase literally",
+  "slang:to-coax": "modern meaning",
+  "slang:to-cobble": "modern meaning",
+  "slang:to-do-over": "answer garbled (\"carries the same meaning\")",
+  "slang:to-famgrasp": "answer garbled (\"shake bands\")",
+  "slang:to-feather-one-s-nest": "modern meaning; cut-off option",
+  "slang:to-flare": "modern meaning",
+  "slang:to-flash": "modern meaning",
+  "slang:to-fleece": "modern meaning",
+  "slang:to-fling": "\"Bailiffs, or Philistines\": a people as an insult",
+  "slang:to-floor": "modern meaning",
+  "slang:to-flout": "modern meaning",
+  "slang:to-flux": "crude nonsense wrong option",
+  "slang:to-frisk": "modern meaning",
+  "slang:to-grab": "modern meaning",
+  "slang:to-grabble": "wrong option \"A gormagon\" nonsense alone",
+  "slang:to-grubshite": "crude",
+  "slang:to-lag": "modern meaning",
+  "slang:to-lollop": "wrong option cut off mid-quote",
+  "slang:to-lope": "modern meaning",
+  "slang:to-melt": "wrong option \"The same\" meaningless",
+  "slang:to-mop-up": "modern meaning",
+  "slang:to-peel": "wrong option \"A coilin\" nonsense",
+  "slang:to-peer": "modern meaning",
+  "slang:to-piddle": "modern meaning",
+  "slang:to-pry": "modern meaning",
+  "slang:to-quash": "modern meaning",
+  "slang:to-queer": "\"queer\" in the question invites jokes about sexuality",
+  "slang:to-quibble": "modern meaning",
+  "slang:to-recruit": "\"dying speeches\" (executions) option",
+  "slang:to-shamble": "wrong option cut off",
+  "slang:to-swill": "wrong option is innuendo",
+  "slang:to-throttle": "answer is strangling",
+  "slang:to-vamp": "wrong option is innuendo",
+  "slang:togemans": "answer \"The same\" is meaningless",
+  "slang:tom-t-dman": "garbled headword",
+  "slang:toper": "wrong option is crude innuendo",
+  "slang:twaddle": "wrong option is a fragment",
+  "slang:upstarts": "wrong option is a fragment",
+  "slang:vice-admiral-of-the-narrow-seas": "wrong option is a fragment",
+  "slang:vincent-s-law": "answer cut off",
+  "slang:walking-cornet": "wrong option: dog's flesh",
+  "slang:wear-a-e": "garbled headword",
+  "slang:wibling-s-witch": "wrong option is nonsense (\"above described\")",
+  "slang:windfall": "wrong option: scaring children, \"foolish nurses\"",
+  "slang:winnings": "wrong option is a fragment",
+  "slang:wood-pecker": "wrong option is a fragment",
+  "slang:wooden-habeas": "wrong option is a typo (\"coilin\")",
+  "slang:wooden-surtout": "answer is a typo, wrong option cut off",
+  "slang:young-one": "answer cut off",
+  "slang:zany": "wrong option mocks body"
+ },
+ "not_asked": {
+  "flower:barberry": "unfair: Sourness of temper vs Surliness",
+  "flower:thorn-apple": "unfair: Deceitful charms vs Artifice",
+  "lostword:prank": "unfair: To dress in the fashion, to adorn vs Full of decorations and adornments, lively, frolicsome",
+  "lostword:quave": "unfair: To shake, to quiver vs Shaking, quivering",
+  "phrase:a-queer-card": "\"queer\": left out with care, as for the slang",
+  "phrase:he-has-supped-all-his-porridge": "unfair: Eaten his last meal vs He is dead",
+  "phrase:he-knows-which-side-his-bread-is-buttered": "unfair: He is alive to his own interest vs He is a shrewd fellow not to be imposed on",
+  "phrase:in-extremis": "unfair: At the very point of death vs Driven to my last shift",
+  "phrase:queer-in-the-attic-storey": "\"queer\": left out with care, as for the slang",
+  "phrase:to-bite-one-s-thumb-at-another": "unfair: To insult vs To be insolent",
+  "phrase:to-live-in-queer-street": "\"queer\": left out with care, as for the slang",
+  "phrase:to-run-riot": "unfair: To act in a very disorderly way vs To make a commotion or disturbance",
+  "phrase:you-are-all-abroad": "unfair: Wide of the mark vs He was altogether in error",
+  "slang:bolt": "unfair: A blunt arrow vs To walk away (bolt = run off)",
+  "slang:collector": "unfair: A highwayman vs Highwaymen",
+  "slang:cullability": "unfair: A disposition liable to be cheated, an unsuspecting nature, open to imposition vs One who is easily tricked out of his property",
+  "slang:leaky": "unfair: Apt to blab vs To tell or discover",
+  "slang:scamp": "unfair: A highwayman vs One that robs alone",
+  "slang:spouting": "unfair: Theatrical declamation vs Bombast language",
+  "slang:wipe": "unfair: A blow, or reproach vs To wipe, or slap"
+ },
+ "scenarios": [
+  {
+   "id": "etiquette:no-introduction-no-bow",
+   "book": "etiquette",
+   "entry": "3",
+   "question": "It's 1870. At a friend's house you chatted with someone, but you were never introduced. You pass them in the street the next day. What do you do?",
+   "answer": "Don't bow: without an introduction you aren't acquainted",
+   "wrong": [
+    "Bow, and stop to chat about the party",
+    "Raise your hat, but don't stop to speak",
+    "Stop and introduce yourself properly"
+   ],
+   "note": "Persons who have met at the house of a mutual friend, without being introduced, should not bow if they afterwards meet elsewhere. A bow implies acquaintance; and persons who have not been introduced are not acquainted."
+  },
+  {
+   "id": "etiquette:letter-of-introduction",
+   "book": "etiquette",
+   "entry": "8",
+   "question": "You've been given a letter of introduction to a distinguished family. Do you deliver it in person?",
+   "answer": "Never: it puts you in a most undignified position",
+   "wrong": [
+    "Always: anything else would seem cold",
+    "Yes, and wait politely while it's read",
+    "Only if the family is expecting you"
+   ],
+   "note": "Never deliver a letter of introduction in person. It places you in the most undignified position imaginable, and compels you to wait while it is being read, like a servant who has been told to wait for an answer."
+  },
+  {
+   "id": "etiquette:morning-call-hours",
+   "book": "etiquette",
+   "entry": "10",
+   "question": "It's winter and you're paying a morning visit. When do you call?",
+   "answer": "Between two and four in the afternoon",
+   "wrong": [
+    "Between nine and eleven in the morning",
+    "Between ten o'clock and noon",
+    "Any time before luncheon"
+   ],
+   "note": "A morning visit should be paid between the hours of two and four p.m., in winter, and two and five in summer."
+  },
+  {
+   "id": "etiquette:ceremonious-call-length",
+   "book": "etiquette",
+   "entry": "418",
+   "question": "You're paying a ceremonious call. How long do you stay?",
+   "answer": "No less than ten minutes and no more than fifteen",
+   "wrong": [
+    "About an hour, and not a minute less",
+    "At least half an hour, or you'll seem cold",
+    "Until the tea things have been cleared"
+   ],
+   "note": "A ceremonious call should never extend over more than fifteen minutes, and it should not be less than ten minutes."
+  },
+  {
+   "id": "etiquette:once-risen-go",
+   "book": "etiquette",
+   "entry": "16",
+   "question": "You've stood up to leave a call, and your hostess warmly urges you to stay a little longer. What's correct?",
+   "answer": "Go anyway: once you've risen, it's best to leave",
+   "wrong": [
+    "Sit down again: refusing would be ungracious",
+    "Stay exactly five minutes more, then go",
+    "Stay until the next visitor arrives"
+   ],
+   "note": "You will, perhaps, be urged to remain, but, having once risen, it is best to go. There is always a certain air of gaucherie in resuming your seat and repeating the ceremony of leave-taking."
+  },
+  {
+   "id": "etiquette:watch-on-a-call",
+   "book": "etiquette",
+   "entry": "17",
+   "question": "You're paying a call and need to check the time on your pocket watch. What do you do?",
+   "answer": "Ask permission, and apologise, pleading other appointments",
+   "wrong": [
+    "Glance at it discreetly, below the table",
+    "Check it openly: callers keep to time",
+    "Ask your hostess the time instead"
+   ],
+   "note": "If you have occasion to look at your watch during a call, ask permission to do so, and apologise for it on the plea of other appointments."
+  },
+  {
+   "id": "etiquette:diamonds-before-dinner",
+   "book": "etiquette",
+   "entry": "41",
+   "question": "You're off to a Victorian luncheon party. Do you wear your diamonds and pearls?",
+   "answer": "No: they belong to evening dress, never before dinner",
+   "wrong": [
+    "Yes, but only a single string of pearls",
+    "Yes: luncheon is the place to show them off",
+    "Only if the hostess is wearing hers"
+   ],
+   "note": "Diamonds, pearls, rubies, and all transparent precious stones belong to evening dress, and should on no account be worn before dinner."
+  },
+  {
+   "id": "etiquette:the-opal",
+   "book": "etiquette",
+   "entry": "152",
+   "question": "You want one gemstone that marks you out as a person of taste. Which does the manual single out?",
+   "answer": "An opal",
+   "wrong": [
+    "A large ruby",
+    "A fine emerald",
+    "A sapphire"
+   ],
+   "note": "Of all precious stones, the opal is one of the most lovely and the least common-place. No vulgar man purchases an opal."
+  },
+  {
+   "id": "etiquette:musk-and-patchouli",
+   "book": "etiquette",
+   "entry": "47",
+   "question": "You're choosing a scent for an evening party. Which two does the manual call the most objectionable of all?",
+   "answer": "Musk and patchouli",
+   "wrong": [
+    "Lavender and rosewater",
+    "Violet and orange-flower",
+    "Sandalwood and bergamot"
+   ],
+   "note": "Perfumes should be used only in the evening, and then in moderation. Nothing is more vulgar than a coarse ordinary scent; and of all coarse, ordinary scents, the most objectionable are musk and patchouli."
+  },
+  {
+   "id": "etiquette:street-gloves",
+   "book": "etiquette",
+   "entry": "156",
+   "question": "You're stepping out into the street. What must your gloves be made of?",
+   "answer": "Kid or calf, and nothing else",
+   "wrong": [
+    "Worsted, for warmth in winter",
+    "Cotton, for a summer's day",
+    "Silk or fine linen"
+   ],
+   "note": "Never be seen in the street without gloves; and never let your gloves be of any material that is not kid or calf. Worsted or cotton gloves are unutterably vulgar."
+  },
+  {
+   "id": "etiquette:break-your-bread",
+   "book": "etiquette",
+   "entry": "61",
+   "question": "You're a guest at a Victorian dinner and the bread comes round. How do you deal with your piece?",
+   "answer": "Break it: no one cuts bread",
+   "wrong": [
+    "Cut it neatly with your own knife",
+    "Slice it with the bread knife provided",
+    "Butter the whole piece, then bite"
+   ],
+   "note": "Then let me tell you that no one cuts bread. You should always break it."
+  },
+  {
+   "id": "etiquette:never-say-fowl",
+   "book": "etiquette",
+   "entry": "60",
+   "question": "A roast bird is going round the dinner table. How do you ask for some?",
+   "answer": "Ask for chicken or capon, never 'fowl'",
+   "wrong": [
+    "Ask for 'a little of the fowl'",
+    "Ask for 'poultry', the polite word",
+    "Point to it and say nothing"
+   ],
+   "note": "You should have asked for chicken or capon. The word \"fowl\" is never heard out of the kitchen."
+  },
+  {
+   "id": "etiquette:tea-in-the-saucer",
+   "book": "etiquette",
+   "entry": "62",
+   "question": "Your tea is far too hot to drink. What's correct?",
+   "answer": "Wait for it to cool, then drink from the cup",
+   "wrong": [
+    "Pour a little into the saucer to cool",
+    "Blow on it gently across the cup",
+    "Stir it briskly until it's cool enough"
+   ],
+   "note": "Nothing can be more vulgar than to pour tea or coffee into a saucer. You should have waited till it cooled, and then have drunk it from the cup."
+  },
+  {
+   "id": "etiquette:too-late-for-dinner",
+   "book": "etiquette",
+   "entry": "177",
+   "question": "You arrive at a dinner party to find dinner already being served. What does one authority advise?",
+   "answer": "Retreat to a restaurant and send an apology",
+   "wrong": [
+    "Slip in quietly and take your seat",
+    "Apologise warmly to the hostess and join in",
+    "Wait in the hall until the next course"
+   ],
+   "note": "if you do not reach the house till dinner is served, you had better retire to a restaurateur's, and thence send an apology, and not interrupt the harmony of the courses by awkward excuses and cold acceptance."
+  },
+  {
+   "id": "etiquette:two-feet-each",
+   "book": "etiquette",
+   "entry": "66",
+   "question": "You're laying the table for a Victorian dinner party. How much room does each guest get?",
+   "answer": "Two feet",
+   "wrong": [
+    "Eighteen inches",
+    "Thirty inches",
+    "Three feet"
+   ],
+   "note": "A space of two feet should be allowed to each person."
+  },
+  {
+   "id": "etiquette:two-wits",
+   "book": "etiquette",
+   "entry": "67",
+   "question": "Two of your dinner guests are celebrated wits. Where do you seat them?",
+   "answer": "Well apart: side by side, they extinguish each other",
+   "wrong": [
+    "Side by side, so they spark off each other",
+    "Together at the centre of the table",
+    "Both at the head, either side of the host"
+   ],
+   "note": "It is obviously a bad plan to place two such persons in close proximity. They extinguish each other."
+  },
+  {
+   "id": "etiquette:soup-or-fish",
+   "book": "etiquette",
+   "entry": "68",
+   "question": "You're a guest at a Victorian dinner and your host asks whether you'll take \"soup or fish\". What would an experienced diner do?",
+   "answer": "Take both: they're separate courses",
+   "wrong": [
+    "Choose the soup, as the lighter course",
+    "Choose the fish, as the grander course",
+    "Leave the choice to your host"
+   ],
+   "note": "They are as much separate courses as the fish and the meat; and all experienced diners take both."
+  },
+  {
+   "id": "etiquette:side-of-the-spoon",
+   "book": "etiquette",
+   "entry": "69",
+   "question": "The soup has arrived. How do you take it?",
+   "answer": "From the side of the spoon, without a sound",
+   "wrong": [
+    "From the tip of the spoon, in small sips",
+    "From the bowl, tipped up to your lips",
+    "A whole spoonful at once, tipped in neatly"
+   ],
+   "note": "In eating soup, remember always to take it from the side of the spoon, and to make no sound in doing so."
+  },
+  {
+   "id": "etiquette:send-you-some-mutton",
+   "book": "etiquette",
+   "entry": "70",
+   "question": "You'd like to offer your neighbour at dinner some mutton. Which word must you never use?",
+   "answer": "\"Assist\", as in \"May I assist you to some?\"",
+   "wrong": [
+    "\"Send\", as in \"Shall I send you some?\"",
+    "\"Help\", as in \"May I help you to some?\"",
+    "\"Offer\", as in \"May I offer you some?\""
+   ],
+   "note": "Never offer to \"assist\" your neighbours to this or that dish. The word is inexpressibly vulgar--all the more vulgar for its affectation of elegance. \"Shall I send you some mutton?\" or \"may I help you to grouse?\" is better chosen and better bred."
+  },
+  {
+   "id": "etiquette:asparagus",
+   "book": "etiquette",
+   "entry": "72",
+   "question": "Asparagus is served at a Victorian dinner. How do you eat it?",
+   "answer": "Watch what the others do, and follow suit",
+   "wrong": [
+    "Always with a knife and fork, never fingers",
+    "Always with your fingers, never cutlery",
+    "With a spoon, tips first"
+   ],
+   "note": "In eating asparagus, it is well to observe what others do, and act accordingly."
+  },
+  {
+   "id": "etiquette:cherry-stones",
+   "book": "etiquette",
+   "entry": "73",
+   "question": "You're eating cherries at dessert. What does the manual prefer you do with the stones?",
+   "answer": "Drop them unseen into your hand, then onto the plate",
+   "wrong": [
+    "Drop them from your lips straight onto the plate",
+    "Tuck them into your napkin as you go",
+    "Line them up neatly round your plate's rim"
+   ],
+   "note": "Others cover the lips with the hand, drop them unseen into the palm, and so deposit them on the side of the plate. In our own opinion, the last is the better way"
+  },
+  {
+   "id": "etiquette:taking-wine",
+   "book": "etiquette",
+   "entry": "75",
+   "question": "Someone across the dinner table invites you to take wine with them. What do you do?",
+   "answer": "Pour a little fresh wine, look at them, bow slightly, sip",
+   "wrong": [
+    "Stand and propose a toast to them",
+    "Rise and clink glasses across the table",
+    "Call out their name and raise your glass high"
+   ],
+   "note": "In accepting, you have only to pour a little fresh wine into your glass, look at the person who invited you, bow slightly, and take a sip from the glass."
+  },
+  {
+   "id": "etiquette:ice-in-the-wine",
+   "book": "etiquette",
+   "entry": "76",
+   "question": "Your host has lumps of clear ice put into the guests' wine glasses. What does the manual make of it?",
+   "answer": "A new fashion that should be abolished as soon as possible",
+   "wrong": [
+    "A refreshing innovation for the summer",
+    "Quite correct, but only with red wines",
+    "Acceptable, provided the ice is very clear"
+   ],
+   "note": "This is an innovation that cannot be too strictly reprehended or too soon abolished."
+  },
+  {
+   "id": "etiquette:broken-glass",
+   "book": "etiquette",
+   "entry": "79",
+   "question": "You knock over a glass and break it at a dinner party. What's correct?",
+   "answer": "Don't apologise: let your face show your regret",
+   "wrong": [
+    "Apologise at once to the hostess",
+    "Offer to pay for a replacement",
+    "Send a note of apology the next morning"
+   ],
+   "note": "If you should unfortunately overturn or break anything, do not apologize for it. You can show your regret in your face, but it is not well-bred to put it into words."
+  },
+  {
+   "id": "etiquette:the-last-piece",
+   "book": "etiquette",
+   "entry": "80",
+   "question": "One slice is left on the dish, and it's offered to you. What do you do?",
+   "answer": "Take it: refusing because it's the last is ill-bred",
+   "wrong": [
+    "Decline it, so as not to seem greedy",
+    "Offer to halve it with your neighbour",
+    "Leave it for the host"
+   ],
+   "note": "To abstain from taking the last piece on the dish, or the last glass of wine in the decanter, only because it is the last, is highly ill-bred."
+  },
+  {
+   "id": "etiquette:policeman-with-a-lantern",
+   "book": "etiquette",
+   "entry": "93",
+   "question": "You're giving a private ball. What should you arrange on the pavement outside?",
+   "answer": "A policeman with a lantern, for the whole evening",
+   "wrong": [
+    "A footman with a torch at each corner",
+    "A small band playing on the doorstep",
+    "Straw laid in the road to muffle the carriages"
+   ],
+   "note": "The best thing that the giver of a private ball can do under these circumstances, is to engage a policeman with a lanthorn to attend on the pavement during the evening"
+  },
+  {
+   "id": "etiquette:bad-dancer-good-dancer",
+   "book": "etiquette",
+   "entry": "97",
+   "question": "You're hosting a ball. Should you introduce a poor dancer to an excellent one?",
+   "answer": "Never: you'd be punishing one friend to oblige another",
+   "wrong": [
+    "Yes: the good dancer will help them improve",
+    "Yes, but only for a quadrille",
+    "Only if the good dancer agrees first"
+   ],
+   "note": "A thoughtful hostess will never introduce a bad dancer to a good one, because she has no right to punish one friend in order to oblige another."
+  },
+  {
+   "id": "etiquette:married-couples-dancing",
+   "book": "etiquette",
+   "entry": "98",
+   "question": "You and your spouse are at a ball together. Do you dance with each other?",
+   "answer": "No: married people don't dance together in society",
+   "wrong": [
+    "Yes: the first dance is always yours",
+    "Yes, but only the last waltz",
+    "Yes, but never more than twice"
+   ],
+   "note": "It is not customary for married persons to dance together in society."
+  },
+  {
+   "id": "etiquette:borrowing-from-the-library",
+   "book": "etiquette",
+   "entry": "102",
+   "question": "You're staying at a country house and spot a book in the library you'd like to read in your room. What's correct?",
+   "answer": "Ask to borrow it, and cover it if necessary",
+   "wrong": [
+    "Take it up: a guest has the run of the library",
+    "Read it only in the library itself",
+    "Take it, and mention it at breakfast"
+   ],
+   "note": "You should never take a book from the library to your own room without requesting permission to borrow it. When it is lent, you should take every care that it sustains no injury while in your possession, and should cover it, if necessary."
+  },
+  {
+   "id": "etiquette:bedtime-biscuits",
+   "book": "etiquette",
+   "entry": "105",
+   "question": "You're a guest at a country house where they dine late and take no supper. How do you know it's time for bed?",
+   "answer": "A servant appears with wine, water and biscuits",
+   "wrong": [
+    "The host winds the hall clock",
+    "The drawing-room lamps are turned down",
+    "The hostess rings a little bell"
+   ],
+   "note": "The signal for retiring to rest is generally given by the appearance of the servant with wine, water, and biscuits, where a late dinner-hour is observed and suppers are not the custom."
+  },
+  {
+   "id": "etiquette:first-letter-of-a-name",
+   "book": "etiquette",
+   "entry": "203",
+   "question": "You're talking about an acquaintance who isn't there. What does the manual call the most flagrant offence against taste?",
+   "answer": "Calling them by the first letter of their name",
+   "wrong": [
+    "Calling them \"our friend\" throughout",
+    "Giving their full title every time",
+    "Mentioning where they live"
+   ],
+   "note": "Above all, never name anybody by the first letter of his name. Married people are sometimes guilty of this flagrant offence against taste."
+  },
+  {
+   "id": "etiquette:hat-on-the-floor",
+   "book": "etiquette",
+   "entry": "129",
+   "question": "You're a Victorian gentleman on a call, and you've brought your hat into the drawing-room. You simply must put it down. Where?",
+   "answer": "On the floor",
+   "wrong": [
+    "On a side table",
+    "On the lid of the piano",
+    "On an empty chair"
+   ],
+   "note": "The hat, however, must never be laid on a table, piano, or any article of furniture; it should be held gracefully in the hand. If you are compelled to lay it aside, put it on the floor."
+  },
+  {
+   "id": "etiquette:sealing-wax",
+   "book": "etiquette",
+   "entry": "139",
+   "question": "You're a Victorian gentleman sealing a letter. What colour wax do you use?",
+   "answer": "Red, and no other",
+   "wrong": [
+    "Black, as the most sober",
+    "Dark blue, as the most refined",
+    "Any colour, to suit your taste"
+   ],
+   "note": "A gentleman should never use sealing-wax of any colour but red, nor paper of any hue but white."
+  },
+  {
+   "id": "etiquette:dismount-to-talk",
+   "book": "etiquette",
+   "entry": "143",
+   "question": "You're out riding and meet a lady you know who is on foot. You'd like to talk. What's correct?",
+   "answer": "Dismount and lead your horse while you talk",
+   "wrong": [
+    "Stay in the saddle but bring your horse to a walk",
+    "Raise your hat and talk from the saddle",
+    "Ask her to wait while you stable your horse"
+   ],
+   "note": "If you are on horseback and wish to converse with a lady who is on foot, you must dismount and lead your horse, so as not to give her the fatigue of looking up to your level."
+  },
+  {
+   "id": "etiquette:hearth-rug",
+   "book": "etiquette",
+   "entry": "165",
+   "question": "You're at an evening party and feeling the cold. Where must you never stand?",
+   "answer": "On the hearth-rug with your back to the fire",
+   "wrong": [
+    "By the window, in the draught",
+    "In the doorway",
+    "Behind the hostess's chair"
+   ],
+   "note": "Never stand upon the hearth-rug with your back to the fire, either in a friend's house or your own."
+  },
+  {
+   "id": "etiquette:leaving-a-crowded-party",
+   "book": "etiquette",
+   "entry": "173",
+   "question": "You're leaving a crowded party. What about saying goodnight to the hostess?",
+   "answer": "Don't seek her out: you might break up the party",
+   "wrong": [
+    "Find her and thank her before you go",
+    "Send a servant to give her your thanks",
+    "Wait for a lull, then bid her a formal goodnight"
+   ],
+   "note": "In retiring from a crowded party it is unnecessary that you should seek out the hostess for the purpose of bidding her a formal good night. By doing this you would, perhaps, remind others that it was getting late, and cause the party to break up."
+  },
+  {
+   "id": "etiquette:too-hot-to-eat",
+   "book": "etiquette",
+   "entry": "181",
+   "question": "You've been served at dinner, but the food is far too hot to eat. What's correct?",
+   "answer": "Take up your knife and fork and appear to begin",
+   "wrong": [
+    "Wait until everyone else has been served",
+    "Send it back to be cooled a little",
+    "Blow gently on each forkful"
+   ],
+   "note": "As soon as you are helped, begin to eat; or, if the viands are too hot for your palate, take up your knife and fork and appear to begin."
+  },
+  {
+   "id": "etiquette:no-spurs",
+   "book": "etiquette",
+   "entry": "197",
+   "question": "You're a cavalry officer going to a ball. What must you leave off?",
+   "answer": "Your spurs",
+   "wrong": [
+    "Your sword",
+    "Your dress uniform",
+    "Your medals"
+   ],
+   "note": "Cavalry officers should never wear spurs in a ball-room."
+  },
+  {
+   "id": "etiquette:three-or-four-observations",
+   "book": "etiquette",
+   "entry": "227",
+   "question": "You're a Victorian gentleman dancing a long half-hour with your partner. How much conversation should you manage?",
+   "answer": "At least three or four observations",
+   "wrong": [
+    "None: talking spoils the dance",
+    "One remark at the start, then silence",
+    "Only a word of thanks at the end"
+   ],
+   "note": "If it be only upon the news of the day, a gentleman should be able to offer at least three or four observations to his partner in the course of a long half-hour."
+  },
+  {
+   "id": "etiquette:absurd-anecdote",
+   "book": "etiquette",
+   "entry": "266",
+   "question": "A fellow guest tells an obviously absurd anecdote. What do you do?",
+   "answer": "Listen politely, with every appearance of belief",
+   "wrong": [
+    "Raise an eyebrow, kindly",
+    "Gently correct the facts",
+    "Ask politely for their source"
+   ],
+   "note": "No matter how absurd are the anecdotes that may be told in your presence, you must never give any sign of incredulity."
+  },
+  {
+   "id": "etiquette:technical-term",
+   "book": "etiquette",
+   "entry": "276",
+   "question": "You're a person of science, and a technical term slips out in polite conversation. What now?",
+   "answer": "Leave it: explaining it would be the greater error",
+   "wrong": [
+    "Explain it at once, in plain words",
+    "Apologise, then explain it",
+    "Ask whether anyone would like it explained"
+   ],
+   "note": "If, however, you unconsciously use such a term or phrase, do not then commit the still greater error of explaining its meaning."
+  },
+  {
+   "id": "etiquette:insect-in-the-salad",
+   "book": "etiquette",
+   "entry": "337",
+   "question": "You find an insect in your salad at a dinner party. What do you do?",
+   "answer": "Pass your plate to the waiter without a word",
+   "wrong": [
+    "Quietly mention it to the hostess",
+    "Remove it discreetly and carry on",
+    "Push the salad aside and leave it"
+   ],
+   "note": "If in the leaves of your salad, or in a plate of fruit you find a worm or insect, pass your plate to the waiter, without any comment, and he will bring you another."
+  },
+  {
+   "id": "etiquette:never-say-waiter",
+   "book": "etiquette",
+   "entry": "343",
+   "question": "At a private dinner you need something from the side table. How do you ask for it?",
+   "answer": "Call a servant by name, or make a sign without speaking",
+   "wrong": [
+    "Call \"Waiter!\" in a low, pleasant voice",
+    "Ask the hostess to have it brought",
+    "Fetch it from the side table yourself"
+   ],
+   "note": "never address those in attendance as \"Waiter!\" as you would at a hotel or restaurant, but call one of them by name; if you cannot do this, make him a sign without speaking."
+  },
+  {
+   "id": "etiquette:silver-fruit-knife",
+   "book": "etiquette",
+   "entry": "352",
+   "question": "You're cutting fruit at dessert. Which knife do you use?",
+   "answer": "A silver one, never steel",
+   "wrong": [
+    "A steel one, freshly sharpened",
+    "Your dinner knife, wiped clean",
+    "A small steel blade with a pearl handle"
+   ],
+   "note": "Do not cut fruit with a steel knife. Use a silver one."
+  },
+  {
+   "id": "etiquette:an-hour-after-dinner",
+   "book": "etiquette",
+   "entry": "362",
+   "question": "Dinner is over and you'd love to slip off home. How long must you stay in the drawing-room?",
+   "answer": "At least an hour",
+   "wrong": [
+    "Fifteen minutes is ample",
+    "Half an hour at the very most",
+    "No time at all: leave after the dessert"
+   ],
+   "note": "It is excessively rude to leave the house as soon as dinner is over. Respect to your hostess obliges you to stay in the drawing-room at least an hour."
+  },
+  {
+   "id": "etiquette:cheese-with-a-fork",
+   "book": "etiquette",
+   "entry": "363",
+   "question": "You're a guest at a Victorian dinner and the cheese arrives. What do you eat it with?",
+   "answer": "A fork",
+   "wrong": [
+    "The tip of your knife",
+    "Your fingers, on a piece of bread",
+    "A small spoon"
+   ],
+   "note": "Never put a knife into your mouth, not even with cheese, which should be eaten with a fork."
+  },
+  {
+   "id": "etiquette:orange-with-a-spoon",
+   "book": "etiquette",
+   "entry": "366",
+   "question": "You're offered an orange at dessert. What should you peel it with?",
+   "answer": "A spoon",
+   "wrong": [
+    "A small steel knife",
+    "Your fingers",
+    "A fork"
+   ],
+   "note": "Apropos of which, I may hint that no epicure ever yet put a knife to an apple, and that an orange should be peeled with a spoon."
+  },
+  {
+   "id": "etiquette:bowing-from-a-window",
+   "book": "etiquette",
+   "entry": "401",
+   "question": "You're a Victorian gentleman at an upstairs window, and a lady you know passes in the street below. Do you bow?",
+   "answer": "No: you may bow up to a window, never down from one",
+   "wrong": [
+    "Yes, a slight bow is quite correct",
+    "Only if she looks up and sees you first",
+    "Yes, but only after she has bowed to you"
+   ],
+   "note": "You may bow to a lady who is seated at a window, if you are in the street; but you must not bow from a window to a lady in the street."
+  },
+  {
+   "id": "etiquette:inopportune-call",
+   "book": "etiquette",
+   "entry": "429",
+   "question": "You arrive on a call and see at once that you've come at a bad time, but you've already been seen. What do you do?",
+   "answer": "Don't leave at once: your retreat is cut off",
+   "wrong": [
+    "Apologise and leave immediately",
+    "Leave your card and withdraw",
+    "Slip out quietly while they're distracted"
+   ],
+   "note": "do not instantly retire unless you have entered unperceived and can so leave, in which case leave immediately; if, however, you have been seen, your instant retreat is cut off."
+  },
+  {
+   "id": "etiquette:visiting-cards",
+   "book": "etiquette",
+   "entry": "430",
+   "question": "You're having visiting cards printed. What goes on them?",
+   "answer": "Your name and address, and nothing else",
+   "wrong": [
+    "Name, address and profession",
+    "Your name and business address",
+    "Name, address and your club"
+   ],
+   "note": "A card should have nothing written upon it, but your name and address. To leave a card with your business address, or the nature of your profession written upon it, shows a shocking ignorance of polite society."
+  },
+  {
+   "id": "etiquette:hyde-park-gloves",
+   "book": "etiquette",
+   "entry": "454",
+   "question": "You're a fashionable Englishman taking a promenade in Hyde Park later in the day. Which gloves?",
+   "answer": "Dark coloured kid gloves",
+   "wrong": [
+    "Reindeer gloves",
+    "Chamois-skin gloves",
+    "Beaver-skin gloves"
+   ],
+   "note": "To enter London in his tilbury, beaver skin gloves. Later in the day, to promenade in Hyde Park, colored kid gloves, dark."
+  },
+  {
+   "id": "etiquette:seven-razors",
+   "book": "etiquette",
+   "entry": "476",
+   "question": "You're a Victorian gentleman who shaves, and money is no object. How many razors should you keep?",
+   "answer": "Seven, one for each day of the week",
+   "wrong": [
+    "Two, used turn and turn about",
+    "One good one, well stropped",
+    "Three: one each for morning, noon and night"
+   ],
+   "note": "If you can afford it, you should have a case of seven razors, one for each day of the week, so that no one shall be too much used."
+  },
+  {
+   "id": "etiquette:lavender-gloves",
+   "book": "etiquette",
+   "entry": "512",
+   "question": "Lavender gloves have become the new fashion for the evening. Should you wear them?",
+   "answer": "No: they're economical, and all economy is an abomination",
+   "wrong": [
+    "Yes, with a black coat they're perfect",
+    "Only at a small, quiet dinner",
+    "Yes, if they're fresh each evening"
+   ],
+   "note": "Recently, indeed, a fashion has sprung up of wearing lavender gloves in the evening. They are economical, and as all economy is an abomination, must be avoided."
+  },
+  {
+   "id": "etiquette:stranger-bows",
+   "book": "etiquette",
+   "entry": "610",
+   "question": "A stranger bows to you in the street, plainly mistaking you for someone else. What do you do?",
+   "answer": "Bow back, to spare them embarrassment",
+   "wrong": [
+    "Stop and explain they've mistaken you",
+    "Pretend not to have noticed it",
+    "Ask them kindly where you've met"
+   ],
+   "note": "If any one bows to you in the street, return the bow. It may be an acquaintance whose face you do not immediately recognize, and if it is a stranger who mistakes you for another, your courteous bow will relieve him from the embarrassment arising from his mistake."
+  },
+  {
+   "id": "etiquette:dont-wait-for-silence",
+   "book": "etiquette",
+   "entry": "623",
+   "question": "You've sat down to play the piano at a party, but the room is still chattering. What do you do?",
+   "answer": "Begin anyway: don't wait for silence",
+   "wrong": [
+    "Wait on the stool until all is quiet",
+    "Strike a firm chord to gain attention",
+    "Ask the hostess to call for quiet"
+   ],
+   "note": "If you play yourself, do not wait for silence in the room before you begin."
+  },
+  {
+   "id": "etiquette:two-verses",
+   "book": "etiquette",
+   "entry": "53",
+   "question": "You've been asked to sing at an evening party. How much do you give them?",
+   "answer": "Two verses of a song",
+   "wrong": [
+    "The whole song, every verse",
+    "Three songs, then rest",
+    "One verse, and a curtsey or bow"
+   ],
+   "note": "Two verses of a song, or four pages of a piece, are at all times enough to give pleasure. If your audience desire more they will ask for more"
+  },
+  {
+   "id": "etiquette:eldest-miss-smith",
+   "book": "etiquette",
+   "entry": "651",
+   "question": "You're writing to the daughters of Mr Smith. How do you address the eldest?",
+   "answer": "As \"Miss Smith\", the surname alone",
+   "wrong": [
+    "As \"Miss Smith Senior\"",
+    "As \"The Elder Miss Smith\"",
+    "As \"Miss A. Smith\", with her initial"
+   ],
+   "note": "Remember, in directing letters to young ladies, the eldest one in a family is addressed by the surname alone, while the others have also the proper name"
+  },
+  {
+   "id": "etiquette:smoking-after-dark",
+   "book": "etiquette",
+   "entry": "661",
+   "question": "You fancy a cigar on your walk. When may you smoke in the street?",
+   "answer": "Only after dark",
+   "wrong": [
+    "Only in the morning",
+    "At any hour, if no one is near",
+    "Only once you reach the park"
+   ],
+   "note": "One must never smoke, again, in the streets; that is, in daylight. The deadly crime may be committed, like burglary, after dark, but not before."
+  },
+  {
+   "id": "etiquette:cards-on-the-table",
+   "book": "etiquette",
+   "entry": "691",
+   "question": "You're paying a call and notice a pile of other people's visiting cards on the table. What's correct?",
+   "answer": "Leave them alone: don't turn them over",
+   "wrong": [
+    "Look through them for mutual friends",
+    "Glance at the top few, discreetly",
+    "Ask your host about the most notable one"
+   ],
+   "note": "It is in bad taste, though often done, to turn over the cards on a table, when you are calling."
+  },
+  {
+   "id": "etiquette:ppc",
+   "book": "etiquette",
+   "entry": "12",
+   "question": "You're leaving town and paying your farewell calls. What do you write in the corner of your card?",
+   "answer": "P.P.C.",
+   "wrong": [
+    "R.S.V.P.",
+    "N.B.",
+    "P.S."
+   ],
+   "note": "Leave-taking cards have P.P.C. (pour prendre congé) written in the corner. Some use P.D.A. (pour dire adieu)."
+  },
+  {
+   "id": "etiquette:gifts-for-superiors",
+   "book": "etiquette",
+   "entry": "113",
+   "question": "You'd like to give a present to someone well above you in rank. What's always safe?",
+   "answer": "Flowers or game",
+   "wrong": [
+    "Something costly, to show your respect",
+    "A fine book, inscribed with their name",
+    "Nothing: gifts should only go downwards"
+   ],
+   "note": "Offerings of flowers and game are unexceptionable, and may be made even to those whose position is superior to that of the giver."
+  },
+  {
+   "id": "almanac:pin-money",
+   "book": "almanac",
+   "entry": "01-01:1",
+   "question": "It's New Year's Day in an old English household. What gift would the ladies be glad of?",
+   "answer": "Pins, or money in their place: hence 'pin-money'",
+   "wrong": [
+    "A china teacup from the master of the house",
+    "A silver thimble from each of the servants",
+    "A new pair of pattens for the muddy lanes"
+   ],
+   "note": "Pins were acceptable new year’s gifts to the ladies, instead of the wooden skewers which they used till the end of the fifteenth century. Sometimes they received a composition in money: and hence allowances for their separate use is still denominated “pin-money.”"
+  },
+  {
+   "id": "almanac:pauntley-fires",
+   "book": "almanac",
+   "entry": "01-05:2",
+   "question": "It's the eve of Twelfth-day at Pauntley, Gloucestershire, and the farm servants are heading out into a wheat field. What for?",
+   "answer": "To light twelve straw fires and toast the master in cyder",
+   "wrong": [
+    "To bury a cake at the field's edge for the fairies",
+    "To walk the furrows ringing handbells at the crows",
+    "To sprinkle the young wheat with Christmas ale"
+   ],
+   "note": "On the eve of Twelfth-day all the servants of every farmer assemble together in one of the fields that has been sown with wheat. At the end of twelve lands, they make twelve fires in a row with straw"
+  },
+  {
+   "id": "almanac:twelfth-cake",
+   "book": "almanac",
+   "entry": "01-06:0",
+   "question": "It's Twelfth-night and the plum cake is being sliced. What's hidden inside?",
+   "answer": "A bean for the king and a pea for the queen",
+   "wrong": [
+    "A sprig of holly for the youngest at the table",
+    "An acorn for the master and a hazelnut for the mistress",
+    "A clove for the cook and a button for the butler"
+   ],
+   "note": "the cake was full of plums, with a bean in it for the king, and a pea for the queen, so as to determine them by the slices."
+  },
+  {
+   "id": "almanac:fiddlers-head",
+   "book": "almanac",
+   "entry": "01-06:1",
+   "question": "It's Twelfth-day on the Isle of Man, and they're 'cutting off the fiddler's head'. What's going on?",
+   "answer": "He says whom each girl will marry, and it's taken as an oracle",
+   "wrong": [
+    "He plays one last tune and every dancer must freeze",
+    "The girls crown him with holly as king of the barn",
+    "He must guess which girl is holding the hidden ring"
+   ],
+   "note": "On Twelfth-day, the fiddler lays his head in some one of the girls’ laps, and a third person asks, who such a maid, or such a maid shall marry, naming the girls then present one after another"
+  },
+  {
+   "id": "almanac:st-distaff",
+   "book": "almanac",
+   "entry": "01-07:0",
+   "question": "It's the day after Twelfth-day, the first day back at work after Christmas. What do the men get up to in the evening?",
+   "answer": "Setting the women's flax alight, and getting a soaking for it",
+   "wrong": [
+    "Racing their ploughs round the green for a ham",
+    "Carrying the yule log's ashes out to the fields",
+    "Ringing the church bells backwards to end Christmas"
+   ],
+   "note": "the burning of the flax and tow belonging to the women, was the men’s diversion in the evening of the first day of labour after the twelve days of Christmas, and that the women repaid the interruption to their industry by sluicing the mischief-makers."
+  },
+  {
+   "id": "almanac:st-agnes-pins",
+   "book": "almanac",
+   "entry": "01-20:1",
+   "question": "It's St Agnes' night and you'd like to dream of the one you'll marry. What does old Aubrey say to do?",
+   "answer": "Pull out a row of pins one by one, sticking one in your sleeve",
+   "wrong": [
+    "Walk backwards round the house three times at midnight",
+    "Put a slice of wedding cake in your left shoe",
+    "Comb your hair before the glass by a single candle"
+   ],
+   "note": "Upon St. Agnes’ night you take a row of pins, and pull out every one, one after another, saying a Pater Noster, sticking a pin in your sleeve, and you will dream of him or her you shall marry."
+  },
+  {
+   "id": "almanac:mummers-dress",
+   "book": "almanac",
+   "entry": "01-26:0",
+   "question": "It's Christmas in the West Country and St George and the mummers are at the door. What are they wearing?",
+   "answer": "Shirt-sleeves, beribboned white trousers and tall pasteboard caps",
+   "wrong": [
+    "Masks of straw and coats turned inside out",
+    "Sheepskin cloaks and crowns of holly and ivy",
+    "Their Sunday best with oak leaves in their hats"
+   ],
+   "note": "St. George and the other tragic performers are dressed out somewhat in the style of morris-dancers, in their shirt-sleeves, and white trowsers much decorated with ribands and handkerchiefs"
+  },
+  {
+   "id": "almanac:hatherleigh-peal",
+   "book": "almanac",
+   "entry": "01-29:2",
+   "question": "It's 1826 at Hatherleigh in Devon, and you've just come from a funeral. What do the church bells do?",
+   "answer": "Ring a lively peal, as they would elsewhere after a wedding",
+   "wrong": [
+    "Ring the curfew an hour early that night",
+    "Stay silent for a month of mourning",
+    "Ring muffled at dawn and dusk for a week"
+   ],
+   "note": "after a funeral the church bells ring a lively peal, as in other places after a wedding"
+  },
+  {
+   "id": "almanac:homesick-bells",
+   "book": "almanac",
+   "entry": "01-29:0",
+   "question": "Our ancestors have moved a church bell to a new steeple. What might it do, unless it's rung in the evening and tied up?",
+   "answer": "Take a nightly trip back to its old church",
+   "wrong": [
+    "Crack at the first christening it rings for",
+    "Ring by itself whenever someone in the parish dies",
+    "Refuse to sound for the new parson"
+   ],
+   "note": "When a bell was removed from its original and favourite situation, it was sometimes supposed to take a nightly trip to its old place of residence, unless exercised in the evening, and secured with a chain or rope."
+  },
+  {
+   "id": "almanac:anthonys-pigs",
+   "book": "almanac",
+   "entry": "01-17:1",
+   "question": "On St Bartholomew's eve, the boys of St Paul's school run into the scholars of St Anthony's. What do they call them?",
+   "answer": "St Anthony's pigs",
+   "wrong": [
+    "Anthony's owls",
+    "Smithfield sheep",
+    "Bartlemy babies"
+   ],
+   "note": "they would call them St. Anthony’s pigs, and they again would call the others pigeons of Paul’s; because many pigeons were bred in Paul’s church, and St. Anthony was always figured with a pig following him."
+  },
+  {
+   "id": "almanac:frost-fair",
+   "book": "almanac",
+   "entry": "01-22:2",
+   "question": "It's a great frost, and thousands are flocking onto the frozen Thames. What do they find there?",
+   "answer": "Swings, bookstalls, skittles and dancing in a barge",
+   "wrong": [
+    "A ploughing match on the ice for a silver cup",
+    "A tented chapel holding services on the ice",
+    "An ice palace built by order of the lord mayor"
+   ],
+   "note": "Swings, bookstalls, dancing in a barge, suttling-booths, playing at skittles, and almost every appendage of a fair on land, appeared now on the Thames."
+  },
+  {
+   "id": "almanac:brides-bed",
+   "book": "almanac",
+   "entry": "02-02:0",
+   "question": "It's Candlemas eve in the Western Isles. The mistress and servants dress up a sheaf of oats and lay it in a basket. What next?",
+   "answer": "Lay a club by it, cry 'Brüd is come!' and read the ashes at dawn",
+   "wrong": [
+    "Carry it three times sunwise round the hearth",
+    "Set it on the roof to watch for the first lambs",
+    "Burn it at dawn and scatter the ashes on the fields"
+   ],
+   "note": "lay a wooden club by it, and this they call Brüd’s Bed; and the mistress and servants cry three times, ‘Brüd is come, Brüd is welcome!’ This they do just before going to bed. In the morning they look among the ashes, and if they see the impression of Brüd’s club there, they reckon it a presage of a good crop, and prosperous year"
+  },
+  {
+   "id": "almanac:candlemas-candle",
+   "book": "almanac",
+   "entry": "02-02:1",
+   "question": "It's Candlemas at Lyme Regis, and the man who buys the family's wood-ashes has sent his yearly present: a large candle. What's done with it?",
+   "answer": "It's lit at nightfall, and all sit up together till it burns out",
+   "wrong": [
+    "It's set in the window to guide travellers on the road",
+    "It's cut in twelve, and one piece burned each month",
+    "It's burned on the ash-heap to bless next year's ashes"
+   ],
+   "note": "The coming of the Candlemas candle was looked forward to by the young ones as an event of some consequence; for, of usage, they had a sort of right to sit up that night, and partake of the refreshment, till all retired to rest, the signal for which was the self-extinction of the Candlemas candle."
+  },
+  {
+   "id": "almanac:swaffham-valentines",
+   "book": "almanac",
+   "entry": "02-13:0",
+   "question": "It's St Valentine's eve at Swaffham in Norfolk. Your door flies open and something comes rolling in. What is it?",
+   "answer": "A valentine tied to an apple or orange, then a loud knock",
+   "wrong": [
+    "A wreath of ivy with a sweetheart's initials",
+    "A ball of red wool to follow to your valentine",
+    "A gingerbread heart with a name iced on it"
+   ],
+   "note": "Watching for a convenient opportunity, the door is slyly opened, and the valentine, attached to an apple or an orange, is thrown in; a loud rap at the door immediately follows"
+  },
+  {
+   "id": "almanac:bay-leaves",
+   "book": "almanac",
+   "entry": "02-14:0",
+   "question": "It's the night before St Valentine's day and you want to dream of your sweetheart. What goes on your pillow?",
+   "answer": "Five bay leaves: one at each corner and one in the middle",
+   "wrong": [
+    "A sprig of rosemary tied with red thread",
+    "A slice of plum cake wrapped in a stocking",
+    "Three daisies picked before sunrise"
+   ],
+   "note": "I got five bay-leaves, and pinned four of them to the four corners of my pillow, and the fifth to the middle; and then, if I dreamt of my sweetheart, Betty said we should be married before the year was out."
+  },
+  {
+   "id": "almanac:holly-boy",
+   "book": "almanac",
+   "entry": "02-14:1",
+   "question": "It's St Valentine's day, 1779, in a little Kent village. The girls are crowded round a bonfire, cheering. What's burning?",
+   "answer": "A 'holly boy' figure they've stolen from the boys",
+   "wrong": [
+    "Last year's valentines, for luck in love",
+    "A straw figure of Old Winter",
+    "The last of the Christmas evergreens"
+   ],
+   "note": "The girls from five or six to eighteen years old were assembled in a crowd, burning an uncouth effigy which they called a “holly boy,” and which they had stolen from the boys"
+  },
+  {
+   "id": "almanac:pancake-bell",
+   "book": "almanac",
+   "entry": "02-15:0",
+   "question": "It's four in the morning on Shrove Tuesday at Hoddesdon, Hertfordshire, and the old curfew bell rings. What does it mean?",
+   "answer": "Pancakes may be made and eaten until it rings again at eight",
+   "wrong": [
+    "The market may open early for eggs and flour",
+    "Every house must sweep its chimney before noon",
+    "All fires must be put out until Ash Wednesday"
+   ],
+   "note": "rang on the morning of Shrove Tuesday at four o’clock, after which hour the inhabitants are at liberty to make and eat _pancakes_, until the bell rings again at eight o’clock at night."
+  },
+  {
+   "id": "almanac:shrove-sunshine",
+   "book": "almanac",
+   "entry": "02-15:1",
+   "question": "It's Shrove Tuesday, 1676, and the sun is shining. What do some say that means?",
+   "answer": "The sun will shine as much every day in Lent",
+   "wrong": [
+    "A cold, late spring and a poor hay crop",
+    "A wet Easter and plenty of mushrooms",
+    "The cuckoo will come early this year"
+   ],
+   "note": "Others affirm that so much as the sun shineth on that day, the like will shine every day in Lent."
+  },
+  {
+   "id": "almanac:tinners-holiday",
+   "book": "almanac",
+   "entry": "03-05:1",
+   "question": "It's St Piran's day in Cornwall. What are the tinners up to?",
+   "answer": "Taking the day off: the saint told their forebears tin's secrets",
+   "wrong": [
+    "Carrying a block of tin to the church to be blessed",
+    "Racing barrows of ore from the pit to the smelting-house",
+    "Leaving candles down the mine for the knockers"
+   ],
+   "note": "having a tradition that some secrets regarding the manufacture of tin was communicated to their ancestors by that saint, they leave the manufacture to shift for itself for that day and keep it as a holiday."
+  },
+  {
+   "id": "almanac:newark-loaves",
+   "book": "almanac",
+   "entry": "03-11:1",
+   "question": "It's 11 March at Newark-upon-Trent, and the town-hall is giving penny loaves to anyone who asks. Why?",
+   "answer": "For Hercules Clay, who dreamt three times his house would burn",
+   "wrong": [
+    "For the end of a famine the year the Trent froze",
+    "For a baker who fed the town through the plague",
+    "For a mayor who found the town's charter in a ditch"
+   ],
+   "note": "Clay (then a tradesman residing in Newark market-place) dreamed three nights successively, that his house was set fire to by the besiegers. Impressed by the repetition of this warning, as he considered it, he quitted his house"
+  },
+  {
+   "id": "almanac:straw-death",
+   "book": "almanac",
+   "entry": "03-13:0",
+   "question": "It's mid-Lent in olden times, and boys come into the village carrying a figure made of straw. What happens?",
+   "answer": "It's Death: folk drive them off, or pay to have it taken away",
+   "wrong": [
+    "It's the patron saint: folk bow and give it bread",
+    "It's a scarecrow: they set it to guard the sown peas",
+    "It's the harvest lord: they ride it round the parish"
+   ],
+   "note": "On this day boys went about, in ancient times, into the villages with a figure of death made of straw; from whence they were generally driven by the country people; who disliked it as an ominous appearance, while some gave them money to get the mawkin carried off."
+  },
+  {
+   "id": "almanac:herring-on-horseback",
+   "book": "almanac",
+   "entry": "03-26:0",
+   "question": "It's Easter Day at Queen's College, Oxford. What's the first dish brought to the table?",
+   "answer": "A red herring set like a man on horseback, on a corn salad",
+   "wrong": [
+    "A pike set like a soldier on guard, on watercress",
+    "A great pie baked in the shape of the college gate",
+    "A gammon carved like a swan, on a bed of parsley"
+   ],
+   "note": "the first dish brought to the table on Easter-day, is a red herring, riding away on horseback, that is to say, a herring placed by the cook, something after the likeness of a man on horseback, set on a corn sallad."
+  },
+  {
+   "id": "almanac:pace-eggs",
+   "book": "almanac",
+   "entry": "03-26:1",
+   "question": "It's Easter eve in Cumberland, and the boys have been begging eggs. What do they do with them?",
+   "answer": "Boil and dye them, then roll and toss them about the fields",
+   "wrong": [
+    "Hide them in the hedges for the girls to find",
+    "Leave them on the church step for the poor",
+    "Blow them out and hang them on a thorn bush"
+   ],
+   "note": "These eggs are hardened by boiling, and tinged with the juice of herbs, broom-flowers, &c. The eggs being thus prepared, the boys go out and play with them in the fields; rolling them up and down, like bowls, upon the ground"
+  },
+  {
+   "id": "almanac:pigeons-milk",
+   "book": "almanac",
+   "entry": "04-01:1",
+   "question": "It's 1 April 1826, and the youngsters want to make an April fool of you. Which errand might they send you on?",
+   "answer": "To a shop for half a pint of 'pigeon's milk'",
+   "wrong": [
+    "To the grocer's for an ounce of 'sunbeam salt'",
+    "To the draper's for a yard of 'thunder ribbon'",
+    "To the baker's for a dozen 'yesterday's buns'"
+   ],
+   "note": "The like knowledge is also gained by an errand to some shop for half a pint of “pigeon’s milk,” or an inquiry at a bookseller’s for the “Life and Adventures of Eve’s Mother.”"
+  },
+  {
+   "id": "almanac:april-pocket",
+   "book": "almanac",
+   "entry": "04-01:0",
+   "question": "It's 1 April 1825. A boy stops you: 'Sir, there's something out of your pocket.' 'What?' What does he say next?",
+   "answer": "'Your hand, sir. Ah! you April fool!'",
+   "wrong": [
+    "'Your watch-chain, sir, and it's gold!'",
+    "'A hole, sir, and your money with it!'",
+    "'Your handkerchief, sir, waving at me!'"
+   ],
+   "note": "the waggery of the day is--“Sir, there’s something _out_ of your pocket.” “Where?” “There!” “What?” “Your _hand_, sir--Ah! you April fool!”"
+  },
+  {
+   "id": "almanac:bury-trap-ball",
+   "book": "almanac",
+   "entry": "04-05:1",
+   "question": "It's Easter Monday at Bury St Edmund's, and there's a spirited game of trap-and-ball going on until sunset. Who's playing?",
+   "answer": "Twelve old women, led by a celebrated 'mistress of the sport'",
+   "wrong": [
+    "The town's twelve aldermen in their gowns",
+    "The grammar-school boys against the choir",
+    "The bell-ringers against the town's bakers"
+   ],
+   "note": "On Shrove Tuesday, Easter Monday, and the Whitsuntide festivals, twelve old women side off for a game at trap-and-ball, which is kept up with the greatest spirit and vigour until sunset."
+  },
+  {
+   "id": "almanac:jack-o-green",
+   "book": "almanac",
+   "entry": "05-01:0",
+   "question": "It's May-day in the London suburbs, about 1805, and a Jack-o'-the-Green is dancing. What's he carrying?",
+   "answer": "A long walking stick with floral wreaths, whisked about",
+   "wrong": [
+    "A tin trumpet to blow at every corner",
+    "A brass bell to ring at every door",
+    "A wooden sword painted green"
+   ],
+   "note": "A Jack-o’-the-Green always carried a long walking stick with floral wreaths; he whisked it about in the dance, and afterwards walked with it in high estate like a lord mayor’s footman."
+  },
+  {
+   "id": "almanac:lying-contest",
+   "book": "almanac",
+   "entry": "05-01:1",
+   "question": "It's May-day on the green at Temple Sowerby, Westmorland, and there's a grindstone for first prize. What's the contest?",
+   "answer": "Lying: the best liar takes the grindstone",
+   "wrong": [
+    "Wrestling, in the Westmorland style",
+    "Carrying a sack of meal up the fell",
+    "Whistling longest on a single breath"
+   ],
+   "note": "which consist of a grindstone as the head prize; a hone or whetstone, for a razor, as the second; and whetstones of an inferior description, for those who can only reach a state of mediocrity in “the noble art of lying.”"
+  },
+  {
+   "id": "almanac:may-dew",
+   "book": "almanac",
+   "entry": "05-01:2",
+   "question": "It's dawn on 1 May 1791, and a crowd heads into the fields. What are they up to?",
+   "answer": "Washing their faces in the dew, to make themselves beautiful",
+   "wrong": [
+    "Hunting four-leaved clover to wear all May",
+    "Listening for the first cuckoo, for luck",
+    "Racing to be first to touch the maypole"
+   ],
+   "note": "a number of persons went into the fields and bathed their faces with the dew on the grass, under the idea that it would render them beautiful."
+  },
+  {
+   "id": "almanac:flora-day-workers",
+   "book": "almanac",
+   "entry": "05-08:0",
+   "question": "It's 8 May, Flora day, and the whole town is given over to mirth, music and feasting. Someone has been caught working. What happens to them?",
+   "answer": "Carried off astride a pole and made to leap the river, or pay",
+   "wrong": [
+    "Set in the stocks with a garland round their neck",
+    "Made to dance alone in the market-place",
+    "Their tools hung on the maypole till evening"
+   ],
+   "note": "Should any persons be found at work, they are instantly seized, set astride on a pole, and jolted away on men’s shoulders, amidst thousands of huzzas, &c., and at last sentenced to leap _over_ the river"
+  },
+  {
+   "id": "almanac:beating-bounds",
+   "book": "almanac",
+   "entry": "05-12:0",
+   "question": "It's Holy Thursday, and the parish schoolboys follow the minister round to the parish boundaries. What are they doing?",
+   "answer": "Striking the boundaries with peeled willow wands",
+   "wrong": [
+    "Lighting lanterns at each boundary stone",
+    "Planting an acorn by each boundary stone",
+    "Tying a ribbon to each boundary tree"
+   ],
+   "note": "followed by the boys of the parish school, headed by their master, to go in procession to the different parish boundaries; which boundaries the boys strike with peeled willow wands that they bear in their hands, and this is called “beating the bounds.”"
+  },
+  {
+   "id": "almanac:dunmow-flitch",
+   "book": "almanac",
+   "entry": "06-20:0",
+   "question": "It's 1751, and a woolcomber and his wife from Weathersfield appear at the manor court of Little Dunmow. What do they claim?",
+   "answer": "The flitch of bacon, by the custom of the manor",
+   "wrong": [
+    "A cheese, for the best-kept cottage garden",
+    "A new spinning wheel, from the lord of the manor",
+    "The right to graze a cow on the common"
+   ],
+   "note": "“John Shakeshanks, woolcomber, and Anne his wife, of the parish of Weathersfield, in Essex, appeared at the customary court at Dunmow-parva, and claim’d the bacon according to the custom of that manor.”"
+  },
+  {
+   "id": "almanac:ripon-table",
+   "book": "almanac",
+   "entry": "06-23:2",
+   "question": "It's Midsummer eve in Ripon, and you moved to a new neighbourhood this year. What does custom expect of you?",
+   "answer": "Spread a table in the street with bread, cheese and ale for all",
+   "wrong": [
+    "Sweep the street from your door to the market cross",
+    "Give a loaf to each of the four nearest houses",
+    "Ring the minster bell once at midnight"
+   ],
+   "note": "every housekeeper, who, in the course of the year, has changed his residence into a new neighbourhood, spreads a table before his door in the street, with bread, cheese, and ale, for those who choose to resort to it."
+  },
+  {
+   "id": "almanac:chester-watch",
+   "book": "almanac",
+   "entry": "06-23:1",
+   "question": "It's St John's eve in Chester, 1564, and the watch is being set with a pageant 'according to ancient custom'. What's in it?",
+   "answer": "Four giants, a unicorn, a camel, a dragon and hobby-horses",
+   "wrong": [
+    "A whale, a mermaid, a ship and a pair of lions",
+    "A castle on wheels, a phoenix and twelve bears",
+    "Three kings, a star, an ark and a griffin"
+   ],
+   "note": "a pageant which is expressly said to be “according to ancient custom,” is ordained to consist of four giants, one unicorn, one dromedary, one camel, one luce, one dragon, and six hobby-horses with other figures."
+  },
+  {
+   "id": "almanac:flower-stools",
+   "book": "almanac",
+   "entry": "06-24:0",
+   "question": "It's Midsummer day in a Northumberland village, and there are stools out by the doors. What's on them?",
+   "answer": "Cushions of flowers set in clay, shown to beg for a feast",
+   "wrong": [
+    "Bowls of milk for the passing fairies",
+    "Midsummer cakes, one for each traveller",
+    "Garlands of St John's wort for the vicar to bless"
+   ],
+   "note": "it is customary on this day to dress out stools with a cushion of flowers. A layer of clay is placed on the stool, and therein is stuck, with great regularity, an arrangement of all kinds of flowers, so close as to form a beautiful cushion."
+  },
+  {
+   "id": "almanac:lammas-towers",
+   "book": "almanac",
+   "entry": "08-01:0",
+   "question": "It's the month before Lammas, and the herdsmen's bands are slowly building something. What?",
+   "answer": "Towers of sods with a flagstaff, to meet at on Lammas day",
+   "wrong": [
+    "Bonfires of furze on every hilltop",
+    "Stone cairns to mark the summer grazing",
+    "A great wicker hut for the Lammas feast"
+   ],
+   "note": "Each of these communities agreed to build a _tower_ in some conspicuous place, near the centre of their district, which was to serve as the place of their rendezvous on Lammas day. This tower was usually built of sods"
+  },
+  {
+   "id": "almanac:doggetts-coat",
+   "book": "almanac",
+   "entry": "08-01:2",
+   "question": "It's 1 August on the Thames, and six young watermen just out of their apprenticeships race from London Bridge to Chelsea. For what?",
+   "answer": "A waterman's coat and silver badge, Dogget's bequest",
+   "wrong": [
+    "A purse of guineas and a new wherry",
+    "A gilt cup from the lord mayor",
+    "The right to row the king's barge for a year"
+   ],
+   "note": "to the purchase of a like coat and badge, to be rowed for in honour of the day by six young watermen whose apprenticeships had expired the year before."
+  },
+  {
+   "id": "almanac:wayzgoose",
+   "book": "almanac",
+   "entry": "08-25:0",
+   "question": "It's Bartholomew-tide in an old printing-house, and the journeymen are making new paper windows. What does the master give them?",
+   "answer": "A feast called a way-goose, before candle-light work begins",
+   "wrong": [
+    "A day's holiday to see Bartholomew Fair",
+    "A new leather apron for every journeyman",
+    "A shilling each for the ink-maker's ale"
+   ],
+   "note": "at which time the master printer makes them a feast called a _way-goose_, to which is invited the corrector, founder, smith, ink-maker, &c."
+  },
+  {
+   "id": "almanac:crying-the-mare",
+   "book": "almanac",
+   "entry": "08-31:0",
+   "question": "It's the end of harvest in Hertfordshire, and the reapers tie together the tops of the last blades of corn. What next?",
+   "answer": "Throw their sickles at it; whoever cuts the knot wins",
+   "wrong": [
+    "Race round the field: the first back cuts the knot",
+    "Draw straws: the shortest straw cuts the knot",
+    "Pelt it with clods: whoever topples it wins"
+   ],
+   "note": "The reapers tie together the tops of the last blades of corn, which they call “mare,” and standing at some distance, throw their sickles at it, and he who cuts the knot, has the prize, with acclamations and good cheer."
+  },
+  {
+   "id": "almanac:hitchin-last-load",
+   "book": "almanac",
+   "entry": "08-31:1",
+   "question": "It's harvest at Hitchin, and a farmer drives furiously home with his last load of corn. What are the people chasing him with?",
+   "answer": "Bowls full of water, to throw on it",
+   "wrong": [
+    "Lanterns, to light him home through the lanes",
+    "Handbells, rung till the cart's unloaded",
+    "Sheaves of their own, to toss on the load"
+   ],
+   "note": "it was formerly the custom at Hitchin, in Hertfordshire, for each farmer to drive furiously home with the last load of his corn, while the people ran after him with bowls full of water in order to throw on it"
+  },
+  {
+   "id": "almanac:eton-nutting",
+   "book": "almanac",
+   "entry": "09-14:2",
+   "question": "It's a September play-day at old Eton, and the scholars are off to gather nuts. What must they do first?",
+   "answer": "Write verses on autumn's plenty and the coming winter's cold",
+   "wrong": [
+    "Construe a page of Virgil to the head master",
+    "Sing a Latin grace in the chapel",
+    "Pay a penny each towards the masters' supper"
+   ],
+   "note": "but before leave was granted for their excursion, they were required to write verses on the fruitfulness of autumn, and the deadly cold of the coming winter."
+  },
+  {
+   "id": "almanac:griggles",
+   "book": "almanac",
+   "entry": "09-28:2",
+   "question": "It's autumn in cider country, and the farmers have left plenty of small apples, 'griggles', on the trees. Who are they for?",
+   "answer": "The village boys, who climb up and clear the trees",
+   "wrong": [
+    "The pigs, turned into the orchard after picking",
+    "The parson, as part of his tithe",
+    "The wassailers, to hang up as offerings at Christmas"
+   ],
+   "note": "The small apples are called _griggles_. These, the farmers leave pretty abundantly on the trees, with an understanding that the urchins will have mercy on the boughs"
+  },
+  {
+   "id": "almanac:lawless-hour",
+   "book": "almanac",
+   "entry": "09-29:0",
+   "question": "It's bailiff-election day at Kidderminster, and the town-house bell rings. What starts?",
+   "answer": "'Lawless hour': everyone pelts each other with cabbage stalks",
+   "wrong": [
+    "A race to the church to be first to vote",
+    "The town crier reads the old charter aloud",
+    "Every shop must put up its shutters for an hour"
+   ],
+   "note": "On the election of a bailiff the inhabitants assemble in the principal streets to throw cabbage stalks at each other. The town-house bell gives signal for the affray. This is called lawless hour."
+  },
+  {
+   "id": "almanac:michaelmas-goose",
+   "book": "almanac",
+   "entry": "09-29:1",
+   "question": "It's Michaelmas day. What's the popular saying about eating goose today?",
+   "answer": "You'll never want money all the year round",
+   "wrong": [
+    "Your own geese will thrive all year",
+    "You'll be wed before Christmas",
+    "The frost will hold off till Martinmas"
+   ],
+   "note": "If you eat goose on Michaelmas-day you will never want money all the year round."
+  },
+  {
+   "id": "almanac:brother-salter",
+   "book": "almanac",
+   "entry": "10-01:0",
+   "question": "It's the first week of October at St Magnus, London Bridge. By Sir John Salter's will, what must the Salters' beadles say there?",
+   "answer": "'How do you do brother Salter? I hope you are well!'",
+   "wrong": [
+    "'God rest Sir John, who gave us bread and salt!'",
+    "'Brother Salter, the salt is sweet this year!'",
+    "'Here's to Sir John, the Salters' good friend!'"
+   ],
+   "note": "ordered that the beadles and servants should go to the said church the first week in October, three times each person, and say, “How do you do brother Salter? I hope you are well!”"
+  },
+  {
+   "id": "almanac:simon-and-jude",
+   "book": "almanac",
+   "entry": "10-28:0",
+   "question": "It's St Simon and St Jude's day. What weather does everyone expect?",
+   "answer": "Rain: the day is held as rainy as St Swithin's",
+   "wrong": [
+    "The first hard frost of the winter",
+    "A gale to strip the last leaves",
+    "A fine day, the last of the summer"
+   ],
+   "note": "This anniversary was deemed as rainy as St. Swithin’s."
+  },
+  {
+   "id": "almanac:hallowe-en-nuts",
+   "book": "almanac",
+   "entry": "10-31:0",
+   "question": "It's Hallowe'en in Ireland. A young woman lays three nuts on the bars of the grate, each named for a lover. One cracks and jumps. What does it mean?",
+   "answer": "That lover will prove unfaithful",
+   "wrong": [
+    "That lover will propose before Christmas",
+    "That lover is thinking of her that very moment",
+    "That lover will travel far before they meet"
+   ],
+   "note": "If a nut cracks or jumps, the lover will prove unfaithful; if it begins to blaze or burn, he has a regard for the person making the trial."
+  },
+  {
+   "id": "almanac:short-tailed-sow",
+   "book": "almanac",
+   "entry": "10-31:1",
+   "question": "It's the eve of 1 November in North Wales, and the autumn fire is lit. Everyone runs through the smoke and throws in a stone. Why do they all run off at the end?",
+   "answer": "To escape the black short-tailed sow",
+   "wrong": [
+    "To chase the last sparks down the hill",
+    "To be home before the church bell tolls",
+    "To beat the fairies to the crossroads"
+   ],
+   "note": "such as running through the fire and smoke, each casting a stone into the fire, and all running off at the conclusion to escape from the black short-tailed sow"
+  },
+  {
+   "id": "almanac:sack-race",
+   "book": "almanac",
+   "entry": "11-15:0",
+   "question": "At the country sports, ten or eleven candidates are tied in something up to their necks for a race of about five hundred yards. What's the sport?",
+   "answer": "Jumping in sacks, for a cheese",
+   "wrong": [
+    "Rolling in barrels, for a ham",
+    "Hopping in hampers, for a goose",
+    "Shuffling in blankets, for a pudding"
+   ],
+   "note": "Ten or eleven candidates are chosen; they are tied in sacks up to their necks, and have to jump about five hundred yards."
+  },
+  {
+   "id": "almanac:martins-nest",
+   "book": "almanac",
+   "entry": "11-19:2",
+   "question": "Martins have built a nest in the corner of your bedroom window. What does it mean?",
+   "answer": "Good luck, the more so if the same birds come back",
+   "wrong": [
+    "A wedding in the house within the year",
+    "A hard winter is on its way",
+    "Someone in the house will soon go overseas"
+   ],
+   "note": "It is considered a presage of good, for this bird to build its nest in the corner of the bedroom-window; and particularly so, should the first inhabitants return in the season."
+  },
+  {
+   "id": "almanac:clementing-apples",
+   "book": "almanac",
+   "entry": "11-23:2",
+   "question": "It's St Clement's day and the boys have been round the houses. What have they collected, and what happens to it?",
+   "answer": "Apples, roasted together, some dropped hot into ale or cider",
+   "wrong": [
+    "Candle-ends, to light a bonfire on the green",
+    "Flour and lard, for a great pancake on the hill",
+    "Nuts, cracked by the fire to tell fortunes"
+   ],
+   "note": "Having collected a good store of apples, which they seldom failed to do, the boys repaired to some one of their houses, where they roasted and ate the apples"
+  },
+  {
+   "id": "almanac:penny-lottery",
+   "book": "almanac",
+   "entry": "12-04:2",
+   "question": "It's early December in the north of England, and there's a Penny Lottery on. What might your penny win you?",
+   "answer": "A whole garden, sold while it lies dormant",
+   "wrong": [
+    "A fat goose for Christmas",
+    "A year's free shaving at the barber's",
+    "A new Sunday coat"
+   ],
+   "note": "About this time, when gardens look in a dormant state, there are frequently Penny Lotteries in the north of England; and very often a whole garden is purchased for one penny."
+  },
+  {
+   "id": "almanac:boy-bishop",
+   "book": "almanac",
+   "entry": "12-06:1",
+   "question": "It's St Nicholas's day, long ago, and the choir boys of a cathedral choose one of their number. To be what?",
+   "answer": "A bishop, in robes and mitre, until Innocents' day",
+   "wrong": [
+    "The saint's page, carrying gifts to the poor",
+    "Keeper of the keys, to lock the masters out",
+    "Captain of the bell-ringers until New Year"
+   ],
+   "note": "the choir boys in cathedral churches, chose one of their number to maintain the state and authority of a bishop, for which purpose the boy was habited in rich episcopal robes, wore a mitre on his head, and bore a crosier in his hand"
+  },
+  {
+   "id": "almanac:st-nicholas-shoes",
+   "book": "almanac",
+   "entry": "12-11:1",
+   "question": "It's the St Nicholas visit. Each of the family leaves a shoe on a table in a room that's then carefully locked. What's found in the morning?",
+   "answer": "The table covered with bonbons, toys and trinkets",
+   "wrong": [
+    "Every shoe newly blacked and mended",
+    "A letter from the saint tucked in each shoe",
+    "Each shoe turned round to point at the door"
+   ],
+   "note": "the board is found covered with _bons bons_, toys, and trinkets."
+  },
+  {
+   "id": "almanac:going-a-gooding",
+   "book": "almanac",
+   "entry": "12-21:0",
+   "question": "It's St Thomas's day in Kent, and women are going 'a gooding' for money. What do they give in return?",
+   "answer": "Sprigs of palm and branches of primroses",
+   "wrong": [
+    "Spiced cakes baked that morning",
+    "Sprigs of holly and mistletoe",
+    "Candles dipped for the long nights"
+   ],
+   "note": "Going a _gooding_ on St. Thomas’s day formerly prevailed in England. Women begged money, and in return presented the donors with sprigs of palm and branches of primroses."
+  },
+  {
+   "id": "almanac:apple-tree-wassail",
+   "book": "almanac",
+   "entry": "12-24:0",
+   "question": "It's Christmas eve, 1790, in Devon, and the country people sing a wassail. What do they do with the toast from the wassail-bowl?",
+   "answer": "Throw it to the apple-trees, for a fruitful year",
+   "wrong": [
+    "Float it on the mill-pond for the fish",
+    "Lay it on the hearth for the Christmas spirits",
+    "Share it with the first stranger at the door"
+   ],
+   "note": "it was then customary for the country people to sing a wassail or drinking-song, and throw the toast from the wassail-bowl to the apple-trees in order to have a fruitful year."
+  },
+  {
+   "id": "almanac:quainton-thorn",
+   "book": "almanac",
+   "entry": "12-24:1",
+   "question": "Christmas eve at Quainton, Bucks: two thousand people go by lantern-light to watch a blackthorn bud. It doesn't. What do they decide?",
+   "answer": "That 25 December can't be the right Christmas-day",
+   "wrong": [
+    "That the parish must plant a new thorn",
+    "That a poor harvest is coming next year",
+    "That the vicar must bless the tree at Twelfth-night"
+   ],
+   "note": "The people finding no appearance of a bud, it was agreed by all, that December 25 (new style) could not be the right Christmas-day, and accordingly refused going to church"
+  },
+  {
+   "id": "almanac:bells-underground",
+   "book": "almanac",
+   "entry": "12-25:2",
+   "question": "It's Christmas morning, and the old folk tell the children to go down to the valley and stoop to the ground. What will they hear?",
+   "answer": "The bells of a church beneath them, ringing merrily",
+   "wrong": [
+    "The fairies' Christmas feast under the hill",
+    "The old mill turning beneath the water",
+    "The river singing under the ice"
+   ],
+   "note": "Even now, it is usual on Christmas morning for old men and women to tell their children and young friends to go to the valley, stoop down, and hear the bells ring merrily."
+  },
+  {
+   "id": "almanac:goose-pies",
+   "book": "almanac",
+   "entry": "12-26:1",
+   "question": "It's St Stephen's day in the North Riding of Yorkshire. Large goose pies go to needy neighbours, all but one. What becomes of that one?",
+   "answer": "It's put by and not tasted till Candlemas",
+   "wrong": [
+    "It's given to the vicar for Twelfth-night",
+    "It's sent to the lord of the manor with the rent",
+    "It's eaten by the bell-ringers on New Year's eve"
+   ],
+   "note": "except one which is carefully laid up, and not tasted till the purification of the virgin, called Candlemas."
+  },
+  {
+   "id": "almanac:king-of-cockneys",
+   "book": "almanac",
+   "entry": "12-28:1",
+   "question": "It's Childermas, 1517, among the sages of the law, and Henry VIII has ordered that a mock king should sit and have due service. Which king?",
+   "answer": "The king of cockneys",
+   "wrong": [
+    "The king of the quill",
+    "The king of the apprentices",
+    "The king of the woolsack"
+   ],
+   "note": "“that the _king of cockneys_, on _Childermas-day_, should sit and have due service; and that he and all his officers should use honest manner and good order"
+  },
+  {
+   "id": "almanac:patricks-crosses",
+   "book": "almanac",
+   "entry": "03-17:2",
+   "question": "It's St Patrick's day: the bells are ringing and the piper's playing. What have the children got pinned to their sleeves?",
+   "answer": "'Patrick's crosses': little prints of a cross or the saint",
+   "wrong": [
+    "Tiny paper stars cut out by their mothers",
+    "Paper harps painted gold",
+    "Little bells to ring in the procession"
+   ],
+   "note": "children have “Patrick’s crosses” pinned to their sleeves. These are small prints of various kinds; some of them merely represent a cross, others are representations of Saint Patrick"
+  },
+  {
+   "id": "almanac:bexhill-old-men",
+   "book": "almanac",
+   "entry": "06-04:0",
+   "question": "It's the king's birthday, 1819, at Bexhill in Sussex, and twenty-five old men dine together at the Bell Inn. What's special about them?",
+   "answer": "Their ages averaged eighty-one, the king's own age",
+   "wrong": [
+    "Each had served at sea under Nelson",
+    "They were all born the same week as the king",
+    "They had rung the bells at his coronation"
+   ],
+   "note": "Twenty-five old men, inhabitants of the parish, whose united ages amounted to 2025, averaging eighty-one each (the age of the king) dined together at the Bell Inn"
+  },
+  {
+   "id": "omen:horseshoe-which-way-up",
+   "book": "omen",
+   "entry": "1.10.6",
+   "question": "You're hanging a horseshoe over the door as a luck token. Which way up should it go, by the popular notion?",
+   "answer": "Points upward, or else the luck may be spilled out",
+   "wrong": [
+    "Points towards the street, to call the luck in",
+    "On its side, with the points towards the hinges",
+    "Points to the left, towards the rising sun"
+   ],
+   "note": "From a scientific standpoint, therefore, the horse-shoe, when used as a protective symbol, should be placed with its convex arch uppermost; but as a luck token, the reverse position is the proper one, else, according to a popular notion, the luck may be spilled out."
+  },
+  {
+   "id": "omen:pennsylvania-prongs",
+   "book": "omen",
+   "entry": "1.15.2",
+   "question": "You're nailing up a horseshoe in eastern Pennsylvania. Which way do the prongs point, and why?",
+   "answer": "Inward, so the luck may be spilled into the house",
+   "wrong": [
+    "Outward, to catch the luck of passers-by",
+    "Downward, so the luck runs onto the doorstep",
+    "Towards the chimney, where luck comes in"
+   ],
+   "note": "In eastern Pennsylvania, however, even in recent times, the horse-shoe is often placed with the prongs pointing inward, so that the luck may be spilled into the house."
+  },
+  {
+   "id": "omen:northumberland-nail-holes",
+   "book": "omen",
+   "entry": "1.15.4",
+   "question": "You find a horseshoe in Northumberland and carefully count the holes with no nails in. What do they tell you?",
+   "answer": "How soon you may expect to be married",
+   "wrong": [
+    "How many children you will one day have",
+    "How many pounds you will come into this year",
+    "How many visitors will call before Sunday"
+   ],
+   "note": "In Northumberland the holes free of nails are carefully counted, as these indicate, presumably in years, how soon the finder of the shoe may expect to be married."
+  },
+  {
+   "id": "omen:spreewald-tell-no-neighbour",
+   "book": "omen",
+   "entry": "1.15.33",
+   "question": "You live among the Wends of the Spreewald and have just found a horseshoe. What mustn't you do?",
+   "answer": "Tell any neighbour about your good fortune",
+   "wrong": [
+    "Pick it up with your bare right hand",
+    "Carry it home after the sun has set",
+    "Let it touch the ground a second time"
+   ],
+   "note": "the lucky finder of a horse-shoe is careful not to tell any neighbor of his good fortune, but proceeds at once to fasten the shoe over the door of his house, or on the threshold, with three nails, and by three blows of a hammer, so that evil spirits may not enter."
+  },
+  {
+   "id": "omen:tuscan-red-bag",
+   "book": "omen",
+   "entry": "1.15.28",
+   "question": "You find a horseshoe in Tuscany. Where do you keep it?",
+   "answer": "In a little red bag with some hay, in your bed",
+   "wrong": [
+    "In a blue bag hung over the kitchen fire",
+    "Under the doorstep, wrapped in a vine leaf",
+    "In your left boot until the next full moon"
+   ],
+   "note": "In Tuscany a horse-shoe when found is placed in a small red bag with some hay, which the Tuscans consider also a luck-bringing article, and the twofold charm is kept in its owner’s bed."
+  },
+  {
+   "id": "omen:thuringian-bachelor",
+   "book": "omen",
+   "entry": "1.14.14",
+   "question": "In the Thuringian Forest, an old shoe off the road won't do for your bedroom threshold. Who must have forged it?",
+   "answer": "A bachelor of good character, on Saint John's Eve",
+   "wrong": [
+    "A seventh son, on Midsummer morning",
+    "A widowed smith, at the dark of the moon",
+    "A smith's apprentice, on his very first day"
+   ],
+   "note": "in order to serve its purpose as a talisman, a Thuringian horse-shoe must have been forged by a bachelor of wholesome life and good character, on Saint John’s Eve."
+  },
+  {
+   "id": "omen:perthshire-minister",
+   "book": "omen",
+   "entry": "1.14.28",
+   "question": "It's about 1850 in Perthshire, and your minister preaches against the horseshoes on the farm doors. What does the parish do?",
+   "answer": "Move them from the outsides of the doors to the insides",
+   "wrong": [
+    "Paint them black so he can't spot them",
+    "Nail them up on the church door instead",
+    "Bury them under the doorsteps"
+   ],
+   "note": "his superstitious parishioners removed the guardian horse-shoes from the outsides of the doors, and nailed them up on the insides."
+  },
+  {
+   "id": "omen:quarrelling-neighbours",
+   "book": "omen",
+   "entry": "1.15.13",
+   "question": "In the far north of Scotland, you and your neighbour have fallen out. Where does a horseshoe keep you both safe?",
+   "answer": "Placed between your two houses",
+   "wrong": [
+    "Over your door, points towards their house",
+    "Buried at midnight under their gate",
+    "On your roof, facing their chimney"
+   ],
+   "note": "if a horse-shoe be placed between the houses of quarrelsome neighbors, neither incurs any risk of evil as a result of the other’s ill-wishes."
+  },
+  {
+   "id": "omen:cauld-airn",
+   "book": "omen",
+   "entry": "1.6.17",
+   "question": "You're out with the Scottish fishing fleet and a shipmate swears. What does everyone do?",
+   "answer": "Cry \"Cauld airn!\" and each grab a piece of iron",
+   "wrong": [
+    "Spit over the side and touch the mast",
+    "Throw a pinch of salt into the sea",
+    "Turn round three times and whistle"
+   ],
+   "note": "if, when plying their vocation, one of their number chance to indulge in profanity, the others at once call out, “Cauld airn!” and each grasps a handy piece of the metal as a counter influence to the misfortune which would else pursue them throughout the day."
+  },
+  {
+   "id": "omen:butter-churn",
+   "book": "omen",
+   "entry": "1.4.6",
+   "question": "You walk into a house in north-west Scotland while the butter is being churned. What's expected of you?",
+   "answer": "Lay your hand on the churn, to show you mean no harm",
+   "wrong": [
+    "Leave at once and come back when it's done",
+    "Drop a pinch of salt in for luck",
+    "Say \"God speed the butter\" from the doorway"
+   ],
+   "note": "In northwestern Scotland whoever enters a house where butter is being made is expected to lay his hand upon the churn, thereby signifying that he has no evil designs against the butter-maker"
+  },
+  {
+   "id": "omen:wine-in-the-lap",
+   "book": "omen",
+   "entry": "3.5.2",
+   "question": "It's 1627, and the salt falls towards a superstitious guest at dinner. What finally comforts him?",
+   "answer": "A waiter pouring wine in his lap",
+   "wrong": [
+    "Throwing a pinch over his left shoulder",
+    "Being served a second helping of bread",
+    "The whole table drinking his health"
+   ],
+   "note": "Bishop Hall wrote, in 1627, that when salt fell towards a superstitious guest at dinner, he was wont to exhibit signs of mental agitation, and refused to be comforted until one of the waiters had poured wine in his lap."
+  },
+  {
+   "id": "omen:norwegian-salt-tears",
+   "book": "omen",
+   "entry": "3.5.10",
+   "question": "You spill the salt in Norway. What will it cost you, by popular belief?",
+   "answer": "As many tears as it takes to dissolve the salt",
+   "wrong": [
+    "A year of bad luck for every grain",
+    "A lost coin for every grain",
+    "Seven days without a letter"
+   ],
+   "note": "According to a popular Norwegian belief, one will shed as many tears as may suffice to dissolve the quantity of salt which he has spilled"
+  },
+  {
+   "id": "omen:bucks-county-crawl",
+   "book": "omen",
+   "entry": "3.5.10",
+   "question": "You spill salt in Bucks County, Pennsylvania. Besides tossing a pinch over your left shoulder, what must you do?",
+   "answer": "Crawl under the table and come out the other side",
+   "wrong": [
+    "Walk three times round the table",
+    "Sweep it up with your left hand only",
+    "Move your chair to the other side"
+   ],
+   "note": "In Bucks County, Pennsylvania, in order to avert ill-luck after salt has been spilled, one should not only toss a pinch of the spilled salt over the left shoulder, but should also crawl under a table and come out on the opposite side."
+  },
+  {
+   "id": "omen:new-england-stove",
+   "book": "omen",
+   "entry": "3.5.14",
+   "question": "You've spilt salt in New England, and a toss over the left shoulder isn't enough. Where must the grains go?",
+   "answer": "On the stove",
+   "wrong": [
+    "Out of the front door",
+    "Down the well",
+    "Under your pillow"
+   ],
+   "note": "for in order thoroughly to break the spell, these particles must be thrown on the stove."
+  },
+  {
+   "id": "omen:gate-of-paradise",
+   "book": "omen",
+   "entry": "3.5.17",
+   "question": "By one remarkable superstition, what awaits you in the hereafter for spilling salt?",
+   "answer": "A year outside the gate of Paradise for every grain",
+   "wrong": [
+    "Counting every grain again before you go in",
+    "No salt at all at the heavenly feast",
+    "A year sweeping heaven's steps for every grain"
+   ],
+   "note": "as a penalty for spilling salt, one must wait outside the gate of Paradise for as many years as there are grains of salt spilled."
+  },
+  {
+   "id": "omen:spill-the-wine",
+   "book": "omen",
+   "entry": "3.5.7",
+   "question": "A 1586 book of symbols says spilling salt on the table is ominous. What is lucky to spill?",
+   "answer": "Wine, especially if unmixed with water",
+   "wrong": [
+    "Milk, especially fresh from the cow",
+    "Water, especially from a holy well",
+    "Oil, especially the first pressing"
+   ],
+   "note": "Wherefore many consider it ominous to spill salt on the table, and, on the other hand, propitious to spill wine, especially if unmixed with water."
+  },
+  {
+   "id": "omen:help-me-to-salt",
+   "book": "omen",
+   "entry": "3.6.1",
+   "question": "In the north of England, someone helps you to salt at table. What does the old couplet say?",
+   "answer": "\"Help me to salt, help me to sorrow\"",
+   "wrong": [
+    "\"Pass the salt, pass the luck\"",
+    "\"Salt from a friend, friendship's end\"",
+    "\"Salt in hand, trouble on land\""
+   ],
+   "note": "it is reckoned unlucky to be helped to salt at table, and this idea has found expression in the popular couplet, “Help me to salt, help me to sorrow.”"
+  },
+  {
+   "id": "omen:russian-salt-smile",
+   "book": "omen",
+   "entry": "3.6.3",
+   "question": "In Russia, you have to pass your neighbour the salt. How do you stop it causing a quarrel?",
+   "answer": "Smile amicably as you offer it",
+   "wrong": [
+    "Pass it with your left hand",
+    "Set it down rather than hand it over",
+    "Say a blessing over it first"
+   ],
+   "note": "But if in proffering the salt one smiles amicably, all danger of a quarrel is happily averted, and the act is wholly relieved of its ominous character."
+  },
+  {
+   "id": "omen:japan-salt-at-night",
+   "book": "omen",
+   "entry": "3.8.14",
+   "question": "You run a Japanese household. When won't you buy salt?",
+   "answer": "At night",
+   "wrong": [
+    "On the first day of the month",
+    "When it's raining",
+    "On your own birthday"
+   ],
+   "note": "The mistress of a household will not buy it at night, and when purchased in the daytime a small quantity is thrown into the fire in order to prevent discord in the family, and to avert misfortune generally."
+  },
+  {
+   "id": "omen:burns-moves-house",
+   "book": "omen",
+   "entry": "3.8.15",
+   "question": "It's 1789 and Robert Burns's family escort him to his new house at Ellisland. What's carried in their midst?",
+   "answer": "A bowl of salt resting on the family Bible",
+   "wrong": [
+    "A horseshoe on a velvet cushion",
+    "A loaf of bread and a lump of coal",
+    "Embers from the old hearth in an iron pot"
+   ],
+   "note": "he was escorted on his route thither along the banks of the river Nith by a procession of relatives, and in their midst was borne a bowl of salt resting on the family Bible."
+  },
+  {
+   "id": "omen:blind-the-fairies",
+   "book": "omen",
+   "entry": "3.9.2",
+   "question": "Why might a Scottish fisherman throw a little salt into the sea?",
+   "answer": "To blind the fairies",
+   "wrong": [
+    "To calm the waves",
+    "To pay the sea for its fish",
+    "To keep the nets from rotting"
+   ],
+   "note": "Scotch fishermen have a traditional custom of salting their nets “for luck,” and they also sometimes throw a little salt into the sea “to blind the fairies.”"
+  },
+  {
+   "id": "omen:salt-box-of-my-love",
+   "book": "omen",
+   "entry": "3.9.1",
+   "question": "You're an Andalusian peasant. What's the most endearing thing you can call your sweetheart?",
+   "answer": "\"The salt-box of my love\"",
+   "wrong": [
+    "\"The sugar-bowl of my heart\"",
+    "\"The honey-pot of my days\"",
+    "\"The bread-bin of my soul\""
+   ],
+   "note": "no more endearing or flattering language can be used in addressing a woman, whether wife or sweetheart, than to call her “the salt-box of my love.”"
+  },
+  {
+   "id": "omen:sneeze-putting-on-shoes",
+   "book": "omen",
+   "entry": "4.1.15",
+   "question": "It's St Augustine's time, and you sneeze while putting on your shoes in the morning. What do you do?",
+   "answer": "Go back to bed",
+   "wrong": [
+    "Take them off and start with the other foot",
+    "Stay indoors until noon",
+    "Put the shoes on the wrong feet"
+   ],
+   "note": "St. Augustine wrote that, in his time, so prevalent was faith in the omens of sneezing that a man would return to bed if he happened to sneeze while putting on his shoes in the morning."
+  },
+  {
+   "id": "omen:elizabethan-two-sneezes",
+   "book": "omen",
+   "entry": "4.2.3",
+   "question": "In Elizabethan England, you sneeze twice while talking business with someone. What should you do?",
+   "answer": "Get up and go straight about your business: you'll prosper",
+   "wrong": [
+    "Let the matter drop, for it will come to nought",
+    "Wait for a third sneeze before deciding",
+    "Shake hands at once and seal the bargain"
+   ],
+   "note": "If that any man talk with another about any matter and snese twise or iiij tymes, let him by and by arise, yf he sett, or yf he be stand, let him move hymself and go straightway without any stays about his business, for he shall prosper."
+  },
+  {
+   "id": "omen:selkirk-sneeze-out-of-bed",
+   "book": "omen",
+   "entry": "4.3.9",
+   "question": "In Selkirkshire, you sneeze as you first step out of bed. What does it tell you?",
+   "answer": "Strangers will come today, one for each sneeze",
+   "wrong": [
+    "Letters will come today, one for each sneeze",
+    "Rain will fall today, an hour for each sneeze",
+    "You'll quarrel today, once for each sneeze"
+   ],
+   "note": "“When they sneeze in first stepping out of bed in the morning, they are thence certified that strangers will be there in the course of the day, in numbers corresponding to the times they sneeze.”"
+  },
+  {
+   "id": "omen:flemish-sneeze-truth",
+   "book": "omen",
+   "entry": "4.3.10",
+   "question": "In old Flanders, someone sneezes while you're in the middle of a story. What does it prove?",
+   "answer": "That what you're saying is the truth",
+   "wrong": [
+    "That you'd better change the subject",
+    "That a stranger is at the door",
+    "That you'll be proved wrong by nightfall"
+   ],
+   "note": "It was a Flemish belief that a sneeze during a conversation proved that what one said was the truth, a doctrine which must have commended itself to snuff-takers."
+  },
+  {
+   "id": "omen:japan-two-sneezes",
+   "book": "omen",
+   "entry": "4.3.14",
+   "question": "You sneeze twice in old Japan. What does it mean?",
+   "answer": "Someone is finding fault with you",
+   "wrong": [
+    "Someone is praising you",
+    "You've simply caught a cold",
+    "An old friend is about to visit"
+   ],
+   "note": "Thus, one sneeze indicates that some one is praising him, while two betoken censure or disparagement; a triple sneeze is commonplace, and means simply that a person has taken cold."
+  },
+  {
+   "id": "omen:new-years-eve-sneeze",
+   "book": "omen",
+   "entry": "4.3.12",
+   "question": "You sneeze on New Year's Eve in China, an ill omen for the year. How do you put it right?",
+   "answer": "Beg a tortoise cake from each of three families, eaten by midnight",
+   "wrong": [
+    "Light three red candles before midnight",
+    "Sweep the doorstep three times before midnight",
+    "Eat a bowl of noodles without speaking"
+   ],
+   "note": "According to a Chinese superstition a sneeze on New Year’s Eve is ominous for the coming year; and, to offset this, the sneezer must visit three families of different surnames, and beg from each a small tortoise-shaped cake, which must be eaten before midnight."
+  },
+  {
+   "id": "omen:french-hats-off",
+   "book": "omen",
+   "entry": "4.5.13",
+   "question": "You're a gentleman in old France and you sneeze in company. What does etiquette require?",
+   "answer": "Take off your hat, then return everyone's salutes",
+   "wrong": [
+    "Turn your back and cover your face",
+    "Bow to the host and beg his pardon",
+    "Leave the room until it has passed"
+   ],
+   "note": "In France the rules of etiquette formerly required that a gentleman who sneezed in the presence of another should take off his hat, and on the subsidence of the paroxysm he was expected formally to return the salutes of all present."
+  },
+  {
+   "id": "omen:rarotonga-welcome-back",
+   "book": "omen",
+   "entry": "4.4.8",
+   "question": "Someone sneezes on Rarotonga. What do you say, and why?",
+   "answer": "\"Ha! you have come back!\", to welcome their wandering spirit",
+   "wrong": [
+    "\"Go away!\", to chase a spirit out of them",
+    "\"Stay a while!\", to keep their luck from leaving",
+    "\"Bless the wind!\", for the breath that left them"
+   ],
+   "note": "They therefore deem it proper to welcome back the wandering spirit, the form of greeting varying in the different islands. The phrase employed by the natives of Raratonga, for example, means “Ha! you have come back!”"
+  },
+  {
+   "id": "omen:siam-book-of-the-judge",
+   "book": "omen",
+   "entry": "4.5.16",
+   "question": "You sneeze in Siam. By the Siamese account, what has just happened?",
+   "answer": "The Supreme Judge has turned to your page in his book",
+   "wrong": [
+    "Someone in the house is about to quarrel",
+    "Your luck has turned for the coming week",
+    "A traveller has set out on the road to you"
+   ],
+   "note": "They believe that the Supreme Judge of the spiritual world is continually turning over the pages of a book containing an account of the life and doings of every human being; and when he comes to the page relating to any individual, the latter never fails to sneeze."
+  },
+  {
+   "id": "omen:wurmlingen-bridge",
+   "book": "omen",
+   "entry": "4.6.6",
+   "question": "A poor soul under a Wurmlingen bridge sneezes three times as you cross. What would have freed him?",
+   "answer": "Saying \"God help thee!\" for the third sneeze too",
+   "wrong": [
+    "Dropping a coin into the stream below",
+    "Calling his name out loud three times",
+    "Crossing the bridge again backwards"
+   ],
+   "note": "Thereupon a voice from under the bridge exclaimed pitifully, “If you had only said, ‘God help thee!’ a third time, I should have been freed from the spell which binds me.”"
+  },
+  {
+   "id": "omen:turkistan-hiccup",
+   "book": "omen",
+   "entry": "4.3.13",
+   "question": "Someone hiccups in Turkistan. What's the polite, luck-bringing thing to say?",
+   "answer": "\"You stole something from me\"",
+   "wrong": [
+    "\"Someone is missing you\"",
+    "\"Your soul is in a hurry\"",
+    "\"Somebody is telling tales\""
+   ],
+   "note": "When, also, any one hiccoughs, it is etiquette to say, “You stole something from me,” and this phrase at such times is supposed to produce good luck."
+  },
+  {
+   "id": "omen:three-sneezes-four-thieves",
+   "book": "omen",
+   "entry": "4.2.1",
+   "question": "It's 1455 in Germany and you sneeze three times. What did popular belief say that meant?",
+   "answer": "Four thieves are about the house",
+   "wrong": [
+    "Three guests are on the road",
+    "A letter is coming from far away",
+    "Rain before the next church bell"
+   ],
+   "note": "we learn that in Germany there was a popular belief that three sneezes indicated the presence of four thieves around the house."
+  },
+  {
+   "id": "omen:shetland-cat-sneeze",
+   "book": "omen",
+   "entry": "4.3.11",
+   "question": "Your cat sneezes in Shetland. What's it telling you?",
+   "answer": "Cold north winds in summer, snow in winter",
+   "wrong": [
+    "A visitor before the week is out",
+    "A good catch for the boats tomorrow",
+    "A letter from someone over the sea"
+   ],
+   "note": "In Shetlandic and Welsh folk-lore the sneeze of a cat indicates cold north winds in summer and snow in winter"
+  },
+  {
+   "id": "omen:hesiod-reaping-day",
+   "book": "omen",
+   "entry": "5.1.3",
+   "question": "You farm by Hesiod's \"Works and Days\". Which day of the month is excellent for reaping corn?",
+   "answer": "The eleventh",
+   "wrong": [
+    "The seventh",
+    "The first",
+    "The fifteenth"
+   ],
+   "note": "Thus he recommends the eleventh of the month as excellent for reaping corn, and the twelfth for shearing sheep."
+  },
+  {
+   "id": "omen:sussex-blackberrying",
+   "book": "omen",
+   "entry": "5.4.2",
+   "question": "Why won't West Sussex folk let the children go blackberrying on 10 October?",
+   "answer": "The Devil goes afield that day",
+   "wrong": [
+    "The fairies claim the hedges that day",
+    "The first frost spoils the fruit that day",
+    "The berries belong to the birds from then"
+   ],
+   "note": "The peasantry of West Sussex in England will not permit their children to go blackberrying on the tenth day of October, on account of a belief that the Devil goes afield on that day"
+  },
+  {
+   "id": "omen:glasgow-weddings",
+   "book": "omen",
+   "entry": "5.5.12",
+   "question": "You're getting married in 1890s Glasgow, like a large share of couples there. Which day do you pick?",
+   "answer": "Friday",
+   "wrong": [
+    "Saturday",
+    "Wednesday",
+    "Monday"
+   ],
+   "note": "This opinion finds favor in Glasgow, where a large proportion of marriages take place on this day; whereas, in the midland counties of England, less than two per cent. of the weddings occur on the sixth day of the week."
+  },
+  {
+   "id": "omen:friday-faced",
+   "book": "omen",
+   "entry": "5.6.16",
+   "question": "In Shropshire, you hear something new on a Friday. What does it do to you?",
+   "answer": "Gives you another wrinkle and adds a year to your age",
+   "wrong": [
+    "Brings a week of rain after it",
+    "Turns out to be false by Sunday",
+    "Means worse news before the month is out"
+   ],
+   "note": "according to a Shropshire saying, “if you hear anything new on a Friday, it gives you another wrinkle on your face, and adds another year to your age.”"
+  },
+  {
+   "id": "omen:irish-friday-stranger",
+   "book": "omen",
+   "entry": "5.6.12",
+   "question": "It's a Friday in Ireland and a stranger knocks. What should you take especial care to do?",
+   "answer": "Not open the door to them",
+   "wrong": [
+    "Offer them a cup of milk",
+    "Ask their name before they cross the threshold",
+    "Give them a pinch of salt as they leave"
+   ],
+   "note": "In Ireland Friday is _facile princeps_ among unlucky days, and especial care should be taken not to open the door of one’s dwelling to any stranger on that day."
+  },
+  {
+   "id": "omen:paris-friday-premieres",
+   "book": "omen",
+   "entry": "5.6.31",
+   "question": "Paris theatres put on nearly two hundred new pieces a year. For many years, how many opened on a Friday?",
+   "answer": "Not one",
+   "wrong": [
+    "About one in seven",
+    "Only the comedies",
+    "Only the tragedies"
+   ],
+   "note": "This is shown by statistics of the Parisian theatres, where there are produced on an average nearly two hundred new pieces annually, and for many years not one of these has had its first performance on a Friday."
+  },
+  {
+   "id": "omen:quatorzieme",
+   "book": "omen",
+   "entry": "7.6.9",
+   "question": "You're giving a Paris dinner party and find you're thirteen. Who do you send for?",
+   "answer": "A quatorzième, to occupy the fourteenth seat",
+   "wrong": [
+    "A priest, to bless the table",
+    "A footman, to lay one place fewer",
+    "The concierge's cat, for the fourteenth chair"
+   ],
+   "note": "The Parisian _pique-assiette_, a person whose title corresponds to the English “trencher friend” or “sponger,” is also known as a _quatorzième_, his chief mission being to occupy the fourteenth seat at a banquet."
+  },
+  {
+   "id": "omen:thirteen-rise-together",
+   "book": "omen",
+   "entry": "7.6.11",
+   "question": "You've rashly dined thirteen at table. How is all the evil averted?",
+   "answer": "The whole company rises to its feet together",
+   "wrong": [
+    "The youngest guest sits apart for the pudding",
+    "A fourteenth place is laid for the pudding",
+    "Everyone touches the table leg at once"
+   ],
+   "note": "All evil, however, was supposed to be averted by the entire company rising to their feet together."
+  },
+  {
+   "id": "omen:box-12a",
+   "book": "omen",
+   "entry": "7.6.14",
+   "question": "You've booked the thirteenth box at an Italian theatre. What number is on its door?",
+   "answer": "12A",
+   "wrong": [
+    "14",
+    "12bis",
+    "XIII"
+   ],
+   "note": "In Italy shrewd theatrical managers have found it expedient to change the number of Box 13 to 12A"
+  },
+  {
+   "id": "omen:persian-thirteen",
+   "book": "omen",
+   "entry": "7.6.19",
+   "question": "You're in Persia and need to mention the number thirteen. What do you say instead?",
+   "answer": "\"Much more\", or \"nothing\"",
+   "wrong": [
+    "\"Twelve and one\"",
+    "\"A baker's dozen\"",
+    "\"The number after twelve\""
+   ],
+   "note": "When they wish to allude to this number, instead of mentioning the proper term, they use words meaning “much more” or “nothing.”"
+  },
+  {
+   "id": "omen:bakers-dozen",
+   "book": "omen",
+   "entry": "7.6.21",
+   "question": "Your baker gives you thirteen loaves for twelve. Why did the custom begin?",
+   "answer": "Heavy fines for short weight: the extra loaf was a precaution",
+   "wrong": [
+    "The oven held twelve loaves and one for the baker",
+    "The thirteenth was a tithe loaf for the church",
+    "Bakers kept one back to test the batch"
+   ],
+   "note": "it was formerly a common practice to give thirteen loaves for twelve, the extra piece being called the _in-bread_ or _to-bread_. This custom is supposed to have originated at a time when heavy fines were imposed for short weights, the additional bread being given by bakers as a precautionary measure."
+  },
+  {
+   "id": "omen:king-edwards-fellowship",
+   "book": "omen",
+   "entry": "7.6.17",
+   "question": "A courtier tells Edward VI that Christ's College, a Master and twelve Fellows, is a superstitious number, and to cut a Fellowship or two. What does the king do?",
+   "answer": "Adds a thirteenth Fellowship, to spoil the conceit",
+   "wrong": [
+    "Takes away two Fellowships, as advised",
+    "Renames the college after himself",
+    "Adds a second Master to make it even"
+   ],
+   "note": "“Oh, no!” said the King, “I have a better way than that to mar their conceit; I will add a thirteenth Fellowship unto them;” which he did accordingly, and so it remaineth unto this day."
+  },
+  {
+   "id": "omen:siamese-staircase",
+   "book": "omen",
+   "entry": "7.1.6",
+   "question": "You're building a house in Siam. What must every staircase have?",
+   "answer": "An uneven number of steps",
+   "wrong": [
+    "A landing every seventh step",
+    "Steps facing the rising sun",
+    "Twelve steps, one for each month"
+   ],
+   "note": "every house must have an uneven number of rooms, windows, and doors; each staircase must have an uneven number of steps."
+  },
+  {
+   "id": "omen:haunted-place-three-things",
+   "book": "omen",
+   "entry": "7.4.8",
+   "question": "A Bavarian peasant passing a haunted place carries a new knife marked with three crosses, a loaf baked on Epiphany Eve, and what?",
+   "answer": "A black cat",
+   "wrong": [
+    "A sprig of rowan",
+    "A horseshoe",
+    "A pinch of salt"
+   ],
+   "note": "considers himself amply fortified against evil if he takes the precaution to carry three things; namely, (1) a new knife which has never cut anything, marked on the blade with three crosses; (2) a loaf of bread baked on Epiphany Eve; (3) a black cat."
+  },
+  {
+   "id": "omen:cato-gnawed-boots",
+   "book": "omen",
+   "entry": "2.5.4",
+   "question": "You're Cato the Censor, told gravely that rats have gnawed your boots. What's your reply?",
+   "answer": "It would portend evil only if the boots had gnawed the rats",
+   "wrong": [
+    "Then the gods want me to stay at home today",
+    "Then I shall go to the Senate barefoot",
+    "Then send for the soothsayer at once"
+   ],
+   "note": "“If the boots had gnawed the rats,” he said, “it might have portended evil.”"
+  },
+  {
+   "id": "omen:letter-to-the-mice",
+   "book": "omen",
+   "entry": "6.3.1",
+   "question": "You're an ancient Greek farmer with mice in the field. How do you drive them away?",
+   "answer": "Write them a message and stick it on a stone in the field",
+   "wrong": [
+    "Bury a bronze cat at the field's edge",
+    "Leave them a share of grain at the gate",
+    "Ring a bell at each corner at dawn"
+   ],
+   "note": "The Grecian husbandmen were accustomed to drive away mice by writing them a message on a piece of paper and sticking it on a stone in the infested field."
+  },
+  {
+   "id": "omen:bohemian-mice-remnants",
+   "book": "omen",
+   "entry": "6.3.6",
+   "question": "On Christmas Eve, a Bohemian peasant throws the dinner leftovers on the barn floor. What does he say?",
+   "answer": "\"O mice, eat these remnants and leave the grain in peace!\"",
+   "wrong": [
+    "\"Little mice, go to the neighbour's barn!\"",
+    "\"Feast tonight, mice, and fast all year!\"",
+    "\"Christ's Mass for man and mouse alike!\""
+   ],
+   "note": "whatever food remains from the midday meal is thrown upon the barn floor, and the following sentence is repeated: “O mice, eat these remnants and leave the grain in peace!”"
+  },
+  {
+   "id": "omen:rats-defence-lawyer",
+   "book": "omen",
+   "entry": "6.8.7",
+   "question": "You're defending some rats summoned to court at Autun. Why can't your clients appear?",
+   "answer": "The road is full of cats, all alert to the case",
+   "wrong": [
+    "The summons wasn't read in their own tongue",
+    "It's harvest time and they're busy",
+    "Their homes are under the courthouse floor"
+   ],
+   "note": "He represented to the judge that his clients found it extremely difficult to obey the summons issued to them by the court, owing to their being obliged to traverse a region abounding in cats"
+  },
+  {
+   "id": "omen:rhyming-rats",
+   "book": "omen",
+   "entry": "6.6.19",
+   "question": "How did people in Britain once believe they could be rid of rats?",
+   "answer": "By cursing them in rhyming verse",
+   "wrong": [
+    "By whistling a tune backwards in the barn",
+    "By writing their names on the granary door",
+    "By ringing the church bell at midnight"
+   ],
+   "note": "In Great Britain there formerly prevailed a belief that rats could be rhymed to death by anathematizing them in metrical verse"
+  },
+  {
+   "id": "omen:kirghis-magpie",
+   "book": "omen",
+   "entry": "6.2.2",
+   "question": "Among the Kirghis, you hear a magpie cry from the east. What's coming?",
+   "answer": "Guests",
+   "wrong": [
+    "A journey",
+    "Something remarkable",
+    "Something evil"
+   ],
+   "note": "If from the north, it portends evil; from the south, a remarkable occurrence; from the east, it denotes the coming of guests; and from the west, a journey."
+  },
+  {
+   "id": "omen:horse-sees-tenfold",
+   "book": "omen",
+   "entry": "1.11.35",
+   "question": "Why, say the Bohemians, does a great horse let a little child lead it?",
+   "answer": "It sees everything ten times bigger than it is",
+   "wrong": [
+    "It knows children can see spirits",
+    "It remembers being a foal itself",
+    "Children smell of milk, which calms it"
+   ],
+   "note": "It is a Bohemian superstition that a horse sees everything magnified tenfold, and that this is the reason why the noble animal submits to being led by a little child."
+  }
+ ]
+}
