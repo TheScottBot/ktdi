@@ -105,7 +105,7 @@ ktdi/
 │   ├── movie.py       movie night: /nowplaying (!np; with rate, predict, bingo underneath) and /shhh (✅/❌ judging listener);
 │   │                  related subcommands are one slash subcommand with an option (sync [time]), the old ones
 │   │                  typed-only (with_app_command=False, extras["merged_into"]: see §6)
-│   ├── units.py       /abm, /imperial
+│   ├── units.py       /abm, /imperial, /metric
 │   ├── timezones.py   /timezone (convert, set, show, clear); parsing lives in lib/timezones.py
 │   ├── weather.py     /weather: Open-Meteo's forecast (lib/openmeteo.py) next to 1893 weather lore; /weather here
 │   │                  (a private form) for where you are, posted without naming it (never stored, cached or logged)
@@ -457,7 +457,10 @@ Everything logs through `logging.getLogger("ktdi")` (`common.log`) to the file a
 ## 11. Libraries (`ktdi/lib`)
 
 - **`abm.py`**: parses metric input (`3cm`, `20C`, `100 km/h`) into a dimension + SI value, then either picks an
-  absurd unit from `abm_units.json` (`convert`) or converts sincerely (`to_imperial`). To add absurd units, add
+  absurd unit from `abm_units.json` (`convert`) or converts sincerely (`to_imperial`). `to_metric` (/metric) is the
+  other way round, from its own table of imperial and US units (`_imperial(...)`: a unit that differs in the UK
+  and US, like a pint, has both values, and both are given unless it's typed as `US pint`); heights and weights
+  can be two parts (`5ft 10`, `11st 4lb`: `COMPOUNDS`). To add absurd units, add
   entries to the JSON (`id`, `name`, `plural`, `dimension`, `si_value`, `accuracy`, optional `article`); to add input
   units, `_add(...)` in `abm.py`. Temperature compares in kelvin; decibels compare to the nearest reference point.
 - **`reminders.py`**: `parse_schedule`, `split_lead`, `split_start`, `parse_date`, `next_occurrence`,
@@ -475,7 +478,7 @@ Everything logs through `logging.getLogger("ktdi")` (`common.log`) to the file a
 
 - The humour is the group's in-jokes and absurd comparisons. **Never mock America, imperial units or Fahrenheit**; 
     American reference points in `/abm` are fine because they're genuinely useful.
-  `/imperial` is sincere and signs off with ❤️.
+  `/imperial` and `/metric` are sincere and sign off with ❤️.
 - Error and refusal messages are friendly, say what to do instead, and are private (`ephemeral`) where possible.
 - British English in user-facing text.
 

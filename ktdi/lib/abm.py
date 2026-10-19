@@ -471,3 +471,234 @@ def _imperial_reply(text: str) -> str:
     if dimension == "time":
         reply += " (time isn't metric, so it's the same everywhere)"
     return reply
+
+
+# --- Sincere metric conversions (for /metric): /imperial the other way round ---
+YARD = 0.9144
+CUBIC_INCH = 1.6387064e-05
+CUBIC_YARD = 0.764554857984
+SQ_YARD = 0.83612736
+US_CUP = 0.0002365882365
+US_QUART = 0.000946352946
+UK_QUART = 0.0011365225
+OIL_BARREL = 0.158987294928
+KNOT = 1852 / 3600
+FOOT_POUND = 1.3558179483314004
+
+# Imperial and US units people can type, as name -> (dimension, SI value). A unit that's different in the UK and the
+# US (a pint, a gallon, a ton) is (dimension, {"UK": ..., "US": ...}): both are given, unless it says which ("US pint").
+UK_US = dict[str, float]
+IMPERIAL_UNITS: dict[str, tuple[str, float | UK_US]] = {}
+IMPERIAL_SYMBOLS: dict[str, list[str]] = {}
+
+
+def _imperial(dimension: str, value: float | UK_US, *names: str) -> None:
+    for name in names:
+        IMPERIAL_UNITS[name] = (dimension, value)
+    IMPERIAL_SYMBOLS.setdefault(dimension, []).append(names[0])
+
+
+_imperial("length", INCH, "in", "inch", "inches", '"', "″")
+_imperial("length", FOOT, "ft", "foot", "feet", "'", "′")
+_imperial("length", YARD, "yd", "yard", "yards")
+_imperial("length", MILE, "mi", "mile", "miles")
+_imperial("area", SQ_INCH, "sq in", "in²", "square inch", "square inches")
+_imperial("area", SQ_FOOT, "sq ft", "ft²", "square foot", "square feet")
+_imperial("area", SQ_YARD, "sq yd", "yd²", "square yard", "square yards")
+_imperial("area", ACRE, "acre", "acres", "ac")
+_imperial("area", SQ_MILE, "sq mi", "mi²", "square mile", "square miles")
+_imperial("volume", US_TSP, "tsp", "teaspoon", "teaspoons")
+_imperial("volume", US_TBSP, "tbsp", "tablespoon", "tablespoons")
+_imperial("volume", {"UK": UK_FL_OZ, "US": US_FL_OZ}, "fl oz", "floz", "fluid ounce", "fluid ounces")
+_imperial("volume", US_CUP, "cup", "cups")
+_imperial("volume", {"UK": UK_PINT, "US": US_PINT}, "pint", "pints", "pt")
+_imperial("volume", {"UK": UK_QUART, "US": US_QUART}, "quart", "quarts", "qt")
+_imperial("volume", {"UK": UK_GALLON, "US": US_GALLON}, "gal", "gallon", "gallons")
+_imperial("volume", CUBIC_INCH, "cu in", "in³", "cubic inch", "cubic inches")
+_imperial("volume", CUBIC_FOOT, "cu ft", "ft³", "cubic foot", "cubic feet")
+_imperial("volume", CUBIC_YARD, "cu yd", "yd³", "cubic yard", "cubic yards")
+_imperial("volume", OIL_BARREL, "bbl", "barrel", "barrels")
+_imperial("volume", ACRE_FOOT, "acre-ft", "acre-foot", "acre-feet", "acre foot", "acre feet")
+_imperial("mass", OUNCE, "oz", "ounce", "ounces")
+_imperial("mass", POUND, "lb", "lbs", "pound", "pounds")
+_imperial("mass", STONE, "st", "stone", "stones")
+_imperial("mass", {"UK": UK_TON, "US": US_TON}, "ton", "tons")
+_imperial("mass", US_TON, "short ton", "short tons")
+_imperial("mass", UK_TON, "long ton", "long tons")
+_imperial("speed", MPH, "mph", "miles per hour")
+_imperial("speed", FOOT, "ft/s", "fps", "feet per second")
+_imperial("speed", KNOT, "kn", "kt", "knot", "knots")
+_imperial("acceleration", FOOT, "ft/s²")
+_imperial("pressure", PSI, "psi")
+_imperial("pressure", IN_HG, "inHg", "in hg", "inches of mercury")
+_imperial("power", HORSEPOWER, "hp", "horsepower", "bhp")
+_imperial("power", BTU_PER_HOUR, "BTU/h", "btu/hr", "btuh")
+_imperial("energy", BTU, "BTU", "btus")
+_imperial("energy", THERM, "therm", "therms")
+_imperial("energy", FOOD_CALORIE, "Cal", "Calorie", "Calories", "food calorie", "food calories")
+_imperial("energy", FOOT_POUND, "ft-lb", "ft·lb", "ft-lbf", "foot-pound", "foot-pounds")
+
+IMPERIAL_UNITS_LOWER = {name.lower(): value for name, value in IMPERIAL_UNITS.items()
+                        if name not in ("Cal", "Calorie", "Calories")}  # "cal" is the small, metric calorie
+WHICH = {"us": "US", "uk": "UK", "imperial": "UK", "imp": "UK", "british": "UK", "american": "US"}
+FAHRENHEIT = ("f", "°f", "fahrenheit", "degf", "degrees f", "degrees fahrenheit")
+# A big unit then a small one: 5 ft 10 in, 11 st 4 lb, 2 lb 3 oz. The small one's unit can be left off: 5 ft 10.
+COMPOUNDS = {FOOT: INCH, YARD: FOOT, STONE: POUND, POUND: OUNCE}
+METRIC_USAGE = ("Give me a number and an imperial or US unit, like `5ft 10`, `5'10\"`, `11st 4lb`, `2 cups`, "
+                "`1 pint`, `70F`, `60 mph` or `32 psi`.")
+PART_RE = re.compile(r"([-+]?(?:\d[\d,]*(?:\.\d*)?|\.\d+))\s*([^\d]*)")
+
+
+def _imperial_unit(unit: str) -> tuple[str, float | UK_US] | None:
+    """An imperial unit's (dimension, SI value), by any of its names, with "US"/"UK" in front to say which."""
+    # "fl. oz", "sq. ft". (Not "ft2" for square feet: "5ft2" is someone's height, 5 ft 2 in.)
+    unit = " ".join(unit.replace(".", " ").split()) if unit not in ('"', "'") else unit
+    words = unit.split(" ", 1)
+    if len(words) == 2 and words[0].lower() in WHICH:
+        found = _imperial_unit(words[1])
+        if found and isinstance(found[1], dict):
+            return found[0], found[1][WHICH[words[0].lower()]]
+        return found
+    return IMPERIAL_UNITS.get(unit) or IMPERIAL_UNITS_LOWER.get(unit.lower())
+
+
+def parse_imperial(text: str) -> tuple[str, float | UK_US] | None:
+    """Parse "5ft 10", "5'10\"", "11 st 4 lb" or "1 pint" into (dimension, SI value: or {"UK", "US"} values for a
+    unit that's different in each). None if it isn't an imperial measurement (it might be metric)."""
+    parts = PART_RE.findall(text.strip().replace(",", ""))
+    if not parts or "".join(number + unit for number, unit in parts).replace(" ", "") != \
+            text.strip().replace(",", "").replace(" ", ""):
+        return None
+    (first_number, first_unit), *rest = [(float(number), unit.strip()) for number, unit in parts]
+    found = _imperial_unit(first_unit)
+    if found is None or len(rest) > 1:
+        return None
+    dimension, value = found
+    if not rest:
+        if isinstance(value, dict):
+            return dimension, {which: first_number * each for which, each in value.items()}
+        return dimension, first_number * value
+    small_number, small_unit = rest[0]
+    small = COMPOUNDS.get(value) if not isinstance(value, dict) else None
+    if small is None or (small_unit and (_imperial_unit(small_unit) or (None, None))[1] != small):
+        return None
+    return dimension, first_number * value + small_number * small
+
+
+def _metric_number(value: float, unit: str) -> str:
+    return f"{plain_number(value)} {unit}"
+
+
+def metric_length(metres: float) -> str:
+    if metres < 0.01:
+        return _metric_number(metres * 1000, "mm")
+    if metres < 1:
+        return _metric_number(metres * 100, "cm")
+    if metres < 3:
+        return f"{_metric_number(metres, 'm')} ({_metric_number(metres * 100, 'cm')})"
+    if metres < 1000:
+        return _metric_number(metres, "m")
+    return _metric_number(metres / 1000, "km")
+
+
+def metric_mass(kg: float) -> str:
+    if kg < 0.001:
+        return _metric_number(kg * 1e6, "mg")
+    if kg < 1:
+        return _metric_number(kg * 1000, "g")
+    if kg < 1000:
+        return _metric_number(kg, "kg")
+    return f"{_metric_number(kg / 1000, 'tonnes')} ({_metric_number(kg, 'kg')})"
+
+
+def metric_volume(m3: float) -> str:
+    if m3 < 1e-3:
+        return _metric_number(m3 * 1e6, "ml")
+    if m3 < 1:
+        return _metric_number(m3 * 1000, "L")
+    return f"{_metric_number(m3, 'm³')} ({_metric_number(m3 * 1000, 'L')})"
+
+
+def metric_area(m2: float) -> str:
+    if m2 < 1:
+        return _metric_number(m2 * 1e4, "cm²")
+    if m2 < 1e4:
+        return _metric_number(m2, "m²")
+    if m2 < 1e6:
+        return f"{_metric_number(m2 / 1e4, 'hectares')} ({_metric_number(m2, 'm²')})"
+    return f"{_metric_number(m2 / 1e6, 'km²')} ({_metric_number(m2 / 1e4, 'hectares')})"
+
+
+def metric_pressure(pascals: float) -> str:
+    if pascals < 1.1e5:  # About the air's (inches of mercury, on a weather map): hectopascals, which are millibars
+        return f"{_metric_number(pascals / 100, 'hPa')} ({_metric_number(pascals / 1000, 'kPa')})"
+    return f"{_metric_number(pascals / 1000, 'kPa')} ({_metric_number(pascals / 1e5, 'bar')})"
+
+
+def metric_energy(joules: float) -> str:
+    if joules < 1000:  # Foot-pounds
+        return _metric_number(joules, "J")
+    if joules < 1e8:  # A day's food (2,000 Calories is 8,368 kJ) and a heater's BTUs: kJ and kcal
+        return f"{_metric_number(joules / 1000, 'kJ')} ({_metric_number(joules / FOOD_CALORIE, 'kcal')})"
+    return f"{_metric_number(joules / 1e6, 'MJ')} ({_metric_number(joules / 3.6e6, 'kWh')})"
+
+
+METRIC_CONVERTERS = {
+    "length": metric_length,
+    "mass": metric_mass,
+    "volume": metric_volume,
+    "area": metric_area,
+    "speed": lambda v: f"{_metric_number(v * 3.6, 'km/h')} ({_metric_number(v, 'm/s')})",
+    "acceleration": lambda v: f"{_metric_number(v, 'm/s²')} ({plain_number(v / STANDARD_GRAVITY)} g)",
+    "pressure": metric_pressure,
+    "power": lambda v: _metric_number(v / 1000, "kW") if v >= 1000 else _metric_number(v, "W"),
+    "energy": metric_energy,
+}
+
+
+def to_metric(text: str) -> str:
+    """The full reply for `metric <text>`: /imperial the other way round, a straight, accurate conversion, with love."""
+    return f"{_metric_reply(text)} {IMPERIAL_SIGN_OFF}"
+
+
+def _metric_reply(text: str) -> str:
+    shown = text.strip()
+    temperature = re.match(r"^\s*([-+]?(?:\d[\d,]*(?:\.\d*)?|\.\d+))\s*(.+?)\s*$", shown)
+    if temperature and temperature.group(2).lower() in FAHRENHEIT:
+        fahrenheit = float(temperature.group(1).replace(",", ""))
+        celsius = (fahrenheit - 32) * 5 / 9
+        if celsius < -273.15:
+            return f"🌡️ {shown} is below absolute zero, so it can't be converted."
+        return f"🌡️ {shown} = **{_degrees(celsius)} °C**"
+    found = parse_imperial(shown)
+    if found is None:
+        try:  # Already metric? Say so, with the imperial, in case that's what was wanted
+            _, dimension, si_value = parse(shown)
+        except ABMError:
+            raise ABMError(f"I couldn't read `{shown}`. {METRIC_USAGE}") from None
+        emoji = DIMENSION_EMOJI.get(dimension, "📐")
+        if dimension == "time":
+            return f"{emoji} {shown}: time isn't imperial or metric, so it's the same everywhere."
+        if dimension == "sound_level":
+            return f"{emoji} {shown}: decibels are the same everywhere."
+        imperial = _imperial_reply(shown).split(" = ", 1)
+        return (f"{emoji} {shown} is already metric." +
+                (f" In imperial it's {imperial[1]}." if len(imperial) == 2 else ""))
+    dimension, value = found
+    emoji = DIMENSION_EMOJI.get(dimension, "📐")
+    convert = METRIC_CONVERTERS[dimension]
+    if isinstance(value, dict):  # A UK pint isn't a US pint: both, unless it said which
+        if value["UK"] < 0:
+            return f"{emoji} {shown} is negative, so there's nothing to convert."
+        return f"{emoji} {shown} = **{convert(value['UK'])}** (UK) or **{convert(value['US'])}** (US)"
+    if value < 0:
+        return f"{emoji} {shown} is negative, so there's nothing to convert."
+    return f"{emoji} {shown} = **{convert(value)}**"
+
+
+def metric_unit_help() -> list[tuple[str, str]]:
+    """(dimension, units) pairs listing what /metric reads, for /help metric."""
+    symbols = {**IMPERIAL_SYMBOLS, "temperature": ["°F"]}
+    order = ["length", "area", "volume", "mass", "temperature", "speed", "acceleration", "pressure", "power", "energy"]
+    return [(f"{DIMENSION_EMOJI[dimension]} {dimension.replace('_', ' ').capitalize()}",
+             " ".join(f"`{symbol}`" for symbol in symbols[dimension])) for dimension in order]

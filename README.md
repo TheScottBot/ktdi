@@ -83,6 +83,7 @@ Countdowns, bingo, votes and ratings.
 ### [📏 Measurements](docs/COMMANDS.md#measurements)
 Units, sincerely or absurdly.
 - `abm`: Anything But Metric, in something absurd · `imperial`: metric to imperial, sincerely
+- `metric`: imperial and US units to metric, just as sincerely
 
 ### [💬 Quotes](docs/COMMANDS.md#quotes)
 - `quote`: save and replay the things people say (or right-click a message: **Save quote**)

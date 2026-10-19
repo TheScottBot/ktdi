@@ -125,6 +125,7 @@ Everything here except `shhh` is under `/nowplaying`, to keep the rest of the sl
 |---|---|
 | `abm <measurement>` | Anything But Metric: converts a metric measurement (`3cm`, `20C`, `2.5kg`, `100km/h`, `500ml`, `85dB`…) into an absurd unit. Units live in `ktdi/lib/abm_units.json`. |
 | `imperial <measurement>` | The sincere version of `abm`: an accurate conversion to imperial/US units (e.g. `180cm` → 5 ft 10.9 in, `75kg` → 165.3 lb (11 st 11.3 lb), `1l` → US and UK pints). Same inputs as `abm`. |
+| `metric <measurement>` | The other way round: an accurate conversion from imperial/US units to metric (e.g. `5ft 10` or `5'10"` → 1.78 m, `11st 4lb` → 71.67 kg, `70F` → 21.1 °C, `60 mph` → 96.56 km/h, `32 psi` → 220.6 kPa). Heights and weights can be in two parts (`5 ft 10 in`, `2 lb 3 oz`). A unit that's different in the UK and the US (a pint, quart, gallon, fluid ounce or ton) gets both, unless you say which (`1 US pint`, `1 imperial gallon`); teaspoons, tablespoons and cups are American. Something already metric gets the imperial instead. `/help metric` lists every unit it reads. Signs off with ❤️, like `imperial`. |
 
 <a id="quotes"></a>
 ### 💬 Quotes
