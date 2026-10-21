@@ -383,3 +383,20 @@ def test_allspray_needs_the_members_intent(server, monkeypatch):
     run(fun.allspray.callback(ctx))
     assert "isn't set up on this bot" in ctx.last.content and ctx.last.private
     assert fun.get_spray_count(111, 2) == 0
+
+
+def test_allspray_goes_on_the_rap_sheet_as_its_own_charge(server, monkeypatch):
+    ctx = Ctx(User(1, "scott"), server)
+    run(fun.allspray.callback(ctx, exclude="<@3>"))
+    run(fun.allspray.callback(Ctx(User(2, "dave"), server)))
+    assert fun.get_allspray_counts(111, 1) == (1, 1)  # Started one, caught in Dave's
+    assert fun.get_allspray_counts(111, 2) == (1, 1)
+    assert fun.get_allspray_counts(111, 3) == (1, 0)  # Spared once, caught once
+    assert fun.get_allspray_counts(111, 4) == (2, 0)
+    monkeypatch.setattr(fun.random, "choice", lambda options: options[0])
+    sheet = Ctx(User(1, "scott"), server)
+    run(fun.rapsheet.callback(sheet, user=server.members[3]))
+    assert "🚨 Was part of an unruly group 2 times." in sheet.last.content
+    run(fun.rapsheet.callback(sheet, user=None))
+    assert "📢 Incited 1 riot." in sheet.last.content and "🚨 Was part of an unruly group 1 time." in sheet.last.content
+    assert all("{" not in line.format(times="2 times", riots="2 riots") for line in fun.CAUGHT_LINES + fun.STARTED_LINES)

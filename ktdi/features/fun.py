@@ -135,9 +135,9 @@ def take_spray(guild_id: int, user_id: int, sprayer_id: int) -> tuple[bool, str]
     return covered, f"\n{note}" if note else ""
 
 
-def _scoped_sum(table: str, guild_id: int, user_id: int, column: str = "user_id") -> int:
+def _scoped_sum(table: str, guild_id: int, user_id: int, column: str = "user_id", summed: str = "count") -> int:
     where, params = db.scope(guild_id)
-    row = db.conn.execute(f"SELECT COALESCE(SUM(count), 0) FROM {table} WHERE {where} AND {column} = ?",
+    row = db.conn.execute(f"SELECT COALESCE(SUM({summed}), 0) FROM {table} WHERE {where} AND {column} = ?",
                           (*params, user_id)).fetchone()
     return row[0]
 
@@ -247,6 +247,39 @@ def get_bad_count(guild_id: int, user_id: int) -> int:
     return _scoped_sum("bad_counts", guild_id, user_id)
 
 
+def record_allspray(guild_id: int, sprayer_id: int, caught_ids: list[int]) -> None:
+    """One /allspray: the sprayer started one, and everyone it hit was caught in one (insurance or not: they were
+    there)."""
+    rows = [(guild_id, sprayer_id, 0, 1)] + [(guild_id, user_id, 1, 0) for user_id in caught_ids]
+    db.conn.executemany("INSERT INTO allspray_counts (guild_id, user_id, caught, started) VALUES (?, ?, ?, ?) "
+                        "ON CONFLICT (guild_id, user_id) DO UPDATE SET caught = caught + excluded.caught, "
+                        "started = started + excluded.started", rows)
+    db.conn.commit()
+
+
+def get_allspray_counts(guild_id: int, user_id: int) -> tuple[int, int]:
+    """(times caught in an /allspray, times they started one)."""
+    return (_scoped_sum("allspray_counts", guild_id, user_id, "user_id", "caught"),
+            _scoped_sum("allspray_counts", guild_id, user_id, "user_id", "started"))
+
+
+# How the rap sheet puts it, a different way each time it's shown
+CAUGHT_LINES = [
+    "🚨 Was part of an unruly group {times}.",
+    "🚨 Rounded up with the usual suspects {times}.",
+    "🚨 Kettled {times}.",
+    "🚨 Caught up in a mass spraying {times}.",
+    "🚨 Found in the wrong crowd {times}.",
+    "🚨 Arrested in a general sweep of the premises {times}.",
+]
+STARTED_LINES = [
+    "📢 Incited {riots}.",
+    "📢 Read the Riot Act to the whole server {times}.",
+    "📢 Sprayed the lot of them {times}.",
+    "📢 Ringleader of {riots}.",
+]
+
+
 def get_don_order_count(guild_id: int, user_id: int) -> int:
     return _scoped_sum("don_orders", guild_id, user_id)
 
@@ -348,8 +381,9 @@ def spared(guild: discord.Guild, text: str | None) -> set[int]:
                        ping="Notify everyone sprayed? Off unless you say so")
 async def allspray(ctx: commands.Context, *, exclude: str | None = None, ping: bool = False):
     """Sprays everyone on the server at once (not bots, and not you), except anyone you spare: `/allspray
-    exclude:@dave @pat`, or a whole role (`exclude:@Mods`). Each spray goes on that person's rap sheet, unless their
-    insurance covers it, and counts for spray futures and wars (it will start one). Nobody's pinged unless you add
+    exclude:@dave @pat`, or a whole role (`exclude:@Mods`). Each spray goes on that person's rap sheet as a normal
+    spray, unless their insurance covers it, and counts for spray futures and wars (it will start one). It's also
+    an extra charge of its own: everyone caught in one was part of an unruly group, and you incited a riot. Nobody's pinged unless you add
     `ping:True`. Typed: `!allspray @dave @pat`, with `ping` anywhere in it to ping."""
     if not config.SERVER_MEMBERS:
         await ctx.send("💦 `/allspray` isn't set up on this bot: it needs to see the server's members (Server "
@@ -367,6 +401,7 @@ async def allspray(ctx: commands.Context, *, exclude: str | None = None, ping: b
         was_covered, _ = take_spray(ctx.guild.id, member.id, ctx.author.id)
         if was_covered:
             covered.append(member)
+    record_allspray(ctx.guild.id, ctx.author.id, [member.id for member in targets])
     log.info("[%s] %s sprayed the whole server (%d), sparing %s", ctx.guild.name, ctx.author, len(targets),
              sorted(spare - {ctx.author.id}))
     spared_names = [f"<@{user_id}>" for user_id in sorted(spare - {ctx.author.id})]
@@ -479,9 +514,9 @@ async def nose(ctx: commands.Context, user: discord.Member | None = None):
 @commands.hybrid_command(name="rapsheet", description="See someone's sprays, bribes, expunges and bails.")
 @commands.guild_only()
 async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
-    """Someone's record (yours, if you don't name anyone): sprays, times they've been bad, expunges and bails, the Don's
-    orders, sprays insurance covered, bribes, committee spending, called predictions, bingo wins, their 🍞 (one
-    for each day they won How well do you 🍞?) and spray futures."""
+    """Someone's record (yours, if you don't name anyone): sprays, times they've been bad, unruly groups and riots
+    (/allspray), expunges and bails, the Don's orders, sprays insurance covered, bribes, committee spending, called
+    predictions, bingo wins, their 🍞 (one for each day they won How well do you 🍞?) and spray futures."""
     await send_rap_sheet(ctx, user or ctx.author)
 
 
@@ -543,6 +578,12 @@ async def send_rap_sheet(ctx: commands.Context, user: discord.abc.User, unabridg
     claims = insurance.claims_text(ctx.guild.id, user.id)
     if claims:
         lines.append(f"🛡️ Insurance covered {claims}.")
+    caught, started = get_allspray_counts(ctx.guild.id, user.id)
+    if caught:
+        lines.append(random.choice(CAUGHT_LINES).format(times=plural(caught, "time")))
+    if started:
+        lines.append(random.choice(STARTED_LINES).format(times=plural(started, "time"),
+                                                         riots=f"{started} riot" + ("s" if started != 1 else "")))
     don_orders = get_don_order_count(ctx.guild.id, user.id)
     if don_orders:
         lines.append(f"🤌 Sprayed themselves on the Don's orders {plural(don_orders, 'time')}.")

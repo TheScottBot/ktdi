@@ -97,6 +97,15 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS allspray_counts (
+        guild_id INTEGER NOT NULL,
+        user_id  INTEGER NOT NULL,
+        caught   INTEGER NOT NULL DEFAULT 0,  -- times they were sprayed along with everyone else (/allspray)
+        started  INTEGER NOT NULL DEFAULT 0,  -- times they sprayed the whole server
+        PRIMARY KEY (guild_id, user_id)
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS spray_expunges (
         guild_id INTEGER NOT NULL,
         user_id  INTEGER NOT NULL,
