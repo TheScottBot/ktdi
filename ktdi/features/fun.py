@@ -29,6 +29,12 @@ BAD_GIF_URLS = [
     "https://klipy.com/gifs/regular-show-benson-8",
     "https://klipy.com/gifs/daddys-home2-daddys-home2gifs-23",
 ]
+PHRASING_GIF_URLS = [
+    "https://klipy.com/gifs/archer-question",
+    "https://klipy.com/gifs/hey-phrasing",
+    "https://klipy.com/gifs/archer-sterling-archer-5",
+    "https://klipy.com/gifs/phrasing-archer-1",
+]
 BADBONK_GIF_URLS = [
     "https://klipy.com/gifs/kanon-head-slap",
     "https://klipy.com/gifs/no-family-guy-2",
@@ -247,6 +253,16 @@ def get_bad_count(guild_id: int, user_id: int) -> int:
     return _scoped_sum("bad_counts", guild_id, user_id)
 
 
+def record_phrasing(guild_id: int, user_id: int) -> None:
+    db.conn.execute("INSERT INTO phrasing_counts (guild_id, user_id, count) VALUES (?, ?, 1) "
+                    "ON CONFLICT (guild_id, user_id) DO UPDATE SET count = count + 1", (guild_id, user_id))
+    db.conn.commit()
+
+
+def get_phrasing_count(guild_id: int, user_id: int) -> int:
+    return _scoped_sum("phrasing_counts", guild_id, user_id)
+
+
 def record_allspray(guild_id: int, sprayer_id: int, caught_ids: list[int]) -> None:
     """One /allspray: the sprayer started one, and everyone it hit was caught in one (insurance or not: they were
     there)."""
@@ -390,10 +406,10 @@ def and_list(items: list[str]) -> str:
 @app_commands.describe(exclude="Who to spare: @them (as many as you like, or an @role). Empty: nobody",
                        ping="Notify everyone sprayed? Off unless you say so")
 async def allspray(ctx: commands.Context, *, exclude: str | None = None, ping: bool = False):
-    """Sprays everyone on the server at once (not bots, and not you), except anyone you spare: `/allspray
-    exclude:@dave @pat`, or a whole role (`exclude:@Mods`). Each spray goes on that person's rap sheet as a normal
-    spray, unless their insurance covers it, and counts for spray futures and wars (it will start one). It's also
-    an extra charge of its own: everyone caught in one was part of an unruly group, and you incited a riot. Nobody's pinged unless you add
+    """Sprays everyone on the server at once (not bots, and not you), except anyone you spare: `/allspray exclude:@dave
+    @pat`, or a whole role (`exclude:@Mods`). Each spray goes on that person's rap sheet as a normal spray, unless their
+    insurance covers it, and counts for spray futures and wars (it will start one). It's also an extra charge of its
+    own: everyone caught in one was part of an unruly group, and you incited a riot. Nobody's pinged unless you add
     `ping:True`. Typed: `!allspray @dave @pat`, with `ping` anywhere in it to ping."""
     if not config.SERVER_MEMBERS:
         await ctx.send("💦 `/allspray` isn't set up on this bot: it needs to see the server's members (Server "
@@ -497,6 +513,66 @@ async def bad(ctx: commands.Context, user: discord.Member | None = None):
     await tell_off(ctx, user, BAD_GIF_URLS, "bad")
 
 
+def last_speaker(channel_id: int, besides: int) -> int | None:
+    """Whoever spoke last in the channel, apart from `besides` (the one calling them out)."""
+    return next((user_id for user_id in reversed(recent_speakers[channel_id]) if user_id != besides), None)
+
+
+async def call_out_phrasing(guild: discord.Guild | None, caller: discord.abc.User, target_id: int | None, send,
+                            channel_id: int | None = None) -> None:
+    """Phrasing! A random GIF via `send(text)`, at whoever it's aimed at (which goes on their rap sheet)."""
+    gif = random.choice(PHRASING_GIF_URLS)
+    if target_id is None:
+        await send(gif)
+        return
+    if guild:
+        record_phrasing(guild.id, target_id)
+        log.info("[%s] %s called out user %s for phrasing", guild.name, caller, target_id)
+    await send(f"<@{target_id}> {gif}")
+
+
+@commands.hybrid_command(name="phrasing", description="Phrasing! Call someone out (or whoever just spoke).")
+@commands.guild_only()
+@app_commands.describe(user="Who said it. Empty: whoever spoke last in the channel")
+async def phrasing(ctx: commands.Context, user: discord.Member | None = None):
+    """Phrasing! Posts an Archer GIF at someone, and it goes on their rap sheet as being called out for phrasing.
+    Name them (`/phrasing @dave`), or leave it empty for whoever spoke last in the channel. Typed, reply to the
+    offending message with `!phrasing`, or right-click it > Apps > **Phrasing**, to call out whoever wrote it."""
+    reference = ctx.message.reference if ctx.interaction is None and ctx.message else None
+    replied = None
+    if user is None and reference is not None:  # Typed as a reply: whoever wrote that
+        replied = reference.resolved if isinstance(reference.resolved, discord.Message) else None
+        if replied is None:
+            try:
+                replied = await ctx.channel.fetch_message(reference.message_id)
+            except (discord.HTTPException, KeyError, AttributeError):
+                replied = None
+    if replied is not None and not replied.author.bot:
+        async def reply(text):
+            return await replied.reply(text)
+        await call_out_phrasing(ctx.guild, ctx.author, replied.author.id, reply)
+        return
+    target = user.id if user and not user.bot else None if user else last_speaker(ctx.channel.id, ctx.author.id)
+    await call_out_phrasing(ctx.guild, ctx.author, target, ctx.send)
+
+
+@app_commands.context_menu(name="Phrasing")
+@app_commands.guild_only()
+async def phrasing_menu(interaction: discord.Interaction, message: discord.Message):
+    """Right-click a message > Apps > Phrasing: calls out whoever wrote it, as a reply to it."""
+    if message.author.bot:
+        await interaction.response.send_message("Bots don't do innuendo. Officially.", ephemeral=True)
+        return
+
+    async def reply(text):
+        await interaction.response.send_message("🫢 Called out.", ephemeral=True)
+        try:
+            return await message.reply(text)
+        except discord.HTTPException:  # Can't reply there: say it in the channel instead
+            return await interaction.followup.send(text)
+    await call_out_phrasing(interaction.guild, interaction.user, message.author.id, reply)
+
+
 @commands.hybrid_command(name="badbonk", description="Bad, with a bonk. Posts a random (violent) telling-off GIF.")
 @app_commands.describe(user="Optional: who's getting bonked (it goes on their rap sheet as being bad)")
 async def badbonk(ctx: commands.Context, user: discord.Member | None = None):
@@ -529,8 +605,9 @@ async def nose(ctx: commands.Context, user: discord.Member | None = None):
 @commands.guild_only()
 async def rapsheet(ctx: commands.Context, user: discord.Member | None = None):
     """Someone's record (yours, if you don't name anyone): sprays, times they've been bad, unruly groups and riots
-    (/allspray), expunges and bails, the Don's orders, sprays insurance covered, bribes, committee spending, called
-    predictions, bingo wins, their 🍞 (one for each day they won How well do you 🍞?) and spray futures."""
+    (/allspray), phrasing call-outs, expunges and bails, the Don's orders, sprays insurance covered, bribes, committee
+    spending, called predictions, bingo wins, their 🍞 (one for each day they won How well do you 🍞?) and spray
+    futures."""
     await send_rap_sheet(ctx, user or ctx.author)
 
 
@@ -592,6 +669,9 @@ async def send_rap_sheet(ctx: commands.Context, user: discord.abc.User, unabridg
     claims = insurance.claims_text(ctx.guild.id, user.id)
     if claims:
         lines.append(f"🛡️ Insurance covered {claims}.")
+    phrasing = get_phrasing_count(ctx.guild.id, user.id)
+    if phrasing:
+        lines.append(f"🫢 Has been called out for phrasing {plural(phrasing, 'time')}.")
     caught, started = get_allspray_counts(ctx.guild.id, user.id)
     if caught:
         lines.append(random.choice(CAUGHT_LINES).format(times=plural(caught, "time")))
@@ -763,8 +843,9 @@ def main_help_lines() -> list[tuple[str, str]]:
 async def setup(bot: commands.Bot):
     # `nose` is written but not registered: Discord's sensitive-media filter blurs its image (and asks UK users for ID).
     # Add it back here to bring it back.
-    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, toenoyoudidnt, rapsheet, breadsheet, blame,
-                    bribe, expunge, bail, linux):
+    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, phrasing, toenoyoudidnt, rapsheet, breadsheet,
+                    blame, bribe, expunge, bail, linux):
         bot.add_command(command)
+    bot.tree.add_command(phrasing_menu)  # Right-click a message > Apps > Phrasing
     bot.add_listener(remember_speaker, "on_message")
     bot.add_listener(spray_reaction, "on_raw_reaction_add")

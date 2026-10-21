@@ -7,7 +7,7 @@ import pytest
 from ktdi.features import fun
 from tests.fakes import Channel, Ctx, Guild, User, run
 
-SCOTT, DAVE = User(1, "scott"), User(2, "dave")
+SCOTT, DAVE, PAT = User(1, "scott"), User(2, "dave"), User(3, "pat")
 
 
 def test_spray_counts_on_the_rap_sheet():
@@ -404,3 +404,47 @@ def test_allspray_goes_on_the_rap_sheet_as_its_own_charge(server, monkeypatch):
     run(fun.rapsheet.callback(sheet, user=None))
     assert "📢 Incited 1 riot." in sheet.last.content and "🚨 Was part of an unruly group 1 time." in sheet.last.content
     assert all("{" not in line.format(times="2 times", riots="2 riots") for line in fun.CAUGHT_LINES + fun.STARTED_LINES)
+
+
+# --- /phrasing ---
+def test_phrasing_at_someone_goes_on_their_rap_sheet():
+    ctx = Ctx(SCOTT)
+    run(fun.phrasing.callback(ctx, user=DAVE))
+    assert ctx.last.content.split()[0] == "<@2>" and ctx.last.content.split()[1] in fun.PHRASING_GIF_URLS
+    run(fun.phrasing.callback(ctx, user=DAVE))
+    assert fun.get_phrasing_count(111, DAVE.id) == 2
+    sheet = Ctx(SCOTT)
+    run(fun.rapsheet.callback(sheet, user=DAVE))
+    assert "🫢 Has been called out for phrasing 2 times." in sheet.last.content
+
+
+def test_phrasing_on_its_own_is_whoever_spoke_last():
+    from collections import deque
+    fun.recent_speakers[500] = deque([DAVE.id, PAT.id, SCOTT.id])  # Scott's own !phrasing is the latest
+    ctx = Ctx(SCOTT)
+    run(fun.phrasing.callback(ctx))
+    assert ctx.last.content.startswith("<@3> ") and fun.get_phrasing_count(111, PAT.id) == 1
+    quiet = Ctx(SCOTT, channel=Channel(501))  # Nobody else has spoken: just the GIF
+    run(fun.phrasing.callback(quiet))
+    assert quiet.last.content in fun.PHRASING_GIF_URLS
+
+
+def test_phrasing_typed_as_a_reply_calls_out_whoever_wrote_it():
+    from tests.fakes import Message
+    channel = Channel(500, Guild())
+    offending = Message(77, DAVE, "I'll be in and out in five minutes", channel)
+    ctx = Ctx(SCOTT, slash=False, channel=channel, reply_to=offending)
+    run(fun.phrasing.callback(ctx))
+    reply = channel.sent[-1]
+    assert reply.replying_to is offending and reply.content.startswith("<@2> ")
+    assert fun.get_phrasing_count(111, DAVE.id) == 1
+
+
+def test_phrasing_from_the_right_click_menu():
+    from tests.fakes import Interaction, Message
+    channel = Channel(500, Guild())
+    offending = Message(78, DAVE, "It's so hard", channel)
+    interaction = Interaction(SCOTT)
+    run(fun.phrasing_menu.callback(interaction, offending))
+    assert interaction.last.content == "🫢 Called out." and interaction.last.private  # Just for the caller
+    assert channel.sent[-1].replying_to is offending and fun.get_phrasing_count(111, DAVE.id) == 1

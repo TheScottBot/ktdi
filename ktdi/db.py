@@ -97,6 +97,14 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS phrasing_counts (
+        guild_id INTEGER NOT NULL,
+        user_id  INTEGER NOT NULL,
+        count    INTEGER NOT NULL DEFAULT 0,  -- times they were called out for phrasing (/phrasing)
+        PRIMARY KEY (guild_id, user_id)
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS allspray_counts (
         guild_id INTEGER NOT NULL,
         user_id  INTEGER NOT NULL,

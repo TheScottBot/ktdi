@@ -40,6 +40,7 @@ Sprays, telling-offs, blame, bribes and the committee.
 - `spray`: spray the degenerate · `allspray`: spray the whole server, sparing whoever you name
 - `rapsheet`: someone's sprays, bribes, expunges and bails
 - `bad` / `badbonk`: a telling-off GIF, without or with a bonk · `tdoi`: spray yourself, on the Don's orders
+- `phrasing`: call someone out for phrasing (or right-click their message > Apps > Phrasing)
 - `whospray`: ask the server's chosen sprayer who's next · `blame`: blame someone who's been talking
 - `bribe`: pay to put the blame back · `expunge` / `bail`: pay to clear your own or a friend's record
 - `committee`: the committee's money · `insurance`: sprays don't count, for a while

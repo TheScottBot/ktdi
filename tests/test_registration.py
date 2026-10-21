@@ -14,9 +14,9 @@ from tests.fakes import Ctx, Guild, User
 SLASH_COMMANDS = ["abm", "allspray", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books",
                   "bread", "bribe", "campaign", "committee", "cure", "deadword", "esoteric", "etiquette", "expunge",
                   "folklore", "hammeredofwitches", "help", "herbal", "household", "imperial", "insurance", "linux",
-                  "loot", "lore", "metric", "nature", "nowplaying", "omen", "plant", "pliny", "quote", "rapsheet",
-                  "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone", "vulgartongue",
-                  "wars", "weather", "whospray", "wisdom", "words"]
+                  "loot", "lore", "metric", "nature", "nowplaying", "omen", "phrasing", "plant", "pliny", "quote",
+                  "rapsheet", "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone",
+                  "vulgartongue", "wars", "weather", "whospray", "wisdom", "words"]
 # !-only, so they're not in Discord's slash menu: the books asked through their shelf (/esoteric book:talisman), and
 # the cryptids
 SHELVED_BOOKS = ["bestiary", "devils", "dream", "enquire", "flowermeaning", "gemlore", "goblin", "magicsquare",
@@ -59,7 +59,7 @@ def loaded_bot(monkeypatch):
 def test_slash_commands(loaded_bot):
     tree = loaded_bot.tree
     assert sorted(c.name for c in tree.get_commands(type=discord.AppCommandType.chat_input)) == SLASH_COMMANDS
-    assert [c.name for c in tree.get_commands(type=discord.AppCommandType.message)] == ["Save quote"]
+    assert sorted(c.name for c in tree.get_commands(type=discord.AppCommandType.message)) == ["Phrasing", "Save quote"]
     for group, subs in SUBCOMMANDS.items():
         assert sorted(c.name for c in tree.get_command(group).commands) == subs
     nowplaying = tree.get_command("nowplaying")

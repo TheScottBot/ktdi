@@ -107,6 +107,12 @@ class Message:
         self.id, self.author, self.content = mid, author, content
         self.channel = channel or Channel()
 
+    async def reply(self, content=None, **kwargs):
+        """A reply to it, sent in its channel (and remembering what it's replying to)."""
+        sent = await self.channel.send(content, **kwargs)
+        sent.replying_to = self
+        return sent
+
 
 class Ctx:
     """A command context: slash=True for /commands, False for !commands."""
