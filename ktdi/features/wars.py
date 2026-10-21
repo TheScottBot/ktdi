@@ -7,7 +7,9 @@ said. Each act in that channel after that joins it, until nobody's done anything
 ends it and classifies it: a war if WAR_ATTACKERS or more people attacked, or a special military operation if it was
 one person on a spree (someone firing back turns an operation into a war). Insults (/vulgartongue insult) are hostile
 too, but only words: a burst with fewer than CONFLICT_ACTS sprays and bads in it is a diplomatic incident, its status
-set by how many insults flew ("Diplomatic relations are tense" up to "A cold war has been declared"). It's named from
+set by how many insults flew ("Diplomatic relations are tense" up to "A cold war has been declared"). An /allspray
+is law enforcement: a conflict with one in it is a police action, or, if anyone hits back after it (a spray, a bad,
+an insult), a riot. It's named from
 what happened (how long, when, which weapon or insult, who suffered) and the report is posted there. Conflicts stay in their channel: separate stupidity
 in two places is two wars, even on servers that share state. Acts reach here through fun.after_spray, fun.tell_off and slang.slang_insult.
 Sprays weren't timestamped before this, so the archives only go back to when it was added.
@@ -34,6 +36,7 @@ DOMINANT_SHARE = 0.6  # A war fought mostly with one weapon is named after it.
 HISTORY_SHOWN = 10
 WEAPONS = ["spray", "bad", "badbonk", "insult"]
 PHYSICAL = {"spray", "bad", "badbonk"}  # Insults are only words: they make a diplomatic incident, not a war.
+ALLSPRAY = "allspray"  # A spray's detail when it came from /allspray: the whole server at once, which is policing
 # A diplomatic incident's status, by how many insults flew: (at least this many, status).
 STATUSES = [(13, "A cold war has been declared."), (9, "Diplomatic relations have broken down."),
             (6, "Ambassadors have been recalled."), (0, "Diplomatic relations are tense.")]
@@ -119,6 +122,57 @@ OPERATION_OUTCOMES = [
     "The targets did not fire back. The committee is unsure whether that's dignity or fear.",
     "The commander withdrew to \"regroup\", and hasn't been seen since.",
 ]
+# An /allspray is the law being enforced on everyone at once. Unopposed, it's a police action...
+POLICE_TITLES = [
+    "The {weekday} Crackdown",
+    "Operation Clean Sweep",
+    "The Great Round-Up of {time}",
+    "{aggressor}'s Zero Tolerance Policy",
+    "The {ordinal} Restoration of Order",
+    "The Reading of the Riot Act",
+    "Operation Due Process (There Wasn't Any)",
+    "The {weekday} Kettling",
+]
+POLICE_CAUSES = [
+    "{first} decided the whole server was guilty.",
+    "{first} declared a state of emergency, then enforced it personally.",
+    "A zero-tolerance policy, announced and carried out by {first} in the same breath.",
+    "{first} invoked powers nobody knew they had.",
+    "Intelligence received by {first}. The source has not been disclosed.",
+]
+POLICE_OUTCOMES = [
+    "Order was restored. Nobody had disturbed it.",
+    "Everyone was found guilty. Nobody was told of what.",
+    "The suspects were released without charge, but damp.",
+    "The streets are safe again, and slightly wetter.",
+    "No resistance was offered. The committee notes this for the record.",
+]
+POLICE_FOOTER = ("Officially recorded as a police action by the committee. It is not a war. The committee supports the "
+                 "police, mostly.")
+# ...and if anyone hits back after it, it's a riot.
+RIOT_TITLES = [
+    "The {weekday} Riots",
+    "The Riot of {time}",
+    "The {ordinal} Great Disturbance",
+    "The Unrest at {time}",
+    "The Uprising Against {aggressor}",
+    "The {acts_words}-Act Riot",
+    "The Breakdown of Law and Order",
+]
+RIOT_EVENING_TITLES = ["The {weekday} Night Riots"]
+RIOT_CAUSES = [
+    "{first} tried to restore order. Order objected.",
+    "Heavy-handed policing by {first}.",
+    "{first} sprayed everyone, and everyone took it personally.",
+    "{first} read the Riot Act. It was taken as a suggestion.",
+]
+RIOT_OUTCOMES = [
+    "Order was eventually restored, mostly by everyone getting bored.",
+    "The authorities lost control, if they ever had any.",
+    "An inquiry has been promised. It will never report.",
+    "Peace returned. The damp patches remain.",
+]
+RIOT_FOOTER = "Officially recorded as a riot by the committee. Damages will not be reimbursed."
 # Diplomatic incidents: insults, but no (real) shots fired. Named after the insults that flew, and when.
 INSULT_TITLES = ["The {insult} Affair", "The {insult} Incident", "The {insult} Communiqué"]
 DIPLOMATIC_TITLES = [
@@ -249,18 +303,31 @@ class War:
         return len(self.physical) < CONFLICT_ACTS
 
     @property
+    def police(self) -> set[int]:
+        """Whoever sprayed the whole server (/allspray) in it: the law, as they see it."""
+        return {act[0] for act in self.acts if act[2] == "spray" and act[4] == ALLSPRAY}
+
+    @property
+    def rioted(self) -> bool:
+        """Whether anyone hit back (anything at all, by anyone but the police) after the first /allspray."""
+        first = next(n for n, act in enumerate(self.acts) if act[2] == "spray" and act[4] == ALLSPRAY)
+        return any(act[0] not in self.police for act in self.acts[first + 1:])
+
+    @property
     def is_war(self) -> bool:
         """Otherwise it's a special military operation (one person, on their own) or a diplomatic incident."""
         return not self.is_diplomatic and len(self.attackers) >= WAR_ATTACKERS
 
     @property
     def category(self) -> str:
+        if self.police:  # An /allspray in it: the law was enforced, and either it held or it didn't
+            return "riot" if self.rioted else "police"
         return "diplomatic" if self.is_diplomatic else "war" if self.is_war else "operation"
 
     @property
     def kind(self) -> str:
-        return {"diplomatic": "diplomatic incident", "war": "war", "operation": "special military operation"}[
-            self.category]
+        return {"diplomatic": "diplomatic incident", "war": "war", "operation": "special military operation",
+                "police": "police action", "riot": "riot"}[self.category]
 
     @property
     def insults(self) -> Counter:
@@ -336,6 +403,12 @@ def title_options(war: War, number: int, names: dict[str, str]) -> list[tuple[st
     facts = {"ordinal": ordinal(number), "year": start.year, "minutes_words": number_words(war.minutes),
              "time": start.strftime("%H:%M"), "weekday": start.strftime("%A"),
              "acts_words": number_words(len(war.acts)), "insult": insult, **names}
+    evening = start.hour >= 18 or start.hour < 4
+    if war.category == "police":
+        return [(title.format(**facts), 1) for title in POLICE_TITLES]
+    if war.category == "riot":
+        weighted = [(title, 2) for title in RIOT_TITLES] + [(title, 3) for title in RIOT_EVENING_TITLES if evening]
+        return [(title.format(**facts), weight) for title, weight in weighted]
     if war.is_diplomatic:
         weighted = [(title, 2) for title in DIPLOMATIC_TITLES]
         if insult:
@@ -343,7 +416,6 @@ def title_options(war: War, number: int, names: dict[str, str]) -> list[tuple[st
         return [(title.format(**facts), weight) for title, weight in weighted]
     weapon, used = Counter(act[2] for act in war.physical).most_common(1)[0]  # Named after the weapons, not the words
     dominant = used / len(war.acts) >= DOMINANT_SHARE
-    evening = start.hour >= 18 or start.hour < 4
     if war.is_war:
         weighted = [(title, 1) for title in GENERIC_TITLES] + [(title, 2) for title in FACT_TITLES]
         if dominant:
@@ -397,9 +469,28 @@ def diplomatic_report(war: War, number: int) -> discord.Embed:
     return embed
 
 
+def most(counts: Counter, what: str) -> str:
+    """The top of a count, "<@a> — 2 incidents", or a tie, said as one: nobody's singled out who wasn't."""
+    top = counts.most_common(1)[0][1]
+    tied = [user for user, count in counts.items() if count == top]
+    if len(tied) == 1:
+        return f"<@{tied[0]}> — {plural(top, what)}"
+    if len(tied) == len(counts) and len(tied) > 2:
+        everyone = number_words(len(tied)).lower()
+        return f"All {everyone}, equally — {plural(top, what)} each. The committee could not separate them."
+    names = [f"<@{user}>" for user in tied]
+    return f"{', '.join(names[:-1])} and {names[-1]}, equally — {plural(top, what)} each"
+
+
+LAW = {"police": (POLICE_CAUSES, POLICE_OUTCOMES, POLICE_FOOTER, discord.Color.blue()),
+       "riot": (RIOT_CAUSES, RIOT_OUTCOMES, RIOT_FOOTER, discord.Color.dark_red())}
+
+
 def report(war: War, number: int) -> discord.Embed:
-    """The committee's official historical record of a war, special military operation or diplomatic incident.
-    `number` is its place in the archives."""
+    """The committee's official historical record of a war, special military operation, police action, riot or
+    diplomatic incident. `number` is its place in the archives."""
+    if war.category in LAW:
+        return law_report(war, number)
     if war.is_diplomatic:
         return diplomatic_report(war, number)
     when = when_text(war)
@@ -415,7 +506,7 @@ def report(war: War, number: int) -> discord.Embed:
     lines = [f"**Cause of conflict:** {war.rng('cause').choice(causes).format(first=f'<@{war.acts[0][0]}>')}",
              f"**Most aggressive combatant:** <@{aggressor}> — {plural(attacks, 'incident')}" if war.is_war
              else f"**Commanding officer:** <@{aggressor}> — {plural(attacks, 'incident')}",
-             f"**Most persecuted:** <@{persecuted}> — {plural(hits, 'incident')}"]
+             f"**Most persecuted:** {most(war.targets, 'incident')}"]
     pacifists = [u for u in war.targets if u not in war.attackers]
     if pacifists:
         lines.append("**Never fired back:** " + ", ".join(f"<@{u}>" for u in pacifists))
@@ -426,6 +517,35 @@ def report(war: War, number: int) -> discord.Embed:
               f"**Historical significance:** {war.rng('significance').choice(SIGNIFICANCE)}"]
     embed.add_field(name="​", value="\n".join(lines)[:1024], inline=False)
     embed.set_footer(text=f"{FOOTER if war.is_war else OPERATION_FOOTER}\nNumber {number} in the archives.")
+    return embed
+
+
+def law_report(war: War, number: int) -> discord.Embed:
+    """The record of an /allspray: a police action (nobody resisted) or a riot (somebody did)."""
+    causes, outcomes, footer, colour = LAW[war.category]
+    embed = discord.Embed(title=war.title[:256], description=f"{when_text(war)}\nClassified as: **{war.kind}**",
+                          color=colour)
+    embed.set_author(name="KTDI Historical Records Office")
+    embed.add_field(name="Hostilities", value=str(len(war.acts)))
+    embed.add_field(name="Persons involved", value=str(len(war.belligerents)))
+    embed.add_field(name="Casualties", value=str(war.casualties))
+    officers = sorted(war.police)
+    lines = [f"**Cause:** {war.rng('cause').choice(causes).format(first=f'<@{officers[0]}>')}",
+             "**Officer in charge:** " + ", ".join(f"<@{u}>" for u in officers)]
+    if war.category == "riot":
+        rioters = Counter(act[0] for act in war.acts if act[0] not in war.police)
+        lines.append(f"**Ringleader:** {most(rioters, 'act')}")
+        lines.append(f"**Most persecuted:** {most(war.targets, 'incident')}")
+    else:
+        detained = [u for u in war.targets if u not in war.police]
+        lines.append(f"**Detained:** {len(detained)}, every one of them guilty and aware of what they've done")
+    lines.append("**Arsenal:** " + ", ".join(plural(war.weapons[w], w) for w in WEAPONS if war.weapons[w]))
+    if war.casualties < len(war.physical):
+        lines.append(f"**Insurance claims:** {len(war.physical) - war.casualties}")
+    lines += [f"**Outcome:** {war.rng('outcome').choice(outcomes)}",
+              f"**Historical significance:** {war.rng('significance').choice(SIGNIFICANCE)}"]
+    embed.add_field(name="\u200b", value="\n".join(lines)[:1024], inline=False)
+    embed.set_footer(text=f"{footer}\nNumber {number} in the archives.")
     return embed
 
 
@@ -482,7 +602,7 @@ def ensure_ceasefire_loop() -> None:
 
 
 # --- /wars ---
-ICONS = {"war": "⚔️", "operation": "🪖", "diplomatic": "📨"}
+ICONS = {"war": "⚔️", "operation": "🪖", "diplomatic": "📨", "police": "🚔", "riot": "🔥"}
 
 @commands.hybrid_command(name="wars", description="The KTDI War Archives: every war, operation and incident here.")
 @commands.guild_only()
@@ -503,8 +623,8 @@ async def wars(ctx: commands.Context, number: int | None = None):
                          f"({acts} {'hostility' if acts == 1 else 'hostilities'})")
         embed = discord.Embed(title="📜 The KTDI War Archives", description="\n".join(lines),
                               color=discord.Color.dark_gold())
-        embed.set_footer(text="⚔️ war · 🪖 special military operation · 📨 diplomatic incident. "
-                              "/wars <number> for the full record.")
+        embed.set_footer(text="⚔️ war · 🪖 special military operation · 🚔 police action · 🔥 riot · "
+                              "📨 diplomatic incident. /wars <number> for the full record.")
         await ctx.send(embed=embed)
         return
     if not 1 <= number <= len(war_ids):
@@ -525,6 +645,8 @@ def help_extras(command: commands.Command) -> tuple[str, list[tuple[str, str, bo
             "committee names it after what happened and publishes the official report in that channel.\n"
             "• Insults (`/vulgartongue insult`) count too, but they're only words: without enough sprays and bads "
             "it's a diplomatic incident, from \"relations are tense\" to \"a cold war\".\n"
+            "• `/allspray` is law enforcement: a police action if nobody resists, and a riot if anyone sprays, "
+            "bads or insults back after it.\n"
             "• Each channel's wars are its own. Spraying yourself doesn't count.")
     return "", [("Rules of engagement", text, False)]
 

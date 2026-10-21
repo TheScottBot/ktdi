@@ -11,7 +11,7 @@ from ktdi.features import fun, insurance, wars
 from tests.fakes import Channel, Ctx, Guild, User, run
 
 SCOTT, DAVE, PAT = User(1, "scott"), User(2, "dave"), User(3, "pat")
-NAMES = {1: "Scott", 2: "Dave", 3: "Pat"}
+NAMES = {1: "Scott", 2: "Dave", 3: "Pat", 4: "Amy", 5: "Bob"}
 REAL_MEMBER_NAME = wars.member_name  # Before the names fixture swaps it out.
 EVENING = datetime(2026, 10, 9, 20, 42, tzinfo=timezone.utc)  # A Friday; 21:42 in London (BST)
 
@@ -334,3 +334,69 @@ def test_the_archives_mark_diplomatic_incidents(at, front):
     ctx = Ctx(SCOTT)
     run(wars.wars.callback(ctx))
     assert ctx.last.embed.description.startswith("`1.` 📨 ")
+
+
+# --- /allspray: the law, enforced on everyone ---
+@pytest.fixture
+def town(monkeypatch, front):
+    """A server of five that the bot can see every member of, so /allspray works."""
+    monkeypatch.setattr(fun.config, "SERVER_MEMBERS", True)
+    guild = Guild()
+    guild.members = [SCOTT, DAVE, PAT, User(4, "amy"), User(5, "bob")]
+    guild.get_member = lambda user_id: next((m for m in guild.members if m.id == user_id), None)
+    guild.get_role = lambda role_id: None
+    return guild
+
+
+def allspray(user, channel, guild):
+    run(fun.allspray.callback(Ctx(user, guild, channel=channel)))
+
+
+def test_an_allspray_nobody_resists_is_a_police_action(at, front, town):
+    allspray(SCOTT, front, town)
+    [(_, report)] = finish(at, 3600)
+    war = wars.get_war(1)
+    assert war.category == "police" and war.kind == "police action" and war.police == {SCOTT.id}
+    assert report.description.endswith("Classified as: **police action**")
+    story = report.fields[3].value
+    assert "**Officer in charge:** <@1>" in story and "**Detained:** 4, every one of them guilty" in story
+    assert any(cause.format(first="<@1>") in story for cause in wars.POLICE_CAUSES)
+    assert report.footer.text.startswith(wars.POLICE_FOOTER)
+    options = {title.format(ordinal="First", weekday="Friday", time="21:42", aggressor="Scott")
+               for title in wars.POLICE_TITLES}
+    assert war.title in options  # Enforcing the law: no incursions, no wars
+
+
+def test_hitting_back_after_an_allspray_is_a_riot(at, front, town):
+    allspray(SCOTT, front, town)
+    at(30)
+    bad(DAVE, SCOTT, front)  # Resisting
+    [(_, report)] = finish(at, 3600)
+    war = wars.get_war(1)
+    assert war.category == "riot" and war.rioted
+    assert report.description.endswith("Classified as: **riot**")
+    story = report.fields[3].value
+    assert "**Officer in charge:** <@1>" in story and "**Ringleader:** <@2> — 1 act" in story
+    assert report.footer.text.startswith(wars.RIOT_FOOTER)
+    ctx = Ctx(SCOTT)
+    run(wars.wars.callback(ctx))
+    assert ctx.last.embed.description.startswith("`1.` 🔥 ")
+
+
+def test_fighting_before_the_allspray_isnt_a_riot(at, front, town):
+    for i in range(3):
+        at(i)
+        bad(DAVE, PAT, front)
+    at(10)
+    allspray(SCOTT, front, town)
+    finish(at, 3600)
+    assert wars.get_war(1).category == "police"  # Nobody hit back *after* it
+
+
+def test_a_tie_is_said_as_one():
+    from collections import Counter
+    assert wars.most(Counter({2: 3, 3: 1}), "incident") == "<@2> — 3 incidents"
+    assert wars.most(Counter({2: 1, 3: 1, 4: 2}), "incident") == "<@4> — 2 incidents"
+    assert wars.most(Counter({2: 2, 3: 2, 4: 1}), "incident") == "<@2> and <@3>, equally — 2 incidents each"
+    assert wars.most(Counter({2: 1, 3: 1, 4: 1, 5: 1}), "incident") == (
+        "All four, equally — 1 incident each. The committee could not separate them.")

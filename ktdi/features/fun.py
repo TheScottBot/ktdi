@@ -176,7 +176,7 @@ def get_futures_record(guild_id: int, user_id: int) -> tuple[int, int]:
 
 
 async def after_spray(guild_id: int, target_id: int, sprayer_id: int, channel_id: int,
-                      covered: bool = False) -> None:
+                      covered: bool = False, allspray: bool = False) -> None:
     """Every spray (/spray, 💦, /tdoi) goes through here, so spray futures on the target can pay out, and it can
     count towards a war (/wars)."""
     from ktdi.features import futures, wars  # Here, not at the top: they need this module first.
@@ -187,7 +187,8 @@ async def after_spray(guild_id: int, target_id: int, sprayer_id: int, channel_id
                 await channel.send(text, allowed_mentions=discord.AllowedMentions.none())
             except discord.HTTPException:
                 pass  # Settled in the database either way; the announcement is a bonus.
-    await wars.hostility(guild_id, channel_id, sprayer_id, target_id, "spray", covered)
+    await wars.hostility(guild_id, channel_id, sprayer_id, target_id, "spray", covered,
+                         detail=wars.ALLSPRAY if allspray else None)  # An /allspray's: a police action, or a riot
 
 
 def record_bail(guild_id: int, user_id: int, paid_by: int) -> None:
@@ -446,7 +447,7 @@ async def allspray(ctx: commands.Context, *, exclude: str | None = None, ping: b
     for message in in_messages(lines):
         await ctx.send(message, allowed_mentions=mentions)
     for member in targets:
-        await after_spray(ctx.guild.id, member.id, ctx.author.id, ctx.channel.id, member in covered)
+        await after_spray(ctx.guild.id, member.id, ctx.author.id, ctx.channel.id, member in covered, allspray=True)
 
 
 @commands.hybrid_command(name="whospray", description="Ask the server's chosen sprayer who should get sprayed.")
