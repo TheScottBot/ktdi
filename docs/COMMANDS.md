@@ -10,6 +10,7 @@ Commands work as slash commands (`/spray`) and as text commands with the prefix 
 | Command | What it does |
 |---|---|
 | `spray [@user]` | Posts a spray bottle GIF. Target someone to add to their rap sheet. |
+| `allspray [exclude] [ping]` | Sprays everyone on the server at once (not bots, not you), except whoever you spare: `allspray exclude:@dave @pat`, or a whole role (`exclude:@Mods`). Each spray goes on that person's rap sheet (unless their insurance covers it) and counts for spray futures and wars, so it will start one. Nobody's pinged unless you add `ping:True` (typed: `!allspray @dave ping`). Needs the bot to see the server's members: see `SERVER_MEMBERS` in [SETUP](SETUP.md#allspray); until then it says it isn't set up. |
 | React 💦 | Reacting 💦 to any message sprays whoever sent it and adds to their rap sheet. |
 | `rapsheet [@user]` | Shows someone's sprays, times they've been bad, expunges, bails, Don orders, sprays covered by insurance, bribes, committee spending, called predictions, bingo wins and spray futures (defaults to you). |
 | `whospray` | Asks the server's Don (set with `/settings whospray_user`) who should be sprayed, with a random phrase. Only the Don is pinged. |

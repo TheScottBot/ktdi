@@ -2,6 +2,8 @@
 
 import types
 
+import pytest
+
 from ktdi.features import fun
 from tests.fakes import Channel, Ctx, Guild, User, run
 
@@ -328,3 +330,56 @@ def test_linux_without_anyone_set():
     ctx = Ctx(SCOTT)
     run(fun.linux.callback(ctx))
     assert "LINUX_HATER_ID" in ctx.last.content and ctx.last.private
+
+
+# --- /allspray ---
+@pytest.fixture
+def server(monkeypatch):
+    """A server with four people and a bot, that the bot can see every member of (SERVER_MEMBERS)."""
+    monkeypatch.setattr(fun.config, "SERVER_MEMBERS", True)
+    guild = Guild(111)
+    scott, dave, pat, amy = User(1, "scott"), User(2, "dave"), User(3, "pat"), User(4, "amy")
+    robot = User(99, "robot")
+    robot.bot = True
+    mods = types.SimpleNamespace(id=500, members=[pat, amy])
+    guild.members = [scott, dave, pat, amy, robot]
+    guild.get_role = lambda role_id: mods if role_id == 500 else None
+    return guild
+
+
+def test_allspray_sprays_everyone_but_you_and_the_bots(server):
+    ctx = Ctx(User(1, "scott"), server)
+    run(fun.allspray.callback(ctx))
+    assert [fun.get_spray_count(111, uid) for uid in (1, 2, 3, 4, 99)] == [0, 1, 1, 1, 0]
+    text = "\n".join(m.content for m in ctx.sent)
+    assert text.startswith("💦 **<@1> sprays the whole server!** 3 people sprayed.")
+    assert "<@2> <@3> <@4>" in text and fun.SPRAY_GIF_URL in text
+    assert all(m.allowed_mentions is fun.NO_PINGS for m in ctx.sent)  # Nobody's pinged unless asked
+
+
+def test_allspray_spares_whoever_you_name(server):
+    ctx = Ctx(User(1, "scott"), server)
+    run(fun.allspray.callback(ctx, exclude="<@2> and <@!3>"))
+    assert [fun.get_spray_count(111, uid) for uid in (2, 3, 4)] == [0, 0, 1]
+    assert ctx.sent[0].content.startswith("💦 **<@1> sprays the whole server!** 1 person sprayed, sparing <@2>, <@3>.")
+    run(fun.allspray.callback(ctx, exclude="<@&500>"))  # A role: its members are spared
+    assert [fun.get_spray_count(111, uid) for uid in (2, 3, 4)] == [1, 0, 1]
+    run(fun.allspray.callback(ctx, exclude="<@2> <@3> <@4>"))
+    assert ctx.last.content == "💦 There's nobody left to spray." and ctx.last.private
+
+
+def test_allspray_pings_only_when_asked(server):
+    ctx = Ctx(User(1, "scott"), server)
+    run(fun.allspray.callback(ctx, ping=True))
+    assert ctx.sent[0].allowed_mentions.users == [server.members[1], server.members[2], server.members[3]]
+    typed = Ctx(User(1, "scott"), server, slash=False)
+    run(fun.allspray.callback(typed, exclude="<@2> ping"))  # Typed: "ping" anywhere in it
+    assert typed.sent[0].allowed_mentions.users == [server.members[2], server.members[3]]
+
+
+def test_allspray_needs_the_members_intent(server, monkeypatch):
+    monkeypatch.setattr(fun.config, "SERVER_MEMBERS", False)
+    ctx = Ctx(User(1, "scott"), server)
+    run(fun.allspray.callback(ctx))
+    assert "isn't set up on this bot" in ctx.last.content and ctx.last.private
+    assert fun.get_spray_count(111, 2) == 0

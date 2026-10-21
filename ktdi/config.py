@@ -90,6 +90,11 @@ WEATHER_PLACE = os.getenv("WEATHER_PLACE") or "London"
 # When each day's spray interest rate (/sprayfutures, /sprayrate) is set, in BOT_TIMEZONE. Defaults to midnight.
 SPRAY_RATE_TIME = time_setting("SPRAY_RATE_TIME", "00:00")
 
+# Whether the bot can see every member of a server (Discord's Server Members intent), for /allspray. Off unless set
+# to true, because the bot can't log in at all if it asks for the intent before it's switched on for the bot in the
+# Developer Portal (Bot > Privileged Gateway Intents > Server Members Intent): switch that on first, then set this.
+SERVER_MEMBERS = os.getenv("SERVER_MEMBERS", "").strip().lower() in ("1", "true", "yes", "on")
+
 # Optional role given to each server's biggest briber. Skipped on servers without a role by this name.
 BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")
 # Who may choose the Don (/settings whospray_user). Nobody else can, not even server admins. Empty = nobody.

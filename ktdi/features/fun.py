@@ -6,6 +6,7 @@ Champion Briber role.
 """
 
 import random
+import re
 from collections import defaultdict, deque
 from pathlib import Path
 
@@ -14,7 +15,7 @@ from discord import app_commands
 from discord.ext import commands
 
 from ktdi import common, config, db
-from ktdi.common import get_member, log, plural
+from ktdi.common import NO_PINGS, get_member, log, plural
 from ktdi.features import bread, committee, movie
 
 SPRAY_GIF_URL = "https://klipy.com/gifs/spray-bottle-3"
@@ -325,6 +326,62 @@ async def spray(ctx: commands.Context, target: discord.Member | None = None):
     covered, note = take_spray(ctx.guild.id, target.id, ctx.author.id)
     await ctx.send(f"{target.mention} {SPRAY_GIF_URL}{note}")
     await after_spray(ctx.guild.id, target.id, ctx.author.id, ctx.channel.id, covered)
+
+
+MENTION_RE = re.compile(r"<@!?(\d+)>")
+ROLE_MENTION_RE = re.compile(r"<@&(\d+)>")
+
+
+def spared(guild: discord.Guild, text: str | None) -> set[int]:
+    """Everyone named in what was typed (@someone, or an @role's members), to be left out of an /allspray."""
+    text = text or ""
+    ids = {int(found) for found in MENTION_RE.findall(text)}
+    for role_id in ROLE_MENTION_RE.findall(text):
+        role = guild.get_role(int(role_id))
+        ids |= {member.id for member in (role.members if role else [])}
+    return ids
+
+
+@commands.hybrid_command(name="allspray", description="Spray the whole server, except anyone you name.")
+@commands.guild_only()
+@app_commands.describe(exclude="Who to spare: @them (as many as you like, or an @role). Empty: nobody",
+                       ping="Notify everyone sprayed? Off unless you say so")
+async def allspray(ctx: commands.Context, *, exclude: str | None = None, ping: bool = False):
+    """Sprays everyone on the server at once (not bots, and not you), except anyone you spare: `/allspray
+    exclude:@dave @pat`, or a whole role (`exclude:@Mods`). Each spray goes on that person's rap sheet, unless their
+    insurance covers it, and counts for spray futures and wars (it will start one). Nobody's pinged unless you add
+    `ping:True`. Typed: `!allspray @dave @pat`, with `ping` anywhere in it to ping."""
+    if not config.SERVER_MEMBERS:
+        await ctx.send("💦 `/allspray` isn't set up on this bot: it needs to see the server's members (Server "
+                       "Members Intent, then `SERVER_MEMBERS=true` in `.env`).", ephemeral=True)
+        return
+    if ctx.interaction is None and exclude and re.search(r"\bping\b", exclude, re.IGNORECASE):
+        ping = True  # Typed: !allspray @dave ping
+    spare = spared(ctx.guild, exclude) | {ctx.author.id}
+    targets = [m for m in ctx.guild.members if not m.bot and m.id not in spare]
+    if not targets:
+        await ctx.send("💦 There's nobody left to spray.", ephemeral=True)
+        return
+    covered = []
+    for member in targets:
+        was_covered, _ = take_spray(ctx.guild.id, member.id, ctx.author.id)
+        if was_covered:
+            covered.append(member)
+    log.info("[%s] %s sprayed the whole server (%d), sparing %s", ctx.guild.name, ctx.author, len(targets),
+             sorted(spare - {ctx.author.id}))
+    spared_names = [f"<@{user_id}>" for user_id in sorted(spare - {ctx.author.id})]
+    people = f"{len(targets)} {'person' if len(targets) == 1 else 'people'}"
+    lines = [f"💦 **{ctx.author.mention} sprays the whole server!** {people} sprayed"
+             + (f", sparing {', '.join(spared_names)}." if spared_names else "."),
+             " ".join(member.mention for member in targets),
+             SPRAY_GIF_URL]
+    if covered:
+        lines.append(f"-# 🛡️ Insurance covered {', '.join(member.mention for member in covered)}.")
+    mentions = discord.AllowedMentions(users=targets) if ping else NO_PINGS
+    for message in in_messages(lines):
+        await ctx.send(message, allowed_mentions=mentions)
+    for member in targets:
+        await after_spray(ctx.guild.id, member.id, ctx.author.id, ctx.channel.id, member in covered)
 
 
 @commands.hybrid_command(name="whospray", description="Ask the server's chosen sprayer who should get sprayed.")
@@ -651,8 +708,8 @@ def main_help_lines() -> list[tuple[str, str]]:
 async def setup(bot: commands.Bot):
     # `nose` is written but not registered: Discord's sensitive-media filter blurs its image (and asks UK users for ID).
     # Add it back here to bring it back.
-    for command in (spray, whospray, tdoi, loot, bad, badbonk, toenoyoudidnt, rapsheet, breadsheet, blame, bribe,
-                    expunge, bail, linux):
+    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, toenoyoudidnt, rapsheet, breadsheet, blame,
+                    bribe, expunge, bail, linux):
         bot.add_command(command)
     bot.add_listener(remember_speaker, "on_message")
     bot.add_listener(spray_reaction, "on_raw_reaction_add")

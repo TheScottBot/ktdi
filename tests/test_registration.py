@@ -11,11 +11,11 @@ from ktdi.bot import KTDIBot, describe_options
 from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
-SLASH_COMMANDS = ["abm", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books", "bread", "bribe",
-                  "campaign", "committee", "cure", "deadword", "esoteric", "etiquette", "expunge", "folklore",
-                  "hammeredofwitches", "help", "herbal", "household", "imperial", "insurance", "linux", "loot",
-                  "lore", "metric", "nature", "nowplaying", "omen", "plant", "pliny", "quote", "rapsheet", "rpg",
-                  "settings", "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone", "vulgartongue",
+SLASH_COMMANDS = ["abm", "allspray", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books",
+                  "bread", "bribe", "campaign", "committee", "cure", "deadword", "esoteric", "etiquette", "expunge",
+                  "folklore", "hammeredofwitches", "help", "herbal", "household", "imperial", "insurance", "linux",
+                  "loot", "lore", "metric", "nature", "nowplaying", "omen", "plant", "pliny", "quote", "rapsheet",
+                  "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone", "vulgartongue",
                   "wars", "weather", "whospray", "wisdom", "words"]
 # !-only, so they're not in Discord's slash menu: the books asked through their shelf (/esoteric book:talisman), and
 # the cryptids

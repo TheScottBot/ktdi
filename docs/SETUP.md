@@ -57,6 +57,20 @@ python -m ktdi.tools.almanac_plates_find --check
 Candidates and small copies to look at go to `private/almanac/` (gitignored). `--bhl` needs a free BHL API key as
 `BHL_API_KEY` in `.env.dev`; the bot itself never uses it.
 
+<a id="allspray"></a>
+## Spraying the whole server (/allspray)
+
+`/allspray` needs the bot to see every member of a server, which Discord calls the **Server Members intent**. It's off
+unless you turn it on, in this order:
+
+1. In the [Developer Portal](https://discord.com/developers/applications), open the bot's application, go to **Bot**,
+   and switch on **Server Members Intent** (under Privileged Gateway Intents). Do it for each bot: the live one and the
+   dev one are separate applications.
+2. Then add `SERVER_MEMBERS=true` to that bot's `.env` (or `.env.dev`) and restart it.
+
+The order matters: a bot that asks for the intent before it's switched on in the Portal can't log in at all. Without
+it, `/allspray` just says it isn't set up.
+
 ## Logs
 
 The bot logs startup, every command used (except `/books` and `/rpg`, which are never logged against anyone), 💦 sprays, bribes and role changes to `logs/ktdi.log` next to `bot.py` (and to the terminal/journal). The file rotates at 1 MB, keeping 5 old files (`ktdi.log.1` … `ktdi.log.5`). To follow it live:

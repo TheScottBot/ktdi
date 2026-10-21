@@ -60,7 +60,8 @@ ktdi/
 │                      and show; daily_loop posts what's due (daily_posts table). /wisdom, /almanac and /bread use it
 ├── features/          one file per feature; each is a discord.py extension
 │   ├── __init__.py    FEATURES: the load order
-│   ├── fun.py         spray, whospray, tdoi, loot, bad, badbonk, linux, blame, bribe, expunge, bail, rapsheet, 💦, Champion Briber
+│   ├── fun.py         spray, allspray (needs SERVER_MEMBERS), whospray, tdoi, loot, bad, badbonk, linux, blame, bribe,
+│   │                  expunge, bail, rapsheet, 💦, Champion Briber
 │   ├── futures.py     /sprayfutures, /sprayrate: bets on someone being sprayed; settled by fun.after_spray or expiry_loop
 │   ├── insurance.py   /insurance: $1,000 of spray immunity; fun.take_spray asks it whether each spray is covered
 │   ├── wars.py        /wars: bursts of sprays and /bad(bonk)s become wars (or special military

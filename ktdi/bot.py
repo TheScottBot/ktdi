@@ -52,6 +52,9 @@ class KTDIBot(commands.Bot):
         intents = discord.Intents.default()
         # Needed to read "<prefix>spray" from messages. Must also be enabled in the Developer Portal.
         intents.message_content = True
+        # Every member of a server, for /allspray: only if SERVER_MEMBERS says it's switched on in the Developer
+        # Portal too (asking for it otherwise stops the bot logging in at all).
+        intents.members = config.SERVER_MEMBERS
         super().__init__(command_prefix=config.COMMAND_PREFIX, intents=intents, help_command=None)
 
     async def load_features(self) -> None:
