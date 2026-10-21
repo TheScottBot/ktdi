@@ -375,6 +375,16 @@ def spared(guild: discord.Guild, text: str | None) -> set[int]:
     return ids
 
 
+def name_of(guild: discord.Guild, user_id: int) -> str:
+    member = guild.get_member(user_id)
+    return member.display_name if member else f"user {user_id}"
+
+
+def and_list(items: list[str]) -> str:
+    """"a", "a and b", "a, b and c"."""
+    return items[0] if len(items) == 1 else f"{', '.join(items[:-1])} and {items[-1]}"
+
+
 @commands.hybrid_command(name="allspray", description="Spray the whole server, except anyone you name.")
 @commands.guild_only()
 @app_commands.describe(exclude="Who to spare: @them (as many as you like, or an @role). Empty: nobody",
@@ -404,11 +414,15 @@ async def allspray(ctx: commands.Context, *, exclude: str | None = None, ping: b
     record_allspray(ctx.guild.id, ctx.author.id, [member.id for member in targets])
     log.info("[%s] %s sprayed the whole server (%d), sparing %s", ctx.guild.name, ctx.author, len(targets),
              sorted(spare - {ctx.author.id}))
-    spared_names = [f"<@{user_id}>" for user_id in sorted(spare - {ctx.author.id})]
+    # The spared by name, in code, so they're plainly not mentions: nobody mistakes them for the sprayed
+    spared_names = [name_of(ctx.guild, user_id).replace("`", "ˋ") for user_id in sorted(spare - {ctx.author.id})]
     people = f"{len(targets)} {'person' if len(targets) == 1 else 'people'}"
+    guilty = "is guilty and knows what they've done" if len(targets) == 1 else \
+        "are all guilty and know what they've done"
     lines = [f"💦 **{ctx.author.mention} sprays the whole server!** {people} sprayed"
-             + (f", sparing {', '.join(spared_names)}." if spared_names else "."),
-             " ".join(member.mention for member in targets),
+             + (f", sparing `{', '.join(spared_names)}`." if spared_names else "."),
+             "",
+             f"{and_list([member.mention for member in targets])} {guilty}.",
              SPRAY_GIF_URL]
     if covered:
         lines.append(f"-# 🛡️ Insurance covered {', '.join(member.mention for member in covered)}.")

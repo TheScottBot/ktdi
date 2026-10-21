@@ -344,6 +344,7 @@ def server(monkeypatch):
     mods = types.SimpleNamespace(id=500, members=[pat, amy])
     guild.members = [scott, dave, pat, amy, robot]
     guild.get_role = lambda role_id: mods if role_id == 500 else None
+    guild.get_member = lambda user_id: next((m for m in guild.members if m.id == user_id), None)
     return guild
 
 
@@ -353,7 +354,8 @@ def test_allspray_sprays_everyone_but_you_and_the_bots(server):
     assert [fun.get_spray_count(111, uid) for uid in (1, 2, 3, 4, 99)] == [0, 1, 1, 1, 0]
     text = "\n".join(m.content for m in ctx.sent)
     assert text.startswith("💦 **<@1> sprays the whole server!** 3 people sprayed.")
-    assert "<@2> <@3> <@4>" in text and fun.SPRAY_GIF_URL in text
+    assert "\n\n<@2>, <@3> and <@4> are all guilty and know what they've done.\n" in text
+    assert fun.SPRAY_GIF_URL in text
     assert all(m.allowed_mentions is fun.NO_PINGS for m in ctx.sent)  # Nobody's pinged unless asked
 
 
@@ -361,7 +363,9 @@ def test_allspray_spares_whoever_you_name(server):
     ctx = Ctx(User(1, "scott"), server)
     run(fun.allspray.callback(ctx, exclude="<@2> and <@!3>"))
     assert [fun.get_spray_count(111, uid) for uid in (2, 3, 4)] == [0, 0, 1]
-    assert ctx.sent[0].content.startswith("💦 **<@1> sprays the whole server!** 1 person sprayed, sparing <@2>, <@3>.")
+    sent = ctx.sent[0].content
+    assert sent.startswith("💦 **<@1> sprays the whole server!** 1 person sprayed, sparing `dave, pat`.")  # Not pinged
+    assert "<@4> is guilty and knows what they've done." in sent and "<@2>" not in sent
     run(fun.allspray.callback(ctx, exclude="<@&500>"))  # A role: its members are spared
     assert [fun.get_spray_count(111, uid) for uid in (2, 3, 4)] == [1, 0, 1]
     run(fun.allspray.callback(ctx, exclude="<@2> <@3> <@4>"))
