@@ -368,14 +368,37 @@ async def update_briber_role(guild: discord.Guild) -> None:
 @commands.guild_only()
 async def spray(ctx: commands.Context, target: discord.Member | None = None):
     """Posts the spray bottle. Name someone (`/spray @dave`) and it goes on their rap sheet, unless their spray
-    insurance covers it (`/insurance`). Reacting 💦 to a message does the same to whoever sent it. Enough sprays, bads
-    and bonks in one channel in a few minutes and the committee writes it up as a war (`/wars`)."""
+    insurance covers it (`/insurance`). Typed, reply to someone's message with `!spray` to spray whoever wrote it.
+    Reacting 💦 to a message does the same. Enough sprays, bads and bonks in one channel in a few minutes and the
+    committee writes it up as a war (`/wars`)."""
+    target = target or await replied_author(ctx)
     if target is None:
         await ctx.send(SPRAY_GIF_URL)
         return
     covered, note = take_spray(ctx.guild.id, target.id, ctx.author.id)
-    await ctx.send(f"{target.mention} {SPRAY_GIF_URL}{note}")
-    await after_spray(ctx.guild.id, target.id, ctx.author.id, ctx.channel.id, covered)
+    try:
+        await ctx.send(f"{target.mention} {SPRAY_GIF_URL}{note}")
+    finally:  # It happened (it's on their rap sheet), even if the reply didn't get out: so it counts
+        await after_spray(ctx.guild.id, target.id, ctx.author.id, ctx.channel.id, covered)
+
+
+async def replied_to(ctx: commands.Context) -> discord.Message | None:
+    """The message a typed command was sent as a reply to, if it was (slash commands can't be replies)."""
+    reference = ctx.message.reference if ctx.interaction is None and ctx.message else None
+    if reference is None:
+        return None
+    if isinstance(reference.resolved, discord.Message):
+        return reference.resolved
+    try:
+        return await ctx.channel.fetch_message(reference.message_id)
+    except (discord.HTTPException, KeyError, AttributeError):
+        return None
+
+
+async def replied_author(ctx: commands.Context) -> discord.abc.User | None:
+    """Whoever wrote the message a typed command replies to (not a bot): `!spray` as a reply sprays them."""
+    message = await replied_to(ctx)
+    return message.author if message is not None and not message.author.bot else None
 
 
 MENTION_RE = re.compile(r"<@!?(\d+)>")
@@ -491,6 +514,7 @@ async def tell_off(ctx: commands.Context, user: discord.Member | None, gifs: lis
     """A random GIF from the list, at someone if named (which goes on their rap sheet as being bad, unless their
     /insurance covers it)."""
     gif = random.choice(gifs)
+    user = user or await replied_author(ctx)  # Typed as a reply: at whoever wrote that
     if user is None:
         await ctx.send(gif)
         return
@@ -500,17 +524,20 @@ async def tell_off(ctx: commands.Context, user: discord.Member | None, gifs: lis
         covered, note = insurance.adjudicate(ctx.guild.id, user.id, ctx.author.id, kind="bad")
         if not covered:
             record_bad(ctx.guild.id, user.id)
-    await ctx.send(f"{user.mention} {gif}" + (f"\n{note}" if note else ""))
-    if ctx.guild:
-        from ktdi.features import wars  # Here, not at the top: wars needs this module first.
-        await wars.hostility(ctx.guild.id, ctx.channel.id, ctx.author.id, user.id, weapon, covered)  # A war?
+    try:
+        await ctx.send(f"{user.mention} {gif}" + (f"\n{note}" if note else ""))
+    finally:  # It happened (it's on their rap sheet), even if the reply didn't get out: so it counts for a war
+        if ctx.guild:
+            from ktdi.features import wars  # Here, not at the top: wars needs this module first.
+            await wars.hostility(ctx.guild.id, ctx.channel.id, ctx.author.id, user.id, weapon, covered)
 
 
 @commands.hybrid_command(name="bad", description="Bad. Posts a random (non-violent) telling-off GIF.")
 @app_commands.describe(user="Optional: who's being bad (it goes on their rap sheet)")
 async def bad(ctx: commands.Context, user: discord.Member | None = None):
-    """Posts a telling-off GIF. Name someone (`/bad @dave`) and it goes on their rap sheet as being bad (counted apart
-    from sprays), unless their insurance covers it. Bads count towards wars (`/wars`)."""
+    """Posts a telling-off GIF. Name someone (`/bad @dave`), or typed, reply to their message with `!bad`, and it goes
+    on their rap sheet as being bad (counted apart from sprays), unless their insurance covers it. Bads count towards
+    wars (`/wars`)."""
     await tell_off(ctx, user, BAD_GIF_URLS, "bad")
 
 
@@ -539,15 +566,7 @@ async def phrasing(ctx: commands.Context, user: discord.Member | None = None):
     """Phrasing! Posts an Archer GIF at someone, and it goes on their rap sheet as being called out for phrasing.
     Name them (`/phrasing @dave`), or leave it empty for whoever spoke last in the channel. Typed, reply to the
     offending message with `!phrasing`, or right-click it > Apps > **Phrasing**, to call out whoever wrote it."""
-    reference = ctx.message.reference if ctx.interaction is None and ctx.message else None
-    replied = None
-    if user is None and reference is not None:  # Typed as a reply: whoever wrote that
-        replied = reference.resolved if isinstance(reference.resolved, discord.Message) else None
-        if replied is None:
-            try:
-                replied = await ctx.channel.fetch_message(reference.message_id)
-            except (discord.HTTPException, KeyError, AttributeError):
-                replied = None
+    replied = await replied_to(ctx) if user is None else None  # Typed as a reply: whoever wrote that
     if replied is not None and not replied.author.bot:
         async def reply(text):
             return await replied.reply(text)
@@ -577,7 +596,8 @@ async def phrasing_menu(interaction: discord.Interaction, message: discord.Messa
 @commands.hybrid_command(name="badbonk", description="Bad, with a bonk. Posts a random (violent) telling-off GIF.")
 @app_commands.describe(user="Optional: who's getting bonked (it goes on their rap sheet as being bad)")
 async def badbonk(ctx: commands.Context, user: discord.Member | None = None):
-    """The violent version of `/bad`: a bonk. It counts as being bad on the rap sheet, just like `/bad`."""
+    """The violent version of `/bad`: a bonk. It counts as being bad on the rap sheet, just like `/bad`. Typed,
+    reply to someone's message with `!badbonk` to bonk whoever wrote it."""
     await tell_off(ctx, user, BADBONK_GIF_URLS, "badbonk")
 
 

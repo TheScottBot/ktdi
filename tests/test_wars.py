@@ -73,9 +73,10 @@ def current(channel):
     return wars.get_war(wars.open_war(channel.id)[0])
 
 
-def test_four_acts_is_a_conflict_but_nobody_is_told(at, front):
-    skirmish(at, front, acts=3)
-    assert wars.open_war(front.id) is None  # 3 isn't enough
+def test_three_acts_is_a_conflict_but_nobody_is_told(at, front):
+    assert wars.CONFLICT_ACTS == 3
+    skirmish(at, front, acts=2)
+    assert wars.open_war(front.id) is None  # 2 isn't enough
     skirmish(at, front, start=60, acts=1)
     assert wars.open_war(front.id) is not None
     assert all(m.content is None or "war" not in m.content.lower() for m in front.sent)  # Not a word.
@@ -84,16 +85,16 @@ def test_four_acts_is_a_conflict_but_nobody_is_told(at, front):
 
 def test_spread_out_isnt_a_conflict(at, front):
     for i in range(10):
-        at(120 * i)  # one every 2 minutes: never 4 in 5 minutes
+        at(180 * i)  # one every 3 minutes: never 3 in 5 minutes
         spray(SCOTT if i % 2 else DAVE, PAT, front)
     assert wars.open_war(front.id) is None
 
 
 def test_conflicts_stay_in_their_channel(at, bot, front):
     elsewhere = bot.add_channel(Channel(601, Guild(222)))
-    for i in range(6):
+    for i in range(4):
         at(10 * i)
-        spray(SCOTT if i % 2 else DAVE, PAT, front if i < 3 else elsewhere)
+        spray(SCOTT if i % 2 else DAVE, PAT, front if i < 2 else elsewhere)  # 2 here, 2 there: 4, but not together
     assert wars.open_war(front.id) is None and wars.open_war(elsewhere.id) is None
 
 
@@ -400,3 +401,34 @@ def test_a_tie_is_said_as_one():
     assert wars.most(Counter({2: 2, 3: 2, 4: 1}), "incident") == "<@2> and <@3>, equally — 2 incidents each"
     assert wars.most(Counter({2: 1, 3: 1, 4: 1, 5: 1}), "incident") == (
         "All four, equally — 1 incident each. The committee could not separate them.")
+
+
+
+def test_a_typed_reply_aims_at_whoever_wrote_it(at, front):
+    """!bad, !badbonk and !spray sent as a reply: at the person replied to, and it counts towards a war."""
+    from tests.fakes import Message
+    offending = Message(90, DAVE, "pineapple on pizza is fine", front)
+    for i, command in enumerate((fun.bad, fun.badbonk, fun.spray)):
+        at(10 * i)
+        ctx = Ctx(SCOTT, channel=front, slash=False, reply_to=offending)
+        run(command.callback(ctx))
+        assert ctx.last.content.startswith("<@2> ")
+    assert fun.get_bad_count(111, DAVE.id) == 2 and fun.get_spray_count(111, DAVE.id) == 1
+    assert wars.open_war(front.id) is not None  # Three at Dave: a conflict
+
+
+def test_it_counts_even_when_the_reply_doesnt_get_out(at, front):
+    """Discord gave up waiting (Unknown interaction): it's on their rap sheet, so it counts for a war too."""
+    import discord
+    for i in range(3):
+        at(10 * i)
+        ctx = Ctx(SCOTT, channel=front)
+
+        async def too_slow(*args, **kwargs):
+            raise discord.NotFound(types.SimpleNamespace(status=404, reason="Not Found"),
+                                   {"code": 10062, "message": "Unknown interaction"})
+        ctx.send = too_slow
+        with pytest.raises(discord.NotFound):
+            run((fun.bad if i % 2 else fun.spray).callback(ctx, DAVE))
+    assert db.conn.execute("SELECT COUNT(*) FROM hostilities").fetchone()[0] == 3
+    assert wars.open_war(front.id) is not None

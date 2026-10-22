@@ -28,7 +28,7 @@ from ktdi import common, config, db
 from ktdi.common import NO_PINGS, log, plural
 
 HELP_CATEGORY = "🎲 Fun"
-CONFLICT_ACTS = 4  # This many acts of hostility...
+CONFLICT_ACTS = 3  # This many acts of hostility...
 CONFLICT_WINDOW = timedelta(minutes=5)  # ...in one channel within this long is a conflict.
 WAR_ATTACKERS = 2  # A war if this many people attacked; one person alone is a special military operation.
 CEASEFIRE = timedelta(minutes=10)  # It's over once nobody's done anything for this long.
