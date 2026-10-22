@@ -312,7 +312,14 @@ async def post_bread(channel: discord.abc.Messageable, last: str | None) -> None
         embeds.append(answer_embed(get_bake(previous.id)))
     bake = open_bake(guild_id, channel.id)
     embeds.append(question_embed(bake, answer_time(guild_id)))
-    message = await channel.send(embeds=embeds, view=answer_view(bake), allowed_mentions=NO_PINGS)
+    try:
+        message = await channel.send(embeds=embeds, view=answer_view(bake), allowed_mentions=NO_PINGS)
+    except BaseException:  # Not posted (the network's down?): as if never tried, so a retry reveals nothing unseen
+        db.conn.execute("DELETE FROM bread_bakes WHERE id = ?", (bake.id,))
+        if previous:  # Yesterday's question is still open, with its answers
+            db.conn.execute("UPDATE bread_bakes SET closed_at = NULL WHERE id = ?", (previous.id,))
+        db.conn.commit()
+        raise
     if message is not None:
         db.conn.execute("UPDATE bread_bakes SET message_id = ? WHERE id = ?", (message.id, bake.id))
         db.conn.commit()

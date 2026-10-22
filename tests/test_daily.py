@@ -172,3 +172,54 @@ def test_the_loop_starts_on_the_minute():
     from datetime import datetime, timezone
     assert daily.seconds_to_next_minute(datetime(2026, 10, 19, 22, 11, 58, 500_000, tzinfo=timezone.utc)) == 2.0
     assert daily.seconds_to_next_minute(datetime(2026, 10, 19, 22, 12, 0, tzinfo=timezone.utc)) == 60.5
+
+
+def test_a_post_that_fails_doesnt_stop_the_others(monkeypatch, bot, caplog):
+    """A bug in one server's post is logged and skipped: the loop, and everyone else's posts, carry on."""
+    import asyncio
+    from datetime import datetime, timedelta, timezone
+    from tests.fakes import Channel, Guild
+    posted = []
+
+    async def broken(channel, last):
+        raise ValueError("a bug")
+
+    async def working(channel, last):
+        posted.append(channel.id)
+        return None
+    monkeypatch.setitem(daily.DAILIES, "broken", daily.Daily("broken", "Broken", "💥", "broken", post=broken))
+    monkeypatch.setitem(daily.DAILIES, "working", daily.Daily("working", "Working", "✅", "working", post=working))
+    for channel_id, kind in ((701, "broken"), (702, "working")):
+        bot.add_channel(Channel(channel_id, Guild(channel_id)))
+        daily.save_setup(channel_id, kind, channel_id, "09:00", datetime.now(timezone.utc) - timedelta(minutes=1), 1)
+    caplog.set_level("ERROR", logger="ktdi")
+    asyncio.run(daily.daily_loop.coro())
+    assert posted == [702] and "broken failed in server 701" in caplog.text
+    assert all(setup.next_run_at > datetime.now(timezone.utc) for setup in map(daily.get_setup, (701, 702),
+                                                                                ("broken", "working")))
+
+
+def test_a_post_discord_couldnt_be_reached_for_is_tried_again(monkeypatch, bot, caplog):
+    """No network at 9am (DNS failing): it's not moved on to tomorrow, but tried again the next minute."""
+    import asyncio
+    import socket
+    from datetime import datetime, timedelta, timezone
+    from tests.fakes import Channel, Guild
+    tries = []
+
+    async def flaky(channel, last):
+        tries.append(1)
+        if len(tries) == 1:
+            raise socket.gaierror(-3, "Temporary failure in name resolution")
+        return "posted"
+    monkeypatch.setitem(daily.DAILIES, "flaky", daily.Daily("flaky", "Flaky", "📶", "flaky", post=flaky))
+    bot.add_channel(Channel(703, Guild(703)))
+    due_at = datetime.now(timezone.utc) - timedelta(minutes=1)
+    daily.save_setup(703, "flaky", 703, "09:00", due_at, 1)
+    caplog.set_level("WARNING", logger="ktdi")
+    asyncio.run(daily.daily_loop.coro())
+    assert daily.get_setup(703, "flaky").next_run_at == due_at  # Still due
+    assert "Couldn't reach Discord to post flaky" in caplog.text and "trying again in a minute" in caplog.text
+    asyncio.run(daily.daily_loop.coro())  # A minute later, the network's back
+    assert len(tries) == 2 and daily.get_setup(703, "flaky").next_run_at > datetime.now(timezone.utc)
+    assert daily.get_setup(703, "flaky").last == "posted"

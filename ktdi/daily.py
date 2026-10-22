@@ -1,12 +1,13 @@
-"""Posting something every day in a channel each server chooses: Old Wisdom of the Day (/wisdom setup), and the
-almanac's day (/almanac setup).
+"""Posting something every day in a channel each server chooses: Old Wisdom of the Day (/wisdom setup), the almanac's
+day (/almanac setup) and the daily bread (/bread setup).
 
 A feature registers a Daily (what it's called, and how to post today's), gives its command a `setup` group whose
 here/stop/show subcommands call setup_here, stop and show below, and calls start() in its setup. Each server has
 at most one channel and time for each Daily (setting it up elsewhere moves it), stored in the daily_posts table, so
-nothing needs a restart. daily_loop checks every minute and always moves a due one on to the next day, even when
-posting fails, so nothing is posted over and over; a day missed by hours (the bot was down) is skipped, not posted
-late.
+nothing needs a restart. daily_loop checks every minute, on the minute. A post that fails because Discord couldn't
+be reached (the network's down: UNREACHABLE) is tried again the next minute; any other failure (a permission, a bug)
+moves it on to the next day, so nothing's tried over and over. A post can't be partly made: one that fails undoes
+what it did. A day missed by hours (the bot was down, or the network was) is skipped, not posted late.
 """
 
 import asyncio
@@ -25,6 +26,7 @@ from ktdi.lib import reminders
 DEFAULT_TIME = "9am"
 GRACE = timedelta(hours=6)  # Later than this, a day's is skipped rather than posted late
 EVERY_DAY = tuple(range(7))
+UNREACHABLE = common.UNREACHABLE  # Tried again the next minute, until GRACE runs out
 
 
 @dataclass(frozen=True)
@@ -115,7 +117,7 @@ def next_post(clock: str, after: datetime) -> datetime:
 async def daily_loop():
     now = datetime.now(timezone.utc)
     for setup in due(now):
-        daily, last = DAILIES.get(setup.kind), None
+        daily, last, again = DAILIES.get(setup.kind), None, False
         try:
             channel = common.bot.get_channel(setup.channel_id)
             if daily is None:
@@ -128,10 +130,17 @@ async def daily_loop():
                 last = await daily.post(channel, setup.last)
                 where = getattr(getattr(channel, "guild", None), "name", setup.guild_id)
                 log.info("Posted %s in %s", daily.name, where)
+        except UNREACHABLE as error:  # No network, or Discord's down: it'll be back, so try again in a minute
+            again = True
+            log.warning("Couldn't reach Discord to post %s in server %s (%s): trying again in a minute",
+                        setup.kind, setup.guild_id, error or type(error).__name__)
         except discord.HTTPException as error:
             log.warning("Couldn't post %s in server %s: %s", setup.kind, setup.guild_id, error)
-        finally:  # Always on to tomorrow, so a failure can't post it over and over
-            posted(setup, next_post(setup.clock, now), last)
+        except Exception:  # A bug in one post mustn't stop the loop, and every other server's posts with it
+            log.exception("%s failed in server %s", setup.kind, setup.guild_id)
+        finally:  # Otherwise on to tomorrow, so a failure can't post it over and over (and GRACE ends the retries)
+            if not again:
+                posted(setup, next_post(setup.clock, now), last)
 
 
 @daily_loop.before_loop

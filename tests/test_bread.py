@@ -298,3 +298,21 @@ def test_long_lines_split_into_messages():
     messages = fun.in_messages(["heading", "🍞" * 2000, "the end"], limit=1000)
     assert messages[0] == "heading" and messages[-1].endswith("the end")
     assert "".join(messages).count("🍞") == 2000 and all(fun.message_length(m) <= 1000 for m in messages)
+
+
+def test_a_post_that_doesnt_get_through_is_undone(channel, bank, monkeypatch):
+    """The network's down at post time: yesterday's question stays open (with its answers), and no new one's opened,
+    so when it's tried again nobody's shown the answer to a question they never saw."""
+    post(channel)
+    press(right_choice(), SCOTT)
+    yesterday = bread.current(111)
+
+    async def no_network(*args, **kwargs):
+        raise OSError("Temporary failure in name resolution")
+    monkeypatch.setattr(channel, "send", no_network)
+    bank.set(NINE_AM + timedelta(days=1), bread)
+    with pytest.raises(OSError):
+        run(bread.post_bread(channel, None))
+    assert bread.current(111) == yesterday  # Still open, as it was
+    assert db.conn.execute("SELECT COUNT(*) FROM bread_bakes").fetchone()[0] == 1
+    assert [right for _, _, right in bread.answers(yesterday)] == [True]

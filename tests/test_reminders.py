@@ -191,3 +191,33 @@ def test_show_includes_reminder(game):
     ctx = Ctx(DAVE)
     run(c.campaign_show.callback(ctx, alias="Game"))
     assert "**Reminder:** ⏰ Mondays at 19:00, pings 15 minutes before" in ctx.last.embed.description
+
+
+def test_a_reminder_the_network_ate_is_sent_when_it_comes_back(game, bot, monkeypatch):
+    """A storm takes the internet out at reminder time: it's not skipped to next week, but sent once it's back."""
+    import socket
+    react(True, remind("mondays at 1900, 15 minutes before").id, DAVE.id)
+    due = current().next_run_at
+    channel = bot.channels[500]
+    real_send = channel.send
+
+    async def no_network(*args, **kwargs):
+        raise socket.gaierror(-3, "Temporary failure in name resolution")
+    monkeypatch.setattr(channel, "send", no_network)
+    game.set(due + timedelta(seconds=20))
+    run(c.reminder_loop.coro())
+    assert current().next_run_at == due  # Still due
+    monkeypatch.setattr(channel, "send", real_send)
+    game.set(due + timedelta(minutes=5))  # The network's back
+    run(c.reminder_loop.coro())
+    assert channel.sent[-1].content.startswith("⏰ **Game** starts <t:") and "<@2>" in channel.sent[-1].content
+    assert local(current().next_run_at) == "Mon 05 Oct 18:45"
+
+
+def test_a_reminder_that_breaks_doesnt_stop_the_others(game, bot, monkeypatch, caplog):
+    remind("mondays at 1900")
+    monkeypatch.setattr(c, "send_reminder", lambda reminder: (_ for _ in ()).throw(ValueError("a bug")))
+    game.set(current().next_run_at + timedelta(seconds=20))
+    caplog.set_level("ERROR", logger="ktdi")
+    run(c.reminder_loop.coro())  # Doesn't raise: the loop carries on
+    assert "failed" in caplog.text and local(current().next_run_at) == "Mon 05 Oct 19:00"

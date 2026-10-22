@@ -673,17 +673,24 @@ async def send_reminder(reminder: Reminder) -> None:
 async def reminder_loop():
     now = datetime.now(timezone.utc)
     for reminder in due_reminders(now):
+        again = False
         try:
             if now - reminder.next_run_at <= REMINDER_GRACE:
                 await send_reminder(reminder)
                 log.info("Sent reminder %d", reminder.id)
             else:
                 log.warning("Skipped reminder %d: it was due at %s, too long ago", reminder.id, reminder.next_run)
+        except common.UNREACHABLE as error:  # No network (a storm?): try again next time round, within the grace
+            again = True
+            log.warning("Couldn't reach Discord to send reminder %d (%s): trying again shortly", reminder.id,
+                        error or type(error).__name__)
         except discord.HTTPException as error:
             log.warning("Couldn't send reminder %d: %s", reminder.id, error)
+        except Exception:  # A bug in one mustn't stop the loop, and everyone else's reminders with it
+            log.exception("Reminder %d failed", reminder.id)
         finally:
-            # Always move on to the next occurrence, so a failure can't cause repeated pings.
-            if get_reminder(reminder.guild_id, reminder.alias_key):
+            # Otherwise on to the next occurrence, so a failure can't cause repeated pings.
+            if not again and get_reminder(reminder.guild_id, reminder.alias_key):
                 anchor = date.fromisoformat(reminder.anchor)
                 set_next_run(reminder.id, next_ping(reminder.schedule, now, reminder.lead, anchor))
 

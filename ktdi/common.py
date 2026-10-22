@@ -1,9 +1,11 @@
 """Small helpers shared by several features."""
 
+import asyncio
 import logging
 from dataclasses import dataclass
 from datetime import date, datetime
 
+import aiohttp
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -16,6 +18,9 @@ log = logging.getLogger("ktdi")
 bot: commands.Bot | None = None
 
 NO_PINGS = discord.AllowedMentions.none()
+# Failures that mean Discord couldn't be reached (the network's down, DNS, a timeout, Discord's own 5xx errors), not
+# that what was being sent is wrong: the background loops (daily posts, campaign reminders) try those again.
+UNREACHABLE = (discord.DiscordServerError, aiohttp.ClientError, asyncio.TimeoutError, OSError)
 
 
 @dataclass
