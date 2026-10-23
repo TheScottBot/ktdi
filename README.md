@@ -49,7 +49,7 @@ Sprays, telling-offs, blame, bribes and the committee.
 ### [🎲 Fun](docs/COMMANDS.md#fun)
 Looting, Linux, anime and the war archives.
 - `loot`: you're looting the body · `linux` and `anime`: what our resident critics think today
-- `wars`: the KTDI War Archives
+- `wars`: the KTDI War Archives · `!fyio`: fuck you, I'm out (typed only)
 
 ### [📚 Words & wisdom](docs/COMMANDS.md#words-and-wisdom)
 All the old books at once, the shelf of words, slang, lost words and Old Wisdom.

@@ -138,9 +138,11 @@ def main_help_lines(ctx: commands.Context) -> dict[str, list[str]]:
     """Each section's lines, in section order: its commands, then any lines features add (main_help_lines())."""
     lines: dict[str, list[str]] = {}
     for cmd in sorted(ctx.bot.commands, key=lambda c: c.name):
-        # Left out: /books away from the library servers, cryptids (extras["hidden"]), which you have to know about, and
-        # the books asked through their shelf, which the shelf's page lists.
-        if can_use(cmd, ctx) and not cmd.extras.get("hidden") and not oldbooks.shelved(cmd.name):
+        # Left out: /books away from the library servers, cryptids (extras["hidden"]), which you have to know about,
+        # unlisted commands (extras["unlisted"]: in the README, just not here), and the books asked through their
+        # shelf, which the shelf's page lists.
+        if (can_use(cmd, ctx) and not cmd.extras.get("hidden") and not cmd.extras.get("unlisted")
+                and not oldbooks.shelved(cmd.name)):
             lines.setdefault(command_category(cmd), []).append(command_line(cmd))
     for module in feature_modules():
         for category, line in getattr(module, "main_help_lines", lambda: [])():

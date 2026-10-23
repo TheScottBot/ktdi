@@ -21,7 +21,7 @@ SLASH_COMMANDS = ["abm", "allspray", "almanac", "anime", "bad", "badbonk", "bail
 # the cryptids
 SHELVED_BOOKS = ["bestiary", "devils", "dream", "enquire", "flowermeaning", "gemlore", "goblin", "magicsquare",
                  "melancholy", "phrase", "pseudodoxia", "secrets", "talisman", "wonder"]
-PREFIX_ONLY_COMMANDS = SHELVED_BOOKS + ["breadsheet", "toenoyoudidnt"]
+PREFIX_ONLY_COMMANDS = SHELVED_BOOKS + ["breadsheet", "fyio", "toenoyoudidnt"]
 HIDDEN_COMMANDS = ["breadsheet", "toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
     "almanac": ["day", "setup"],
@@ -310,7 +310,8 @@ def test_the_docs_cover_every_command_and_feature(loaded_bot):
             continue
         assert f"`{root_command.name}" in reference or f"`!{root_command.name}" in reference, command.qualified_name
         assert re.search(rf"\b{re.escape(command.name)}\b", reference), command.qualified_name
-        assert f"`{root_command.name}`" in readme, f"{root_command.name} isn't in the README's index"
+        assert f"`{root_command.name}`" in readme or f"`!{root_command.name}`" in readme, \
+            f"{root_command.name} isn't in the README's index"  # (A typed-only one as `!fyio`)
     for feature in FEATURES:
         assert f"{feature.rsplit('.', 1)[1]}.py" in architecture, feature
 
@@ -388,3 +389,16 @@ def test_help_autocompletes_sections_and_commands(loaded_bot):
     for _, topic in help_feature.help_topics(loaded_bot, interaction):
         asyncio.run(help_feature.help_command.callback(ctx, command=topic))
         assert ctx.last.embed is not None, topic
+
+
+
+def test_unlisted_commands_are_documented_but_not_listed(loaded_bot):
+    """!fyio: off the /help lists, but no secret (the README and docs have it), and /help fyio still answers."""
+    import pathlib
+    ctx = Ctx(User(1, "scott"), Guild(111), bot=loaded_bot)
+    listed = "\n".join(line for lines in help_feature.main_help_lines(ctx).values() for line in lines)
+    assert "fyio" not in listed
+    root = pathlib.Path(__file__).resolve().parent.parent
+    assert "`!fyio`" in (root / "README.md").read_text(encoding="utf-8")
+    page = help_feature.command_help_embed(loaded_bot.get_command("fyio"))
+    assert page.title == "!fyio" and "Only works typed" in page.description

@@ -29,6 +29,9 @@ BAD_GIF_URLS = [
     "https://klipy.com/gifs/regular-show-benson-8",
     "https://klipy.com/gifs/daddys-home2-daddys-home2gifs-23",
 ]
+FYIO_GIF_URLS = [
+    "https://klipy.com/gifs/ferret-retreat-2",
+]
 PHRASING_GIF_URLS = [
     "https://klipy.com/gifs/archer-question",
     "https://klipy.com/gifs/hey-phrasing",
@@ -612,6 +615,14 @@ async def toenoyoudidnt(ctx: commands.Context):
     await ctx.send(TOES_GIF_URL, delete_after=TOES_SECONDS)  # ...and the cryptid after a few seconds.
 
 
+# Typed only, and left off the /help lists (extras["unlisted"]), but not a secret: the README has it.
+@commands.command(name="fyio", description="Fuck you, I'm out.", extras={**FUN, "unlisted": True})
+async def fyio(ctx: commands.Context):
+    """Fuck you, I'm out: for leaving a conversation with dignity, or at least at speed. Only typed (`!fyio`)."""
+    await ctx.send(f"🚪 **{ctx.author.display_name} is out.**\n{random.choice(FYIO_GIF_URLS)}",
+                   allowed_mentions=NO_PINGS)
+
+
 @commands.hybrid_command(name="nose", description="The nose. You know the one.", extras=FUN)
 @app_commands.describe(user="Optional: who it's for")
 async def nose(ctx: commands.Context, user: discord.Member | None = None):
@@ -864,8 +875,8 @@ def main_help_lines() -> list[tuple[str, str]]:
 async def setup(bot: commands.Bot):
     # `nose` is written but not registered: Discord's sensitive-media filter blurs its image (and asks UK users for ID).
     # Add it back here to bring it back.
-    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, phrasing, toenoyoudidnt, rapsheet, breadsheet,
-                    blame, bribe, expunge, bail, linux):
+    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, phrasing, fyio, toenoyoudidnt, rapsheet,
+                    breadsheet, blame, bribe, expunge, bail, linux):
         bot.add_command(command)
     bot.tree.add_command(phrasing_menu)  # Right-click a message > Apps > Phrasing
     bot.add_listener(remember_speaker, "on_message")
