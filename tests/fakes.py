@@ -63,6 +63,9 @@ class Sent:
     async def add_reaction(self, emoji):
         self.reactions.append(emoji)
 
+    async def delete(self, delay=None):
+        self.deleted = True
+
     async def end_poll(self):
         self.poll._finalized = True
         return self

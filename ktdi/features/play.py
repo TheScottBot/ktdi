@@ -18,6 +18,9 @@ from ktdi.lib import reminders
 HELP_CATEGORY = "🎲 Fun"
 
 
+NOW = {"now", "right now", "asap", "straight away"}  # start:now, either pace: no wait, the host starts it
+
+
 def play_command(games: dict[str, sessions.Game]) -> commands.HybridCommand:
     """/play, with every registered game in its menu."""
 
@@ -35,6 +38,8 @@ def play_command(games: dict[str, sessions.Game]) -> commands.HybridCommand:
             await ctx.send(f"There's already a game of {going.game.title} here: one at a time.", ephemeral=True)
             return
         starts_at = None
+        if start and " ".join(start.lower().split()) in NOW:
+            start = None  # Now: the lobby's open, and the host starts it as soon as enough are in
         if start:
             if pace != "async":
                 await ctx.send("A start time is for games played through the day (`pace:async`): live ones start "
@@ -60,14 +65,17 @@ def play_command(games: dict[str, sessions.Game]) -> commands.HybridCommand:
         "Starts a game in this channel: a lobby people join with a button, then the host presses Start. Everything "
         "else happens by buttons on the game's board: 🃏 **My card** shows you yours (only you see it), a "
         "button for your move when it's your turn (it says what: in Crust, ✍️ **Give your clue**, then 🗳️ **Vote**, "
-        "a list of names to pick from), 🔁 **Play again** at the end.\n\n"
+        "a list of names to pick from), 🔁 **Play again** at the end. Missed the start? "
+        "➕ **Join next round** on the board, and you're dealt in when someone presses Play again. The board moves "
+        "back to the bottom of the channel when chat's buried it.\n\n"
         "**Two paces:** ⚡ `live`, for playing together now (moves in seconds), or 🕰️ `async`, through the day: "
         "each move has 4 hours, and the clock stops overnight (23:00–07:00 UK), so nobody's timed out while asleep "
-        "(moves are still taken then). An async game can start itself: `start:9am`.\n\n"
+        "(moves are still taken then). An async game can start itself: `start:9am`. `start:now` (or no "
+        "start) means the host starts it once enough are in.\n\n"
         "**Pings:** nobody's pinged unless they've pressed 🔔 **Ping me**, so a muted channel stays muted. One game "
         "per channel at a time; the host (or someone with Manage Server) can cancel it.\n\n**The games:**\n" + lines)
     play = app_commands.describe(game="Which game", pace="live: together, now. async: through the day (4-hour moves)",
-                                 start="Async only: when it starts itself, with whoever's in (9am, 18:30)")(play)
+                                 start="now (the host starts it), or async only: a time it starts itself, with whoever's in (9am)")(play)
     play = app_commands.choices(
         game=[app_commands.Choice(name=f"{g.emoji} {g.title}", value=key) for key, g in games.items()][:25],
         pace=[app_commands.Choice(name="⚡ Live: together, now", value="live"),
@@ -80,4 +88,5 @@ def play_command(games: dict[str, sessions.Game]) -> commands.HybridCommand:
 async def setup(bot: commands.Bot):
     bot.add_command(play_command(sessions.GAMES))
     bot.add_dynamic_items(sessions.GameButton)  # Every game's buttons, from before a restart too
+    bot.add_listener(sessions.chatted, "on_message")  # Moves a game's board back down when chat's buried it
     sessions.start_loop()

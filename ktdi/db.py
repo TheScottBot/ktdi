@@ -404,6 +404,14 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS game_waiting (  -- joined a game mid-round: dealt in on the next round (Play again)
+        session_id INTEGER NOT NULL,
+        user_id    INTEGER NOT NULL,
+        joined_at  TEXT NOT NULL,
+        PRIMARY KEY (session_id, user_id)
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS game_pings (  -- who's asked to be pinged when it's their move (everyone else isn't)
         user_id INTEGER PRIMARY KEY
     )

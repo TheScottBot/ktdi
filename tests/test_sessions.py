@@ -68,6 +68,8 @@ class Words(sessions.Game):
 @pytest.fixture(autouse=True)
 def game(monkeypatch, clock, bot):
     monkeypatch.setitem(sessions.GAMES, "words", Words())
+    monkeypatch.setattr(sessions, "_buried", {})
+    monkeypatch.setattr(sessions, "_bumped", {})
     clock.set(NOON, sessions)
     bot.add_channel(Channel(500, Guild(111)))
     return clock
@@ -109,6 +111,11 @@ def board(bot):
     return channel(bot).messages[session.message_id]
 
 
+def last_post(bot):
+    """The last thing the game said (the board, moved down after it, has no text)."""
+    return next(m for m in reversed(channel(bot).sent) if m.content)
+
+
 # --- The lobby ---
 def test_a_lobby_is_one_message_edited_as_people_join(bot):
     ctx = open_lobby()
@@ -137,9 +144,10 @@ def test_starting_needs_the_host_and_enough_players(bot):
     session = sessions.get(1)
     assert session.phase == "playing" and session.step == "word:0"
     assert session.deadline == NOON + timedelta(seconds=30)  # Live: seconds
-    assert "Words has started" in channel(bot).sent[-1].content or any(
+    assert "Words has started" in last_post(bot).content or any(
         "Words has started" in (m.content or "") for m in channel(bot).sent)
-    assert [item.custom_id.split(":")[2] for item in board(bot).view.children] == ["card", "move", "pings", "cancel"]
+    assert [item.custom_id.split(":")[2] for item in board(bot).view.children] == [
+        "card", "move", "join", "pings", "cancel"]
 
 
 def test_the_host_leaving_hands_it_on_and_a_full_lobby_is_full():
@@ -242,7 +250,8 @@ def test_async_moves_have_hours_and_a_nudge(game, bot):
     assert "<@1>" in notice.content and notice.allowed_mentions is sessions.NO_PINGS  # Named, not pinged
     game.set(NOON + timedelta(hours=3, seconds=1), sessions)
     run(sessions.tick(sessions.now()))
-    assert channel(bot).sent[-1].content.startswith("⏰ <@1>: still your move")
+    assert last_post(bot).content.startswith("⏰ <@1>: still your move")
+    assert channel(bot).sent[-1] is board(bot)  # And the board's moved down under it
 
 
 def test_the_clock_stops_overnight():
@@ -260,9 +269,65 @@ def test_pings_only_for_those_who_asked(bot):
     assert press("pings", DAVE).last.content.startswith("🔔")
     started(pace="async")
     move("hello", SCOTT)  # Dave's turn now: he asked, so he's pinged
-    notice = channel(bot).sent[-1]
+    notice = last_post(bot)
     assert notice.content.startswith("⏳ <@2>") and [u.id for u in notice.allowed_mentions.users] == [DAVE.id]
     assert press("pings", DAVE).last.content.startswith("🔕") and not sessions.pings_on(DAVE.id)
+
+
+def test_joining_mid_game_deals_you_in_next_round(bot):
+    started()
+    joined = press("join", PAT)
+    assert "next round" in joined.last.content and joined.last.private
+    assert sessions.get(1).players == [SCOTT.id, DAVE.id]  # Not this round
+    assert "**Next round:** <@3>" in board(bot).embed.description
+    assert "already" in press("join", PAT).last.content and "this round already" in press("join", DAVE).last.content
+    assert next(item.item.label for item in board(bot).view.children if item.action == "join") == "Join next round"
+    move("a", SCOTT)
+    move("b", DAVE)
+    assert "<@3>" in channel(bot).sent[-1].content  # The reveal says who's waiting
+    press("again", SCOTT)
+    assert sessions.get(2).players == [SCOTT.id, DAVE.id, PAT.id]
+
+
+def test_the_next_round_cant_be_overfull():
+    started(players=(SCOTT, DAVE, PAT))
+    press("join", AMY)  # Four is the most
+    assert "full" in press("join", User(5, "bob")).last.content
+
+
+def test_the_board_moves_down_after_the_games_posts(bot):
+    started()
+    first = board(bot)
+    move("hello", SCOTT)
+    assert channel(bot).sent[-1] is board(bot) and board(bot) is not first
+    assert getattr(first, "deleted", False)  # The old one's gone, so there's one board
+
+
+def test_the_board_moves_down_when_chat_buries_it(game, bot):
+    started()
+    buried = board(bot)
+
+    def chat(n, author=DAVE):
+        for _ in range(n):
+            run(sessions.chatted(types.SimpleNamespace(guild=Guild(111), author=author, channel=channel(bot))))
+
+    game.set(NOON + timedelta(seconds=40), sessions)  # Past BUMP_GAP since the last move
+    chat(sessions.BUMP_AFTER - 1)
+    assert board(bot) is buried
+    chat(1)
+    assert board(bot) is not buried and channel(bot).sent[-1] is board(bot)
+    moved = board(bot)
+    chat(sessions.BUMP_AFTER)  # Again straight away: not yet (BUMP_GAP)
+    assert board(bot) is moved
+    game.set(NOON + timedelta(seconds=80), sessions)
+    chat(1)
+    assert board(bot) is not moved
+
+
+def test_chat_with_no_game_on_moves_nothing(bot):
+    for _ in range(sessions.BUMP_AFTER + 1):
+        run(sessions.chatted(types.SimpleNamespace(guild=Guild(111), author=DAVE, channel=channel(bot))))
+    assert channel(bot).sent == []
 
 
 def test_live_games_dont_post_turn_notices_unless_someones_pinged(bot):
@@ -290,6 +355,13 @@ def test_a_lobby_nobody_starts_goes(game, bot):
 def test_a_start_time_is_only_for_async():
     ctx = open_lobby(start="9am")
     assert "through the day" in ctx.last.content and sessions.get(1) is None
+
+
+@pytest.mark.parametrize("pace", ["live", "async"])
+def test_start_now_opens_the_lobby_for_the_host_to_start(pace):
+    open_lobby(pace=pace, start=" Right  NOW ")
+    session = sessions.get(1)
+    assert session.phase == "lobby" and session.pace == pace and session.starts_at is None
 
 
 def test_no_network_is_tried_again(game, monkeypatch):

@@ -12,7 +12,10 @@ that, the same for every game:
   sees, as a reply to their press, never a DM;
 - deadlines, reminders (async) and turn notices, which only ping players who've asked to be (🔔: game_pings), so a
   muted channel stays muted;
-- the reveal, Play again (same players, a fresh lobby), and every result kept in game_results for all-time tables
+- joining mid-game (➕ Join next round: game_waiting), dealt in when the next round's lobby opens;
+- the board kept in sight: after the game posts, or when chat has buried it, it's posted again at the bottom (and
+  the old one deleted), rather than pinned (pinning needs Manage Messages and posts a notice of its own);
+- the reveal, Play again (same players and whoever's waiting, a fresh lobby), and every result kept in game_results for all-time tables
   later (nothing shows them yet: a game's results show only until the next one).
 
 Everything's in the database (game_sessions, game_players) and every button is a lasting one ("game:<id>:<action>",
@@ -39,6 +42,8 @@ NUDGE_AT = 0.75  # Async: remind whoever's being waited on this far through thei
 CHECK_EVERY = 5  # Seconds between deadline checks
 ACTIVE = ("lobby", "playing")
 COLOUR = discord.Color.from_rgb(120, 90, 160)
+BUMP_AFTER = 5  # Chat messages under the board before it's moved back to the bottom...
+BUMP_GAP = timedelta(seconds=30)  # ...at most this often
 
 
 def now() -> datetime:
@@ -240,6 +245,18 @@ def add_player(session_id: int, user_id: int, commit: bool = True) -> None:
         db.conn.commit()
 
 
+def waiting_list(session_id: int) -> list[int]:
+    """Who's joined mid-game, for the next round, in the order they joined."""
+    return [user for (user,) in db.conn.execute(
+        "SELECT user_id FROM game_waiting WHERE session_id = ? ORDER BY joined_at, rowid", (session_id,))]
+
+
+def add_waiting(session_id: int, user_id: int) -> None:
+    db.conn.execute("INSERT OR IGNORE INTO game_waiting (session_id, user_id, joined_at) VALUES (?, ?, ?)",
+                    (session_id, user_id, now().isoformat()))
+    db.conn.commit()
+
+
 def remove_player(session_id: int, user_id: int) -> None:
     db.conn.execute("DELETE FROM game_players WHERE session_id = ? AND user_id = ?", (session_id, user_id))
     db.conn.commit()
@@ -320,6 +337,8 @@ def board_embed(session: Session) -> discord.Embed:
         lines.append(f"**Waiting on:** {mentions(waiting)}")
     if session.deadline:
         lines.append(f"**Time's up** <t:{int(session.deadline.timestamp())}:R>")
+    if session.phase == "playing" and (next_round := waiting_list(session.id)):
+        lines.append(f"**Next round:** {' '.join(f'<@{user}>' for user in next_round)}")
     lines.append(f"-# {PACES[session.pace]} · players: {' '.join(f'<@{user}>' for user in session.players)}")
     return discord.Embed(title=f"{game.emoji} {game.title}", description="\n".join(lines), color=COLOUR)
 
@@ -327,7 +346,7 @@ def board_embed(session: Session) -> discord.Embed:
 def view_for(session: Session) -> discord.ui.View | None:
     view = discord.ui.View(timeout=None)
     buttons = {"lobby": ["join", "leave", "start", "pace", "pings", "cancel"],
-               "playing": ["card", "move", "pings", "cancel"],
+               "playing": ["card", "move", "join", "pings", "cancel"],
                "done": ["again"]}.get(session.phase, [])
     for action in buttons:
         if action == "pace" and len(session.game.paces) < 2:
@@ -335,6 +354,8 @@ def view_for(session: Session) -> discord.ui.View | None:
         if action == "move" and session.phase == "playing":
             label, emoji = session.game.move_button(session)
             view.add_item(GameButton(session.id, action, label=label, emoji=emoji))
+        elif action == "join" and session.phase == "playing":
+            view.add_item(GameButton(session.id, action, label="Join next round"))
         else:
             view.add_item(GameButton(session.id, action))
     return view if buttons else None
@@ -345,12 +366,61 @@ async def update_board(session: Session) -> None:
     channel = common.bot.get_channel(session.channel_id) if common.bot else None
     if channel is None or session.message_id is None:
         return
-    embed = lobby_embed(session) if session.phase == "lobby" else ended_embed(session) \
-        if session.phase in ("cancelled", "expired") else board_embed(session)
     try:
-        await channel.get_partial_message(session.message_id).edit(embed=embed, view=view_for(session))
+        await channel.get_partial_message(session.message_id).edit(embed=board_for(session), view=view_for(session))
     except (discord.HTTPException, KeyError):
         pass  # The board's gone (deleted?): the game goes on, in its posts
+
+
+def board_for(session: Session) -> discord.Embed:
+    return lobby_embed(session) if session.phase == "lobby" else ended_embed(session) \
+        if session.phase in ("cancelled", "expired") else board_embed(session)
+
+
+_buried: dict[int, int] = {}  # Channel -> chat messages since its board was last posted
+_bumped: dict[int, datetime] = {}  # Channel -> when its board was last moved down
+
+
+async def bump(session: Session) -> None:
+    """Move the board to the bottom of the channel, so it isn't lost in chat: post it again, and delete the old one
+    (its buttons are lasting ones, so a press on it on the way out still works)."""
+    channel = common.bot.get_channel(session.channel_id) if common.bot else None
+    if channel is None:
+        return
+    old = session.message_id
+    try:
+        message = await channel.send(embed=board_for(session), view=view_for(session), allowed_mentions=NO_PINGS)
+    except discord.HTTPException:
+        await update_board(session)  # Can't post (permissions?): the old one's kept up to date instead
+        return
+    session.message_id = message.id
+    save(session)
+    _buried[session.channel_id], _bumped[session.channel_id] = 0, now()
+    if old is not None:
+        try:
+            await channel.get_partial_message(old).delete()
+        except (discord.HTTPException, KeyError):
+            pass  # Already gone
+
+
+async def chatted(message: discord.Message) -> None:
+    """on_message: when chat has buried a game's board (BUMP_AFTER messages, BUMP_GAP apart at most), move it down."""
+    me = getattr(getattr(common.bot, "user", None), "id", None)
+    if message.guild is None or message.author.id == me:  # The game's own posts are followed by the board anyway
+        return
+    channel_id = message.channel.id
+    _buried[channel_id] = _buried.get(channel_id, 0) + 1
+    last = _bumped.get(channel_id)
+    if _buried[channel_id] < BUMP_AFTER or (last and now() - last < BUMP_GAP):
+        return
+    session = active_in(channel_id)
+    if session is None:
+        _buried.pop(channel_id, None)
+        return
+    async with lock(session.id):
+        session = get(session.id)
+        if session is not None and session.phase in ACTIVE and session.message_id is not None:
+            await bump(session)
 
 
 def ended_embed(session: Session) -> discord.Embed:
@@ -407,11 +477,11 @@ async def advanced(session: Session, posts: list[str | discord.Embed]) -> None:
                                  f"board. Time's up <t:{int(session.deadline.timestamp())}:R>."]
             save(session)
             await post(session, posts, pinged=waiting)
-            await update_board(session)
+            await (bump(session) if posts else update_board(session))
             return
     save(session)
     await post(session, posts)
-    await update_board(session)
+    await (bump(session) if posts else update_board(session))
 
 
 async def finish(session: Session) -> None:
@@ -426,7 +496,11 @@ async def finish(session: Session) -> None:
     log.info("A game of %s finished in channel %s", session.game_key, session.channel_id)
     channel = common.bot.get_channel(session.channel_id) if common.bot else None
     if channel is not None:
-        await channel.send(embed=session.game.reveal(session), view=view_for(session), allowed_mentions=NO_PINGS)
+        next_round = waiting_list(session.id)
+        joining = (f"🔁 Waiting for the next round: {' '.join(f'<@{user}>' for user in next_round)}. Press **Play "
+                   f"again** to deal them in.") if next_round else None
+        await channel.send(joining, embed=session.game.reveal(session), view=view_for(session),
+                           allowed_mentions=NO_PINGS)
     await update_board(session)
 
 
@@ -500,6 +574,9 @@ async def pressed(interaction: discord.Interaction, session_id: int, action: str
             else:
                 await reply(interaction, embed=game.card(session, user))
             return
+        if action == "join" and session.phase == "playing":
+            await join_next_round(interaction, session)
+            return
         if session.phase != "lobby" and action in ("join", "leave", "start", "pace"):
             await reply(interaction, "That lobby's closed: the game's started (or over).")
             return
@@ -550,6 +627,25 @@ async def pressed(interaction: discord.Interaction, session_id: int, action: str
             return
         session = get(session.id)
         await interaction.response.edit_message(embed=lobby_embed(session), view=view_for(session))
+
+
+async def join_next_round(interaction: discord.Interaction, session: Session) -> None:
+    """➕ mid-game: on the list for the next round, dealt in when its lobby opens (Play again)."""
+    user = interaction.user.id
+    if user in session.players:
+        await reply(interaction, "You're in this round already.")
+        return
+    next_round = waiting_list(session.id)
+    if user in next_round:
+        await reply(interaction, "You're in for the next round already.")
+        return
+    if len(session.players) + len(next_round) >= session.game.max_players:
+        await reply(interaction, f"The next round's full: {session.game.max_players} at most.")
+        return
+    add_waiting(session.id, user)
+    await reply(interaction, "➕ You're in for the next round: you'll be dealt in when this one's over and someone "
+                             "presses 🔁 **Play again**. Watch this one for how they play.")
+    await update_board(session)
 
 
 async def ask(interaction: discord.Interaction, session_id: int) -> None:
@@ -620,8 +716,10 @@ async def play_again(interaction: discord.Interaction, session: Session) -> None
     if going := active_in(session.channel_id):
         await reply(interaction, f"There's already a game here: {going.game.title}.")
         return
+    everyone = [interaction.user.id] + [user for user in session.players + waiting_list(session.id)
+                                        if user != interaction.user.id]
     again = create(session.guild_id, session.channel_id, session.game, interaction.user.id, session.pace,
-                   [interaction.user.id] + [user for user in session.players if user != interaction.user.id])
+                   list(dict.fromkeys(everyone))[:session.game.max_players])
     await interaction.response.defer()
     channel = common.bot.get_channel(again.channel_id) if common.bot else None
     if channel is not None:
@@ -667,6 +765,7 @@ async def due(session: Session, moment: datetime) -> None:
         if waiting:
             await post(session, [f"⏰ {mentions(waiting)}: still your move in {session.game.title}. Time's up "
                                  f"<t:{int(session.deadline.timestamp())}:R>."], pinged=waiting)
+            await bump(session)
         return
     if session.deadline and session.deadline <= moment:
         stuck_at = session.step
