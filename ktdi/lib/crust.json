@@ -1,0 +1,3137 @@
+{
+ "_about": "Crust's cards (/play game:crust), built by ktdi/tools/crust_build.py from crust_curation.json: don't edit by hand.",
+ "cards": [
+  {
+   "id": "lost-drink",
+   "theme": "Drink & drinking",
+   "words": [
+    {
+     "word": "Bever",
+     "meaning": "A drink between meals",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n42/mode/2up?q=Bever"
+    },
+    {
+     "word": "Barrel fever",
+     "meaning": "The headache caused by intemperance in ale or beer",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n38/mode/2up?q=Barrel%20fever"
+    },
+    {
+     "word": "Brinch",
+     "meaning": "To drink in answer to a pledge",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n54/mode/2up?q=Brinch"
+    },
+    {
+     "word": "Dew-cup",
+     "meaning": "The morning allowance of beer to harvest labourers",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n79/mode/2up?q=Dew-cup"
+    },
+    {
+     "word": "Mantle",
+     "meaning": "To cream or sparkle like ale, wine, or effervescent waters",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n159/mode/2up?q=Mantle"
+    },
+    {
+     "word": "Swill-bowl",
+     "meaning": "A drunkard",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n258/mode/2up?q=Swill-bowl"
+    },
+    {
+     "word": "Waught",
+     "meaning": "A deep draught of liquor",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n302/mode/2up?q=Waught"
+    },
+    {
+     "word": "Drouthy",
+     "meaning": "Thirsty, or dry",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n85/mode/2up?q=Drouthy"
+    }
+   ]
+  },
+  {
+   "id": "lost-table",
+   "theme": "At table",
+   "words": [
+    {
+     "word": "Mazer",
+     "meaning": "A goblet",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n161/mode/2up?q=Mazer"
+    },
+    {
+     "word": "Birler",
+     "meaning": "A butler, or pourer out of liquor",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n45/mode/2up?q=Birler"
+    },
+    {
+     "word": "Smell-feast",
+     "meaning": "A parasite",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n231/mode/2up?q=Smell-feast"
+    },
+    {
+     "word": "Pingle",
+     "meaning": "To eat with very little appetite",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n183/mode/2up?q=Pingle"
+    },
+    {
+     "word": "Slotter",
+     "meaning": "To make a noise with the palate in eating",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n230/mode/2up?q=Slotter"
+    },
+    {
+     "word": "Quaisy",
+     "meaning": "Tough and indigestible",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n188/mode/2up?q=Quaisy"
+    },
+    {
+     "word": "Troll",
+     "meaning": "To pass round the bottle at table",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n285/mode/2up?q=Troll"
+    },
+    {
+     "word": "Brander",
+     "meaning": "A gridiron",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n52/mode/2up?q=Brander"
+    }
+   ]
+  },
+  {
+   "id": "lost-food",
+   "theme": "Food & eating",
+   "words": [
+    {
+     "word": "Flaun",
+     "meaning": "A pancake",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n100/mode/2up?q=Flaun"
+    },
+    {
+     "word": "Sool",
+     "meaning": "Anything eaten with bread or potatoes for a relish",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n236/mode/2up?q=Sool"
+    },
+    {
+     "word": "Orts",
+     "meaning": "Scraps, fragments, leavings",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n179/mode/2up?q=Orts"
+    },
+    {
+     "word": "Shive",
+     "meaning": "A large slice",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n218/mode/2up?q=Shive"
+    },
+    {
+     "word": "Sculsh",
+     "meaning": "Any trashy sweetmeats or green fruit",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n211/mode/2up?q=Sculsh"
+    },
+    {
+     "word": "Thepes",
+     "meaning": "Gooseberries",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n266/mode/2up?q=Thepes"
+    },
+    {
+     "word": "Franch",
+     "meaning": "To crunch with the teeth",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n107/mode/2up?q=Franch"
+    },
+    {
+     "word": "Wersh",
+     "meaning": "Insipid, unsavoury, tasteless",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n306/mode/2up?q=Wersh"
+    }
+   ]
+  },
+  {
+   "id": "lost-weather",
+   "theme": "Weather & sky",
+   "words": [
+    {
+     "word": "Airt",
+     "meaning": "The quarter from which the wind blows, from the Gaelic ard, a height",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n33/mode/2up?q=Airt"
+    },
+    {
+     "word": "Levin",
+     "meaning": "The lightning",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n147/mode/2up?q=Levin"
+    },
+    {
+     "word": "Lift",
+     "meaning": "The sky, the air, the atmosphere",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n148/mode/2up?q=Lift"
+    },
+    {
+     "word": "Lown",
+     "meaning": "Still, calm",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n155/mode/2up?q=Lown"
+    },
+    {
+     "word": "Skyte",
+     "meaning": "To drive and pelt like rain or hail before the wind",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n225/mode/2up?q=Skyte"
+    },
+    {
+     "word": "Glouse",
+     "meaning": "A strong gleam of heat",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n117/mode/2up?q=Glouse"
+    },
+    {
+     "word": "Snithe",
+     "meaning": "Cold, sharp, and cutting",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n234/mode/2up?q=Snithe"
+    },
+    {
+     "word": "Swale",
+     "meaning": "To distend and wave in the wind, as a plume, a flag, or a sail",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n254/mode/2up?q=Swale"
+    }
+   ]
+  },
+  {
+   "id": "lost-time",
+   "theme": "Time & age",
+   "words": [
+    {
+     "word": "Aforetime",
+     "meaning": "Of old time",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n32/mode/2up?q=Aforetime"
+    },
+    {
+     "word": "Alderelde",
+     "meaning": "Extreme old age",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n33/mode/2up?q=Alderelde"
+    },
+    {
+     "word": "Belive",
+     "meaning": "Immediately",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n41/mode/2up?q=Belive"
+    },
+    {
+     "word": "Gliff",
+     "meaning": "A moment, a short slumber, a nap",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n116/mode/2up?q=Gliff"
+    },
+    {
+     "word": "Lome",
+     "meaning": "Frequent",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n153/mode/2up?q=Lome"
+    },
+    {
+     "word": "Neist",
+     "meaning": "The next, or nearest",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n173/mode/2up?q=Neist"
+    },
+    {
+     "word": "Sunstead",
+     "meaning": "The solstice",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n254/mode/2up?q=Sunstead"
+    },
+    {
+     "word": "Mirkshade",
+     "meaning": "The evening, twilight, the gloaming",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n165/mode/2up?q=Mirkshade"
+    }
+   ]
+  },
+  {
+   "id": "lost-birds",
+   "theme": "Birds",
+   "words": [
+    {
+     "word": "Culver",
+     "meaning": "A pigeon, or dove",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n73/mode/2up?q=Culver"
+    },
+    {
+     "word": "Merle",
+     "meaning": "The blackbird",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n162/mode/2up?q=Merle"
+    },
+    {
+     "word": "Mevy",
+     "meaning": "The gull, the sea-mew",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n162/mode/2up?q=Mevy"
+    },
+    {
+     "word": "Miredrum",
+     "meaning": "The bittern",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n165/mode/2up?q=Miredrum"
+    },
+    {
+     "word": "Nope",
+     "meaning": "The bullfinch",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n176/mode/2up?q=Nope"
+    },
+    {
+     "word": "Ruddock",
+     "meaning": "The robin redbreast",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n204/mode/2up?q=Ruddock"
+    },
+    {
+     "word": "Skart",
+     "meaning": "The cormorant",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n223/mode/2up?q=Skart"
+    },
+    {
+     "word": "Whaup",
+     "meaning": "A curlew",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n308/mode/2up?q=Whaup"
+    }
+   ]
+  },
+  {
+   "id": "lost-flowers",
+   "theme": "Wild flowers",
+   "words": [
+    {
+     "word": "Bellbloom",
+     "meaning": "The hedge convolvulus",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n41/mode/2up?q=Bellbloom"
+    },
+    {
+     "word": "Blaver",
+     "meaning": "The blue corn-flower, or the corn blue-bottle",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n46/mode/2up?q=Blaver"
+    },
+    {
+     "word": "Breezeblossom",
+     "meaning": "The wild anemone",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n54/mode/2up?q=Breezeblossom"
+    },
+    {
+     "word": "Culverwort",
+     "meaning": "The herb columbine",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n73/mode/2up?q=Culverwort"
+    },
+    {
+     "word": "Lithe-wort",
+     "meaning": "The forget-me-not",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n152/mode/2up?q=Lithe-wort"
+    },
+    {
+     "word": "Mell-Sylvester",
+     "meaning": "The honeysuckle",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n162/mode/2up?q=Mell-Sylvester"
+    },
+    {
+     "word": "Ninniver",
+     "meaning": "The white water-lily",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n176/mode/2up?q=Ninniver"
+    },
+    {
+     "word": "Paigle",
+     "meaning": "A cowslip",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n180/mode/2up?q=Paigle"
+    }
+   ]
+  },
+  {
+   "id": "lost-harvest",
+   "theme": "Corn & harvest",
+   "words": [
+    {
+     "word": "Ear",
+     "meaning": "To plough, to cultivate, from the Sanscrit and Gaelic ar",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n90/mode/2up?q=Ear"
+    },
+    {
+     "word": "Braird",
+     "meaning": "The first sprouting of the corn",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n52/mode/2up?q=Braird"
+    },
+    {
+     "word": "Clevel",
+     "meaning": "A grain of corn",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n66/mode/2up?q=Clevel"
+    },
+    {
+     "word": "Gavel",
+     "meaning": "A sheaf of corn before it is tied up",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n112/mode/2up?q=Gavel"
+    },
+    {
+     "word": "Hoils",
+     "meaning": "The beards of barley",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n127/mode/2up?q=Hoils"
+    },
+    {
+     "word": "Math",
+     "meaning": "A mowing",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n159/mode/2up?q=Math"
+    },
+    {
+     "word": "Moulter",
+     "meaning": "The toll or tax taken by a miller for grinding corn",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n170/mode/2up?q=Moulter"
+    },
+    {
+     "word": "Bowboy",
+     "meaning": "A scarecrow",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n52/mode/2up?q=Bowboy"
+    }
+   ]
+  },
+  {
+   "id": "lost-field",
+   "theme": "Field work",
+   "words": [
+    {
+     "word": "Yelf",
+     "meaning": "A hay-fork, a dung-fork",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n327/mode/2up?q=Yelf"
+    },
+    {
+     "word": "Yelm",
+     "meaning": "A portion of straw, as much as can be carried under the arm",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n327/mode/2up?q=Yelm"
+    },
+    {
+     "word": "Pix",
+     "meaning": "To glean in an orchard",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n183/mode/2up?q=Pix"
+    },
+    {
+     "word": "Sned",
+     "meaning": "To prune, lop, shear, mow",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n233/mode/2up?q=Sned"
+    },
+    {
+     "word": "Quoy",
+     "meaning": "A northern word, signifying a piece of enclosed land on a common",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n190/mode/2up?q=Quoy"
+    },
+    {
+     "word": "Kex",
+     "meaning": "Dry stalk of hemlock or corn",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n136/mode/2up?q=Kex"
+    },
+    {
+     "word": "Raddles",
+     "meaning": "Pieces of supple underwood, twisted between upright stakes to form a fence",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n190/mode/2up?q=Raddles"
+    },
+    {
+     "word": "Uneared",
+     "meaning": "Unploughed, untilled, uncultivated",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n291/mode/2up?q=Uneared"
+    }
+   ]
+  },
+  {
+   "id": "lost-land",
+   "theme": "Land & water",
+   "words": [
+    {
+     "word": "Adle",
+     "meaning": "Stagnant water that smells badly",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n32/mode/2up?q=Adle"
+    },
+    {
+     "word": "Queach",
+     "meaning": "A bog, a morass",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n188/mode/2up?q=Queach"
+    },
+    {
+     "word": "Pirle",
+     "meaning": "A stream",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n183/mode/2up?q=Pirle"
+    },
+    {
+     "word": "Slab",
+     "meaning": "Thick mire",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n229/mode/2up?q=Slab"
+    },
+    {
+     "word": "Waterstead",
+     "meaning": "The ordinary channel or bed of a river, or smaller stream",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n302/mode/2up?q=Waterstead"
+    },
+    {
+     "word": "Slade",
+     "meaning": "A narrow valley on a mountain side",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n225/mode/2up?q=Slade"
+    },
+    {
+     "word": "Trod",
+     "meaning": "A footpath",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n284/mode/2up?q=Trod"
+    },
+    {
+     "word": "Scoil",
+     "meaning": "Loose stones, rubbish",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n210/mode/2up?q=Scoil"
+    }
+   ]
+  },
+  {
+   "id": "lost-feelings",
+   "theme": "Feelings",
+   "words": [
+    {
+     "word": "Dule",
+     "meaning": "Grief, sorrow, lamentation",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n89/mode/2up?q=Dule"
+    },
+    {
+     "word": "Dowff",
+     "meaning": "Dispirited, weary, dejected",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n84/mode/2up?q=Dowff"
+    },
+    {
+     "word": "Dree",
+     "meaning": "To suffer, to endure",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n84/mode/2up?q=Dree"
+    },
+    {
+     "word": "Grue",
+     "meaning": "To fear greatly",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n122/mode/2up?q=Grue"
+    },
+    {
+     "word": "Ug",
+     "meaning": "To feel abhorrence, or disgust at",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n288/mode/2up?q=Ug"
+    },
+    {
+     "word": "Yammer",
+     "meaning": "To yearn or desire",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n322/mode/2up?q=Yammer"
+    },
+    {
+     "word": "Murge",
+     "meaning": "To rejoice",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n171/mode/2up?q=Murge"
+    },
+    {
+     "word": "Rewth",
+     "meaning": "Pity, compassion",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n197/mode/2up?q=Rewth"
+    }
+   ]
+  },
+  {
+   "id": "lost-fun",
+   "theme": "Fun & merriment",
+   "words": [
+    {
+     "word": "Crouse",
+     "meaning": "Merry, brisk, lively",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n72/mode/2up?q=Crouse"
+    },
+    {
+     "word": "Splore",
+     "meaning": "A riotously merry meeting",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n240/mode/2up?q=Splore"
+    },
+    {
+     "word": "Snirt",
+     "meaning": "A short, suppressed laugh",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n234/mode/2up?q=Snirt"
+    },
+    {
+     "word": "Yoyster",
+     "meaning": "To frolic, to laugh loudly",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n328/mode/2up?q=Yoyster"
+    },
+    {
+     "word": "Bord",
+     "meaning": "A joke, a jest, a trick",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n51/mode/2up?q=Bord"
+    },
+    {
+     "word": "Daff",
+     "meaning": "To make a fool of, to play the fool",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n74/mode/2up?q=Daff"
+    },
+    {
+     "word": "Pirl",
+     "meaning": "To spin like a top",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n183/mode/2up?q=Pirl"
+    },
+    {
+     "word": "Queming",
+     "meaning": "Pleasure",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n189/mode/2up?q=Queming"
+    }
+   ]
+  },
+  {
+   "id": "lost-talk",
+   "theme": "Talk",
+   "words": [
+    {
+     "word": "Quethe",
+     "meaning": "To say, speak, declare",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n189/mode/2up?q=Quethe"
+    },
+    {
+     "word": "Rown",
+     "meaning": "To talk privately",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n202/mode/2up?q=Rown"
+    },
+    {
+     "word": "Yatter",
+     "meaning": "To talk in a peevish and querulous manner",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n323/mode/2up?q=Yatter"
+    },
+    {
+     "word": "Bode",
+     "meaning": "A message",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n48/mode/2up?q=Bode"
+    },
+    {
+     "word": "Lesing",
+     "meaning": "A lie, a falsehood",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n144/mode/2up?q=Lesing"
+    },
+    {
+     "word": "Rede",
+     "meaning": "To advise, to counsel",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n195/mode/2up?q=Rede"
+    },
+    {
+     "word": "Whist",
+     "meaning": "Silence, or to keep silence",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n309/mode/2up?q=Whist"
+    },
+    {
+     "word": "Claw",
+     "meaning": "To flatter, to praise",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n64/mode/2up?q=Claw"
+    }
+   ]
+  },
+  {
+   "id": "lost-rogues",
+   "theme": "Rogues & characters",
+   "words": [
+    {
+     "word": "Birkie",
+     "meaning": "A conceited person",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n45/mode/2up?q=Birkie"
+    },
+    {
+     "word": "Pranker",
+     "meaning": "A dandy, a 'swell.'",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n186/mode/2up?q=Pranker"
+    },
+    {
+     "word": "Swasher",
+     "meaning": "A rowdy, a rough, a bully, a braggart",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n255/mode/2up?q=Swasher"
+    },
+    {
+     "word": "Lorel",
+     "meaning": "A dissolute person",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n153/mode/2up?q=Lorel"
+    },
+    {
+     "word": "Henter",
+     "meaning": "A thief, a holder, or seizer of that which does not belong to him",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n125/mode/2up?q=Henter"
+    },
+    {
+     "word": "Vothman",
+     "meaning": "An outlaw",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n295/mode/2up?q=Vothman"
+    },
+    {
+     "word": "Glaverer",
+     "meaning": "A flatterer",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n114/mode/2up?q=Glaverer"
+    },
+    {
+     "word": "Pinchback",
+     "meaning": "A miser, who denies himself proper raiment",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n183/mode/2up?q=Pinchback"
+    }
+   ]
+  },
+  {
+   "id": "lost-work",
+   "theme": "Work & idleness",
+   "words": [
+    {
+     "word": "Chare",
+     "meaning": "A day's work",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n62/mode/2up?q=Chare"
+    },
+    {
+     "word": "Aidle",
+     "meaning": "To earn one's bread indifferently well",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n33/mode/2up?q=Aidle"
+    },
+    {
+     "word": "Swink",
+     "meaning": "To labour over-hard",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n259/mode/2up?q=Swink"
+    },
+    {
+     "word": "Kemp",
+     "meaning": "To strive with another who shall do most work in a given time",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n136/mode/2up?q=Kemp"
+    },
+    {
+     "word": "Olyte",
+     "meaning": "Diligent",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n178/mode/2up?q=Olyte"
+    },
+    {
+     "word": "Bummel",
+     "meaning": "An idle fellow, a drone",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n55/mode/2up?q=Bummel"
+    },
+    {
+     "word": "Micher",
+     "meaning": "A truant or skulker",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n162/mode/2up?q=Micher"
+    },
+    {
+     "word": "Moffle",
+     "meaning": "To spoil work, to do anything badly, and without knowledge",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n168/mode/2up?q=Moffle"
+    }
+   ]
+  },
+  {
+   "id": "lost-light",
+   "theme": "Light & dark",
+   "words": [
+    {
+     "word": "Leme",
+     "meaning": "To shine",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n144/mode/2up?q=Leme"
+    },
+    {
+     "word": "Glede",
+     "meaning": "A burning coal",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n114/mode/2up?q=Glede"
+    },
+    {
+     "word": "Tead",
+     "meaning": "A light, a lamp",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n264/mode/2up?q=Tead"
+    },
+    {
+     "word": "Spunkie",
+     "meaning": "The ignis fatuus, Will o' the Wisp, or Jack o' the Lantern",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n242/mode/2up?q=Spunkie"
+    },
+    {
+     "word": "Glincy",
+     "meaning": "Smooth and shining, mirror-like",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n117/mode/2up?q=Glincy"
+    },
+    {
+     "word": "Rindle",
+     "meaning": "To sparkle like running water",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n193/mode/2up?q=Rindle"
+    },
+    {
+     "word": "Douter",
+     "meaning": "An extinguisher",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n83/mode/2up?q=Douter"
+    },
+    {
+     "word": "Thesterness",
+     "meaning": "Darkness",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n266/mode/2up?q=Thesterness"
+    }
+   ]
+  },
+  {
+   "id": "lost-folk",
+   "theme": "Folk & kin",
+   "words": [
+    {
+     "word": "Oye",
+     "meaning": "A grandchild",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n180/mode/2up?q=Oye"
+    },
+    {
+     "word": "Sib",
+     "meaning": "Related to by blood or marriage",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n221/mode/2up?q=Sib"
+    },
+    {
+     "word": "Marrow",
+     "meaning": "A mate, equal, companion, sweetheart",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n159/mode/2up?q=Marrow"
+    },
+    {
+     "word": "Thorpsman",
+     "meaning": "A villager",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n269/mode/2up?q=Thorpsman"
+    },
+    {
+     "word": "Springald",
+     "meaning": "A youth, a young man",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n241/mode/2up?q=Springald"
+    },
+    {
+     "word": "Sithcundman",
+     "meaning": "The oldest inhabitant",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n223/mode/2up?q=Sithcundman"
+    },
+    {
+     "word": "Welder",
+     "meaning": "A ruler, a governor",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n305/mode/2up?q=Welder"
+    },
+    {
+     "word": "Strend",
+     "meaning": "A generation",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n251/mode/2up?q=Strend"
+    }
+   ]
+  },
+  {
+   "id": "lost-money",
+   "theme": "Money & trade",
+   "words": [
+    {
+     "word": "Plack",
+     "meaning": "A piece of money",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n183/mode/2up?q=Plack"
+    },
+    {
+     "word": "Chaffer",
+     "meaning": "To haggle",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n61/mode/2up?q=Chaffer"
+    },
+    {
+     "word": "Niffer",
+     "meaning": "To exchange",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n175/mode/2up?q=Niffer"
+    },
+    {
+     "word": "Outrope",
+     "meaning": "A sale by auction",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n179/mode/2up?q=Outrope"
+    },
+    {
+     "word": "Wair",
+     "meaning": "To lay out, to expend judiciously",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n297/mode/2up?q=Wair"
+    },
+    {
+     "word": "Wanthrift",
+     "meaning": "Prodigality",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n300/mode/2up?q=Wanthrift"
+    },
+    {
+     "word": "Hain",
+     "meaning": "To save, to preserve with care, to spare, to keep without use",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n123/mode/2up?q=Hain"
+    },
+    {
+     "word": "Wad",
+     "meaning": "A wager, a bet, a pledge",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n295/mode/2up?q=Wad"
+    }
+   ]
+  },
+  {
+   "id": "lost-body",
+   "theme": "The body",
+   "words": [
+    {
+     "word": "Pow",
+     "meaning": "The head, the pate",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n186/mode/2up?q=Pow"
+    },
+    {
+     "word": "Nieve",
+     "meaning": "The fist, the closed hand",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n175/mode/2up?q=Nieve"
+    },
+    {
+     "word": "Loof",
+     "meaning": "The hollow of the hand",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n153/mode/2up?q=Loof"
+    },
+    {
+     "word": "Hardel",
+     "meaning": "The back of the hand",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n124/mode/2up?q=Hardel"
+    },
+    {
+     "word": "Oxter",
+     "meaning": "The arm-pit",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n180/mode/2up?q=Oxter"
+    },
+    {
+     "word": "Rugge",
+     "meaning": "The back of a man or animal",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n206/mode/2up?q=Rugge"
+    },
+    {
+     "word": "Slote",
+     "meaning": "The pit of the stomach",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n230/mode/2up?q=Slote"
+    },
+    {
+     "word": "Snite",
+     "meaning": "A snout or nose",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n234/mode/2up?q=Snite"
+    }
+   ]
+  },
+  {
+   "id": "lost-bumps",
+   "theme": "Bumps & breakages",
+   "words": [
+    {
+     "word": "Clour",
+     "meaning": "A lump on the flesh, caused by a heavy blow",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n66/mode/2up?q=Clour"
+    },
+    {
+     "word": "Tolt",
+     "meaning": "To give yourself a blow by striking your head against a beam",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n281/mode/2up?q=Tolt"
+    },
+    {
+     "word": "Chap",
+     "meaning": "To knock",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n61/mode/2up?q=Chap"
+    },
+    {
+     "word": "Dirl",
+     "meaning": "To vibrate and shake from the effects of a heavy blow, or of a loud noise",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n81/mode/2up?q=Dirl"
+    },
+    {
+     "word": "Chimble",
+     "meaning": "To crumble into very small fragments",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n62/mode/2up?q=Chimble"
+    },
+    {
+     "word": "Flinders",
+     "meaning": "Fragments, small pieces, splinters",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n100/mode/2up?q=Flinders"
+    },
+    {
+     "word": "Whommle",
+     "meaning": "To turn over clumsily and suddenly",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n309/mode/2up?q=Whommle"
+    },
+    {
+     "word": "Scart",
+     "meaning": "To scratch",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n208/mode/2up?q=Scart"
+    }
+   ]
+  },
+  {
+   "id": "lost-character",
+   "theme": "Good & bad character",
+   "words": [
+    {
+     "word": "Leal",
+     "meaning": "Loyal, faithful, true",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n143/mode/2up?q=Leal"
+    },
+    {
+     "word": "Hende",
+     "meaning": "Gentle, courteous, polite",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n124/mode/2up?q=Hende"
+    },
+    {
+     "word": "Prow",
+     "meaning": "Brave, courageous",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n187/mode/2up?q=Prow"
+    },
+    {
+     "word": "Soothfast",
+     "meaning": "Strong and steady in the truth",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n236/mode/2up?q=Soothfast"
+    },
+    {
+     "word": "Welwilly",
+     "meaning": "Benevolent",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n306/mode/2up?q=Welwilly"
+    },
+    {
+     "word": "Swikeful",
+     "meaning": "Deceitful, treacherous",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n258/mode/2up?q=Swikeful"
+    },
+    {
+     "word": "Inwit",
+     "meaning": "Conscience",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n131/mode/2up?q=Inwit"
+    },
+    {
+     "word": "Ruly",
+     "meaning": "Obedient",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n206/mode/2up?q=Ruly"
+    }
+   ]
+  },
+  {
+   "id": "lost-house",
+   "theme": "House & home",
+   "words": [
+    {
+     "word": "Woning",
+     "meaning": "A dwelling",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n315/mode/2up?q=Woning"
+    },
+    {
+     "word": "Kebars",
+     "meaning": "Rafters of a house or other building",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n135/mode/2up?q=Kebars"
+    },
+    {
+     "word": "Theak",
+     "meaning": "To thatch",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n266/mode/2up?q=Theak"
+    },
+    {
+     "word": "Parget",
+     "meaning": "To plaister or besprinkle a wall",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n180/mode/2up?q=Parget"
+    },
+    {
+     "word": "Cod",
+     "meaning": "A pillow, bag, or cushion",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n68/mode/2up?q=Cod"
+    },
+    {
+     "word": "But and Ben",
+     "meaning": "Out of doors and indoors",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n57/mode/2up?q=But%20and%20Ben"
+    },
+    {
+     "word": "Bield",
+     "meaning": "A shelter",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n43/mode/2up?q=Bield"
+    },
+    {
+     "word": "Steik",
+     "meaning": "To shut up",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n245/mode/2up?q=Steik"
+    }
+   ]
+  },
+  {
+   "id": "lost-sounds",
+   "theme": "Sounds & noises",
+   "words": [
+    {
+     "word": "Chirm",
+     "meaning": "To sound like the murmur or song of a multiplicity of birds",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n63/mode/2up?q=Chirm"
+    },
+    {
+     "word": "Rowte",
+     "meaning": "To roar or bellow like cattle",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n200/mode/2up?q=Rowte"
+    },
+    {
+     "word": "Yamph",
+     "meaning": "To bark, like a small dog",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n322/mode/2up?q=Yamph"
+    },
+    {
+     "word": "Jow",
+     "meaning": "The sound of a great bell",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n133/mode/2up?q=Jow"
+    },
+    {
+     "word": "Brattle",
+     "meaning": "A confused noise or clatter of feet",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n54/mode/2up?q=Brattle"
+    },
+    {
+     "word": "Scrike",
+     "meaning": "A shrill cry, or sound",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n210/mode/2up?q=Scrike"
+    },
+    {
+     "word": "Sharm",
+     "meaning": "To make a buzzing, confused, chattering noise",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n215/mode/2up?q=Sharm"
+    },
+    {
+     "word": "Roopit",
+     "meaning": "Hoarse, as with bronchitis or sore throat",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n200/mode/2up?q=Roopit"
+    }
+   ]
+  },
+  {
+   "id": "lost-sneaking",
+   "theme": "Sneaking & grabbing",
+   "words": [
+    {
+     "word": "Mithe",
+     "meaning": "To conceal",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n167/mode/2up?q=Mithe"
+    },
+    {
+     "word": "Snoove",
+     "meaning": "To pry, to sneak",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n234/mode/2up?q=Snoove"
+    },
+    {
+     "word": "Keek",
+     "meaning": "To peep slyly, to look in",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n133/mode/2up?q=Keek"
+    },
+    {
+     "word": "Snick-drawing",
+     "meaning": "Entering a house or door by stealth",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n233/mode/2up?q=Snick-drawing"
+    },
+    {
+     "word": "Sleithly",
+     "meaning": "Slily, cunningly",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n227/mode/2up?q=Sleithly"
+    },
+    {
+     "word": "Choile",
+     "meaning": "To over-reach",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n63/mode/2up?q=Choile"
+    },
+    {
+     "word": "Kep",
+     "meaning": "To catch, to receive",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n136/mode/2up?q=Kep"
+    },
+    {
+     "word": "Rax",
+     "meaning": "To reach",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n193/mode/2up?q=Rax"
+    }
+   ]
+  },
+  {
+   "id": "lost-songs",
+   "theme": "Songs & verse",
+   "words": [
+    {
+     "word": "Virelay",
+     "meaning": "A catch, a rondeau",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n294/mode/2up?q=Virelay"
+    },
+    {
+     "word": "Twime",
+     "meaning": "A couplet",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n287/mode/2up?q=Twime"
+    },
+    {
+     "word": "Thrime",
+     "meaning": "A triplet",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n273/mode/2up?q=Thrime"
+    },
+    {
+     "word": "O'erword",
+     "meaning": "The chorus, burden, leading idea, or repeated phrase of a song or ballad",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n179/mode/2up?q=O%27erword"
+    },
+    {
+     "word": "Scope",
+     "meaning": "Anglo-Saxon for a poet or maker",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n210/mode/2up?q=Scope"
+    },
+    {
+     "word": "Crowder",
+     "meaning": "A fiddler",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n73/mode/2up?q=Crowder"
+    },
+    {
+     "word": "Whiffler",
+     "meaning": "A fifer, or flute-player",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n309/mode/2up?q=Whiffler"
+    },
+    {
+     "word": "Quillet",
+     "meaning": "A play upon words",
+     "source": "Mackay, Lost Beauties of the English Language (1874)",
+     "link": "https://archive.org/details/cu31924096224880/page/n189/mode/2up?q=Quillet"
+    }
+   ]
+  },
+  {
+   "id": "slang-coins",
+   "theme": "Coins",
+   "words": [
+    {
+     "word": "Grig",
+     "meaning": "A farthing",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GRIG.%20A%20farthing.%20A%20merry%20grig%3B%20a%20fellow%20as%20merry"
+    },
+    {
+     "word": "Magg",
+     "meaning": "A halfpenny",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=MAGG.%20A%20halfpenny."
+    },
+    {
+     "word": "Dace",
+     "meaning": "Two pence",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=DACE.%20Two%20pence.%20Tip%20me%20a%20dace%3B%20lend%20me%20two"
+    },
+    {
+     "word": "Treswins",
+     "meaning": "Threepence",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TRESWINS.%20Threepence."
+    },
+    {
+     "word": "Croker",
+     "meaning": "A groat, or four pence",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CROKER.%20A%20groat%2C%20or%20four%20pence."
+    },
+    {
+     "word": "Tizzy",
+     "meaning": "Sixpence",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TIZZY.%20Sixpence."
+    },
+    {
+     "word": "Twelver",
+     "meaning": "A shilling",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TWELVER.%20A%20shilling."
+    },
+    {
+     "word": "Slat",
+     "meaning": "Half a crown",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SLAT.%20Half%20a%20crown.%20CANT."
+    }
+   ]
+  },
+  {
+   "id": "slang-money",
+   "theme": "Money",
+   "words": [
+    {
+     "word": "Plumb",
+     "meaning": "An hundred thousand pounds",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PLUMB.%20An%20hundred%20thousand%20pounds."
+    },
+    {
+     "word": "Flymsey",
+     "meaning": "A bank note",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=FLYMSEY.%20A%20bank%20note."
+    },
+    {
+     "word": "Goree",
+     "meaning": "Money, chiefly gold",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GOREE.%20Money%2C%20chiefly%20gold%3A%20perhaps%20from%20the%20traffic%20carried%20on"
+    },
+    {
+     "word": "Darby",
+     "meaning": "Ready money",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=DARBY.%20Ready%20money.%20CANT."
+    },
+    {
+     "word": "Grannum's Gold",
+     "meaning": "Hoarded money",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GOLD.%20Hoarded%20money%3A%20supposed%20to%20have%20belonged%20to%20the%20grandmother"
+    },
+    {
+     "word": "Spangle",
+     "meaning": "A seven shilling piece",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SPANGLE.%20A%20seven%20shilling%20piece."
+    },
+    {
+     "word": "Smelts",
+     "meaning": "Half guineas",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SMELTS.%20Half%20guineas.%20CANT."
+    },
+    {
+     "word": "Strike",
+     "meaning": "Twenty shillings",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=STRIKE.%20Twenty%20shillings.%20CANT."
+    }
+   ]
+  },
+  {
+   "id": "slang-mixed-drinks",
+   "theme": "Mixed drinks",
+   "words": [
+    {
+     "word": "Crank",
+     "meaning": "Gin and water",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CRANK.%20Gin%20and%20water%3B%20also%2C%20brisk%2C%20pert."
+    },
+    {
+     "word": "Purl",
+     "meaning": "Ale in which wormwood has been infused, or ale and bitters drunk warm",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PURL.%20Ale%20in%20which%20wormwood%20has%20been%20infused%2C%20or%20ale"
+    },
+    {
+     "word": "Bragget",
+     "meaning": "Mead and ale sweetened with honey",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BRAGGET.%20Mead%20and%20ale%20sweetened%20with%20honey."
+    },
+    {
+     "word": "Cool Tankard",
+     "meaning": "Wine and water, with lemon, sugar, and burrage",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=COOL%20TANKARD.%20Wine%20and%20water%2C%20with%20lemon%2C%20sugar%2C%20and%20burrage."
+    },
+    {
+     "word": "Huckle My Buff",
+     "meaning": "Beer, egg, and brandy, made hot",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=HUCKLE%20MY%20BUFF.%20Beer%2C%20egg%2C%20and%20brandy%2C%20made%20hot."
+    },
+    {
+     "word": "Doctor",
+     "meaning": "Milk and water, with a little rum, and some nutmeg",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=DOCTOR.%20Milk%20and%20water%2C%20with%20a%20little%20rum%2C%20and%20some"
+    },
+    {
+     "word": "Cobblers Punch",
+     "meaning": "Treacle, vinegar, gin, and water",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=COBBLERS%20PUNCH.%20Treacle%2C%20vinegar%2C%20gin%2C%20and%20water."
+    },
+    {
+     "word": "Three Threads",
+     "meaning": "Half common ale, mixed with stale and double beer",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=THREE%20THREADS.%20Half%20common%20ale%2C%20mixed%20with%20stale%20and%20double"
+    }
+   ]
+  },
+  {
+   "id": "slang-drinks",
+   "theme": "Drinks",
+   "words": [
+    {
+     "word": "Bingo",
+     "meaning": "Brandy or other spirituous liquor",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BINGO.%20Brandy%20or%20other%20spirituous%20liquor.%20Cant."
+    },
+    {
+     "word": "Kill Devil",
+     "meaning": "New still-burnt rum",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=KILL%20DEVIL.%20New%20still%2Dburnt%20rum."
+    },
+    {
+     "word": "Red Fustian",
+     "meaning": "Port wine",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RED%20FUSTIAN.%20Port%20wine."
+    },
+    {
+     "word": "Cat Lap",
+     "meaning": "Tea, called also scandal broth",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CAT%20LAP.%20Tea%2C%20called%20also%20scandal%20broth.%20See%20SCANDAL%20BROTH."
+    },
+    {
+     "word": "Twist",
+     "meaning": "A mixture of half tea and half coffee",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TWIST.%20A%20mixture%20of%20half%20tea%20and%20half%20coffee%3B%20likewise"
+    },
+    {
+     "word": "Perkin",
+     "meaning": "Water cyder",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PERKIN.%20Water%20cyder."
+    },
+    {
+     "word": "Taplash",
+     "meaning": "Thick and bad beer",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TAPLASH.%20Thick%20and%20bad%20beer."
+    },
+    {
+     "word": "Water Bewitched",
+     "meaning": "Very weak punch or beer",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=WATER%20BEWITCHED.%20Very%20weak%20punch%20or%20beer."
+    }
+   ]
+  },
+  {
+   "id": "slang-taverns",
+   "theme": "Pubs & taverns",
+   "words": [
+    {
+     "word": "Bowsing Ken",
+     "meaning": "An ale-house or gin-shop",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BOWSING%20KEN.%20An%20ale%2Dhouse%20or%20gin%2Dshop."
+    },
+    {
+     "word": "Beggar Maker",
+     "meaning": "A publican, or ale-house keeper",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BEGGAR%20MAKER.%20A%20publican%2C%20or%20ale%2Dhouse%20keeper."
+    },
+    {
+     "word": "Dash",
+     "meaning": "A tavern drawer",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=DASH.%20A%20tavern%20drawer.%20To%20cut%20a%20dash%3A%20to%20make"
+    },
+    {
+     "word": "Rum Dropper",
+     "meaning": "A vintner",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20DROPPER.%20A%20vintner.%20CANT."
+    },
+    {
+     "word": "Gin Spinner",
+     "meaning": "A distiller",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GIN%20SPINNER.%20A%20distiller."
+    },
+    {
+     "word": "Godfather",
+     "meaning": "He who pays the reckoning, or answers for the rest of the company",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GODFATHER.%20He%20who%20pays%20the%20reckoning%2C%20or%20answers%20for%20the"
+    },
+    {
+     "word": "Whistling Shop",
+     "meaning": "Rooms in the King's Bench and Fleet prison where drams are privately sold",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=Bench%20and%20Fleet%20prison%20where%20drams%20are%20privately%20sold."
+    },
+    {
+     "word": "Size of Ale",
+     "meaning": "Half a pint",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SIZE%20OF%20ALE.%20Half%20a%20pint.%20Size%20of%20bread%20and"
+    }
+   ]
+  },
+  {
+   "id": "slang-fellows",
+   "theme": "Kinds of fellow",
+   "words": [
+    {
+     "word": "Dry Boots",
+     "meaning": "A sly humorous fellow",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=DRY%20BOOTS.%20A%20sly%20humorous%20fellow."
+    },
+    {
+     "word": "Rusty Guts",
+     "meaning": "A blunt surly fellow",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUSTY%20GUTS.%20A%20blunt%20surly%20fellow%3A%20a%20jocular%20misnomer%20of"
+    },
+    {
+     "word": "Slug-a-Bed",
+     "meaning": "A drone, one that cannot rise in the morning",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SLUG%2DA%2DBED.%20A%20drone%2C%20one%20that%20cannot%20rise%20in%20the%20morning."
+    },
+    {
+     "word": "Hog Grubber",
+     "meaning": "A mean stingy fellow",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=HOG%20GRUBBER.%20A%20mean%20stingy%20fellow."
+    },
+    {
+     "word": "Princox",
+     "meaning": "A pert, lively, forward fellow",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PRINCOX.%20A%20pert%2C%20lively%2C%20forward%20fellow."
+    },
+    {
+     "word": "Rosy Gills",
+     "meaning": "One with a sanguine or fresh-coloured countenance",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=ROSY%20GILLS.%20One%20with%20a%20sanguine%20or%20fresh%2Dcoloured%20countenance."
+    },
+    {
+     "word": "Niffynaffy Fellow",
+     "meaning": "A trifler",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=NIFFYNAFFY%20FELLOW.%20A%20trifler."
+    },
+    {
+     "word": "Scaly Fish",
+     "meaning": "An honest, rough, blunt sailor",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SCALY%20FISH.%20An%20honest%2C%20rough%2C%20blunt%20sailor."
+    }
+   ]
+  },
+  {
+   "id": "slang-crafts",
+   "theme": "Shops & crafts",
+   "words": [
+    {
+     "word": "Quarrel-Picker",
+     "meaning": "A glazier",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=QUARREL%2DPICKER.%20A%20glazier%3A%20from%20the%20small%20squares%20in%20casements%2C%20called"
+    },
+    {
+     "word": "Smear",
+     "meaning": "A plasterer",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SMEAR.%20A%20plasterer."
+    },
+    {
+     "word": "Skins",
+     "meaning": "A tanner",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SKINS.%20A%20tanner."
+    },
+    {
+     "word": "Smug",
+     "meaning": "A nick name for a blacksmith",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SMUG.%20A%20nick%20name%20for%20a%20blacksmith%3B%20also%20neat%20and"
+    },
+    {
+     "word": "Split Fig",
+     "meaning": "A grocer",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SPLIT%20FIG.%20A%20grocer."
+    },
+    {
+     "word": "Smoker",
+     "meaning": "A tobacconist",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SMOKER.%20A%20tobacconist."
+    },
+    {
+     "word": "Master of the Mint",
+     "meaning": "A gardener",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=MASTER%20OF%20THE%20MINT.%20A%20gardener."
+    },
+    {
+     "word": "Devil Drawer",
+     "meaning": "A miserable painter",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=DEVIL%20DRAWER.%20A%20miserable%20painter."
+    }
+   ]
+  },
+  {
+   "id": "slang-hired-hands",
+   "theme": "Hired hands",
+   "words": [
+    {
+     "word": "Green Bag",
+     "meaning": "An attorney",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=deeds%20in%20a%20green%20bag%3B%20and%2C%20it%20is%20said%2C%20when"
+    },
+    {
+     "word": "Sheepskin Fiddler",
+     "meaning": "A drummer",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SHEEPSKIN%20FIDDLER.%20A%20drummer."
+    },
+    {
+     "word": "Crowdero",
+     "meaning": "A fiddler",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CROWDERO.%20A%20fiddler."
+    },
+    {
+     "word": "Daisy Kickers",
+     "meaning": "Ostlers at great inns",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=DAISY%20KICKERS.%20Ostlers%20at%20great%20inns."
+    },
+    {
+     "word": "Keel Bullies",
+     "meaning": "Men employed to load and unload the coal vessels",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=KEEL%20BULLIES.%20Men%20employed%20to%20load%20and%20unload%20the%20coal"
+    },
+    {
+     "word": "Rattling Cove",
+     "meaning": "A coachman",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RATTLING%20COVE.%20A%20coachman.%20CANT."
+    },
+    {
+     "word": "Nip Cheese",
+     "meaning": "A nick name for the purser of a ship",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=NIP%20CHEESE.%20A%20nick%20name%20for%20the%20purser%20of%20a"
+    },
+    {
+     "word": "Glim Jack",
+     "meaning": "A link-boy",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GLIM%20JACK.%20A%20link%2Dboy.%20CANT."
+    }
+   ]
+  },
+  {
+   "id": "slang-clothes",
+   "theme": "Clothes",
+   "words": [
+    {
+     "word": "Galligaskins",
+     "meaning": "Breeches",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GALLIGASKINS.%20Breeches."
+    },
+    {
+     "word": "Belly Cheat",
+     "meaning": "An apron",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BELLY%20CHEAT.%20An%20apron."
+    },
+    {
+     "word": "Calle",
+     "meaning": "A cloak or gown",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CALLE.%20A%20cloak%20or%20gown.%20CANT."
+    },
+    {
+     "word": "Numms",
+     "meaning": "A sham collar, to be worn over a dirty shirt",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=NUMMS.%20A%20sham%20collar%2C%20to%20be%20worn%20over%20a%20dirty"
+    },
+    {
+     "word": "Vamper",
+     "meaning": "Stockings",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=VAMPER.%20Stockings."
+    },
+    {
+     "word": "Fogle",
+     "meaning": "A silk handkerchief",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=FOGLE.%20A%20silk%20handkerchief"
+    },
+    {
+     "word": "Jazey",
+     "meaning": "A bob wig",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=JAZEY.%20A%20bob%20wig."
+    },
+    {
+     "word": "Penthouse Nab",
+     "meaning": "A broad brimmed hat",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PENTHOUSE%20NAB.%20A%20broad%20brimmed%20hat."
+    }
+   ]
+  },
+  {
+   "id": "slang-finery",
+   "theme": "Dress & finery",
+   "words": [
+    {
+     "word": "Upper Benjamin",
+     "meaning": "A great coat",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=UPPER%20BENJAMIN.%20A%20great%20coat.%20CANT."
+    },
+    {
+     "word": "Stick Flams",
+     "meaning": "A pair of gloves",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=STICK%20FLAMS.%20A%20pair%20of%20gloves."
+    },
+    {
+     "word": "Tye",
+     "meaning": "A neckcloth",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TYE.%20A%20neckcloth."
+    },
+    {
+     "word": "Trolly Lolly",
+     "meaning": "Coarse lace once much in fashion",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TROLLY%20LOLLY.%20Coarse%20lace%20once%20much%20in%20fashion."
+    },
+    {
+     "word": "Jem",
+     "meaning": "A gold ring",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=JEM.%20A%20gold%20ring.%20CANT."
+    },
+    {
+     "word": "Cheats",
+     "meaning": "Sham sleeves to put over a dirty shift or shirt",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CHEATS.%20Sham%20sleeves%20to%20put%20over%20a%20dirty%20shift%20or"
+    },
+    {
+     "word": "Rum Nab",
+     "meaning": "A good hat",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20NAB.%20A%20good%20hat."
+    },
+    {
+     "word": "Small Clothes",
+     "meaning": "Breeches",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SMALL%20CLOTHES.%20Breeches%3A%20a%20gird%20at%20the%20affected%20delicacy%20of"
+    }
+   ]
+  },
+  {
+   "id": "slang-stealing",
+   "theme": "Ways of stealing",
+   "words": [
+    {
+     "word": "Avoir Du Pois Lay",
+     "meaning": "Stealing brass weights off the counters of shops",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=AVOIR%20DU%20POIS%20LAY.%20Stealing%20brass%20weights%20off%20the%20counters"
+    },
+    {
+     "word": "Curbing Law",
+     "meaning": "The act of hooking goods out of windows",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CURBING%20LAW.%20The%20act%20of%20hooking%20goods%20out%20of%20windows"
+    },
+    {
+     "word": "Drag Lay",
+     "meaning": "Waiting in the streets to rob carts or waggons",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=DRAG%20LAY.%20Waiting%20in%20the%20streets%20to%20rob%20carts%20or"
+    },
+    {
+     "word": "Heavers",
+     "meaning": "Thieves who make it their business to steal tradesmen's shop-books",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=HEAVERS.%20Thieves%20who%20make%20it%20their%20business%20to%20steal"
+    },
+    {
+     "word": "Impudent Stealing",
+     "meaning": "Cutting out the backs of coaches, and robbing the seats",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=IMPUDENT%20STEALING.%20Cutting%20out%20the%20backs%20of%20coaches%2C%20and%20robbing"
+    },
+    {
+     "word": "Konoblin Rig",
+     "meaning": "Stealing large pieces of coal from coalsheds",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=KONOBLIN%20RIG.%20Stealing%20large%20pieces%20of%20coal%20from%20coalsheds."
+    },
+    {
+     "word": "Lully Triggers",
+     "meaning": "Thieves who steal wet linen",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=LULLY%20TRIGGERS.%20Thieves%20who%20steal%20wet%20linen.%20Cant."
+    },
+    {
+     "word": "Tayle Drawers",
+     "meaning": "Thieves who snatch gentlemens swords from their sides",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TAYLE%20DRAWERS.%20Thieves%20who%20snatch%20gentlemens%20swords%20from%20their%20sides."
+    }
+   ]
+  },
+  {
+   "id": "slang-thieves",
+   "theme": "Thieves & their marks",
+   "words": [
+    {
+     "word": "Bleating Rig",
+     "meaning": "Sheep stealing",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BLEATING%20RIG.%20Sheep%20stealing.%20Cant."
+    },
+    {
+     "word": "Roost Lay",
+     "meaning": "Stealing poultry",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=ROOST%20LAY.%20Stealing%20poultry."
+    },
+    {
+     "word": "Peter Lay",
+     "meaning": "The department of stealing portmanteaus, trunks, &c",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PETER%20LAY.%20The%20department%20of%20stealing%20portmanteaus%2C%20trunks"
+    },
+    {
+     "word": "Star Lag",
+     "meaning": "Breaking shop-windows, and stealing some article thereout",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=STAR%20LAG.%20Breaking%20shop%2Dwindows%2C%20and%20stealing%20some%20article%20thereout."
+    },
+    {
+     "word": "Snudge",
+     "meaning": "A thief who hides himself under a bed, in Order to rob the house",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SNUDGE.%20A%20thief%20who%20hides%20himself%20under%20a%20bed%2C%20in"
+    },
+    {
+     "word": "Waterpad",
+     "meaning": "One that robs ships in the river Thames",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=WATERPAD.%20One%20that%20robs%20ships%20in%20the%20river%20Thames."
+    },
+    {
+     "word": "Clank Napper",
+     "meaning": "A silver tankard stealer",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CLANK%20NAPPER.%20A%20silver%20tankard%20stealer.%20See%20RUM%20BUBBER."
+    },
+    {
+     "word": "Mill Lay",
+     "meaning": "To force open the doors of houses in order to rob them",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=MILL%20LAY.%20To%20force%20open%20the%20doors%20of%20houses%20in"
+    }
+   ]
+  },
+  {
+   "id": "slang-cant-2",
+   "theme": "Thieves' cant (more)",
+   "words": [
+    {
+     "word": "Darkmans",
+     "meaning": "The night",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=DARKMANS.%20The%20night.%20CANT."
+    },
+    {
+     "word": "Ruffmans",
+     "meaning": "The woods, hedges, or bushes",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUFFMANS.%20The%20woods%2C%20hedges%2C%20or%20bushes.%20CANT."
+    },
+    {
+     "word": "Libken",
+     "meaning": "A house to lie in",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=LIBKEN.%20A%20house%20to%20lie%20in.%20CANT."
+    },
+    {
+     "word": "Glybe",
+     "meaning": "A writing",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GLYBE.%20A%20writing.%20CANT."
+    },
+    {
+     "word": "Cracksman",
+     "meaning": "A house-breaker",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CRACKSMAN.%20A%20house%2Dbreaker.%20The%20kiddy%20is%20a%20clever%20cracksman%3B%20the"
+    },
+    {
+     "word": "To Paum",
+     "meaning": "To conceal in the hand",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TO%20PAUM.%20To%20conceal%20in%20the%20hand.%20To%20paum%20a"
+    },
+    {
+     "word": "Flash Lingo",
+     "meaning": "The canting or slang language",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=FLASH%20LINGO.%20The%20canting%20or%20slang%20language."
+    },
+    {
+     "word": "Quaking Cheat",
+     "meaning": "A calf or sheep",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=QUAKING%20CHEAT.%20A%20calf%20or%20sheep."
+    }
+   ]
+  },
+  {
+   "id": "slang-rum",
+   "theme": "Fine things",
+   "words": [
+    {
+     "word": "Rum Degen",
+     "meaning": "A handsome sword",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20DEGEN.%20A%20handsome%20sword.%20CANT."
+    },
+    {
+     "word": "Rum Prancer",
+     "meaning": "A fine horse",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20PRANCER.%20A%20fine%20horse.%20CANT."
+    },
+    {
+     "word": "Rum Peepers",
+     "meaning": "Fine looking-glasses",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20PEEPERS.%20Fine%20looking%2Dglasses.%20CANT."
+    },
+    {
+     "word": "Rum Bugher",
+     "meaning": "A valuable dog",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20BUGHER.%20A%20valuable%20dog.%20CANT."
+    },
+    {
+     "word": "Rum Cod",
+     "meaning": "A good purse of gold",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20COD.%20A%20good%20purse%20of%20gold.%20CANT."
+    },
+    {
+     "word": "Rum Glymmer",
+     "meaning": "King or chief of the link-boys",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20GLYMMER.%20King%20or%20chief%20of%20the%20link%2Dboys.%20CANT."
+    },
+    {
+     "word": "Rum Beck",
+     "meaning": "A justice of the peace",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20BECK.%20A%20justice%20of%20the%20peace.%20CANT."
+    },
+    {
+     "word": "Rum Bob",
+     "meaning": "A young apprentice",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20BOB.%20A%20young%20apprentice%3B%20also%20a%20sharp%20trick."
+    }
+   ]
+  },
+  {
+   "id": "slang-rum-2",
+   "theme": "More fine things",
+   "words": [
+    {
+     "word": "Rum Snitch",
+     "meaning": "A smart fillip on the nose",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20SNITCH.%20A%20smart%20fillip%20on%20the%20nose."
+    },
+    {
+     "word": "Rum Squeeze",
+     "meaning": "Much wine, or good liquor, given among fiddlers",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20SQUEEZE.%20Much%20wine%2C%20or%20good%20liquor%2C%20given%20among%20fiddlers."
+    },
+    {
+     "word": "Rum Dubber",
+     "meaning": "An expert picklock",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20DUBBER.%20An%20expert%20picklock."
+    },
+    {
+     "word": "Rum Pad",
+     "meaning": "The highway",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20PAD.%20The%20highway.%20CANT."
+    },
+    {
+     "word": "Rum Clout",
+     "meaning": "A fine silk, cambric, or holland handkerchief",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20CLOUT.%20A%20fine%20silk%2C%20cambric%2C%20or%20holland%20handkerchief.%20CANT."
+    },
+    {
+     "word": "Rum Cole",
+     "meaning": "New money, or medals",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20COLE.%20New%20money%2C%20or%20medals."
+    },
+    {
+     "word": "Rum Duke",
+     "meaning": "A jolly handsome fellow",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20DUKE.%20A%20jolly%20handsome%20fellow%3B%20also%20an%20odd%20eccentric"
+    },
+    {
+     "word": "Rum Bluffer",
+     "meaning": "A jolly host",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RUM%20BLUFFER.%20A%20jolly%20host.%20CANT."
+    }
+   ]
+  },
+  {
+   "id": "slang-horses",
+   "theme": "Horses & riding",
+   "words": [
+    {
+     "word": "Hobbledygee",
+     "meaning": "A pace between a walk and a run, a dog-trot",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=HOBBLEDYGEE.%20A%20pace%20between%20a%20walk%20and%20a%20run%2C%20a"
+    },
+    {
+     "word": "Tittup",
+     "meaning": "A gentle hand gallop, or canter",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TITTUP.%20A%20gentle%20hand%20gallop%2C%20or%20canter."
+    },
+    {
+     "word": "Bonesetter",
+     "meaning": "A hard-trotting horse",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BONESETTER.%20A%20hard%2Dtrotting%20horse."
+    },
+    {
+     "word": "Gibbe",
+     "meaning": "A horse that shrinks from the collar and will not draw",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GIBBE.%20A%20horse%20that%20shrinks%20from%20the%20collar%20and%20will"
+    },
+    {
+     "word": "Piper",
+     "meaning": "A broken winded horse",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PIPER.%20A%20broken%20winded%20horse."
+    },
+    {
+     "word": "Gob String",
+     "meaning": "A bridle",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GOB%20STRING.%20A%20bridle."
+    },
+    {
+     "word": "Pad Borrowers",
+     "meaning": "Horse stealers",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PAD%20BORROWERS.%20Horse%20stealers."
+    },
+    {
+     "word": "Colt",
+     "meaning": "One who lets horses to highwaymen",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=COLT.%20One%20who%20lets%20horses%20to%20highwaymen%3B%20also%20a%20boy"
+    }
+   ]
+  },
+  {
+   "id": "slang-law",
+   "theme": "Law & prison",
+   "words": [
+    {
+     "word": "Catch Pole",
+     "meaning": "A bum bailiff, or sheriff's officer",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CATCH%20POLE.%20A%20bum%20bailiff%2C%20or"
+    },
+    {
+     "word": "Cramp Rings",
+     "meaning": "Bolts, shackles, or fetters",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CRAMP%20RINGS.%20Bolts%2C%20shackles%2C%20or%20fetters.%20CANT."
+    },
+    {
+     "word": "Fastner",
+     "meaning": "A warrant",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=FASTNER.%20A%20warrant."
+    },
+    {
+     "word": "Lambskin Men",
+     "meaning": "The judges",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=LAMBSKIN%20MEN.%20The%20judges%3A%20from%20their%20robes%20lined%20and%20bordered"
+    },
+    {
+     "word": "Turned Up",
+     "meaning": "Acquitted",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TURNED%20UP.%20Acquitted%3B%20discharged."
+    },
+    {
+     "word": "Under Dubber",
+     "meaning": "A turnkey",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=UNDER%20DUBBER.%20A%20turnkey."
+    },
+    {
+     "word": "Prig Napper",
+     "meaning": "A thief taker",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PRIG%20NAPPER.%20A%20thief%20taker."
+    },
+    {
+     "word": "Campbell's Academy",
+     "meaning": "The hulks or lighters, on board of which felons are condemned to hard labour",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=ACADEMY.%20The%20hulks%20or%20lighters%2C%20on%20board%20of%20which%20felons"
+    }
+   ]
+  },
+  {
+   "id": "slang-tales",
+   "theme": "Talk & tales",
+   "words": [
+    {
+     "word": "Whisker",
+     "meaning": "A great lie",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=WHISKER.%20A%20great%20lie."
+    },
+    {
+     "word": "Canterbury Story",
+     "meaning": "A long roundabout tale",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CANTERBURY%20STORY.%20A%20long%20roundabout%20tale."
+    },
+    {
+     "word": "Carry Witchet",
+     "meaning": "A sort of conundrum, puzzlewit, or riddle",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CARRY%20WITCHET.%20A%20sort%20of%20conundrum%2C%20puzzlewit%2C%20or%20riddle."
+    },
+    {
+     "word": "Fustian",
+     "meaning": "Bombast language",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=FUSTIAN.%20Bombast%20language.%20Red%20fustian%3B%20port%20wine."
+    },
+    {
+     "word": "Slipslopping",
+     "meaning": "Misnaming and misapplying any hard word",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SLIPSLOPPING.%20Misnaming%20and%20misapplying%20any%20hard%20word%3B%20from%20the%20character"
+    },
+    {
+     "word": "To Wiredraw",
+     "meaning": "To lengthen out or extend any book, letter, or discourse",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TO%20WIREDRAW.%20To%20lengthen%20out%20or%20extend%20any%20book%2C%20letter"
+    },
+    {
+     "word": "To Whiddle",
+     "meaning": "To tell or discover",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TO%20WHIDDLE.%20To%20tell%20or%20discover.%20He%20whiddles%3B%20he%20peaches."
+    },
+    {
+     "word": "To Cap",
+     "meaning": "To take one's oath",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=oath.%20I%20will%20cap%20downright%3B%20I%20will%20swear%20home.%20CANT."
+    }
+   ]
+  },
+  {
+   "id": "slang-moods",
+   "theme": "Moods & feelings",
+   "words": [
+    {
+     "word": "Blue Devils",
+     "meaning": "Low spirits",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BLUE%20DEVILS.%20Low%20spirits."
+    },
+    {
+     "word": "Betwattled",
+     "meaning": "Surprised, confounded, out of one's senses",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BETWATTLED.%20Surprised%2C%20confounded%2C%20out%20of"
+    },
+    {
+     "word": "Friday-Face",
+     "meaning": "A dismal countenance",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=FRIDAY%2DFACE.%20A%20dismal%20countenance.%20Before%2C%20and%20even%20long%20after%20the"
+    },
+    {
+     "word": "Glimflashy",
+     "meaning": "Angry, or in a passion",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GLIMFLASHY.%20Angry%2C%20or%20in%20a%20passion.%20CANT."
+    },
+    {
+     "word": "Havy Cavy",
+     "meaning": "Wavering, doubtful, shilly shally",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=HAVY%20CAVY.%20Wavering%2C%20doubtful%2C%20shilly%20shally."
+    },
+    {
+     "word": "Maggotty",
+     "meaning": "Whimsical, capricious",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=MAGGOTTY.%20Whimsical%2C%20capricious."
+    },
+    {
+     "word": "Watery-Headed",
+     "meaning": "Apt to shed tears",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=WATERY%2DHEADED.%20Apt%20to%20shed%20tears."
+    },
+    {
+     "word": "Peery",
+     "meaning": "Inquisitive, suspicious",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=a%20peery%2C%20tis%20snitch%20we%20are%20observed"
+    }
+   ]
+  },
+  {
+   "id": "slang-soldiers",
+   "theme": "Soldiers & army",
+   "words": [
+    {
+     "word": "Brown Bess",
+     "meaning": "A soldier's firelock",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=firelock.%20To%20hug%20brown%20Bess%3B%20to%20carry%20a%20firelock%2C%20or"
+    },
+    {
+     "word": "Parish Soldier",
+     "meaning": "A jeering name for a militiaman",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PARISH%20SOLDIER.%20A%20jeering%20name%20for%20a%20militiaman%3A%20from%20substitutes"
+    },
+    {
+     "word": "Rag Carrier",
+     "meaning": "An ensign",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=RAG%20CARRIER.%20An%20ensign."
+    },
+    {
+     "word": "Tow Row",
+     "meaning": "A grenadier",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TOW%20ROW.%20A%20grenadier.%20The%20tow%20row%20club%3B%20a%20club"
+    },
+    {
+     "word": "Skulker",
+     "meaning": "A soldier who by feigned sickness, or other pretences, evades his duty",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SKULKER.%20A%20soldier%20who%20by%20feigned%20sickness%2C%20or%20other%20pretences"
+    },
+    {
+     "word": "Pear Making",
+     "meaning": "Taking bounties from several regiments and immediately deserting",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PEAR%20MAKING.%20Taking%20bounties%20from%20several%20regiments%20and%20immediately%20deserting."
+    },
+    {
+     "word": "Sutrer",
+     "meaning": "A camp publican",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SUTRER.%20A%20camp%20publican%3A%20also%20one%20that%20pilfers%20gloves%2C%20tobacco"
+    },
+    {
+     "word": "Soldier's Pomatum",
+     "meaning": "A piece of tallow candle",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=POMATUM.%20A%20piece%20of%20tallow%20candle."
+    }
+   ]
+  },
+  {
+   "id": "slang-fun",
+   "theme": "Fun & merrymaking",
+   "words": [
+    {
+     "word": "Spouting Club",
+     "meaning": "A meeting of apprentices and mechanics to rehearse different characters in plays",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SPOUTING%20CLUB.%20A%20meeting%20of%20apprentices%20and%20mechanics%20to%20rehearse"
+    },
+    {
+     "word": "Flying Stationers",
+     "meaning": "Ballad-singers and hawkers of penny histories",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=FLYING%20STATIONERS.%20Ballad%2Dsingers%20and%20hawkers%20of%20penny%20histories."
+    },
+    {
+     "word": "Jack Pudding",
+     "meaning": "The merry andrew, zany, or jester to a mountebank",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=JACK%20PUDDING.%20The%20merry%20andrew%2C%20zany%2C%20or%20jester%20to%20a"
+    },
+    {
+     "word": "Faulkner",
+     "meaning": "A tumbler, juggler, or shewer of tricks",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=FAULKNER.%20A%20tumbler%2C%20juggler%2C%20or%20shewer%20of%20tricks%3B%20perhaps%20because"
+    },
+    {
+     "word": "Scheme",
+     "meaning": "A party of pleasure",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SCHEME.%20A%20party%20of%20pleasure."
+    },
+    {
+     "word": "Botherams",
+     "meaning": "A convivial society",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BOTHERAMS.%20A%20convivial%20society."
+    },
+    {
+     "word": "Kittle Pitchering",
+     "meaning": "A jocular method of hobbling or bothering a troublesome teller of long stories",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=KITTLE%20PITCHERING.%20A%20jocular%20method%20of%20hobbling%20or%20bothering%20a"
+    },
+    {
+     "word": "Rig",
+     "meaning": "Fun, game, diversion, or trick",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=rig%20upon%20any%20particular%20person%3B%20to%20make%20him%20a%20butt."
+    }
+   ]
+  },
+  {
+   "id": "slang-house",
+   "theme": "House & home",
+   "words": [
+    {
+     "word": "Glimfenders",
+     "meaning": "Andirons",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GLIMFENDERS.%20Andirons.%20CANT."
+    },
+    {
+     "word": "Glimstick",
+     "meaning": "A candlestick",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GLIMSTICK.%20A%20candlestick.%20CANT."
+    },
+    {
+     "word": "Glaze",
+     "meaning": "A window",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GLAZE.%20A%20window."
+    },
+    {
+     "word": "Sky Parlour",
+     "meaning": "The garret, or upper story",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SKY%20PARLOUR.%20The%20garret%2C%20or%20upper%20story."
+    },
+    {
+     "word": "Sticks",
+     "meaning": "Household furniture",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=STICKS.%20Household%20furniture."
+    },
+    {
+     "word": "Muffling Cheat",
+     "meaning": "A napkin",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=MUFFLING%20CHEAT.%20A%20napkin."
+    },
+    {
+     "word": "Sunny Bank",
+     "meaning": "A good fire in winter",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SUNNY%20BANK.%20A%20good%20fire%20in%20winter."
+    },
+    {
+     "word": "Guy",
+     "meaning": "A dark lanthorn",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=GUY.%20A%20dark%20lanthorn%3A%20an%20allusion%20to%20Guy%20Faux%2C%20the"
+    }
+   ]
+  },
+  {
+   "id": "slang-things",
+   "theme": "Things & tools",
+   "words": [
+    {
+     "word": "Budget",
+     "meaning": "A wallet",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BUDGET.%20A%20wallet.%20To%20open%20the%20budget%3B%20a%20term%20used"
+    },
+    {
+     "word": "Ped",
+     "meaning": "A basket",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PED.%20A%20basket.%20CANT."
+    },
+    {
+     "word": "Peter",
+     "meaning": "A portmanteau or cloke-bag",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PETER.%20A%20portmanteau%20or%20cloke%2Dbag.%20Biter%20of%20peters%3B%20one%20that"
+    },
+    {
+     "word": "Steel Bar",
+     "meaning": "A needle",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=STEEL%20BAR.%20A%20needle.%20A%20steel%20bar%20flinger%3B%20a%20taylor"
+    },
+    {
+     "word": "Taylors Goose",
+     "meaning": "An iron with which, when heated, press down the seams of clothes",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TAYLORS%20GOOSE.%20An%20iron%20with%20which%2C%20when%20heated%2C%20press%20down"
+    },
+    {
+     "word": "Lullies",
+     "meaning": "Wet linen",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=LULLIES.%20Wet%20linen.%20Cant."
+    },
+    {
+     "word": "Make Weight",
+     "meaning": "A small candle",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=MAKE%20WEIGHT.%20A%20small%20candle%3A%20a%20term%20applied%20to%20a"
+    },
+    {
+     "word": "Pit",
+     "meaning": "A watch fob",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PIT.%20A%20watch%20fob.%20He%20drew%20a%20rare%20thimble%20from"
+    }
+   ]
+  },
+  {
+   "id": "slang-debts",
+   "theme": "Debts & dealing",
+   "words": [
+    {
+     "word": "Earnest",
+     "meaning": "A deposit in part of payment, to bind a bargain",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=EARNEST.%20A%20deposit%20in%20part%20of%20payment%2C%20to%20bind%20a"
+    },
+    {
+     "word": "Spilt",
+     "meaning": "A small reward or gift",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=SPILT.%20A%20small%20reward%20or%20gift."
+    },
+    {
+     "word": "Breaking Shins",
+     "meaning": "Borrowing money",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=BREAKING%20SHINS.%20Borrowing%20money%3B%20perhaps%20from%20the%20figurative%20operation%20being"
+    },
+    {
+     "word": "Two to One Shop",
+     "meaning": "A pawnbroker's",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=alluding%20to%20the%20three%20blue%20balls%2C%20the%20sign%20of%20that"
+    },
+    {
+     "word": "Pursenets",
+     "meaning": "Goods taken up at thrice their value, by young spendthrifts, upon trust",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PURSENETS.%20Goods%20taken%20up%20at%20thrice%20their%20value%2C%20by%20young"
+    },
+    {
+     "word": "Public Man",
+     "meaning": "A bankrupt",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=PUBLIC%20MAN.%20A%20bankrupt."
+    },
+    {
+     "word": "Cent Per Cent",
+     "meaning": "An usurer",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=CENT%20PER%20CENT.%20An%20usurer."
+    },
+    {
+     "word": "To Blot the Skrip and Jar It",
+     "meaning": "To stand engaged or bound for any one",
+     "source": "Grose's Dictionary of the Vulgar Tongue (1811 edition)",
+     "link": "https://www.gutenberg.org/cache/epub/5402/pg5402-images.html#:~:text=TO%20BLOT%20THE%20SKRIP%20AND%20JAR%20IT.%20To%20stand%20engaged"
+    }
+   ]
+  },
+  {
+   "id": "flower-courtship",
+   "theme": "Flowers of courtship",
+   "words": [
+    {
+     "word": "Moss Rose",
+     "meaning": "Confession of Love",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Moss_Rose_Confession_of_Love"
+    },
+    {
+     "word": "Cactus",
+     "meaning": "Ardent love",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Cactus_Ardent_Love"
+    },
+    {
+     "word": "Nosegay",
+     "meaning": "Gallantry",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Geranium, Rose-scented",
+     "meaning": "Preference",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Day-Lily, Yellow",
+     "meaning": "Coquetry",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Laurustinus",
+     "meaning": "I die if neglected",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Mignonette",
+     "meaning": "Your qualities surpass your charms",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Mignonette_Your_Qualities_surpass_your_Charms"
+    },
+    {
+     "word": "Pine-apple",
+     "meaning": "You are perfect",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    }
+   ]
+  },
+  {
+   "id": "flower-sorrow",
+   "theme": "Flowers of sorrow",
+   "words": [
+    {
+     "word": "Cypress",
+     "meaning": "Mourning",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Cypress_Mourning"
+    },
+    {
+     "word": "Adonis, Flos",
+     "meaning": "Painful recollections",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Geranium, Sorrowful",
+     "meaning": "Melancholy mind",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Meadow Saffron",
+     "meaning": "My best days are past",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html"
+    },
+    {
+     "word": "Primrose",
+     "meaning": "Early grief; Childhood",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Primrose_Early_Grief"
+    },
+    {
+     "word": "Cranberry",
+     "meaning": "Cure for the Heartache",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Cranberry_Cure_for_the_Heartache"
+    },
+    {
+     "word": "Poppy",
+     "meaning": "Consolation; Sleep",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Poppy_Consolation"
+    },
+    {
+     "word": "Myrobolan",
+     "meaning": "Privation",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    }
+   ]
+  },
+  {
+   "id": "flower-rejection",
+   "theme": "Flowers of rejection",
+   "words": [
+    {
+     "word": "Hortensia",
+     "meaning": "You are cold",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Tansey, Wild",
+     "meaning": "I declare war against you",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Burdock",
+     "meaning": "Touch me not",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Citron",
+     "meaning": "Estrangement",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Citron_Estrangement"
+    },
+    {
+     "word": "Straw, Broken",
+     "meaning": "Rupture of a contract",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Columbine",
+     "meaning": "Desertion; Folly",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Columbine_Desertion"
+    },
+    {
+     "word": "Primrose, large-flowered Evening",
+     "meaning": "Inconstancy",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Rose, White",
+     "meaning": "I would be single; Silence",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#White_Rose_I_would_be_single"
+    }
+   ]
+  },
+  {
+   "id": "flower-faults",
+   "theme": "Flowers of faults",
+   "words": [
+    {
+     "word": "Thistle",
+     "meaning": "Surliness",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Borage",
+     "meaning": "Bluntness",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Fuller’s Teasel",
+     "meaning": "Misanthropy",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Daffodil",
+     "meaning": "Self-love",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Snapdragon",
+     "meaning": "Presumption",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Buttercup",
+     "meaning": "Ingratitude",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Balsam",
+     "meaning": "Impatience",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Cuscuta",
+     "meaning": "Meanness",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    }
+   ]
+  },
+  {
+   "id": "flower-deceit",
+   "theme": "Flowers of deceit",
+   "words": [
+    {
+     "word": "Bilberry",
+     "meaning": "Treachery",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Bugloss",
+     "meaning": "Falsehood",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Walnut",
+     "meaning": "Stratagem",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Venus’s Looking-glass",
+     "meaning": "Flattery",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Sunflower",
+     "meaning": "False riches",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Sunflower_False_Riches"
+    },
+    {
+     "word": "Dragon Plant",
+     "meaning": "You are near a snare",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dragon_Plant_You_are_near_a_snare"
+    },
+    {
+     "word": "Lavender",
+     "meaning": "Distrust; Mistrust",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Lavender_Distrust"
+    },
+    {
+     "word": "Almond-tree",
+     "meaning": "Indiscretion",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    }
+   ]
+  },
+  {
+   "id": "flower-virtue",
+   "theme": "Flowers of virtue",
+   "words": [
+    {
+     "word": "Sage",
+     "meaning": "Domestic virtues; Esteem",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Sage_Domestic_Virtues"
+    },
+    {
+     "word": "Geranium, Wild",
+     "meaning": "Steadfast piety",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Chicory",
+     "meaning": "Frugality",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Cress",
+     "meaning": "Resolution",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Box",
+     "meaning": "Stoicism",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Box_Stoicism"
+    },
+    {
+     "word": "Mallow",
+     "meaning": "Beneficence",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Coriander",
+     "meaning": "Hidden merit",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Oak",
+     "meaning": "Nobility; Hospitality",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Oak_Nobility"
+    }
+   ]
+  },
+  {
+   "id": "flower-blessings",
+   "theme": "Flowers of good wishes",
+   "words": [
+    {
+     "word": "Beech",
+     "meaning": "Prosperity",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Fig",
+     "meaning": "Longevity",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Sweet Sultan",
+     "meaning": "Happiness",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Juniper",
+     "meaning": "Protection",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Juniper_Protection"
+    },
+    {
+     "word": "Parsley",
+     "meaning": "Festivity",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Angelica",
+     "meaning": "Inspiration",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Tussilage, Sweet-scented",
+     "meaning": "Justice shall be done to you",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Hazel",
+     "meaning": "Peace, reconciliation",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Hazel_Peace_Reconciliation"
+    }
+   ]
+  },
+  {
+   "id": "flower-graces",
+   "theme": "Flowers of gifts & graces",
+   "words": [
+    {
+     "word": "Acanthus",
+     "meaning": "The arts",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Acanthus_The_Arts"
+    },
+    {
+     "word": "Lotus",
+     "meaning": "Eloquence",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Geranium, Pencilled leaf",
+     "meaning": "Ingenuity",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Dahlia",
+     "meaning": "Elegance and Dignity",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dahlia_Elegance_and_Dignity"
+    },
+    {
+     "word": "Hornbeam",
+     "meaning": "Ornament",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Strawberry",
+     "meaning": "Perfection",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Strawberry_Perfection"
+    },
+    {
+     "word": "Coxcomb",
+     "meaning": "Singularity",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Coxcomb_Singularity"
+    },
+    {
+     "word": "Rose, Monthly",
+     "meaning": "Beauty ever new",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    }
+   ]
+  },
+  {
+   "id": "flower-moods",
+   "theme": "Flowers of moods",
+   "words": [
+    {
+     "word": "Sainfoil, Shaking",
+     "meaning": "Agitation",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Cowslip",
+     "meaning": "Pensiveness",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Cowslip_Pensiveness"
+    },
+    {
+     "word": "Sycamore",
+     "meaning": "Curiosity",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Truffle",
+     "meaning": "Surprise",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Heath",
+     "meaning": "Solitude",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Stonecrop",
+     "meaning": "Tranquility",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "London Pride",
+     "meaning": "Frivolity",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    },
+    {
+     "word": "Champignon",
+     "meaning": "Suspicion",
+     "source": "Henrietta Dumont, The Language of Flowers (1851)",
+     "link": "https://www.gutenberg.org/cache/epub/71779/pg71779-images.html#Dictionary_of_Flowers"
+    }
+   ]
+  }
+ ]
+}

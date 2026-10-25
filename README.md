@@ -48,6 +48,7 @@ Sprays, telling-offs, blame, bribes and the committee.
 
 ### [🎲 Fun](docs/COMMANDS.md#fun)
 Looting, Linux, anime and the war archives.
+- `play`: party games, live or through the day (🧚 Crust: find the Changeling who doesn't know the old word)
 - `loot`: you're looting the body · `linux` and `anime`: what our resident critics think today
 - `wars`: the KTDI War Archives · `!fyio`: fuck you, I'm out (typed only)
 

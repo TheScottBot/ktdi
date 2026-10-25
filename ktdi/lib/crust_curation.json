@@ -1,0 +1,817 @@
+{
+ "_about": "Crust's cards: a theme and eight of /bread's reviewed words (by question id) each. Made by agents from private/crust/pool_*.json, checked against the house rules; build with python -m ktdi.tools.crust_build.",
+ "cards": [
+  {
+   "id": "lost-drink",
+   "theme": "Drink & drinking",
+   "words": [
+    "lostword:bever",
+    "lostword:barrel-fever",
+    "lostword:brinch",
+    "lostword:dew-cup",
+    "lostword:mantle",
+    "lostword:swill-bowl",
+    "lostword:waught",
+    "lostword:drouthy"
+   ]
+  },
+  {
+   "id": "lost-table",
+   "theme": "At table",
+   "words": [
+    "lostword:mazer",
+    "lostword:birler",
+    "lostword:smell-feast",
+    "lostword:pingle",
+    "lostword:slotter",
+    "lostword:quaisy",
+    "lostword:troll",
+    "lostword:brander"
+   ]
+  },
+  {
+   "id": "lost-food",
+   "theme": "Food & eating",
+   "words": [
+    "lostword:flaun",
+    "lostword:sool",
+    "lostword:orts",
+    "lostword:shive",
+    "lostword:sculsh",
+    "lostword:thepes",
+    "lostword:franch",
+    "lostword:wersh"
+   ]
+  },
+  {
+   "id": "lost-weather",
+   "theme": "Weather & sky",
+   "words": [
+    "lostword:airt",
+    "lostword:levin",
+    "lostword:lift",
+    "lostword:lown",
+    "lostword:skyte",
+    "lostword:glouse",
+    "lostword:snithe",
+    "lostword:swale"
+   ]
+  },
+  {
+   "id": "lost-time",
+   "theme": "Time & age",
+   "words": [
+    "lostword:aforetime",
+    "lostword:alderelde",
+    "lostword:belive",
+    "lostword:gliff",
+    "lostword:lome",
+    "lostword:neist",
+    "lostword:sunstead",
+    "lostword:mirkshade"
+   ]
+  },
+  {
+   "id": "lost-birds",
+   "theme": "Birds",
+   "words": [
+    "lostword:culver",
+    "lostword:merle",
+    "lostword:mevy",
+    "lostword:miredrum",
+    "lostword:nope",
+    "lostword:ruddock",
+    "lostword:skart",
+    "lostword:whaup"
+   ]
+  },
+  {
+   "id": "lost-flowers",
+   "theme": "Wild flowers",
+   "words": [
+    "lostword:bellbloom",
+    "lostword:blaver",
+    "lostword:breezeblossom",
+    "lostword:culverwort",
+    "lostword:lithe-wort",
+    "lostword:mell-sylvester",
+    "lostword:ninniver",
+    "lostword:paigle"
+   ]
+  },
+  {
+   "id": "lost-harvest",
+   "theme": "Corn & harvest",
+   "words": [
+    "lostword:ear",
+    "lostword:braird",
+    "lostword:clevel",
+    "lostword:gavel",
+    "lostword:hoils",
+    "lostword:math",
+    "lostword:moulter",
+    "lostword:bowboy"
+   ]
+  },
+  {
+   "id": "lost-field",
+   "theme": "Field work",
+   "words": [
+    "lostword:yelf",
+    "lostword:yelm",
+    "lostword:pix",
+    "lostword:sned",
+    "lostword:quoy",
+    "lostword:kex",
+    "lostword:raddles",
+    "lostword:uneared"
+   ]
+  },
+  {
+   "id": "lost-land",
+   "theme": "Land & water",
+   "words": [
+    "lostword:adle",
+    "lostword:queach",
+    "lostword:pirle",
+    "lostword:slab",
+    "lostword:waterstead",
+    "lostword:slade",
+    "lostword:trod",
+    "lostword:scoil"
+   ]
+  },
+  {
+   "id": "lost-feelings",
+   "theme": "Feelings",
+   "words": [
+    "lostword:dule",
+    "lostword:dowff",
+    "lostword:dree",
+    "lostword:grue",
+    "lostword:ug",
+    "lostword:yammer",
+    "lostword:murge",
+    "lostword:rewth"
+   ]
+  },
+  {
+   "id": "lost-fun",
+   "theme": "Fun & merriment",
+   "words": [
+    "lostword:crouse",
+    "lostword:splore",
+    "lostword:snirt",
+    "lostword:yoyster",
+    "lostword:bord",
+    "lostword:daff",
+    "lostword:pirl",
+    "lostword:queming"
+   ]
+  },
+  {
+   "id": "lost-talk",
+   "theme": "Talk",
+   "words": [
+    "lostword:quethe",
+    "lostword:rown",
+    "lostword:yatter",
+    "lostword:bode",
+    "lostword:lesing",
+    "lostword:rede",
+    "lostword:whist",
+    "lostword:claw"
+   ]
+  },
+  {
+   "id": "lost-rogues",
+   "theme": "Rogues & characters",
+   "words": [
+    "lostword:birkie",
+    "lostword:pranker",
+    "lostword:swasher",
+    "lostword:lorel",
+    "lostword:henter",
+    "lostword:vothman",
+    "lostword:glaverer",
+    "lostword:pinchback"
+   ]
+  },
+  {
+   "id": "lost-work",
+   "theme": "Work & idleness",
+   "words": [
+    "lostword:chare",
+    "lostword:aidle",
+    "lostword:swink",
+    "lostword:kemp",
+    "lostword:olyte",
+    "lostword:bummel",
+    "lostword:micher",
+    "lostword:moffle"
+   ]
+  },
+  {
+   "id": "lost-light",
+   "theme": "Light & dark",
+   "words": [
+    "lostword:leme",
+    "lostword:glede",
+    "lostword:tead",
+    "lostword:spunkie",
+    "lostword:glincy",
+    "lostword:rindle",
+    "lostword:douter",
+    "lostword:thesterness"
+   ]
+  },
+  {
+   "id": "lost-folk",
+   "theme": "Folk & kin",
+   "words": [
+    "lostword:oye",
+    "lostword:sib",
+    "lostword:marrow",
+    "lostword:thorpsman",
+    "lostword:springald",
+    "lostword:sithcundman",
+    "lostword:welder",
+    "lostword:strend"
+   ]
+  },
+  {
+   "id": "lost-money",
+   "theme": "Money & trade",
+   "words": [
+    "lostword:plack",
+    "lostword:chaffer",
+    "lostword:niffer",
+    "lostword:outrope",
+    "lostword:wair",
+    "lostword:wanthrift",
+    "lostword:hain",
+    "lostword:wad"
+   ]
+  },
+  {
+   "id": "lost-body",
+   "theme": "The body",
+   "words": [
+    "lostword:pow",
+    "lostword:nieve",
+    "lostword:loof",
+    "lostword:hardel",
+    "lostword:oxter",
+    "lostword:rugge",
+    "lostword:slote",
+    "lostword:snite"
+   ]
+  },
+  {
+   "id": "lost-bumps",
+   "theme": "Bumps & breakages",
+   "words": [
+    "lostword:clour",
+    "lostword:tolt",
+    "lostword:chap",
+    "lostword:dirl",
+    "lostword:chimble",
+    "lostword:flinders",
+    "lostword:whommle",
+    "lostword:scart"
+   ]
+  },
+  {
+   "id": "lost-character",
+   "theme": "Good & bad character",
+   "words": [
+    "lostword:leal",
+    "lostword:hende",
+    "lostword:prow",
+    "lostword:soothfast",
+    "lostword:welwilly",
+    "lostword:swikeful",
+    "lostword:inwit",
+    "lostword:ruly"
+   ]
+  },
+  {
+   "id": "lost-house",
+   "theme": "House & home",
+   "words": [
+    "lostword:woning",
+    "lostword:kebars",
+    "lostword:theak",
+    "lostword:parget",
+    "lostword:cod",
+    "lostword:but-and-ben",
+    "lostword:bield",
+    "lostword:steik"
+   ]
+  },
+  {
+   "id": "lost-sounds",
+   "theme": "Sounds & noises",
+   "words": [
+    "lostword:chirm",
+    "lostword:rowte",
+    "lostword:yamph",
+    "lostword:jow",
+    "lostword:brattle",
+    "lostword:scrike",
+    "lostword:sharm",
+    "lostword:roopit"
+   ]
+  },
+  {
+   "id": "lost-sneaking",
+   "theme": "Sneaking & grabbing",
+   "words": [
+    "lostword:mithe",
+    "lostword:snoove",
+    "lostword:keek",
+    "lostword:snick-drawing",
+    "lostword:sleithly",
+    "lostword:choile",
+    "lostword:kep",
+    "lostword:rax"
+   ]
+  },
+  {
+   "id": "lost-songs",
+   "theme": "Songs & verse",
+   "words": [
+    "lostword:virelay",
+    "lostword:twime",
+    "lostword:thrime",
+    "lostword:o-erword",
+    "lostword:scope",
+    "lostword:crowder",
+    "lostword:whiffler",
+    "lostword:quillet"
+   ]
+  },
+  {
+   "id": "slang-coins",
+   "theme": "Coins",
+   "words": [
+    "slang:grig",
+    "slang:magg",
+    "slang:dace",
+    "slang:treswins",
+    "slang:croker",
+    "slang:tizzy",
+    "slang:twelver",
+    "slang:slat"
+   ]
+  },
+  {
+   "id": "slang-money",
+   "theme": "Money",
+   "words": [
+    "slang:plumb",
+    "slang:flymsey",
+    "slang:goree",
+    "slang:darby",
+    "slang:grannum-s-gold",
+    "slang:spangle",
+    "slang:smelts",
+    "slang:strike"
+   ]
+  },
+  {
+   "id": "slang-mixed-drinks",
+   "theme": "Mixed drinks",
+   "words": [
+    "slang:crank",
+    "slang:purl",
+    "slang:bragget",
+    "slang:cool-tankard",
+    "slang:huckle-my-buff",
+    "slang:doctor",
+    "slang:cobblers-punch",
+    "slang:three-threads"
+   ]
+  },
+  {
+   "id": "slang-drinks",
+   "theme": "Drinks",
+   "words": [
+    "slang:bingo",
+    "slang:kill-devil",
+    "slang:red-fustian",
+    "slang:cat-lap",
+    "slang:twist",
+    "slang:perkin",
+    "slang:taplash",
+    "slang:water-bewitched"
+   ]
+  },
+  {
+   "id": "slang-taverns",
+   "theme": "Pubs & taverns",
+   "words": [
+    "slang:bowsing-ken",
+    "slang:beggar-maker",
+    "slang:dash",
+    "slang:rum-dropper",
+    "slang:gin-spinner",
+    "slang:godfather",
+    "slang:whistling-shop",
+    "slang:size-of-ale"
+   ]
+  },
+  {
+   "id": "slang-fellows",
+   "theme": "Kinds of fellow",
+   "words": [
+    "slang:dry-boots",
+    "slang:rusty-guts",
+    "slang:slug-a-bed",
+    "slang:hog-grubber",
+    "slang:princox",
+    "slang:rosy-gills",
+    "slang:niffynaffy-fellow",
+    "slang:scaly-fish"
+   ]
+  },
+  {
+   "id": "slang-crafts",
+   "theme": "Shops & crafts",
+   "words": [
+    "slang:quarrel-picker",
+    "slang:smear",
+    "slang:skins",
+    "slang:smug",
+    "slang:split-fig",
+    "slang:smoker",
+    "slang:master-of-the-mint",
+    "slang:devil-drawer"
+   ]
+  },
+  {
+   "id": "slang-hired-hands",
+   "theme": "Hired hands",
+   "words": [
+    "slang:green-bag",
+    "slang:sheepskin-fiddler",
+    "slang:crowdero",
+    "slang:daisy-kickers",
+    "slang:keel-bullies",
+    "slang:rattling-cove",
+    "slang:nip-cheese",
+    "slang:glim-jack"
+   ]
+  },
+  {
+   "id": "slang-clothes",
+   "theme": "Clothes",
+   "words": [
+    "slang:galligaskins",
+    "slang:belly-cheat",
+    "slang:calle",
+    "slang:numms",
+    "slang:vamper",
+    "slang:fogle",
+    "slang:jazey",
+    "slang:penthouse-nab"
+   ]
+  },
+  {
+   "id": "slang-finery",
+   "theme": "Dress & finery",
+   "words": [
+    "slang:upper-benjamin",
+    "slang:stick-flams",
+    "slang:tye",
+    "slang:trolly-lolly",
+    "slang:jem",
+    "slang:cheats",
+    "slang:rum-nab",
+    "slang:small-clothes"
+   ]
+  },
+  {
+   "id": "slang-stealing",
+   "theme": "Ways of stealing",
+   "words": [
+    "slang:avoir-du-pois-lay",
+    "slang:curbing-law",
+    "slang:drag-lay",
+    "slang:heavers",
+    "slang:impudent-stealing",
+    "slang:konoblin-rig",
+    "slang:lully-triggers",
+    "slang:tayle-drawers"
+   ]
+  },
+  {
+   "id": "slang-thieves",
+   "theme": "Thieves & their marks",
+   "words": [
+    "slang:bleating-rig",
+    "slang:roost-lay",
+    "slang:peter-lay",
+    "slang:star-lag",
+    "slang:snudge",
+    "slang:waterpad",
+    "slang:clank-napper",
+    "slang:mill-lay"
+   ]
+  },
+  {
+   "id": "slang-cant-2",
+   "theme": "Thieves' cant (more)",
+   "words": [
+    "slang:darkmans",
+    "slang:ruffmans",
+    "slang:libken",
+    "slang:glybe",
+    "slang:cracksman",
+    "slang:to-paum",
+    "slang:flash-lingo",
+    "slang:quaking-cheat"
+   ]
+  },
+  {
+   "id": "slang-rum",
+   "theme": "Fine things",
+   "words": [
+    "slang:rum-degen",
+    "slang:rum-prancer",
+    "slang:rum-peepers",
+    "slang:rum-bugher",
+    "slang:rum-cod",
+    "slang:rum-glymmer",
+    "slang:rum-beck",
+    "slang:rum-bob"
+   ]
+  },
+  {
+   "id": "slang-rum-2",
+   "theme": "More fine things",
+   "words": [
+    "slang:rum-snitch",
+    "slang:rum-squeeze",
+    "slang:rum-dubber",
+    "slang:rum-pad",
+    "slang:rum-clout",
+    "slang:rum-cole",
+    "slang:rum-duke",
+    "slang:rum-bluffer"
+   ]
+  },
+  {
+   "id": "slang-horses",
+   "theme": "Horses & riding",
+   "words": [
+    "slang:hobbledygee",
+    "slang:tittup",
+    "slang:bonesetter",
+    "slang:gibbe",
+    "slang:piper",
+    "slang:gob-string",
+    "slang:pad-borrowers",
+    "slang:colt"
+   ]
+  },
+  {
+   "id": "slang-law",
+   "theme": "Law & prison",
+   "words": [
+    "slang:catch-pole",
+    "slang:cramp-rings",
+    "slang:fastner",
+    "slang:lambskin-men",
+    "slang:turned-up",
+    "slang:under-dubber",
+    "slang:prig-napper",
+    "slang:campbell-s-academy"
+   ]
+  },
+  {
+   "id": "slang-tales",
+   "theme": "Talk & tales",
+   "words": [
+    "slang:whisker",
+    "slang:canterbury-story",
+    "slang:carry-witchet",
+    "slang:fustian",
+    "slang:slipslopping",
+    "slang:to-wiredraw",
+    "slang:to-whiddle",
+    "slang:to-cap"
+   ]
+  },
+  {
+   "id": "slang-moods",
+   "theme": "Moods & feelings",
+   "words": [
+    "slang:blue-devils",
+    "slang:betwattled",
+    "slang:friday-face",
+    "slang:glimflashy",
+    "slang:havy-cavy",
+    "slang:maggotty",
+    "slang:watery-headed",
+    "slang:peery"
+   ]
+  },
+  {
+   "id": "slang-soldiers",
+   "theme": "Soldiers & army",
+   "words": [
+    "slang:brown-bess",
+    "slang:parish-soldier",
+    "slang:rag-carrier",
+    "slang:tow-row",
+    "slang:skulker",
+    "slang:pear-making",
+    "slang:sutrer",
+    "slang:soldier-s-pomatum"
+   ]
+  },
+  {
+   "id": "slang-fun",
+   "theme": "Fun & merrymaking",
+   "words": [
+    "slang:spouting-club",
+    "slang:flying-stationers",
+    "slang:jack-pudding",
+    "slang:faulkner",
+    "slang:scheme",
+    "slang:botherams",
+    "slang:kittle-pitchering",
+    "slang:rig"
+   ]
+  },
+  {
+   "id": "slang-house",
+   "theme": "House & home",
+   "words": [
+    "slang:glimfenders",
+    "slang:glimstick",
+    "slang:glaze",
+    "slang:sky-parlour",
+    "slang:sticks",
+    "slang:muffling-cheat",
+    "slang:sunny-bank",
+    "slang:guy"
+   ]
+  },
+  {
+   "id": "slang-things",
+   "theme": "Things & tools",
+   "words": [
+    "slang:budget",
+    "slang:ped",
+    "slang:peter",
+    "slang:steel-bar",
+    "slang:taylors-goose",
+    "slang:lullies",
+    "slang:make-weight",
+    "slang:pit"
+   ]
+  },
+  {
+   "id": "slang-debts",
+   "theme": "Debts & dealing",
+   "words": [
+    "slang:earnest",
+    "slang:spilt",
+    "slang:breaking-shins",
+    "slang:two-to-one-shop",
+    "slang:pursenets",
+    "slang:public-man",
+    "slang:cent-per-cent",
+    "slang:to-blot-the-skrip-and-jar-it"
+   ]
+  },
+  {
+   "id": "flower-courtship",
+   "theme": "Flowers of courtship",
+   "words": [
+    "flower:moss-rose",
+    "flower:cactus",
+    "flower:nosegay",
+    "flower:geranium-rose-scented",
+    "flower:day-lily-yellow",
+    "flower:laurustinus",
+    "flower:mignonette",
+    "flower:pine-apple"
+   ]
+  },
+  {
+   "id": "flower-sorrow",
+   "theme": "Flowers of sorrow",
+   "words": [
+    "flower:cypress",
+    "flower:adonis-flos",
+    "flower:geranium-sorrowful",
+    "flower:meadow-saffron",
+    "flower:primrose",
+    "flower:cranberry",
+    "flower:poppy",
+    "flower:myrobolan"
+   ]
+  },
+  {
+   "id": "flower-rejection",
+   "theme": "Flowers of rejection",
+   "words": [
+    "flower:hortensia",
+    "flower:tansey-wild",
+    "flower:burdock",
+    "flower:citron",
+    "flower:straw-broken",
+    "flower:columbine",
+    "flower:primrose-large-flowered-evening",
+    "flower:rose-white"
+   ]
+  },
+  {
+   "id": "flower-faults",
+   "theme": "Flowers of faults",
+   "words": [
+    "flower:thistle",
+    "flower:borage",
+    "flower:fuller-s-teasel",
+    "flower:daffodil",
+    "flower:snapdragon",
+    "flower:buttercup",
+    "flower:balsam",
+    "flower:cuscuta"
+   ]
+  },
+  {
+   "id": "flower-deceit",
+   "theme": "Flowers of deceit",
+   "words": [
+    "flower:bilberry",
+    "flower:bugloss",
+    "flower:walnut",
+    "flower:venus-s-looking-glass",
+    "flower:sunflower",
+    "flower:dragon-plant",
+    "flower:lavender",
+    "flower:almond-tree"
+   ]
+  },
+  {
+   "id": "flower-virtue",
+   "theme": "Flowers of virtue",
+   "words": [
+    "flower:sage",
+    "flower:geranium-wild",
+    "flower:chicory",
+    "flower:cress",
+    "flower:box",
+    "flower:mallow",
+    "flower:coriander",
+    "flower:oak"
+   ]
+  },
+  {
+   "id": "flower-blessings",
+   "theme": "Flowers of good wishes",
+   "words": [
+    "flower:beech",
+    "flower:fig",
+    "flower:sweet-sultan",
+    "flower:juniper",
+    "flower:parsley",
+    "flower:angelica",
+    "flower:tussilage-sweet-scented",
+    "flower:hazel"
+   ]
+  },
+  {
+   "id": "flower-graces",
+   "theme": "Flowers of gifts & graces",
+   "words": [
+    "flower:acanthus",
+    "flower:lotus",
+    "flower:geranium-pencilled-leaf",
+    "flower:dahlia",
+    "flower:hornbeam",
+    "flower:strawberry",
+    "flower:coxcomb",
+    "flower:rose-monthly"
+   ]
+  },
+  {
+   "id": "flower-moods",
+   "theme": "Flowers of moods",
+   "words": [
+    "flower:sainfoil-shaking",
+    "flower:cowslip",
+    "flower:sycamore",
+    "flower:truffle",
+    "flower:heath",
+    "flower:stonecrop",
+    "flower:london-pride",
+    "flower:champignon"
+   ]
+  }
+ ]
+}

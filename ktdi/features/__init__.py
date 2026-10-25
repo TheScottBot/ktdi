@@ -40,6 +40,8 @@ FEATURES = [
     "ktdi.features.lore",
     "ktdi.features.wisdom",
     "ktdi.features.bread",
+    "ktdi.features.crust",
+    "ktdi.features.play",
     "ktdi.features.etiquette",
     "ktdi.features.movie",
     "ktdi.features.units",

@@ -74,6 +74,11 @@ class Sent:
         if "embed" in kwargs:
             self.embed = kwargs["embed"]
             self.embed_edits.append(kwargs["embed"])
+        if "embeds" in kwargs:
+            self.embeds = list(kwargs["embeds"])
+            self.embed = self.embeds[0] if self.embeds else None
+        if "view" in kwargs:
+            self.view = kwargs["view"]
 
     async def remove_reaction(self, emoji, member):
         self.removed_reactions.append((str(emoji), member.id))
@@ -91,6 +96,7 @@ class Channel:
     async def send(self, content=None, embed=None, view=None, allowed_mentions=None, embeds=None, **kwargs):
         message = Sent(content, embed, view, allowed_mentions=allowed_mentions, embeds=embeds)
         self.sent.append(message)
+        self.messages[message.id] = message  # So it can be fetched (and edited) again, like a real one
         return message
 
     async def fetch_message(self, message_id):

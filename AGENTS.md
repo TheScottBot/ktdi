@@ -38,6 +38,7 @@ conventions; this file is only the working rules. (CLAUDE.md imports this file, 
   `SHELVES` entry (the command makes itself; `category` is its /help section), plus its name in
   `tests/test_registration.py`'s `SLASH_COMMANDS`, a row in `docs/COMMANDS.md`, the README's index and the shelves
   listed here; and the books that belong on it.
+- **A new game** is a `sessions.Game` subclass in its own feature, `register()`ed: its rules only (cards, steps, answers, timeouts, the reveal, results), with `timings` for both paces. No command of its own: `/play game:` lists it. Add it to `/play`'s docs row and the README line.
 - **Curating an old book:** keep only what's on an allowlist, and leave out anything with racism or contempt for a
   people or faith (even in passing), mockery of America, sex, gore, cruelty to animals, remedies someone could try,
   misogyny, suicide, harm to children, or anything that takes **gender or sexuality** lightly: people or animals

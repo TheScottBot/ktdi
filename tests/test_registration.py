@@ -6,7 +6,7 @@ import discord
 import pytest
 from discord.ext import commands
 
-from ktdi import daily
+from ktdi import daily, sessions
 from ktdi.bot import KTDIBot, describe_options
 from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
@@ -14,9 +14,9 @@ from tests.fakes import Ctx, Guild, User
 SLASH_COMMANDS = ["abm", "allspray", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books",
                   "bread", "bribe", "campaign", "committee", "cure", "deadword", "esoteric", "etiquette", "expunge",
                   "folklore", "hammeredofwitches", "help", "herbal", "household", "imperial", "insurance", "linux",
-                  "loot", "lore", "metric", "nature", "nowplaying", "omen", "phrasing", "plant", "pliny", "quote",
-                  "rapsheet", "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate", "tdoi", "timezone",
-                  "vulgartongue", "wars", "weather", "whospray", "wisdom", "words"]
+                  "loot", "lore", "metric", "nature", "nowplaying", "omen", "phrasing", "plant", "play", "pliny",
+                  "quote", "rapsheet", "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate", "tdoi",
+                  "timezone", "vulgartongue", "wars", "weather", "whospray", "wisdom", "words"]
 # !-only, so they're not in Discord's slash menu: the books asked through their shelf (/esoteric book:talisman), and
 # the cryptids
 SHELVED_BOOKS = ["bestiary", "devils", "dream", "enquire", "flowermeaning", "gemlore", "goblin", "magicsquare",
@@ -48,6 +48,7 @@ SUBCOMMANDS = {
 def loaded_bot(monkeypatch):
     monkeypatch.setattr(campaigns.reminder_loop, "start", lambda: None)  # no background loops in tests
     monkeypatch.setattr(daily.daily_loop, "start", lambda: None)
+    monkeypatch.setattr(sessions.deadline_loop, "start", lambda: None)
     bot = KTDIBot()
 
     async def load():
@@ -275,6 +276,7 @@ def test_one_unreachable_server_doesnt_stop_startup(monkeypatch, caplog):
     from ktdi import config
     monkeypatch.setattr(campaigns.reminder_loop, "start", lambda: None)
     monkeypatch.setattr(daily.daily_loop, "start", lambda: None)
+    monkeypatch.setattr(sessions.deadline_loop, "start", lambda: None)
     monkeypatch.setattr(config, "GUILD_IDS", [111, 222, 333])
     bot = KTDIBot()
     synced = []

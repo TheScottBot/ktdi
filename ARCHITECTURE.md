@@ -55,6 +55,10 @@ ktdi/
 │                      entries on another shelf too), its entries' names (autocomplete when it's picked on a shelf),
 │                      and own_command: False for a book asked only through its shelf (/esoteric book:talisman),
 │                      whose command is typed-only (!talisman)
+├── sessions.py        the game engine behind /play: lobbies, live and async paces (async's clock stops
+│                      23:00–07:00), private cards and moves by lasting buttons (GameButton), deadlines
+│                      and nudges (deadline_loop), opt-in pings (game_pings), Play again, game_results.
+│                      A game is a Game subclass, register()ed by its feature: rules only
 ├── daily.py           posting every day in a channel each server chooses: a feature registers a Daily (its name
 │                      and how to post today's), and its `setup here/stop/show` subcommands call setup_here, stop
 │                      and show; daily_loop posts what's due (daily_posts table). /wisdom, /almanac and /bread use it
@@ -91,6 +95,8 @@ ktdi/
 │                      and the shelf commands (/nature, /folklore, /esoteric, /words, /household): the same on one
 │                      shelf, or (book:) one of its books, by running that book's own command; book: comes first,
 │                      so thing:'s autocomplete knows which book's entries to suggest
+│   ├── play.py        /play game:<game> [pace] [start]: opens a lobby for any registered game
+│   ├── crust.py       Crust, a /play game: the Changeling and the Household, from lib/crust.json
 │   ├── wisdom.py      /wisdom: a random entry from any OLD_BOOK; Old Wisdom of the Day (/wisdom setup here),
 │   │                  a Daily (daily.py) that picks a different book each day
 │   ├── bread.py   /bread (How well do you 🍞?): a question a day from lib/bread.json, answered
@@ -204,6 +210,8 @@ ktdi/
     │                  customs, omens), each checked against its passage. bread_curation.json: what was
     │                  left out (every built question was read; leave_out's answers aren't offered as wrong
     │                  ones either, not_asked's are) and the scenarios
+    ├── crust.json     Crust's cards (a theme and eight words from /bread's reviewed ones), built by
+    │                  tools/crust_build.py from crust_curation.json
     ├── talismans.json !talisman's passages (Pavitt, The Book of Talismans, Amulets and Zodiacal Gems, 1922),
     │                  built by tools/talisman_build.py from the book's web page and talisman_curation.json:
     │                  paragraphs or runs (part.chapter.paragraph), each with a title and other names; a
@@ -396,6 +404,9 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `daily_posts` | what each server has posted every day (`kind`: Old Wisdom of the Day, the almanac, the daily bread): the channel, the time (BOT_TIMEZONE), when it's next due (UTC), and what it remembers from the last one (wisdom: the book, so it's not the same twice). |
 | `bread_bakes` | each server's `/bread` questions, one a day: which question (its id in `bread.json`), its four answers in the order shown and which is right, the post, and `closed_at` once the next day's post has given the answer (one open per server). |
 | `bread_answers` | one answer per person per question (`PRIMARY KEY (bake_id, user_id)`: no changing it), and whether it was right. Nobody's told what anyone picked until it's closed; scores read them through `scope()`. |
+| `game_sessions` / `game_players` | /play: each game from lobby to reveal (its pace, phase, the step it's waiting on and that step's deadline and nudge, and the game's own state as JSON) and who's in it, in the order they joined. Edited in place; a restart carries on from here. |
+| `game_results` | every finished game's points, win and role per player: kept for all-time tables later (nothing shows them yet). |
+| `game_pings` | who's asked to be pinged when it's their move in a game (🔔). Nobody else is. |
 | `herbal_posts` | each `/herbal` post: which box from `herbal.json` and how deep it's been dug with ⛏️, so a dig carries on after a restart. |
 | `committee_spending` | what the committee's money was spent on (`/committee spend`): amount, item, who. Money in isn't stored separately: it's the `bribes` totals (bribe, expunge, bail and insurance premiums all record a bribe), so the balance is bribes minus spending, both read through `scope()`. |
 

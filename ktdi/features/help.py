@@ -29,7 +29,7 @@ EMBED_FIELD_COUNT_LIMIT = 25
 # goes after these, alphabetically (with no description).
 CATEGORIES = {
     "💦 Rap sheet": "Sprays, telling-offs, blame, bribes and the committee",
-    "🎲 Fun": "Looting, Linux, anime and the war archives",
+    "🎲 Fun": "Party games, looting, Linux, anime and the war archives",
     "📚 Words & wisdom": "All the old books at once, the shelf of words, slang, Old Wisdom and the daily bread",
     "🐉 Beasts & magic": "The shelves of natural history, folklore and magic, Pliny, omens and witches",
     "🌿 Hearth & herbs": "The household shelf, Mrs Beeton, manners, Culpeper's cures and the almanac",

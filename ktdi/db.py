@@ -363,6 +363,52 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS game_sessions (  -- /play: one game, from its lobby to its reveal (ktdi/sessions.py)
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id   INTEGER NOT NULL,
+        channel_id INTEGER NOT NULL,
+        message_id INTEGER,            -- the lobby, which becomes the board: edited in place
+        game       TEXT NOT NULL,      -- "crust"
+        host_id    INTEGER NOT NULL,
+        pace       TEXT NOT NULL,      -- "live" or "async"
+        phase      TEXT NOT NULL,      -- lobby, playing, done, cancelled, expired
+        step       TEXT,               -- what the game's waiting for now ("clue:123", "vote"): its deadline's set by it
+        state      TEXT NOT NULL DEFAULT '{}',  -- the game's own (JSON): cards, turns, answers
+        deadline   TEXT,               -- UTC: when the step (or the lobby) times out
+        nudge_at   TEXT,               -- UTC: when to remind whoever's being waited on (async), until it's done
+        starts_at  TEXT,               -- UTC: an async game set to start itself
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL,
+        ended_at   TEXT
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS game_players (
+        session_id INTEGER NOT NULL,
+        user_id    INTEGER NOT NULL,
+        joined_at  TEXT NOT NULL,
+        PRIMARY KEY (session_id, user_id)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS game_results (  -- every finished game's points, kept for all-time tables (not shown yet)
+        session_id INTEGER NOT NULL,
+        guild_id   INTEGER NOT NULL,
+        game       TEXT NOT NULL,
+        user_id    INTEGER NOT NULL,
+        points     INTEGER NOT NULL,
+        won        INTEGER NOT NULL,
+        role       TEXT,               -- the game's name for their part ("changeling", "household")
+        at         TEXT NOT NULL,
+        PRIMARY KEY (session_id, user_id)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS game_pings (  -- who's asked to be pinged when it's their move (everyone else isn't)
+        user_id INTEGER PRIMARY KEY
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS bread_bakes (  -- /bread: one question a day
         id          INTEGER PRIMARY KEY AUTOINCREMENT,
         guild_id    INTEGER NOT NULL,

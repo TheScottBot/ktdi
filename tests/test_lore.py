@@ -169,12 +169,13 @@ def test_lore_says_how_to_ask_a_book_through_its_shelf(monkeypatch):
 # --- A shelf's books (the real ones, on a real bot) ---
 @pytest.fixture(scope="module")
 def real_bot():
-    from ktdi import daily, db
+    from ktdi import daily, db, sessions
     from ktdi.bot import KTDIBot
     from ktdi.features import campaigns
     with pytest.MonkeyPatch.context() as patch:
         patch.setattr(campaigns.reminder_loop, "start", lambda: None)  # No background loops in tests
         patch.setattr(daily.daily_loop, "start", lambda: None)
+        patch.setattr(sessions.deadline_loop, "start", lambda: None)
         db.init(":memory:")
         bot = KTDIBot()
         run(bot.load_features())
