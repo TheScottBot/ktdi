@@ -5,8 +5,6 @@ own feature, registered with sessions.register), so new games don't add to Disco
 starts itself at `start` with whoever's in). Everything after that happens on the game's board, by buttons.
 """
 
-from datetime import datetime, timezone
-
 import discord
 from discord import app_commands
 from discord.ext import commands
@@ -50,7 +48,7 @@ def play_command(games: dict[str, sessions.Game]) -> commands.HybridCommand:
             except reminders.ScheduleError as error:
                 await ctx.send(str(error), ephemeral=True)
                 return
-            starts_at = daily.next_post(f"{hour:02d}:{minute:02d}", datetime.now(timezone.utc))
+            starts_at = daily.next_post(f"{hour:02d}:{minute:02d}", sessions.now())
         session = sessions.create(ctx.guild.id, ctx.channel.id, chosen, ctx.author.id, pace, [ctx.author.id],
                                   starts_at)
         message = await ctx.send(embed=sessions.lobby_embed(session), view=sessions.view_for(session),

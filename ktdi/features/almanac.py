@@ -5,11 +5,14 @@ No date: today (in BOT_TIMEZONE). A date: "5 november", "nov 5", "5/11", "tomorr
 /almanac setup here [time] posts the day's in a channel every morning (ktdi/daily.py, as Old Wisdom of the Day does).
 The data is ktdi/lib/almanac.json, built by ktdi/tools/almanac_build.py from passages picked by hand.
 
-The plant of the day comes with a picture of it where there's a good one: an old botanical plate, coloured and public
-domain, linked from Wikimedia Commons or the Biodiversity Heritage Library (not kept here) and credited in the footer.
+The plant of the day comes with a picture of it: a botanical plate or drawing, never a photo (mostly old and coloured;
+public domain or freely licensed), linked from Wikimedia Commons or the Biodiversity Heritage Library (not kept here)
+and credited in the footer.
 Which plate goes with which plant was decided by looking at every one, and is recorded in ktdi/lib/almanac_plates.json
 by Hone's Latin name (null: looked, and there wasn't a good one; better none than the wrong plant). The candidates come
-from ktdi/tools/almanac_plates_find.py, which also checks the links still work (--check).
+from ktdi/tools/almanac_plates_find.py, which also checks the links still work (--check). A plant with no good plate
+of its own shows a relative's, from its genus as Hone named it, and says so in the footer (relative()): a picture is
+half the point of the morning post, and the obscure starworts and goldenrods come in runs.
 """
 
 import json
@@ -44,8 +47,39 @@ PLATES: dict[str, dict | None] = json.loads(PLATES_DATA.read_text(encoding="utf-
 def plate(flower: dict | None) -> dict | None:
     """The picture of the day's plant, if there's a good one: {"image", "page", "credit"}. It's found by the plant's
     Latin name as Hone gives it ("Early Witlow grass. _Draba verna._" is "Draba verna")."""
+    latin = latin_name(flower)
+    return (PLATES.get(latin) or relative(latin)) if latin else None
+
+
+def latin_name(flower: dict | None) -> str | None:
     names = re.findall(r"_([^_]+)_", flower["plant"]) if flower else []
-    return PLATES.get(names[-1].strip(" .")) if names else None
+    return names[-1].strip(" .") if names else None
+
+
+NO_RELATIVES = {"agaricus", "boletus"}  # Hone's fungi genera held mushrooms that look nothing alike
+
+
+def relative(latin: str) -> dict | None:
+    """No good plate of the plant itself: one of another plant of its genus as Hone named it (another starwort,
+    another goldenrod), marked as a relative ("related" is its name now), so a run of obscure starworts still has
+    pictures without passing one off as the other. When there are several, the plateless days of that genus take
+    turns, in the order they come in the year, so a run of them doesn't show the same one."""
+    genus = latin.split()[0].casefold()
+    if genus in NO_RELATIVES:
+        return None
+    kin, images = [], set()
+    for name, picture in sorted(PLATES.items()):
+        if picture and name.split()[0].casefold() == genus and picture["image"] not in images:
+            kin.append(picture)
+            images.add(picture["image"])
+    if not kin:
+        return None
+    plateless = list(dict.fromkeys(
+        name for _, day in sorted(DAYS.items()) if (name := latin_name(day["flower"]))
+        and name.split()[0].casefold() == genus and not PLATES.get(name)))
+    turn = plateless.index(latin) if latin in plateless else 0
+    picture = kin[turn % len(kin)]
+    return {**picture, "related": picture["name"]}
 
 
 def heading(month: int, day: int) -> str:
@@ -94,7 +128,9 @@ def day_embed(month: int, day: int) -> discord.Embed:
     picture = plate(entry["flower"])
     if picture:
         embed.set_image(url=picture["image"])
-        footer = f"{footer.rstrip('.')}. Plate: {picture['credit']}."
+        which = f" of a relative, {picture['related']} (we found no good one of this plant)" \
+            if picture.get("related") else ""
+        footer = f"{footer.rstrip('.')}. Plate{which}: {picture['credit']}."
     embed.set_footer(text=footer)
     return embed
 

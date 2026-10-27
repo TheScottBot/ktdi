@@ -1,5 +1,5 @@
 {
- "_about": "A picture for each of the almanac's plants of the day, by Hone's Latin name: an old botanical plate, coloured and public domain, on Wikimedia Commons or the Biodiversity Heritage Library. Every one was looked at and is the plant named (by its current name, in \"name\"); null means looked and found no good one, and a plant not listed hasn't been looked at yet. \"credit\" is what the plate's own page says it's from. Candidates come from ktdi/tools/almanac_plates_find.py.",
+ "_about": "A picture for each of the almanac's plants of the day, by Hone's Latin name: a botanical plate or drawing (never a photo), mostly old and coloured, public domain or freely licensed, on Wikimedia Commons or the Biodiversity Heritage Library. Every one was looked at and is the plant named (by its current name, in \"name\"); null means looked and found no good one, and a plant not listed hasn't been looked at yet. \"credit\" is what the plate's own page says it's from. Candidates come from ktdi/tools/almanac_plates_find.py.",
  "plates": {
   "Achania pilosa": {
    "name": "Malvaviscus arboreus",
@@ -61,7 +61,12 @@
    "page": "https://commons.wikimedia.org/wiki/File:Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._284.png",
    "credit": "Sowerby, Coloured Figures of English Fungi, plate 284 (1803)"
   },
-  "Agaricus lactiflorus": null,
+  "Agaricus lactiflorus": {
+   "name": "Lactifluus volemus",
+   "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Agaricus_lactifluus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v11.jpg/960px-Agaricus_lactifluus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v11.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Agaricus_lactifluus_%E2%80%94_Flora_Batava_%E2%80%94_Volume_v11.jpg",
+   "credit": "Flora Batava, vol. 11, plate 874"
+  },
   "Agrimonia Eupatoria": {
    "name": "Agrimonia eupatoria",
    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Agrimonia_eupatoria_Sturm08057.jpg/500px-Agrimonia_eupatoria_Sturm08057.jpg",
@@ -203,7 +208,12 @@
    "page": "https://commons.wikimedia.org/wiki/File:A_curious_herbal_(Plate_228)_BHL296693.jpg",
    "credit": "Blackwell, A Curious Herbal, plate 228 (1737)"
   },
-  "Asphodelus Luteus": null,
+  "Asphodelus Luteus": {
+   "name": "Asphodeline lutea",
+   "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Curtis%27s_botanical_magazine_%28No._773%29_%288448656604%29.jpg/960px-Curtis%27s_botanical_magazine_%28No._773%29_%288448656604%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Curtis%27s_botanical_magazine_(No._773)_(8448656604).jpg",
+   "credit": "Curtis's Botanical Magazine, vol. 20, plate 773 (1804)"
+  },
   "Asplenium Scolopendium": {
    "name": "Asplenium scolopendrium",
    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/A_curious_herbal_%28Plate_138%29_BHL296465.jpg/960px-A_curious_herbal_%28Plate_138%29_BHL296465.jpg",
@@ -272,7 +282,12 @@
    "page": "https://commons.wikimedia.org/wiki/File:Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._346.png",
    "credit": "Sowerby, Coloured Figures of English Fungi, plate 346 (1803)"
   },
-  "Boletus Bovinus": null,
+  "Boletus Bovinus": {
+   "name": "Suillus bovinus",
+   "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Kuhr%C3%B6hrling-1.jpg/960px-Kuhr%C3%B6hrling-1.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Kuhr%C3%B6hrling-1.jpg",
+   "credit": "Painted by Albin Schmalfuß for Michael's Führer für Pilzfreunde (1897)"
+  },
   "Boltonia Asteroides": {
    "name": "Boltonia asteroides",
    "image": "https://www.biodiversitylibrary.org/pageimage/487489",
@@ -869,7 +884,12 @@
    "page": "https://commons.wikimedia.org/wiki/File:The_Botanical_Magazine,_Plate_265_(Volume_8,_1794).png",
    "credit": "Curtis's Botanical Magazine, plate 265 (1794)"
   },
-  "Larnium garganicum": null,
+  "Larnium garganicum": {
+   "name": "Lamium garganicum",
+   "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Bodleian-Library-MS-Sherard-244_00134_f-128-Lamium-striatum.jpg/960px-Bodleian-Library-MS-Sherard-244_00134_f-128-Lamium-striatum.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Bodleian-Library-MS-Sherard-244_00134_f-128-Lamium-striatum.jpg",
+   "credit": "Ferdinand Bauer, watercolour for Sibthorp's Flora Graeca (1787–1794), Bodleian Libraries MS. Sherard 244, f. 128"
+  },
   "Lathyrus odoratus": {
    "name": "Lathyrus odoratus",
    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/The_Botanical_Magazine%2C_Plate_60_%28Volume_2%2C_1788%29.png/960px-The_Botanical_Magazine%2C_Plate_60_%28Volume_2%2C_1788%29.png",
@@ -1072,7 +1092,12 @@
    "page": "https://www.biodiversitylibrary.org/page/477005",
    "credit": "Curtis's Botanical Magazine, plate 1687 (1814), via the Biodiversity Heritage Library"
   },
-  "Nelumbo Nilotica": null,
+  "Nelumbo Nilotica": {
+   "name": "Nelumbo nucifera",
+   "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Botanique._1-3._Nymph%C3%A6a_nelumbo_%28NYPL_b14212718-1268693%29.jpg/960px-Botanique._1-3._Nymph%C3%A6a_nelumbo_%28NYPL_b14212718-1268693%29.jpg",
+   "page": "https://commons.wikimedia.org/wiki/File:Botanique._1-3._Nymph%C3%A6a_nelumbo_(NYPL_b14212718-1268693).jpg",
+   "credit": "Description de l'Égypte, Histoire naturelle, vol. 2, Botanique plate 61 (1809), via the New York Public Library"
+  },
   "Oenothera biennis": {
    "name": "Oenothera biennis",
    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/116_Oenothera_biennis_L.jpg/500px-116_Oenothera_biennis_L.jpg",
@@ -1189,8 +1214,18 @@
    "page": "https://commons.wikimedia.org/wiki/File:Coloured_Figures_of_English_Fungi_or_Mushrooms_-_t._59.png",
    "credit": "Sowerby, Coloured Figures of English Fungi, plate 59 (1797)"
   },
-  "Phascum cuspidatum": null,
-  "Phascum muticum": null,
+  "Phascum cuspidatum": {
+   "name": "Phascum cuspidatum",
+   "image": "https://www.biodiversitylibrary.org/pageimage/34303439",
+   "page": "https://www.biodiversitylibrary.org/page/34303439",
+   "credit": "Bryologia Europaea, vol. 1, Phascum plate 1 (1836–1851), via the Biodiversity Heritage Library"
+  },
+  "Phascum muticum": {
+   "name": "Acaulon muticum",
+   "image": "https://www.biodiversitylibrary.org/pageimage/34303437",
+   "page": "https://www.biodiversitylibrary.org/page/34303437",
+   "credit": "Bryologia Europaea, vol. 1, Acaulon plate 1 (1836–1851), via the Biodiversity Heritage Library"
+  },
   "Phleum panniculatum": {
    "name": "Phleum paniculatum",
    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Phleum_paniculatum_illustration_%2801%29.jpg/960px-Phleum_paniculatum_illustration_%2801%29.jpg",

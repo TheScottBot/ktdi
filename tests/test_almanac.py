@@ -204,6 +204,30 @@ def test_the_plant_of_the_day_with_its_plate(monkeypatch):
     assert fools.image.url is None and fools.footer.text == almanac.SOURCE
 
 
+def test_a_plant_with_no_plate_gets_a_relatives_marked_as_one(monkeypatch):
+    mercury = {**DRABA, "name": "Mercurialis perennis", "image": DRABA["image"] + "?dog", "credit": "Curtis (1790)"}
+    monkeypatch.setattr(almanac, "PLATES", {"Draba verna": DRABA, "Mercurialis annua": None,
+                                            "Mercurialis perennis": mercury})
+    fools = almanac.almanac_embed("1 april")
+    assert fools.image.url == mercury["image"]
+    assert fools.footer.text == (f"{almanac.SOURCE}. Plate of a relative, Mercurialis perennis (we found no good one "
+                                 "of this plant): Curtis (1790).")
+    assert almanac.plate({"plant": "Field mushroom. _Agaricus campestris._"}) is None  # Not fungi: they look nothing alike
+
+
+def test_a_run_of_plateless_days_takes_turns_with_the_relatives(monkeypatch):
+    def day(latin):
+        return {"flower": {"plant": f"A starwort. _{latin}._", "for": ""}}
+    monkeypatch.setattr(almanac, "DAYS", {"10-23": day("Aster junicus"), "10-24": day("Aster flexuosus"),
+                                          "10-25": day("Aster Amellus")})
+    amellus, chinensis = ({**DRABA, "name": name, "image": DRABA["image"] + name} for name in
+                          ("Aster amellus", "Callistephus chinensis"))
+    monkeypatch.setattr(almanac, "PLATES", {"Aster Amellus": amellus, "Aster Chinensis": chinensis})
+    first, second = (almanac.plate(almanac.DAYS[key]["flower"])["related"] for key in ("10-23", "10-24"))
+    assert {first, second} == {"Aster amellus", "Callistephus chinensis"}
+    assert "related" not in almanac.plate(almanac.DAYS["10-25"]["flower"])  # Its own, when it has one
+
+
 # Commons: a thumbnail at a width it serves, 500 px or more ("960px-", "lossy-page1-960px-" for a scanned TIFF), never
 # the file itself (Commons rate-limits those), and no tracking on the end. BHL: a page image.
 COMMONS_IMAGE = re.compile(r"https://(upload|thumb)\.wikimedia\.org/wikipedia/commons/(thumb/[0-9a-f]/[0-9a-f]{2}/[^/?]+/"
