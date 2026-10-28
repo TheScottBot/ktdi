@@ -21,14 +21,13 @@ def slash(user, **options):
 
 def test_it_starts_empty():
     assert "Nothing yet" in typed(SCOTT).content and "Nothing yet" in slash(SCOTT).content
+    assert "Nothing yet" in typed(SCOTT, "list").content and "Nothing yet" in slash(SCOTT, page=1).content
 
 
 def test_adding_and_recalling_one():
-    added = typed(SCOTT, "add One of the alphabet people -- Uncle Clive, lowering his voice")
+    added = typed(SCOTT, "add One of the alphabet people")
     assert added.content == "🧓 Added #1."
-    recalled = slash(DAVE).embed.description
-    assert recalled.startswith(cc.INTRO + "\n## “One of the alphabet people”")
-    assert "*— Uncle Clive, lowering his voice*" in recalled and "<@" not in recalled  # Nobody's named
+    assert slash(DAVE).embed.description == cc.INTRO + "\n## “One of the alphabet people”"  # Nobody's named
 
 
 def test_a_reply_saves_the_words_but_not_who_wrote_them():
@@ -39,7 +38,7 @@ def test_a_reply_saves_the_words_but_not_who_wrote_them():
 
 
 def test_slash_add_number_search_and_delete():
-    slash(SCOTT, add="Doesn't take their tarps in", who="Gerald from the golf club")
+    slash(SCOTT, add="Doesn't take their tarps in")
     slash(SCOTT, add="One of the letters")
     assert "“One of the letters”" in slash(DAVE, number=2).embed.description
     found = slash(DAVE, search="tarps").embed.description
@@ -55,6 +54,26 @@ def test_typed_ways_in():
     assert "#1" in typed(DAVE, "last").embed.description and "#1" in typed(DAVE, "search theatrical").embed.description
     assert "Try `!cc`" in typed(DAVE, "what is this").content
     assert typed(SCOTT, "delete 1").content == "🗑️ Deleted #1."
+
+
+def test_the_whole_book_ten_a_page():
+    for n in range(1, 24):
+        typed(SCOTT, f"add Call number {n}")
+    first = typed(DAVE, "list")
+    assert first.embed.footer.text == "Page 1 of 3" and "`#1`" in first.embed.description and "`#11`" not in first.embed.description
+    back, forward = first.view.children
+    assert back.disabled and not forward.disabled
+    turned = Interaction(DAVE)
+    run(forward.callback(turned))
+    page_two = turned.sent[-1]
+    assert page_two.embed.footer.text == "Page 2 of 3" and "`#11`" in page_two.embed.description
+    last = slash(DAVE, page=9)  # Past the end: the last page
+    assert last.embed.footer.text == "Page 3 of 3" and "`#23`" in last.embed.description
+
+
+def test_a_short_book_has_no_buttons():
+    typed(SCOTT, "add One of the letters")
+    assert typed(DAVE, "list").view is None
 
 
 def test_its_own_book_apart_from_the_real_quotes():

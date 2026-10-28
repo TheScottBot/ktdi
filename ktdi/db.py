@@ -50,7 +50,7 @@ SCHEMA = [
         guild_id   INTEGER NOT NULL,
         user_id    INTEGER NOT NULL,  -- always 0: folklore, nobody's named on one
         text       TEXT NOT NULL,
-        context    TEXT,              -- who'd say it ("Uncle Clive")
+        context    TEXT,              -- unused: the quotes' columns, kept the same
         added_by   INTEGER NOT NULL,
         channel_id INTEGER,
         message_id INTEGER,
