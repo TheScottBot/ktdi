@@ -315,6 +315,21 @@ def test_toenoyoudidnt_still_appears_without_manage_messages():
     assert typed.last.content == fun.TOES_GIF_URL and typed.last.delete_after == 5
 
 
+def test_mefr_is_sighted_then_gone():
+    typed = Ctx(SCOTT, slash=False)
+    run(fun.mefr.callback(typed))
+    assert typed.message.deleted  # The summoning goes at once
+    assert typed.last.file.filename == "mefr.jpg" and typed.last.delete_after == fun.TOES_SECONDS
+    assert fun.MEFR_IMAGE.exists()
+
+
+def test_mefr_missing_is_never_seen(monkeypatch, tmp_path):
+    monkeypatch.setattr(fun, "MEFR_IMAGE", tmp_path / "gone.jpg")
+    typed = Ctx(SCOTT, slash=False)
+    run(fun.mefr.callback(typed))
+    assert typed.sent == []
+
+
 def test_linux_asks_whoever_is_set_and_only_pings_them(monkeypatch):
     from ktdi import config
     monkeypatch.setattr(config, "LINUX_HATER_ID", 7)

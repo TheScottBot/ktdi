@@ -45,6 +45,7 @@ BADBONK_GIF_URLS = [
 ]
 TOES_GIF_URL = "https://klipy.com/gifs/toes-test-water"
 TOES_SECONDS = 5  # How long the cryptid is visible before it's gone.
+MEFR_IMAGE = Path(__file__).resolve().parent.parent / "assets" / "mefr.jpg"  # Cropped to the creature alone
 NOSE_IMAGE = Path(__file__).resolve().parent.parent / "assets" / "nose.png"  # Attached, not linked, so it can't vanish.
 
 HELP_CATEGORY = "💦 Rap sheet"  # loot and linux say otherwise.
@@ -615,6 +616,19 @@ async def toenoyoudidnt(ctx: commands.Context):
     await ctx.send(TOES_GIF_URL, delete_after=TOES_SECONDS)  # ...and the cryptid after a few seconds.
 
 
+# Another cryptid, the same way: a sighting at a birthday party, gone before anyone can get a better look.
+@commands.command(name="mefr", description="🧡", extras={**FUN, "hidden": True})
+async def mefr(ctx: commands.Context):
+    try:
+        await ctx.message.delete()
+    except discord.HTTPException:
+        pass
+    if not MEFR_IMAGE.exists():
+        log.warning("The !mefr image is missing: %s", MEFR_IMAGE)
+        return  # Nothing was seen. Nothing was ever there.
+    await ctx.send(file=discord.File(MEFR_IMAGE, filename="mefr.jpg"), delete_after=TOES_SECONDS)
+
+
 # Typed only, and left off the /help lists (extras["unlisted"]), but not a secret: the README has it.
 @commands.command(name="fyio", description="Fuck you, I'm out.", extras={**FUN, "unlisted": True})
 async def fyio(ctx: commands.Context):
@@ -875,7 +889,7 @@ def main_help_lines() -> list[tuple[str, str]]:
 async def setup(bot: commands.Bot):
     # `nose` is written but not registered: Discord's sensitive-media filter blurs its image (and asks UK users for ID).
     # Add it back here to bring it back.
-    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, phrasing, fyio, toenoyoudidnt, rapsheet,
+    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, phrasing, fyio, toenoyoudidnt, mefr, rapsheet,
                     breadsheet, blame, bribe, expunge, bail, linux):
         bot.add_command(command)
     bot.tree.add_command(phrasing_menu)  # Right-click a message > Apps > Phrasing
