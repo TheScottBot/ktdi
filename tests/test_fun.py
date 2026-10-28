@@ -323,6 +323,53 @@ def test_mefr_is_sighted_then_gone():
     assert fun.MEFR_IMAGE.exists()
 
 
+def test_hotdawg_is_sighted_then_gone():
+    typed = Ctx(SCOTT, slash=False)
+    run(fun.hotdawg.callback(typed))
+    assert typed.message.deleted and typed.last.file.filename == "hotdawg.jpg"
+    assert typed.last.delete_after == fun.TOES_SECONDS and fun.HOTDAWG_IMAGE.exists()
+
+
+def test_silence_types_and_says_nothing(monkeypatch):
+    waited = []
+
+    async def wait(seconds):
+        waited.append(seconds)
+    monkeypatch.setattr(fun.asyncio, "sleep", wait)
+    typed = Ctx(SCOTT, slash=False)
+    typing = []
+
+    class Typing:
+        async def __aenter__(self):
+            typing.append("on")
+
+        async def __aexit__(self, *exc):
+            typing.append("off")
+    typed.typing = Typing
+    run(fun.silence.callback(typed))
+    assert typed.message.deleted and typing == ["on", "off"] and waited == [fun.SILENCE_SECONDS]
+    assert typed.sent == []  # Nothing. Ever.
+
+
+def test_a_glimpse_is_rare_and_brief(monkeypatch):
+    import types as _types
+    from tests.fakes import Channel, Guild, Message
+    monkeypatch.setattr(fun.asyncio, "sleep", lambda seconds: asyncio_noop())
+    guild = Guild(111)
+    guild.me = _types.SimpleNamespace(id=999)
+    message = Message(1, DAVE, "hello", Channel(500, guild))
+    monkeypatch.setattr(fun.random, "randrange", lambda odds: 1)  # Not this time
+    run(fun.glimpse(message))
+    assert message.reactions == []
+    monkeypatch.setattr(fun.random, "randrange", lambda odds: 0)  # This time
+    run(fun.glimpse(message))
+    assert message.reactions == ["👁️"] and message.removed_reactions == [("👁️", 999)]
+
+
+async def asyncio_noop():
+    return None
+
+
 def test_mefr_missing_is_never_seen(monkeypatch, tmp_path):
     monkeypatch.setattr(fun, "MEFR_IMAGE", tmp_path / "gone.jpg")
     typed = Ctx(SCOTT, slash=False)

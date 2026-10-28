@@ -21,8 +21,8 @@ SLASH_COMMANDS = ["abm", "allspray", "almanac", "anime", "bad", "badbonk", "bail
 # the cryptids
 SHELVED_BOOKS = ["bestiary", "devils", "dream", "enquire", "flowermeaning", "gemlore", "goblin", "magicsquare",
                  "melancholy", "phrase", "pseudodoxia", "secrets", "talisman", "wonder"]
-PREFIX_ONLY_COMMANDS = SHELVED_BOOKS + ["breadsheet", "fyio", "mefr", "toenoyoudidnt"]
-HIDDEN_COMMANDS = ["breadsheet", "mefr", "toenoyoudidnt"]  # cryptids: real commands, left off the /help list
+PREFIX_ONLY_COMMANDS = SHELVED_BOOKS + ["...", "breadsheet", "fyio", "hotdawg", "mefr", "toenoyoudidnt"]
+HIDDEN_COMMANDS = ["...", "breadsheet", "hotdawg", "mefr", "toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
     "almanac": ["day", "setup"],
     "beeton": ["advice", "menu", "recipe"],
@@ -116,7 +116,7 @@ def test_prefix_commands(loaded_bot):
 
 def test_listeners(loaded_bot):
     assert {name: sorted(f.__name__ for f in funcs) for name, funcs in loaded_bot.extra_events.items()} == {
-        "on_message": ["chatted", "remember_speaker", "vote_closed_by_itself"],
+        "on_message": ["chatted", "glimpse", "remember_speaker", "vote_closed_by_itself"],
         "on_raw_reaction_add": ["dig", "prediction_vote", "reminder_subscribe", "spray_reaction"],
         "on_raw_reaction_remove": ["prediction_unvote", "reminder_unsubscribe"],
     }
@@ -307,8 +307,10 @@ def test_the_docs_cover_every_command_and_feature(loaded_bot):
     for command in loaded_bot.walk_commands():
         root_command = command.root_parent or command
         if root_command.extras.get("hidden"):
-            for doc in (reference, readme, architecture):
-                assert command.name not in doc, f"cryptid {command.qualified_name} is in the docs"
+            for doc in (reference, readme, architecture):  # As a command ("!...", "`...") or, a word, anywhere
+                written = re.search(rf"(?<![\w`!])(?:`!?|!){re.escape(command.name)}(?![\w.])", doc)
+                named = command.name.isalnum() and re.search(rf"\b{re.escape(command.name)}\b", doc)
+                assert not (written or named), f"cryptid {command.qualified_name} is in the docs"
             continue
         assert f"`{root_command.name}" in reference or f"`!{root_command.name}" in reference, command.qualified_name
         assert re.search(rf"\b{re.escape(command.name)}\b", reference), command.qualified_name

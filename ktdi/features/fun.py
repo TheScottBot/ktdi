@@ -5,6 +5,7 @@ Champion Briber role.
 (The Don Ordered It) is someone spraying themselves on the Don's orders.
 """
 
+import asyncio
 import random
 import re
 from collections import defaultdict, deque
@@ -45,7 +46,12 @@ BADBONK_GIF_URLS = [
 ]
 TOES_GIF_URL = "https://klipy.com/gifs/toes-test-water"
 TOES_SECONDS = 5  # How long the cryptid is visible before it's gone.
+SILENCE_SECONDS = 25  # !...: how long the bot types for, before saying nothing at all
+GLIMPSE_ODDS = 1000  # One message in this many is looked at, briefly (no command: it just happens)
+GLIMPSE_SECONDS = 10
+GLIMPSE_EMOJI = "👁️"
 MEFR_IMAGE = Path(__file__).resolve().parent.parent / "assets" / "mefr.jpg"  # Cropped to the creature alone
+HOTDAWG_IMAGE = Path(__file__).resolve().parent.parent / "assets" / "hotdawg.jpg"
 NOSE_IMAGE = Path(__file__).resolve().parent.parent / "assets" / "nose.png"  # Attached, not linked, so it can't vanish.
 
 HELP_CATEGORY = "💦 Rap sheet"  # loot and linux say otherwise.
@@ -619,14 +625,50 @@ async def toenoyoudidnt(ctx: commands.Context):
 # Another cryptid, the same way: a sighting at a birthday party, gone before anyone can get a better look.
 @commands.command(name="mefr", description="🧡", extras={**FUN, "hidden": True})
 async def mefr(ctx: commands.Context):
+    await sighting(ctx, MEFR_IMAGE)
+
+
+@commands.command(name="hotdawg", description="🌭", extras={**FUN, "hidden": True})
+async def hotdawg(ctx: commands.Context):
+    await sighting(ctx, HOTDAWG_IMAGE)
+
+
+async def sighting(ctx: commands.Context, image: Path) -> None:
+    """A photo cryptid: the summoning goes at once, and the photo after TOES_SECONDS."""
     try:
         await ctx.message.delete()
     except discord.HTTPException:
         pass
-    if not MEFR_IMAGE.exists():
-        log.warning("The !mefr image is missing: %s", MEFR_IMAGE)
+    if not image.exists():
+        log.warning("A cryptid's image is missing: %s", image)
         return  # Nothing was seen. Nothing was ever there.
-    await ctx.send(file=discord.File(MEFR_IMAGE, filename="mefr.jpg"), delete_after=TOES_SECONDS)
+    await ctx.send(file=discord.File(image, filename=image.name), delete_after=TOES_SECONDS)
+
+
+# A cryptid that's never seen at all: your message goes, the bot starts typing, and then it doesn't say anything.
+@commands.command(name="...", aliases=["…"], description="…", extras={**FUN, "hidden": True})  # Phones turn ... into …
+async def silence(ctx: commands.Context):
+    try:
+        await ctx.message.delete()
+    except discord.HTTPException:
+        pass
+    try:
+        async with ctx.typing():
+            await asyncio.sleep(SILENCE_SECONDS)
+    except discord.HTTPException:
+        pass  # Can't even type there: it was never here
+
+
+# Not a command: now and then (one message in GLIMPSE_ODDS), something looks at a message, and then it doesn't.
+async def glimpse(message: discord.Message):
+    if message.guild is None or message.author.bot or random.randrange(GLIMPSE_ODDS):
+        return
+    try:
+        await message.add_reaction(GLIMPSE_EMOJI)
+        await asyncio.sleep(GLIMPSE_SECONDS)
+        await message.remove_reaction(GLIMPSE_EMOJI, message.guild.me)
+    except discord.HTTPException:
+        pass  # No Add Reactions there, or the message went first
 
 
 # Typed only, and left off the /help lists (extras["unlisted"]), but not a secret: the README has it.
@@ -889,9 +931,10 @@ def main_help_lines() -> list[tuple[str, str]]:
 async def setup(bot: commands.Bot):
     # `nose` is written but not registered: Discord's sensitive-media filter blurs its image (and asks UK users for ID).
     # Add it back here to bring it back.
-    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, phrasing, fyio, toenoyoudidnt, mefr, rapsheet,
+    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, phrasing, fyio, toenoyoudidnt, mefr, hotdawg, silence, rapsheet,
                     breadsheet, blame, bribe, expunge, bail, linux):
         bot.add_command(command)
     bot.tree.add_command(phrasing_menu)  # Right-click a message > Apps > Phrasing
     bot.add_listener(remember_speaker, "on_message")
+    bot.add_listener(glimpse, "on_message")
     bot.add_listener(spray_reaction, "on_raw_reaction_add")

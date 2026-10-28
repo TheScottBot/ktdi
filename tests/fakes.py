@@ -115,6 +115,15 @@ class Message:
     def __init__(self, mid: int, author: User, content: str, channel: Channel | None = None):
         self.id, self.author, self.content = mid, author, content
         self.channel = channel or Channel()
+        self.guild = getattr(self.channel, "guild", None)
+        self.reactions: list = []
+        self.removed_reactions: list = []
+
+    async def add_reaction(self, emoji):
+        self.reactions.append(emoji)
+
+    async def remove_reaction(self, emoji, member):
+        self.removed_reactions.append((str(emoji), getattr(member, "id", None)))
 
     async def reply(self, content=None, **kwargs):
         """A reply to it, sent in its channel (and remembering what it's replying to)."""
