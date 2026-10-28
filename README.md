@@ -93,7 +93,7 @@ Units, sincerely or absurdly.
 - `quote`: save and replay the things people say (or right-click a message: **Save quote**)
 
 ### [🗓️ Campaigns](docs/COMMANDS.md#campaigns)
-- `campaign`: our campaigns' D&D Beyond and VTT links, and session reminders
+- `campaign`: our campaigns' D&D Beyond and VTT links, session reminders, and pinging the group (RP heavy tonight, running late)
 
 ### [🔧 Utilities](docs/COMMANDS.md#utilities)
 Timezones, weather and settings.

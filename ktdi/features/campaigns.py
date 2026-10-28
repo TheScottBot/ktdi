@@ -16,9 +16,30 @@ from ktdi.lib import fuzzy, reminders
 HELP_CATEGORY = "🗓️ Campaigns"
 CAMPAIGN_ALIAS_MAX = 50
 # Can't be aliases, or !campaign <alias> would clash.
-CAMPAIGN_SUBCOMMANDS = {"add", "edit", "list", "remove", "show", "remind", "unremind", "reschedule", "skip"}
+CAMPAIGN_SUBCOMMANDS = {"add", "edit", "list", "remove", "show", "remind", "unremind", "reschedule", "skip", "message"}
 # Note: with shared state, aliases must be unique across all shared servers (checked in campaign add / edit).
 REMINDER_EMOJI = "🔔"
+# /campaign message's alerts: key -> (the menu's label, what's posted). A note can be added to any of them.
+ALERTS = {
+    "coming": ("📣 Session's coming up", "📣 Session's coming up: don't forget!"),
+    "moved": ("🗓️ Session has moved", "🗓️ The session has moved: check the time."),
+    "rp": ("🎭 Session will be RP heavy", "🎭 This session will be RP heavy: bring your best voices."),
+    "combat": ("⚔️ Session will be combat heavy", "⚔️ This session will be combat heavy: know your sheet and your spells."),
+    "late": ("⏳ Running late", "⏳ Running a bit late: hang tight."),
+    "early": ("⏰ Starting early", "⏰ Starting early this time."),
+    "headcount": ("🙋 Who's in?", "🙋 Who's in? React ✅ if you can make it, ❌ if you can't."),
+    "homework": ("📜 Homework", "📜 Homework: level up, update your sheet, or finish that backstory."),
+    "recap": ("📖 Recap's up", "📖 The recap's up: catch up before the session."),
+    "newplayer": ("🧙 New player joining", "🧙 A new player's joining: be nice."),
+    "themes": ("⚠️ Heavy themes ahead", "⚠️ Heads up: this one has heavy themes. Say (or message the DM) if anything's "
+                                       "off-limits."),
+    "inperson": ("🏠 In person this time", "🏠 In person this time."),
+    "online": ("💻 Online this time", "💻 Online this time."),
+    "food": ("🍕 Food's being sorted", "🍕 Food's being sorted: say if you want in."),
+    "break": ("🏖️ Taking a break", "🏖️ The campaign's taking a break for a bit."),
+}
+HEADCOUNT = ("✅", "❌")
+NOTE_MAX = 300
 REMINDER_GRACE = timedelta(hours=1)  # If the bot was down at reminder time, still send it up to this late.
 CLEAR_LINK = "none"  # Pass this to /campaign edit to remove a link.
 KNOWN_VTTS = {
@@ -629,22 +650,23 @@ async def campaign_skip(ctx: commands.Context, *, alias: str):
         f"Next ping: {when_text(next_run)}. {note}")
 
 
-async def tell_subscribers(ctx: commands.Context, reminder: Reminder, alert: str, confirmation: str) -> None:
+async def tell_subscribers(ctx: commands.Context, reminder: Reminder, alert: str,
+                           confirmation: str) -> discord.Message | None:
     """A change to when people play: everyone with a 🔔 is pinged (but whoever made it: they know) in the reminder's
     channel. Made there, the alert is the reply; made elsewhere, the reply's the confirmation, saying where it went."""
     people = [user for user in subscribers(reminder.id) if user != ctx.author.id]
     alert = f"{alert} {' '.join(f'<@{user}>' for user in people)}".strip()
     pings = discord.AllowedMentions(users=[discord.Object(id=user) for user in people], everyone=False, roles=False)
     if ctx.channel.id == reminder.channel_id:
-        await ctx.send(alert, allowed_mentions=pings)
-        return
+        return await ctx.send(alert, allowed_mentions=pings)
     channel = common.bot.get_channel(reminder.channel_id)
-    told = ""
+    told, sent = "", None
     if channel is not None:
-        await channel.send(alert, allowed_mentions=pings)
+        sent = await channel.send(alert, allowed_mentions=pings)
         told = f"\n-# Posted in <#{reminder.channel_id}>" + (f", pinging the {len(people)} with a {REMINDER_EMOJI}."
                                                             if people else ".")
     await send_campaign_reply(ctx, confirmation + told)
+    return sent
 
 
 async def campaign_alias_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
@@ -652,8 +674,73 @@ async def campaign_alias_autocomplete(interaction: discord.Interaction, current:
     return choices(fuzzy.starting_first(current, aliases))
 
 
+def alert_key(text: str) -> str | None:
+    """An alert by its key ("rp") or its label, or the start of either ("combat", "who's in")."""
+    wanted = " ".join(text.casefold().split())
+    if wanted in ALERTS:
+        return wanted
+    for key, (label, _) in ALERTS.items():
+        words = label.casefold().split(" ", 1)[-1]  # Without its emoji
+        if wanted and (words.startswith(wanted) or wanted in words):
+            return key
+    return None
+
+
+@campaign_group.command(name="message", description="Ping everyone with a 🔔 for a campaign: session's up, RP heavy…")
+@app_commands.describe(alias="The campaign", alert="What to tell them", note="Anything to add (optional)")
+@app_commands.choices(alert=[app_commands.Choice(name=label, value=key) for key, (label, _) in ALERTS.items()])
+async def campaign_message(ctx: commands.Context, alias: str, alert: str, *, note: str = ""):
+    """Pings everyone who's reacted 🔔 to the campaign's reminder, in its channel, with one of a set of alerts and
+    anything you add: `/campaign message alias:Monday game alert:Session will be RP heavy note:Bring snacks`. It says
+    who sent it and when the next session is. **Who's in?** adds ✅ and ❌ for people to answer with.
+
+    The alerts: session's coming up, session has moved, RP heavy, combat heavy, running late, starting early, who's
+    in?, homework, recap's up, new player joining, heavy themes ahead, in person, online, food's being sorted, taking
+    a break. To call a session off (or move it) for real, `/campaign skip` (or `reschedule`) changes the reminder too,
+    and pings everyone by itself.
+
+    Anyone with a 🔔 on it can send one (so a player can say they're running late), as can whoever set the reminder,
+    whoever added the campaign, or a mod. Typed: `!campaign message "Monday game" rp heavy, bring snacks` (the alert
+    first, then a comma and the note)."""
+    campaign = get_campaign(ctx.guild.id, alias)
+    reminder = get_reminder(campaign.guild_id, campaign.alias) if campaign else None
+    if campaign is None or reminder is None:
+        await send_campaign_reply(ctx, f"“{discord.utils.escape_markdown(alias)}” doesn't have a reminder, so nobody's "
+                                       f"{REMINDER_EMOJI}'d to be pinged. Set one with `/campaign remind`.", private=True)
+        return
+    group = subscribers(reminder.id)
+    if ctx.author.id not in group and not can_manage_reminder(ctx.author, reminder, campaign):
+        await send_campaign_reply(ctx, f"Only the group ({REMINDER_EMOJI} on the reminder), whoever set the reminder, "
+                                       "whoever added the campaign, or a moderator can message them.", private=True)
+        return
+    if ctx.interaction is None and "," in alert + " " + note:
+        alert, note = (alert + " " + note).split(",", 1)  # Typed: "rp heavy, bring snacks"
+    key = alert_key(alert)
+    if key is None:
+        await send_campaign_reply(ctx, "Which alert? " + ", ".join(f"`{k}`" for k in ALERTS) + ".", private=True)
+        return
+    note = " ".join(note.split())
+    if len(note) > NOTE_MAX:
+        await send_campaign_reply(ctx, f"Keep the note under {NOTE_MAX} characters.", private=True)
+        return
+    lines = [f"**{campaign.alias}**: {ALERTS[key][1]} (from <@{ctx.author.id}>)"]
+    if note:
+        lines.append(f"> {discord.utils.escape_mentions(note)}")
+    if key != "break":
+        lines.append(f"-# Next session: {when_text(reminder.next_game_at)}")
+    log.info("[%s] %s messaged the group for %r: %s", ctx.guild.name, ctx.author, campaign.alias, key)
+    sent = await tell_subscribers(ctx, reminder, "\n".join(lines),
+                                  f"📣 Sent to the **{campaign.alias}** group: {ALERTS[key][0]}.")
+    if key == "headcount" and sent is not None:
+        for emoji in HEADCOUNT:
+            try:
+                await sent.add_reaction(emoji)
+            except discord.HTTPException:
+                break  # Missing Add Reactions: people can still add them
+
+
 for _command in (campaign_show, campaign_edit, campaign_remove, campaign_remind, campaign_unremind,
-                 campaign_reschedule, campaign_skip):
+                 campaign_reschedule, campaign_skip, campaign_message):
     _command.autocomplete("alias")(campaign_alias_autocomplete)
 
 
@@ -764,19 +851,28 @@ def help_sections() -> list[tuple[str, str, set[str]]]:
             "• `change:every other thursday 8pm from 5 nov`: a whole new schedule.\n"
             f"• All of these keep everyone's {REMINDER_EMOJI}."
         ), {"skip", "reschedule", "remind"}),
+        ("📣 Messaging the group", (
+            "• `/campaign message alias:Monday game alert:Session will be RP heavy` pings everyone with a 🔔, in the "
+            "reminder's channel. Pick the alert from the list (coming up, moved, RP or combat heavy, running late, "
+            "who's in?, homework, heavy themes ahead and more) and add a `note` if you like.\n"
+            "• **Who's in?** adds ✅ and ❌ to answer with.\n"
+            "• To call a session off or move it for real, `skip` or `reschedule`: they change the reminder too."
+        ), {"message"}),
         ("🔐 Who can change what", (
             f"• Anyone can add a campaign, and anyone can {REMINDER_EMOJI} to get pinged.\n"
             "• Editing or removing a campaign: whoever added it, or anyone with Manage Messages.\n"
-            "• Changing, skipping or stopping a reminder: whoever set it, whoever added the campaign, or a mod."
-        ), {"edit", "remove", "remind", "unremind", "skip", "reschedule"}),
+            "• Changing, skipping or stopping a reminder: whoever set it, whoever added the campaign, or a mod.\n"
+            f"• Messaging the group: anyone with a {REMINDER_EMOJI} on it, and the same people."
+        ), {"edit", "remove", "remind", "unremind", "skip", "reschedule", "message"}),
         (f"⌨️ Typing it with {p}", (
             f"• `{p}campaign Monday game` shows one; `{p}campaign` lists them all.\n"
             "• When more follows the alias, put a multi-word alias in quotes: "
             f"`{p}campaign add \"Monday game\" <link> <link>`, "
             f"`{p}campaign remind \"Monday game\" mondays at 1900, 15m before`, "
-            f"`{p}campaign reschedule \"Monday game\" next 26 oct`.\n"
+            f"`{p}campaign reschedule \"Monday game\" next 26 oct`, "
+            f"`{p}campaign message \"Monday game\" rp heavy, bring snacks`.\n"
             f"• `{p}campaign skip Monday game` and `{p}campaign remove Monday game` don't need quotes."
-        ), {"add", "show", "list", "edit", "remove", "remind", "unremind", "skip", "reschedule"}),
+        ), {"add", "show", "list", "edit", "remove", "remind", "unremind", "skip", "reschedule", "message"}),
     ]
 
 

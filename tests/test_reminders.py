@@ -157,6 +157,45 @@ def test_a_reschedule_that_moves_the_game_pings_but_a_new_warning_doesnt(game, b
     assert alert.content.endswith("<@2>") and [u.id for u in alert.allowed_mentions.users] == [DAVE.id]
 
 
+def message(author, alert, note="", slash=True, channel=None):
+    ctx = Ctx(author, slash=slash, channel=channel)
+    run(c.campaign_message.callback(ctx, "Game", alert, note=note))
+    return ctx
+
+
+def test_messaging_the_group_pings_everyone_with_a_bell(game, bot):
+    message_id = remind("mondays at 1900").id
+    react(True, message_id, DAVE.id)
+    react(True, message_id, PAT.id)
+    sent = message(SCOTT, "rp", "Bring snacks @everyone").last
+    assert sent.content.startswith("**Game**: 🎭 This session will be RP heavy: bring your best voices. (from <@1>)")
+    assert "> Bring snacks @​everyone" in sent.content and "-# Next session: <t:" in sent.content
+    assert sent.content.endswith("<@2> <@3>") and [u.id for u in sent.allowed_mentions.users] == [DAVE.id, PAT.id]
+    assert sent.allowed_mentions.everyone is False and not sent.private
+
+
+def test_a_headcount_gets_ticks_and_a_player_can_say_theyre_late(game, bot):
+    react(True, remind("mondays at 1900").id, DAVE.id)
+    assert message(SCOTT, "headcount").last.reactions == ["✅", "❌"]
+    late = message(DAVE, "late").last  # Dave's in the group: he can, and isn't pinged by his own
+    assert "Running a bit late" in late.content and late.allowed_mentions.users == []
+    assert "Only the group" in message(PAT, "late").last.content  # Pat isn't
+
+
+def test_a_message_typed_or_from_elsewhere(game, bot):
+    react(True, remind("mondays at 1900").id, DAVE.id)
+    typed = message(SCOTT, "combat", "heavy, big boss tonight", slash=False).last
+    assert "combat heavy" in typed.content and "> big boss tonight" in typed.content
+    assert "Which alert?" in message(SCOTT, "dance party").last.content
+    elsewhere = message(SCOTT, "who's in", channel=Channel(600))
+    assert bot.channels[500].sent[-1].reactions == ["✅", "❌"]
+    assert "Sent to the **Game** group: 🙋 Who's in?" in elsewhere.last.content
+
+
+def test_messaging_needs_a_reminder(game):
+    assert "doesn't have a reminder" in message(SCOTT, "rp").last.content
+
+
 def test_weekly_skip(game):
     remind("mondays at 1900")
     run(c.campaign_skip.callback(Ctx(SCOTT), alias="Game"))

@@ -36,7 +36,7 @@ SUBCOMMANDS = {
     "nowplaying": ["bingo", "canon", "end", "history", "objection", "pause", "predict", "rate", "set", "show", "start",
                    "sync", "vote", "watchlist"],
     "timezone": ["clear", "convert", "set", "show"],
-    "campaign": ["add", "edit", "list", "remind", "remove", "reschedule", "show", "skip", "unremind"],
+    "campaign": ["add", "edit", "list", "message", "remind", "remove", "reschedule", "show", "skip", "unremind"],
     "quote": ["add", "claim", "delete", "dissociate", "last", "random", "search", "show"],
     "settings": ["shared_state", "show", "whospray_user"],
     "books": ["download", "search"],
@@ -139,7 +139,7 @@ def test_help_details(loaded_bot):
     campaign = help_feature.command_help_embed(loaded_bot.get_command("campaign"))
     assert campaign.title == "/campaign"
     assert [f.name for f in campaign.fields if not f.name.startswith("/")] == [
-        "📋 Setting up", "⏰ Reminders", "🗓️ When the game moves", "🔐 Who can change what", "⌨️ Typing it with !"]
+        "📋 Setting up", "⏰ Reminders", "🗓️ When the game moves", "📣 Messaging the group", "🔐 Who can change what", "⌨️ Typing it with !"]
     remind = help_feature.command_help_embed(loaded_bot.get_command("campaign remind"))
     assert "Also works typed as `!campaign remind`." in remind.description
     quote = help_feature.command_help_embed(loaded_bot.get_command("quote"))
