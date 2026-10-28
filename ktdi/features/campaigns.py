@@ -541,7 +541,7 @@ async def reminder_to_change(ctx: commands.Context, alias: str) -> tuple[Campaig
 
 
 @campaign_group.command(name="reschedule",
-                        description="Change a reminder's schedule, next date or warning, keeping everyone's 🔔.")
+                        description="Change a reminder's schedule, next date or warning; pings everyone with a 🔔.")
 @app_commands.describe(alias="The campaign",
                        change="e.g. 30 minutes before · next 26 oct · every other monday 7pm · mondays 6pm from 12 oct")
 async def campaign_reschedule(ctx: commands.Context, alias: str, *, change: str):
@@ -587,9 +587,17 @@ async def campaign_reschedule(ctx: commands.Context, alias: str, *, change: str)
     update_reminder_schedule(reminder.id, schedule, anchor, first, lead_minutes)
     log.info("[%s] %s rescheduled the reminder for %r: %s, %s", ctx.guild.name, ctx.author, campaign.alias,
              schedule.describe(), ping_phrase(lead_minutes))
-    await send_campaign_reply(ctx, f"🗓️ Reminder for **{campaign.alias}** updated: {schedule.describe()}, "
-                                   f"{ping_phrase(lead_minutes)}.\n"
-                                   f"Next ping: {when_text(first)}. Everyone's {REMINDER_EMOJI} still counts.")
+    confirmation = (f"🗓️ Reminder for **{campaign.alias}** updated: {schedule.describe()}, "
+                    f"{ping_phrase(lead_minutes)}.\nNext ping: {when_text(first)}. Everyone's {REMINDER_EMOJI} still "
+                    "counts.")
+    session = first + timedelta(minutes=lead_minutes)
+    if session == reminder.next_game_at and schedule.describe() == reminder.schedule.describe():
+        await send_campaign_reply(ctx, confirmation)  # Only the warning changed: the game hasn't moved
+        return
+    await tell_subscribers(
+        ctx, reminder,
+        f"🗓️ **{campaign.alias}** has moved (by <@{ctx.author.id}>): {schedule.describe()}. Next session: "
+        f"{when_text(session)}.", confirmation)
 
 
 @campaign_group.command(name="skip", description="Skip the next reminder. Fortnightly games shift a week and carry on from there.")
@@ -613,8 +621,30 @@ async def campaign_skip(ctx: commands.Context, *, alias: str):
         note = "Back to normal after that."
     update_reminder_schedule(reminder.id, schedule, anchor, next_run, reminder.lead_minutes)
     log.info("[%s] %s skipped a reminder for %r", ctx.guild.name, ctx.author, campaign.alias)
-    await send_campaign_reply(ctx, f"⏭️ Skipped the {upcoming:%a %d %b} session for **{campaign.alias}**.\n"
-                                   f"Next ping: {when_text(next_run)}. {note}")
+    await tell_subscribers(
+        ctx, reminder,
+        f"⏭️ **{campaign.alias}** is off on {upcoming:%a %d %b} (skipped by <@{ctx.author.id}>). Next session: "
+        f"{when_text(next_run + reminder.lead)}. {note}",
+        f"⏭️ Skipped the {upcoming:%a %d %b} session for **{campaign.alias}**.\n"
+        f"Next ping: {when_text(next_run)}. {note}")
+
+
+async def tell_subscribers(ctx: commands.Context, reminder: Reminder, alert: str, confirmation: str) -> None:
+    """A change to when people play: everyone with a 🔔 is pinged (but whoever made it: they know) in the reminder's
+    channel. Made there, the alert is the reply; made elsewhere, the reply's the confirmation, saying where it went."""
+    people = [user for user in subscribers(reminder.id) if user != ctx.author.id]
+    alert = f"{alert} {' '.join(f'<@{user}>' for user in people)}".strip()
+    pings = discord.AllowedMentions(users=[discord.Object(id=user) for user in people], everyone=False, roles=False)
+    if ctx.channel.id == reminder.channel_id:
+        await ctx.send(alert, allowed_mentions=pings)
+        return
+    channel = common.bot.get_channel(reminder.channel_id)
+    told = ""
+    if channel is not None:
+        await channel.send(alert, allowed_mentions=pings)
+        told = f"\n-# Posted in <#{reminder.channel_id}>" + (f", pinging the {len(people)} with a {REMINDER_EMOJI}."
+                                                            if people else ".")
+    await send_campaign_reply(ctx, confirmation + told)
 
 
 async def campaign_alias_autocomplete(interaction: discord.Interaction, current: str) -> list[app_commands.Choice[str]]:
@@ -726,7 +756,8 @@ def help_sections() -> list[tuple[str, str, set[str]]]:
             f"• Times are {config.REMINDER_TIMEZONE.key} time; summer time is handled."
         ), {"remind", "unremind"}),
         ("🗓️ When the game moves", (
-            "• `/campaign skip`: skip the next session. Fortnightly games shift a week and carry on from there.\n"
+            "• `/campaign skip`: skip the next session, and everyone with a 🔔 is pinged that it's off. Fortnightly "
+            "games shift a week and carry on from there. A `reschedule` that moves the game pings them too.\n"
             "• `/campaign reschedule change:next 26 oct`: the next session is on that date (a fortnightly "
             "schedule counts from it).\n"
             "• `change:30 minutes before`: change just the warning.\n"

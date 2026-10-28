@@ -123,6 +123,40 @@ def test_start_date_and_fortnightly_skip(game):
     assert sessions() == ["Mon 26 Oct 19:00", "Mon 09 Nov 19:00", "Mon 23 Nov 19:00"]
 
 
+def test_a_skip_pings_everyone_with_a_bell_but_the_skipper(game, bot):
+    message_id = remind("mondays at 1900").id
+    for user in (DAVE, PAT, SCOTT):
+        react(True, message_id, user.id)
+    ctx = Ctx(SCOTT)  # In the reminder's channel: the reply is the alert
+    run(c.campaign_skip.callback(ctx, alias="Game"))
+    alert = ctx.last
+    assert alert.content.startswith("⏭️ **Game** is off on Mon 28 Sep (skipped by <@1>). Next session: <t:")
+    assert alert.content.endswith("<@2> <@3>") and not alert.private
+    assert [u.id for u in alert.allowed_mentions.users] == [DAVE.id, PAT.id] and alert.allowed_mentions.everyone is False
+
+
+def test_a_skip_from_another_channel_posts_the_alert_in_the_reminders(game, bot):
+    react(True, remind("mondays at 1900").id, DAVE.id)
+    ctx = Ctx(SCOTT, channel=Channel(600))
+    run(c.campaign_skip.callback(ctx, alias="Game"))
+    alert = bot.channels[500].sent[-1]
+    assert alert.content.startswith("⏭️ **Game** is off") and alert.content.endswith("<@2>")
+    assert [u.id for u in alert.allowed_mentions.users] == [DAVE.id]
+    assert "Posted in <#500>, pinging the 1 with a 🔔." in ctx.last.content
+
+
+def test_a_reschedule_that_moves_the_game_pings_but_a_new_warning_doesnt(game, bot):
+    react(True, remind("mondays at 1900").id, DAVE.id)
+    ctx = Ctx(SCOTT)
+    run(c.campaign_reschedule.callback(ctx, "Game", change="30 minutes before"))
+    assert "updated" in ctx.last.content and ctx.last.allowed_mentions is c.NO_PINGS  # Same game, quietly
+    ctx = Ctx(SCOTT)
+    run(c.campaign_reschedule.callback(ctx, "Game", change="tuesdays 8pm"))
+    alert = ctx.last
+    assert alert.content.startswith("🗓️ **Game** has moved (by <@1>): Tuesdays at 20:00. Next session: <t:")
+    assert alert.content.endswith("<@2>") and [u.id for u in alert.allowed_mentions.users] == [DAVE.id]
+
+
 def test_weekly_skip(game):
     remind("mondays at 1900")
     run(c.campaign_skip.callback(Ctx(SCOTT), alias="Game"))
@@ -132,7 +166,7 @@ def test_weekly_skip(game):
 def test_reschedule_keeps_subscribers_and_message(game):
     message_id = remind("every other monday at 7pm from 19 oct").id
     react(True, message_id, DAVE.id)
-    assert "updated" in reschedule("next 2 nov").content
+    assert "has moved" in reschedule("next 2 nov").content  # Moved the game: Dave's pinged
     assert sessions(2) == ["Mon 02 Nov 19:00", "Mon 16 Nov 19:00"]
     reschedule("every other thursday 8pm from 5 nov")
     assert sessions(2) == ["Thu 05 Nov 20:00", "Thu 19 Nov 20:00"]
