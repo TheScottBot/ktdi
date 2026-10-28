@@ -37,9 +37,10 @@ class Quote:
 # --- Storage. Reads take the asking server's ID and see whatever its shared state allows. Quote IDs are unique
 # across all servers, so #12 means the same quote everywhere it's visible. ---
 def add_quote(guild_id: int, user_id: int, text: str, context: str | None, added_by: int,
-              channel_id: int | None = None, message_id: int | None = None) -> int:
+              channel_id: int | None = None, message_id: int | None = None, table: str = "quotes") -> int:
+    """table: "quotes", or "cc_quotes" for /cc's (the same columns, numbered on their own)."""
     cursor = db.conn.execute(
-        "INSERT INTO quotes (guild_id, user_id, text, context, added_by, channel_id, message_id, created_at)"
+        f"INSERT INTO {table} (guild_id, user_id, text, context, added_by, channel_id, message_id, created_at)"
         " VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         (guild_id, user_id, text, context, added_by, channel_id, message_id,
          datetime.now(timezone.utc).isoformat(timespec="seconds")),
@@ -48,9 +49,9 @@ def add_quote(guild_id: int, user_id: int, text: str, context: str | None, added
     return cursor.lastrowid
 
 
-def get_quote(guild_id: int, quote_id: int) -> Quote | None:
+def get_quote(guild_id: int, quote_id: int, table: str = "quotes") -> Quote | None:
     where, params = db.scope(guild_id)
-    row = db.conn.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE {where} AND id = ?", (*params, quote_id)).fetchone()
+    row = db.conn.execute(f"SELECT {QUOTE_COLUMNS} FROM {table} WHERE {where} AND id = ?", (*params, quote_id)).fetchone()
     return Quote(*row) if row else None
 
 
@@ -61,30 +62,31 @@ def quote_for_message(guild_id: int, message_id: int) -> Quote | None:
     return Quote(*row) if row else None
 
 
-def random_quote(guild_id: int, user_id: int | None = None) -> Quote | None:
+def random_quote(guild_id: int, user_id: int | None = None, table: str = "quotes") -> Quote | None:
     where, params = db.scope(guild_id)
     if user_id is not None:
         where, params = f"{where} AND user_id = ?", [*params, user_id]
-    row = db.conn.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE {where} ORDER BY RANDOM() LIMIT 1", params).fetchone()
+    row = db.conn.execute(f"SELECT {QUOTE_COLUMNS} FROM {table} WHERE {where} ORDER BY RANDOM() LIMIT 1",
+                          params).fetchone()
     return Quote(*row) if row else None
 
 
-def search_quotes(guild_id: int, text: str, limit: int = 10) -> list[Quote]:
+def search_quotes(guild_id: int, text: str, limit: int = 10, table: str = "quotes") -> list[Quote]:
     where, params = db.scope(guild_id)
     pattern = "%" + text.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_") + "%"
     rows = db.conn.execute(
-        f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE {where} AND (text LIKE ? ESCAPE '\\' OR context LIKE ? ESCAPE '\\')"
+        f"SELECT {QUOTE_COLUMNS} FROM {table} WHERE {where} AND (text LIKE ? ESCAPE '\\' OR context LIKE ? ESCAPE '\\')"
         " ORDER BY id DESC LIMIT ?",
         (*params, pattern, pattern, limit),
     ).fetchall()
     return [Quote(*row) for row in rows]
 
 
-def recent_quotes(guild_id: int, limit: int, user_id: int | None = None) -> list[Quote]:
+def recent_quotes(guild_id: int, limit: int, user_id: int | None = None, table: str = "quotes") -> list[Quote]:
     where, params = db.scope(guild_id)
     if user_id is not None:
         where, params = f"{where} AND user_id = ?", [*params, user_id]
-    rows = db.conn.execute(f"SELECT {QUOTE_COLUMNS} FROM quotes WHERE {where} ORDER BY id DESC LIMIT ?",
+    rows = db.conn.execute(f"SELECT {QUOTE_COLUMNS} FROM {table} WHERE {where} ORDER BY id DESC LIMIT ?",
                            (*params, limit)).fetchall()
     return [Quote(*row) for row in rows]
 
@@ -104,9 +106,9 @@ def claim_quote(guild_id: int, quote_id: int, user_id: int) -> None:
     db.conn.commit()
 
 
-def delete_quote(guild_id: int, quote_id: int) -> None:
+def delete_quote(guild_id: int, quote_id: int, table: str = "quotes") -> None:
     where, params = db.scope(guild_id)
-    db.conn.execute(f"DELETE FROM quotes WHERE {where} AND id = ?", (*params, quote_id))
+    db.conn.execute(f"DELETE FROM {table} WHERE {where} AND id = ?", (*params, quote_id))
     db.conn.commit()
 
 

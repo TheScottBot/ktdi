@@ -96,8 +96,10 @@ class Channel:
     def __str__(self):
         return f"channel-{self.id}"
 
-    async def send(self, content=None, embed=None, view=None, allowed_mentions=None, embeds=None, **kwargs):
-        message = Sent(content, embed, view, allowed_mentions=allowed_mentions, embeds=embeds)
+    async def send(self, content=None, embed=None, view=None, allowed_mentions=None, embeds=None, file=None,
+                   delete_after=None, **kwargs):
+        message = Sent(content, embed, view, file=file, allowed_mentions=allowed_mentions, embeds=embeds)
+        message.delete_after = delete_after
         self.sent.append(message)
         self.messages[message.id] = message  # So it can be fetched (and edited) again, like a real one
         return message

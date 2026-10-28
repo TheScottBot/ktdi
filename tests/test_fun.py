@@ -366,6 +366,18 @@ def test_a_glimpse_is_rare_and_brief(monkeypatch):
     assert message.reactions == ["👁️"] and message.removed_reactions == [("👁️", 999)]
 
 
+def test_the_hotdawg_wanders_rarely(monkeypatch):
+    from tests.fakes import Channel, Guild, Message
+    channel = Channel(500, Guild(111))
+    message = Message(1, DAVE, "hello", channel)
+    monkeypatch.setattr(fun.random, "randrange", lambda odds: 1)
+    run(fun.wander(message))
+    assert channel.sent == []
+    monkeypatch.setattr(fun.random, "randrange", lambda odds: 0)
+    run(fun.wander(message))
+    assert channel.sent[-1].file.filename == "hotdawg.jpg" and channel.sent[-1].delete_after == fun.TOES_SECONDS
+
+
 async def asyncio_noop():
     return None
 

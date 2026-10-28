@@ -45,6 +45,19 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS cc_quotes (  -- /cc, conservative calls: the quotes' columns, numbered on their own
+        id         INTEGER PRIMARY KEY AUTOINCREMENT,
+        guild_id   INTEGER NOT NULL,
+        user_id    INTEGER NOT NULL,  -- always 0: folklore, nobody's named on one
+        text       TEXT NOT NULL,
+        context    TEXT,              -- who'd say it ("Uncle Clive")
+        added_by   INTEGER NOT NULL,
+        channel_id INTEGER,
+        message_id INTEGER,
+        created_at TEXT NOT NULL
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS campaigns (
         guild_id      INTEGER NOT NULL,
         alias         TEXT NOT NULL,  -- as typed, e.g. "Monday game"

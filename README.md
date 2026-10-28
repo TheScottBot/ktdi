@@ -91,6 +91,7 @@ Units, sincerely or absurdly.
 
 ### [💬 Quotes](docs/COMMANDS.md#quotes)
 - `quote`: save and replay the things people say (or right-click a message: **Save quote**)
+- `cc`: conservative calls, our book of what they call us when they won't use our names
 
 ### [🗓️ Campaigns](docs/COMMANDS.md#campaigns)
 - `campaign`: our campaigns' D&D Beyond and VTT links, session reminders, and pinging the group (RP heavy tonight, running late)

@@ -50,6 +50,9 @@ SILENCE_SECONDS = 25  # !...: how long the bot types for, before saying nothing 
 GLIMPSE_ODDS = 1000  # One message in this many is looked at, briefly (no command: it just happens)
 GLIMPSE_SECONDS = 10
 GLIMPSE_EMOJI = "👁️"
+WANDER_ODDS = 5000  # One message in this many, the hotdawg turns up on its own, in that channel
+
+
 MEFR_IMAGE = Path(__file__).resolve().parent.parent / "assets" / "mefr.jpg"  # Cropped to the creature alone
 HOTDAWG_IMAGE = Path(__file__).resolve().parent.parent / "assets" / "hotdawg.jpg"
 NOSE_IMAGE = Path(__file__).resolve().parent.parent / "assets" / "nose.png"  # Attached, not linked, so it can't vanish.
@@ -671,6 +674,17 @@ async def glimpse(message: discord.Message):
         pass  # No Add Reactions there, or the message went first
 
 
+# Not a command either, and rarer: the hotdawg turns up on its own, where someone's just spoken, and leaves.
+async def wander(message: discord.Message):
+    if message.guild is None or message.author.bot or random.randrange(WANDER_ODDS) or not HOTDAWG_IMAGE.exists():
+        return
+    try:
+        await message.channel.send(file=discord.File(HOTDAWG_IMAGE, filename=HOTDAWG_IMAGE.name),
+                                   delete_after=TOES_SECONDS)
+    except discord.HTTPException:
+        pass  # Can't post there: it went somewhere else
+
+
 # Typed only, and left off the /help lists (extras["unlisted"]), but not a secret: the README has it.
 @commands.command(name="fyio", description="Fuck you, I'm out.", extras={**FUN, "unlisted": True})
 async def fyio(ctx: commands.Context):
@@ -937,4 +951,5 @@ async def setup(bot: commands.Bot):
     bot.tree.add_command(phrasing_menu)  # Right-click a message > Apps > Phrasing
     bot.add_listener(remember_speaker, "on_message")
     bot.add_listener(glimpse, "on_message")
+    bot.add_listener(wander, "on_message")
     bot.add_listener(spray_reaction, "on_raw_reaction_add")

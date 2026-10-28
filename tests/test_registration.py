@@ -12,7 +12,7 @@ from ktdi.features import campaigns, help as help_feature
 from tests.fakes import Ctx, Guild, User
 
 SLASH_COMMANDS = ["abm", "allspray", "almanac", "anime", "bad", "badbonk", "bail", "beeton", "blame", "books",
-                  "bread", "bribe", "campaign", "committee", "cure", "deadword", "esoteric", "etiquette", "expunge",
+                  "bread", "bribe", "campaign", "cc", "committee", "cure", "deadword", "esoteric", "etiquette", "expunge",
                   "folklore", "hammeredofwitches", "help", "herbal", "household", "imperial", "insurance", "linux",
                   "loot", "lore", "metric", "nature", "nowplaying", "omen", "phrasing", "plant", "play", "pliny",
                   "quote", "rapsheet", "rpg", "settings", "shhh", "spray", "sprayfutures", "sprayrate", "tdoi",
@@ -116,7 +116,7 @@ def test_prefix_commands(loaded_bot):
 
 def test_listeners(loaded_bot):
     assert {name: sorted(f.__name__ for f in funcs) for name, funcs in loaded_bot.extra_events.items()} == {
-        "on_message": ["chatted", "glimpse", "remember_speaker", "vote_closed_by_itself"],
+        "on_message": ["chatted", "glimpse", "remember_speaker", "vote_closed_by_itself", "wander"],
         "on_raw_reaction_add": ["dig", "prediction_vote", "reminder_subscribe", "spray_reaction"],
         "on_raw_reaction_remove": ["prediction_unvote", "reminder_unsubscribe"],
     }

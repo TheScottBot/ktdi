@@ -122,6 +122,7 @@ ktdi/
 │   ├── weather.py     /weather: Open-Meteo's forecast (lib/openmeteo.py) next to 1893 weather lore; /weather here
 │   │                  (a private form) for where you are, posted without naming it (never stored, cached or logged)
 │   ├── quotes.py      quotes (prefix group, slash group, right-click form)
+│   ├── cc.py          /cc, conservative calls: a quote book of our own for the gag (the quotes' storage, cc_quotes)
 │   ├── campaigns.py   campaigns, reminders, the reminder loop
 │   ├── settings.py    /settings (shared state, whospray user)
 │   ├── books.py       /books (Calibre-Web)
@@ -380,6 +381,7 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `sprays` | spray count per (server, person) |
 | `bribes` | bribe count and total per (server, person) |
 | `briber_role_holders` | who holds the Champion Briber role, per server |
+| `cc_quotes` | /cc's book, the quotes' columns (`context` is who'd say it), numbered on its own |
 | `quotes` | quotes; `user_id = 0` means anonymous; `message_id` links to the original (dropped for anonymous) |
 | `campaigns` | alias → D&D Beyond / VTT links, per server; `alias_key` is the lowercased alias |
 | `campaign_reminders` | one per campaign: schedule, start time, `lead_minutes`, `next_run`, setup message |
