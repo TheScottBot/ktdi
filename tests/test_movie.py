@@ -43,6 +43,90 @@ def test_set_doesnt_start_it(at, bot):
     assert movie.current_movie(111).title == "Shrek"
 
 
+def test_where_its_streaming(at):
+    assert "Nothing's lined up" in np("set", stream="https://www.netflix.com/title/123").content
+    np("set", title="Paddington 2")
+    added = np("set", stream="https://www.netflix.com/title/70301870", user=DAVE).content
+    assert added.startswith("📺 Added Netflix for Paddington 2.")
+    np("stream", link="<https://www.bbc.co.uk/iplayer/episode/m001>")  # Typed, in Discord's no-preview brackets
+    where = np("show").content
+    assert "📺 **Where:** [Netflix](<https://www.netflix.com/title/70301870>) · " \
+           "[BBC iPlayer](<https://www.bbc.co.uk/iplayer/episode/m001>)" in where
+    assert "already has that link" in np("set", stream="https://www.netflix.com/title/70301870").content
+    assert "needs to be a link" in np("set", stream="netflix").content
+    assert movie.stream_service("https://watch.example.org/x") == "watch.example.org"
+    assert np("set", stream="none").content == "📺 Cleared 2 links for Paddington 2."
+    assert "Where:" not in np("show").content
+
+
+def test_streaming_links_stay_with_the_film(at):
+    np("set", title="Alien", stream="https://www.disneyplus.com/movies/alien/1")  # Lined up and linked at once
+    assert "[Disney+]" in np("show").content
+    np("set", title="Shrek")
+    assert "Where:" not in np("show").content
+    np("set", title="alien")  # Back again: its link comes with it
+    assert "[Disney+]" in np("show").content
+
+
+def test_where_tmdb_says_its_on(at, monkeypatch):
+    from ktdi import config
+    from ktdi.lib import tmdb
+    asked = []
+
+    async def find(title, token, region):
+        asked.append(title)
+        return tmdb.Providers("Alien (1979)", "https://www.justwatch.com/uk/movie/alien", ["Disney Plus"],
+                              ["Apple TV"], [])
+    monkeypatch.setattr(tmdb, "find", find)
+    assert "📡" not in np("set", title="Alien").content  # No token: nothing's looked up
+    monkeypatch.setattr(config, "TMDB_READ_TOKEN", "token")
+    np("set", title="Shrek")
+    np("set", title="Alien")
+    shown = np("show").content
+    assert "📡 **On:** Disney Plus · **Rent:** Apple TV (via [JustWatch](<https://www.justwatch.com/uk/movie/alien>))" in shown
+    np("set", title="Shrek")
+    np("set", title="Alien")
+    assert asked.count("Alien") == 1  # Looked up once a week at most
+
+
+def test_a_film_already_on_is_caught_up_when_its_shown(at, monkeypatch):
+    from ktdi import config
+    from ktdi.lib import tmdb
+
+    async def find(title, token, region):
+        return tmdb.Providers("Alien (1979)", None, ["Disney Plus"], [], [])
+    monkeypatch.setattr(tmdb, "find", find)
+    np("set", title="Alien")
+    np("start")  # Playing before there was a token: set won't take it now
+    monkeypatch.setattr(config, "TMDB_READ_TOKEN", "token")
+    shown = np("show")
+    assert "📡 **On:** Disney Plus" in shown.content  # Looked up, and the message edited to say so
+
+
+def test_where_tmdb_found_another_film_says_so(at, monkeypatch):
+    from ktdi import config
+    from ktdi.lib import tmdb
+
+    async def find(title, token, region):
+        return tmdb.Providers("Aliens (1986)", None, [], [], ["Apple TV"])
+    monkeypatch.setattr(tmdb, "find", find)
+    monkeypatch.setattr(config, "TMDB_READ_TOKEN", "token")
+    np("set", title="Alien")
+    assert "📡 **Buy:** Apple TV (via JustWatch, for Aliens (1986))" in np("show").content
+
+
+def test_a_failed_look_up_is_just_left_out(at, monkeypatch):
+    from ktdi import config
+    from ktdi.lib import tmdb
+
+    async def find(title, token, region):
+        raise TimeoutError
+    monkeypatch.setattr(tmdb, "find", find)
+    monkeypatch.setattr(config, "TMDB_READ_TOKEN", "token")
+    assert np("set", title="Alien").content.startswith("🎬 **Up next:** Alien")
+    assert "📡" not in np("show").content
+
+
 def test_start_pause_resume_end(at, bot):
     assert "Nothing's lined up" in np("start").content
     np("set", title="Shrek 2")

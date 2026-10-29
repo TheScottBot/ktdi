@@ -71,6 +71,20 @@ unless you turn it on, in this order:
 The order matters: a bot that asks for the intent before it's switched on in the Portal can't log in at all. Without
 it, `/allspray` just says it isn't set up.
 
+<a id="streaming"></a>
+## Where films are streaming (/nowplaying, optional)
+
+`/nowplaying set` can say which UK services have a film ("📡 On: Netflix · Rent: Apple TV, via JustWatch"), from
+[TMDB](https://www.themoviedb.org/)'s free API, which uses JustWatch's data. To switch it on:
+
+1. Make a free account at themoviedb.org, then Settings > API, and ask for an API key (personal use).
+2. Copy the **API Read Access Token** (the long one) into `.env` (and `.env.dev`) as `TMDB_READ_TOKEN=...`.
+   `TMDB_REGION` changes the country (two letters; `GB` unless set).
+3. Restart the bot.
+
+Without it, nothing's looked up, and people can still add links themselves (`/nowplaying set stream:<link>`).
+Each film is looked up at most once a week (kept in the `movie_providers` table).
+
 ## Logs
 
 The bot logs startup, every command used (except `/books` and `/rpg`, which are never logged against anyone), 💦 sprays, bribes and role changes to `logs/ktdi.log` next to `bot.py` (and to the terminal/journal). The file rotates at 1 MB, keeping 5 old files (`ktdi.log.1` … `ktdi.log.5`). To follow it live:

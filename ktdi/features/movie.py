@@ -18,19 +18,22 @@ where they went, for /help.
 """
 
 import asyncio
+import json
 import math
 import random
 import re
+import urllib.parse
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 
+import aiohttp
 import discord
 from discord import app_commands
 from discord.ext import commands
 
-from ktdi import common, db
+from ktdi import common, config, db
 from ktdi.common import NO_PINGS, log, plural
-from ktdi.lib import fuzzy, letterboxd
+from ktdi.lib import fuzzy, letterboxd, tmdb
 
 HELP_CATEGORY = "🎬 Movie night"
 TITLE_MAX_LENGTH = 100
@@ -394,16 +397,117 @@ def film_clock(movie: Movie) -> str:
     return f"⏱️ Started {live(clock_start)}" + (", not counting pauses" if movie.paused_seconds else "")
 
 
+# --- Where it's streaming: links people add (no looking it up: nothing's scraped) ---
+STREAMING_SERVICES = {  # A link's site -> the name shown for it
+    "netflix.com": "Netflix", "primevideo.com": "Prime Video", "amazon.co.uk": "Prime Video",
+    "amazon.com": "Prime Video", "disneyplus.com": "Disney+", "apps.disneyplus.com": "Disney+",
+    "bbc.co.uk": "BBC iPlayer", "channel4.com": "Channel 4", "itv.com": "ITVX", "itvx.com": "ITVX",
+    "my5.tv": "5", "channel5.com": "5", "nowtv.com": "NOW", "now.com": "NOW", "tv.apple.com": "Apple TV+",
+    "mubi.com": "MUBI", "youtube.com": "YouTube", "youtu.be": "YouTube", "paramountplus.com": "Paramount+",
+    "max.com": "Max", "hbomax.com": "Max", "skystore.com": "Sky Store", "sky.com": "Sky", "bfi.org.uk": "BFI Player",
+    "plex.tv": "Plex", "tubitv.com": "Tubi", "pluto.tv": "Pluto TV", "rakuten.tv": "Rakuten TV",
+    "shudder.com": "Shudder", "criterionchannel.com": "Criterion Channel", "crunchyroll.com": "Crunchyroll",
+    "archive.org": "Internet Archive", "play.google.com": "Google TV", "letterboxd.com": "Letterboxd",
+    "justwatch.com": "JustWatch",
+}
+STREAM_URL = re.compile(r"^<?(https?://[^\s<>]+)>?$")
+STREAMS_SHOWN = 10
+
+
+def stream_service(url: str) -> str:
+    """The service a link's for, from its site ("www.netflix.com/title/123" is Netflix); else the site itself."""
+    host = (urllib.parse.urlsplit(url).hostname or "").removeprefix("www.")
+    for site, name in STREAMING_SERVICES.items():
+        if host == site or host.endswith("." + site):
+            return name
+    return host or "Link"
+
+
+def streams(guild_id: int, title: str) -> list[str]:
+    return [url for (url,) in db.conn.execute(
+        "SELECT url FROM movie_streams WHERE guild_id = ? AND title_key = ? ORDER BY added_at, rowid",
+        (guild_id, title_key(title)))]
+
+
+def add_stream(guild_id: int, title: str, url: str, user_id: int) -> bool:
+    """Whether it was new."""
+    cursor = db.conn.execute("INSERT OR IGNORE INTO movie_streams (guild_id, title_key, url, added_by, added_at) "
+                             "VALUES (?, ?, ?, ?, ?)", (guild_id, title_key(title), url, user_id, now().isoformat()))
+    db.conn.commit()
+    return cursor.rowcount > 0
+
+
+def clear_streams(guild_id: int, title: str) -> int:
+    cursor = db.conn.execute("DELETE FROM movie_streams WHERE guild_id = ? AND title_key = ?",
+                             (guild_id, title_key(title)))
+    db.conn.commit()
+    return cursor.rowcount
+
+
+PROVIDERS_FRESH = timedelta(days=7)  # Look a film up again after this
+
+
+def cached_providers(title: str) -> tuple[tmdb.Providers | None, datetime | None]:
+    """(what TMDB said, when), or (None, None) if it's never been looked up."""
+    row = db.conn.execute("SELECT found, fetched_at FROM movie_providers WHERE title_key = ?",
+                          (title_key(title),)).fetchone()
+    if row is None:
+        return None, None
+    return (tmdb.Providers(**json.loads(row[0])) if row[0] else None), datetime.fromisoformat(row[1])
+
+
+async def look_up_providers(title: str) -> bool:
+    """Ask TMDB where a film's on, unless it was asked lately or there's no token. Whether anything was found.
+    Never raises: a failed look-up is logged, and people's own links still show."""
+    if not config.TMDB_READ_TOKEN:
+        return False
+    found, fetched = cached_providers(title)
+    if fetched and now() - fetched < PROVIDERS_FRESH:
+        return found is not None
+    try:
+        found = await tmdb.find(title, config.TMDB_READ_TOKEN, config.TMDB_REGION)
+    except (aiohttp.ClientError, TimeoutError, ValueError, KeyError) as error:
+        log.warning("Couldn't look up where %r is streaming: %s", title, error)
+        return False
+    db.conn.execute("INSERT OR REPLACE INTO movie_providers (title_key, found, fetched_at) VALUES (?, ?, ?)",
+                    (title_key(title), json.dumps(found.__dict__) if found else None, now().isoformat()))
+    db.conn.commit()
+    return found is not None
+
+
+def where_line(movie: Movie) -> str:
+    """People's links ("📺 Where: Netflix · Prime Video", each linked), and what TMDB/JustWatch says it's on."""
+    lines = []
+    links = [f"[{stream_service(url)}](<{url}>)" for url in streams(movie.guild_id, movie.title)[:STREAMS_SHOWN]]
+    if links:
+        lines.append(f"📺 **Where:** {' · '.join(links)}")
+    found, _ = cached_providers(movie.title)
+    if found:
+        parts = [f"**On:** {', '.join(found.stream)}"] if found.stream else []
+        if found.rent:
+            parts.append(f"**Rent:** {', '.join(found.rent[:6])}")
+        if not found.stream and found.buy:
+            parts.append(f"**Buy:** {', '.join(found.buy[:6])}")
+        source = f"[JustWatch](<{found.link}>)" if found.link else "JustWatch"
+        same = title_key(tmdb.split_year(found.title)[0]) == title_key(tmdb.split_year(movie.title)[0])
+        which = "" if same else f", for {discord.utils.escape_markdown(found.title)}"  # In case it found another film
+        lines.append(f"📡 {' · '.join(parts)} (via {source}{which})" if parts else
+                     f"📡 Not on streaming here (via {source}{which})")
+    return "".join(f"\n{line}" for line in lines)
+
+
 def status_text(movie: Movie | None) -> str:
     if movie is None:
         return "🎬 Nothing's lined up. Pick something with `/nowplaying set <title>`."
+    where = where_line(movie)
     if movie.started_at is None:
         label = f"[{movie.label}](<{movie.link}>)" if movie.link else movie.label
-        return f"🎬 **Up next:** {label}\n-# Lined up by <@{movie.set_by}>. `/nowplaying start` when everyone's ready."
+        return (f"🎬 **Up next:** {label}{where}\n-# Lined up by <@{movie.set_by}>. `/nowplaying start` when "
+                "everyone's ready.")
     if movie.paused_at:
-        return (f"⏸️ **Paused:** {movie.label} at {timecode(watched_seconds(movie))}\n"
+        return (f"⏸️ **Paused:** {movie.label} at {timecode(watched_seconds(movie))}{where}\n"
                 f"-# Paused {live(movie.paused_at)}. `/nowplaying start` to carry on.")
-    return f"▶️ **Now playing:** {movie.label}\n-# {film_clock(movie)}. Put on by <@{movie.set_by}>."
+    return f"▶️ **Now playing:** {movie.label}{where}\n-# {film_clock(movie)}. Put on by <@{movie.set_by}>."
 
 
 async def set_bot_status(bot: commands.Bot, watching: str | None) -> None:
@@ -748,12 +852,28 @@ async def np_group(ctx: commands.Context):
 
 @np_group.command(name="show", description="What's lined up or playing, and how far in.")
 async def np_show(ctx: commands.Context):
-    await ctx.send(status_text(current_movie(ctx.guild.id)), allowed_mentions=NO_PINGS)
+    message = await ctx.send(status_text(current_movie(ctx.guild.id)), allowed_mentions=NO_PINGS)
+    await add_providers(ctx.guild.id, message)  # A film lined up before there was a token, or still playing
 
 
-@np_group.command(name="set", description="Line up what's being watched. It doesn't start until /nowplaying start.")
-@app_commands.describe(title="What we're watching")
-async def np_set(ctx: commands.Context, *, title: str):
+@np_group.command(name="set", description="Line up what's being watched, or add where it's streaming.")
+@app_commands.describe(title="What we're watching",
+                       stream="A link to where it's streaming (Netflix, iPlayer…), added to what's lined up; none clears")
+async def np_set(ctx: commands.Context, *, title: str = "", stream: str | None = None):  # Typed: the title is the rest
+    """Lines a film up without starting it, so people can `predict` and get their `bingo` cards. Autocompletes from
+    the watchlist, and `Alien` finds `Alien (1979)` if there's only one.
+
+    **Where's it streaming?** `stream:` adds a link to what's lined up (or playing): `/nowplaying set
+    stream:https://www.netflix.com/title/123`. It shows as the service's name ("📺 Where: Netflix · BBC iPlayer"), on
+    `/nowplaying` and whenever the film's shown, and stays with the film for rewatches. `stream:none` clears them. It
+    can come with a title, to line one up and add its link at once. Typed: `!np stream <link>`.
+
+    If the bot has a TMDB token, lining a film up also says which UK services have it ("📡 On: Netflix · Rent: Apple
+    TV"), from JustWatch's data via TMDB, with JustWatch's page for it. This product uses the TMDB API but is not
+    endorsed or certified by TMDB."""
+    if stream is not None and not title:
+        await add_stream_link(ctx, stream)
+        return
     title = one_line(title, TITLE_MAX_LENGTH)
     if not title:
         await ctx.send("What are we watching?", ephemeral=True)
@@ -763,7 +883,60 @@ async def np_set(ctx: commands.Context, *, title: str):
         await ctx.send(f"{movie.name} is still on. `/nowplaying end` it first.", ephemeral=True)
         return
     log.info("[%s] %s lined up %r", ctx.guild.name, ctx.author, title)
-    await ctx.send(set_up_next(ctx.guild.id, title, ctx.author.id), allowed_mentions=NO_PINGS)
+    if stream is not None:
+        set_up_next(ctx.guild.id, title, ctx.author.id)
+        await add_stream_link(ctx, stream)
+        return
+    message = await ctx.send(set_up_next(ctx.guild.id, title, ctx.author.id), allowed_mentions=NO_PINGS)
+    await add_providers(ctx.guild.id, message)
+
+
+async def add_providers(guild_id: int, message) -> None:
+    """After anything that shows the current film (set, a vote's winner, /nowplaying, a link added): find where it's
+    on (TMDB) if that isn't known this week, and add it to that message. So a film set before there was a token, or
+    already playing, is caught up the next time it's shown."""
+    movie = current_movie(guild_id)
+    if movie is None or message is None or not config.TMDB_READ_TOKEN:
+        return
+    before = status_text(movie)
+    if not await look_up_providers(movie.title) or before not in (message.content or ""):
+        return
+    try:
+        await message.edit(content=message.content.replace(before, status_text(movie), 1))
+    except discord.HTTPException:
+        pass  # The announcement's gone: /nowplaying shows it anyway
+
+
+@np_group.command(name="stream", description="Add a link to where the film's streaming.", with_app_command=False,
+                  extras={"merged_into": "nowplaying set stream:"})
+async def np_stream(ctx: commands.Context, *, link: str):
+    await add_stream_link(ctx, link)
+
+
+async def add_stream_link(ctx: commands.Context, link: str) -> None:
+    movie = current_movie(ctx.guild.id)
+    if movie is None:
+        await ctx.send("Nothing's lined up to add it to. `/nowplaying set <title>` first.", ephemeral=True)
+        return
+    link = link.strip()
+    if link.casefold() in ("none", "clear"):
+        cleared = clear_streams(ctx.guild.id, movie.title)
+        await ctx.send(f"📺 Cleared {plural(cleared, 'link')} for {movie.name}." if cleared else
+                       f"{movie.name} has no links to clear.", ephemeral=not cleared, allowed_mentions=NO_PINGS)
+        return
+    match = STREAM_URL.match(link)
+    if match is None or len(match.group(1)) > 500:
+        await ctx.send("That needs to be a link: `https://…` (the film's page on Netflix, iPlayer, Prime…).",
+                       ephemeral=True)
+        return
+    url = match.group(1)
+    if not add_stream(ctx.guild.id, movie.title, url, ctx.author.id):
+        await ctx.send(f"{movie.name} already has that link.", ephemeral=True)
+        return
+    log.info("[%s] %s added a %s link for %r", ctx.guild.name, ctx.author, stream_service(url), movie.title)
+    message = await ctx.send(f"📺 Added {stream_service(url)} for {movie.name}.\n{status_text(movie)}",
+                             allowed_mentions=NO_PINGS)
+    await add_providers(ctx.guild.id, message)
 
 
 def set_up_next(guild_id: int, title: str, user_id: int) -> str:
@@ -1123,7 +1296,8 @@ async def np_vote_end(ctx: commands.Context):
         poll = message.poll
     except discord.HTTPException:
         poll = None  # The poll's gone (deleted?): close the vote without a winner.
-    await ctx.send(finish_vote(vote, poll, ctx.author.id), allowed_mentions=NO_PINGS)
+    message = await ctx.send(finish_vote(vote, poll, ctx.author.id), allowed_mentions=NO_PINGS)
+    await add_providers(ctx.guild.id, message)  # The winner, if it was lined up
 
 
 def vote_link(vote: Vote) -> str:
@@ -1167,7 +1341,8 @@ async def vote_closed_by_itself(message: discord.Message):
         poll = (await message.channel.fetch_message(vote.message_id)).poll
     except discord.HTTPException:
         poll = None
-    await message.channel.send(finish_vote(vote, poll, vote.created_by), allowed_mentions=NO_PINGS)
+    result = await message.channel.send(finish_vote(vote, poll, vote.created_by), allowed_mentions=NO_PINGS)
+    await add_providers(vote.guild_id, result)  # The winner, if it was lined up
 
 
 async def start_movie(ctx: commands.Context, movie: Movie) -> str:

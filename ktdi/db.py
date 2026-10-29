@@ -254,6 +254,23 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS movie_streams (  -- where a film's streaming: links people added (/nowplaying set stream:)
+        guild_id   INTEGER NOT NULL,
+        title_key  TEXT NOT NULL,     -- the film's title casefolded, so the links stay with it (rewatches, the watchlist)
+        url        TEXT NOT NULL,
+        added_by   INTEGER NOT NULL,
+        added_at   TEXT NOT NULL,
+        PRIMARY KEY (guild_id, title_key, url)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS movie_providers (  -- where a film's streaming per TMDB/JustWatch: looked up at most weekly
+        title_key  TEXT PRIMARY KEY,  -- the title casefolded (as the bot was asked it, year and all)
+        found      TEXT,              -- JSON: {title, link, stream, rent, buy}; NULL if TMDB didn't know the film
+        fetched_at TEXT NOT NULL
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS movie_votes (
         id              INTEGER PRIMARY KEY AUTOINCREMENT,
         guild_id        INTEGER NOT NULL,

@@ -147,6 +147,8 @@ ktdi/
     │                  archive.org scan), each tagged with its weather and any months or day, and its page in the
     │                  scan with a word to highlight (tools/weather_lore_pages.py)
     ├── openmeteo.py   Open-Meteo forecast and place lookup (free, no key); None when it's down
+    ├── tmdb.py        where a film's streaming, for /nowplaying: TMDB's free API (JustWatch's data), with
+    │                  TMDB_READ_TOKEN; service names and JustWatch's page, looked up at most weekly (movie_providers)
     ├── etiquette.py   /etiquette's situations: today's words (texting, D&D) filed under the manuals' topics
     ├── etiquette.json /etiquette's rules: hand-picked, word for word, from Routledge's and Hartley's manuals
     │                  (1860s, Gutenberg), each tagged with its topics
@@ -391,6 +393,8 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `bad_counts` | times each person was told off with `/bad @them` or `/badbonk @them`, per (server, person). Its own rap sheet line; not a spray. |
 | `spray_expunges` | sprays each person paid to remove (`/expunge`), per (server, person). Subtracted from sprays on read; sprays are never deleted. |
 | `spray_bails` | sprays removed from someone's record by someone else (`/bail`), per (server, person, payer). Also subtracted on read. |
+| `movie_providers` | what TMDB/JustWatch said a film's on, by `title_key` (JSON, or NULL if TMDB didn't know it), refreshed at most weekly |
+| `movie_streams` | where a film's streaming: links people added (`/nowplaying set stream:`), by guild and the film's `title_key`, so they stay with it for rewatches |
 | `movies` | one row per **watch** of a film: title (and `title_key`, casefolded, to match rewatches), who set it, started/paused/ended times, seconds paused, `watch_number` (fixed at `/nowplaying start`, counting earlier watches through `scope()`), `archived_at` for the watchlist (the to-watch list: added, imported from Letterboxd, or set aside unstarted), `link` (its Letterboxd page), `dropped_at` (taken off the watchlist; kept) and `struck_at` (struck off as watched: still listed, crossed out, left out of random votes) and `from_watchlist` (lined up from the watchlist: when that watch ends, `keep_on_watchlist_struck()` adds a fresh struck entry, since the watch's own row keeps its ratings and predictions). A server's current film is its row that's neither ended nor archived; that and the watchlist are per server, never shared. `/nowplaying history` and `/nowplaying predictions` read through `scope()`. Nothing is deleted: a film swapped or ended before it starts is archived, predictions and all, and `/nowplaying set` of the same title restores it. |
 | `movie_votes` / `movie_vote_options` | `/nowplaying vote`: the Discord poll's message, and which poll answer (1, 2, 3...) is which watchlist film. The votes themselves stay in Discord; the bot reads them when the poll closes (`/nowplaying vote end`, or the "poll results" message Discord posts when its time runs out). One open vote per server. |
 | `movie_ratings` | `/nowplaying rate` scores, per (movie, person) |
