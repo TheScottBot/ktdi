@@ -475,15 +475,15 @@ def test_rating(at):
     assert "**Shrek 2**" in rate(AMY).content
 
 
-def test_rating_to_the_thousandth_out_of_spite(at):
+def test_rating_to_five_decimal_places_out_of_spite(at):
     np("set", title="Cats")
     np("start")
-    assert rate(SCOTT, 7.385).content.startswith("⭐ <@1> gave **Cats** a 7.385/10.\n**7.385/10**")
+    assert rate(SCOTT, 7.38513).content.startswith("⭐ <@1> gave **Cats** a 7.38513/10.\n**7.38513/10**")
     assert "a 2.5/10" in rate(DAVE, 2.5).content
-    assert "**4.943/10** from 2 ratings." in rate(DAVE).content  # (7.385 + 2.5) / 2 = 4.9425: to the thousandth
-    refused = rate(PAT, 7.3851)
-    assert "To the thousandth, not beyond" in refused.content and refused.private
-    assert "<@1>: 7.385/10\n<@2>: 2.5/10" in rate(PAT).content
+    assert "**4.94257/10** from 2 ratings." in rate(DAVE).content  # (7.38513 + 2.5) / 2 = 4.942565: halves up
+    refused = rate(PAT, 7.385123)
+    assert "Five decimal places, not beyond" in refused.content and refused.private
+    assert "<@1>: 7.38513/10\n<@2>: 2.5/10" in rate(PAT).content
     assert movie.score_text(10.0) == "10" and movie.average_text([9.0, 9.0]) == "9.0"
 
 

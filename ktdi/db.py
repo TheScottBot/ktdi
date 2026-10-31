@@ -311,7 +311,7 @@ SCHEMA = [
     CREATE TABLE IF NOT EXISTS movie_ratings (
         movie_id INTEGER NOT NULL,
         user_id  INTEGER NOT NULL,
-        score    INTEGER NOT NULL,  -- 1 to 10, to the thousandth (7.385: SQLite keeps the decimal)
+        score    INTEGER NOT NULL,  -- 1 to 10, to five decimal places (7.38513: SQLite keeps the decimal)
         PRIMARY KEY (movie_id, user_id)
     )
     """,

@@ -577,17 +577,18 @@ def ratings(movie_id: int) -> list[tuple[int, int]]:
                            (movie_id,)).fetchall()
 
 
-RATING_PLACES = 3  # Ratings to the thousandth: 7.385/10. Out of spite.
+RATING_PLACES = 5  # Ratings to five decimal places: 7.38513/10. Out of spite.
 
 
 def score_text(score: float) -> str:
-    """A rating as given: 9, 7.5, 7.385 (no trailing zeros)."""
+    """A rating as given: 9, 7.5, 7.38513 (no trailing zeros)."""
     return f"{score:.{RATING_PLACES}f}".rstrip("0").rstrip(".")
 
 
 def average_text(scores: list[float]) -> str:
-    """An average to the thousandth, with at least one decimal: 9.0, 8.5, 7.385. Worked out in decimal, halves
-    rounded up, so 4.9425 is 4.943 (binary floats would make it 4.942, which is no way to treat a precise rating)."""
+    """An average to five decimal places, with at least one decimal: 9.0, 8.5, 7.38513. Worked out in decimal,
+    halves rounded up, so 4.942565 is 4.94257 (binary floats can round it down, which is no way to treat a precise
+    rating)."""
     exact = sum(Decimal(str(score)) for score in scores) / len(scores)
     text = f"{exact.quantize(Decimal(1).scaleb(-RATING_PLACES), rounding=ROUND_HALF_UP)}".rstrip("0")
     return text + "0" if text.endswith(".") else text
@@ -1900,11 +1901,11 @@ async def shhh(ctx: commands.Context, *, reason: str | None = None):
     await ctx.send(f"{text}\n-# Requested by {ctx.author.mention}.", allowed_mentions=NO_PINGS)
 
 
-@np_group.command(name="rate", description="Rate the film out of 10 (to the thousandth, if you must), or see ratings.")
-@app_commands.describe(score="1 to 10, decimals to three places allowed: 7.385 (leave empty to see the ratings)")
+@np_group.command(name="rate", description="Rate the film out of 10 (to five decimal places, if you must), or see ratings.")
+@app_commands.describe(score="1 to 10, decimals to five places allowed: 7.38513 (leave empty to see the ratings)")
 async def rate(ctx: commands.Context, score: commands.Range[float, 1, 10] | None = None):
-    """Rate the film that's on, or the last one that finished, out of 10. Decimals are welcome, to the thousandth:
-    `7.385`. Shows the group's average (to the thousandth too) and calls out anyone far enough from everyone else.
+    """Rate the film that's on, or the last one that finished, out of 10. Decimals are welcome, to five places:
+    `7.38513`. Shows the group's average (to five places too) and calls out anyone far enough from everyone else.
     Without a score, shows everyone's ratings. Rating again replaces your score."""
     movie = movie_to_rate(ctx.guild.id)
     if movie is None:
@@ -1917,7 +1918,7 @@ async def rate(ctx: commands.Context, score: commands.Range[float, 1, 10] | None
                        allowed_mentions=NO_PINGS)
         return
     if abs(score * 10 ** RATING_PLACES - round(score * 10 ** RATING_PLACES)) > 1e-6:
-        await ctx.send(f"To the thousandth, not beyond: {score_text(score)} will do, or something like 7.385. "
+        await ctx.send(f"Five decimal places, not beyond: {score_text(score)} will do, or something like 7.38513. "
                        "There are limits, even out of spite.", ephemeral=True)
         return
     score = round(score, RATING_PLACES)
