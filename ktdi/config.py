@@ -96,10 +96,12 @@ SPRAY_RATE_TIME = time_setting("SPRAY_RATE_TIME", "00:00")
 SERVER_MEMBERS = os.getenv("SERVER_MEMBERS", "").strip().lower() in ("1", "true", "yes", "on")
 
 # Where films are streaming, for /nowplaying (TMDB's free API, with JustWatch's data): its "API Read Access Token".
-# Unset, nothing's looked up and people's own links (/nowplaying set stream:) still work. TMDB_REGION is the country
-# whose services count (two letters; GB unless set).
+# Unset, nothing's looked up and people's own links (/nowplaying set stream:) still work. TMDB_REGIONS are the
+# countries whose services are shown, two letters each, comma-separated, in that order (GB,PL,US unless set; the
+# first is the one TMDB's search favours). TMDB_REGION, one country, still works.
 TMDB_READ_TOKEN = os.getenv("TMDB_READ_TOKEN", "")
-TMDB_REGION = (os.getenv("TMDB_REGION") or "GB").strip().upper()
+TMDB_REGIONS = tuple(dict.fromkeys(code.strip().upper() for code in (
+    os.getenv("TMDB_REGIONS") or os.getenv("TMDB_REGION") or "GB,PL,US").split(",") if len(code.strip()) == 2)) or ("GB",)
 
 # Optional role given to each server's biggest briber. Skipped on servers without a role by this name.
 BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")

@@ -68,51 +68,92 @@ def test_streaming_links_stay_with_the_film(at):
     assert "[Disney+]" in np("show").content
 
 
-def test_where_tmdb_says_its_on(at, monkeypatch):
+def on_tmdb(monkeypatch, title="Alien (1979)", **countries):
+    """A fake TMDB that says this, and a token, so it's asked. Returns the titles it was asked about."""
     from ktdi import config
     from ktdi.lib import tmdb
     asked = []
 
-    async def find(title, token, region):
-        asked.append(title)
-        return tmdb.Providers("Alien (1979)", "https://www.justwatch.com/uk/movie/alien", ["Disney Plus"],
-                              ["Apple TV"], [])
+    async def find(name, token, regions):
+        asked.append(name)
+        return tmdb.Providers(title, {code: countries.get(code, tmdb.Country()) for code in regions})
     monkeypatch.setattr(tmdb, "find", find)
+    monkeypatch.setattr(config, "TMDB_REGIONS", ("GB", "PL", "US"))
+    monkeypatch.setattr(config, "TMDB_READ_TOKEN", "token")
+    return asked
+
+
+def test_where_to_watch_in_each_country(at, monkeypatch):
+    from ktdi import config
+    from ktdi.lib import tmdb
+    asked = on_tmdb(monkeypatch, GB=tmdb.Country("https://jw/gb", ["Disney Plus"], ["Apple TV"]),
+                    PL=tmdb.Country("https://jw/pl", ["Disney Plus", "Netflix"]),
+                    US=tmdb.Country(None, [], ["Apple TV"], ["Vudu"]))
+    monkeypatch.setattr(config, "TMDB_READ_TOKEN", "")
     assert "📡" not in np("set", title="Alien").content  # No token: nothing's looked up
     monkeypatch.setattr(config, "TMDB_READ_TOKEN", "token")
     np("set", title="Shrek")
     np("set", title="Alien")
     shown = np("show").content
-    assert "📡 **On:** Disney Plus · **Rent:** Apple TV (via [JustWatch](<https://www.justwatch.com/uk/movie/alien>))" in shown
+    assert ("📡 **Where to watch** (via JustWatch):\n"
+            "**[🇬🇧 UK](<https://jw/gb>)**\n"
+            "- Disney+\n"  # Tidied, and no search page known: just named (the heading links to JustWatch)
+            "- Rent: Apple TV\n"
+            "**[🇵🇱 Poland](<https://jw/pl>)**\n"
+            "- Disney+\n"
+            "- [Netflix](<https://www.netflix.com/search?q=Alien>)\n"  # A search for it on Netflix
+            "**🇺🇸 US**\n"
+            "- Rent: Apple TV\n"
+            "- Buy: Vudu") in shown
     np("set", title="Shrek")
     np("set", title="Alien")
     assert asked.count("Alien") == 1  # Looked up once a week at most
 
 
+def test_a_country_with_nothing_says_so(at, monkeypatch):
+    from ktdi.lib import tmdb
+    on_tmdb(monkeypatch, GB=tmdb.Country(None, ["Netflix"]))
+    np("set", title="Alien")
+    shown = np("show").content
+    assert "**🇵🇱 Poland**\n- Not streaming" in shown and "**🇺🇸 US**\n- Not streaming" in shown
+
+
+def test_changing_the_countries_looks_it_up_again(at, monkeypatch):
+    from ktdi import config
+    asked = on_tmdb(monkeypatch)
+    np("set", title="Alien")
+    monkeypatch.setattr(config, "TMDB_REGIONS", ("GB",))
+    np("set", title="Shrek")
+    np("set", title="Alien")
+    assert asked.count("Alien") == 2
+
+
 def test_a_film_already_on_is_caught_up_when_its_shown(at, monkeypatch):
     from ktdi import config
     from ktdi.lib import tmdb
-
-    async def find(title, token, region):
-        return tmdb.Providers("Alien (1979)", None, ["Disney Plus"], [], [])
-    monkeypatch.setattr(tmdb, "find", find)
+    on_tmdb(monkeypatch, GB=tmdb.Country(None, ["Disney Plus"]))
+    monkeypatch.setattr(config, "TMDB_READ_TOKEN", "")
     np("set", title="Alien")
     np("start")  # Playing before there was a token: set won't take it now
     monkeypatch.setattr(config, "TMDB_READ_TOKEN", "token")
     shown = np("show")
-    assert "📡 **On:** Disney Plus" in shown.content  # Looked up, and the message edited to say so
+    assert "**🇬🇧 UK**\n- Disney+" in shown.content  # Looked up, and the message edited to say so
+
+
+def test_too_many_links_for_one_message_are_left_as_names(at, monkeypatch):
+    from ktdi.lib import tmdb
+    many = [f"Service {n}" for n in range(6)]
+    on_tmdb(monkeypatch, **{code: tmdb.Country("https://www.justwatch.com/" + "x" * 700, many, many, many)
+                            for code in ("GB", "PL", "US")})
+    np("set", title="Alien")
+    shown = np("show").content
+    assert len(shown) <= 2000 and "- Service 0\n" in shown and "justwatch" not in shown
 
 
 def test_where_tmdb_found_another_film_says_so(at, monkeypatch):
-    from ktdi import config
-    from ktdi.lib import tmdb
-
-    async def find(title, token, region):
-        return tmdb.Providers("Aliens (1986)", None, [], [], ["Apple TV"])
-    monkeypatch.setattr(tmdb, "find", find)
-    monkeypatch.setattr(config, "TMDB_READ_TOKEN", "token")
+    on_tmdb(monkeypatch, title="Aliens (1986)")
     np("set", title="Alien")
-    assert "📡 **Buy:** Apple TV (via JustWatch, for Aliens (1986))" in np("show").content
+    assert "📡 **Where to watch** (via JustWatch, for Aliens (1986)):" in np("show").content
 
 
 def test_a_failed_look_up_is_just_left_out(at, monkeypatch):

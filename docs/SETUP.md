@@ -74,12 +74,12 @@ it, `/allspray` just says it isn't set up.
 <a id="streaming"></a>
 ## Where films are streaming (/nowplaying, optional)
 
-`/nowplaying set` can say which UK services have a film ("📡 On: Netflix · Rent: Apple TV, via JustWatch"), from
+`/nowplaying set` can say which services have a film in the UK, Poland and the US (a list per country: where it's on and where to rent it, via JustWatch), from
 [TMDB](https://www.themoviedb.org/)'s free API, which uses JustWatch's data. To switch it on:
 
 1. Make a free account at themoviedb.org, then Settings > API, and ask for an API key (personal use).
 2. Copy the **API Read Access Token** (the long one) into `.env` (and `.env.dev`) as `TMDB_READ_TOKEN=...`.
-   `TMDB_REGION` changes the country (two letters; `GB` unless set).
+   `TMDB_REGIONS` sets the countries shown, two letters each, comma-separated (`GB,PL,US` unless set).
 3. Restart the bot.
 
 Without it, nothing's looked up, and people can still add links themselves (`/nowplaying set stream:<link>`).

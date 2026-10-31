@@ -453,7 +453,13 @@ def cached_providers(title: str) -> tuple[tmdb.Providers | None, datetime | None
                           (title_key(title),)).fetchone()
     if row is None:
         return None, None
-    return (tmdb.Providers(**json.loads(row[0])) if row[0] else None), datetime.fromisoformat(row[1])
+    try:
+        found = tmdb.Providers.from_json(json.loads(row[0])) if row[0] else None
+    except (KeyError, TypeError, ValueError):
+        return None, None  # From before it did several countries: looked up again
+    if found and set(found.countries) != set(config.TMDB_REGIONS):
+        return None, None  # The countries asked for have changed since
+    return found, datetime.fromisoformat(row[1])
 
 
 async def look_up_providers(title: str) -> bool:
@@ -465,41 +471,86 @@ async def look_up_providers(title: str) -> bool:
     if fetched and now() - fetched < PROVIDERS_FRESH:
         return found is not None
     try:
-        found = await tmdb.find(title, config.TMDB_READ_TOKEN, config.TMDB_REGION)
+        found = await tmdb.find(title, config.TMDB_READ_TOKEN, config.TMDB_REGIONS)
     except (aiohttp.ClientError, TimeoutError, ValueError, KeyError) as error:
         log.warning("Couldn't look up where %r is streaming: %s", title, error)
         return False
     db.conn.execute("INSERT OR REPLACE INTO movie_providers (title_key, found, fetched_at) VALUES (?, ?, ?)",
-                    (title_key(title), json.dumps(found.__dict__) if found else None, now().isoformat()))
+                    (title_key(title), json.dumps(found.to_json()) if found else None, now().isoformat()))
     db.conn.commit()
     return found is not None
 
 
-def where_line(movie: Movie) -> str:
-    """People's links ("📺 Where: Netflix · Prime Video", each linked), and what TMDB/JustWatch says it's on."""
+# A service's search page for a film, by the name TMDB gives it: one click from the film, since TMDB has no links into
+# the services themselves. Only ones whose search address is plain; the rest link to JustWatch's page for the country.
+SEARCH_PAGES = {
+    "netflix": "https://www.netflix.com/search?q={q}",
+    "amazon prime video": "https://www.primevideo.com/search?phrase={q}",
+    "amazon video": "https://www.primevideo.com/search?phrase={q}",
+    "apple tv": "https://tv.apple.com/search?term={q}", "apple tv plus": "https://tv.apple.com/search?term={q}",
+    "apple tv+": "https://tv.apple.com/search?term={q}",
+    "bbc iplayer": "https://www.bbc.co.uk/iplayer/search?q={q}",
+    "channel 4": "https://www.channel4.com/search?q={q}",
+    "youtube": "https://www.youtube.com/results?search_query={q}",
+    "google play movies": "https://play.google.com/store/search?q={q}&c=movies",
+    "hulu": "https://www.hulu.com/search?q={q}",
+}
+COUNTRY_NAMES = {"GB": "UK", "PL": "Poland", "US": "US", "IE": "Ireland", "DE": "Germany", "FR": "France",
+                 "CA": "Canada", "AU": "Australia", "NL": "Netherlands", "ES": "Spain", "IT": "Italy"}
+STATUS_MAX = 1900  # Discord's limit is 2000: past this, the services are named without links
+
+
+def service_link(name: str, film: str) -> str:
+    """The service's name, linked to a search for the film on it if its search page is known. The rest are just
+    named: the country's heading links to JustWatch's page, which has them all (linking each there too only made the
+    message too long for Discord)."""
+    template = SEARCH_PAGES.get(name.casefold())
+    shown = discord.utils.escape_markdown(name)
+    return f"[{shown}](<{template.format(q=urllib.parse.quote_plus(film))}>)" if template else shown
+
+
+def where_line(movie: Movie, linked: bool = True) -> str:
+    """People's links ("📺 Where: Netflix · Prime Video", each linked), then where TMDB/JustWatch says it's on, a list
+    per country. linked=False names the services without links, for when that's too long for one message."""
     lines = []
-    links = [f"[{stream_service(url)}](<{url}>)" for url in streams(movie.guild_id, movie.title)[:STREAMS_SHOWN]]
+    links = [f"[{stream_service(url)}](<{url}>)" if linked else stream_service(url)
+             for url in streams(movie.guild_id, movie.title)[:STREAMS_SHOWN]]
     if links:
         lines.append(f"📺 **Where:** {' · '.join(links)}")
     found, _ = cached_providers(movie.title)
     if found:
-        parts = [f"**On:** {', '.join(found.stream)}"] if found.stream else []
-        if found.rent:
-            parts.append(f"**Rent:** {', '.join(found.rent[:6])}")
-        if not found.stream and found.buy:
-            parts.append(f"**Buy:** {', '.join(found.buy[:6])}")
-        source = f"[JustWatch](<{found.link}>)" if found.link else "JustWatch"
         same = title_key(tmdb.split_year(found.title)[0]) == title_key(tmdb.split_year(movie.title)[0])
         which = "" if same else f", for {discord.utils.escape_markdown(found.title)}"  # In case it found another film
-        lines.append(f"📡 {' · '.join(parts)} (via {source}{which})" if parts else
-                     f"📡 Not on streaming here (via {source}{which})")
+        lines.append(f"📡 **Where to watch** (via JustWatch{which}):")
+        film = tmdb.split_year(found.title)[0]
+        for code, there in found.countries.items():
+            lines += country_lines(code, there, film, linked)
     return "".join(f"\n{line}" for line in lines)
+
+
+def country_lines(code: str, there: tmdb.Country, film: str, linked: bool = True) -> list[str]:
+    """**🇬🇧 UK** (linked to JustWatch's page there), then a line per service it's on, and one for renting."""
+    name = f"{tmdb.flag(code)} {COUNTRY_NAMES.get(code, code)}"
+    lines = [f"**[{name}](<{there.link}>)**" if linked and there.link else f"**{name}**"]
+    lines += [f"- {service_link(service, film) if linked else discord.utils.escape_markdown(service)}"
+              for service in there.stream[:6]]
+    if there.rent:
+        lines.append(f"- Rent: {', '.join(there.rent[:4])}")
+    if not there.stream and there.buy:
+        lines.append(f"- Buy: {', '.join(there.buy[:4])}")
+    if len(lines) == 1:
+        lines.append("- Not streaming")
+    return lines
 
 
 def status_text(movie: Movie | None) -> str:
     if movie is None:
         return "🎬 Nothing's lined up. Pick something with `/nowplaying set <title>`."
-    where = where_line(movie)
+    text = _status_text(movie, where_line(movie))
+    return text if len(text) <= STATUS_MAX else _status_text(movie, where_line(movie, linked=False))
+
+
+def _status_text(movie: Movie, where: str) -> str:
     if movie.started_at is None:
         label = f"[{movie.label}](<{movie.link}>)" if movie.link else movie.label
         return (f"🎬 **Up next:** {label}{where}\n-# Lined up by <@{movie.set_by}>. `/nowplaying start` when "
@@ -868,9 +919,10 @@ async def np_set(ctx: commands.Context, *, title: str = "", stream: str | None =
     `/nowplaying` and whenever the film's shown, and stays with the film for rewatches. `stream:none` clears them. It
     can come with a title, to line one up and add its link at once. Typed: `!np stream <link>`.
 
-    If the bot has a TMDB token, lining a film up also says which UK services have it ("📡 On: Netflix · Rent: Apple
-    TV"), from JustWatch's data via TMDB, with JustWatch's page for it. This product uses the TMDB API but is not
-    endorsed or certified by TMDB."""
+    If the bot has a TMDB token, lining a film up also lists where to watch it in the UK, Poland and the US: each
+    country (linked to JustWatch's page there), the services it's on, and what it can be rented on. Netflix, Prime
+    Video, Apple TV, iPlayer and a few others link to a search for the film on them; the country links to JustWatch. From
+    JustWatch's data via TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB."""
     if stream is not None and not title:
         await add_stream_link(ctx, stream)
         return

@@ -148,7 +148,8 @@ ktdi/
     │                  scan with a word to highlight (tools/weather_lore_pages.py)
     ├── openmeteo.py   Open-Meteo forecast and place lookup (free, no key); None when it's down
     ├── tmdb.py        where a film's streaming, for /nowplaying: TMDB's free API (JustWatch's data), with
-    │                  TMDB_READ_TOKEN; service names and JustWatch's page, looked up at most weekly (movie_providers)
+    │                  TMDB_READ_TOKEN; per country (TMDB_REGIONS: GB,PL,US), service names and JustWatch's page,
+    │                  looked up at most weekly (movie_providers)
     ├── etiquette.py   /etiquette's situations: today's words (texting, D&D) filed under the manuals' topics
     ├── etiquette.json /etiquette's rules: hand-picked, word for word, from Routledge's and Hartley's manuals
     │                  (1860s, Gutenberg), each tagged with its topics
