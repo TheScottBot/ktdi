@@ -475,6 +475,18 @@ def test_rating(at):
     assert "**Shrek 2**" in rate(AMY).content
 
 
+def test_rating_to_the_thousandth_out_of_spite(at):
+    np("set", title="Cats")
+    np("start")
+    assert rate(SCOTT, 7.385).content.startswith("⭐ <@1> gave **Cats** a 7.385/10.\n**7.385/10**")
+    assert "a 2.5/10" in rate(DAVE, 2.5).content
+    assert "**4.943/10** from 2 ratings." in rate(DAVE).content  # (7.385 + 2.5) / 2 = 4.9425: to the thousandth
+    refused = rate(PAT, 7.3851)
+    assert "To the thousandth, not beyond" in refused.content and refused.private
+    assert "<@1>: 7.385/10\n<@2>: 2.5/10" in rate(PAT).content
+    assert movie.score_text(10.0) == "10" and movie.average_text([9.0, 9.0]) == "9.0"
+
+
 def test_predictions_are_sealed_then_revealed_and_judged(at, bot):
     np("set", title="Shrek 2")
     ctx = Ctx(DAVE)

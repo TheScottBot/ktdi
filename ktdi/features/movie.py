@@ -25,6 +25,7 @@ import re
 import urllib.parse
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from decimal import ROUND_HALF_UP, Decimal
 
 import aiohttp
 import discord
@@ -576,12 +577,27 @@ def ratings(movie_id: int) -> list[tuple[int, int]]:
                            (movie_id,)).fetchall()
 
 
+RATING_PLACES = 3  # Ratings to the thousandth: 7.385/10. Out of spite.
+
+
+def score_text(score: float) -> str:
+    """A rating as given: 9, 7.5, 7.385 (no trailing zeros)."""
+    return f"{score:.{RATING_PLACES}f}".rstrip("0").rstrip(".")
+
+
+def average_text(scores: list[float]) -> str:
+    """An average to the thousandth, with at least one decimal: 9.0, 8.5, 7.385. Worked out in decimal, halves
+    rounded up, so 4.9425 is 4.943 (binary floats would make it 4.942, which is no way to treat a precise rating)."""
+    exact = sum(Decimal(str(score)) for score in scores) / len(scores)
+    text = f"{exact.quantize(Decimal(1).scaleb(-RATING_PLACES), rounding=ROUND_HALF_UP)}".rstrip("0")
+    return text + "0" if text.endswith(".") else text
+
+
 def rating_summary(movie_id: int) -> str:
     scores = ratings(movie_id)
     if not scores:
         return "No ratings yet."
-    average = sum(s for _, s in scores) / len(scores)
-    text = f"**{average:.1f}/10** from {plural(len(scores), 'rating')}."
+    text = f"**{average_text([s for _, s in scores])}/10** from {plural(len(scores), 'rating')}."
     if len(scores) >= 3:
         # Whoever is furthest from everyone else's average, if they're far enough out to argue about.
         def gap(entry):
@@ -589,7 +605,7 @@ def rating_summary(movie_id: int) -> str:
             return abs(entry[1] - sum(others) / len(others))
         user_id, score = max(scores, key=gap)
         if gap((user_id, score)) >= 3:
-            text += f"\n-# <@{user_id}> gave it a {score}. <@{user_id}> is wrong."
+            text += f"\n-# <@{user_id}> gave it a {score_text(score)}. <@{user_id}> is wrong."
     return text
 
 
@@ -823,7 +839,7 @@ def viewing_report(movie: Movie) -> discord.Embed:
     lines = [f"**Film:** {movie.linked_name}" + (f" (watch #{movie.watch_number})" if (movie.watch_number or 1) > 1
                                                     else ""),
              f"**Watched:** {watched}, ended {movie.ended_at.strftime('%d %b %Y')}",
-             f"**Rating:** {sum(scores) / len(scores):.1f}/10 from {plural(len(scores), 'rating')}" if scores
+             f"**Rating:** {average_text(scores)}/10 from {plural(len(scores), 'rating')}" if scores
              else "**Rating:** none submitted",
              f"**Morale:** {morale(scores)}",
              f"**Predictions upheld:** {sum(v.called for v in verdicts)} of {len(verdicts)}" if verdicts
@@ -1743,7 +1759,7 @@ async def np_history(ctx: commands.Context, *, film: str | None = None):
     lines = []
     for movie in movies:
         scores = [s for _, s in ratings(movie.id)]
-        line = f"**{movie.label}**: " + (f"{sum(scores) / len(scores):.1f}/10 ({plural(len(scores), 'rating')})"
+        line = f"**{movie.label}**: " + (f"{average_text(scores)}/10 ({plural(len(scores), 'rating')})"
                                         if scores else "not rated")
         verdicts = revealed_predictions(movie.id)
         if verdicts:
@@ -1884,24 +1900,34 @@ async def shhh(ctx: commands.Context, *, reason: str | None = None):
     await ctx.send(f"{text}\n-# Requested by {ctx.author.mention}.", allowed_mentions=NO_PINGS)
 
 
-@np_group.command(name="rate", description="Rate the film out of 10, or see everyone's ratings.")
-@app_commands.describe(score="1 to 10 (leave empty to see the ratings)")
-async def rate(ctx: commands.Context, score: commands.Range[int, 1, 10] | None = None):
+@np_group.command(name="rate", description="Rate the film out of 10 (to the thousandth, if you must), or see ratings.")
+@app_commands.describe(score="1 to 10, decimals to three places allowed: 7.385 (leave empty to see the ratings)")
+async def rate(ctx: commands.Context, score: commands.Range[float, 1, 10] | None = None):
+    """Rate the film that's on, or the last one that finished, out of 10. Decimals are welcome, to the thousandth:
+    `7.385`. Shows the group's average (to the thousandth too) and calls out anyone far enough from everyone else.
+    Without a score, shows everyone's ratings. Rating again replaces your score."""
     movie = movie_to_rate(ctx.guild.id)
     if movie is None:
         await ctx.send("Nothing to rate yet. Watch something first.", ephemeral=True)
         return
     if score is None:
         scores = ratings(movie.id)
-        lines = [f"<@{user_id}>: {s}/10" for user_id, s in scores]
+        lines = [f"<@{user_id}>: {score_text(s)}/10" for user_id, s in scores]
         await ctx.send("\n".join([f"⭐ **{movie.label}**: {rating_summary(movie.id)}", *lines]),
                        allowed_mentions=NO_PINGS)
         return
+    if abs(score * 10 ** RATING_PLACES - round(score * 10 ** RATING_PLACES)) > 1e-6:
+        await ctx.send(f"To the thousandth, not beyond: {score_text(score)} will do, or something like 7.385. "
+                       "There are limits, even out of spite.", ephemeral=True)
+        return
+    score = round(score, RATING_PLACES)
+    stored = int(score) if score == int(score) else score  # Whole ones stay whole, as before
     db.conn.execute("INSERT INTO movie_ratings (movie_id, user_id, score) VALUES (?, ?, ?)"
                     " ON CONFLICT (movie_id, user_id) DO UPDATE SET score = excluded.score",
-                    (movie.id, ctx.author.id, score))
+                    (movie.id, ctx.author.id, stored))
     db.conn.commit()
-    await ctx.send(f"⭐ {ctx.author.mention} gave **{movie.label}** a {score}/10.\n{rating_summary(movie.id)}",
+    await ctx.send(f"⭐ {ctx.author.mention} gave **{movie.label}** a {score_text(score)}/10.\n"
+                   f"{rating_summary(movie.id)}",
                    allowed_mentions=NO_PINGS)
 
 
