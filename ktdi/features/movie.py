@@ -920,52 +920,117 @@ async def warnings_for(title: str) -> ddd.Warnings | None:
     return found
 
 
-def warnings_text(movie: Movie, found: ddd.Warnings) -> str:
-    """The warnings, each behind a spoiler tag (some give the plot away), grouped by the site's categories."""
-    same = title_key(tmdb.split_year(found.title)[0]) == title_key(tmdb.split_year(movie.title)[0])
-    which = "" if same else f" (found as {discord.utils.escape_markdown(found.title)})"
-    head = f"⚠️ **Content warnings: {movie.name}**{which}"
-    if not found.warnings:
-        return (f"{head}\nNothing's been voted in yet. Check, or add some, on "
-                f"[Does the Dog Die](<{found.link}>).")
-    groups: dict[str, list[str]] = {}
-    for warning in found.warnings[:CW_SHOWN]:
-        groups.setdefault(warning.category, []).append(f"||{discord.utils.escape_markdown(warning.topic)}||")
-    lines = [head, "-# Tap to reveal: some give the plot away."]
-    lines += [f"**{category}:** {', '.join(topics)}" for category, topics in groups.items()]
-    more = len(found.warnings) - CW_SHOWN
-    lines.append(f"-# {f'{more} more, and ' if more > 0 else ''}the votes, on [Does the Dog Die](<{found.link}>).")
+OWN_WARNING_MAX = 100  # Characters in one we add
+OWN_WARNINGS_MAX = 15  # Per film
+
+
+def own_warnings(guild_id: int, title: str) -> list[str]:
+    return [warning for (warning,) in db.conn.execute(
+        "SELECT warning FROM movie_own_warnings WHERE guild_id = ? AND title_key = ? ORDER BY added_at, rowid",
+        (guild_id, title_key(title)))]
+
+
+def add_own_warning(guild_id: int, title: str, warning: str, user_id: int) -> bool:
+    """Whether it was new (the same words, whatever the capitals, are the same warning)."""
+    if warning.casefold() in (w.casefold() for w in own_warnings(guild_id, title)):
+        return False
+    db.conn.execute("INSERT INTO movie_own_warnings (guild_id, title_key, warning, added_by, added_at) "
+                    "VALUES (?, ?, ?, ?, ?)", (guild_id, title_key(title), warning, user_id, now().isoformat()))
+    db.conn.commit()
+    return True
+
+
+def clear_own_warnings(guild_id: int, title: str) -> int:
+    cursor = db.conn.execute("DELETE FROM movie_own_warnings WHERE guild_id = ? AND title_key = ?",
+                             (guild_id, title_key(title)))
+    db.conn.commit()
+    return cursor.rowcount
+
+
+def warnings_text(movie: Movie, found: ddd.Warnings | None, ours: list[str], note: str = "") -> str:
+    """Ours first ("From us"), then the site's, grouped by its categories; every one behind a spoiler tag (some give
+    the plot away). `note` says why the site's are missing (not set up, not reachable, doesn't know the film)."""
+    which = ""
+    if found and title_key(tmdb.split_year(found.title)[0]) != title_key(tmdb.split_year(movie.title)[0]):
+        which = f" (found as {discord.utils.escape_markdown(found.title)})"
+    lines = [f"⚠️ **Content warnings: {movie.name}**{which}"]
+    if ours or (found and found.warnings):
+        lines.append("-# Tap to reveal: some give the plot away.")
+    if ours:
+        lines.append(f"**From us:** {', '.join(f'||{discord.utils.escape_markdown(w)}||' for w in ours)}")
+    if found and found.warnings:
+        groups: dict[str, list[str]] = {}
+        for warning in found.warnings[:CW_SHOWN]:
+            groups.setdefault(warning.category, []).append(f"||{discord.utils.escape_markdown(warning.topic)}||")
+        lines += [f"**{category}:** {', '.join(topics)}" for category, topics in groups.items()]
+        more = len(found.warnings) - CW_SHOWN
+        lines.append(f"-# {f'{more} more, and ' if more > 0 else ''}the votes, on "
+                     f"[Does the Dog Die](<{found.link}>).")
+    elif found:
+        lines.append(f"Nothing's been voted in on [Does the Dog Die](<{found.link}>) yet.")
+    if note:
+        lines.append(f"-# {note}")
+    if not ours:
+        lines.append("-# Something they don't cover? `/nowplaying cw add:<warning>` adds it for us.")
     return "\n".join(lines)
 
 
-@np_group.command(name="cw", description="Content warnings for the film that's lined up or playing (Does the Dog Die).")
-async def np_cw(ctx: commands.Context):
+@np_group.command(name="cw", description="Content warnings for the film that's on (Does the Dog Die, and our own).")
+@app_commands.describe(add="Add a warning of our own to the film that's on (e.g. lots of direct eye contact); none "
+                           "clears ours")
+async def np_cw(ctx: commands.Context, *, add: str | None = None):  # Typed: !np cw <warning> adds one
     """Content warnings for the film that's lined up or playing, from Does the Dog Die (doesthedogdie.com), where
     people vote on a couple of hundred topics: animals dying, jump scares, flashing lights, sexual violence, self-harm,
     misgendering and the rest. Only the ones most voters say yes to are shown, grouped (Animal, Sex, Mental health…),
     and each is behind a spoiler tag, so you only see the ones you tap: some give the plot away. A link goes to the
-    film's page there for the rest and the votes.
+    film's page there for the rest and the votes. It finds the film by its title (a year helps: `Alien (1979)`), and
+    says so if it found a different one.
 
-    It finds the film by its title (a year helps: `Alien (1979)`), and says so if it found a different one."""
+    **Our own:** `add:` adds a warning the site doesn't cover (`/nowplaying cw add:lots of direct eye contact`). Ours
+    come first ("From us"), also behind spoiler tags, and stay with the film for rewatches. `add:none` clears ours.
+    Typed: `!np cw` shows them, `!np cw lots of direct eye contact` adds one."""
     movie = current_movie(ctx.guild.id)
     if movie is None:
         await ctx.send("Nothing's lined up. `/nowplaying set <title>` first.", ephemeral=True)
         return
+    if add is not None:
+        warning = " ".join(add.replace("||", " ").split())  # It's spoilered for them: ||bars|| typed in would show
+        if warning.casefold() in ("none", "clear"):
+            cleared = clear_own_warnings(ctx.guild.id, movie.title)
+            await ctx.send(f"⚠️ Cleared our {plural(cleared, 'warning')} for {movie.name}." if cleared else
+                           f"{movie.name} has none of ours to clear.", ephemeral=not cleared,
+                           allowed_mentions=NO_PINGS)
+            return
+        if not warning or len(warning) > OWN_WARNING_MAX:
+            await ctx.send(f"A warning's a few words, {OWN_WARNING_MAX} characters at most: `lots of direct eye "
+                           "contact`.", ephemeral=True)
+            return
+        if len(own_warnings(ctx.guild.id, movie.title)) >= OWN_WARNINGS_MAX:
+            await ctx.send(f"{movie.name} has {OWN_WARNINGS_MAX} of ours already. `add:none` clears them.",
+                           ephemeral=True, allowed_mentions=NO_PINGS)
+            return
+        if not add_own_warning(ctx.guild.id, movie.title, warning, ctx.author.id):
+            await ctx.send("That one's on there already.", ephemeral=True)
+            return
+        log.info("[%s] %s added a content warning for %r", ctx.guild.name, ctx.author, movie.title)
+    ours = own_warnings(ctx.guild.id, movie.title)
+    found, note = None, ""
     if not config.DDD_API_KEY:
-        await ctx.send("Content warnings aren't set up on this bot (it needs a Does the Dog Die API key: "
-                       "`DDD_API_KEY`).", ephemeral=True)
+        note = "Does the Dog Die's aren't set up on this bot (it needs `DDD_API_KEY`)."
+    else:
+        try:
+            found = await warnings_for(movie.title)
+        except (aiohttp.ClientError, TimeoutError, ValueError, KeyError, TypeError) as error:
+            log.warning("Couldn't get content warnings for %r: %s", movie.title, error)
+            note = "I couldn't reach Does the Dog Die just now. Try again in a bit."
+        else:
+            if found is None:
+                note = f"Does the Dog Die doesn't know {movie.name}. A year in the title can help: `Alien (1979)`."
+    if found is None and not ours and add is None:
+        await ctx.send(f"⚠️ {note}", ephemeral=True, allowed_mentions=NO_PINGS)
         return
-    try:
-        found = await warnings_for(movie.title)
-    except (aiohttp.ClientError, TimeoutError, ValueError, KeyError, TypeError) as error:
-        log.warning("Couldn't get content warnings for %r: %s", movie.title, error)
-        await ctx.send("I couldn't reach Does the Dog Die just now. Try again in a bit.", ephemeral=True)
-        return
-    if found is None:
-        await ctx.send(f"Does the Dog Die doesn't know {movie.name}. A year can help: `/nowplaying set "
-                       f"{movie.title} (1979)`.", ephemeral=True, allowed_mentions=NO_PINGS)
-        return
-    await ctx.send(warnings_text(movie, found), allowed_mentions=NO_PINGS)
+    added = f"⚠️ Added for {movie.name}.\n" if add is not None else ""
+    await ctx.send(added + warnings_text(movie, found, ours, note), allowed_mentions=NO_PINGS)
 
 
 @np_group.command(name="show", description="What's lined up or playing, and how far in.")

@@ -396,6 +396,7 @@ One SQLite file, opened once (`db.conn`). Schema lives in `db.SCHEMA`; changes t
 | `bad_counts` | times each person was told off with `/bad @them` or `/badbonk @them`, per (server, person). Its own rap sheet line; not a spray. |
 | `spray_expunges` | sprays each person paid to remove (`/expunge`), per (server, person). Subtracted from sprays on read; sprays are never deleted. |
 | `spray_bails` | sprays removed from someone's record by someone else (`/bail`), per (server, person, payer). Also subtracted on read. |
+| `movie_own_warnings` | /nowplaying cw add: warnings we add to a film (things Does the Dog Die doesn't track), by guild and `title_key` |
 | `movie_warnings` | /nowplaying cw: a film's content warnings per Does the Dog Die, by `title_key` (JSON, or NULL if the site didn't know it), refreshed at most weekly |
 | `movie_providers` | what TMDB/JustWatch said a film's on, by `title_key` (JSON, or NULL if TMDB didn't know it), refreshed at most weekly |
 | `movie_streams` | where a film's streaming: links people added (`/nowplaying set stream:`), by guild and the film's `title_key`, so they stay with it for rewatches |

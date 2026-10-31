@@ -203,7 +203,7 @@ def test_content_warnings_for_another_film_or_none(at, monkeypatch):
     on_ddd(monkeypatch, ddd.Warnings("Aliens (1986)", "https://www.doesthedogdie.com/media/9", []))
     np("set", title="Alien")
     shown = np("cw").content
-    assert "(found as Aliens (1986))" in shown and "Nothing's been voted in yet" in shown
+    assert "(found as Aliens (1986))" in shown and "Nothing's been voted in on" in shown
 
 
 def test_content_warnings_need_a_key_and_the_site(at, monkeypatch):
@@ -215,6 +215,31 @@ def test_content_warnings_need_a_key_and_the_site(at, monkeypatch):
     assert "couldn't reach" in np("cw").content
     on_ddd(monkeypatch, None)
     assert "doesn't know Alien" in np("cw").content
+
+
+def test_our_own_warnings(at, monkeypatch):
+    from ktdi import config
+    from ktdi.lib import ddd
+    on_ddd(monkeypatch, ddd.Warnings("Alien (1979)", "https://www.doesthedogdie.com/media/2",
+                                     [ddd.Warning("there are jump scares", "Fear", 90, 1)]))
+    assert "Nothing's lined up" in np("cw", add="eye contact").content
+    np("set", title="Alien (1979)")
+    added = np("cw", add="  lots of   direct eye contact ").content
+    assert added.startswith("⚠️ Added for Alien (1979).\n⚠️ **Content warnings: Alien (1979)**")
+    assert "**From us:** ||lots of direct eye contact||\n**Fear:** ||there are jump scares||" in added
+    assert "already" in np("cw", add="LOTS OF DIRECT EYE CONTACT").content
+    assert "already" in np("cw", add="||lots of direct eye contact||").content  # Spoiler bars typed in: the same one
+    np("cw", add="a man eats a whole onion")
+    assert "**From us:** ||lots of direct eye contact||, ||a man eats a whole onion||" in np("cw").content
+    np("set", title="Shrek")
+    assert "From us" not in np("cw").content
+    np("set", title="alien (1979)")  # Back again: ours come with it
+    assert "From us" in np("cw").content
+    monkeypatch.setattr(config, "DDD_API_KEY", "")  # Ours still show without the site
+    shown = np("cw").content
+    assert "From us" in shown and "aren't set up" in shown
+    assert np("cw", add="none").content.startswith("⚠️ Cleared our 2 warnings for ")
+    assert "x" * 101 not in np("cw", add="x" * 101).content and "100 characters" in np("cw", add="x" * 101).content
 
 
 def test_start_pause_resume_end(at, bot):

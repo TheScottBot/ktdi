@@ -264,6 +264,16 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS movie_own_warnings (  -- /nowplaying cw add: warnings we add (things DDD doesn't track)
+        guild_id   INTEGER NOT NULL,
+        title_key  TEXT NOT NULL,     -- the film's title casefolded, so they stay with it (rewatches, the watchlist)
+        warning    TEXT NOT NULL,     -- "lots of direct eye contact"
+        added_by   INTEGER NOT NULL,
+        added_at   TEXT NOT NULL,
+        PRIMARY KEY (guild_id, title_key, warning)
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS movie_warnings (  -- /nowplaying cw: a film's content warnings per Does the Dog Die, weekly
         title_key  TEXT PRIMARY KEY,  -- the title casefolded (as the bot was asked it, year and all)
         found      TEXT,              -- JSON: {title, link, warnings}; NULL if the site didn't know the film
