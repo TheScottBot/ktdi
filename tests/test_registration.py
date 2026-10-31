@@ -33,7 +33,7 @@ SUBCOMMANDS = {
     "wisdom": ["now", "setup"],
     "bread": ["scores", "setup", "today"],
     "insurance": ["buy", "complain", "status"],
-    "nowplaying": ["bingo", "canon", "end", "history", "objection", "pause", "predict", "rate", "set", "show", "start",
+    "nowplaying": ["bingo", "canon", "cw", "end", "history", "objection", "pause", "predict", "rate", "set", "show", "start",
                    "sync", "vote", "watchlist"],
     "timezone": ["clear", "convert", "set", "show"],
     "campaign": ["add", "edit", "list", "message", "remind", "remove", "reschedule", "show", "skip", "unremind"],

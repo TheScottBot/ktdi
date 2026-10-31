@@ -33,7 +33,7 @@ from discord.ext import commands
 
 from ktdi import common, config, db
 from ktdi.common import NO_PINGS, log, plural
-from ktdi.lib import fuzzy, letterboxd, tmdb
+from ktdi.lib import ddd, fuzzy, letterboxd, tmdb
 
 HELP_CATEGORY = "🎬 Movie night"
 TITLE_MAX_LENGTH = 100
@@ -899,6 +899,73 @@ def bingo_card_embed(movie: Movie, user_id: int) -> discord.Embed:
 @commands.guild_only()
 async def np_group(ctx: commands.Context):
     await np_show.callback(ctx)
+
+
+CW_SHOWN = 25  # Content warnings listed; the rest are on the site
+WARNINGS_FRESH = timedelta(days=7)
+
+
+async def warnings_for(title: str) -> ddd.Warnings | None:
+    """A film's content warnings, from the cache if they're under a week old, else from Does the Dog Die. None if
+    the site doesn't know it. Raises what ddd.find does (and ValueError if there's no key) for the caller."""
+    row = db.conn.execute("SELECT found, fetched_at FROM movie_warnings WHERE title_key = ?",
+                          (title_key(title),)).fetchone()
+    if row and now() - datetime.fromisoformat(row[1]) < WARNINGS_FRESH:
+        return ddd.Warnings.from_json(json.loads(row[0])) if row[0] else None
+    name, year = tmdb.split_year(title)
+    found = await ddd.find(name, year, config.DDD_API_KEY)
+    db.conn.execute("INSERT OR REPLACE INTO movie_warnings (title_key, found, fetched_at) VALUES (?, ?, ?)",
+                    (title_key(title), json.dumps(found.to_json()) if found else None, now().isoformat()))
+    db.conn.commit()
+    return found
+
+
+def warnings_text(movie: Movie, found: ddd.Warnings) -> str:
+    """The warnings, each behind a spoiler tag (some give the plot away), grouped by the site's categories."""
+    same = title_key(tmdb.split_year(found.title)[0]) == title_key(tmdb.split_year(movie.title)[0])
+    which = "" if same else f" (found as {discord.utils.escape_markdown(found.title)})"
+    head = f"⚠️ **Content warnings: {movie.name}**{which}"
+    if not found.warnings:
+        return (f"{head}\nNothing's been voted in yet. Check, or add some, on "
+                f"[Does the Dog Die](<{found.link}>).")
+    groups: dict[str, list[str]] = {}
+    for warning in found.warnings[:CW_SHOWN]:
+        groups.setdefault(warning.category, []).append(f"||{discord.utils.escape_markdown(warning.topic)}||")
+    lines = [head, "-# Tap to reveal: some give the plot away."]
+    lines += [f"**{category}:** {', '.join(topics)}" for category, topics in groups.items()]
+    more = len(found.warnings) - CW_SHOWN
+    lines.append(f"-# {f'{more} more, and ' if more > 0 else ''}the votes, on [Does the Dog Die](<{found.link}>).")
+    return "\n".join(lines)
+
+
+@np_group.command(name="cw", description="Content warnings for the film that's lined up or playing (Does the Dog Die).")
+async def np_cw(ctx: commands.Context):
+    """Content warnings for the film that's lined up or playing, from Does the Dog Die (doesthedogdie.com), where
+    people vote on a couple of hundred topics: animals dying, jump scares, flashing lights, sexual violence, self-harm,
+    misgendering and the rest. Only the ones most voters say yes to are shown, grouped (Animal, Sex, Mental health…),
+    and each is behind a spoiler tag, so you only see the ones you tap: some give the plot away. A link goes to the
+    film's page there for the rest and the votes.
+
+    It finds the film by its title (a year helps: `Alien (1979)`), and says so if it found a different one."""
+    movie = current_movie(ctx.guild.id)
+    if movie is None:
+        await ctx.send("Nothing's lined up. `/nowplaying set <title>` first.", ephemeral=True)
+        return
+    if not config.DDD_API_KEY:
+        await ctx.send("Content warnings aren't set up on this bot (it needs a Does the Dog Die API key: "
+                       "`DDD_API_KEY`).", ephemeral=True)
+        return
+    try:
+        found = await warnings_for(movie.title)
+    except (aiohttp.ClientError, TimeoutError, ValueError, KeyError, TypeError) as error:
+        log.warning("Couldn't get content warnings for %r: %s", movie.title, error)
+        await ctx.send("I couldn't reach Does the Dog Die just now. Try again in a bit.", ephemeral=True)
+        return
+    if found is None:
+        await ctx.send(f"Does the Dog Die doesn't know {movie.name}. A year can help: `/nowplaying set "
+                       f"{movie.title} (1979)`.", ephemeral=True, allowed_mentions=NO_PINGS)
+        return
+    await ctx.send(warnings_text(movie, found), allowed_mentions=NO_PINGS)
 
 
 @np_group.command(name="show", description="What's lined up or playing, and how far in.")

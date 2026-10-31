@@ -168,6 +168,55 @@ def test_a_failed_look_up_is_just_left_out(at, monkeypatch):
     assert "📡" not in np("show").content
 
 
+def on_ddd(monkeypatch, found):
+    from ktdi import config
+    from ktdi.lib import ddd
+    asked = []
+
+    async def find(name, year, key):
+        asked.append((name, year))
+        if isinstance(found, Exception):
+            raise found
+        return found
+    monkeypatch.setattr(ddd, "find", find)
+    monkeypatch.setattr(config, "DDD_API_KEY", "key")
+    return asked
+
+
+def test_content_warnings_behind_spoilers(at, monkeypatch):
+    from ktdi.lib import ddd
+    asked = on_ddd(monkeypatch, ddd.Warnings("Alien (1979)", "https://www.doesthedogdie.com/media/2", [
+        ddd.Warning("there are jump scares", "Jump Scares", 90, 1), ddd.Warning("a cat dies", "Animal", 40, 2),
+        ddd.Warning("someone is restrained", "Other", 10, 9)]))
+    assert "Nothing's lined up" in np("cw").content
+    np("set", title="Alien (1979)")
+    shown = np("cw").content
+    assert shown.startswith("⚠️ **Content warnings: Alien (1979)**\n-# Tap to reveal")
+    assert "**Jump Scares:** ||there are jump scares||" in shown and "**Animal:** ||a cat dies||" in shown
+    assert "[Does the Dog Die](<https://www.doesthedogdie.com/media/2>)" in shown
+    np("cw")
+    assert asked == [("Alien", "1979")]  # Once a week at most
+
+
+def test_content_warnings_for_another_film_or_none(at, monkeypatch):
+    from ktdi.lib import ddd
+    on_ddd(monkeypatch, ddd.Warnings("Aliens (1986)", "https://www.doesthedogdie.com/media/9", []))
+    np("set", title="Alien")
+    shown = np("cw").content
+    assert "(found as Aliens (1986))" in shown and "Nothing's been voted in yet" in shown
+
+
+def test_content_warnings_need_a_key_and_the_site(at, monkeypatch):
+    from ktdi import config
+    np("set", title="Alien")
+    monkeypatch.setattr(config, "DDD_API_KEY", "")
+    assert "aren't set up" in np("cw").content
+    on_ddd(monkeypatch, TimeoutError())
+    assert "couldn't reach" in np("cw").content
+    on_ddd(monkeypatch, None)
+    assert "doesn't know Alien" in np("cw").content
+
+
 def test_start_pause_resume_end(at, bot):
     assert "Nothing's lined up" in np("start").content
     np("set", title="Shrek 2")

@@ -103,6 +103,10 @@ TMDB_READ_TOKEN = os.getenv("TMDB_READ_TOKEN", "")
 TMDB_REGIONS = tuple(dict.fromkeys(code.strip().upper() for code in (
     os.getenv("TMDB_REGIONS") or os.getenv("TMDB_REGION") or "GB,PL,US").split(",") if len(code.strip()) == 2)) or ("GB",)
 
+# Content warnings for /nowplaying cw, from Does the Dog Die (doesthedogdie.com): its free API key, from your profile
+# page there. Unset, /nowplaying cw says it isn't set up.
+DDD_API_KEY = os.getenv("DDD_API_KEY", "")
+
 # Optional role given to each server's biggest briber. Skipped on servers without a role by this name.
 BRIBER_ROLE_NAME = os.getenv("BRIBER_ROLE_NAME", "Champion Briber")
 # Who may choose the Don (/settings whospray_user). Nobody else can, not even server admins. Empty = nobody.

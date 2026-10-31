@@ -85,6 +85,18 @@ it, `/allspray` just says it isn't set up.
 Without it, nothing's looked up, and people can still add links themselves (`/nowplaying set stream:<link>`).
 Each film is looked up at most once a week (kept in the `movie_providers` table).
 
+<a id="content-warnings"></a>
+## Content warnings (/nowplaying cw, optional)
+
+`/nowplaying cw` lists a film's content warnings from [Does the Dog Die](https://www.doesthedogdie.com), each behind a
+spoiler tag. To switch it on:
+
+1. Make a free account at doesthedogdie.com and copy the API key from your profile page.
+2. Put it in `.env` (and `.env.dev`) as `DDD_API_KEY=...`, and restart the bot.
+
+Without it, `/nowplaying cw` says it isn't set up. Each film is looked up at most once a week (the `movie_warnings`
+table).
+
 ## Logs
 
 The bot logs startup, every command used (except `/books` and `/rpg`, which are never logged against anyone), 💦 sprays, bribes and role changes to `logs/ktdi.log` next to `bot.py` (and to the terminal/journal). The file rotates at 1 MB, keeping 5 old files (`ktdi.log.1` … `ktdi.log.5`). To follow it live:

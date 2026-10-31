@@ -264,6 +264,13 @@ SCHEMA = [
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS movie_warnings (  -- /nowplaying cw: a film's content warnings per Does the Dog Die, weekly
+        title_key  TEXT PRIMARY KEY,  -- the title casefolded (as the bot was asked it, year and all)
+        found      TEXT,              -- JSON: {title, link, warnings}; NULL if the site didn't know the film
+        fetched_at TEXT NOT NULL
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS movie_providers (  -- where a film's streaming per TMDB/JustWatch: looked up at most weekly
         title_key  TEXT PRIMARY KEY,  -- the title casefolded (as the bot was asked it, year and all)
         found      TEXT,              -- JSON: {title, link, stream, rent, buy}; NULL if TMDB didn't know the film
