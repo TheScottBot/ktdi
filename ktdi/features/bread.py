@@ -20,7 +20,7 @@ DynamicItem the bot registers in setup), so a day-old post still takes answers u
 import json
 import random
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 
 import discord
@@ -36,7 +36,7 @@ QUESTIONS: dict[str, dict] = {q["id"]: q for q in json.loads(DATA.read_text(enco
 EMOJI = "🍞"
 COLOUR = discord.Color.from_rgb(196, 140, 72)  # Golden crust
 LETTERS = ["🇦", "🇧", "🇨", "🇩"]
-WEEK = timedelta(days=7)
+WEEK = 7  # "This week's top bakers": the server's last 7 questions (not 7 days, which a millisecond can shift)
 STREAK_SHOWN = 3  # A run of right answers this long is mentioned with the answer
 SHOWN = 15  # On /bread scores
 NOTE_LENGTH = 300  # The book's own words, with the answer
@@ -193,14 +193,17 @@ def streak(guild_id: int, user_id: int) -> int:
     return count
 
 
-def scores(guild_id: int, since: datetime | None = None) -> list[tuple[int, int, int]]:
-    """(user, right, answered) on questions whose answer is out (since a time, if given), best first: most right,
-    then fewest tries."""
+def scores(guild_id: int, last: int | None = None) -> list[tuple[int, int, int]]:
+    """(user, right, answered) on questions whose answer is out (only the server's `last` few, if given), best first:
+    most right, then fewest tries. Counted in questions, not time: a week of daily questions measured in days slid by
+    milliseconds (the post goes up a moment later each day), so a win could drop out the moment another came in."""
     where, params = db.scope(guild_id)
     sql = (f"SELECT a.user_id, SUM(a.correct), COUNT(*) FROM (SELECT * FROM bread_answers WHERE {where}) a "
            "JOIN bread_bakes b ON b.id = a.bake_id WHERE b.closed_at IS NOT NULL")
-    if since:
-        sql, params = sql + " AND b.closed_at >= ?", [*params, since.isoformat()]
+    if last:
+        sql += (" AND b.id IN (SELECT id FROM bread_bakes WHERE guild_id = ? AND closed_at IS NOT NULL "
+                "ORDER BY id DESC LIMIT ?)")
+        params = [*params, guild_id, last]
     sql += " GROUP BY a.user_id ORDER BY SUM(a.correct) DESC, COUNT(*) ASC, a.user_id"
     return [tuple(row) for row in db.conn.execute(sql, params)]
 
@@ -247,7 +250,7 @@ def answer_embed(bake: Bake) -> discord.Embed:
         lines.append("🍞 for " + ", ".join(named))
     if given:
         lines.append(" · ".join(f"{LETTERS[n]} {sum(1 for _, choice, _ in given if choice == n)}" for n in range(4)))
-    week = [(user, right) for user, right, _ in scores(bake.guild_id, since=now() - WEEK) if right][:5]
+    week = [(user, right) for user, right, _ in scores(bake.guild_id, last=WEEK) if right][:5]
     if week:
         lines.append("🏆 This week's top bakers: " + " · ".join(f"<@{user}> {right}" for user, right in week))
     return discord.Embed(title=f"{EMOJI} Yesterday's bake: No. {bake.number}", description="\n".join(lines)[:4096],

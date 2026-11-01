@@ -105,6 +105,21 @@ def test_the_next_post_gives_the_answer_then_a_new_question(channel, bank):
     assert "out of the oven" in late.content and late.private
 
 
+def test_the_week_is_the_last_seven_questions_however_late_the_post(channel, bank, monkeypatch):
+    """A week counted in days slid by the milliseconds each post took: whether the win from 7 days back counted
+    depended on them. Now it's always the last 7 questions."""
+    monkeypatch.setattr(bread, "QUESTIONS", {f"q{n}": question(f"q{n}") for n in range(12)})
+    post(channel)
+    press(right_choice(), SCOTT)  # Question 1: Scott's win
+    for day in range(1, 9):
+        bank.set(NINE_AM + timedelta(days=day, milliseconds=day % 3), bread)  # Posts go up a moment late, or not
+        post(channel)
+        if day == 7:
+            assert dict((u, r) for u, r, _ in bread.scores(111, last=bread.WEEK))[SCOTT.id] == 1  # 1 to 7: in
+    assert SCOTT.id not in [u for u, r, _ in bread.scores(111, last=bread.WEEK) if r]  # 2 to 8: out
+    assert bread.record(111, SCOTT.id) == (1, 1)  # All-time, it's still there
+
+
 def test_nobody_answering_or_nobody_right(channel, bank):
     post(channel)
     bank.set(NINE_AM + timedelta(days=1), bread)
