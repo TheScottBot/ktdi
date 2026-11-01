@@ -95,11 +95,11 @@ def test_the_next_post_gives_the_answer_then_a_new_question(channel, bank):
     lines = answer.description.split("\n")
     assert lines[1] == f"It was {letter} **A drink between meals**."
     assert lines[2].startswith("> ") and lines[3].startswith("-# From [Mackay")  # The book's words, and the link
-    assert "🍞 for <@1>, <@3>" in answer.description  # The winners get a 🍞
+    assert "🍞 for <@1> (1 🍞), <@3> (1 🍞)" in answer.description  # The winners get a 🍞, and their total
     assert "<@2>" not in answer.description.split("🏆")[0]  # Nobody's told who picked what wrongly...
     counts = next(line for line in lines if line.startswith("🇦 "))
     assert f"{letter} 2" in counts  # ...only how many picked each
-    assert "🏆 This week's top bakers: <@1> 1 · <@3> 1" in answer.description
+    assert "🏆 Last 7 days' top bakers: <@1> 1 · <@3> 1" in answer.description
     assert bread.current(111).question_id != old.question_id  # A different question
     late = press(right, DAVE, bake_id=old.id)  # The old post's buttons: closed
     assert "out of the oven" in late.content and late.private
@@ -154,7 +154,7 @@ def test_a_streak_is_mentioned(channel, bank):
         bank.set(NINE_AM + timedelta(days=day), bread)
         message = post(channel)
         if day == 3:
-            assert "<@1> (3 in a row)" in message.embeds[0].description
+            assert "<@1> (3 🍞, 3 in a row)" in message.embeds[0].description
         press(right_choice())
     assert bread.streak(111, SCOTT.id) == 3
 
@@ -180,8 +180,8 @@ def test_scores_loaves_and_the_rap_sheet(channel, bank):
     assert bread.record(111, SCOTT.id) == (2, 2) and bread.record(111, PAT.id) == (0, 0)
     ctx = Ctx(SCOTT, Guild(111))
     run(bread.bread_scores.callback(ctx))
-    assert ctx.last.embed.description.split("\n") == ["1. <@1>: **2** right of 2, crumb, 2 in a row",
-                                                      "2. <@2>: **0** right of 2, crumb"]
+    assert ctx.last.embed.description.split("\n") == ["1. <@1>: **2** right of 2 · 2 in the last 7 days, crumb, 2 in a row",
+                                                      "2. <@2>: **0** right of 2 · 0 in the last 7 days, crumb"]
     sheet = Ctx(SCOTT, Guild(111))
     run(fun.rapsheet.callback(sheet, user=None))
     assert "🍞🍞 from How well do you 🍞? (right 2 of 2)." in sheet.last.text

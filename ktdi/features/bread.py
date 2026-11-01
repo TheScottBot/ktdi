@@ -2,8 +2,8 @@
 A question a day from the old books.
 
 Once a day, at the time a server picks (/bread setup here [time]), the daily bread is posted: yesterday's bake
-(its answer, who got it right, the book's own words and a link, and the week's top bakers), then today's question,
-with four buttons. People answer whenever they like: a button answers privately, once, and nobody sees what anyone
+(its answer, who got it right with their all-time totals, the book's own words and a link, and the last 7 days' top
+bakers), then today's question, with four buttons. People answer whenever they like: a button answers privately, once, and nobody sees what anyone
 picked until the next day's post. /bread today shows today's question again, for whoever missed it.
 
 The questions are in ktdi/lib/bread.json, built by ktdi/tools/bread_build.py from the old books (and
@@ -36,7 +36,7 @@ QUESTIONS: dict[str, dict] = {q["id"]: q for q in json.loads(DATA.read_text(enco
 EMOJI = "🍞"
 COLOUR = discord.Color.from_rgb(196, 140, 72)  # Golden crust
 LETTERS = ["🇦", "🇧", "🇨", "🇩"]
-WEEK = 7  # "This week's top bakers": the server's last 7 questions (not 7 days, which a millisecond can shift)
+WEEK = 7  # "Last 7 days": the server's last 7 questions (counted in questions: a millisecond can shift days)
 STREAK_SHOWN = 3  # A run of right answers this long is mentioned with the answer
 SHOWN = 15  # On /bread scores
 NOTE_LENGTH = 300  # The book's own words, with the answer
@@ -228,7 +228,8 @@ def question_embed(bake: Bake, answer_at: datetime | None) -> discord.Embed:
 
 
 def answer_embed(bake: Bake) -> discord.Embed:
-    """Yesterday's bake: the answer, who got it right, the book's own words and the week's top bakers."""
+    """Yesterday's bake: the answer, who got it right (with their all-time 🍞), the book's own words and the last
+    7 days' top bakers."""
     question = bake.question
     lines = [f"**{bake.asked}**", f"It was {LETTERS[bake.correct]} **{oldbooks.escape(bake.options[bake.correct])}**."]
     if question and question.get("note"):
@@ -243,16 +244,18 @@ def answer_embed(bake: Bake) -> discord.Embed:
     elif not right:
         lines.append(random.choice(NOBODY_RIGHT))
     else:
+        totals = {user: total for user, total, _ in scores(bake.guild_id)}
         named = []
-        for user in right:
+        for user in right:  # Each with their all-time 🍞 (today's included), so a win always shows
             run = streak(bake.guild_id, user)
-            named.append(f"<@{user}>" + (f" ({run} in a row)" if run >= STREAK_SHOWN else ""))
+            named.append(f"<@{user}> ({totals.get(user, 1)} {EMOJI}" + (f", {run} in a row" if run >= STREAK_SHOWN
+                                                                        else "") + ")")
         lines.append("🍞 for " + ", ".join(named))
     if given:
         lines.append(" · ".join(f"{LETTERS[n]} {sum(1 for _, choice, _ in given if choice == n)}" for n in range(4)))
     week = [(user, right) for user, right, _ in scores(bake.guild_id, last=WEEK) if right][:5]
     if week:
-        lines.append("🏆 This week's top bakers: " + " · ".join(f"<@{user}> {right}" for user, right in week))
+        lines.append("🏆 Last 7 days' top bakers: " + " · ".join(f"<@{user}> {right}" for user, right in week))
     return discord.Embed(title=f"{EMOJI} Yesterday's bake: No. {bake.number}", description="\n".join(lines)[:4096],
                          color=COLOUR)
 
@@ -366,18 +369,19 @@ async def bread(ctx: commands.Context):
                    description="Who's the top baker: everyone's right answers, and their loaf.")
 @commands.guild_only()
 async def bread_scores(ctx: commands.Context):
-    """Everyone's right answers, best first (fewest tries breaks a tie), with their loaf (Crumb, Crust, Bap,
-    Bloomer, Cottage loaf, and at 100 right, Master baker) and anyone on a run of right answers. An answer counts once
-    it's out."""
+    """Everyone's right answers, best first (fewest tries breaks a tie), with how many of the last 7 days' they got
+    right, their loaf (Crumb, Crust, Bap, Bloomer, Cottage loaf, and at 100 right, Master baker) and anyone on a run
+    of right answers. An answer counts once it's out."""
     rows = scores(ctx.guild.id)
+    week = {user: right for user, right, _ in scores(ctx.guild.id, last=WEEK)}
     if not rows:
         await ctx.send(f"{EMOJI} No scores yet. Nobody's had a go.", ephemeral=True)
         return
     lines = []
     for rank, (user, right, answered) in enumerate(rows[:SHOWN], 1):
         run = streak(ctx.guild.id, user)
-        lines.append(f"{rank}. <@{user}>: **{right}** right of {answered}, {loaf(right).lower()}"
-                     + (f", {run} in a row" if run >= 2 else ""))
+        lines.append(f"{rank}. <@{user}>: **{right}** right of {answered} · {week.get(user, 0)} in the last 7 days, "
+                     f"{loaf(right).lower()}" + (f", {run} in a row" if run >= 2 else ""))
     embed = discord.Embed(title=f"{EMOJI} How well do you bread?", description="\n".join(lines), color=COLOUR)
     embed.set_footer(text="Crumb · Crust (5) · Bap (15) · Bloomer (30) · Cottage loaf (60) · Master baker (100). "
                           "Every right answer is a 🍞 on the rap sheet.")
