@@ -21,8 +21,8 @@ SLASH_COMMANDS = ["abm", "allspray", "almanac", "anime", "bad", "badbonk", "bail
 # the cryptids
 SHELVED_BOOKS = ["bestiary", "devils", "dream", "enquire", "flowermeaning", "gemlore", "goblin", "magicsquare",
                  "melancholy", "phrase", "pseudodoxia", "secrets", "talisman", "wonder"]
-PREFIX_ONLY_COMMANDS = SHELVED_BOOKS + ["...", "breadsheet", "fyio", "hotdawg", "mefr", "toenoyoudidnt"]
-HIDDEN_COMMANDS = ["...", "breadsheet", "hotdawg", "mefr", "toenoyoudidnt"]  # cryptids: real commands, left off the /help list
+PREFIX_ONLY_COMMANDS = SHELVED_BOOKS + ["...", "breadsheet", "bt", "fyio", "hotdawg", "mefr", "toenoyoudidnt"]
+HIDDEN_COMMANDS = ["...", "breadsheet", "bt", "hotdawg", "mefr", "toenoyoudidnt"]  # cryptids: real commands, left off the /help list
 SUBCOMMANDS = {
     "almanac": ["day", "setup"],
     "beeton": ["advice", "menu", "recipe"],

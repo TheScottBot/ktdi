@@ -315,6 +315,15 @@ def test_toenoyoudidnt_still_appears_without_manage_messages():
     assert typed.last.content == fun.TOES_GIF_URL and typed.last.delete_after == 5
 
 
+def test_bread_tongue_vanishes():
+    from discord.ext import commands
+    typed = Ctx(SCOTT, slash=False)
+    run(fun.bt.callback(typed))
+    assert typed.last.content == fun.BREAD_TONGUE_GIF_URL and typed.last.delete_after == fun.TOES_SECONDS
+    assert typed.message.deleted and typed.message.deleted_after is None  # your !bt goes at once
+    assert not isinstance(fun.bt, commands.HybridCommand) and fun.bt.extras.get("hidden")
+
+
 def test_mefr_is_sighted_then_gone():
     typed = Ctx(SCOTT, slash=False)
     run(fun.mefr.callback(typed))

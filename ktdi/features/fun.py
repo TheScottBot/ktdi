@@ -45,6 +45,7 @@ BADBONK_GIF_URLS = [
     "https://klipy.com/gifs/bad-kitty",
 ]
 TOES_GIF_URL = "https://klipy.com/gifs/toes-test-water"
+BREAD_TONGUE_GIF_URL = "https://klipy.com/gifs/moldy-french-toast-lick"
 TOES_SECONDS = 5  # How long the cryptid is visible before it's gone.
 SILENCE_SECONDS = 25  # !...: how long the bot types for, before saying nothing at all
 GLIMPSE_ODDS = 1000  # One message in this many is looked at, briefly (no command: it just happens)
@@ -618,11 +619,22 @@ async def badbonk(ctx: commands.Context, user: discord.Member | None = None):
 # after a few seconds, along with the message that summoned it. Did you see it? No you didn't.
 @commands.command(name="toenoyoudidnt", description="👣", extras={**FUN, "hidden": True})
 async def toenoyoudidnt(ctx: commands.Context):
+    await fleeting(ctx, TOES_GIF_URL)
+
+
+# Bread tongue: the same, and best not looked at for long anyway.
+@commands.command(name="bt", description="👅", extras={**FUN, "hidden": True})
+async def bt(ctx: commands.Context):
+    await fleeting(ctx, BREAD_TONGUE_GIF_URL)
+
+
+async def fleeting(ctx: commands.Context, gif_url: str) -> None:
+    """A GIF cryptid: the summoning goes at once (if the bot has Manage Messages), and the GIF after TOES_SECONDS."""
     try:
-        await ctx.message.delete()  # The summoning goes at once (if the bot has Manage Messages)...
+        await ctx.message.delete()
     except discord.HTTPException:
         pass
-    await ctx.send(TOES_GIF_URL, delete_after=TOES_SECONDS)  # ...and the cryptid after a few seconds.
+    await ctx.send(gif_url, delete_after=TOES_SECONDS)
 
 
 # Another cryptid, the same way: a sighting at a birthday party, gone before anyone can get a better look.
@@ -945,7 +957,7 @@ def main_help_lines() -> list[tuple[str, str]]:
 async def setup(bot: commands.Bot):
     # `nose` is written but not registered: Discord's sensitive-media filter blurs its image (and asks UK users for ID).
     # Add it back here to bring it back.
-    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, phrasing, fyio, toenoyoudidnt, mefr, hotdawg, silence, rapsheet,
+    for command in (spray, allspray, whospray, tdoi, loot, bad, badbonk, phrasing, fyio, toenoyoudidnt, bt, mefr, hotdawg, silence, rapsheet,
                     breadsheet, blame, bribe, expunge, bail, linux):
         bot.add_command(command)
     bot.tree.add_command(phrasing_menu)  # Right-click a message > Apps > Phrasing

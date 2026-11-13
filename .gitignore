@@ -15,3 +15,5 @@ herbal-build/
 
 # Private notes, kept locally (e.g. insurance golden minutes)
 private/
+
+.DS_Store
